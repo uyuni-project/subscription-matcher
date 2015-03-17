@@ -35,11 +35,11 @@ assign_subscriptions_to_systems
 
     # make sure system does not have a subscription already
     notany
-      subscriptions.assigned($subscription_, $system)
+      subscriptions.assigned($_subscription, $system)
 
     # make sure subscription is not reused
     notany
-      subscriptions.assigned($subscription, $system_)
+      subscriptions.assigned($subscription, $_system)
   assert
     subscriptions.assigned($subscription, $system)
     python print "%s is assigned to %s" % ($subscription, $system)
@@ -51,7 +51,7 @@ list_free_subscriptions
   foreach
     subscriptions.id($subscription)
     notany
-      subscriptions.assigned($subscription, $system_)
+      subscriptions.assigned($subscription, $_system)
   assert
     python print "%s is free" % $subscription
 
@@ -59,6 +59,6 @@ list_non_compliant_systems
   foreach
     systems.id($system)
     notany
-      subscriptions.assigned($subscription_, $system)
+      subscriptions.assigned($_subscription, $system)
   assert
     python print "%s is not compliant" % $system
