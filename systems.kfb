@@ -7,8 +7,13 @@ arch(lesch, x86_64)
 id(e25)
 name(e25, 'e25.suse.de')
 arch(e25, x86_64)
-
 is_guest_of(e25, lesch)
+
+id(e42)
+name(e42, 'e25.suse.de')
+arch(e42, x86_64)
+is_guest_of(e42, lesch)
+
 
 id(taylor)
 name(taylor, 'taylor.suse.de')
