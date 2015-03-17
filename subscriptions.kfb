@@ -1,0 +1,23 @@
+id(sles_phy_1)
+product(sles_phy_1, 'SLES')
+arch(sles_phy_1, 'x86_64')
+type(sles_phy_1, physical)
+count(sles_phy_1, 1)
+
+id(sles_phy_2)
+product(sles_phy_2, 'SLES')
+arch(sles_phy_2, 'x86_64')
+type(sles_phy_2, physical)
+count(sles_phy_2, 1)
+
+id(sles_phy_3)
+product(sles_phy_3, 'SLES')
+arch(sles_phy_3, 'x86_64')
+type(sles_phy_3, physical)
+count(sles_phy_3, 1)
+
+id(sles_virt_1)
+product(sles_virt_1, 'SLES')
+arch(sles_virt_1, 'x86_64')
+type(sles_virt_1, virtual)
+count(sles_virt_1, 1)

@@ -1,0 +1,60 @@
+add_facts_for_virtual_systems
+  foreach
+    systems.is_guest_of($guest, $host)
+  assert
+    systems.virtual($guest)
+    python print "%s is virtual" % $guest
+
+add_facts_for_physical_systems
+  foreach
+    systems.id($system1)
+    notany
+      systems.is_guest_of($system1, $system2)
+  assert
+    systems.physical($system1)
+    python print "%s is physical" % $system1
+
+# rules to determine which subscriptions can potentially match which systems
+
+physical_license_can_match
+  foreach
+    systems.physical($system)
+    systems.arch($system, $arch)
+
+    subscriptions.id($subscription)
+    subscriptions.product($subscription, 'SLES')
+    subscriptions.arch($subscription, $arch)
+    subscriptions.type($subscription, physical)
+  assert
+    subscriptions.can_match($subscription, $system)
+    python print "%s can match %s" % ($subscription, $system)
+
+virtual_license_can_match
+  foreach
+    systems.virtual($system)
+    systems.arch($system, $arch)
+
+    subscriptions.id($subscription)
+    subscriptions.product($subscription, 'SLES')
+    subscriptions.arch($subscription, $arch)
+    subscriptions.type($subscription, virtual)
+  assert
+    subscriptions.can_match($subscription, $system)
+    python print "%s can match %s" % ($subscription, $system)
+
+# rules to actually match subscriptions with systems
+
+match
+  foreach
+    subscriptions.can_match($subscription, $system)
+
+    # make sure system does not have a subscription already
+    notany
+      subscriptions.match($subscription_, $system)
+
+    # make sure subscription is not reused
+    notany
+      subscriptions.match($subscription, $system_)
+  assert
+    subscriptions.match($subscription, $system)
+    python print "%s is assigned to %s" % ($subscription, $system)
