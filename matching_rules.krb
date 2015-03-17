@@ -15,7 +15,6 @@ physical_license_can_match
 
 virtual_license_can_match
   foreach
-    systems.virtual($system)
     systems.arch($system, $arch)
 
     subscriptions.product($subscription, 'SLES')
