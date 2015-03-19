@@ -1,0 +1,41 @@
+package com.suse.marcher;
+
+import java.util.List;
+
+import com.suse.matcher.model.Subscription;
+import com.suse.matcher.model.System;
+
+rule "Determine physical systems on which a 'SLES x86_64 pre 2011' subscription can be applied"
+    when
+        // for every subscription of this type
+        $subscription : Subscription(type == "sles_x86_64_pre_2011")
+
+        // for every physical system with matching arch
+        $system : System(arch == "x86_64", physical)
+
+        // and for every one of its guest systems
+        $guests : List() from collect (System(parentId == $system.id))
+    then
+        // add the subscription to applicable set to the host
+        modify($system) { applicableSubscriptions.add($subscription); }
+
+        // add the subscription to applicable set to each guest
+        for (Object guest: $guests) {
+            modify((System)guest) { applicableSubscriptions.add($subscription); }
+        }
+end
+
+query isApplicable(Subscription subscription, System system)
+     // for every physical system with matching arch
+    $system : System(arch == "x86_64", physical, id == system.id) or
+
+    // and for every one of its guest systems
+    ($host : System(id == system.parentId) and isApplicable(subscription, $host;))
+end
+
+query hasApplicableSubscription(System system)
+    $subscription : Subscription(type == "sles_x86_64_pre_2011")
+    $system : System(id == system.id)
+
+    isApplicable($subscription, $system;)
+end

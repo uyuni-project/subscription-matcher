@@ -1,0 +1,27 @@
+[
+  {
+    "id": "lesch",
+    "cpus": 2,
+    "arch": "x86_64"
+  },
+  {
+    "id": "e25",
+    "arch": "x86_64",
+    "parent_id": "lesch"
+  },
+  {
+    "id": "e42",
+    "arch": "x86_64",
+    "parent_id": "lesch"
+  },
+  {
+    "id": "taylor",
+    "cpus": 2,
+    "arch": "x86_64"
+  },
+  {
+    "id": "berthold",
+    "cpus": 127,
+    "arch": "s390x"
+  }
+]
