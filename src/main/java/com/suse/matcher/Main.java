@@ -4,6 +4,9 @@ import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
 import org.kie.api.KieServices;
+import org.kie.api.event.rule.DebugAgendaEventListener;
+import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
+import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.QueryResults;
@@ -26,6 +29,17 @@ public class Main {
         KieServices factory = KieServices.Factory.get();
         KieContainer container = factory.getKieClasspathContainer();
         KieSession session = container.newKieSession("ksession-rules");
+
+        // The application can also setup listeners
+        session.addEventListener( new DebugAgendaEventListener() );
+        session.addEventListener( new DebugRuleRuntimeEventListener() );
+        // To setup a file based audit logger, uncomment the next line
+        KieRuntimeLogger logger = factory.getLoggers().newFileLogger( session, "./log/matcher" );
+
+        // To setup a ThreadedFileLogger, so that the audit view reflects events whilst debugging,
+        // uncomment the next line
+        // KieRuntimeLogger logger = factory.getLoggers().newThreadedFileLogger( session, "./log/matcher", 1000 );
+
         FileLoader loader = new FileLoader();
 
         // insert facts from json files
@@ -40,6 +54,7 @@ public class Main {
 
         // start forward-chaining inductions
         session.fireAllRules();
+        logger.close();
 
         // print results
         java.lang.System.out.println("**Forward-chaining** results:");
