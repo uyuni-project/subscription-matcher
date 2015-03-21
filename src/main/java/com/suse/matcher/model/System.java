@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.kie.api.definition.type.PropertyReactive;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,13 +28,17 @@ public class System {
     /** The arch. */
     public String arch;
 
-    /** The parent id. */
-    @SerializedName("parent_id")
-    public String parentId;
+    /** virtual machines */
+    @SerializedName("virtual_systems")
+    public Set<String> virtualSystems = new HashSet<String>();
+
+    /** The hypervisor id. */
+    @SerializedName("host_id")
+    public String hostId;
 
     /** IDs of installed products. */
     @SerializedName("product_ids")
-    public List<String> productIds;
+    public List<String> productIds = new LinkedList<String>();
 
     // computed fields
     /** List of subscriptions applicable to this system. */
@@ -45,7 +50,7 @@ public class System {
      * @return true, if is physical
      */
     public boolean isPhysical() {
-        return parentId == null;
+        return hostId == null;
     }
 
     /** {@inheritDoc} */
@@ -58,5 +63,9 @@ public class System {
     @Override
     public boolean equals(Object objIn) {
         return EqualsBuilder.reflectionEquals(this, objIn);
+    }
+
+    public String toString() {
+        return "System[" + id +"]";
     }
 }
