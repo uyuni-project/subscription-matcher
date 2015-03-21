@@ -9,8 +9,8 @@ import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.rule.QueryResults;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,13 +43,20 @@ public class Main {
         FileLoader loader = new FileLoader();
 
         // insert facts from json files
+
+        for (Subscription subscription : loader.loadSubscriptions()) {
+        	/* A rules engine do not like changing facts during execution.
+        	 * To be on the save side, we do not insert subscriptions
+        	 * which are not valid.
+        	 */
+        	if (subscription.getStartsAt().before(new Date()) &&
+        		subscription.getExpiresAt().after(new Date())) {
+        			session.insert(subscription);
+        	}
+        }
         List<System> systems = loader.loadSystems();
         for (System system : systems) {
             session.insert(system);
-        }
-
-        for (Subscription subscription : loader.loadSubscriptions()) {
-            session.insert(subscription);
         }
 
         // start forward-chaining inductions
