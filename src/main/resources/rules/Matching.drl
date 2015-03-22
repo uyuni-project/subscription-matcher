@@ -14,11 +14,69 @@ rule "partnumber 874-005030"
 			cpus = 32,
 			unlimitedVirtualization = true,
 			stackable = false,
-			usableProductIds.add("1"),
+			usableProductIds.add((String)"1"),
 			supportType = "Standard",
 			lifetime = 3;
 		};
 end
+
+rule "partnumber 874-005031"
+    when
+        $subscription : Subscription(partnumber == "874-005031")
+    then
+        modify($subscription) {
+            cpus = 8,
+            unlimitedVirtualization = true,
+            stackable = false,
+            usableProductIds.add((String)"1"),
+            supportType = "Standard",
+            lifetime = 3;
+        };
+end
+
+rule "partnumber 874-005032"
+    when
+        $subscription : Subscription(partnumber == "874-005032")
+    then
+        modify($subscription) {
+            cpus = 8,
+            unlimitedVirtualization = true,
+            stackable = false,
+            usableProductIds.add((String)"1"),
+            usableProductIds.add((String)"2"),
+            supportType = "Standard",
+            lifetime = 3;
+        };
+end
+
+rule "partnumber 874-005033"
+    when
+        $subscription : Subscription(partnumber == "874-005033")
+    then
+        modify($subscription) {
+            cpus = 4,
+            unlimitedVirtualization = true,
+            stackable = false,
+            usableProductIds.add((String)"1"),
+            supportType = "Standard",
+            lifetime = 3;
+        };
+end
+
+rule "partnumber 874-005034"
+    when
+        $subscription : Subscription(partnumber == "874-005034")
+    then
+        modify($subscription) {
+            cpus = 2,
+            unlimitedVirtualization = true,
+            stackable = true,
+            usableProductIds.add((String)"1"),
+            supportType = "Standard",
+            lifetime = 3;
+        };
+end
+
 
 rule "virtual systems to hostId"
 when

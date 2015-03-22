@@ -1,0 +1,18 @@
+[
+  {
+    "id": "2",
+    "type": "sles_x86_64_post_2011",
+    "partnumber": "874-005031",
+    "system_limit": 2,
+    "starts_at": "2013-08-01T00:00:00Z",
+    "expires_at": "2015-07-31T00:00:00Z"
+  },
+  {
+    "id": "3",
+    "type": "res_x86_64_post_2011",
+    "partnumber": "874-005032",
+    "system_limit": 2,
+    "starts_at": "2013-08-01T00:00:00Z",
+    "expires_at": "2015-07-31T00:00:00Z"
+  }
+]

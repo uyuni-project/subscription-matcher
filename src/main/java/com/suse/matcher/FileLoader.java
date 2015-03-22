@@ -11,11 +11,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.List;
-
+import org.apache.commons.io.FilenameUtils;
 /**
  * The Class FileLoader.
  */
 public class FileLoader {
+
+    private String scenariodir;
 
     /** The system file name. */
     private static final String SYSTEM_FILE = "systems.json";
@@ -29,7 +31,17 @@ public class FileLoader {
     /** The subscription file expected content type. */
     private static final Type SUBSCRIPTION_FILE_CONTENT_TYPE = new TypeToken<List<Subscription>>() { }.getType();
 
-    /**
+    /** constructor */
+    public FileLoader(String scenariodir) {
+        if (scenariodir == null) {
+            this.scenariodir = ".";
+        }
+        else {
+            this.scenariodir = scenariodir;
+        }
+	}
+
+	/**
      * Load a system list from a JSON file.
      *
      * @return the list
@@ -38,7 +50,8 @@ public class FileLoader {
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
     public List<System> loadSystems() throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return new Gson().fromJson(new FileReader(SYSTEM_FILE), SYSTEM_FILE_CONTENT_TYPE);
+        String systemfile = FilenameUtils.concat(scenariodir, SYSTEM_FILE);
+        return new Gson().fromJson(new FileReader(systemfile), SYSTEM_FILE_CONTENT_TYPE);
     }
 
     /**
@@ -50,6 +63,7 @@ public class FileLoader {
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
     public List<Subscription> loadSubscriptions() throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return new Gson().fromJson(new FileReader(SUBSCRIPTION_FILE), SUBSCRIPTION_FILE_CONTENT_TYPE);
+        String subscriptionfile = FilenameUtils.concat(scenariodir, SUBSCRIPTION_FILE);
+        return new Gson().fromJson(new FileReader(subscriptionfile), SUBSCRIPTION_FILE_CONTENT_TYPE);
     }
 }
