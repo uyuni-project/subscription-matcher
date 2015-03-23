@@ -18,53 +18,35 @@ import org.apache.commons.io.FilenameUtils;
  */
 public class FileLoader {
 
-    private String scenariodir;
-
-    /** The system file name. */
-    private static final String SYSTEM_FILE = "systems.json";
-
     /** The system file expected content type. */
     private static final Type SYSTEM_FILE_CONTENT_TYPE = new TypeToken<List<System>>() { }.getType();
-
-    /** The subscription file name. */
-    private static final String SUBSCRIPTION_FILE = "subscriptions.json";
 
     /** The subscription file expected content type. */
     private static final Type SUBSCRIPTION_FILE_CONTENT_TYPE = new TypeToken<List<Subscription>>() { }.getType();
 
-    /** constructor */
-    public FileLoader(String scenariodir) {
-        if (scenariodir == null) {
-            this.scenariodir = ".";
-        }
-        else {
-            this.scenariodir = scenariodir;
-        }
-    }
-
     /**
      * Load a system list from a JSON file.
      *
+     * @param path the path to load from
      * @return the list
      * @throws FileNotFoundException the file is not in the expected path
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<System> loadSystems() throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        String systemfile = FilenameUtils.concat(scenariodir, SYSTEM_FILE);
-        return new Gson().fromJson(new FileReader(systemfile), SYSTEM_FILE_CONTENT_TYPE);
+    public List<System> loadSystems(String path) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+        return new Gson().fromJson(new FileReader(path), SYSTEM_FILE_CONTENT_TYPE);
     }
 
     /**
      * Load a subscription list from a JSON file.
      *
+     * @param path the path to load from
      * @return the list
      * @throws FileNotFoundException the file is not in the expected path
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<Subscription> loadSubscriptions() throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        String subscriptionfile = FilenameUtils.concat(scenariodir, SUBSCRIPTION_FILE);
-        return new Gson().fromJson(new FileReader(subscriptionfile), SUBSCRIPTION_FILE_CONTENT_TYPE);
+    public List<Subscription> loadSubscriptions(String path) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+        return new Gson().fromJson(new FileReader(path), SUBSCRIPTION_FILE_CONTENT_TYPE);
     }
 }
