@@ -81,18 +81,6 @@ public class Main {
             		java.lang.System.out.println(subscription.id + " can be used for " + system.id);
             	}
             }
-            /*
-        	java.lang.System.out.println("**Backward-chaining** results:");
-        	for (System system : systems) {
-            	QueryResults results = session.getQueryResults("hasApplicableSubscription", system);
-            	if (results.size() > 0) {
-                	java.lang.System.out.println(system.id + " has at least one applicable subscription");
-            	}
-            	else {
-                	java.lang.System.out.println(system.id + " does not have ANY applicable subscription");
-            	}
-        	}
-            */
         }
     }
 }
