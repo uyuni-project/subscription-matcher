@@ -6,6 +6,6 @@
 	<classpathentry kind="con" path="DROOLS/Drools"/>
 	<classpathentry kind="lib" path="target/dependency/gson-2.3.1.jar"/>
 	<classpathentry kind="lib" path="target/dependency/commons-lang3-3.3.2.jar"/>
-	<classpathentry kind="lib" path="/home/mc/CVS/matcher/target/dependency/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="target/dependency/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
