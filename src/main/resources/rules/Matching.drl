@@ -7,17 +7,17 @@ import com.suse.matcher.model.System;
 
 /* Layer 1 - expose partnumbers to more facts */
 rule "partnumber 874-005030"
-	when
-		$subscription : Subscription(partnumber == "874-005030")
-	then
-		modify($subscription) {
-			cpus = 32,
-			unlimitedVirtualization = true,
-			stackable = false,
-			usableProductIds.add((String)"1"),
-			supportType = "Standard",
-			lifetime = 3;
-		};
+    when
+        $subscription : Subscription(partnumber == "874-005030")
+    then
+        modify($subscription) {
+            cpus = 32,
+            unlimitedVirtualization = true,
+            stackable = false,
+            usableProductIds.add((String)"1"),
+            supportType = "Standard",
+            lifetime = 3;
+        };
 end
 
 rule "partnumber 874-005031"
@@ -80,18 +80,18 @@ end
 
 rule "virtual systems to hostId"
 when
-	$guest : System(hostId == null)
-	$host  : System(virtualSystems contains $guest.id )
+    $guest : System(hostId == null)
+    $host  : System(virtualSystems contains $guest.id )
 then
-	modify($guest) { hostId = $host.id; }
+    modify($guest) { hostId = $host.id; }
 end
 
 rule "hostId to virtual systems"
 when
-	$guest : System(hostId != null)
-	$host  : System(id == $guest.hostId, virtualSystems not contains $guest.id )
+    $guest : System(hostId != null)
+    $host  : System(id == $guest.hostId, virtualSystems not contains $guest.id )
 then
-	modify($host) { virtualSystems.add($guest.id); }
+    modify($host) { virtualSystems.add($guest.id); }
 end
 
 
