@@ -1,0 +1,17 @@
+package com.suse.matchability;
+
+import java.util.List;
+
+import com.suse.matcher.model.Subscription;
+import com.suse.matcher.model.System;
+
+rule "installed product matches subscription"
+    when
+        $system : System()
+        $subscription : Subscription( matchAnyProductOnSystem($system),
+            (stackable == true || cpus >= $system.cpus ),
+            (unlimitedVirtualization == true || $system.virtualSystems.size() == 0) )
+    then
+        //System.out.println( "test" );
+        modify($system) { applicableSubscriptions.add($subscription); }
+end
