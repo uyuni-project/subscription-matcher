@@ -8,15 +8,14 @@ import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.List;
-import org.apache.commons.io.FilenameUtils;
 
 /**
- * The Class FileLoader.
+ * Loads facts from JSON resources.
  */
-public class FileLoader {
+public class Loader {
 
     /** The system file expected content type. */
     private static final Type SYSTEM_FILE_CONTENT_TYPE = new TypeToken<List<System>>() { }.getType();
@@ -27,26 +26,26 @@ public class FileLoader {
     /**
      * Load a system list from a JSON file.
      *
-     * @param path the path to load from
+     * @param reader the reader object
      * @return the list
      * @throws FileNotFoundException the file is not in the expected path
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<System> loadSystems(String path) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return new Gson().fromJson(new FileReader(path), SYSTEM_FILE_CONTENT_TYPE);
+    public List<System> loadSystems(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+        return new Gson().fromJson(reader, SYSTEM_FILE_CONTENT_TYPE);
     }
 
     /**
      * Load a subscription list from a JSON file.
      *
-     * @param path the path to load from
+     * @param reader the reader object
      * @return the list
      * @throws FileNotFoundException the file is not in the expected path
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<Subscription> loadSubscriptions(String path) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return new Gson().fromJson(new FileReader(path), SUBSCRIPTION_FILE_CONTENT_TYPE);
+    public List<Subscription> loadSubscriptions(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+        return new Gson().fromJson(reader, SUBSCRIPTION_FILE_CONTENT_TYPE);
     }
 }

@@ -75,5 +75,11 @@
             <artifactId>default-kiesession</artifactId>
             <version>6.2.0.Final</version>
         </dependency>
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.12</version>
+          <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

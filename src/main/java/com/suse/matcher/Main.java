@@ -3,6 +3,7 @@ package com.suse.matcher;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
+import java.io.FileReader;
 import java.util.List;
 
 /**
@@ -26,9 +27,9 @@ public class Main {
         String subscriptionsPath = args[1];
 
         // load files
-        FileLoader loader = new FileLoader();
-        List<System> systems = loader.loadSystems(systemsPath);
-        List<Subscription> subscriptions = loader.loadSubscriptions(subscriptionsPath);
+        Loader loader = new Loader();
+        List<System> systems = loader.loadSystems(new FileReader(systemsPath));
+        List<Subscription> subscriptions = loader.loadSubscriptions(new FileReader(subscriptionsPath));
 
         // run the engine
         new Matcher().match(systems, subscriptions);
