@@ -66,6 +66,6 @@ public class System {
     }
 
     public String toString() {
-        return "System[" + id +"]";
+        return "System[" + id + "]";
     }
 }

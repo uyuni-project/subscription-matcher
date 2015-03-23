@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.apache.commons.io.FilenameUtils;
+
 /**
  * The Class FileLoader.
  */
@@ -39,9 +40,9 @@ public class FileLoader {
         else {
             this.scenariodir = scenariodir;
         }
-	}
+    }
 
-	/**
+    /**
      * Load a system list from a JSON file.
      *
      * @return the list
