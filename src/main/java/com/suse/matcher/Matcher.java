@@ -1,5 +1,6 @@
 package com.suse.matcher;
 
+import com.suse.matcher.model.PossibleMatch;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
@@ -9,7 +10,9 @@ import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.ObjectFilter;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -26,8 +29,9 @@ public class Matcher {
      *
      * @param systems the systems
      * @param subscriptions the subscriptions
+     * @return a collection of matches
      */
-    public void match(List<System> systems, List<Subscription> subscriptions) {
+    public Collection<PossibleMatch> match(List<System> systems, List<Subscription> subscriptions) {
         // instantiate engine
         KieServices factory = KieServices.Factory.get();
         KieContainer container = factory.getKieClasspathContainer();
@@ -56,5 +60,16 @@ public class Matcher {
         // start engine
         session.fireAllRules();
         logger.close();
+
+        // gather results
+        @SuppressWarnings("unchecked")
+        Collection<PossibleMatch> results = (Collection<PossibleMatch>) session.getObjects(new ObjectFilter() {
+            @Override
+            public boolean accept(Object fact) {
+                return fact instanceof PossibleMatch;
+            }
+        });
+
+        return results;
     }
 }

@@ -39,10 +39,6 @@ public class System {
     /** <code>true</code> if this is a machine made of metal */
     public boolean physical = true;
 
-    // computed fields
-    /** List of subscriptions applicable to this system. */
-    public Set<Subscription> applicableSubscriptions = new HashSet<Subscription>();
-
     /** {@inheritDoc} */
     @Override
     public int hashCode() {

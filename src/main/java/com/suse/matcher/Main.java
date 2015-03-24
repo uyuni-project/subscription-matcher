@@ -1,9 +1,11 @@
 package com.suse.matcher;
 
+import com.suse.matcher.model.PossibleMatch;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
 import java.io.FileReader;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -32,13 +34,11 @@ public class Main {
         List<Subscription> subscriptions = loader.loadSubscriptions(new FileReader(subscriptionsPath));
 
         // run the engine
-        new Matcher().match(systems, subscriptions);
+        Collection<PossibleMatch> results = new Matcher().match(systems, subscriptions);
 
         // print results
-        for (System system : systems) {
-            for (Subscription subscription : system.applicableSubscriptions) {
-                java.lang.System.out.println(subscription.id + " can be used for " + system.id);
-            }
+        for (PossibleMatch result : results) {
+            java.lang.System.out.println(result.systemId + " can match " + result.subscriptionId);
         }
 
         java.lang.System.exit(0);
