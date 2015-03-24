@@ -1,4 +1,4 @@
-package com.suse.marcher.inputaugmenting;
+package com.suse.matcher.rules;
 
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;

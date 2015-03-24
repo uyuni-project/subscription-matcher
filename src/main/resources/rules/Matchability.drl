@@ -1,4 +1,4 @@
-package com.suse.matchability;
+package com.suse.matcher.rules;
 
 import java.util.List;
 
