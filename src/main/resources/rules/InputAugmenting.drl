@@ -74,20 +74,12 @@ rule "partnumber 874-005034"
         };
 end
 
-
-rule "virtual systems to hostId"
+rule "ensure virtual systems are indeed virtual"
 when
-    $guest : System(hostId == null)
-    $host  : System(virtualSystems contains $guest.id )
+    $guest : System(physical)
+    $host : System(virtualSystemIds contains $guest.id )
 then
-    modify($guest) { hostId = $host.id; }
+    modify($guest) {
+        physical = false;
+    }
 end
-
-rule "hostId to virtual systems"
-when
-    $guest : System(hostId != null)
-    $host  : System(id == $guest.hostId, virtualSystems not contains $guest.id )
-then
-    modify($host) { virtualSystems.add($guest.id); }
-end
-
