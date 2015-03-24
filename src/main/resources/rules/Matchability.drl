@@ -10,7 +10,7 @@ rule "installed product matches subscription"
         $system : System()
         $subscription : Subscription( matchAnyProductOnSystem($system),
             (stackable == true || cpus >= $system.cpus ),
-            (unlimitedVirtualization == true || $system.virtualSystems.size() == 0) )
+            (unlimitedVirtualization == true || $system.virtualSystemIds.size() == 0) )
     then
         //System.out.println( "test" );
         modify($system) { applicableSubscriptions.add($subscription); }

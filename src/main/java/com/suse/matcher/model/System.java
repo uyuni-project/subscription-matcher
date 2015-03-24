@@ -26,8 +26,8 @@ public class System {
     public Integer cpus;
 
     /** virtual machines */
-    @SerializedName("virtual_systems")
-    public Set<String> virtualSystems = new HashSet<String>();
+    @SerializedName("virtual_system_ids")
+    public Set<String> virtualSystemIds = new HashSet<String>();
 
     /** The hypervisor id. */
     @SerializedName("host_id")
