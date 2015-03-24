@@ -3,9 +3,9 @@ package com.suse.marcher.inputaugmenting;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
-rule "partnumber 874-005030"
+rule "partNumber 874-005030"
     when
-        $subscription : Subscription(partnumber == "874-005030")
+        $subscription : Subscription(partNumber == "874-005030")
     then
         modify($subscription) {
             cpus = 32,
@@ -17,9 +17,9 @@ rule "partnumber 874-005030"
         };
 end
 
-rule "partnumber 874-005031"
+rule "partNumber 874-005031"
     when
-        $subscription : Subscription(partnumber == "874-005031")
+        $subscription : Subscription(partNumber == "874-005031")
     then
         modify($subscription) {
             cpus = 8,
@@ -31,9 +31,9 @@ rule "partnumber 874-005031"
         };
 end
 
-rule "partnumber 874-005032"
+rule "partNumber 874-005032"
     when
-        $subscription : Subscription(partnumber == "874-005032")
+        $subscription : Subscription(partNumber == "874-005032")
     then
         modify($subscription) {
             cpus = 8,
@@ -46,9 +46,9 @@ rule "partnumber 874-005032"
         };
 end
 
-rule "partnumber 874-005033"
+rule "partNumber 874-005033"
     when
-        $subscription : Subscription(partnumber == "874-005033")
+        $subscription : Subscription(partNumber == "874-005033")
     then
         modify($subscription) {
             cpus = 4,
@@ -60,9 +60,9 @@ rule "partnumber 874-005033"
         };
 end
 
-rule "partnumber 874-005034"
+rule "partNumber 874-005034"
     when
-        $subscription : Subscription(partnumber == "874-005034")
+        $subscription : Subscription(partNumber == "874-005034")
     then
         modify($subscription) {
             cpus = 2,

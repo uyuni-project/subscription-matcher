@@ -29,7 +29,8 @@ public class Subscription {
     public String type;
 
     /** The part number */
-    public String partnumber;
+    @SerializedName("part_number")
+    public String partNumber;
 
     /** The count. */
     @SerializedName("system_limit")
