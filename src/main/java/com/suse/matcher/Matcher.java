@@ -1,5 +1,6 @@
 package com.suse.matcher;
 
+import com.suse.matcher.model.InvalidPinnedMatch;
 import com.suse.matcher.model.PinnedMatch;
 import com.suse.matcher.model.PossibleMatch;
 import com.suse.matcher.model.Subscription;
@@ -27,7 +28,13 @@ public class Matcher {
     public static final String LOG_FILENAME = "drools";
 
     /** Rule group ordering. */
-    private static final String[] RULE_GROUPS = {"InputValidation", "InputAugmenting", "Matchability", "Matching"};
+    private static final String[] RULE_GROUPS = {"InputValidation", "InputAugmenting", "Matchability", "Matching", "OutputCollection"};
+
+    /** Matching results. */
+    private Collection<PossibleMatch> possibleMatches = null;
+
+    /** Invalid pin matches provided by the user. */
+    private Collection<InvalidPinnedMatch> invalidPinMatches = null;
 
     /**
      * Tries to match systems to subscriptions.
@@ -35,9 +42,9 @@ public class Matcher {
      * @param systems the systems
      * @param subscriptions the subscriptions
      * @param pinnedMatches the matches pinned by the user
-     * @return a collection of matches
      */
-    public Collection<PossibleMatch> match(List<System> systems, List<Subscription> subscriptions, List<PinnedMatch> pinnedMatches) {
+    @SuppressWarnings("unchecked")
+    public void match(List<System> systems, List<Subscription> subscriptions, List<PinnedMatch> pinnedMatches) {
         // instantiate engine
         KieServices factory = KieServices.Factory.get();
         KieContainer container = factory.getKieClasspathContainer();
@@ -77,14 +84,36 @@ public class Matcher {
         logger.close();
 
         // gather results
-        @SuppressWarnings("unchecked")
-        Collection<PossibleMatch> results = (Collection<PossibleMatch>) session.getObjects(new ObjectFilter() {
+        possibleMatches = (Collection<PossibleMatch>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
                 return fact instanceof PossibleMatch;
             }
         });
 
-        return results;
+        invalidPinMatches = (Collection<InvalidPinnedMatch>) session.getObjects(new ObjectFilter() {
+            @Override
+            public boolean accept(Object fact) {
+                return fact instanceof InvalidPinnedMatch;
+            }
+        });
+    }
+
+    /**
+     * Gets the possible matches.
+     *
+     * @return the possible matches
+     */
+    public Collection<PossibleMatch> getPossibleMatches() {
+        return possibleMatches;
+    }
+
+    /**
+     * Gets the invalid pinned matches.
+     *
+     * @return the invalid pinned matches
+     */
+    public Collection<InvalidPinnedMatch> getInvalidPinnedMatches() {
+        return invalidPinMatches;
     }
 }

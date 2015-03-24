@@ -1,0 +1,16 @@
+package com.suse.matcher.rules;
+
+import com.suse.matcher.model.InvalidPinnedMatch;
+import com.suse.matcher.model.PinnedMatch;
+import com.suse.matcher.model.PossibleMatch;
+import com.suse.matcher.model.Subscription;
+import com.suse.matcher.model.System;
+
+rule "flag invalid pinned matches"
+    agenda-group "OutputCollection"
+    when
+        $pinned_match : PinnedMatch($systemId : systemId, $subscriptionId : subscriptionId)
+        not (PossibleMatch(systemId == $systemId, subscriptionId == $subscriptionId))
+    then
+        insert(new InvalidPinnedMatch($systemId, $subscriptionId));
+end
