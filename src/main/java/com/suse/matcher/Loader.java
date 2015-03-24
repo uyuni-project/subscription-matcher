@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.suse.matcher.model.Product;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
@@ -23,6 +24,9 @@ public class Loader {
 
     /** The subscription file expected content type. */
     private static final Type SUBSCRIPTION_FILE_CONTENT_TYPE = new TypeToken<List<Subscription>>() { }.getType();
+
+    /** The product file expected content type. */
+    private static final Type PRODUCT_FILE_CONTENT_TYPE = new TypeToken<List<Product>>() { }.getType();
 
     /** Deserializer instance. */
     private Gson gson;
@@ -56,5 +60,18 @@ public class Loader {
      */
     public List<Subscription> loadSubscriptions(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
         return gson.fromJson(reader, SUBSCRIPTION_FILE_CONTENT_TYPE);
+    }
+
+    /**
+     * Load a product list from a JSON file.
+     *
+     * @param reader the reader object
+     * @return the list
+     * @throws FileNotFoundException the file is not in the expected path
+     * @throws JsonIOException in case the file cannot be read correctly
+     * @throws JsonSyntaxException in case JSON does not have correct syntax
+     */
+    public List<Product> loadProducts(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+        return gson.fromJson(reader, PRODUCT_FILE_CONTENT_TYPE);
     }
 }

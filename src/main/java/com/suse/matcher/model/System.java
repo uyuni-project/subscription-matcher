@@ -1,6 +1,7 @@
 package com.suse.matcher.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.suse.matcher.ProductData;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -57,6 +58,11 @@ public class System {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("id", id)
+            .append("cpus", cpus)
+            .append("virtualSystemIds", virtualSystemIds)
+            .append("products", ProductData.getInstance().getFriendlyNames(productIds))
+            .toString();
     }
 }
