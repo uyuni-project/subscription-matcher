@@ -29,10 +29,6 @@ public class System {
     @SerializedName("virtual_system_ids")
     public Set<String> virtualSystemIds = new HashSet<String>();
 
-    /** The hypervisor id. */
-    @SerializedName("host_id")
-    public String hostId;
-
     /** IDs of installed products. */
     @SerializedName("product_ids")
     public List<String> productIds = new LinkedList<String>();
@@ -40,15 +36,6 @@ public class System {
     // computed fields
     /** List of subscriptions applicable to this system. */
     public Set<Subscription> applicableSubscriptions = new HashSet<Subscription>();
-
-    /**
-     * Checks if this system is physical (not virtual).
-     *
-     * @return true, if is physical
-     */
-    public boolean isPhysical() {
-        return hostId == null;
-    }
 
     /** {@inheritDoc} */
     @Override
