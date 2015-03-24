@@ -1,8 +1,8 @@
 package com.suse.matcher;
 
 import com.suse.matcher.model.InvalidPinnedMatch;
+import com.suse.matcher.model.Match;
 import com.suse.matcher.model.PinnedMatch;
-import com.suse.matcher.model.PossibleMatch;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
@@ -31,7 +31,7 @@ public class Matcher {
     private static final String[] RULE_GROUPS = {"InputValidation", "InputAugmenting", "Matchability", "Matching", "OutputCollection"};
 
     /** Matching results. */
-    private Collection<PossibleMatch> possibleMatches = null;
+    private Collection<Match> matches = null;
 
     /** Invalid pin matches provided by the user. */
     private Collection<InvalidPinnedMatch> invalidPinMatches = null;
@@ -84,28 +84,28 @@ public class Matcher {
         logger.close();
 
         // gather results
-        possibleMatches = (Collection<PossibleMatch>) session.getObjects(new ObjectFilter() {
+        matches = (Collection<Match>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
-                return fact instanceof PossibleMatch;
+                return fact.getClass().getSimpleName().equals("Match");
             }
         });
 
         invalidPinMatches = (Collection<InvalidPinnedMatch>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
-                return fact instanceof InvalidPinnedMatch;
+                return fact.getClass().getSimpleName().equals("InvalidPinnedMatch");
             }
         });
     }
 
     /**
-     * Gets the possible matches.
+     * Gets the matches.
      *
-     * @return the possible matches
+     * @return the matches
      */
-    public Collection<PossibleMatch> getPossibleMatches() {
-        return possibleMatches;
+    public Collection<Match> getMatches() {
+        return matches;
     }
 
     /**
