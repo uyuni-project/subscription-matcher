@@ -7,6 +7,7 @@ import com.suse.matcher.model.System;
 import com.suse.matcher.model.PossibleMatch;
 
 rule "installed product matches subscription"
+    agenda-group "Matchability"
     when
         $system : System()
         $subscription : Subscription( matchAnyProductOnSystem($system),

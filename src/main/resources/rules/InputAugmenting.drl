@@ -4,6 +4,7 @@ import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
 rule "partNumber 874-005030"
+    agenda-group "InputAugmenting"
     when
         $subscription : Subscription(partNumber == "874-005030")
     then
@@ -18,6 +19,7 @@ rule "partNumber 874-005030"
 end
 
 rule "partNumber 874-005031"
+    agenda-group "InputAugmenting"
     when
         $subscription : Subscription(partNumber == "874-005031")
     then
@@ -32,6 +34,7 @@ rule "partNumber 874-005031"
 end
 
 rule "partNumber 874-005032"
+    agenda-group "InputAugmenting"
     when
         $subscription : Subscription(partNumber == "874-005032")
     then
@@ -47,6 +50,7 @@ rule "partNumber 874-005032"
 end
 
 rule "partNumber 874-005033"
+    agenda-group "InputAugmenting"
     when
         $subscription : Subscription(partNumber == "874-005033")
     then
@@ -61,6 +65,7 @@ rule "partNumber 874-005033"
 end
 
 rule "partNumber 874-005034"
+    agenda-group "InputAugmenting"
     when
         $subscription : Subscription(partNumber == "874-005034")
     then
@@ -75,6 +80,7 @@ rule "partNumber 874-005034"
 end
 
 rule "ensure virtual systems are indeed virtual"
+agenda-group "InputAugmenting"
 when
     $guest : System(physical)
     $host : System(virtualSystemIds contains $guest.id )

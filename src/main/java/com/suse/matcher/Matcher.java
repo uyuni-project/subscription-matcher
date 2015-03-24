@@ -12,6 +12,7 @@ import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.ObjectFilter;
+import org.kie.api.runtime.rule.Agenda;
 
 import java.util.Collection;
 import java.util.Date;
@@ -24,6 +25,9 @@ public class Matcher {
 
     /** Filename for internal Drools audit log. */
     public static final String LOG_FILENAME = "drools";
+
+    /** Rule group ordering. */
+    private static final String[] RULE_GROUPS = {"InputValidation", "InputAugmenting", "Matchability", "Matching"};
 
     /**
      * Tries to match systems to subscriptions.
@@ -39,6 +43,12 @@ public class Matcher {
         KieContainer container = factory.getKieClasspathContainer();
         KieSession session = container.newKieSession("ksession-rules");
         KieRuntimeLogger logger = factory.getLoggers().newFileLogger(session, LOG_FILENAME);
+
+        // set rule ordering
+        Agenda agenda = session.getAgenda();
+        for (int i = RULE_GROUPS.length - 1; i >= 0; i--) {
+            agenda.getAgendaGroup(RULE_GROUPS[i]).setFocus();
+        }
 
         // set up logging
         session.addEventListener(new DebugAgendaEventListener());
