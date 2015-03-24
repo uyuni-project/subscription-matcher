@@ -6,6 +6,7 @@ import com.suse.matcher.model.System;
 import org.kie.api.KieServices;
 import org.kie.api.event.rule.DebugAgendaEventListener;
 import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
+import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
@@ -31,6 +32,7 @@ public class Matcher {
         KieServices factory = KieServices.Factory.get();
         KieContainer container = factory.getKieClasspathContainer();
         KieSession session = container.newKieSession("ksession-rules");
+        KieRuntimeLogger logger = factory.getLoggers().newFileLogger(session, LOG_FILENAME);
 
         // set up logging
         session.addEventListener(new DebugAgendaEventListener());
@@ -53,5 +55,6 @@ public class Matcher {
 
         // start engine
         session.fireAllRules();
+        logger.close();
     }
 }
