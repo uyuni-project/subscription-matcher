@@ -1,5 +1,6 @@
 package com.suse.matcher;
 
+import com.suse.matcher.model.PinnedMatch;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
@@ -30,6 +31,9 @@ public class MatcherTest {
     /** List of subscriptions in the current test run. */
     private List<Subscription> subscriptions;
 
+    /** List of pinned matches in the current test run. */
+    private List<PinnedMatch> pinnedMatches;
+
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
      * with files loaded from resources/subscriptions* JSON files.
@@ -44,7 +48,8 @@ public class MatcherTest {
         for (int i = 1; i <= 4; i++) {
             result.add(new Object[] {
                     loader.loadSystems(getReader(i, "systems.json")),
-                    loader.loadSubscriptions(getReader(i, "subscriptions.json"))
+                    loader.loadSubscriptions(getReader(i, "subscriptions.json")),
+                    loader.loadPinnedMatches(getReader(i, "pinned_matches.json"))
             });
         }
         return result;
@@ -67,10 +72,11 @@ public class MatcherTest {
      * @param systemsIn the systems
      * @param subscriptionsIn the subscriptions
      */
-    public MatcherTest(List<System> systemsIn, List<Subscription> subscriptionsIn) {
+    public MatcherTest(List<System> systemsIn, List<Subscription> subscriptionsIn, List<PinnedMatch> pinnedMatchesIn) {
         matcher = new Matcher();
         systems = systemsIn;
         subscriptions = subscriptionsIn;
+        pinnedMatches = pinnedMatchesIn;
     }
 
     /**
@@ -78,7 +84,7 @@ public class MatcherTest {
      */
     @Test
     public void test() {
-        matcher.match(systems, subscriptions);
+        matcher.match(systems, subscriptions, pinnedMatches);
         // TODO: currently this simply tests no Exceptions are thrown, more significant checks should be added here
     }
 }

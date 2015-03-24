@@ -1,5 +1,6 @@
 package com.suse.matcher;
 
+import com.suse.matcher.model.PinnedMatch;
 import com.suse.matcher.model.PossibleMatch;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
@@ -29,9 +30,10 @@ public class Matcher {
      *
      * @param systems the systems
      * @param subscriptions the subscriptions
+     * @param pinnedMatches the matches pinned by the user
      * @return a collection of matches
      */
-    public Collection<PossibleMatch> match(List<System> systems, List<Subscription> subscriptions) {
+    public Collection<PossibleMatch> match(List<System> systems, List<Subscription> subscriptions, List<PinnedMatch> pinnedMatches) {
         // instantiate engine
         KieServices factory = KieServices.Factory.get();
         KieContainer container = factory.getKieClasspathContainer();
@@ -55,6 +57,9 @@ public class Matcher {
         }
         for (System system : systems) {
             session.insert(system);
+        }
+        for (PinnedMatch pinnedMatch : pinnedMatches) {
+            session.insert(pinnedMatch);
         }
 
         // start engine
