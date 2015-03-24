@@ -33,7 +33,7 @@ public class System {
 
     /** IDs of installed products. */
     @SerializedName("product_ids")
-    public List<String> productIds = new LinkedList<String>();
+    public List<Integer> productIds = new LinkedList<Integer>();
 
     /** <code>true</code> if this is a machine made of metal */
     public boolean physical = true;

@@ -14,7 +14,7 @@ import org.kie.api.definition.type.PropertyReactive;
 public class Product {
 
     /** The id. */
-    public String id;
+    public Integer id;
 
     /** The description. */
     public String description;

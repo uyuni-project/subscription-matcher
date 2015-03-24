@@ -11,7 +11,7 @@ rule "partNumber 874-005030"
             cpus = 32,
             unlimitedVirtualization = true,
             stackable = false,
-            usableProductIds.add((String)"1"),
+            usableProductIds.add(1),
             supportType = "Standard",
             lifetime = 3;
         };
@@ -25,7 +25,7 @@ rule "partNumber 874-005031"
             cpus = 8,
             unlimitedVirtualization = true,
             stackable = false,
-            usableProductIds.add((String)"1"),
+            usableProductIds.add(1),
             supportType = "Standard",
             lifetime = 3;
         };
@@ -39,8 +39,8 @@ rule "partNumber 874-005032"
             cpus = 8,
             unlimitedVirtualization = true,
             stackable = false,
-            usableProductIds.add((String)"1"),
-            usableProductIds.add((String)"2"),
+            usableProductIds.add(1),
+            usableProductIds.add(2),
             supportType = "Standard",
             lifetime = 3;
         };
@@ -54,7 +54,7 @@ rule "partNumber 874-005033"
             cpus = 4,
             unlimitedVirtualization = true,
             stackable = false,
-            usableProductIds.add((String)"1"),
+            usableProductIds.add(1),
             supportType = "Standard",
             lifetime = 3;
         };
@@ -68,7 +68,7 @@ rule "partNumber 874-005034"
             cpus = 2,
             unlimitedVirtualization = true,
             stackable = true,
-            usableProductIds.add((String)"1"),
+            usableProductIds.add(1),
             supportType = "Standard",
             lifetime = 3;
         };

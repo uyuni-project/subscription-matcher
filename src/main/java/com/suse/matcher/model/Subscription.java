@@ -54,7 +54,7 @@ public class Subscription {
     public Boolean stackable;
 
     /** usable for products */
-    public List<String> usableProductIds = new LinkedList<String>();
+    public List<Integer> usableProductIds = new LinkedList<Integer>();
 
     /** support type */
     public String supportType;
@@ -67,7 +67,7 @@ public class Subscription {
     }
 
     public Boolean matchAnyProductOnSystem(System s) {
-        for (String p : s.productIds) {
+        for (Integer p : s.productIds) {
             if (usableProductIds.contains(p)) {
                 return true;
             }
