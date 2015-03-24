@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 import java.util.HashSet;
@@ -49,7 +51,9 @@ public class System {
         return EqualsBuilder.reflectionEquals(this, objIn);
     }
 
+    /** {@inheritDoc} */
+    @Override
     public String toString() {
-        return "System[" + id + "]";
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
