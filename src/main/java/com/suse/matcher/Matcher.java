@@ -45,7 +45,7 @@ public class Matcher {
              * on the save side, we do not insert subscriptions which are not
              * valid.
              */
-            if (subscription.getStartsAt().before(new Date()) && subscription.getExpiresAt().after(new Date())) {
+            if (subscription.startsAt.before(new Date()) && subscription.expiresAt.after(new Date())) {
                 session.insert(subscription);
             }
         }

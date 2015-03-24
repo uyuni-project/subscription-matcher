@@ -1,6 +1,7 @@
 package com.suse.matcher;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -23,6 +24,14 @@ public class Loader {
     /** The subscription file expected content type. */
     private static final Type SUBSCRIPTION_FILE_CONTENT_TYPE = new TypeToken<List<Subscription>>() { }.getType();
 
+    /** Deserializer instance. */
+    private Gson gson;
+
+    /** Default constructor. */
+    public Loader() {
+        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
+    }
+
     /**
      * Load a system list from a JSON file.
      *
@@ -33,7 +42,7 @@ public class Loader {
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
     public List<System> loadSystems(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return new Gson().fromJson(reader, SYSTEM_FILE_CONTENT_TYPE);
+        return gson.fromJson(reader, SYSTEM_FILE_CONTENT_TYPE);
     }
 
     /**
@@ -46,6 +55,6 @@ public class Loader {
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
     public List<Subscription> loadSubscriptions(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return new Gson().fromJson(reader, SUBSCRIPTION_FILE_CONTENT_TYPE);
+        return gson.fromJson(reader, SUBSCRIPTION_FILE_CONTENT_TYPE);
     }
 }
