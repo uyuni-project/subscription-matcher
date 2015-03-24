@@ -2,25 +2,21 @@
   {
     "id": "cokerunner",
     "cpus": 16,
-    "arch": "x86_64",
     "product_ids": ["1"]
   },
   {
     "id": "fakelanding",
     "cpus": 8,
-    "arch": "x86_64",
     "product_ids": ["1"]
   },
   {
     "id": "manager",
     "cpus": 8,
-    "arch": "x86_64",
     "product_ids": ["1"]
   },
   {
     "id": "chupacabra",
     "cpus": 16,
-    "arch": "x86_64",
     "product_ids": ["1"]
   }
 ]

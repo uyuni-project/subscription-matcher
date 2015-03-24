@@ -2,45 +2,38 @@
   {
     "id": "lesch",
     "cpus": 2,
-    "arch": "x86_64",
     "virtual_systems": ["e25", "e42"],
     "product_ids": ["1"]
   },
   {
     "id": "e25",
     "cpus": 2,
-    "arch": "x86_64",
     "product_ids": ["1"]
   },
   {
     "id": "e42",
     "cpus": 64,
-    "arch": "x86_64",
     "product_ids": ["1"]
   },
   {
     "id": "vmware",
     "cpus": 2,
-    "arch": "x86_64",
     "virtual_systems": ["virt1", "virt2"],
     "product_ids": []
   },
   {
     "id": "virt1",
     "cpus": 2,
-    "arch": "x86_64",
     "product_ids": ["1"]
   },
   {
     "id": "virt2",
     "cpus": 1,
-    "arch": "x86_64",
     "product_ids": ["1"]
   },
   {
     "id": "berthold",
     "cpus": 127,
-    "arch": "s390x",
     "product_ids": ["2"]
   }
 ]

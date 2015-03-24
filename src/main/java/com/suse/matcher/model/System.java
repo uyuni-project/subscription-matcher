@@ -25,9 +25,6 @@ public class System {
     /** The populated CPU socket count. */
     public Integer cpus;
 
-    /** The arch. */
-    public String arch;
-
     /** virtual machines */
     @SerializedName("virtual_systems")
     public Set<String> virtualSystems = new HashSet<String>();
