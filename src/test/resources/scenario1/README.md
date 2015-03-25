@@ -11,11 +11,12 @@ For virtual hosts we need to map all products of all virtual
 systems running on these hosts to the host to make use of
 the **unlimited virtualization** option of many subscriptions.
 
-The subscription we have in this scenario is for product id **1**.
-It has *unlimited virtualization* and upto 32 cpus.
+The subscription we have in this scenario, part number
+874-005030, is for product id 814 (SLES11 SP3 x86_64),
+it has *unlimited virtualization* and up to 32 cpus.
 
 Additionally we have one system in this scenario where we do
-not have a subscription for.
+not have a subscription for (1122, RES 5).
 
 Result
 ------
