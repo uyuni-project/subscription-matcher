@@ -1,7 +1,8 @@
 Scenario 3 - SLES and RES subscription with overlapping products
 ================================================================
 
-In this scenario we have 2 SLES subscriptions and 2 RES subscriptions.
+In this scenario we have 2 SLES subscriptions (id 2) and 2 RES
+subscriptions (id 3).
 The RES subscriptions include the possibility to use them also for SLES.
 
 We have 4 systems, 2 with SLES and 2 with RES. The RES subscriptions

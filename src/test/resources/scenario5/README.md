@@ -1,4 +1,4 @@
-Scenario 4 - Stackable subscription different orgs
+Scenario 5 - Stackable subscription different orgs
 ==================================================
 
 This scenario has 2 SLES subscriptions from different SCC organizations

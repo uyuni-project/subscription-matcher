@@ -1,4 +1,4 @@
-Scenario 4 - Stackable subscription different start/end dates
+Scenario 6 - Stackable subscription different start/end dates
 =============================================================
 
 This scenario has 2 SLES subscriptions with different start and end dates.
