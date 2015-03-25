@@ -1,20 +1,18 @@
 [
   {
     "id": "2",
-    "type": "sles_x86_64_post_2011",
-    "part_number": "874-005031",
+    "part_number": "874-006260",
     "system_limit": 2,
     "starts_at": "2013-08-01T00:00:00Z",
     "expires_at": "2015-07-31T00:00:00Z",
-    "scc_orgid": "UC7"
+    "scc_org_id": "UC7"
   },
   {
     "id": "3",
-    "type": "res_x86_64_post_2011",
-    "part_number": "874-005032",
+    "part_number": "874-005649",
     "system_limit": 2,
     "starts_at": "2013-08-01T00:00:00Z",
     "expires_at": "2015-07-31T00:00:00Z",
-    "scc_orgid": "UC7"
+    "scc_org_id": "UC7"
   }
 ]

@@ -1,20 +1,18 @@
 [
   {
     "id": "4",
-    "type": "sles_x86_64_post_2015",
-    "part_number": "874-005034",
+    "part_number": "800-TEMPORARY-X86-2CPU-STACKABLE",
     "system_limit": 3,
     "starts_at": "2013-08-01T00:00:00Z",
     "expires_at": "2018-07-31T00:00:00Z",
-    "scc_orgid": "UC5"
+    "scc_org_id": "UC5"
   },
   {
     "id": "5",
-    "type": "sles_x86_64_post_2015",
-    "part_number": "874-005034",
+    "part_number": "800-TEMPORARY-X86-2CPU-STACKABLE",
     "system_limit": 3,
     "starts_at": "2013-08-01T00:00:00Z",
     "expires_at": "2018-07-31T00:00:00Z",
-    "scc_orgid": "UC7"
+    "scc_org_id": "UC7"
   }
 ]
