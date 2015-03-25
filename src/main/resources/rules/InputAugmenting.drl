@@ -78,7 +78,7 @@ rule "ensure virtual systems are indeed virtual"
 agenda-group "InputAugmenting"
 when
     $guest : System(physical)
-    $host : System(virtualSystemIds contains $guest.id )
+    $host : System(virtualSystemIds contains $guest.id)
 then
     modify($guest) {
         physical = false;
