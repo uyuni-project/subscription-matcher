@@ -1,0 +1,12 @@
+[
+  {
+    "id": "fakelanding",
+    "cpus": 4,
+    "product_ids": [1]
+  },
+  {
+    "id": "chupacabra",
+    "cpus": 8,
+    "product_ids": [1]
+  }
+]
