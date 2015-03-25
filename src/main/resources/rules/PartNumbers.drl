@@ -1,0 +1,18 @@
+package com.suse.matcher.rules;
+
+import com.suse.matcher.model.Subscription;
+import com.suse.matcher.model.System;
+
+rule "partNumber 874-005030"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-005030")
+    then
+        modify($subscription) {
+            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,
+            supportLevel = Subscription.STANDARD,
+            cpus = 32,
+            stackable = false,
+            productIds.add(1);
+        };
+end
