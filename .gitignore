@@ -2,3 +2,5 @@
 bin
 target
 drools.log
+legacy_skus.csv
+*~
