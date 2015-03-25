@@ -32,6 +32,7 @@ public class Matcher {
         "InputValidation",
         "InputAugmenting",
         "PartNumbers",
+        "ProductsInSubscriptions",
         "Matchability",
         "Matching",
         "OutputCollection"

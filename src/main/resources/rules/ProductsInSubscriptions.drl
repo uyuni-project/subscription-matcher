@@ -1,0 +1,39 @@
+package com.suse.matcher.rules;
+
+import com.suse.matcher.model.Subscription;
+import com.suse.matcher.model.System;
+
+// TODO: remove this rule file and replace it with real data from SCC
+
+rule "Fake products to subscription rule for SLES"
+    agenda-group "ProductsInSubscriptions"
+    when
+        $subscription : Subscription(
+            partNumber == "874-005030" ||
+            partNumber == "874-006260" ||
+            partNumber == "874-005649" ||
+            partNumber == "800-TEMPORARY-X86-2CPU-STACKABLE"
+        )
+    then
+        modify($subscription) {
+            productIds.add(814),
+            productIds.add(793),
+            productIds.add(1298),
+            productIds.add(1300),
+            productIds.add(1118);
+        };
+end
+
+rule "Fake products to subscription rule for RES"
+    agenda-group "ProductsInSubscriptions"
+    when
+        $subscription : Subscription(
+            partNumber == "874-005649"
+        )
+    then
+        modify($subscription) {
+            productIds.add(1122),
+            productIds.add(1138),
+            productIds.add(1251);
+        };
+end
