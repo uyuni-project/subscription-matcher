@@ -28,7 +28,7 @@ public class Matcher {
     public static final String LOG_FILENAME = "drools";
 
     /** Rule group ordering. */
-    private static final String[] RULE_GROUPS = {"InputAugmenting", "Matchability", "Matching", "OutputCollection"};
+    private static final String[] RULE_GROUPS = {"InputValidation", "InputAugmenting", "Matchability", "Matching", "OutputCollection"};
 
     /** Matching results. */
     private Collection<Match> matches = null;
