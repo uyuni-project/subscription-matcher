@@ -5,6 +5,7 @@ import com.suse.matcher.model.Match;
 import com.suse.matcher.model.PinnedMatch;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
+import com.suse.matcher.model.Today;
 
 import org.kie.api.KieServices;
 import org.kie.api.event.rule.DebugAgendaEventListener;
@@ -16,7 +17,6 @@ import org.kie.api.runtime.ObjectFilter;
 import org.kie.api.runtime.rule.Agenda;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,15 +62,9 @@ public class Matcher {
         session.addEventListener(new DebugRuleRuntimeEventListener());
 
         // insert facts
+        session.insert(new Today());
         for (Subscription subscription : subscriptions) {
-            /*
-             * A rules engine do not like changing facts during execution. To be
-             * on the save side, we do not insert subscriptions which are not
-             * valid.
-             */
-            if (subscription.startsAt.before(new Date()) && subscription.expiresAt.after(new Date())) {
-                session.insert(subscription);
-            }
+            session.insert(subscription);
         }
         for (System system : systems) {
             session.insert(system);

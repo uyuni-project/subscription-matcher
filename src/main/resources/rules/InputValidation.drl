@@ -1,1 +1,13 @@
 package com.suse.matcher.rules;
+
+import com.suse.matcher.model.Subscription;
+import com.suse.matcher.model.Today;
+
+rule "subscription is still valid"
+    agenda-group "InputValidation"
+    when
+        $today : Today($timestamp : timestamp) and
+        $subscription: Subscription(expiresAt < $timestamp || startsAt > $timestamp)
+    then
+        retract($subscription);
+end
