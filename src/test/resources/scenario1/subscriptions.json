@@ -5,6 +5,7 @@
     "part_number": "874-005030",
     "system_limit": 3,
     "starts_at": "2013-08-01T00:00:00Z",
-    "expires_at": "2015-07-31T00:00:00Z"
+    "expires_at": "2015-07-31T00:00:00Z",
+    "scc_orgid": "UC7"
   }
 ]
