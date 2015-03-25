@@ -10,7 +10,11 @@ public class Today {
     /** Current timestamp. */
     public Date timestamp = new Date();
 
-
+    /**
+     * Gets the timestamp.
+     *
+     * @return the timestamp
+     */
     public Date getTimestamp() {
         return timestamp;
     }

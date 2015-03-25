@@ -42,30 +42,12 @@ public class Match {
     }
 
     /**
-     * Sets the system id.
-     *
-     * @param systemIdIn the new system id
-     */
-    public void setSystemId(String systemIdIn) {
-        systemId = systemIdIn;
-    }
-
-    /**
      * Gets the subscription id.
      *
      * @return the subscription id
      */
     public String getSubscriptionId() {
         return subscriptionId;
-    }
-
-    /**
-     * Sets the subscription id.
-     *
-     * @param subscriptionIdIn the new subscription id
-     */
-    public void setSubscriptionId(String subscriptionIdIn) {
-        subscriptionId = subscriptionIdIn;
     }
 
     /** {@inheritDoc} */

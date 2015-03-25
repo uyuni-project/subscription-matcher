@@ -39,6 +39,51 @@ public class System {
     /** <code>true</code> if this is a machine made of metal */
     public boolean physical = true;
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Gets the cpus.
+     *
+     * @return the cpus
+     */
+    public Integer getCpus() {
+        return cpus;
+    }
+
+    /**
+     * Gets the virtual system ids.
+     *
+     * @return the virtual system ids
+     */
+    public Set<String> getVirtualSystemIds() {
+        return virtualSystemIds;
+    }
+
+    /**
+     * Gets the product ids.
+     *
+     * @return the product ids
+     */
+    public List<Integer> getProductIds() {
+        return productIds;
+    }
+
+    /**
+     * Checks if is physical.
+     *
+     * @return true, if is physical
+     */
+    public boolean isPhysical() {
+        return physical;
+    }
+
     /** {@inheritDoc} */
     @Override
     public int hashCode() {

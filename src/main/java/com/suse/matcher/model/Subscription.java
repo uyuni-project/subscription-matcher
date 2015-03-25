@@ -75,6 +75,114 @@ public class Subscription {
         return false;
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Gets the part number.
+     *
+     * @return the part number
+     */
+    public String getPartNumber() {
+        return partNumber;
+    }
+
+    /**
+     * Gets the system limit.
+     *
+     * @return the system limit
+     */
+    public Integer getSystemLimit() {
+        return systemLimit;
+    }
+
+    /**
+     * Gets the start date.
+     *
+     * @return the starts at
+     */
+    public Date getStartsAt() {
+        return startsAt;
+    }
+
+    /**
+     * Gets the expiration date.
+     *
+     * @return the expires at
+     */
+    public Date getExpiresAt() {
+        return expiresAt;
+    }
+
+    /**
+     * Gets the cpus.
+     *
+     * @return the cpus
+     */
+    public Integer getCpus() {
+        return cpus;
+    }
+
+    /**
+     * Gets the unlimited virtualization attribute.
+     *
+     * @return the unlimited virtualization attribute
+     */
+    public Boolean getUnlimitedVirtualization() {
+        return unlimitedVirtualization;
+    }
+
+    /**
+     * Gets the stackable attribute.
+     *
+     * @return the stackable attribute
+     */
+    public Boolean getStackable() {
+        return stackable;
+    }
+
+    /**
+     * Gets the usable product ids.
+     *
+     * @return the usable product ids
+     */
+    public List<Integer> getUsableProductIds() {
+        return usableProductIds;
+    }
+
+    /**
+     * Gets the support type.
+     *
+     * @return the support type
+     */
+    public String getSupportType() {
+        return supportType;
+    }
+
+    /**
+     * Gets the lifetime.
+     *
+     * @return the lifetime
+     */
+    public Integer getLifetime() {
+        return lifetime;
+    }
+
     /** {@inheritDoc} */
     @Override
     public int hashCode() {

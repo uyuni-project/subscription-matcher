@@ -14,4 +14,22 @@ public class Product {
     /** A human-friendly name. */
     @SerializedName("friendly_name")
     public String friendlyName;
+
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Gets the friendly name.
+     *
+     * @return the friendly name
+     */
+    public String getFriendlyName() {
+        return friendlyName;
+    }
 }
