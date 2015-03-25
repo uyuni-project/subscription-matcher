@@ -80,10 +80,10 @@ public class Subscription {
 
 
     // computed fields
-    /**  One of PHYSICAL_ONLY, UNLIMITED_VIRTUALIZATION or TWO_TWO. */
+    /** One of PHYSICAL_ONLY, UNLIMITED_VIRTUALIZATION, TWO_TWO or null. */
     public String virtualizationPolicy;
 
-    /**  Support level. */
+    /** One of BASIC, STANDARD, PRIORITY or null. */
     public String supportLevel;
 
     /**  Populated CPU sockets or IFLs (s390x architecture), null for "instance subscriptions". */
