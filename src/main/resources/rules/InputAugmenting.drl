@@ -9,12 +9,11 @@ rule "partNumber 874-005030"
         $subscription : Subscription(partNumber == "874-005030")
     then
         modify($subscription) {
+            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,
+            supportLevel = Subscription.STANDARD,
             cpus = 32,
-            unlimitedVirtualization = true,
             stackable = false,
-            usableProductIds.add(1),
-            supportType = "Standard",
-            lifetime = 3;
+            productIds.add(1);
         };
 end
 
@@ -24,12 +23,11 @@ rule "partNumber 874-005031"
         $subscription : Subscription(partNumber == "874-005031")
     then
         modify($subscription) {
+            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,
+            supportLevel = Subscription.STANDARD,
             cpus = 8,
-            unlimitedVirtualization = true,
             stackable = false,
-            usableProductIds.add(1),
-            supportType = "Standard",
-            lifetime = 3;
+            productIds.add(1);
         };
 end
 
@@ -39,13 +37,12 @@ rule "partNumber 874-005032"
         $subscription : Subscription(partNumber == "874-005032")
     then
         modify($subscription) {
+            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,
+            supportLevel = Subscription.STANDARD,
             cpus = 8,
-            unlimitedVirtualization = true,
             stackable = false,
-            usableProductIds.add(1),
-            usableProductIds.add(2),
-            supportType = "Standard",
-            lifetime = 3;
+            productIds.add(1),
+            productIds.add(2);
         };
 end
 
@@ -55,12 +52,11 @@ rule "partNumber 874-005033"
         $subscription : Subscription(partNumber == "874-005033")
     then
         modify($subscription) {
+            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,
+            supportLevel = Subscription.STANDARD,
             cpus = 4,
-            unlimitedVirtualization = true,
             stackable = false,
-            usableProductIds.add(1),
-            supportType = "Standard",
-            lifetime = 3;
+            productIds.add(1);
         };
 end
 
@@ -70,12 +66,11 @@ rule "partNumber 874-005034"
         $subscription : Subscription(partNumber == "874-005034")
     then
         modify($subscription) {
+            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,
+            supportLevel = Subscription.STANDARD,
             cpus = 2,
-            unlimitedVirtualization = true,
-            stackable = true,
-            usableProductIds.add(1),
-            supportType = "Standard",
-            lifetime = 3;
+            stackable = false,
+            productIds.add(1);
         };
 end
 

@@ -19,15 +19,45 @@ import java.util.List;
  */
 @PropertyReactive
 public class Subscription {
+    // values for virtualizationPolicy
+    /**
+     * This subscription can exclusively be assigned to a physical system, and
+     * virtual machines running on top of it will not get the same subscription
+     * for free.
+     */
+    public static final String PHYSICAL_ONLY = "physical_only";
+
+    /**
+     * This subscription can exclusively be assigned to a physical system, and
+     * virtual machines running on top of it will automatically get the same
+     * subscription for free.
+     */
+    public static final String UNLIMITED_VIRTUALIZATION = "unlimited_virtualization";
+
+    /**
+     * This subscription can either be assigned to a physical system without
+     * a SUSE-provided hypervisor or to up to two virtual machines, regardless
+     * of the hypervisor they run on.
+     */
+    public static final String TWO_TWO = "two_two";
+
+    // values for supportLevel
+    /** Basic support level. */
+    public static final String BASIC = "basic";
+
+    /** Standard support level. */
+    public static final String STANDARD = "standard";
+
+    /** Priority support level. */
+    public static final String PRIORITY = "priority";
+
+
 
     // JSON fields
     /** The id. */
     public String id;
 
-    /** The type / description. */
-    public String type;
-
-    /** The part number */
+    /** The part number. */
     @SerializedName("part_number")
     public String partNumber;
 
@@ -35,46 +65,66 @@ public class Subscription {
     @SerializedName("system_limit")
     public Integer systemLimit;
 
-    /** Start Date */
+    /** Start Date. */
     @SerializedName("starts_at")
     public Date startsAt = new Date(Long.MIN_VALUE);
 
-    /** End Date */
+    /** End Date. */
     @SerializedName("expires_at")
     public Date expiresAt = new Date(Long.MAX_VALUE);
 
+    /** SCC Organization Id. */
+    @SerializedName("scc_org_id")
+    public String sccOrgId;
+
+
+
     // computed fields
-    /** CPUs / socket / IFLs: 0 means instance subscription */
+    /**  One of PHYSICAL_ONLY, UNLIMITED_VIRTUALIZATION or TWO_TWO. */
+    public String virtualizationPolicy;
+
+    /**  Support level. */
+    public String supportLevel;
+
+    /**  Populated CPU sockets or IFLs (s390x architecture), null for "instance subscriptions". */
     public Integer cpus;
 
-    /** unlimited virtualization */
-    public Boolean unlimitedVirtualization;
-
-    /** stackable */
+    /**  Can this subscription be used multiple times on the same system? */
     public Boolean stackable;
 
-    /** usable for products */
-    public List<Integer> usableProductIds = new LinkedList<Integer>();
+    /**  Products that can be licensed with this subscription. */
+    public List<Integer> productIds = new LinkedList<Integer>();
 
-    /** support type */
-    public String supportType;
 
-    /** FIXME: needed? lifetime in years */
-    public Integer lifetime;
 
+    //methods
+    /**
+     * Checks if is instance subscription.
+     *
+     * @return the boolean
+     */
     public Boolean isInstanceSubscription() {
-        return (cpus == 0);
+        return cpus == null;
     }
 
+    /**
+     * Match any product on system.
+     *
+     * @param s the s
+     * @return the boolean
+     */
     public Boolean matchAnyProductOnSystem(System s) {
         for (Integer p : s.productIds) {
-            if (usableProductIds.contains(p)) {
+            if (productIds.contains(p)) {
                 return true;
             }
         }
         return false;
     }
 
+
+
+    //getters
     /**
      * Gets the id.
      *
@@ -82,15 +132,6 @@ public class Subscription {
      */
     public String getId() {
         return id;
-    }
-
-    /**
-     * Gets the type.
-     *
-     * @return the type
-     */
-    public String getType() {
-        return type;
     }
 
     /**
@@ -130,21 +171,39 @@ public class Subscription {
     }
 
     /**
+     * Gets the SCC org id.
+     *
+     * @return the SCC org id
+     */
+    public String getSccOrgId() {
+        return sccOrgId;
+    }
+
+    /**
+     * Gets the virtualization policy.
+     *
+     * @return the virtualization policy
+     */
+    public String getVirtualizationPolicy() {
+        return virtualizationPolicy;
+    }
+
+    /**
+     * Gets the support level.
+     *
+     * @return the support level
+     */
+    public String getSupportLevel() {
+        return supportLevel;
+    }
+
+    /**
      * Gets the cpus.
      *
      * @return the cpus
      */
     public Integer getCpus() {
         return cpus;
-    }
-
-    /**
-     * Gets the unlimited virtualization attribute.
-     *
-     * @return the unlimited virtualization attribute
-     */
-    public Boolean getUnlimitedVirtualization() {
-        return unlimitedVirtualization;
     }
 
     /**
@@ -157,32 +216,17 @@ public class Subscription {
     }
 
     /**
-     * Gets the usable product ids.
+     * Gets the product ids.
      *
-     * @return the usable product ids
+     * @return the product ids
      */
-    public List<Integer> getUsableProductIds() {
-        return usableProductIds;
+    public List<Integer> getProductIds() {
+        return productIds;
     }
 
-    /**
-     * Gets the support type.
-     *
-     * @return the support type
-     */
-    public String getSupportType() {
-        return supportType;
-    }
 
-    /**
-     * Gets the lifetime.
-     *
-     * @return the lifetime
-     */
-    public Integer getLifetime() {
-        return lifetime;
-    }
 
+    // utility methods
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
