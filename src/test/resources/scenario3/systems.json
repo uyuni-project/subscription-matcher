@@ -1,21 +1,21 @@
 [
   {
-    "id": "res6",
+    "id": 500,
     "cpus": 8,
     "product_ids": [1138]
   },
   {
-    "id": "fakelanding",
+    "id": 1000,
     "cpus": 8,
     "product_ids": [814]
   },
   {
-    "id": "manager",
+    "id": 2000,
     "cpus": 8,
     "product_ids": [814]
   },
   {
-    "id": "res7",
+    "id": 600,
     "cpus": 8,
     "product_ids": [1138]
   }

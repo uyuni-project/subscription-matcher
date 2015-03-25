@@ -4,8 +4,8 @@ Scenario 1 - Virtual Machines and unassignable system
 The first scenario defines 2 virtual hosts with either
 two virtual systems on top of it.
 
-One virtual host is a *SLES* and the second one in a *VMware*
-server.
+One virtual host is a *SLES* (id 100) and the second one
+is a *VMware* server (id 200).
 
 For virtual hosts we need to map all products of all virtual
 systems running on these hosts to the host to make use of
@@ -21,6 +21,6 @@ not have a subscription for (1122, RES 5).
 Result
 ------
 
-The result should be *lesch* and *vmware* consume each 1 subscription.
-1 subscription is free and the system *berthold* can not be entitled.
+The result should be 100 and 200 consume each 1 subscription.
+1 subscription is free and the system 300 can not be entitled.
 

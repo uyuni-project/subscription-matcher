@@ -1,6 +1,6 @@
 [
   {
-    "id": "2",
+    "id": 2,
     "part_number": "874-006260",
     "system_limit": 2,
     "starts_at": "2013-08-01T00:00:00Z",
@@ -8,7 +8,7 @@
     "scc_org_id": "UC7"
   },
   {
-    "id": "3",
+    "id": 3,
     "part_number": "874-005649",
     "system_limit": 2,
     "starts_at": "2013-08-01T00:00:00Z",

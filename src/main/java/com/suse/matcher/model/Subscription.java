@@ -55,7 +55,7 @@ public class Subscription {
 
     // JSON fields
     /** The id. */
-    public String id;
+    public Integer id;
 
     /** The part number. */
     @SerializedName("part_number")
@@ -130,7 +130,7 @@ public class Subscription {
      *
      * @return the id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

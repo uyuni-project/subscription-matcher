@@ -1,21 +1,21 @@
 [
   {
-    "id": "cokerunner",
+    "id": 100,
     "cpus": 16,
     "product_ids": [1]
   },
   {
-    "id": "fakelanding",
+    "id": 200,
     "cpus": 8,
     "product_ids": [1]
   },
   {
-    "id": "manager",
+    "id": 300,
     "cpus": 8,
     "product_ids": [1]
   },
   {
-    "id": "chupacabra",
+    "id": 400,
     "cpus": 16,
     "product_ids": [1]
   }

@@ -12,7 +12,7 @@ public class InvalidPinnedMatch extends Match {
      * @param systemIdIn the system id in
      * @param subscriptionIdIn the subscription id in
      */
-    public InvalidPinnedMatch(String systemIdIn, String subscriptionIdIn) {
+    public InvalidPinnedMatch(Integer systemIdIn, Integer subscriptionIdIn) {
         super(systemIdIn, subscriptionIdIn);
     }
 }

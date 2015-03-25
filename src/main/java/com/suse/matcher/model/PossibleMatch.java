@@ -11,7 +11,7 @@ public class PossibleMatch extends Match {
      * @param systemIdIn the system id in
      * @param subscriptionIdIn the subscription id in
      */
-    public PossibleMatch(String systemIdIn, String subscriptionIdIn) {
+    public PossibleMatch(Integer systemIdIn, Integer subscriptionIdIn) {
         super(systemIdIn, subscriptionIdIn);
     }
 }

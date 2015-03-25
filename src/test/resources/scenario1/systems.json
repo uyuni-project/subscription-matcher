@@ -1,42 +1,42 @@
 [
   {
-    "id": "lesch",
+    "id": 100,
     "cpus": 2,
-    "virtual_systems": ["e25", "e42"],
+    "virtual_systems": [101, 102],
     "product_ids": [814]
   },
   {
-    "id": "e25",
+    "id": 101,
     "cpus": 2,
     "product_ids": [814],
     "physical": false
   },
   {
-    "id": "e42",
+    "id": 102,
     "cpus": 64,
     "product_ids": [814],
     "physical": false
   },
   {
-    "id": "vmware",
+    "id": 200,
     "cpus": 2,
-    "virtual_systems": ["virt1", "virt2"],
+    "virtual_systems": [201, 202],
     "product_ids": []
   },
   {
-    "id": "virt1",
+    "id": 201,
     "cpus": 2,
     "product_ids": [814],
     "physical": false
   },
   {
-    "id": "virt2",
+    "id": 202,
     "cpus": 1,
     "product_ids": [814],
     "physical": false
   },
   {
-    "id": "berthold",
+    "id": 300,
     "cpus": 127,
     "product_ids": [1122]
   }

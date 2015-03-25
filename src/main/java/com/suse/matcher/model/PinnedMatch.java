@@ -12,7 +12,7 @@ public class PinnedMatch extends Match {
      * @param systemIdIn the system id in
      * @param subscriptionIdIn the subscription id in
      */
-    public PinnedMatch(String systemIdIn, String subscriptionIdIn) {
+    public PinnedMatch(Integer systemIdIn, Integer subscriptionIdIn) {
         super(systemIdIn, subscriptionIdIn);
     }
 }

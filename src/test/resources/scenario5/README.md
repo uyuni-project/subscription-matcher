@@ -17,5 +17,5 @@ The system with 4 cpus can be entitled, while the other system with 8 cpus
 cannot.
 
 It is not allowed to take one subscription from **UC5**
-and assign them with 3 from **UC7** to **chupacabra**.
+and assign them with 3 from **UC7** to 200.
 

@@ -1,6 +1,6 @@
 [
   {
-    "id": "4",
+    "id": 4,
     "part_number": "800-TEMPORARY-X86-2CPU-STACKABLE",
     "system_limit": 3,
     "starts_at": "2013-08-01T00:00:00Z",
@@ -8,7 +8,7 @@
     "scc_org_id": "UC5"
   },
   {
-    "id": "5",
+    "id": 5,
     "part_number": "800-TEMPORARY-X86-2CPU-STACKABLE",
     "system_limit": 3,
     "starts_at": "2013-08-01T00:00:00Z",

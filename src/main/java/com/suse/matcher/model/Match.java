@@ -14,11 +14,11 @@ public class Match {
 
     /** The system id. */
     @SerializedName("system_id")
-    public String systemId;
+    public Integer systemId;
 
     /** The subscription id. */
     @SerializedName("subscription_id")
-    public String subscriptionId;
+    public Integer subscriptionId;
 
     /**
      * Standard constructor.
@@ -26,7 +26,7 @@ public class Match {
      * @param systemIdIn a system id
      * @param subscriptionIdIn an id of subscription assigned to the system
      */
-    public Match(String systemIdIn, String subscriptionIdIn) {
+    public Match(Integer systemIdIn, Integer subscriptionIdIn) {
         super();
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
@@ -37,7 +37,7 @@ public class Match {
      *
      * @return the system id
      */
-    public String getSystemId() {
+    public Integer getSystemId() {
         return systemId;
     }
 
@@ -46,7 +46,7 @@ public class Match {
      *
      * @return the subscription id
      */
-    public String getSubscriptionId() {
+    public Integer getSubscriptionId() {
         return subscriptionId;
     }
 

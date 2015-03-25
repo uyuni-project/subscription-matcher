@@ -1,11 +1,11 @@
 [
   {
-    "id": "fakelanding",
+    "id": 100,
     "cpus": 4,
     "product_ids": [1118]
   },
   {
-    "id": "chupacabra",
+    "id": 200,
     "cpus": 8,
     "product_ids": [1118]
   }

@@ -23,7 +23,7 @@ public class System {
 
     // JSON fields
     /** The id. */
-    public String id;
+    public Integer id;
 
     /** The populated CPU socket count. */
     public Integer cpus;
@@ -44,7 +44,7 @@ public class System {
      *
      * @return the id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
