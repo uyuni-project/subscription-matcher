@@ -87,7 +87,7 @@ public class Subscription {
     public String supportLevel;
 
     /**  Populated CPU sockets or IFLs (s390x architecture), null for "instance subscriptions". */
-    public Integer cpus;
+    public Integer cpus = null;
 
     /**  Can this subscription be used multiple times on the same system? */
     public Boolean stackable;
