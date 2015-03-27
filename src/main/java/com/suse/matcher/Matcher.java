@@ -2,7 +2,6 @@ package com.suse.matcher;
 
 import static com.suse.matcher.model.Match.Kind.CONFIRMED;
 import static com.suse.matcher.model.Match.Kind.INVALID;
-import static com.suse.matcher.model.Match.Kind.USER_PINNED;
 
 import com.suse.matcher.model.Match;
 import com.suse.matcher.model.Subscription;
@@ -83,7 +82,6 @@ public class Matcher {
             session.insert(system);
         }
         for (Match pinnedMatch : pinnedMatches) {
-            pinnedMatch.kind = USER_PINNED;
             session.insert(pinnedMatch);
         }
 

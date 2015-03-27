@@ -6,6 +6,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.suse.matcher.model.Match;
+import com.suse.matcher.model.Match.Kind;
 import com.suse.matcher.model.Product;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
@@ -54,12 +55,17 @@ public class Loader {
      * Load matches from a JSON file.
      *
      * @param reader the reader object
+     * @param kind the match kind
      * @return the list
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<Match> loadMatches(Reader reader) throws JsonIOException, JsonSyntaxException {
-        return gson.fromJson(reader, new TypeToken<List<Match>>() { }.getType());
+    public List<Match> loadMatches(Reader reader, Kind kind) throws JsonIOException, JsonSyntaxException {
+        List<Match> result = gson.fromJson(reader, new TypeToken<List<Match>>() { }.getType());
+        for (Match match : result) {
+            match.kind = kind;
+        }
+        return result;
     }
 
     /**
