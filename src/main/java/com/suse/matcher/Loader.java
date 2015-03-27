@@ -10,7 +10,6 @@ import com.suse.matcher.model.Product;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
-import java.io.FileNotFoundException;
 import java.io.Reader;
 import java.util.List;
 
@@ -32,11 +31,10 @@ public class Loader {
      *
      * @param reader the reader object
      * @return the list
-     * @throws FileNotFoundException the file is not in the expected path
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<System> loadSystems(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+    public List<System> loadSystems(Reader reader) throws JsonIOException, JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<System>>() { }.getType());
     }
 
@@ -45,11 +43,10 @@ public class Loader {
      *
      * @param reader the reader object
      * @return the list
-     * @throws FileNotFoundException the file is not in the expected path
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<Subscription> loadSubscriptions(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+    public List<Subscription> loadSubscriptions(Reader reader) throws JsonIOException, JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<Subscription>>() { }.getType());
     }
 
@@ -58,11 +55,10 @@ public class Loader {
      *
      * @param reader the reader object
      * @return the list
-     * @throws FileNotFoundException the file is not in the expected path
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<Match> loadMatches(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+    public List<Match> loadMatches(Reader reader) throws JsonIOException, JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<Match>>() { }.getType());
     }
 
@@ -71,11 +67,10 @@ public class Loader {
      *
      * @param reader the reader object
      * @return the list
-     * @throws FileNotFoundException the file is not in the expected path
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<Product> loadProducts(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+    public List<Product> loadProducts(Reader reader) throws JsonIOException, JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<Product>>() { }.getType());
     }
 }
