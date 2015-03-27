@@ -45,7 +45,7 @@ public class Matcher {
     private Collection<Match> matches = null;
 
     /** Invalid pin matches provided by the user. */
-    private Collection<Match> invalidPinMatches = null;
+    private Collection<Match> invalidPinnedMatches = null;
 
     /**
      * Tries to match systems to subscriptions.
@@ -97,7 +97,7 @@ public class Matcher {
             }
         });
 
-        invalidPinMatches = (Collection<Match>) session.getObjects(new ObjectFilter() {
+        invalidPinnedMatches = (Collection<Match>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
                 return fact instanceof Match && ((Match) fact).kind == INVALID;
@@ -120,6 +120,6 @@ public class Matcher {
      * @return the invalid pinned matches
      */
     public Collection<Match> getInvalidPinnedMatches() {
-        return invalidPinMatches;
+        return invalidPinnedMatches;
     }
 }
