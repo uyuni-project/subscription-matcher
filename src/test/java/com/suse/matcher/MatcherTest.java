@@ -1,6 +1,6 @@
 package com.suse.matcher;
 
-import com.suse.matcher.model.PinnedMatch;
+import com.suse.matcher.model.Match;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
@@ -32,7 +32,7 @@ public class MatcherTest {
     private List<Subscription> subscriptions;
 
     /** List of pinned matches in the current test run. */
-    private List<PinnedMatch> pinnedMatches;
+    private List<Match> pinnedMatches;
 
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
@@ -71,8 +71,9 @@ public class MatcherTest {
      *
      * @param systemsIn the systems
      * @param subscriptionsIn the subscriptions
+     * @param pinnedMatchesIn the pinned matches
      */
-    public MatcherTest(List<System> systemsIn, List<Subscription> subscriptionsIn, List<PinnedMatch> pinnedMatchesIn) {
+    public MatcherTest(List<System> systemsIn, List<Subscription> subscriptionsIn, List<Match> pinnedMatchesIn) {
         matcher = new Matcher();
         systems = systemsIn;
         subscriptions = subscriptionsIn;
