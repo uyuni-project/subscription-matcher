@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.suse.matcher.model.PinnedMatch;
+import com.suse.matcher.model.Match;
 import com.suse.matcher.model.Product;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
@@ -27,7 +27,7 @@ public class Loader {
     private static final Type SUBSCRIPTION_FILE_CONTENT_TYPE = new TypeToken<List<Subscription>>() { }.getType();
 
     /** The preferences file expected content type. */
-    private static final Type PINNED_MATCH_FILE_CONTENT_TYPE = new TypeToken<List<PinnedMatch>>() { }.getType();
+    private static final Type MATCH_FILE_CONTENT_TYPE = new TypeToken<List<Match>>() { }.getType();
 
     /** The product file expected content type. */
     private static final Type PRODUCT_FILE_CONTENT_TYPE = new TypeToken<List<Product>>() { }.getType();
@@ -67,7 +67,7 @@ public class Loader {
     }
 
     /**
-     * Load pinned matches from a JSON file.
+     * Load matches from a JSON file.
      *
      * @param reader the reader object
      * @return the list
@@ -75,8 +75,8 @@ public class Loader {
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<PinnedMatch> loadPinnedMatches(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return gson.fromJson(reader, PINNED_MATCH_FILE_CONTENT_TYPE);
+    public List<Match> loadMatches(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
+        return gson.fromJson(reader, MATCH_FILE_CONTENT_TYPE);
     }
 
     /**

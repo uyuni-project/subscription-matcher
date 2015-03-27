@@ -1,8 +1,10 @@
 package com.suse.matcher;
 
-import com.suse.matcher.model.InvalidPinnedMatch;
+import static com.suse.matcher.model.Match.Kind.CONFIRMED;
+import static com.suse.matcher.model.Match.Kind.INVALID;
+import static com.suse.matcher.model.Match.Kind.USER_PINNED;
+
 import com.suse.matcher.model.Match;
-import com.suse.matcher.model.PinnedMatch;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 import com.suse.matcher.model.Today;
@@ -18,6 +20,7 @@ import org.kie.api.runtime.rule.Agenda;
 
 import java.util.Collection;
 import java.util.List;
+
 
 /**
  * Wraps the rule engine.
@@ -42,7 +45,7 @@ public class Matcher {
     private Collection<Match> matches = null;
 
     /** Invalid pin matches provided by the user. */
-    private Collection<InvalidPinnedMatch> invalidPinMatches = null;
+    private Collection<Match> invalidPinMatches = null;
 
     /**
      * Tries to match systems to subscriptions.
@@ -52,7 +55,7 @@ public class Matcher {
      * @param pinnedMatches the matches pinned by the user
      */
     @SuppressWarnings("unchecked")
-    public void match(List<System> systems, List<Subscription> subscriptions, List<PinnedMatch> pinnedMatches) {
+    public void match(List<System> systems, List<Subscription> subscriptions, List<Match> pinnedMatches) {
         // instantiate engine
         KieServices factory = KieServices.Factory.get();
         KieContainer container = factory.getKieClasspathContainer();
@@ -77,7 +80,8 @@ public class Matcher {
         for (System system : systems) {
             session.insert(system);
         }
-        for (PinnedMatch pinnedMatch : pinnedMatches) {
+        for (Match pinnedMatch : pinnedMatches) {
+            pinnedMatch.kind = USER_PINNED;
             session.insert(pinnedMatch);
         }
 
@@ -89,14 +93,14 @@ public class Matcher {
         matches = (Collection<Match>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
-                return fact.getClass().getSimpleName().equals("Match");
+                return fact instanceof Match && ((Match) fact).kind == CONFIRMED;
             }
         });
 
-        invalidPinMatches = (Collection<InvalidPinnedMatch>) session.getObjects(new ObjectFilter() {
+        invalidPinMatches = (Collection<Match>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
-                return fact.getClass().getSimpleName().equals("InvalidPinnedMatch");
+                return fact instanceof Match && ((Match) fact).kind == INVALID;
             }
         });
     }
@@ -115,7 +119,7 @@ public class Matcher {
      *
      * @return the invalid pinned matches
      */
-    public Collection<InvalidPinnedMatch> getInvalidPinnedMatches() {
+    public Collection<Match> getInvalidPinnedMatches() {
         return invalidPinMatches;
     }
 }

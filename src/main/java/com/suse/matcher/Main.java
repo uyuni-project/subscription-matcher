@@ -1,8 +1,6 @@
 package com.suse.matcher;
 
-import com.suse.matcher.model.InvalidPinnedMatch;
 import com.suse.matcher.model.Match;
-import com.suse.matcher.model.PinnedMatch;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
@@ -35,16 +33,16 @@ public class Main {
         Loader loader = new Loader();
         List<System> systems = loader.loadSystems(new FileReader(systemsPath));
         List<Subscription> subscriptions = loader.loadSubscriptions(new FileReader(subscriptionsPath));
-        List<PinnedMatch> pinnedMatches = loader.loadPinnedMatches(new FileReader(pinnedMatchPath));
+        List<Match> pinnedMatches = loader.loadMatches(new FileReader(pinnedMatchPath));
 
         // run the engine
         Matcher matcher = new Matcher();
         matcher.match(systems, subscriptions, pinnedMatches);
         Collection<Match> results = matcher.getMatches();
-        Collection<InvalidPinnedMatch> errors = matcher.getInvalidPinnedMatches();
+        Collection<Match> errors = matcher.getInvalidPinnedMatches();
 
         // print results
-        for (InvalidPinnedMatch error : errors) {
+        for (Match error : errors) {
             java.lang.System.out.println("Pinned match of system " + error.systemId + " to subscription " + error.subscriptionId
                     + " is invalid and was ignored");
         }

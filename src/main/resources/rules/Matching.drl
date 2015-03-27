@@ -1,16 +1,15 @@
 package com.suse.matcher.rules;
 
 import com.suse.matcher.model.Match;
-import com.suse.matcher.model.PinnedMatch;
-import com.suse.matcher.model.PossibleMatch;
+import com.suse.matcher.model.Match.Kind;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
 rule "match valid user-specified matches"
     agenda-group "Matchability"
     when
-        PinnedMatch($systemId : systemId, $subscriptionId : subscriptionId) and
-        PossibleMatch(systemId == $systemId, subscriptionId == $subscriptionId)
+        Match($systemId : systemId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED) and
+        Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
     then
-        insert(new Match($systemId, $subscriptionId));
+        insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
 end

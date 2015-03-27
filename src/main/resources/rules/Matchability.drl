@@ -2,9 +2,10 @@ package com.suse.matcher.rules;
 
 import java.util.List;
 
+import com.suse.matcher.model.Match;
+import com.suse.matcher.model.Match.Kind;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
-import com.suse.matcher.model.PossibleMatch;
 
 rule "installed product matches subscription"
     agenda-group "Matchability"
@@ -14,5 +15,5 @@ rule "installed product matches subscription"
             (stackable == true || cpus >= $system.cpus ),
             (virtualizationPolicy == Subscription.UNLIMITED_VIRTUALIZATION || $system.virtualSystemIds.size() == 0) )
     then
-        insert(new PossibleMatch($system.id, $subscription.id));
+        insert(new Match($system.id, $subscription.id, Kind.POSSIBLE));
 end

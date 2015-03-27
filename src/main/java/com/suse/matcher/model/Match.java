@@ -12,6 +12,23 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class Match {
 
+    /**
+     * Kind of this match
+     */
+    public enum Kind {
+        /** Rule engine established that this match can be used */
+        POSSIBLE,
+
+        /** Rule engine established it will be part of the result */
+        CONFIRMED,
+
+        /** User wants this match, rule engine did not yet confirm it is valid */
+        USER_PINNED,
+
+        /** User wanted this match but rule engine denies it's OK to use */
+        INVALID
+    }
+
     /** The system id. */
     @SerializedName("system_id")
     public Integer systemId;
@@ -20,16 +37,21 @@ public class Match {
     @SerializedName("subscription_id")
     public Integer subscriptionId;
 
+    /** The kind. */
+    public Kind kind;
+
     /**
      * Standard constructor.
      *
      * @param systemIdIn a system id
      * @param subscriptionIdIn an id of subscription assigned to the system
+     * @param kindIn the match kind
      */
-    public Match(Integer systemIdIn, Integer subscriptionIdIn) {
+    public Match(Integer systemIdIn, Integer subscriptionIdIn, Kind kindIn) {
         super();
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
+        kindIn = kind;
     }
 
     /**
