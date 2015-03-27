@@ -18,7 +18,9 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.ObjectFilter;
 import org.kie.api.runtime.rule.Agenda;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -42,10 +44,10 @@ public class Matcher {
     };
 
     /** Matching results. */
-    private Collection<Match> matches = null;
+    private List<Match> matches = null;
 
     /** Invalid pin matches provided by the user. */
-    private Collection<Match> invalidPinnedMatches = null;
+    private List<Match> invalidPinnedMatches = null;
 
     /**
      * Tries to match systems to subscriptions.
@@ -90,19 +92,21 @@ public class Matcher {
         logger.close();
 
         // gather results
-        matches = (Collection<Match>) session.getObjects(new ObjectFilter() {
+        matches = new ArrayList<Match>((Collection<Match>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
                 return fact instanceof Match && ((Match) fact).kind == CONFIRMED;
             }
-        });
+        }));
+        Collections.sort(matches);
 
-        invalidPinnedMatches = (Collection<Match>) session.getObjects(new ObjectFilter() {
+        invalidPinnedMatches = new ArrayList<Match>((Collection<Match>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
                 return fact instanceof Match && ((Match) fact).kind == INVALID;
             }
-        });
+        }));
+        Collections.sort(invalidPinnedMatches);
     }
 
     /**
@@ -110,7 +114,7 @@ public class Matcher {
      *
      * @return the matches
      */
-    public Collection<Match> getMatches() {
+    public List<Match> getMatches() {
         return matches;
     }
 
@@ -119,7 +123,7 @@ public class Matcher {
      *
      * @return the invalid pinned matches
      */
-    public Collection<Match> getInvalidPinnedMatches() {
+    public List<Match> getInvalidPinnedMatches() {
         return invalidPinnedMatches;
     }
 }

@@ -2,6 +2,7 @@ package com.suse.matcher.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * Represents match of a subscription to a system requested by the user.
  */
-public class Match {
+public class Match implements Comparable<Match> {
 
     /**
      * Kind of this match
@@ -70,6 +71,12 @@ public class Match {
      */
     public Integer getSubscriptionId() {
         return subscriptionId;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int compareTo(Match oIn) {
+        return CompareToBuilder.reflectionCompare(this, oIn);
     }
 
     /** {@inheritDoc} */
