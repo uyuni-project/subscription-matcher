@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Collection;
@@ -45,12 +47,20 @@ public class MatcherTest {
     public static Collection<Object[]> loadTestData() throws Exception {
         Loader loader = new Loader();
         Collection<Object[]> result = new LinkedList<>();
-        for (int i = 1; i <= 4; i++) {
-            result.add(new Object[] {
-                    loader.loadSystems(getReader(i, "systems.json")),
-                    loader.loadSubscriptions(getReader(i, "subscriptions.json")),
-                    loader.loadPinnedMatches(getReader(i, "pinned_matches.json"))
-            });
+        int i = 1;
+        boolean moreFiles = true;
+        while (moreFiles) {
+            try {
+                result.add(new Object[] {
+                        loader.loadSystems(getReader(i, "systems.json")),
+                        loader.loadSubscriptions(getReader(i, "subscriptions.json")),
+                        loader.loadMatches(getReader(i, "pinned_matches.json"))
+                });
+                i++;
+            }
+            catch (FileNotFoundException e) {
+                moreFiles = false;
+            }
         }
         return result;
     }
@@ -61,9 +71,14 @@ public class MatcherTest {
      * @param scenarioNumber the i
      * @param fileName the filename
      * @return the reader
+     * @throws FileNotFoundException if the JSON file was not found
      */
-    private static Reader getReader(int scenarioNumber, String fileName) {
-        return new InputStreamReader(MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber + "/" + fileName));
+    private static Reader getReader(int scenarioNumber, String fileName) throws FileNotFoundException {
+        InputStream is = MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber + "/" + fileName);
+        if (is == null) {
+            throw new FileNotFoundException();
+        }
+        return new InputStreamReader(is);
     }
 
     /**
