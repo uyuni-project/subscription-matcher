@@ -13,3 +13,17 @@ rule "match valid user-specified matches"
     then
         insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
 end
+
+rule "match valid matches"
+    agenda-group "Matching"
+    when
+        $system : System($systemId : id) and
+        Match($subscriptionId : subscriptionId, systemId == $systemId, kind == Kind.POSSIBLE) and
+        $subscription: Subscription($systemLimit : systemLimit, id == $subscriptionId, matchAnyProductOnSystem($system), systemLimit > 0) and
+        not (Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.CONFIRMED))
+    then
+        insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
+        modify($subscription){
+            systemLimit = $systemLimit -1
+        }
+end
