@@ -52,7 +52,7 @@ public class Match implements Comparable<Match> {
         super();
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
-        kindIn = kind;
+        kind = kindIn;
     }
 
     /**
