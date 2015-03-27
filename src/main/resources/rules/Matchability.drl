@@ -13,7 +13,12 @@ rule "installed product matches subscription"
         $system : System()
         $subscription : Subscription( matchAnyProductOnSystem($system),
             (stackable == true || cpus >= $system.cpus ),
-            (virtualizationPolicy == Subscription.UNLIMITED_VIRTUALIZATION || $system.virtualSystemIds.size() == 0) )
+            (
+                (virtualizationPolicy == Subscription.PHYSICAL_ONLY && $system.physical) ||
+                (virtualizationPolicy == Subscription.UNLIMITED_VIRTUALIZATION && $system.physical)
+                // TWO_TWO can be applied to both physical and virtual systems
+            )
+        )
     then
         insert(new Match($system.id, $subscription.id, Kind.POSSIBLE));
 end
