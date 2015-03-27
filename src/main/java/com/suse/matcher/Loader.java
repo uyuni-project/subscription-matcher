@@ -12,25 +12,12 @@ import com.suse.matcher.model.System;
 
 import java.io.FileNotFoundException;
 import java.io.Reader;
-import java.lang.reflect.Type;
 import java.util.List;
 
 /**
  * Loads facts from JSON resources.
  */
 public class Loader {
-
-    /** The system file expected content type. */
-    private static final Type SYSTEM_FILE_CONTENT_TYPE = new TypeToken<List<System>>() { }.getType();
-
-    /** The subscription file expected content type. */
-    private static final Type SUBSCRIPTION_FILE_CONTENT_TYPE = new TypeToken<List<Subscription>>() { }.getType();
-
-    /** The preferences file expected content type. */
-    private static final Type MATCH_FILE_CONTENT_TYPE = new TypeToken<List<Match>>() { }.getType();
-
-    /** The product file expected content type. */
-    private static final Type PRODUCT_FILE_CONTENT_TYPE = new TypeToken<List<Product>>() { }.getType();
 
     /** Deserializer instance. */
     private Gson gson;
@@ -50,7 +37,7 @@ public class Loader {
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
     public List<System> loadSystems(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return gson.fromJson(reader, SYSTEM_FILE_CONTENT_TYPE);
+        return gson.fromJson(reader, new TypeToken<List<System>>() { }.getType());
     }
 
     /**
@@ -63,7 +50,7 @@ public class Loader {
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
     public List<Subscription> loadSubscriptions(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return gson.fromJson(reader, SUBSCRIPTION_FILE_CONTENT_TYPE);
+        return gson.fromJson(reader, new TypeToken<List<Subscription>>() { }.getType());
     }
 
     /**
@@ -76,7 +63,7 @@ public class Loader {
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
     public List<Match> loadMatches(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return gson.fromJson(reader, MATCH_FILE_CONTENT_TYPE);
+        return gson.fromJson(reader, new TypeToken<List<Match>>() { }.getType());
     }
 
     /**
@@ -89,6 +76,6 @@ public class Loader {
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
     public List<Product> loadProducts(Reader reader) throws FileNotFoundException, JsonIOException, JsonSyntaxException {
-        return gson.fromJson(reader, PRODUCT_FILE_CONTENT_TYPE);
+        return gson.fromJson(reader, new TypeToken<List<Product>>() { }.getType());
     }
 }
