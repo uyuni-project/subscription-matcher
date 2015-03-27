@@ -1,5 +1,11 @@
 package com.suse.matcher;
 
+import static com.suse.matcher.model.Match.Kind.CONFIRMED;
+import static com.suse.matcher.model.Match.Kind.INVALID;
+import static com.suse.matcher.model.Match.Kind.USER_PINNED;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import com.suse.matcher.model.Match;
 import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
@@ -36,6 +42,12 @@ public class MatcherTest {
     /** List of pinned matches in the current test run. */
     private List<Match> pinnedMatches;
 
+    /** List of expected matches in the current test run. */
+    private List<Match> expectedMatches;
+
+    /** List of expected invalid pinned matches in the current test run. */
+    private List<Match> expectedInvalidPinnedMatches;
+
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
      * with files loaded from resources/subscriptions* JSON files.
@@ -52,9 +64,11 @@ public class MatcherTest {
         while (moreFiles) {
             try {
                 result.add(new Object[] {
-                        loader.loadSystems(getReader(i, "systems.json")),
-                        loader.loadSubscriptions(getReader(i, "subscriptions.json")),
-                        loader.loadMatches(getReader(i, "pinned_matches.json"))
+                    loader.loadSystems(getReader(i, "systems.json")),
+                    loader.loadSubscriptions(getReader(i, "subscriptions.json")),
+                    loader.loadMatches(getReader(i, "pinned_matches.json"), USER_PINNED),
+                    loader.loadMatches(getReader(i, "expected_matches.json"), CONFIRMED),
+                    loader.loadMatches(getReader(i, "expected_invalid_pinned_matches.json"), INVALID)
                 });
                 i++;
             }
@@ -87,12 +101,17 @@ public class MatcherTest {
      * @param systemsIn the systems
      * @param subscriptionsIn the subscriptions
      * @param pinnedMatchesIn the pinned matches
+     * @param expectedMatchesIn the expected output matches
+     * @param expectedInvalidPinnedMatchesIn the expected invalid pinned matches
      */
-    public MatcherTest(List<System> systemsIn, List<Subscription> subscriptionsIn, List<Match> pinnedMatchesIn) {
+    public MatcherTest(List<System> systemsIn, List<Subscription> subscriptionsIn, List<Match> pinnedMatchesIn, List<Match> expectedMatchesIn,
+            List<Match> expectedInvalidPinnedMatchesIn) {
         matcher = new Matcher();
         systems = systemsIn;
         subscriptions = subscriptionsIn;
         pinnedMatches = pinnedMatchesIn;
+        expectedMatches = expectedMatchesIn;
+        expectedInvalidPinnedMatches = expectedInvalidPinnedMatchesIn;
     }
 
     /**
@@ -101,6 +120,10 @@ public class MatcherTest {
     @Test
     public void test() {
         matcher.match(systems, subscriptions, pinnedMatches);
-        // TODO: currently this simply tests no Exceptions are thrown, more significant checks should be added here
+        List<Match> actualMatches = matcher.getMatches();
+        List<Match> actualInvalidPinnedMatches = matcher.getInvalidPinnedMatches();
+
+        assertThat(actualMatches, equalTo((Collection<Match>)expectedMatches));
+        assertThat(actualInvalidPinnedMatches, equalTo((Collection<Match>)expectedInvalidPinnedMatches));
     }
 }

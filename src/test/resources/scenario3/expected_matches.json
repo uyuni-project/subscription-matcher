@@ -1,0 +1,18 @@
+[
+  {
+    "system_id": 500,
+    "subscription_id": 3
+  },
+  {
+    "system_id": 1000,
+    "subscription_id": 2
+  },
+  {
+    "system_id": 2000,
+    "subscription_id": 2
+  },
+  {
+    "system_id": 600,
+    "subscription_id": 3
+  }
+]
