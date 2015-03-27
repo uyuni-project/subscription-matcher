@@ -6,7 +6,7 @@ import com.suse.matcher.model.Subscription;
 import com.suse.matcher.model.System;
 
 rule "match valid user-specified matches"
-    agenda-group "Matchability"
+    agenda-group "Matching"
     when
         Match($systemId : systemId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED) and
         Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
