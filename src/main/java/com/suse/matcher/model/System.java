@@ -23,14 +23,14 @@ public class System {
 
     // JSON fields
     /** The id. */
-    public Integer id;
+    public Long id;
 
     /** The populated CPU socket count. */
     public Integer cpus;
 
     /** virtual machines */
     @SerializedName("virtual_system_ids")
-    public Set<String> virtualSystemIds = new HashSet<String>();
+    public List<Long> virtualSystemIds = new LinkedList<Long>();
 
     /** IDs of installed products. */
     @SerializedName("product_ids")
@@ -44,7 +44,7 @@ public class System {
      *
      * @return the id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -62,7 +62,7 @@ public class System {
      *
      * @return the virtual system ids
      */
-    public Set<String> getVirtualSystemIds() {
+    public List<Long> getVirtualSystemIds() {
         return virtualSystemIds;
     }
 
