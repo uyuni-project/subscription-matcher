@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Static product data container.
@@ -75,7 +76,7 @@ public class ProductData {
      * @param productIds the product ids
      * @return the friendly names
      */
-    public Collection<String> getFriendlyNames(List<Integer> productIds) {
+    public Collection<String> getFriendlyNames(Set<Integer> productIds) {
         return CollectionUtils.collect(productIds, new Transformer<Integer,String>(){
             @Override
             public String transform(Integer id) {
