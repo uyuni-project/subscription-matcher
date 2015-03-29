@@ -2,7 +2,7 @@
   {
     "id": 100,
     "cpus": 2,
-    "virtual_systems": [101, 102],
+    "virtual_system_ids": [101, 102],
     "product_ids": [814]
   },
   {
@@ -20,7 +20,7 @@
   {
     "id": 200,
     "cpus": 2,
-    "virtual_systems": [201, 202],
+    "virtual_system_ids": [201, 202],
     "product_ids": []
   },
   {
