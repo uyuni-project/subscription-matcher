@@ -122,7 +122,19 @@ public class Subscription {
         return false;
     }
 
-
+    /**
+     * Returns a ranking of the fitness of this subscription to the
+     * specified system. Higher rank values will be preferred to lower ones when
+     * the rule engine will decide upon different possible matches.
+     *
+     * @param system the system to rank
+     * @return a ranking value
+     */
+    public int computeFitnessTo(System system) {
+        // prefer subscriptions that match the number of needed CPUs
+        // or at least come close
+        return -Math.abs(this.cpus - system.cpus);
+    }
 
     //getters
     /**

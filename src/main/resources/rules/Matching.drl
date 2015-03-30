@@ -16,6 +16,7 @@ end
 
 rule "match valid matches"
     agenda-group "Matching"
+    salience $subscription.computeFitnessTo($system)
     when
         $system : System($systemId : id) and
         Match($subscriptionId : subscriptionId, systemId == $systemId, kind == Kind.POSSIBLE) and
