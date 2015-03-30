@@ -24,7 +24,7 @@ rule "match valid matches"
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
-        modify($subscription){
+        modify($subscription) {
             systemLimit = $systemLimit -1
         }
 end
