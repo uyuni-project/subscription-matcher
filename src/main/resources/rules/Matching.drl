@@ -8,7 +8,7 @@ import com.suse.matcher.model.System;
 rule "match valid user-specified matches"
     agenda-group "Matching"
     when
-        Match($systemId : systemId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED) and
+        Match($systemId : systemId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED)
         Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
     then
         insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
@@ -18,9 +18,9 @@ rule "match valid matches"
     agenda-group "Matching"
     salience $subscription.computeFitnessTo($system)
     when
-        $system : System($systemId : id) and
-        Match($subscriptionId : subscriptionId, systemId == $systemId, kind == Kind.POSSIBLE) and
-        $subscription: Subscription($systemLimit : systemLimit, id == $subscriptionId, matchAnyProductOnSystem($system), systemLimit > 0) and
+        $system : System($systemId : id)
+        Match($subscriptionId : subscriptionId, systemId == $systemId, kind == Kind.POSSIBLE)
+        $subscription: Subscription($systemLimit : systemLimit, id == $subscriptionId, matchAnyProductOnSystem($system), systemLimit > 0)
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
