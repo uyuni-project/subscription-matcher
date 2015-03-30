@@ -95,6 +95,8 @@ public class Subscription {
     /**  Products that can be licensed with this subscription. */
     public List<Integer> productIds = new LinkedList<Integer>();
 
+    /**  Do product ids contain any RedHat product? */
+    public boolean red = false;
 
 
     //methods
@@ -131,9 +133,16 @@ public class Subscription {
      * @return a ranking value
      */
     public int computeFitnessTo(System system) {
-        // prefer subscriptions that match the number of needed CPUs
-        // or at least come close
-        return -Math.abs(this.cpus - system.cpus);
+        // here we compute different scores in the [0, 1] range
+
+        // prefer red subscriptions for red systems
+        int rednessScore = (this.isRed() == system.isRed() ? 1 : 0);
+
+        // prefer subscriptions that match (or are close to) the number of needed CPUs
+        int cpuScore = 1 - Math.abs(this.cpus - system.cpus) / this.cpus;
+
+        // combine all scores in order of preference
+        return rednessScore * 10 + cpuScore;
     }
 
     //getters
@@ -236,6 +245,14 @@ public class Subscription {
         return productIds;
     }
 
+    /**
+     * True if any RedHat product is in this subscription.
+     *
+     * @return true, if subscription is red
+     */
+    public boolean isRed() {
+        return red;
+    }
 
 
     // utility methods

@@ -39,6 +39,10 @@ public class System {
     /** <code>true</code> if this is a machine made of metal */
     public boolean physical = true;
 
+    // computed fields
+    /**  Do product ids contain any RedHat product? */
+    public boolean red = false;
+
     /**
      * Gets the id.
      *
@@ -82,6 +86,15 @@ public class System {
      */
     public boolean isPhysical() {
         return physical;
+    }
+
+    /**
+     * True if any RedHat product is installed.
+     *
+     * @return true, if system is red
+     */
+    public boolean isRed() {
+        return red;
     }
 
     /** {@inheritDoc} */
