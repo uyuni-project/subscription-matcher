@@ -126,23 +126,24 @@ public class Subscription {
 
     /**
      * Returns a ranking of the fitness of this subscription to the
-     * specified system. Higher rank values will be preferred to lower ones when
+     * specified system in the interval [0,1].
+     * Higher rank values will be preferred to lower ones when
      * the rule engine will decide upon different possible matches.
      *
      * @param system the system to rank
      * @return a ranking value
      */
-    public int computeFitnessTo(System system) {
+    public long computeFitnessTo(System system) {
         // here we compute different scores in the [0, 1] range
 
         // prefer red subscriptions for red systems
-        int rednessScore = (this.isRed() == system.isRed() ? 1 : 0);
+        long rednessScore = (this.isRed() == system.isRed() ? 1 : 0);
 
         // prefer subscriptions that match (or are close to) the number of needed CPUs
-        int cpuScore = 1 - Math.abs(this.cpus - system.cpus) / this.cpus;
+        long cpuScore = 1 - Math.abs(this.cpus - system.cpus) / this.cpus;
 
         // combine all scores in order of preference
-        return rednessScore * 10 + cpuScore;
+        return (rednessScore * 10 + cpuScore) / 11;
     }
 
     //getters

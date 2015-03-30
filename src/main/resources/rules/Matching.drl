@@ -7,6 +7,7 @@ import com.suse.matcher.model.System;
 
 rule "match valid user-specified matches"
     agenda-group "Matching"
+    salience 2
     when
         Match($systemId : systemId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED)
         Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
@@ -16,7 +17,7 @@ end
 
 rule "match valid matches"
     agenda-group "Matching"
-    salience $subscription.computeFitnessTo($system)
+    salience $subscription.computeFitnessTo($system) // result in interval [0, 1]
     when
         $system : System($systemId : id)
         Match($subscriptionId : subscriptionId, systemId == $systemId, kind == Kind.POSSIBLE)
