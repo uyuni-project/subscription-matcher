@@ -1,0 +1,43 @@
+[
+  {
+    "id": 100,
+    "cpus": 2,
+    "virtual_system_ids": [101, 102],
+    "product_ids": [814]
+  },
+  {
+    "id": 101,
+    "cpus": 2,
+    "product_ids": [814],
+    "physical": false
+  },
+  {
+    "id": 102,
+    "cpus": 64,
+    "product_ids": [814],
+    "physical": false
+  },
+  {
+    "id": 200,
+    "cpus": 2,
+    "virtual_system_ids": [201, 202],
+    "product_ids": []
+  },
+  {
+    "id": 201,
+    "cpus": 2,
+    "product_ids": [814],
+    "physical": false
+  },
+  {
+    "id": 202,
+    "cpus": 1,
+    "product_ids": [814],
+    "physical": false
+  },
+  {
+    "id": 300,
+    "cpus": 127,
+    "product_ids": [1122]
+  }
+]
