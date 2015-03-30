@@ -20,7 +20,7 @@ rule "match valid matches"
         $system : System($systemId : id) and
         Match($subscriptionId : subscriptionId, systemId == $systemId, kind == Kind.POSSIBLE) and
         $subscription: Subscription($systemLimit : systemLimit, id == $subscriptionId, matchAnyProductOnSystem($system), systemLimit > 0) and
-        not (Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.CONFIRMED))
+        not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
         modify($subscription){
