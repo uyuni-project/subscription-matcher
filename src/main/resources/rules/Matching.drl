@@ -1,9 +1,11 @@
 package com.suse.matcher.rules;
 
-import com.suse.matcher.model.Match;
-import com.suse.matcher.model.Match.Kind;
-import com.suse.matcher.model.Subscription;
-import com.suse.matcher.model.System;
+import com.suse.matcher.facts.Match;
+import com.suse.matcher.facts.Match.Kind;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
+import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.SystemProduct;
 
 rule "match valid user-specified matches"
     agenda-group "Matching"
@@ -20,8 +22,10 @@ rule "match valid matches"
     salience $subscription.computeFitnessTo($system) // result in interval [0, 1]
     when
         $system : System($systemId : id)
-        Match($subscriptionId : subscriptionId, systemId == $systemId, kind == Kind.POSSIBLE)
-        $subscription: Subscription($systemLimit : systemLimit, id == $subscriptionId, matchAnyProductOnSystem($system), systemLimit > 0)
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+        $subscription : Subscription($systemLimit : systemLimit, id == $subscriptionId, systemLimit > 0)
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         insert(new Match($systemId, $subscriptionId, 1, Kind.CONFIRMED));

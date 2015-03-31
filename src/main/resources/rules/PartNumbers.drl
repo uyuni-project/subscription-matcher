@@ -1,7 +1,7 @@
 package com.suse.matcher.rules;
 
-import com.suse.matcher.model.Subscription;
-import com.suse.matcher.model.System;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.System;
 
 //suse linux enterprise server for x86 amd64 & intel64 (per server up to 32cpu sockets) priority 1-year subscription
 rule "Add subscription data for part number 874-005025"

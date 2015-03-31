@@ -1,4 +1,4 @@
-package com.suse.matcher.model;
+package com.suse.matcher.facts;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,10 +7,12 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.kie.api.definition.type.PropertyReactive;
 
 /**
  * Represents match of a subscription to a system requested by the user.
  */
+@PropertyReactive
 public class Match implements Comparable<Match> {
 
     /**
@@ -53,7 +55,6 @@ public class Match implements Comparable<Match> {
      * @param kindIn the match kind
      */
     public Match(Long systemIdIn, Long subscriptionIdIn, Integer quantityIn, Kind kindIn) {
-        super();
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
         kind = kindIn;
@@ -67,6 +68,15 @@ public class Match implements Comparable<Match> {
      */
     public Long getSystemId() {
         return systemId;
+    }
+
+    /**
+     * Gets the subscription id.
+     *
+     * @return the subscription id
+     */
+    public Long getSubscriptionId() {
+        return subscriptionId;
     }
 
     /**
@@ -85,15 +95,6 @@ public class Match implements Comparable<Match> {
      */
     public Kind getKind() {
         return kind;
-    }
-
-    /**
-     * Gets the subscription id.
-     *
-     * @return the subscription id
-     */
-    public Long getSubscriptionId() {
-        return subscriptionId;
     }
 
     /** {@inheritDoc} */

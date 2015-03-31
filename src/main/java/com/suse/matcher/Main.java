@@ -1,10 +1,8 @@
 package com.suse.matcher;
 
-import static com.suse.matcher.model.Match.Kind.USER_PINNED;
-
-import com.suse.matcher.model.Match;
-import com.suse.matcher.model.Subscription;
-import com.suse.matcher.model.System;
+import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonSubscription;
+import com.suse.matcher.json.JsonSystem;
 
 import java.io.FileReader;
 import java.util.Collection;
@@ -33,26 +31,31 @@ public class Main {
 
         // load files
         Loader loader = new Loader();
-        List<System> systems = loader.loadSystems(new FileReader(systemsPath));
-        List<Subscription> subscriptions = loader.loadSubscriptions(new FileReader(subscriptionsPath));
-        List<Match> pinnedMatches = loader.loadMatches(new FileReader(pinnedMatchPath), USER_PINNED);
+        List<JsonSystem> systems = loader.loadSystems(new FileReader(systemsPath));
+        List<JsonSubscription> subscriptions = loader.loadSubscriptions(new FileReader(subscriptionsPath));
+        List<JsonMatch> pinnedMatches = loader.loadMatches(new FileReader(pinnedMatchPath));
 
         // run the engine
-        Matcher matcher = new Matcher();
-        matcher.match(systems, subscriptions, pinnedMatches);
-        Collection<Match> results = matcher.getMatches();
-        Collection<Match> errors = matcher.getInvalidPinnedMatches();
+        try( Matcher matcher = new Matcher()){
+            matcher.addSystems(systems);
+            matcher.addSubscriptions(subscriptions);
+            matcher.addPinnedMatches(pinnedMatches);
 
-        // print results
-        for (Match error : errors) {
-            java.lang.System.out.println("Pinned match of system " + error.systemId + " to subscription " + error.subscriptionId
-                    + " is invalid and was ignored");
+            matcher.match();
+
+            Collection<JsonMatch> results = matcher.getMatches();
+            Collection<JsonMatch> errors = matcher.getInvalidPinnedMatches();
+
+            // print results
+            for (JsonMatch error : errors) {
+                java.lang.System.out.println("Pinned match of system " + error.systemId + " to subscription " + error.subscriptionId
+                        + " is invalid and was ignored");
+            }
+
+            for (JsonMatch result : results) {
+                java.lang.System.out.println(result.systemId + " can match " + result.subscriptionId);
+            }
+            java.lang.System.exit(0);
         }
-
-        for (Match result : results) {
-            java.lang.System.out.println(result.systemId + " can match " + result.subscriptionId);
-        }
-
-        java.lang.System.exit(0);
     }
 }

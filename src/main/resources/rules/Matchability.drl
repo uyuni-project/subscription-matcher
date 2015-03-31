@@ -2,16 +2,20 @@ package com.suse.matcher.rules;
 
 import java.util.List;
 
-import com.suse.matcher.model.Match;
-import com.suse.matcher.model.Match.Kind;
-import com.suse.matcher.model.Subscription;
-import com.suse.matcher.model.System;
+import com.suse.matcher.facts.Match;
+import com.suse.matcher.facts.Match.Kind;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
+import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.SystemProduct;
 
 rule "installed product matches subscription"
     agenda-group "Matchability"
     when
-        $system : System()
-        $subscription : Subscription( matchAnyProductOnSystem($system),
+        $system : System($systemId : id)
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        $subscription : Subscription(id == $subscriptionId,
             (stackable == true || cpus >= $system.cpus ),
             (
                 (virtualizationPolicy == Subscription.PHYSICAL_ONLY && $system.physical) ||

@@ -1,9 +1,9 @@
 package com.suse.matcher.rules;
 
-import com.suse.matcher.model.Match;
-import com.suse.matcher.model.Match.Kind;
-import com.suse.matcher.model.Subscription;
-import com.suse.matcher.model.System;
+import com.suse.matcher.facts.Match;
+import com.suse.matcher.facts.Match.Kind;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.System;
 
 rule "flag invalid pinned matches"
     agenda-group "OutputCollection"

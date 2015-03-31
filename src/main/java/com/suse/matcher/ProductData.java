@@ -1,7 +1,7 @@
 package com.suse.matcher;
 
-import com.suse.matcher.model.Product;
-import com.suse.matcher.model.System;
+import com.suse.matcher.json.JsonProduct;
+import com.suse.matcher.json.JsonSystem;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -44,18 +44,18 @@ public class ProductData {
         if (instance == null) {
             Map<Long, String> friendlyNames = new HashMap<>();
             try {
-                Reader reader = new InputStreamReader(System.class.getResourceAsStream("/products.json"));
-                List<Product> products = new Loader().loadProducts(reader);
+                Reader reader = new InputStreamReader(JsonSystem.class.getResourceAsStream("/products.json"));
+                List<JsonProduct> products = new Loader().loadProducts(reader);
                 MapUtils.populateMap(friendlyNames, products,
-                    new Transformer<Product, Long>(){
+                    new Transformer<JsonProduct, Long>(){
                         @Override
-                        public Long transform(Product product) {
+                        public Long transform(JsonProduct product) {
                             return product.id;
                         }
                     },
-                    new Transformer<Product, String>(){
+                    new Transformer<JsonProduct, String>(){
                         @Override
-                        public String transform(Product product) {
+                        public String transform(JsonProduct product) {
                             return product.friendlyName;
                         }
                     }

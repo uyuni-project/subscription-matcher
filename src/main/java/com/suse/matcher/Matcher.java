@@ -1,13 +1,20 @@
 package com.suse.matcher;
 
-import static com.suse.matcher.model.Match.Kind.CONFIRMED;
-import static com.suse.matcher.model.Match.Kind.INVALID;
+import static com.suse.matcher.facts.Match.Kind.CONFIRMED;
+import static com.suse.matcher.facts.Match.Kind.INVALID;
 
-import com.suse.matcher.model.Match;
-import com.suse.matcher.model.Subscription;
-import com.suse.matcher.model.System;
-import com.suse.matcher.model.Today;
+import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.Match;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SystemProduct;
+import com.suse.matcher.facts.Today;
+import com.suse.matcher.facts.System;
+import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonSubscription;
+import com.suse.matcher.json.JsonSystem;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.Transformer;
 import org.kie.api.KieServices;
 import org.kie.api.event.rule.DebugAgendaEventListener;
 import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
@@ -26,7 +33,7 @@ import java.util.List;
 /**
  * Wraps the rule engine.
  */
-public class Matcher {
+public class Matcher implements AutoCloseable {
 
     /** Filename for internal Drools audit log. */
     public static final String LOG_FILENAME = "drools";
@@ -42,26 +49,20 @@ public class Matcher {
         "OutputCollection"
     };
 
-    /** Matching results. */
-    private List<Match> matches = null;
+    /** The session. */
+    private KieSession session;
 
-    /** Invalid pin matches provided by the user. */
-    private List<Match> invalidPinnedMatches = null;
+    /** The logger. */
+    private KieRuntimeLogger logger;
 
     /**
-     * Tries to match systems to subscriptions.
-     *
-     * @param systems the systems
-     * @param subscriptions the subscriptions
-     * @param pinnedMatches the matches pinned by the user
+     * Instantiates a new matcher.
      */
-    @SuppressWarnings("unchecked")
-    public void match(List<System> systems, List<Subscription> subscriptions, List<Match> pinnedMatches) {
-        // instantiate engine
+    public Matcher() {
         KieServices factory = KieServices.Factory.get();
         KieContainer container = factory.getKieClasspathContainer();
-        KieSession session = container.newKieSession("ksession-rules");
-        KieRuntimeLogger logger = factory.getLoggers().newFileLogger(session, LOG_FILENAME);
+        session = container.newKieSession("ksession-rules");
+        logger = factory.getLoggers().newFileLogger(session, LOG_FILENAME);
 
         // set rule ordering
         Agenda agenda = session.getAgenda();
@@ -73,24 +74,66 @@ public class Matcher {
         session.addEventListener(new DebugAgendaEventListener());
         session.addEventListener(new DebugRuleRuntimeEventListener());
 
-        // insert facts
         session.insert(new Today());
-        for (Subscription subscription : subscriptions) {
-            session.insert(subscription);
-        }
-        for (System system : systems) {
-            session.insert(system);
-        }
-        for (Match pinnedMatch : pinnedMatches) {
-            session.insert(pinnedMatch);
-        }
+    }
 
+    /**
+     * Adds the systems.
+     *
+     * @param systems the systems
+     */
+    public void addSystems(List<JsonSystem> systems) {
+        for (JsonSystem system : systems) {
+            session.insert(new System(system.id, system.cpus));
+            for (Long guestId : system.virtualSystemIds) {
+                session.insert(new HostGuest(system.id, guestId));
+            }
+            for (Long productId : system.productIds) {
+                session.insert(new SystemProduct(system.id, productId));
+            }
+        }
+    }
+
+    /**
+     * Adds the subscriptions.
+     *
+     * @param subscriptions the subscriptions
+     */
+    public void addSubscriptions(List<JsonSubscription> subscriptions) {
+        for (JsonSubscription subscription : subscriptions) {
+            session.insert(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit, subscription.startsAt,
+                    subscription.expiresAt, subscription.sccOrgId));
+        }
+    }
+
+    /**
+     * Adds the pinned matches.
+     *
+     * @param pinnedMatches the pinned matches
+     */
+    public void addPinnedMatches(List<JsonMatch> pinnedMatches) {
+        for (JsonMatch pinnedMatch : pinnedMatches) {
+            session.insert(new Match(pinnedMatch.systemId, pinnedMatch.subscriptionId, pinnedMatch.quantity, Match.Kind.USER_PINNED));
+        }
+    }
+
+    /**
+     * Tries to match systems to subscriptions.
+     */
+    public void match() {
         // start engine
         session.fireAllRules();
         logger.close();
+    }
 
-        // gather results
-        matches = new ArrayList<Match>((Collection<Match>) session.getObjects(new ObjectFilter() {
+    /**
+     * Gets the resulting matches.
+     *
+     * @return the matches
+     */
+    public Collection<JsonMatch> getMatches() {
+        @SuppressWarnings("unchecked")
+        List<Match> matches = new ArrayList<Match>((Collection<Match>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
                 return fact instanceof Match && ((Match) fact).kind == CONFIRMED;
@@ -98,30 +141,49 @@ public class Matcher {
         }));
         Collections.sort(matches);
 
-        invalidPinnedMatches = new ArrayList<Match>((Collection<Match>) session.getObjects(new ObjectFilter() {
+        return transform(matches);
+    }
+
+    /**
+     * Gets the resulting invalid pinned matches.
+     *
+     * @return the invalid pinned matches
+     */
+    public Collection<JsonMatch> getInvalidPinnedMatches() {
+        @SuppressWarnings("unchecked")
+        List<Match>invalidPinnedMatches = new ArrayList<Match>((Collection<Match>) session.getObjects(new ObjectFilter() {
             @Override
             public boolean accept(Object fact) {
                 return fact instanceof Match && ((Match) fact).kind == INVALID;
             }
         }));
         Collections.sort(invalidPinnedMatches);
+
+        return transform(invalidPinnedMatches);
     }
 
     /**
-     * Gets the matches.
+     * Transforms a collection of Match objects to JsonMatch objects.
      *
-     * @return the matches
+     * @param matches the matches
+     * @return the json matches
      */
-    public List<Match> getMatches() {
-        return matches;
+    private Collection<JsonMatch> transform(List<Match> matches) {
+        return CollectionUtils.collect(matches, new Transformer<Match, JsonMatch>(){
+            @Override
+            public JsonMatch transform(Match match) {
+                return new JsonMatch(match.systemId, match.subscriptionId, match.quantity);
+            }
+        });
     }
 
     /**
-     * Gets the invalid pinned matches.
-     *
-     * @return the invalid pinned matches
+     * {@inheritDoc}
      */
-    public List<Match> getInvalidPinnedMatches() {
-        return invalidPinnedMatches;
+    @Override
+    public void close() throws Exception {
+        if (session != null) {
+            session.dispose();
+        }
     }
 }

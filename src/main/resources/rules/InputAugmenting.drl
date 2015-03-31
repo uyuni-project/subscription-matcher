@@ -1,13 +1,14 @@
 package com.suse.matcher.rules;
 
-import com.suse.matcher.model.Subscription;
-import com.suse.matcher.model.System;
+import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.SystemProduct;
 
 rule "ensure virtual systems are indeed virtual"
 agenda-group "InputAugmenting"
 when
-    $guest : System(physical)
-    $host : System(virtualSystemIds contains $guest.id)
+    HostGuest($hostId : hostId, $guestId : guestId)
+    $guest : System(id == $guestId, physical)
 then
     modify($guest) {
         physical = false;
@@ -17,11 +18,8 @@ end
 rule "map products of virtual systems to the host system"
 agenda-group "InputAugmenting"
 when
-    $guest : System()
-    $host : System(virtualSystemIds contains $guest.id)
-    $pdid : Long() from $guest.productIds
+    HostGuest($hostId: hostId, $guestId : guestId)
+    SystemProduct($productId : productId, systemId == $guestId)
 then
-    modify($host) {
-        productIds.add($pdid)
-    }
+    insert(new SystemProduct($hostId, $productId));
 end

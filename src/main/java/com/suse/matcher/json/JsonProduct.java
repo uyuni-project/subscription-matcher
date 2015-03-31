@@ -1,12 +1,11 @@
-package com.suse.matcher.model;
+package com.suse.matcher.json;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
- * A piece of software which can be installed to a {@link System} and requires a
- * {@link Subscription}.
+ * JSON representation of a product.
  */
-public class Product {
+public class JsonProduct {
 
     /** The id. */
     public Long id;

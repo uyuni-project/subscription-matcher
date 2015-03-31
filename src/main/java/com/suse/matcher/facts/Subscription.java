@@ -1,7 +1,4 @@
-package com.suse.matcher.model;
-
-import com.google.gson.annotations.SerializedName;
-import com.suse.matcher.model.System;
+package com.suse.matcher.facts;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -10,11 +7,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
- * An entitlement to use one or more {@link Product}s on one or more
+ * An entitlement to use one or more products on one or more
  * {@link System}s.
  */
 @PropertyReactive
@@ -53,33 +48,26 @@ public class Subscription {
 
 
 
-    // JSON fields
+    // constructor-populated fields
     /** The id. */
     public Long id;
 
     /** The part number. */
-    @SerializedName("part_number")
     public String partNumber;
 
     /** The count. */
-    @SerializedName("system_limit")
     public Integer systemLimit;
 
     /** Start Date. */
-    @SerializedName("starts_at")
     public Date startsAt = new Date(Long.MIN_VALUE);
 
     /** End Date. */
-    @SerializedName("expires_at")
     public Date expiresAt = new Date(Long.MAX_VALUE);
 
     /** SCC Organization Id. */
-    @SerializedName("scc_org_id")
     public String sccOrgId;
 
-
-
-    // computed fields
+    // rule-computed fields
     /** One of PHYSICAL_ONLY, UNLIMITED_VIRTUALIZATION, TWO_TWO or null. */
     public String virtualizationPolicy;
 
@@ -89,64 +77,32 @@ public class Subscription {
     /**  Populated CPU sockets or IFLs (s390x architecture), null for "instance subscriptions". */
     public Integer cpus = null;
 
-    /**  Can this subscription be used multiple times on the same system? */
+    /**   Can this subscription be used multiple times on the same system?. */
     public Boolean stackable;
 
-    /**  Products that can be licensed with this subscription. */
-    public List<Long> productIds = new LinkedList<Long>();
-
-    /**  Do product ids contain any RedHat product? */
+    /**   Do product ids contain any RedHat product?. */
     public boolean red = false;
 
 
-    //methods
     /**
-     * Checks if is instance subscription.
+     * Instantiates a new subscription.
      *
-     * @return the boolean
+     * @param idIn the id
+     * @param partNumberIn the part number
+     * @param systemLimitIn the system limit
+     * @param startsAtIn the starts at
+     * @param expiresAtIn the expires at
+     * @param sccOrgIdIn the scc org id
      */
-    public Boolean isInstanceSubscription() {
-        return cpus == null;
+    public Subscription(Long idIn, String partNumberIn, Integer systemLimitIn, Date startsAtIn, Date expiresAtIn, String sccOrgIdIn) {
+        id = idIn;
+        partNumber = partNumberIn;
+        systemLimit = systemLimitIn;
+        startsAt = startsAtIn;
+        expiresAt = expiresAtIn;
+        sccOrgId = sccOrgIdIn;
     }
 
-    /**
-     * Match any product on system.
-     *
-     * @param s the s
-     * @return the boolean
-     */
-    public Boolean matchAnyProductOnSystem(System s) {
-        for (Long p : s.productIds) {
-            if (productIds.contains(p)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns a ranking of the fitness of this subscription to the
-     * specified system in the interval [0,1].
-     * Higher rank values will be preferred to lower ones when
-     * the rule engine will decide upon different possible matches.
-     *
-     * @param system the system to rank
-     * @return a ranking value
-     */
-    public long computeFitnessTo(System system) {
-        // here we compute different scores in the [0, 1] range
-
-        // prefer red subscriptions for red systems
-        long rednessScore = (this.isRed() == system.isRed() ? 1 : 0);
-
-        // prefer subscriptions that match (or are close to) the number of needed CPUs
-        long cpuScore = 1 - Math.abs(this.cpus - system.cpus) / this.cpus;
-
-        // combine all scores in order of preference
-        return (rednessScore * 10 + cpuScore) / 11;
-    }
-
-    //getters
     /**
      * Gets the id.
      *
@@ -177,16 +133,16 @@ public class Subscription {
     /**
      * Gets the start date.
      *
-     * @return the starts at
+     * @return the start date
      */
     public Date getStartsAt() {
         return startsAt;
     }
 
     /**
-     * Gets the expiration date.
+     * Gets the end date.
      *
-     * @return the expires at
+     * @return the end date
      */
     public Date getExpiresAt() {
         return expiresAt;
@@ -229,32 +185,54 @@ public class Subscription {
     }
 
     /**
-     * Gets the stackable attribute.
+     * Gets the stackable.
      *
-     * @return the stackable attribute
+     * @return the stackable
      */
     public Boolean getStackable() {
         return stackable;
     }
 
     /**
-     * Gets the product ids.
+     * Checks if is red.
      *
-     * @return the product ids
-     */
-    public List<Long> getProductIds() {
-        return productIds;
-    }
-
-    /**
-     * True if any RedHat product is in this subscription.
-     *
-     * @return true, if subscription is red
+     * @return true, if is red
      */
     public boolean isRed() {
         return red;
     }
 
+    //methods
+    /**
+     * Checks if is instance subscription.
+     *
+     * @return the boolean
+     */
+    public Boolean isInstanceSubscription() {
+        return cpus == null;
+    }
+
+    /**
+     * Returns a ranking of the fitness of this subscription to the
+     * specified system in the interval [0,1].
+     * Higher rank values will be preferred to lower ones when
+     * the rule engine will decide upon different possible matches.
+     *
+     * @param system the system to rank
+     * @return a ranking value
+     */
+    public long computeFitnessTo(System system) {
+        // here we compute different scores in the [0, 1] range
+
+        // prefer red subscriptions for red systems
+        long rednessScore = (this.red == system.red ? 1 : 0);
+
+        // prefer subscriptions that match (or are close to) the number of needed CPUs
+        long cpuScore = 1 - Math.abs(this.cpus - system.cpus) / this.cpus;
+
+        // combine all scores in order of preference
+        return (rednessScore * 10 + cpuScore) / 11;
+    }
 
     // utility methods
     /** {@inheritDoc} */

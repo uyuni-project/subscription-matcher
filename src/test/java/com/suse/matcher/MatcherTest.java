@@ -1,14 +1,11 @@
 package com.suse.matcher;
 
-import static com.suse.matcher.model.Match.Kind.CONFIRMED;
-import static com.suse.matcher.model.Match.Kind.INVALID;
-import static com.suse.matcher.model.Match.Kind.USER_PINNED;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import com.suse.matcher.model.Match;
-import com.suse.matcher.model.Subscription;
-import com.suse.matcher.model.System;
+import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonSubscription;
+import com.suse.matcher.json.JsonSystem;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,19 +31,19 @@ public class MatcherTest {
     private Matcher matcher;
 
     /** List of systems in the current test run. */
-    private List<System> systems;
+    private List<JsonSystem> systems;
 
     /** List of subscriptions in the current test run. */
-    private List<Subscription> subscriptions;
+    private List<JsonSubscription> subscriptions;
 
     /** List of pinned matches in the current test run. */
-    private List<Match> pinnedMatches;
+    private List<JsonMatch> pinnedMatches;
 
     /** List of expected matches in the current test run. */
-    private List<Match> expectedMatches;
+    private Collection<JsonMatch> expectedMatches;
 
     /** List of expected invalid pinned matches in the current test run. */
-    private List<Match> expectedInvalidPinnedMatches;
+    private Collection<JsonMatch> expectedInvalidPinnedMatches;
 
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
@@ -66,9 +63,9 @@ public class MatcherTest {
                 result.add(new Object[] {
                     loader.loadSystems(getReader(i, "systems.json")),
                     loader.loadSubscriptions(getReader(i, "subscriptions.json")),
-                    loader.loadMatches(getReader(i, "pinned_matches.json"), USER_PINNED),
-                    loader.loadMatches(getReader(i, "expected_matches.json"), CONFIRMED),
-                    loader.loadMatches(getReader(i, "expected_invalid_pinned_matches.json"), INVALID)
+                    loader.loadMatches(getReader(i, "pinned_matches.json")),
+                    loader.loadMatches(getReader(i, "expected_matches.json")),
+                    loader.loadMatches(getReader(i, "expected_invalid_pinned_matches.json"))
                 });
                 i++;
             }
@@ -104,8 +101,8 @@ public class MatcherTest {
      * @param expectedMatchesIn the expected output matches
      * @param expectedInvalidPinnedMatchesIn the expected invalid pinned matches
      */
-    public MatcherTest(List<System> systemsIn, List<Subscription> subscriptionsIn, List<Match> pinnedMatchesIn, List<Match> expectedMatchesIn,
-            List<Match> expectedInvalidPinnedMatchesIn) {
+    public MatcherTest(List<JsonSystem> systemsIn, List<JsonSubscription> subscriptionsIn, List<JsonMatch> pinnedMatchesIn,
+            List<JsonMatch> expectedMatchesIn, List<JsonMatch> expectedInvalidPinnedMatchesIn) {
         matcher = new Matcher();
         systems = systemsIn;
         subscriptions = subscriptionsIn;
@@ -119,11 +116,16 @@ public class MatcherTest {
      */
     @Test
     public void test() {
-        matcher.match(systems, subscriptions, pinnedMatches);
-        List<Match> actualMatches = matcher.getMatches();
-        List<Match> actualInvalidPinnedMatches = matcher.getInvalidPinnedMatches();
+        matcher.addSystems(systems);
+        matcher.addSubscriptions(subscriptions);
+        matcher.addPinnedMatches(pinnedMatches);
 
-        assertThat(actualMatches, equalTo((Collection<Match>)expectedMatches));
-        assertThat(actualInvalidPinnedMatches, equalTo((Collection<Match>)expectedInvalidPinnedMatches));
+        matcher.match();
+
+        Collection<JsonMatch> actualMatches = matcher.getMatches();
+        Collection<JsonMatch> actualInvalidPinnedMatches = matcher.getInvalidPinnedMatches();
+
+        assertThat(actualMatches, equalTo(expectedMatches));
+        assertThat(actualInvalidPinnedMatches, equalTo(expectedInvalidPinnedMatches));
     }
 }
