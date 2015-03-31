@@ -19,7 +19,7 @@ agenda-group "InputAugmenting"
 when
     $guest : System()
     $host : System(virtualSystemIds contains $guest.id)
-    $pdid : Integer() from $guest.productIds
+    $pdid : Long() from $guest.productIds
 then
     modify($host) {
         productIds.add($pdid)

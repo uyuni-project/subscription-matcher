@@ -55,7 +55,7 @@ public class Subscription {
 
     // JSON fields
     /** The id. */
-    public Integer id;
+    public Long id;
 
     /** The part number. */
     @SerializedName("part_number")
@@ -93,7 +93,7 @@ public class Subscription {
     public Boolean stackable;
 
     /**  Products that can be licensed with this subscription. */
-    public List<Integer> productIds = new LinkedList<Integer>();
+    public List<Long> productIds = new LinkedList<Long>();
 
     /**  Do product ids contain any RedHat product? */
     public boolean red = false;
@@ -116,7 +116,7 @@ public class Subscription {
      * @return the boolean
      */
     public Boolean matchAnyProductOnSystem(System s) {
-        for (Integer p : s.productIds) {
+        for (Long p : s.productIds) {
             if (productIds.contains(p)) {
                 return true;
             }
@@ -152,7 +152,7 @@ public class Subscription {
      *
      * @return the id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -242,7 +242,7 @@ public class Subscription {
      *
      * @return the product ids
      */
-    public List<Integer> getProductIds() {
+    public List<Long> getProductIds() {
         return productIds;
     }
 

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class Product {
 
     /** The id. */
-    public Integer id;
+    public Long id;
 
     /** A human-friendly name. */
     @SerializedName("friendly_name")
@@ -20,7 +20,7 @@ public class Product {
      *
      * @return the id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

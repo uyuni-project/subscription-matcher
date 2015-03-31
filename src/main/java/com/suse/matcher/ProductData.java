@@ -24,14 +24,14 @@ public class ProductData {
     private static ProductData instance = null;
 
     /** Map from product IDs to friendly names. */
-    private Map<Integer, String> friendlyNames;
+    private Map<Long, String> friendlyNames;
 
     /** Private constructor, use <code>getInstance()</code> */
     private ProductData() {
     }
 
     /** Private constructor, use <code>getInstance()</code> */
-    private ProductData(Map<Integer, String> friendlyNamesIn) {
+    private ProductData(Map<Long, String> friendlyNamesIn) {
         friendlyNames = friendlyNamesIn;
     }
 
@@ -42,14 +42,14 @@ public class ProductData {
      */
     public static ProductData getInstance() {
         if (instance == null) {
-            Map<Integer, String> friendlyNames = new HashMap<>();
+            Map<Long, String> friendlyNames = new HashMap<>();
             try {
                 Reader reader = new InputStreamReader(System.class.getResourceAsStream("/products.json"));
                 List<Product> products = new Loader().loadProducts(reader);
                 MapUtils.populateMap(friendlyNames, products,
-                    new Transformer<Product, Integer>(){
+                    new Transformer<Product, Long>(){
                         @Override
-                        public Integer transform(Product product) {
+                        public Long transform(Product product) {
                             return product.id;
                         }
                     },
@@ -76,10 +76,10 @@ public class ProductData {
      * @param productIds the product ids
      * @return the friendly names
      */
-    public Collection<String> getFriendlyNames(Set<Integer> productIds) {
-        return CollectionUtils.collect(productIds, new Transformer<Integer,String>(){
+    public Collection<String> getFriendlyNames(Set<Long> productIds) {
+        return CollectionUtils.collect(productIds, new Transformer<Long,String>(){
             @Override
-            public String transform(Integer id) {
+            public String transform(Long id) {
                 if (friendlyNames.containsKey(id)) {
                     return friendlyNames.get(id);
                 }

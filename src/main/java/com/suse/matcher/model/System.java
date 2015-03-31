@@ -34,7 +34,7 @@ public class System {
 
     /** IDs of installed products. */
     @SerializedName("product_ids")
-    public Set<Integer> productIds = new HashSet<Integer>();
+    public Set<Long> productIds = new HashSet<Long>();
 
     /** <code>true</code> if this is a machine made of metal */
     public boolean physical = true;
@@ -75,7 +75,7 @@ public class System {
      *
      * @return the product ids
      */
-    public Set<Integer> getProductIds() {
+    public Set<Long> getProductIds() {
         return productIds;
     }
 

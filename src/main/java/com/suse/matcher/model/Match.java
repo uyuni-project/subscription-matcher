@@ -36,7 +36,7 @@ public class Match implements Comparable<Match> {
 
     /** The subscription id. */
     @SerializedName("subscription_id")
-    public Integer subscriptionId;
+    public Long subscriptionId;
 
     /** The number of subscriptions used in this match. */
     public Integer quantity;
@@ -52,7 +52,7 @@ public class Match implements Comparable<Match> {
      * @param quantityIn the number of subscriptions used in this match
      * @param kindIn the match kind
      */
-    public Match(Long systemIdIn, Integer subscriptionIdIn, Integer quantityIn, Kind kindIn) {
+    public Match(Long systemIdIn, Long subscriptionIdIn, Integer quantityIn, Kind kindIn) {
         super();
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
@@ -92,7 +92,7 @@ public class Match implements Comparable<Match> {
      *
      * @return the subscription id
      */
-    public Integer getSubscriptionId() {
+    public Long getSubscriptionId() {
         return subscriptionId;
     }
 
