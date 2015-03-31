@@ -79,6 +79,15 @@ public class Match implements Comparable<Match> {
     }
 
     /**
+     * Gets the kind.
+     *
+     * @return the kind
+     */
+    public Kind getKind() {
+        return kind;
+    }
+
+    /**
      * Gets the subscription id.
      *
      * @return the subscription id
