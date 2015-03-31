@@ -1,18 +1,22 @@
 [
   {
     "system_id": 500,
-    "subscription_id": 3
+    "subscription_id": 3,
+    "quantity": 1
   },
   {
     "system_id": 600,
-    "subscription_id": 3
+    "subscription_id": 3,
+    "quantity": 1
   },
   {
     "system_id": 1000,
-    "subscription_id": 2
+    "subscription_id": 2,
+    "quantity": 1
   },
   {
     "system_id": 2000,
-    "subscription_id": 2
+    "subscription_id": 2,
+    "quantity": 1
   }
 ]

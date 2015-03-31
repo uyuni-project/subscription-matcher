@@ -9,10 +9,10 @@ rule "match valid user-specified matches"
     agenda-group "Matching"
     salience 2
     when
-        Match($systemId : systemId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED)
-        Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+        Match($systemId : systemId, $subscriptionId : subscriptionId, $quantity: quantity, kind == Kind.USER_PINNED)
+        Match(systemId == $systemId, subscriptionId == $subscriptionId, quantity == $quantity, kind == Kind.POSSIBLE)
     then
-        insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
+        insert(new Match($systemId, $subscriptionId, $quantity, Kind.CONFIRMED));
 end
 
 rule "match valid matches"
@@ -24,7 +24,7 @@ rule "match valid matches"
         $subscription: Subscription($systemLimit : systemLimit, id == $subscriptionId, matchAnyProductOnSystem($system), systemLimit > 0)
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
-        insert(new Match($systemId, $subscriptionId, Kind.CONFIRMED));
+        insert(new Match($systemId, $subscriptionId, 1, Kind.CONFIRMED));
         modify($subscription) {
             systemLimit = $systemLimit -1
         }

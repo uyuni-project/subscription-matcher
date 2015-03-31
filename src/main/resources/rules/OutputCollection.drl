@@ -8,8 +8,8 @@ import com.suse.matcher.model.System;
 rule "flag invalid pinned matches"
     agenda-group "OutputCollection"
     when
-        $pinned_match : Match($systemId : systemId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED)
-        not (Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE))
+        $pinned_match : Match($systemId : systemId, $subscriptionId : subscriptionId, $quantity: quantity, kind == Kind.USER_PINNED)
+        not (Match(systemId == $systemId, subscriptionId == $subscriptionId, quantity == $quantity, kind == Kind.POSSIBLE))
     then
-        insert(new Match($systemId, $subscriptionId, Kind.INVALID));
+        insert(new Match($systemId, $subscriptionId, $quantity, Kind.INVALID));
 end

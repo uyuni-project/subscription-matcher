@@ -20,5 +20,5 @@ rule "installed product matches subscription"
             )
         )
     then
-        insert(new Match($system.id, $subscription.id, Kind.POSSIBLE));
+        insert(new Match($system.id, $subscription.id, 1, Kind.POSSIBLE));
 end
