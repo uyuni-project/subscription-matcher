@@ -231,6 +231,7 @@ public class Subscription {
      * systems.
      *
      * @param system the system
+     * @param alreadyLicensedCpus the number of CPUs that are already licensed
      * @return the integer
      */
     public Integer computeQuantityFor(System system, Number alreadyLicensedCpus) {
