@@ -14,7 +14,7 @@ rule "match valid user-specified matches"
         Match($systemId : systemId, $subscriptionId : subscriptionId, $productId : productId, $quantity: quantity, kind == Kind.USER_PINNED)
         Match(systemId == $systemId, subscriptionId == $subscriptionId, productId == $productId, quantity == $quantity, kind == Kind.POSSIBLE)
     then
-        insert(new Match($systemId, $subscriptionId, $productId, $quantity, Kind.CONFIRMED));
+        insert(new Match($systemId, $subscriptionId, $productId, 1, Kind.CONFIRMED));
 end
 
 rule "match valid matches"
