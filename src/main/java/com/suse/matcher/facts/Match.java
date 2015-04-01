@@ -1,7 +1,5 @@
 package com.suse.matcher.facts;
 
-import com.google.gson.annotations.SerializedName;
-
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -33,11 +31,9 @@ public class Match implements Comparable<Match> {
     }
 
     /** The system id. */
-    @SerializedName("system_id")
     public Long systemId;
 
     /** The subscription id. */
-    @SerializedName("subscription_id")
     public Long subscriptionId;
 
     /** The number of subscriptions used in this match. */
