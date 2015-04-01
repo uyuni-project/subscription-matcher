@@ -9,19 +9,31 @@ import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 
-rule "installed product matches subscription"
+rule "physical only subscription can match a system"
     agenda-group "Matchability"
     when
-        $system : System($systemId : id)
+        $system : System($systemId : id, physical)
         SystemProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
-        $subscription : Subscription(id == $subscriptionId,
-            (stackable == true || cpus >= $system.cpus),
-            (
-                (virtualizationPolicy == Subscription.PHYSICAL_ONLY && $system.physical) ||
-                (virtualizationPolicy == Subscription.UNLIMITED_VIRTUALIZATION && $system.physical)
-                // TWO_TWO can be applied to both physical and virtual systems
-            )
+        $subscription : Subscription(
+            id == $subscriptionId,
+            virtualizationPolicy == Subscription.PHYSICAL_ONLY,
+            cpus >= $system.cpus
+        )
+    then
+        insert(new Match($system.id, $subscription.id, $productId, 1, Kind.POSSIBLE));
+end
+
+rule "unlimited virtualization subscription can match a system"
+    agenda-group "Matchability"
+    when
+        $system : System($systemId : id, physical)
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        $subscription : Subscription(
+            id == $subscriptionId,
+            virtualizationPolicy == Subscription.UNLIMITED_VIRTUALIZATION,
+            (cpus >= $system.cpus || stackable)
         )
     then
         insert(new Match($system.id, $subscription.id, $productId, 1, Kind.POSSIBLE));
