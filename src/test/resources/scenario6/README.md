@@ -17,4 +17,3 @@ cannot.
 
 It is not allowed to mix subscriptions with different start and end dates
 for one product.
-
