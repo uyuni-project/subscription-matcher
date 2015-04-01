@@ -17,15 +17,22 @@ rule "match valid user-specified matches"
         insert(new Match($systemId, $subscriptionId, $productId, 1, Kind.CONFIRMED));
 end
 
-rule "match valid matches"
+rule "match non-stackable matches"
     agenda-group "Matching"
     salience $subscription.computeFitnessTo($system) // result in interval [0, 1]
     when
         $system : System($systemId : id)
+        $subscription : Subscription(
+            $subscriptionId : id,
+            $systemLimit : systemLimit,
+            systemLimit > 0,
+            stackable == false
+        )
+
         SystemProduct($productId : productId, systemId == $systemId)
-        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
+
         Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
-        $subscription : Subscription($systemLimit : systemLimit, id == $subscriptionId, systemLimit > 0)
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         insert(new Match($systemId, $subscriptionId, $productId, 1, Kind.CONFIRMED));
