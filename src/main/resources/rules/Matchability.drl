@@ -38,3 +38,18 @@ rule "unlimited virtualization subscription can match a system"
     then
         insert(new Match($system.id, $subscription.id, $productId, 1, Kind.POSSIBLE));
 end
+
+rule "1-2 stackable subscription can match a system"
+    agenda-group "Matchability"
+    when
+        $system : System($systemId : id)
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        $subscription : Subscription(
+            id == $subscriptionId,
+            virtualizationPolicy == Subscription.TWO_TWO
+        )
+        not (HostGuest(hostId == $systemId))
+    then
+        insert(new Match($system.id, $subscription.id, $productId, 1, Kind.POSSIBLE));
+end
