@@ -51,6 +51,11 @@ rule "match stackable matches"
         $subscription : Subscription(
             $subscriptionId : id,
             $systemLimit : systemLimit,
+            $startsAt : startsAt,
+            $expiresAt : expiresAt,
+            $sccOrgId : sccOrgId,
+            $virtualizationPolicy : virtualizationPolicy,
+            $supportLevel : supportLevel,
             systemLimit > 0,
             stackable == true
         )
@@ -60,10 +65,19 @@ rule "match stackable matches"
 
         Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
 
-        // require that no non-stackable subscription is assigned already
+        // require that other CONFIRMED subscriptions on this system and product are all
+        // stackable, from the same SCC Org Id, support level, dates, policy
         forall (
             $otherMatch : Match(systemId == $systemId, productId == $productId, kind == Kind.CONFIRMED)
-            Subscription(id == $otherMatch.subscriptionId, stackable == true)
+            Subscription(
+                id == $otherMatch.subscriptionId,
+                startsAt == $startsAt,
+                expiresAt == $expiresAt,
+                sccOrgId == $sccOrgId,
+                virtualizationPolicy == $virtualizationPolicy,
+                supportLevel == $supportLevel,
+                stackable == true
+            )
         )
 
         // require that there are still some unlicensed cpus
