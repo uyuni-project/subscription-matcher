@@ -8,7 +8,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 /**
- * Represents match of a subscription to a system requested by the user.
+ * Represents the association of a {@link Subscription} to an installation of a
+ * product, that is, to a ({@link System}, product) couple.
  */
 @PropertyReactive
 public class Match implements Comparable<Match> {
@@ -36,6 +37,9 @@ public class Match implements Comparable<Match> {
     /** The subscription id. */
     public Long subscriptionId;
 
+    /** The product id. */
+    public Long productId;
+
     /** The number of subscriptions used in this match. */
     public Integer quantity;
 
@@ -47,12 +51,14 @@ public class Match implements Comparable<Match> {
      *
      * @param systemIdIn a system id
      * @param subscriptionIdIn an id of subscription assigned to the system
+     * @param productIdIn an id of a product
      * @param quantityIn the number of subscriptions used in this match
      * @param kindIn the match kind
      */
-    public Match(Long systemIdIn, Long subscriptionIdIn, Integer quantityIn, Kind kindIn) {
+    public Match(Long systemIdIn, Long subscriptionIdIn, Long productIdIn, Integer quantityIn, Kind kindIn) {
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
+        productId = productIdIn;
         kind = kindIn;
         quantity = quantityIn;
     }
@@ -73,6 +79,15 @@ public class Match implements Comparable<Match> {
      */
     public Long getSubscriptionId() {
         return subscriptionId;
+    }
+
+    /**
+     * Gets the product id.
+     *
+     * @return the product id
+     */
+    public Long getProductId() {
+        return productId;
     }
 
     /**

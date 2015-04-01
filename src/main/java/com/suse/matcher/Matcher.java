@@ -112,8 +112,8 @@ public class Matcher implements AutoCloseable {
      * @param pinnedMatches the pinned matches
      */
     public void addPinnedMatches(List<JsonMatch> pinnedMatches) {
-        for (JsonMatch pinnedMatch : pinnedMatches) {
-            session.insert(new Match(pinnedMatch.systemId, pinnedMatch.subscriptionId, pinnedMatch.quantity, Match.Kind.USER_PINNED));
+        for (JsonMatch match : pinnedMatches) {
+            session.insert(new Match(match.systemId, match.subscriptionId, match.productId, match.quantity, Match.Kind.USER_PINNED));
         }
     }
 
@@ -172,7 +172,7 @@ public class Matcher implements AutoCloseable {
         return CollectionUtils.collect(matches, new Transformer<Match, JsonMatch>(){
             @Override
             public JsonMatch transform(Match match) {
-                return new JsonMatch(match.systemId, match.subscriptionId, match.quantity);
+                return new JsonMatch(match.systemId, match.subscriptionId, match.productId, match.quantity);
             }
         });
     }

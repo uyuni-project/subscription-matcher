@@ -20,6 +20,10 @@ public class JsonMatch {
     @SerializedName("subscription_id")
     public Long subscriptionId;
 
+    /** The product id. */
+    @SerializedName("product_id")
+    public Long productId;
+
     /** The number of subscriptions used in this match. */
     public Integer quantity;
 
@@ -28,11 +32,13 @@ public class JsonMatch {
      *
      * @param systemIdIn the system id
      * @param subscriptionIdIn the subscription id
+     * @param productIdIn an id of a product
      * @param quantityIn the quantity
      */
-    public JsonMatch(Long systemIdIn, Long subscriptionIdIn, Integer quantityIn) {
+    public JsonMatch(Long systemIdIn, Long subscriptionIdIn, Long productIdIn, Integer quantityIn) {
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
+        productId = productIdIn;
         quantity = quantityIn;
     }
 
