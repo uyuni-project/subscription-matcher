@@ -40,3 +40,42 @@ rule "match non-stackable matches"
             systemLimit = $systemLimit -1
         }
 end
+
+rule "match stackable matches"
+    // NOTE: the only stackable subscriptions are TWO_TWO
+    // and UNLIMITED_VIRTUAL after 2015, only on physical hosts
+    agenda-group "Matching"
+    salience $subscription.computeFitnessTo($system) // result in interval [0, 1]
+    when
+        $system : System($systemId : id, physical)
+        $subscription : Subscription(
+            $subscriptionId : id,
+            $systemLimit : systemLimit,
+            systemLimit > 0,
+            stackable == true
+        )
+
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
+
+        Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+
+        // require that no non-stackable subscription is assigned already
+        forall (
+            $otherMatch : Match(systemId == $systemId, productId == $productId, kind == Kind.CONFIRMED)
+            Subscription(id == $otherMatch.subscriptionId, stackable == true)
+        )
+
+        // require that there are still some unlicensed cpus
+        accumulate (
+            Match(systemId == $systemId, subscriptionId == $subscriptionId, $quantity : quantity, kind == Kind.CONFIRMED);
+            $alreadyLicensedCpus : sum($quantity * $subscription.cpus)
+        )
+        System(id == $systemId, $alreadyLicensedCpus < $system.cpus)
+    then
+        Integer quantity = $subscription.computeQuantityFor($system, $alreadyLicensedCpus);
+        insert(new Match($systemId, $subscriptionId, $productId, quantity, Kind.CONFIRMED));
+        modify($subscription) {
+            systemLimit = $systemLimit - quantity
+        }
+end

@@ -7666,3 +7666,16 @@ rule "Add subscription data for part number 662644470269"
         };
 end
 
+// temporary part number to simulate stackable subscriptions
+rule "Add subscription data for part number 800-TEMPORARY-X86-2CPU-STACKABLE"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "800-TEMPORARY-X86-2CPU-STACKABLE")
+    then
+        modify($subscription) {
+            virtualizationPolicy = Subscription.UNLIMITED_VIRTUALIZATION,
+            supportLevel = Subscription.BASIC,
+            cpus = 2,
+            stackable = true
+        };
+end
