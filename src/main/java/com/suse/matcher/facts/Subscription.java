@@ -36,17 +36,6 @@ public class Subscription {
      */
     public static final String TWO_TWO = "two_two";
 
-    // values for supportLevel
-    /** Basic support level. */
-    public static final String BASIC = "basic";
-
-    /** Standard support level. */
-    public static final String STANDARD = "standard";
-
-    /** Priority support level. */
-    public static final String PRIORITY = "priority";
-
-
 
     // constructor-populated fields
     /** The id. */
@@ -71,7 +60,7 @@ public class Subscription {
     /** One of PHYSICAL_ONLY, UNLIMITED_VIRTUALIZATION, TWO_TWO or null. */
     public String virtualizationPolicy;
 
-    /** One of BASIC, STANDARD, PRIORITY or null. */
+    /** Support level identifier. */
     public String supportLevel;
 
     /**  Populated CPU sockets or IFLs (s390x architecture), null for "instance subscriptions". */
