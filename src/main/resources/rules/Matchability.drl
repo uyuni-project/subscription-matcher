@@ -16,7 +16,7 @@ rule "installed product matches subscription"
         SystemProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(id == $subscriptionId,
-            (stackable == true || cpus >= $system.cpus ),
+            (stackable == true || cpus >= $system.cpus),
             (
                 (virtualizationPolicy == Subscription.PHYSICAL_ONLY && $system.physical) ||
                 (virtualizationPolicy == Subscription.UNLIMITED_VIRTUALIZATION && $system.physical)
