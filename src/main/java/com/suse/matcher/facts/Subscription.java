@@ -14,28 +14,29 @@ import java.util.Date;
  */
 @PropertyReactive
 public class Subscription {
-    // values for virtualizationPolicy
     /**
-     * This subscription can exclusively be assigned to a physical system, and
-     * virtual machines running on top of it will not get the same subscription
-     * for free.
+     * Encodes virtual machine assignment policies for a {@link Subscription}
      */
-    public static final String PHYSICAL_ONLY = "physical_only";
-
-    /**
-     * This subscription can exclusively be assigned to a physical system, and
-     * virtual machines running on top of it will automatically get the same
-     * subscription for free.
-     */
-    public static final String UNLIMITED_VIRTUALIZATION = "unlimited_virtualization";
-
-    /**
-     * This subscription can either be assigned to a physical system without
-     * a SUSE-provided hypervisor or to up to two virtual machines, regardless
-     * of the hypervisor they run on.
-     */
-    public static final String TWO_TWO = "two_two";
-
+    public enum Policy {
+        /**
+         * This subscription can exclusively be assigned to a physical system, and
+         * virtual machines running on top of it will not get the same subscription
+         * for free.
+         */
+        PHYSICAL_ONLY,
+        /**
+         * This subscription can exclusively be assigned to a physical system, and
+         * virtual machines running on top of it will automatically get the same
+         * subscription for free.
+         */
+        UNLIMITED_VIRTUALIZATION,
+        /**
+         * This subscription can either be assigned to a physical system without
+         * a SUSE-provided hypervisor or to up to two virtual machines, regardless
+         * of the hypervisor they run on.
+         */
+        TWO_TWO
+    }
 
     // constructor-populated fields
     /** The id. */
@@ -57,8 +58,8 @@ public class Subscription {
     public String sccOrgId;
 
     // rule-computed fields
-    /** One of PHYSICAL_ONLY, UNLIMITED_VIRTUALIZATION, TWO_TWO or null. */
-    public String virtualizationPolicy;
+    /** Virtualization policy. */
+    public Policy policy;
 
     /** Support level identifier. */
     public String supportLevel;
@@ -151,8 +152,8 @@ public class Subscription {
      *
      * @return the virtualization policy
      */
-    public String getVirtualizationPolicy() {
-        return virtualizationPolicy;
+    public Policy getPolicy() {
+        return policy;
     }
 
     /**

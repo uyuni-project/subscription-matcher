@@ -2,9 +2,11 @@ package com.suse.matcher.rules;
 
 import java.util.List;
 
+import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Match;
 import com.suse.matcher.facts.Match.Kind;
 import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
@@ -17,7 +19,7 @@ rule "physical only subscription can match a system"
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
             id == $subscriptionId,
-            virtualizationPolicy == Subscription.PHYSICAL_ONLY,
+            policy == Policy.PHYSICAL_ONLY,
             cpus >= $system.cpus
         )
     then
@@ -32,7 +34,7 @@ rule "unlimited virtualization subscription can match a system"
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
             id == $subscriptionId,
-            virtualizationPolicy == Subscription.UNLIMITED_VIRTUALIZATION,
+            policy == Policy.UNLIMITED_VIRTUALIZATION,
             (cpus >= $system.cpus || stackable)
         )
     then
@@ -47,7 +49,7 @@ rule "1-2 stackable subscription can match a system"
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
             id == $subscriptionId,
-            virtualizationPolicy == Subscription.TWO_TWO
+            policy == Policy.TWO_TWO
         )
         not (HostGuest(hostId == $systemId))
     then
