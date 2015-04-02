@@ -3,17 +3,19 @@ package com.suse.matcher;
 import static com.suse.matcher.facts.Match.Kind.CONFIRMED;
 import static com.suse.matcher.facts.Match.Kind.INVALID;
 
+import com.google.gson.reflect.TypeToken;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Match;
 import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.facts.Today;
-import com.suse.matcher.facts.System;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 import org.kie.api.KieServices;
 import org.kie.api.event.rule.DebugAgendaEventListener;
@@ -132,14 +134,12 @@ public class Matcher implements AutoCloseable {
      * @return the matches
      */
     public Collection<JsonMatch> getMatches() {
-        @SuppressWarnings("unchecked")
-        List<Match> matches = new ArrayList<Match>((Collection<Match>) session.getObjects(new ObjectFilter() {
+        List<Match> matches = getFacts(new TypeToken<Match>(){}, new Predicate<Match>() {
             @Override
-            public boolean accept(Object fact) {
-                return fact instanceof Match && ((Match) fact).kind == CONFIRMED;
+            public boolean evaluate(Match match) {
+                return match.kind == CONFIRMED;
             }
-        }));
-        Collections.sort(matches);
+        });
 
         return transform(matches);
     }
@@ -160,6 +160,30 @@ public class Matcher implements AutoCloseable {
         Collections.sort(invalidPinnedMatches);
 
         return transform(invalidPinnedMatches);
+    }
+
+    /**
+     * Gets the facts.
+     *
+     * @param <T> the generic type of fact, must be Comparable
+     * @param token wrapped version of T, necessary because of Java generics implementation
+     * @param condition an additional filtering condition
+     * @return the facts
+     */
+    @SuppressWarnings("unchecked")
+    private <T extends Comparable<? super T>> List<T> getFacts(final TypeToken<T> token, final Predicate<T> condition){
+
+        Collection<T> unsorted = (Collection<T>) session.getObjects(new ObjectFilter() {
+            @Override
+            public boolean accept(Object fact) {
+                return fact.getClass().equals(token.getType()) && condition.evaluate((T)fact);
+            }
+        });
+
+        List<T> result = new ArrayList<T>(unsorted);
+        Collections.sort(result);
+
+        return result;
     }
 
     /**
