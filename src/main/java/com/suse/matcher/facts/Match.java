@@ -111,7 +111,13 @@ public class Match implements Comparable<Match> {
     /** {@inheritDoc} */
     @Override
     public int compareTo(Match oIn) {
-        return CompareToBuilder.reflectionCompare(this, oIn);
+        return new CompareToBuilder()
+            .append(systemId, oIn.systemId)
+            .append(productId, oIn.productId)
+            .append(subscriptionId, oIn.subscriptionId)
+            .append(quantity, oIn.quantity)
+            .append(kind, oIn.kind)
+            .toComparison();
     }
 
     /** {@inheritDoc} */
