@@ -53,7 +53,7 @@ rule "match stackable matches"
     when
         // we have a physical system
         $system : System($systemId : id, physical)
-        // we have a non-stackable subscription with enough slots
+        // we have a stackable subscription with enough slots
         $subscription : Subscription(
             $subscriptionId : id,
             $quantity : quantity,
