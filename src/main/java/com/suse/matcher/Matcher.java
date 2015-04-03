@@ -37,6 +37,7 @@ import org.kie.api.runtime.rule.Agenda;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -140,8 +141,12 @@ public class Matcher implements AutoCloseable {
         // start engine
         session.fireAllRules();
 
-        // collect results
-        JsonOutput output = new JsonOutput();
+        // collect facts
+        List<System> systems = getFacts(new TypeToken<System>(){});
+        List<Long> systemIds = new LinkedList<>();
+        for (System system : systems) {
+            systemIds.add(system.id);
+        }
 
         List<Match> confirmedMatches = getFacts(new TypeToken<Match>(){}, new Predicate<Match>() {
             @Override
@@ -149,6 +154,9 @@ public class Matcher implements AutoCloseable {
                 return match.kind == CONFIRMED;
             }
         });
+
+        // format result in json format
+        JsonOutput output = new JsonOutput();
 
         Map<Pair<Long, Long>, Match> matchMap = new TreeMap<>();
         for (Match match : confirmedMatches) {
@@ -163,7 +171,7 @@ public class Matcher implements AutoCloseable {
             installationMap.put(installation.systemId, installation.productId);
         }
 
-        for (Long systemId : installationMap.keySet()) {
+        for (Long systemId: systemIds) {
             JsonOutputSystem system = new JsonOutputSystem(systemId);
 
             boolean compliantProductExists = false;
