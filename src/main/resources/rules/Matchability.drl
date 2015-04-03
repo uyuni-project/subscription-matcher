@@ -23,7 +23,7 @@ rule "physical only subscription can match a system"
             cpus >= $system.cpus
         )
     then
-        insert(new Match($system.id, $subscription.id, $productId, null, Kind.POSSIBLE));
+        insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
 end
 
 rule "unlimited virtualization subscription can match a system"
@@ -38,7 +38,7 @@ rule "unlimited virtualization subscription can match a system"
             (cpus >= $system.cpus || stackable)
         )
     then
-        insert(new Match($system.id, $subscription.id, $productId, null, Kind.POSSIBLE));
+        insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
 end
 
 rule "1-2 stackable subscription can match a system"
@@ -53,5 +53,5 @@ rule "1-2 stackable subscription can match a system"
         )
         not (HostGuest(hostId == $systemId))
     then
-        insert(new Match($system.id, $subscription.id, $productId, null, Kind.POSSIBLE));
+        insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
 end

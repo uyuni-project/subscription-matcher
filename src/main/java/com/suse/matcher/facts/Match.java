@@ -34,11 +34,11 @@ public class Match implements Comparable<Match> {
     /** The system id. */
     public Long systemId;
 
-    /** The subscription id. */
-    public Long subscriptionId;
-
     /** The product id. */
     public Long productId;
+
+    /** The subscription id. */
+    public Long subscriptionId;
 
     /** The number of subscriptions used in this match. */
     public Integer quantity;
@@ -50,15 +50,15 @@ public class Match implements Comparable<Match> {
      * Standard constructor.
      *
      * @param systemIdIn a system id
-     * @param subscriptionIdIn an id of subscription assigned to the system
      * @param productIdIn an id of a product
+     * @param subscriptionIdIn an id of subscription assigned to the system
      * @param quantityIn the number of subscriptions used in this match
      * @param kindIn the match kind
      */
-    public Match(Long systemIdIn, Long subscriptionIdIn, Long productIdIn, Integer quantityIn, Kind kindIn) {
+    public Match(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer quantityIn, Kind kindIn) {
         systemId = systemIdIn;
-        subscriptionId = subscriptionIdIn;
         productId = productIdIn;
+        subscriptionId = subscriptionIdIn;
         kind = kindIn;
         quantity = quantityIn;
     }
@@ -73,21 +73,21 @@ public class Match implements Comparable<Match> {
     }
 
     /**
-     * Gets the subscription id.
-     *
-     * @return the subscription id
-     */
-    public Long getSubscriptionId() {
-        return subscriptionId;
-    }
-
-    /**
      * Gets the product id.
      *
      * @return the product id
      */
     public Long getProductId() {
         return productId;
+    }
+
+    /**
+     * Gets the subscription id.
+     *
+     * @return the subscription id
+     */
+    public Long getSubscriptionId() {
+        return subscriptionId;
     }
 
     /**
