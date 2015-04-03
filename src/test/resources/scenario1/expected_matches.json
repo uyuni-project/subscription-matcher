@@ -6,9 +6,33 @@
     "quantity": 1
   },
   {
+    "system_id": 101,
+    "product_id": 814,
+    "subscription_id": 1,
+    "quantity": 0
+  },
+  {
+    "system_id": 102,
+    "product_id": 814,
+    "subscription_id": 1,
+    "quantity": 0
+  },
+  {
     "system_id": 200,
     "product_id": 814,
     "subscription_id": 1,
     "quantity": 1
+  },
+  {
+    "system_id": 201,
+    "product_id": 814,
+    "subscription_id": 1,
+    "quantity": 0
+  },
+  {
+    "system_id": 202,
+    "product_id": 814,
+    "subscription_id": 1,
+    "quantity": 0
   }
 ]
