@@ -61,7 +61,7 @@ rule "match stackable matches"
         Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
-        Integer quantity = $subscription.computeQuantityFor($system, 0);
+        Integer quantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
         insert(new Match($systemId, $subscriptionId, $productId, quantity, Kind.CONFIRMED));
         modify($subscription) {
             systemLimit = $systemLimit - quantity

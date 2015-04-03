@@ -224,23 +224,6 @@ public class Subscription {
         return (rednessScore * 10 + cpuScore) / 11;
     }
 
-    /**
-     * Returns the maximum number of instances of this subscriptions that can be
-     * used on the system.
-     *
-     * This method only makes sense on stackable subscriptions for physical
-     * systems.
-     *
-     * @param system the system
-     * @param alreadyLicensedCpus the number of CPUs that are already licensed
-     * @return the integer
-     */
-    public Integer computeQuantityFor(System system, Number alreadyLicensedCpus) {
-        Integer necessaryCpus = system.cpus - alreadyLicensedCpus.intValue();
-        Integer necessarySubscriptions = necessaryCpus/this.cpus + necessaryCpus % this.cpus;
-        return Math.min(systemLimit, necessarySubscriptions);
-    }
-
     // utility methods
     /** {@inheritDoc} */
     @Override
