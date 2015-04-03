@@ -1,5 +1,6 @@
 package com.suse.matcher.facts;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,7 +12,7 @@ import org.kie.api.definition.type.PropertyReactive;
  * products and that can be assigned {@link Subscription}s.
  */
 @PropertyReactive
-public class System {
+public class System implements Comparable<System> {
     // constructor-populated fields
     /** The id. */
     public Long id;
@@ -71,6 +72,12 @@ public class System {
      */
     public boolean isRed() {
         return red;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int compareTo(System oIn) {
+        return new CompareToBuilder().append(id, oIn.id).toComparison();
     }
 
     /** {@inheritDoc} */
