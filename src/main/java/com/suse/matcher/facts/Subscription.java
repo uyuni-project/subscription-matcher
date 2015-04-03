@@ -219,7 +219,14 @@ public class Subscription implements Comparable<Subscription> {
         long rednessScore = (this.red == system.red ? 1 : 0);
 
         // prefer subscriptions that match (or are close to) the number of needed CPUs
-        long cpuScore = 1 - Math.abs(this.cpus - system.cpus) / this.cpus;
+        long cpuScore;
+        if (system.physical) {
+            cpuScore = 1 - Math.abs(this.cpus - system.cpus) / this.cpus;
+        }
+        else {
+            // don't prefer VM-specific subscriptions
+            cpuScore = 0;
+        }
 
         // combine all scores in order of preference
         return (rednessScore * 10 + cpuScore) / 11;

@@ -15,7 +15,8 @@ rule "Fake products to subscription rule for SLES"
             partNumber == "874-006260" ||
             partNumber == "874-005649" ||
             partNumber == "874-006311" ||
-            partNumber == "800-TEMPORARY-X86-2CPU-STACKABLE"
+            partNumber == "800-TEMPORARY-X86-2CPU-STACKABLE" ||
+            partNumber == "800-TEMPORARY-X86-2CPU-STACKABLE-TWOTWO"
         )
     then
         insert(new SubscriptionProduct($subscription.id, 814L));

@@ -76,3 +76,32 @@ rule "match stackable matches"
             quantity = $quantity - consumedQuantity
         }
 end
+
+rule "match VM-only matches"
+    // the subscriptions that can match VMs directly are TWO_TWO after 2015
+    agenda-group "Matching"
+    salience $subscription.computeFitnessTo($system) // result in interval [0, 1]
+    when
+        // we have a virtual system
+        $system : System($systemId : id, physical == false)
+        // we have a TWO_TWO subscription with enough slots
+        $subscription : Subscription(
+            $subscriptionId : id,
+            $quantity : quantity,
+            quantity >= 0.5
+        )
+
+        // we have a possible match with a product
+        Match(systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+
+        // and that product is provided by the subscription
+        SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
+
+        // unless other subscriptions have already been assigned
+        not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
+    then
+        insert(new Match($systemId, $productId, $subscriptionId, 0.5, Kind.CONFIRMED));
+        modify($subscription) {
+            quantity = $quantity - 0.5
+        }
+end

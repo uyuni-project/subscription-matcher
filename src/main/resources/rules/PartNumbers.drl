@@ -7680,3 +7680,16 @@ rule "Add subscription data for part number 800-TEMPORARY-X86-2CPU-STACKABLE"
             stackable = true
         };
 end
+
+rule "Add subscription data for part number 800-TEMPORARY-X86-2CPU-STACKABLE-TWOTWO"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "800-TEMPORARY-X86-2CPU-STACKABLE-TWOTWO")
+    then
+        modify($subscription) {
+            policy = Policy.TWO_TWO,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
