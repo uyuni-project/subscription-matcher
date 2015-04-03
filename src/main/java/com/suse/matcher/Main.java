@@ -1,11 +1,11 @@
 package com.suse.matcher;
 
 import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 
 import java.io.FileReader;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,10 +30,10 @@ public class Main {
         String pinnedMatchPath = args[2];
 
         // load files
-        JsonConverter loader = new JsonConverter();
-        List<JsonSystem> systems = loader.loadSystems(new FileReader(systemsPath));
-        List<JsonSubscription> subscriptions = loader.loadSubscriptions(new FileReader(subscriptionsPath));
-        List<JsonMatch> pinnedMatches = loader.loadMatches(new FileReader(pinnedMatchPath));
+        JsonConverter converter = new JsonConverter();
+        List<JsonSystem> systems = converter.loadSystems(new FileReader(systemsPath));
+        List<JsonSubscription> subscriptions = converter.loadSubscriptions(new FileReader(subscriptionsPath));
+        List<JsonMatch> pinnedMatches = converter.loadMatches(new FileReader(pinnedMatchPath));
 
         // run the engine
         try( Matcher matcher = new Matcher()){
@@ -43,18 +43,10 @@ public class Main {
 
             matcher.match();
 
-            Collection<JsonMatch> results = matcher.getMatches();
-            Collection<JsonMatch> errors = matcher.getInvalidPinnedMatches();
+            JsonOutput output = matcher.getOutput();
 
-            // print results
-            for (JsonMatch error : errors) {
-                java.lang.System.out.println("Pinned match of system " + error.systemId + " to subscription " + error.subscriptionId
-                        + " is invalid and was ignored");
-            }
+            java.lang.System.out.println(converter.toJson(output));
 
-            for (JsonMatch result : results) {
-                java.lang.System.out.println(result.systemId + " can match " + result.subscriptionId);
-            }
             java.lang.System.exit(0);
         }
     }

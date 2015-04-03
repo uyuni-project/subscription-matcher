@@ -11,12 +11,20 @@ import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.facts.Today;
 import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonOutput;
+import com.suse.matcher.json.JsonOutputError;
+import com.suse.matcher.json.JsonOutputProduct;
+import com.suse.matcher.json.JsonOutputSubscription;
+import com.suse.matcher.json.JsonOutputSystem;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.Transformer;
+import org.apache.commons.collections4.functors.TruePredicate;
+import org.apache.commons.collections4.map.MultiValueMap;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.kie.api.KieServices;
 import org.kie.api.event.rule.DebugAgendaEventListener;
 import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
@@ -30,6 +38,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 
 /**
@@ -133,37 +144,101 @@ public class Matcher implements AutoCloseable {
      *
      * @return the matches
      */
-    public Collection<JsonMatch> getMatches() {
-        List<Match> matches = getFacts(new TypeToken<Match>(){}, new Predicate<Match>() {
+    @SuppressWarnings("unchecked")
+    public JsonOutput getOutput() {
+        JsonOutput output = new JsonOutput();
+
+        List<Match> confirmedMatches = getFacts(new TypeToken<Match>(){}, new Predicate<Match>() {
             @Override
             public boolean evaluate(Match match) {
                 return match.kind == CONFIRMED;
             }
         });
 
-        return transform(matches);
-    }
+        Map<Pair<Long, Long>, Match> matchMap = new TreeMap<>();
+        for (Match match : confirmedMatches) {
+            matchMap.put(new ImmutablePair<>(match.systemId, match.productId), match);
+        }
 
-    /**
-     * Gets the resulting invalid pinned matches.
-     *
-     * @return the invalid pinned matches
-     */
-    public Collection<JsonMatch> getInvalidPinnedMatches() {
-        @SuppressWarnings("unchecked")
-        List<Match>invalidPinnedMatches = new ArrayList<Match>((Collection<Match>) session.getObjects(new ObjectFilter() {
-            @Override
-            public boolean accept(Object fact) {
-                return fact instanceof Match && ((Match) fact).kind == INVALID;
+        List<SystemProduct> installations = getFacts(new TypeToken<SystemProduct>(){});
+
+        @SuppressWarnings("rawtypes")
+        MultiMap<Long, Long> installationMap = MultiValueMap.multiValueMap(new TreeMap<Long, Collection>(), TreeSet.class);
+        for (SystemProduct installation : installations) {
+            installationMap.put(installation.systemId, installation.productId);
+        }
+
+        for (Long systemId : installationMap.keySet()) {
+            JsonOutputSystem system = new JsonOutputSystem(systemId);
+
+            boolean compliantProductExists = false;
+            boolean allProductsCompliant = true;
+            for (Long productId: (Collection<Long>) installationMap.get(systemId)) {
+                JsonOutputProduct product = new JsonOutputProduct(productId);
+
+                Match match = matchMap.get(new ImmutablePair<>(system.id, product.id));
+                if (match != null) {
+                    product.subscriptionId = match.subscriptionId;
+                    product.subscriptionQuantity = match.quantity;
+                }
+                compliantProductExists = compliantProductExists || (match != null);
+                allProductsCompliant = allProductsCompliant && (match != null);
+
+                system.products.add(product);
             }
-        }));
-        Collections.sort(invalidPinnedMatches);
 
-        return transform(invalidPinnedMatches);
+            if (compliantProductExists) {
+                if (allProductsCompliant) {
+                    output.compliantSystems.add(system);
+                }
+                else {
+                    output.partiallyCompliantSystems.add(system);
+                }
+            }
+            else {
+                output.nonCompliantSystems.add(system);
+            }
+        }
+
+        List<Subscription> subscriptions = getFacts(new TypeToken<Subscription>(){});
+        for (Subscription subscription : subscriptions) {
+            if (subscription.systemLimit > 0) {
+                output.remainingSubscriptions.add(new JsonOutputSubscription(subscription.id, subscription.systemLimit));
+            }
+        }
+
+        List<Match> invalidMatches = getFacts(new TypeToken<Match>(){}, new Predicate<Match>() {
+            @Override
+            public boolean evaluate(Match match) {
+                return match.kind == INVALID;
+            }
+        });
+
+        for (Match match : invalidMatches) {
+            JsonOutputError error = new JsonOutputError("invalid_pinned_match");
+            error.data.put("system_id", match.systemId);
+            error.data.put("subscription_id", match.subscriptionId);
+            error.data.put("product_id", match.productId);
+            output.errors.add(error);
+        }
+
+        return output;
     }
 
     /**
-     * Gets the facts.
+     * Gets the facts of a certain type.
+     *
+     * @param <T> the generic type of fact, must be Comparable
+     * @param token wrapped version of T, necessary because of Java generics implementation
+     * @return the facts
+     */
+    @SuppressWarnings("unchecked")
+    private <T extends Comparable<? super T>> List<T> getFacts(final TypeToken<T> type){
+        return getFacts(type, TruePredicate.INSTANCE);
+    }
+
+    /**
+     * Gets the facts of a certain type given a certain condition.
      *
      * @param <T> the generic type of fact, must be Comparable
      * @param token wrapped version of T, necessary because of Java generics implementation
@@ -184,21 +259,6 @@ public class Matcher implements AutoCloseable {
         Collections.sort(result);
 
         return result;
-    }
-
-    /**
-     * Transforms a collection of Match objects to JsonMatch objects.
-     *
-     * @param matches the matches
-     * @return the json matches
-     */
-    private Collection<JsonMatch> transform(List<Match> matches) {
-        return CollectionUtils.collect(matches, new Transformer<Match, JsonMatch>(){
-            @Override
-            public JsonMatch transform(Match match) {
-                return new JsonMatch(match.systemId, match.productId, match.subscriptionId, match.quantity);
-            }
-        });
     }
 
     /**

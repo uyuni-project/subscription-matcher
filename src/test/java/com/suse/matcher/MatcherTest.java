@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 
@@ -39,11 +40,8 @@ public class MatcherTest {
     /** List of pinned matches in the current test run. */
     private List<JsonMatch> pinnedMatches;
 
-    /** List of expected matches in the current test run. */
-    private Collection<JsonMatch> expectedMatches;
-
-    /** List of expected invalid pinned matches in the current test run. */
-    private Collection<JsonMatch> expectedInvalidPinnedMatches;
+    /** The expected output. */
+    private JsonOutput expectedOutput;
 
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
@@ -64,8 +62,7 @@ public class MatcherTest {
                     loader.loadSystems(getReader(i, "systems.json")),
                     loader.loadSubscriptions(getReader(i, "subscriptions.json")),
                     loader.loadMatches(getReader(i, "pinned_matches.json")),
-                    loader.loadMatches(getReader(i, "expected_matches.json")),
-                    loader.loadMatches(getReader(i, "expected_invalid_pinned_matches.json"))
+                    loader.loadOutput(getReader(i, "output.json"))
                 });
                 i++;
             }
@@ -98,17 +95,15 @@ public class MatcherTest {
      * @param systemsIn the systems
      * @param subscriptionsIn the subscriptions
      * @param pinnedMatchesIn the pinned matches
-     * @param expectedMatchesIn the expected output matches
-     * @param expectedInvalidPinnedMatchesIn the expected invalid pinned matches
+     * @param expectedOutputIn the expected output
      */
     public MatcherTest(List<JsonSystem> systemsIn, List<JsonSubscription> subscriptionsIn, List<JsonMatch> pinnedMatchesIn,
-            List<JsonMatch> expectedMatchesIn, List<JsonMatch> expectedInvalidPinnedMatchesIn) {
+            JsonOutput expectedOutputIn) {
         matcher = new Matcher();
         systems = systemsIn;
         subscriptions = subscriptionsIn;
         pinnedMatches = pinnedMatchesIn;
-        expectedMatches = expectedMatchesIn;
-        expectedInvalidPinnedMatches = expectedInvalidPinnedMatchesIn;
+        expectedOutput = expectedOutputIn;
     }
 
     /**
@@ -122,10 +117,8 @@ public class MatcherTest {
 
         matcher.match();
 
-        Collection<JsonMatch> actualMatches = matcher.getMatches();
-        Collection<JsonMatch> actualInvalidPinnedMatches = matcher.getInvalidPinnedMatches();
+        JsonOutput actualOutput = matcher.getOutput();
 
-        assertThat(actualMatches, equalTo(expectedMatches));
-        assertThat(actualInvalidPinnedMatches, equalTo(expectedInvalidPinnedMatches));
+        assertThat(actualOutput, equalTo(expectedOutput));
     }
 }

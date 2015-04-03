@@ -8,6 +8,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonProduct;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
@@ -78,6 +79,18 @@ public class JsonConverter {
      */
     public List<JsonProduct> loadProducts(Reader reader) throws JsonIOException, JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<JsonProduct>>() { }.getType());
+    }
+
+    /**
+     * Load a matcher's output from a JSON file.
+     *
+     * @param reader the reader object
+     * @return the output
+     * @throws JsonIOException in case the file cannot be read correctly
+     * @throws JsonSyntaxException in case JSON does not have correct syntax
+     */
+    public JsonOutput loadOutput(Reader reader) {
+        return gson.fromJson(reader, new TypeToken<JsonOutput>() { }.getType());
     }
 
     /**
