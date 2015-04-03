@@ -1,5 +1,6 @@
 package com.suse.matcher.facts;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,7 +14,7 @@ import java.util.Date;
  * {@link System}s.
  */
 @PropertyReactive
-public class Subscription {
+public class Subscription implements Comparable<Subscription> {
     /**
      * Encodes virtual machine assignment policies for a {@link Subscription}
      */
@@ -225,6 +226,12 @@ public class Subscription {
     }
 
     // utility methods
+    /** {@inheritDoc} */
+    @Override
+    public int compareTo(Subscription oIn) {
+        return new CompareToBuilder().append(id, oIn.id).toComparison();
+    }
+
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
