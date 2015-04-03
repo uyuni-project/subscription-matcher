@@ -30,7 +30,7 @@ public class Main {
         String pinnedMatchPath = args[2];
 
         // load files
-        Loader loader = new Loader();
+        JsonConverter loader = new JsonConverter();
         List<JsonSystem> systems = loader.loadSystems(new FileReader(systemsPath));
         List<JsonSubscription> subscriptions = loader.loadSubscriptions(new FileReader(subscriptionsPath));
         List<JsonMatch> pinnedMatches = loader.loadMatches(new FileReader(pinnedMatchPath));

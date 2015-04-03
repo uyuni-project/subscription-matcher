@@ -1,5 +1,7 @@
 package com.suse.matcher;
 
+import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
@@ -14,16 +16,20 @@ import java.io.Reader;
 import java.util.List;
 
 /**
- * Loads facts from JSON resources.
+ * Reads and writes JSON resources.
  */
-public class Loader {
+public class JsonConverter {
 
     /** Deserializer instance. */
     private Gson gson;
 
     /** Default constructor. */
-    public Loader() {
-        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
+    public JsonConverter() {
+        gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+            .setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
+            .setPrettyPrinting()
+            .create();
     }
 
     /**
@@ -72,5 +78,14 @@ public class Loader {
      */
     public List<JsonProduct> loadProducts(Reader reader) throws JsonIOException, JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<JsonProduct>>() { }.getType());
+    }
+
+    /**
+     * Converts an object to a JSON string.
+     * @param o an object
+     * @return the corresponding JSON string
+     */
+    public String toJson(Object o){
+        return gson.toJson(o);
     }
 }

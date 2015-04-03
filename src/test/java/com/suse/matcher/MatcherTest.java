@@ -54,7 +54,7 @@ public class MatcherTest {
      */
     @Parameters
     public static Collection<Object[]> loadTestData() throws Exception {
-        Loader loader = new Loader();
+        JsonConverter loader = new JsonConverter();
         Collection<Object[]> result = new LinkedList<>();
         int i = 1;
         boolean moreFiles = true;
