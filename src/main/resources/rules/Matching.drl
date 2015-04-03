@@ -59,13 +59,7 @@ rule "match stackable matches"
         SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
 
         Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
-
-        // require that other CONFIRMED subscriptions on this system and product are all
-        // from the same SCC id
-        forall (
-            $otherMatch : Match(systemId == $systemId, productId == $productId, kind == Kind.CONFIRMED)
-            Subscription(id == $subscriptionId, id == $otherMatch.subscriptionId)
-        )
+        not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         Integer quantity = $subscription.computeQuantityFor($system, 0);
         insert(new Match($systemId, $subscriptionId, $productId, quantity, Kind.CONFIRMED));
