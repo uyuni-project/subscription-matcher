@@ -1,5 +1,6 @@
 package com.suse.matcher.facts;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -10,7 +11,7 @@ import org.kie.api.definition.type.PropertyReactive;
  * Represents an installation relationship.
  */
 @PropertyReactive
-public class SystemProduct {
+public class SystemProduct implements Comparable<SystemProduct> {
 
     /** The system id. */
     public Long systemId;
@@ -45,6 +46,15 @@ public class SystemProduct {
      */
     public Long getProductId() {
         return productId;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int compareTo(SystemProduct oIn) {
+        return new CompareToBuilder()
+            .append(systemId, oIn.systemId)
+            .append(productId, oIn.productId)
+            .toComparison();
     }
 
     /** {@inheritDoc} */
