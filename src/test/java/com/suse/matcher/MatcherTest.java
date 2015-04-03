@@ -1,7 +1,6 @@
 package com.suse.matcher;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonOutput;
@@ -107,16 +106,22 @@ public class MatcherTest {
     }
 
     /**
-     * Test.
+     * Tests against scenario data.
+     * @throws Exception in case anything goes wrong
      */
     @Test
-    public void test() {
+    public void test() throws Exception {
         matcher.addSystems(systems);
         matcher.addSubscriptions(subscriptions);
         matcher.addPinnedMatches(pinnedMatches);
 
         JsonOutput actualOutput = matcher.match();
+        matcher.close();
 
-        assertThat(actualOutput, equalTo(expectedOutput));
+        assertEquals(expectedOutput.compliantSystems, actualOutput.compliantSystems);
+        assertEquals(expectedOutput.partiallyCompliantSystems, actualOutput.partiallyCompliantSystems);
+        assertEquals(expectedOutput.nonCompliantSystems, actualOutput.nonCompliantSystems);
+        assertEquals(expectedOutput.remainingSubscriptions, actualOutput.remainingSubscriptions);
+        assertEquals(expectedOutput.errors, actualOutput.errors);
     }
 }
