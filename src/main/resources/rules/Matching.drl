@@ -51,7 +51,7 @@ rule "match stackable matches"
         $subscription : Subscription(
             $subscriptionId : id,
             $systemLimit : systemLimit,
-            systemLimit > 0,
+            systemLimit * cpus >= $system.cpus,
             stackable == true
         )
 
@@ -66,15 +66,8 @@ rule "match stackable matches"
             $otherMatch : Match(systemId == $systemId, productId == $productId, kind == Kind.CONFIRMED)
             Subscription(id == $subscriptionId, id == $otherMatch.subscriptionId)
         )
-
-        // require that there are still some unlicensed cpus
-        accumulate (
-            Match(systemId == $systemId, subscriptionId == $subscriptionId, $quantity : quantity, kind == Kind.CONFIRMED);
-            $alreadyLicensedCpus : sum($quantity * $subscription.cpus)
-        )
-        System(id == $systemId, $alreadyLicensedCpus < $system.cpus)
     then
-        Integer quantity = $subscription.computeQuantityFor($system, $alreadyLicensedCpus);
+        Integer quantity = $subscription.computeQuantityFor($system, 0);
         insert(new Match($systemId, $subscriptionId, $productId, quantity, Kind.CONFIRMED));
         modify($subscription) {
             systemLimit = $systemLimit - quantity

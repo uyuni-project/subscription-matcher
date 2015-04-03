@@ -4,11 +4,5 @@
     "subscription_id": 4,
     "product_id": 1298,
     "quantity": 2
-  },
-  {
-    "system_id": 200,
-    "subscription_id": 5,
-    "product_id": 1298,
-    "quantity": 3
   }
 ]
