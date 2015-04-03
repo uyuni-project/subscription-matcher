@@ -41,9 +41,7 @@ public class Main {
             matcher.addSubscriptions(subscriptions);
             matcher.addPinnedMatches(pinnedMatches);
 
-            matcher.match();
-
-            JsonOutput output = matcher.getOutput();
+            JsonOutput output = matcher.match();
 
             java.lang.System.out.println(converter.toJson(output));
         }

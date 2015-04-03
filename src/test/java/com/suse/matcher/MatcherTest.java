@@ -115,9 +115,7 @@ public class MatcherTest {
         matcher.addSubscriptions(subscriptions);
         matcher.addPinnedMatches(pinnedMatches);
 
-        matcher.match();
-
-        JsonOutput actualOutput = matcher.getOutput();
+        JsonOutput actualOutput = matcher.match();
 
         assertThat(actualOutput, equalTo(expectedOutput));
     }

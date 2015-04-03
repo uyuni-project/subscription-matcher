@@ -132,20 +132,15 @@ public class Matcher implements AutoCloseable {
 
     /**
      * Tries to match systems to subscriptions.
-     */
-    public void match() {
-        // start engine
-        session.fireAllRules();
-        logger.close();
-    }
-
-    /**
-     * Gets the resulting matches.
      *
-     * @return the matches
+     * @return the output
      */
     @SuppressWarnings("unchecked")
-    public JsonOutput getOutput() {
+    public JsonOutput match() {
+        // start engine
+        session.fireAllRules();
+
+        // collect results
         JsonOutput output = new JsonOutput();
 
         List<Match> confirmedMatches = getFacts(new TypeToken<Match>(){}, new Predicate<Match>() {
@@ -266,6 +261,9 @@ public class Matcher implements AutoCloseable {
      */
     @Override
     public void close() throws Exception {
+        if (logger != null) {
+            logger.close();
+        }
         if (session != null) {
             session.dispose();
         }
