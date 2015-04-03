@@ -23,5 +23,5 @@ rule "add matches for virtual machines included in hosts's subscriptions"
         Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION)
         HostGuest(hostId == $hostId, $guestId : guestId)
     then
-        insert(new Match($guestId, $productId, $subscriptionId, 0, Kind.CONFIRMED));
+        insert(new Match($guestId, $productId, $subscriptionId, 0.0, Kind.CONFIRMED));
 end

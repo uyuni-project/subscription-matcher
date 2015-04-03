@@ -13,7 +13,7 @@ public class JsonOutputSubscription {
     public Long id;
 
     /** The quantity. */
-    public Integer quantity;
+    public Double quantity;
 
     /**
      * Standard constructor.
@@ -21,7 +21,7 @@ public class JsonOutputSubscription {
      * @param idIn the id
      * @param quantityIn the quantity
      */
-    public JsonOutputSubscription(Long idIn, Integer quantityIn) {
+    public JsonOutputSubscription(Long idIn, Double quantityIn) {
         super();
         id = idIn;
         quantity = quantityIn;

@@ -115,8 +115,8 @@ public class Matcher implements AutoCloseable {
      */
     public void addSubscriptions(List<JsonSubscription> subscriptions) {
         for (JsonSubscription subscription : subscriptions) {
-            session.insert(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit, subscription.startsAt,
-                    subscription.expiresAt, subscription.sccOrgId));
+            session.insert(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit.doubleValue(),
+                    subscription.startsAt, subscription.expiresAt, subscription.sccOrgId));
         }
     }
 
@@ -208,8 +208,8 @@ public class Matcher implements AutoCloseable {
 
         List<Subscription> subscriptions = getFacts(new TypeToken<Subscription>(){});
         for (Subscription subscription : subscriptions) {
-            if (subscription.systemLimit > 0) {
-                output.remainingSubscriptions.add(new JsonOutputSubscription(subscription.id, subscription.systemLimit));
+            if (subscription.quantity > 0) {
+                output.remainingSubscriptions.add(new JsonOutputSubscription(subscription.id, subscription.quantity));
             }
         }
 
