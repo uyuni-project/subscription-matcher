@@ -22,7 +22,6 @@ public class JsonOutputSubscription {
      * @param quantityIn the quantity
      */
     public JsonOutputSubscription(Long idIn, Double quantityIn) {
-        super();
         id = idIn;
         quantity = quantityIn;
     }
