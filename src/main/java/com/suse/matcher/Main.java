@@ -36,7 +36,7 @@ public class Main {
         List<JsonMatch> pinnedMatches = converter.loadMatches(new FileReader(pinnedMatchPath));
 
         // run the engine
-        try( Matcher matcher = new Matcher()){
+        try(Matcher matcher = new Matcher()){
             matcher.addSystems(systems);
             matcher.addSubscriptions(subscriptions);
             matcher.addPinnedMatches(pinnedMatches);
@@ -46,8 +46,6 @@ public class Main {
             JsonOutput output = matcher.getOutput();
 
             java.lang.System.out.println(converter.toJson(output));
-
-            java.lang.System.exit(0);
         }
     }
 }
