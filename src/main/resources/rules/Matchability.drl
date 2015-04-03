@@ -30,7 +30,13 @@ rule "unlimited virtualization subscription can match a system"
     agenda-group "Matchability"
     when
         $system : System($systemId : id, physical)
-        SystemProduct($productId : productId, systemId == $systemId)
+        (
+            SystemProduct($productId : productId, systemId == $systemId) or
+            (
+                HostGuest(hostId == $systemId, $guestId : guestId) and
+                SystemProduct($productId : productId, systemId == $guestId)
+            )
+        )
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
             id == $subscriptionId,

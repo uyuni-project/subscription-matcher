@@ -170,6 +170,9 @@ public class Matcher implements AutoCloseable {
         for (SystemProduct installation : installations) {
             installationMap.put(installation.systemId, installation.productId);
         }
+        for (Match match : confirmedMatches) {
+            installationMap.put(match.systemId, match.productId);
+        }
 
         for (Long systemId: systemIds) {
             JsonOutputSystem system = new JsonOutputSystem(systemId);

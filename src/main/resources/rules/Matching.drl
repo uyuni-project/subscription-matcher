@@ -29,10 +29,9 @@ rule "match non-stackable matches"
             stackable == false
         )
 
-        SystemProduct($productId : productId, systemId == $systemId)
+        Match(systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
         SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
 
-        Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         insert(new Match($systemId, $productId, $subscriptionId, 1, Kind.CONFIRMED));
@@ -55,10 +54,9 @@ rule "match stackable matches"
             stackable == true
         )
 
-        SystemProduct($productId : productId, systemId == $systemId)
+        Match(systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
         SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
 
-        Match(systemId == $systemId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         Integer quantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;

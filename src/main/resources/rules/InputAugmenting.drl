@@ -14,12 +14,3 @@ then
         physical = false;
     }
 end
-
-rule "map products of virtual systems to the host system"
-agenda-group "InputAugmenting"
-when
-    HostGuest($hostId: hostId, $guestId : guestId)
-    SystemProduct($productId : productId, systemId == $guestId)
-then
-    insert(new SystemProduct($hostId, $productId));
-end
