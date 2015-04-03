@@ -21,7 +21,9 @@ rule "match non-stackable matches"
     agenda-group "Matching"
     salience $subscription.computeFitnessTo($system) // result in interval [0, 1]
     when
+        // we have a system
         $system : System($systemId : id)
+        // we have a non-stackable subscription with available slots
         $subscription : Subscription(
             $subscriptionId : id,
             $systemLimit : systemLimit,
@@ -29,9 +31,13 @@ rule "match non-stackable matches"
             stackable == false
         )
 
+        // we have a possible match with a product
         Match(systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+
+        // and that product is provided by the subscription
         SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
 
+        // unless other subscriptions have already been assigned
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         insert(new Match($systemId, $productId, $subscriptionId, 1, Kind.CONFIRMED));
@@ -41,12 +47,13 @@ rule "match non-stackable matches"
 end
 
 rule "match stackable matches"
-    // NOTE: the only stackable subscriptions are TWO_TWO
-    // and UNLIMITED_VIRTUAL after 2015, only on physical hosts
+    // NOTE: the only stackable subscriptions are TWO_TWO and UNLIMITED_VIRTUAL after 2015
     agenda-group "Matching"
     salience $subscription.computeFitnessTo($system) // result in interval [0, 1]
     when
+        // we have a physical system
         $system : System($systemId : id, physical)
+        // we have a non-stackable subscription with enough slots
         $subscription : Subscription(
             $subscriptionId : id,
             $systemLimit : systemLimit,
@@ -54,9 +61,13 @@ rule "match stackable matches"
             stackable == true
         )
 
+        // we have a possible match with a product
         Match(systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+
+        // and that product is provided by the subscription
         SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
 
+        // unless other subscriptions have already been assigned
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
         Integer quantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
