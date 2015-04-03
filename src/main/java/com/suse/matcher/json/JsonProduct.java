@@ -1,6 +1,5 @@
 package com.suse.matcher.json;
 
-import com.google.gson.annotations.SerializedName;
 
 /**
  * JSON representation of a product.
@@ -11,7 +10,6 @@ public class JsonProduct {
     public Long id;
 
     /** A human-friendly name. */
-    @SerializedName("friendly_name")
     public String friendlyName;
 
     /**
