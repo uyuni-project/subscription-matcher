@@ -3,9 +3,8 @@ Scenario 5 - Stackable subscription different orgs
 
 This scenario has 2 SLES11 SP4 x86_64 subscriptions from different SCC 
 organizations (multi mirrorcredentials feature, id 1118).
-Both subscriptions are for 2 cpus, stackable and system_limit 3 (temporary
-part number is 800-TEMPORARY-X86-2CPU-STACKABLE, will be updated with the
-real one as soon as it is decided).
+Both subscriptions are for 2 cpus, stackable and system_limit 3
+(part number is 874-006876).
 But one is from organization **UC5** while the other is from **UC7**.
 
 We have 2 systems. One with 4 cpus and one with 8 cpus.
