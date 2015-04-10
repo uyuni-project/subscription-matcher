@@ -5396,7 +5396,7 @@ rule "Add subscription data for part number 874-007039"
         $subscription : Subscription($quantity : quantity, partNumber == "874-007039")
     then
         modify($subscription) {
-            policy = Policy.INSTANCE,
+            policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
             quantity = $quantity * 4,
@@ -5411,7 +5411,7 @@ rule "Add subscription data for part number 874-007043"
         $subscription : Subscription($quantity : quantity, partNumber == "874-007043")
     then
         modify($subscription) {
-            policy = Policy.INSTANCE,
+            policy = Policy.PHYSICAL_ONLY,
             supportLevel = "l3-priority",
             cpus = 2,
             quantity = $quantity * 4,
@@ -5426,7 +5426,7 @@ rule "Add subscription data for part number 874-007040"
         $subscription : Subscription($quantity : quantity, partNumber == "874-007040")
     then
         modify($subscription) {
-            policy = Policy.INSTANCE,
+            policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
             quantity = $quantity * 4,
@@ -5441,7 +5441,7 @@ rule "Add subscription data for part number 874-007044"
         $subscription : Subscription($quantity : quantity, partNumber == "874-007044")
     then
         modify($subscription) {
-            policy = Policy.INSTANCE,
+            policy = Policy.PHYSICAL_ONLY,
             supportLevel = "l3-priority",
             cpus = 2,
             quantity = $quantity * 4,
@@ -5512,7 +5512,7 @@ rule "Add subscription data for part number 662644477515"
         $subscription : Subscription($quantity : quantity, partNumber == "662644477515")
     then
         modify($subscription) {
-            policy = Policy.INSTANCE,
+            policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
             quantity = $quantity * 4,
@@ -5527,7 +5527,7 @@ rule "Add subscription data for part number 662644477519"
         $subscription : Subscription($quantity : quantity, partNumber == "662644477519")
     then
         modify($subscription) {
-            policy = Policy.INSTANCE,
+            policy = Policy.PHYSICAL_ONLY,
             supportLevel = "l3-priority",
             cpus = 2,
             quantity = $quantity * 4,
@@ -5542,7 +5542,7 @@ rule "Add subscription data for part number 662644477516"
         $subscription : Subscription($quantity : quantity, partNumber == "662644477516")
     then
         modify($subscription) {
-            policy = Policy.INSTANCE,
+            policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
             quantity = $quantity * 4,
@@ -5557,7 +5557,7 @@ rule "Add subscription data for part number 662644477520"
         $subscription : Subscription($quantity : quantity, partNumber == "662644477520")
     then
         modify($subscription) {
-            policy = Policy.INSTANCE,
+            policy = Policy.PHYSICAL_ONLY,
             supportLevel = "l3-priority",
             cpus = 2,
             quantity = $quantity * 4,
