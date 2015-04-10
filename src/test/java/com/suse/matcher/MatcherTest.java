@@ -118,10 +118,15 @@ public class MatcherTest {
         JsonOutput actualOutput = matcher.match();
         matcher.close();
 
-        assertEquals(expectedOutput.compliantSystems, actualOutput.compliantSystems);
-        assertEquals(expectedOutput.partiallyCompliantSystems, actualOutput.partiallyCompliantSystems);
-        assertEquals(expectedOutput.nonCompliantSystems, actualOutput.nonCompliantSystems);
-        assertEquals(expectedOutput.remainingSubscriptions, actualOutput.remainingSubscriptions);
-        assertEquals(expectedOutput.errors, actualOutput.errors);
+        JsonConverter c = new JsonConverter();
+
+        assertEquals("compliant systems", c.toJson(expectedOutput.compliantSystems), c.toJson(actualOutput.compliantSystems));
+        assertEquals("partially compliant systems",
+                c.toJson(expectedOutput.partiallyCompliantSystems),
+                c.toJson(actualOutput.partiallyCompliantSystems)
+        );
+        assertEquals("non compliant systems", c.toJson(expectedOutput.nonCompliantSystems), c.toJson(actualOutput.nonCompliantSystems));
+        assertEquals("remaining subscriptions", c.toJson(expectedOutput.remainingSubscriptions), c.toJson(actualOutput.remainingSubscriptions));
+        assertEquals("errors", c.toJson(expectedOutput.errors), c.toJson(actualOutput.errors));
     }
 }
