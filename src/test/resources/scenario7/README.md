@@ -18,8 +18,8 @@ it has *unlimited virtualization* and up to 32 cpus.
 Additionally we have one system in this scenario where we do
 not have a subscription for (1122, RES 5).
 
-Finally, an invalid pin is provided as input, matching a physical-
-only subscription to a VM.
+Finally, an invalid pin is provided as input, matching a
+wrong product.
 
 Result
 ------

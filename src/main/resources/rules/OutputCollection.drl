@@ -15,13 +15,3 @@ rule "flag invalid pinned matches"
     then
         insert(new Match($systemId, $productId, $subscriptionId, null, Kind.INVALID));
 end
-
-rule "add matches for virtual machines included in hosts's subscriptions"
-    agenda-group "OutputCollection"
-    when
-        $match : Match($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId, kind == Kind.CONFIRMED)
-        Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION)
-        HostGuest(hostId == $hostId, $guestId : guestId)
-    then
-        insert(new Match($guestId, $productId, $subscriptionId, 0.0, Kind.CONFIRMED));
-end

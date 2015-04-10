@@ -63,6 +63,16 @@ rule "unlimited virtualization subscription can match a system"
         insert(new Match($system.id, $productId, $subscription.id, consumedQuantity.doubleValue(), Kind.POSSIBLE));
 end
 
+rule "virtual machines included in hosts's subscriptions can match"
+    agenda-group "Matchability"
+    when
+        $match : Match($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId, kind == Kind.POSSIBLE)
+        Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION)
+        HostGuest(hostId == $hostId, $guestId : guestId)
+    then
+        insert(new Match($guestId, $productId, $subscriptionId, 0.0, Kind.POSSIBLE));
+end
+
 rule "1-2 stackable subscription can match a system"
     agenda-group "Matchability"
     when

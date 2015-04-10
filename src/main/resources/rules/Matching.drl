@@ -1,5 +1,6 @@
 package com.suse.matcher.rules;
 
+import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Match;
 import com.suse.matcher.facts.Match.Kind;
 import com.suse.matcher.facts.Subscription;
@@ -103,4 +104,15 @@ rule "match VM-only matches"
         modify($subscription) {
             quantity = $quantity - 0.5
         }
+end
+
+rule "match virtual machines included in hosts's subscriptions"
+    agenda-group "Matching"
+    when
+        Match($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId, kind == Kind.CONFIRMED)
+        Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION)
+        HostGuest(hostId == $hostId, $guestId : guestId)
+        Match(systemId == $guestId, productId == $productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE, quantity == 0.0)
+    then
+        insert(new Match($guestId, $productId, $subscriptionId, 0.0, Kind.CONFIRMED));
 end
