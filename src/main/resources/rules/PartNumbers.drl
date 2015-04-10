@@ -5145,20 +5145,6 @@ rule "Add subscription data for part number 874-007099"
         };
 end
 
-//suse openstack cloud swift storage node, x86-64, 1-2 sockets, l3-priority subscription, 1 year
-rule "Add subscription data for part number N/A"
-    agenda-group "PartNumbers"
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "N/A")
-    then
-        modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
-            supportLevel = "l3-priority",
-            cpus = 2,
-            stackable = true
-        };
-end
-
 //suse openstack cloud swift storage node, x86-64, 1-2 sockets, priority subscription, 3 year
 rule "Add subscription data for part number 874-007100"
     agenda-group "PartNumbers"
@@ -5807,7 +5793,7 @@ rule "Add subscription data for part number 113-002192-001"
         $subscription : Subscription($quantity : quantity, partNumber == "113-002192-001")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -6142,7 +6128,7 @@ rule "Add subscription data for part number 051-004066"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004066")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -6501,7 +6487,7 @@ rule "Add subscription data for part number 874-005057"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005057")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -6514,7 +6500,7 @@ rule "Add subscription data for part number 874-005055"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005055")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -6813,7 +6799,7 @@ rule "Add subscription data for part number 874-005309"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005309")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -7075,7 +7061,7 @@ rule "Add subscription data for part number 874-005314"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005314")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -7608,7 +7594,7 @@ rule "Add subscription data for part number 874-005313"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005313")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -7646,7 +7632,7 @@ rule "Add subscription data for part number 874-005658"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005658")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -7725,7 +7711,7 @@ rule "Add subscription data for part number 874-005311"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005311")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -7925,7 +7911,7 @@ rule "Add subscription data for part number 874-005312"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005312")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -8057,7 +8043,7 @@ rule "Add subscription data for part number 874-005310"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005310")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -8138,7 +8124,7 @@ rule "Add subscription data for part number 877-001317"
         $subscription : Subscription($quantity : quantity, partNumber == "877-001317")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -8165,7 +8151,7 @@ rule "Add subscription data for part number 874-006071"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006071")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -8601,7 +8587,7 @@ rule "Add subscription data for part number 874-005315"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005315")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -8968,7 +8954,7 @@ rule "Add subscription data for part number 051-004063"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004063")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -9208,7 +9194,7 @@ rule "Add subscription data for part number 051-004067"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004067")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -9394,7 +9380,7 @@ rule "Add subscription data for part number 874-006093"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006093")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -9421,7 +9407,7 @@ rule "Add subscription data for part number 874-005316"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005316")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -9883,7 +9869,7 @@ rule "Add subscription data for part number 874-006070"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006070")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -10162,7 +10148,7 @@ rule "Add subscription data for part number 874-005524"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005524")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -10282,7 +10268,7 @@ rule "Add subscription data for part number 874-006092"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006092")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -10402,7 +10388,7 @@ rule "Add subscription data for part number 877-001341-SAL"
         $subscription : Subscription($quantity : quantity, partNumber == "877-001341-SAL")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -10734,7 +10720,7 @@ rule "Add subscription data for part number 874-006476"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006476")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -10915,7 +10901,7 @@ rule "Add subscription data for part number 874-006472"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006472")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -10998,7 +10984,7 @@ rule "Add subscription data for part number 874-004798"
         $subscription : Subscription($quantity : quantity, partNumber == "874-004798")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -11164,7 +11150,7 @@ rule "Add subscription data for part number 874-006474"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006474")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -11283,7 +11269,7 @@ rule "Add subscription data for part number 874-006096"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006096")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -11516,7 +11502,7 @@ rule "Add subscription data for part number 874-006500"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006500")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -11625,7 +11611,7 @@ rule "Add subscription data for part number 051-004064"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004064")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -11680,7 +11666,7 @@ rule "Add subscription data for part number 051-004069"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004069")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -11705,7 +11691,7 @@ rule "Add subscription data for part number 874-006478"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006478")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -11800,7 +11786,7 @@ rule "Add subscription data for part number 874-006498"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006498")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -11910,7 +11896,7 @@ rule "Add subscription data for part number 874-005318"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005318")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -12075,7 +12061,7 @@ rule "Add subscription data for part number 874-006502"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006502")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -12168,7 +12154,7 @@ rule "Add subscription data for part number 874-005659"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005659")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12293,7 +12279,7 @@ rule "Add subscription data for part number 874-006854"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006854")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12417,7 +12403,7 @@ rule "Add subscription data for part number 874-006484"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006484")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12444,7 +12430,7 @@ rule "Add subscription data for part number 874-006475"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006475")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12499,7 +12485,7 @@ rule "Add subscription data for part number 874-006095"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006095")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12635,7 +12621,7 @@ rule "Add subscription data for part number 874-006473"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006473")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12648,7 +12634,7 @@ rule "Add subscription data for part number 874-006471"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006471")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12675,7 +12661,7 @@ rule "Add subscription data for part number 874-006516"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006516")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -12688,7 +12674,7 @@ rule "Add subscription data for part number 874-005526"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005526")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -12863,7 +12849,7 @@ rule "Add subscription data for part number 051-004068"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004068")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12931,7 +12917,7 @@ rule "Add subscription data for part number 662644474472"
         $subscription : Subscription($quantity : quantity, partNumber == "662644474472")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -12944,7 +12930,7 @@ rule "Add subscription data for part number 874-006496"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006496")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -13123,7 +13109,7 @@ rule "Add subscription data for part number 051-004247"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004247")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -13164,7 +13150,7 @@ rule "Add subscription data for part number 874-005533"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005533")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -13177,7 +13163,7 @@ rule "Add subscription data for part number 874-005528"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005528")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -13204,7 +13190,7 @@ rule "Add subscription data for part number 662644473482"
         $subscription : Subscription($quantity : quantity, partNumber == "662644473482")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -13217,7 +13203,7 @@ rule "Add subscription data for part number 874-005529"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005529")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -13230,7 +13216,7 @@ rule "Add subscription data for part number 874-006477"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006477")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -13271,7 +13257,7 @@ rule "Add subscription data for part number 874-005194"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005194")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -13298,7 +13284,7 @@ rule "Add subscription data for part number 662644473505"
         $subscription : Subscription($quantity : quantity, partNumber == "662644473505")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -13311,7 +13297,7 @@ rule "Add subscription data for part number 877-001213"
         $subscription : Subscription($quantity : quantity, partNumber == "877-001213")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -13324,7 +13310,7 @@ rule "Add subscription data for part number 874-005317"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005317")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -13351,7 +13337,7 @@ rule "Add subscription data for part number 051-004097"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004097")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             stackable = false
         };
@@ -13364,7 +13350,7 @@ rule "Add subscription data for part number 874-005195"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005195")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
@@ -13377,7 +13363,7 @@ rule "Add subscription data for part number 662644473499"
         $subscription : Subscription($quantity : quantity, partNumber == "662644473499")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "standard",
             stackable = false
         };
@@ -13390,7 +13376,7 @@ rule "Add subscription data for part number 874-005683"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005683")
     then
         modify($subscription) {
-            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false
         };
