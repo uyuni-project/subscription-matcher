@@ -23,7 +23,7 @@ rule "physical only subscription can match a system"
             cpus >= $system.cpus
         )
     then
-        insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
+        insert(new Match($system.id, $productId, $subscription.id, 1.0, Kind.POSSIBLE));
 end
 
 rule "instance subscription can match a system"
@@ -38,7 +38,7 @@ rule "instance subscription can match a system"
             (cpus == null || cpus >= $system.cpus)
         )
     then
-        insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
+        insert(new Match($system.id, $productId, $subscription.id, 1.0, Kind.POSSIBLE));
 end
 
 rule "unlimited virtualization subscription can match a system"
@@ -59,7 +59,8 @@ rule "unlimited virtualization subscription can match a system"
             (cpus >= $system.cpus || stackable)
         )
     then
-        insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
+        Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
+        insert(new Match($system.id, $productId, $subscription.id, consumedQuantity.doubleValue(), Kind.POSSIBLE));
 end
 
 rule "1-2 stackable subscription can match a system"
@@ -74,5 +75,6 @@ rule "1-2 stackable subscription can match a system"
         )
         not (HostGuest(hostId == $systemId))
     then
-        insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
+        double consumedQuantity = $system.physical ? ($system.cpus + $subscription.cpus - 1) / $subscription.cpus : 0.5;
+        insert(new Match($system.id, $productId, $subscription.id, consumedQuantity, Kind.POSSIBLE));
 end

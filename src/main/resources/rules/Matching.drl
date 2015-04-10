@@ -11,10 +11,10 @@ rule "match valid user-specified matches"
     agenda-group "Matching"
     salience 2
     when
-        Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, $quantity: quantity, kind == Kind.USER_PINNED)
-        Match(systemId == $systemId, productId == $productId, subscriptionId == $subscriptionId, quantity == $quantity, kind == Kind.POSSIBLE)
+        Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED)
+        Match($quantity: quantity, systemId == $systemId, productId == $productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
     then
-        insert(new Match($systemId, $productId, $subscriptionId, 1.0, Kind.CONFIRMED));
+        insert(new Match($systemId, $productId, $subscriptionId, $quantity, Kind.CONFIRMED));
 end
 
 rule "match non-stackable matches"
@@ -32,7 +32,7 @@ rule "match non-stackable matches"
         )
 
         // we have a possible match with a product
-        Match(systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+        Match($usedQuantity : quantity, systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
 
         // and that product is provided by the subscription
         SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
@@ -40,9 +40,9 @@ rule "match non-stackable matches"
         // unless other subscriptions have already been assigned
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
-        insert(new Match($systemId, $productId, $subscriptionId, 1.0, Kind.CONFIRMED));
+        insert(new Match($systemId, $productId, $subscriptionId, $usedQuantity, Kind.CONFIRMED));
         modify($subscription) {
-            quantity = $quantity -1
+            quantity = $quantity - $usedQuantity
         }
 end
 
@@ -62,7 +62,7 @@ rule "match stackable matches"
         )
 
         // we have a possible match with a product
-        Match(systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+        Match($usedQuantity : quantity, systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
 
         // and that product is provided by the subscription
         SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
@@ -70,10 +70,9 @@ rule "match stackable matches"
         // unless other subscriptions have already been assigned
         not (Match(systemId == $systemId, kind == Kind.CONFIRMED))
     then
-        Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
-        insert(new Match($systemId, $productId, $subscriptionId, consumedQuantity.doubleValue(), Kind.CONFIRMED));
+        insert(new Match($systemId, $productId, $subscriptionId, $usedQuantity, Kind.CONFIRMED));
         modify($subscription) {
-            quantity = $quantity - consumedQuantity
+            quantity = $quantity - $usedQuantity
         }
 end
 
@@ -92,7 +91,7 @@ rule "match VM-only matches"
         )
 
         // we have a possible match with a product
-        Match(systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
+        Match($usedQuantity : quantity, systemId == $systemId, $productId : productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE)
 
         // and that product is provided by the subscription
         SubscriptionProduct(subscriptionId == $subscriptionId, productId == $productId)
