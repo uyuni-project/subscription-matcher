@@ -1,0 +1,13 @@
+[
+  {
+    "id": 100,
+    "cpus": 4,
+    "product_ids": [1300],
+    "virtual_system_ids": [200]
+  },
+  {
+    "id": 200,
+    "cpus": 4,
+    "product_ids": [1300, 1288]
+  }
+]

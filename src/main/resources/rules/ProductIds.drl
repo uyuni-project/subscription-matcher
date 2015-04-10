@@ -52,3 +52,14 @@ rule "Fake products to system rule for RES"
             red = true;
         };
 end
+
+rule "Fake products to subscription rule for SUSE-Cloud"
+    agenda-group "ProductIds"
+    when
+        $subscription : Subscription(
+            partNumber == "874-006385"
+        )
+    then
+        insert(new SubscriptionProduct($subscription.id, 1221L));
+        insert(new SubscriptionProduct($subscription.id, 1288L));
+end
