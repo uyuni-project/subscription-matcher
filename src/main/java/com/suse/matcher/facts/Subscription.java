@@ -36,7 +36,13 @@ public class Subscription implements Comparable<Subscription> {
          * a SUSE-provided hypervisor or to up to two virtual machines, regardless
          * of the hypervisor they run on.
          */
-        TWO_TWO
+        TWO_TWO,
+        /**
+         * This subscription can either be assigned to a physical system as well
+         * as to a virtual system. It is meant for an instance but do not allow
+         * any virtualization inheritance
+         */
+        INSTANCE
     }
 
     // constructor-populated fields
