@@ -10,10 +10,10 @@ import com.suse.matcher.facts.System;
 rule "flag invalid pinned matches"
     agenda-group "OutputCollection"
     when
-        $pinned_match : Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, $quantity: quantity, kind == Kind.USER_PINNED)
-        not (Match(systemId == $systemId, productId == $productId, subscriptionId == $subscriptionId, quantity == $quantity, kind == Kind.POSSIBLE))
+        $pinned_match : Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, kind == Kind.USER_PINNED)
+        not (Match(systemId == $systemId, productId == $productId, subscriptionId == $subscriptionId, kind == Kind.POSSIBLE))
     then
-        insert(new Match($systemId, $productId, $subscriptionId, $quantity, Kind.INVALID));
+        insert(new Match($systemId, $productId, $subscriptionId, null, Kind.INVALID));
 end
 
 rule "add matches for virtual machines included in hosts's subscriptions"
