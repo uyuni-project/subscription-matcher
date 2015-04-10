@@ -26,6 +26,21 @@ rule "physical only subscription can match a system"
         insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
 end
 
+rule "instance subscription can match a system"
+    agenda-group "Matchability"
+    when
+        $system : System($systemId : id)
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        $subscription : Subscription(
+            id == $subscriptionId,
+            policy == Policy.INSTANCE,
+            (cpus == null || cpus >= $system.cpus)
+        )
+    then
+        insert(new Match($system.id, $productId, $subscription.id, null, Kind.POSSIBLE));
+end
+
 rule "unlimited virtualization subscription can match a system"
     agenda-group "Matchability"
     when
