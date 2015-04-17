@@ -54,11 +54,7 @@ public class Matcher implements AutoCloseable {
 
     /** Rule group ordering. */
     private static final String[] RULE_GROUPS = {
-        "InputValidation",
-        "InputAugmenting",
-        "PartNumbers",
-        "ProductIds",
-        "Matchability",
+        "FirstGroup",
         "Matching",
         "OutputCollection"
     };

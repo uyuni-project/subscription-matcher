@@ -4,7 +4,7 @@ import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Today;
 
 rule "subscription is still valid"
-    agenda-group "InputValidation"
+    agenda-group  "FirstGroup"
     when
         $today : Today($timestamp : timestamp)
         $subscription: Subscription(expiresAt < $timestamp || startsAt > $timestamp)
