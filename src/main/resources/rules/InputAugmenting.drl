@@ -5,7 +5,6 @@ import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 
 rule "ensure virtual systems are indeed virtual"
-agenda-group  "FirstGroup"
 when
     HostGuest($hostId : hostId, $guestId : guestId)
     $guest : System(id == $guestId, physical)

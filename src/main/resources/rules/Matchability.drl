@@ -12,7 +12,6 @@ import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 
 rule "physical only subscription can match a system"
-    agenda-group  "FirstGroup"
     when
         $system : System($systemId : id, physical)
         SystemProduct($productId : productId, systemId == $systemId)
@@ -27,7 +26,6 @@ rule "physical only subscription can match a system"
 end
 
 rule "instance subscription can match a system"
-    agenda-group  "FirstGroup"
     when
         $system : System($systemId : id)
         SystemProduct($productId : productId, systemId == $systemId)
@@ -42,7 +40,6 @@ rule "instance subscription can match a system"
 end
 
 rule "unlimited virtualization subscription can match a system"
-    agenda-group  "FirstGroup"
     when
         $system : System($systemId : id, physical)
         (
@@ -64,7 +61,6 @@ rule "unlimited virtualization subscription can match a system"
 end
 
 rule "virtual machines included in hosts's subscriptions can match"
-    agenda-group  "FirstGroup"
     when
         $match : Match($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId, kind == Kind.POSSIBLE)
         Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION)
@@ -74,7 +70,6 @@ rule "virtual machines included in hosts's subscriptions can match"
 end
 
 rule "1-2 stackable subscription can match a system"
-    agenda-group  "FirstGroup"
     when
         $system : System($systemId : id)
         SystemProduct($productId : productId, systemId == $systemId)
