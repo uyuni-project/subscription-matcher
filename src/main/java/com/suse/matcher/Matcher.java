@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Match;
 import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.facts.Today;
@@ -113,6 +114,9 @@ public class Matcher implements AutoCloseable {
         for (JsonSubscription subscription : subscriptions) {
             session.insert(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit.doubleValue(),
                     subscription.startsAt, subscription.expiresAt, subscription.sccOrgId));
+            for (Long productId : subscription.productIds) {
+                session.insert(new SubscriptionProduct(subscription.id, productId));
+            }
         }
     }
 

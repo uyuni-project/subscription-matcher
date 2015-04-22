@@ -1,6 +1,8 @@
 package com.suse.matcher.json;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * JSON representation of a subscription.
@@ -24,4 +26,8 @@ public class JsonSubscription {
 
     /** SCC Organization Id. */
     public String sccOrgId;
+
+    /** Provided product IDs */
+    public Set<Long> productIds = new HashSet<Long>();
+
 }
