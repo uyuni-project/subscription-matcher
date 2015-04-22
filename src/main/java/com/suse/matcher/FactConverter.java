@@ -3,6 +3,7 @@ package com.suse.matcher;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.facts.Today;
@@ -63,6 +64,9 @@ public class FactConverter {
         for (JsonSubscription subscription : subscriptions) {
             result.add(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit.doubleValue(), subscription.startsAt,
                     subscription.expiresAt, subscription.sccOrgId));
+            for (Long productId : subscription.productIds) {
+                result.add(new SubscriptionProduct(subscription.id, productId));
+            }
         }
 
         for (JsonMatch match : pinnedMatches) {

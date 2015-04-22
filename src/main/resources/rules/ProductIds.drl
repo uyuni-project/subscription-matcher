@@ -31,13 +31,9 @@ rule "Fake products to subscription rule for RES"
             partNumber == "874-005649"
         )
     then
-        //insert(new SubscriptionProduct($subscription.id, 1122L));
-        //insert(new SubscriptionProduct($subscription.id, 1138L));
-        //insert(new SubscriptionProduct($subscription.id, 1251L));
-
-        modify($subscription) {
-            red = true;
-        };
+        insert(new SubscriptionProduct($subscription.id, 1122L));
+        insert(new SubscriptionProduct($subscription.id, 1138L));
+        insert(new SubscriptionProduct($subscription.id, 1251L));
 end
 
 rule "Fake products to system rule for RES"
