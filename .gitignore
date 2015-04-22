@@ -5,3 +5,7 @@ drools.log
 legacy_skus.csv
 *~
 *.orig
+utils/PartNumbers.drl
+utils/ihv_isv.csv
+utils/test.csv
+
