@@ -51,17 +51,17 @@ public class MatcherTest {
      */
     @Parameters
     public static Collection<Object[]> loadTestData() throws Exception {
-        JsonConverter loader = new JsonConverter();
+        JsonIO io = new JsonIO();
         Collection<Object[]> result = new LinkedList<>();
         int i = 1;
         boolean moreFiles = true;
         while (moreFiles) {
             try {
                 result.add(new Object[] {
-                    loader.loadSystems(getReader(i, "systems.json")),
-                    loader.loadSubscriptions(getReader(i, "subscriptions.json")),
-                    loader.loadMatches(getReader(i, "pinned_matches.json")),
-                    loader.loadOutput(getReader(i, "output.json"))
+                    io.loadSystems(getReader(i, "systems.json")),
+                    io.loadSubscriptions(getReader(i, "subscriptions.json")),
+                    io.loadMatches(getReader(i, "pinned_matches.json")),
+                    io.loadOutput(getReader(i, "output.json"))
                 });
                 i++;
             }
@@ -113,15 +113,15 @@ public class MatcherTest {
     public void test() throws Exception {
         JsonOutput actualOutput = matcher.match(systems, subscriptions, pinnedMatches);
 
-        JsonConverter c = new JsonConverter();
+        JsonIO io = new JsonIO();
 
-        assertEquals("compliant systems", c.toJson(expectedOutput.compliantSystems), c.toJson(actualOutput.compliantSystems));
+        assertEquals("compliant systems", io.toJson(expectedOutput.compliantSystems), io.toJson(actualOutput.compliantSystems));
         assertEquals("partially compliant systems",
-                c.toJson(expectedOutput.partiallyCompliantSystems),
-                c.toJson(actualOutput.partiallyCompliantSystems)
+                io.toJson(expectedOutput.partiallyCompliantSystems),
+                io.toJson(actualOutput.partiallyCompliantSystems)
         );
-        assertEquals("non compliant systems", c.toJson(expectedOutput.nonCompliantSystems), c.toJson(actualOutput.nonCompliantSystems));
-        assertEquals("remaining subscriptions", c.toJson(expectedOutput.remainingSubscriptions), c.toJson(actualOutput.remainingSubscriptions));
-        assertEquals("errors", c.toJson(expectedOutput.errors), c.toJson(actualOutput.errors));
+        assertEquals("non compliant systems", io.toJson(expectedOutput.nonCompliantSystems), io.toJson(actualOutput.nonCompliantSystems));
+        assertEquals("remaining subscriptions", io.toJson(expectedOutput.remainingSubscriptions), io.toJson(actualOutput.remainingSubscriptions));
+        assertEquals("errors", io.toJson(expectedOutput.errors), io.toJson(actualOutput.errors));
     }
 }

@@ -17,15 +17,15 @@ import java.io.Reader;
 import java.util.List;
 
 /**
- * Reads and writes JSON resources.
+ * Serializes and deserializes objects from and to JSON.
  */
-public class JsonConverter {
+public class JsonIO {
 
     /** Deserializer instance. */
     private Gson gson;
 
     /** Default constructor. */
-    public JsonConverter() {
+    public JsonIO() {
         gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
             .setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
@@ -38,10 +38,9 @@ public class JsonConverter {
      *
      * @param reader the reader object
      * @return the list
-     * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<JsonSystem> loadSystems(Reader reader) throws JsonIOException, JsonSyntaxException {
+    public List<JsonSystem> loadSystems(Reader reader) throws JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<JsonSystem>>() { }.getType());
     }
 
@@ -50,10 +49,9 @@ public class JsonConverter {
      *
      * @param reader the reader object
      * @return the list
-     * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<JsonSubscription> loadSubscriptions(Reader reader) throws JsonIOException, JsonSyntaxException {
+    public List<JsonSubscription> loadSubscriptions(Reader reader) throws JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<JsonSubscription>>() { }.getType());
     }
 
@@ -62,10 +60,9 @@ public class JsonConverter {
      *
      * @param reader the reader object
      * @return the list
-     * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<JsonMatch> loadMatches(Reader reader) throws JsonIOException, JsonSyntaxException {
+    public List<JsonMatch> loadMatches(Reader reader) throws JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<JsonMatch>>() { }.getType());
     }
 
@@ -74,10 +71,9 @@ public class JsonConverter {
      *
      * @param reader the reader object
      * @return the list
-     * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<JsonProduct> loadProducts(Reader reader) throws JsonIOException, JsonSyntaxException {
+    public List<JsonProduct> loadProducts(Reader reader) throws JsonSyntaxException {
         return gson.fromJson(reader, new TypeToken<List<JsonProduct>>() { }.getType());
     }
 
