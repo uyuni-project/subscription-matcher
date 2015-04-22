@@ -35,15 +35,10 @@ public class Main {
         List<JsonSubscription> subscriptions = converter.loadSubscriptions(new FileReader(subscriptionsPath));
         List<JsonMatch> pinnedMatches = converter.loadMatches(new FileReader(pinnedMatchPath));
 
-        // run the engine
-        try(Matcher matcher = new Matcher()){
-            matcher.addSystems(systems);
-            matcher.addSubscriptions(subscriptions);
-            matcher.addPinnedMatches(pinnedMatches);
+        // do the matching
+        JsonOutput result = new Matcher().match(systems, subscriptions, pinnedMatches);
 
-            JsonOutput output = matcher.match();
-
-            java.lang.System.out.println(converter.toJson(output));
-        }
+        // print output
+        System.out.println(converter.toJson(result));
     }
 }

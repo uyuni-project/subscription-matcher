@@ -1,6 +1,5 @@
 package com.suse.matcher.facts;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -8,28 +7,21 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 /**
- * Represents the association of a {@link Subscription} to an installation of a
- * product, that is, to a ({@link System}, product) couple.
+ *
+ * A match associates an installation to a {@link Subscription} (an installation
+ * is a ({@link System}, product) couple).
+ *
+ * A match is possible when the {@link Subscription} is applicable to the
+ * {@link System} and the product.
+ *
+ * Note that the above definition does not take other matches into account - a
+ * match is possible when it makes sense on its own.
+ *
+ * The "correct" mix of PossibleMatches, if it exists, is determined in an
+ * {@link com.suse.matcher.solver.Assignment}.
  */
 @PropertyReactive
-public class Match implements Comparable<Match> {
-
-    /**
-     * Kind of this match
-     */
-    public enum Kind {
-        /** Rule engine established that this match can be used */
-        POSSIBLE,
-
-        /** Rule engine established it will be part of the result */
-        CONFIRMED,
-
-        /** User wants this match, rule engine did not yet confirm it is valid */
-        USER_PINNED,
-
-        /** User wanted this match but rule engine denies it's OK to use */
-        INVALID
-    }
+public class PossibleMatch {
 
     /** The system id. */
     public Long systemId;
@@ -43,9 +35,6 @@ public class Match implements Comparable<Match> {
     /** The number of subscriptions used in this match. */
     public Double quantity;
 
-    /** The kind. */
-    public Kind kind;
-
     /**
      * Standard constructor.
      *
@@ -53,13 +42,11 @@ public class Match implements Comparable<Match> {
      * @param productIdIn an id of a product
      * @param subscriptionIdIn an id of subscription assigned to the system
      * @param quantityIn the number of subscriptions used in this match
-     * @param kindIn the match kind
      */
-    public Match(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Double quantityIn, Kind kindIn) {
+    public PossibleMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Double quantityIn) {
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
-        kind = kindIn;
         quantity = quantityIn;
     }
 
@@ -97,27 +84,6 @@ public class Match implements Comparable<Match> {
      */
     public Double getQuantity() {
         return quantity;
-    }
-
-    /**
-     * Gets the kind.
-     *
-     * @return the kind
-     */
-    public Kind getKind() {
-        return kind;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int compareTo(Match oIn) {
-        return new CompareToBuilder()
-            .append(systemId, oIn.systemId)
-            .append(productId, oIn.productId)
-            .append(subscriptionId, oIn.subscriptionId)
-            .append(quantity, oIn.quantity)
-            .append(kind, oIn.kind)
-            .toComparison();
     }
 
     /** {@inheritDoc} */

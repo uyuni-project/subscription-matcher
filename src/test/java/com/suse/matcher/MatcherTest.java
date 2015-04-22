@@ -111,12 +111,7 @@ public class MatcherTest {
      */
     @Test
     public void test() throws Exception {
-        matcher.addSystems(systems);
-        matcher.addSubscriptions(subscriptions);
-        matcher.addPinnedMatches(pinnedMatches);
-
-        JsonOutput actualOutput = matcher.match();
-        matcher.close();
+        JsonOutput actualOutput = matcher.match(systems, subscriptions, pinnedMatches);
 
         JsonConverter c = new JsonConverter();
 
