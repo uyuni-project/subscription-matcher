@@ -177,7 +177,7 @@ public class FactConverter {
         for (JsonMatch match : pinnedMatches) {
             Match actualMatch = matchMap.get(new ImmutablePair<Long, Long>(match.systemId, match.productId));
             if (actualMatch == null || !match.subscriptionId.equals(actualMatch.subscriptionId)) {
-                JsonOutputError error = new JsonOutputError("invalid_pinned_match");
+                JsonOutputError error = new JsonOutputError("unsatisfied_pinned_match");
                 error.data.put("system_id", match.systemId);
                 error.data.put("subscription_id", match.subscriptionId);
                 error.data.put("product_id", match.productId);

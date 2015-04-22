@@ -82,7 +82,7 @@
   ],
   "errors": [
     {
-      "type": "invalid_pinned_match",
+      "type": "unsatisfied_pinned_match",
       "data": 
         {
           "subscription_id": 1,
