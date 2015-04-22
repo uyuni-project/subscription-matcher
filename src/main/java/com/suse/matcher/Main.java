@@ -30,20 +30,15 @@ public class Main {
         String pinnedMatchPath = args[2];
 
         // load files
-        JsonConverter converter = new JsonConverter();
-        List<JsonSystem> systems = converter.loadSystems(new FileReader(systemsPath));
-        List<JsonSubscription> subscriptions = converter.loadSubscriptions(new FileReader(subscriptionsPath));
-        List<JsonMatch> pinnedMatches = converter.loadMatches(new FileReader(pinnedMatchPath));
+        JsonIO io = new JsonIO();
+        List<JsonSystem> systems = io.loadSystems(new FileReader(systemsPath));
+        List<JsonSubscription> subscriptions = io.loadSubscriptions(new FileReader(subscriptionsPath));
+        List<JsonMatch> pinnedMatches = io.loadMatches(new FileReader(pinnedMatchPath));
 
-        // run the engine
-        try(Matcher matcher = new Matcher()){
-            matcher.addSystems(systems);
-            matcher.addSubscriptions(subscriptions);
-            matcher.addPinnedMatches(pinnedMatches);
+        // do the matching
+        JsonOutput result = new Matcher().match(systems, subscriptions, pinnedMatches);
 
-            JsonOutput output = matcher.match();
-
-            java.lang.System.out.println(converter.toJson(output));
-        }
+        // print output
+        System.out.println(io.toJson(result));
     }
 }

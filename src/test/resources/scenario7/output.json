@@ -77,12 +77,12 @@
   "remaining_subscriptions": [
     {
       "id": 1,
-      "quantity": 2
+      "quantity": 1
     }
   ],
   "errors": [
     {
-      "type": "invalid_pinned_match",
+      "type": "unsatisfied_pinned_match",
       "data": 
         {
           "subscription_id": 1,

@@ -3,8 +3,7 @@ package com.suse.matcher.rules;
 import java.util.List;
 
 import com.suse.matcher.facts.HostGuest;
-import com.suse.matcher.facts.Match;
-import com.suse.matcher.facts.Match.Kind;
+import com.suse.matcher.facts.PossibleMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.SubscriptionProduct;
@@ -12,7 +11,6 @@ import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 
 rule "physical only subscription can match a system"
-    agenda-group  "FirstGroup"
     when
         $system : System($systemId : id, physical)
         SystemProduct($productId : productId, systemId == $systemId)
@@ -23,11 +21,10 @@ rule "physical only subscription can match a system"
             cpus >= $system.cpus
         )
     then
-        insert(new Match($system.id, $productId, $subscription.id, 1.0, Kind.POSSIBLE));
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, 1.0));
 end
 
 rule "instance subscription can match a system"
-    agenda-group  "FirstGroup"
     when
         $system : System($systemId : id)
         SystemProduct($productId : productId, systemId == $systemId)
@@ -38,11 +35,10 @@ rule "instance subscription can match a system"
             (cpus == null || cpus >= $system.cpus)
         )
     then
-        insert(new Match($system.id, $productId, $subscription.id, 1.0, Kind.POSSIBLE));
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, 1.0));
 end
 
 rule "unlimited virtualization subscription can match a system"
-    agenda-group  "FirstGroup"
     when
         $system : System($systemId : id, physical)
         (
@@ -60,21 +56,19 @@ rule "unlimited virtualization subscription can match a system"
         )
     then
         Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
-        insert(new Match($system.id, $productId, $subscription.id, consumedQuantity.doubleValue(), Kind.POSSIBLE));
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedQuantity.doubleValue()));
 end
 
 rule "virtual machines included in hosts's subscriptions can match"
-    agenda-group  "FirstGroup"
     when
-        $match : Match($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId, kind == Kind.POSSIBLE)
+        $match : PossibleMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
         Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION)
         HostGuest(hostId == $hostId, $guestId : guestId)
     then
-        insert(new Match($guestId, $productId, $subscriptionId, 0.0, Kind.POSSIBLE));
+        insert(new PossibleMatch($guestId, $productId, $subscriptionId, 0.0));
 end
 
 rule "1-2 stackable subscription can match a system"
-    agenda-group  "FirstGroup"
     when
         $system : System($systemId : id)
         SystemProduct($productId : productId, systemId == $systemId)
@@ -86,5 +80,5 @@ rule "1-2 stackable subscription can match a system"
         not (HostGuest(hostId == $systemId))
     then
         double consumedQuantity = $system.physical ? ($system.cpus + $subscription.cpus - 1) / $subscription.cpus : 0.5;
-        insert(new Match($system.id, $productId, $subscription.id, consumedQuantity, Kind.POSSIBLE));
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedQuantity));
 end

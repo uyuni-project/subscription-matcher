@@ -77,10 +77,6 @@ public class Subscription implements Comparable<Subscription> {
     /**   Can this subscription be used multiple times on the same system?. */
     public Boolean stackable;
 
-    /**   Do product ids contain any RedHat product?. */
-    public boolean red = false;
-
-
     /**
      * Instantiates a new subscription.
      *
@@ -190,15 +186,6 @@ public class Subscription implements Comparable<Subscription> {
         return stackable;
     }
 
-    /**
-     * Checks if is red.
-     *
-     * @return true, if is red
-     */
-    public boolean isRed() {
-        return red;
-    }
-
     //methods
     /**
      * Checks if is instance subscription.
@@ -207,35 +194,6 @@ public class Subscription implements Comparable<Subscription> {
      */
     public Boolean isInstanceSubscription() {
         return cpus == null;
-    }
-
-    /**
-     * Returns a ranking of the fitness of this subscription to the
-     * specified system in the interval [0,1].
-     * Higher rank values will be preferred to lower ones when
-     * the rule engine will decide upon different possible matches.
-     *
-     * @param system the system to rank
-     * @return a ranking value
-     */
-    public long computeFitnessTo(System system) {
-        // here we compute different scores in the [0, 1] range
-
-        // prefer red subscriptions for red systems
-        long rednessScore = (this.red == system.red ? 1 : 0);
-
-        // prefer subscriptions that match (or are close to) the number of needed CPUs
-        long cpuScore;
-        if (system.physical) {
-            cpuScore = 1 - Math.abs(this.cpus - system.cpus) / this.cpus;
-        }
-        else {
-            // don't prefer VM-specific subscriptions
-            cpuScore = 0;
-        }
-
-        // combine all scores in order of preference
-        return (rednessScore * 10 + cpuScore) / 11;
     }
 
     // utility methods

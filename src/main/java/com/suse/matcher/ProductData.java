@@ -45,7 +45,7 @@ public class ProductData {
             Map<Long, String> friendlyNames = new HashMap<>();
             try {
                 Reader reader = new InputStreamReader(JsonSystem.class.getResourceAsStream("/products.json"));
-                List<JsonProduct> products = new JsonConverter().loadProducts(reader);
+                List<JsonProduct> products = new JsonIO().loadProducts(reader);
                 MapUtils.populateMap(friendlyNames, products,
                     new Transformer<JsonProduct, Long>(){
                         @Override
