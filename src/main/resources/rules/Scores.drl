@@ -51,20 +51,20 @@ end
 
 // Soft constraints: we try to find the solution that minimizes the score, but there are no guarantees.
 
-rule "minimizeUncoveredInstallations"
+rule "maximizeCoveredInstallations"
     when
         Match(confirmed != null)
         SystemProduct($systemId : systemId, $productId : productId)
-        not Match(systemId == $systemId, productId == $productId, confirmed == true)
+        Match(systemId == $systemId, productId == $productId, confirmed == true)
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, (-$systemId-$productId) * 10);
+        scoreHolder.addSoftConstraintMatch(kcontext, ($systemId + $productId) * 10);
 end
 
-rule "tryToUsePinnedMatches"
+rule "maximizePinnedMatchesUse"
     when
         Match(confirmed != null)
         PinnedMatch($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId)
-        not Match(systemId == $systemId, productId == $productId, subscriptionId == $subscriptionId, confirmed == true)
+        Match(systemId == $systemId, productId == $productId, subscriptionId == $subscriptionId, confirmed == true)
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, -1);
+        scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end
