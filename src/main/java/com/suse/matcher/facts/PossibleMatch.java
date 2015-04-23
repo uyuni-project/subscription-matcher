@@ -32,8 +32,8 @@ public class PossibleMatch {
     /** The subscription id. */
     public Long subscriptionId;
 
-    /** The number of subscriptions used in this match. */
-    public Double quantity;
+    /** The number of subscription cents used in this match. */
+    public Integer cents;
 
     /**
      * Standard constructor.
@@ -41,13 +41,13 @@ public class PossibleMatch {
      * @param systemIdIn a system id
      * @param productIdIn an id of a product
      * @param subscriptionIdIn an id of subscription assigned to the system
-     * @param quantityIn the number of subscriptions used in this match
+     * @param centsIn the number of subscription cents used in this match
      */
-    public PossibleMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Double quantityIn) {
+    public PossibleMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn) {
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
-        quantity = quantityIn;
+        cents = centsIn;
     }
 
     /**
@@ -78,12 +78,12 @@ public class PossibleMatch {
     }
 
     /**
-     * Gets the quantity.
+     * Gets the number of subscription cents used in this match.
      *
-     * @return the quantity
+     * @return the cents
      */
-    public Double getQuantity() {
-        return quantity;
+    public Integer getCents() {
+        return cents;
     }
 
     /** {@inheritDoc} */

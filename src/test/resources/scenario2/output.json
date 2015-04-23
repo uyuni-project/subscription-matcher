@@ -6,7 +6,7 @@
         {
           "id": 814,
           "subscription_id": 1,
-          "subscription_quantity": 1
+          "subscription_cents": 100
         }
       ]
     },
@@ -16,7 +16,7 @@
         {
           "id": 814,
           "subscription_id": 2,
-          "subscription_quantity": 1
+          "subscription_cents": 100
         }
       ]
     },
@@ -26,7 +26,7 @@
         {
           "id": 814,
           "subscription_id": 2,
-          "subscription_quantity": 1
+          "subscription_cents": 100
         }
       ]
     },
@@ -36,7 +36,7 @@
         {
           "id": 814,
           "subscription_id": 1,
-          "subscription_quantity": 1
+          "subscription_cents": 100
         }
       ]
     }

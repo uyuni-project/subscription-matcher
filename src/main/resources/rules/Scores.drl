@@ -22,12 +22,12 @@ global HardSoftLongScoreHolder scoreHolder;
 rule "dontExceedSubscriptionCount"
     when
         Subscription($subscriptionId:id, $quantity : quantity)
-        $requiredSubscriptions : Number(doubleValue > $quantity) from accumulate (
-            Match($aQuantity : quantity, subscriptionId == $subscriptionId, confirmed == true),
-            sum($aQuantity)
+        $requiredCents : Number(intValue > $quantity * 100) from accumulate (
+            Match($cents : cents, subscriptionId == $subscriptionId, confirmed == true),
+            sum($cents)
         )
     then
-        scoreHolder.addHardConstraintMatch(kcontext, (long) (($quantity - $requiredSubscriptions.doubleValue()) * 100));
+        scoreHolder.addHardConstraintMatch(kcontext, $quantity * 100 - $requiredCents.intValue());
 end
 
 rule "disallowFreeVmRides"

@@ -62,7 +62,7 @@ public class FactConverter {
         }
 
         for (JsonSubscription subscription : subscriptions) {
-            result.add(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit.doubleValue(), subscription.startsAt,
+            result.add(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit, subscription.startsAt,
                     subscription.expiresAt, subscription.sccOrgId));
             for (Long productId : subscription.productIds) {
                 result.add(new SubscriptionProduct(subscription.id, productId));
@@ -136,7 +136,7 @@ public class FactConverter {
                     Match match = matchMap.get(new ImmutablePair<>(system.id, product.id));
                     if (match != null) {
                         product.subscriptionId = match.subscriptionId;
-                        product.subscriptionQuantity = match.quantity;
+                        product.subscriptionCents = match.cents;
                     }
                     compliantProductExists = compliantProductExists || (match != null);
                     allProductsCompliant = allProductsCompliant && (match != null);
@@ -159,15 +159,15 @@ public class FactConverter {
         }
 
         // fill output object's remaining subscriptions field
-        Map<Long, Double> remainings = new TreeMap<>();
+        Map<Long, Integer> remainings = new TreeMap<>();
         for (JsonSubscription subscription : subscriptions) {
-            remainings.put(subscription.id, subscription.systemLimit.doubleValue());
+            remainings.put(subscription.id, subscription.systemLimit * 100);
         }
         for (Match match : confirmedMatches) {
-            remainings.put(match.subscriptionId, remainings.get(match.subscriptionId) - match.quantity);
+            remainings.put(match.subscriptionId, remainings.get(match.subscriptionId) - match.cents);
         }
         for (JsonSubscription subscription : subscriptions) {
-            Double remaining = remainings.get(subscription.id);
+            Integer remaining = remainings.get(subscription.id);
             if (remaining > 0) {
                 output.remainingSubscriptions.add(new JsonOutputSubscription(subscription.id, remaining));
             }

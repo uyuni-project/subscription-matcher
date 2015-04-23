@@ -23,8 +23,8 @@ public class Match  {
     /** The subscription id. */
     public Long subscriptionId;
 
-    /** The number of subscriptions used in this match. */
-    public Double quantity;
+    /** The number of subscription cents used in this match. */
+    public Integer cents;
 
     /**
      * True if this match is taken by the planner, false if it is possible but
@@ -38,13 +38,13 @@ public class Match  {
      * @param systemIdIn a system id
      * @param productIdIn an id of a product
      * @param subscriptionIdIn an id of subscription assigned to the system
-     * @param quantityIn the number of subscriptions used in this match
+     * @param centsIn the number of subscription cents used in this match
      */
-    public Match(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Double quantityIn) {
+    public Match(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn) {
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
-        quantity = quantityIn;
+        cents = centsIn;
         confirmed = null;
     }
 
@@ -82,12 +82,12 @@ public class Match  {
     }
 
     /**
-     * Gets the quantity.
+     * Gets the number of subscription cents used in this match.
      *
-     * @return the quantity
+     * @return the cents
      */
-    public Double getQuantity() {
-        return quantity;
+    public Integer getCents() {
+        return cents;
     }
 
     /**
@@ -116,7 +116,7 @@ public class Match  {
             .append(systemId)
             .append(productId)
             .append(subscriptionId)
-            .append(quantity)
+            .append(cents)
             // confirmed is a planning variable, so it must not be in hashCode
             .toHashCode();
     }
@@ -132,7 +132,7 @@ public class Match  {
             .append(systemId, other.systemId)
             .append(productId, other.productId)
             .append(subscriptionId, other.subscriptionId)
-            .append(quantity, other.quantity)
+            .append(cents, other.cents)
             // confirmed is a planning variable, so it must not be in equals
             .isEquals();
     }

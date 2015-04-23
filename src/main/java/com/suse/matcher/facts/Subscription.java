@@ -52,8 +52,8 @@ public class Subscription implements Comparable<Subscription> {
     /** The part number. */
     public String partNumber;
 
-    /** The remaining availability of this subscription. */
-    public Double quantity;
+    /** The number of subscription units (usually systems) available in this subscription. */
+    public Integer quantity;
 
     /** Start Date. */
     public Date startsAt = new Date(Long.MIN_VALUE);
@@ -87,7 +87,7 @@ public class Subscription implements Comparable<Subscription> {
      * @param expiresAtIn the expires at
      * @param sccOrgIdIn the scc org id
      */
-    public Subscription(Long idIn, String partNumberIn, Double quantityIn, Date startsAtIn, Date expiresAtIn, String sccOrgIdIn) {
+    public Subscription(Long idIn, String partNumberIn, Integer quantityIn, Date startsAtIn, Date expiresAtIn, String sccOrgIdIn) {
         id = idIn;
         partNumber = partNumberIn;
         quantity = quantityIn;
@@ -115,11 +115,11 @@ public class Subscription implements Comparable<Subscription> {
     }
 
     /**
-     * Gets the system limit.
+     * Gets the number of subscriptions available.
      *
-     * @return the system limit
+     * @return the quantity
      */
-    public Double getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 

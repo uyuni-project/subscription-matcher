@@ -5,8 +5,8 @@
       "products": [
         {
           "id": 1117,
-          "subscription_id": 5,
-          "subscription_quantity": 2
+          "subscription_id": 4,
+          "subscription_cents": 200
         }
       ]
     }
@@ -27,11 +27,11 @@
   "remaining_subscriptions": [
     {
       "id": 4,
-      "quantity": 3
+      "cents": 100
     },
     {
       "id": 5,
-      "quantity": 1
+      "cents": 300
     }
   ],
   "errors": []

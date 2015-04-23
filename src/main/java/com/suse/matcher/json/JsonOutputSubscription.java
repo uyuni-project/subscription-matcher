@@ -12,18 +12,18 @@ public class JsonOutputSubscription {
     /** The id. */
     public Long id;
 
-    /** The quantity. */
-    public Double quantity;
+    /** The remaining cents. */
+    public Integer cents;
 
     /**
      * Standard constructor.
      *
      * @param idIn the id
-     * @param quantityIn the quantity
+     * @param centsIn the number of remaining cents
      */
-    public JsonOutputSubscription(Long idIn, Double quantityIn) {
+    public JsonOutputSubscription(Long idIn, Integer centsIn) {
         id = idIn;
-        quantity = quantityIn;
+        cents = centsIn;
     }
 
     /** {@inheritDoc} */

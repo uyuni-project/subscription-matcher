@@ -6,7 +6,7 @@
         {
           "id": 1300,
           "subscription_id": 4,
-          "subscription_quantity": 2
+          "subscription_cents": 200
         }
       ]
     },
@@ -16,12 +16,12 @@
         {
             "id": 1288,
             "subscription_id": 5,
-            "subscription_quantity": 1
+            "subscription_cents": 100
         },
         {
           "id": 1300,
           "subscription_id": 4,
-          "subscription_quantity": 0
+          "subscription_cents": 0
         }
       ]
     }

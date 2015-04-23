@@ -19,22 +19,17 @@ public class JsonMatch {
     /** The subscription id. */
     public Long subscriptionId;
 
-    /** The number of subscriptions used in this match. */
-    public Integer quantity;
-
     /**
      * Instantiates a new match.
      *
      * @param systemIdIn the system id
      * @param productIdIn an id of a product
      * @param subscriptionIdIn the subscription id
-     * @param quantityIn the quantity
      */
-    public JsonMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer quantityIn) {
+    public JsonMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn) {
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
-        quantity = quantityIn;
     }
 
     /** {@inheritDoc} */

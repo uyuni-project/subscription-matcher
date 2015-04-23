@@ -41,7 +41,7 @@ public class Matcher {
         for (Object fact : deducedFacts) {
             if (fact instanceof PossibleMatch) {
                 PossibleMatch match = (PossibleMatch) fact;
-                matches.add(new Match(match.systemId, match.productId, match.subscriptionId, match.quantity));
+                matches.add(new Match(match.systemId, match.productId, match.subscriptionId, match.cents));
             }
             else {
                 otherFacts.add(fact);

@@ -15,8 +15,8 @@ public class JsonOutputProduct {
     /** A matching subscription ID or null. */
     public Long subscriptionId;
 
-    /** The amount of used subscriptions or null */
-    public Double subscriptionQuantity;
+    /** The amount of used subscription cents or null */
+    public Integer subscriptionCents;
 
     /**
      * Standard constructor.

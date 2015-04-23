@@ -21,7 +21,7 @@ rule "physical only subscription can match a system"
             cpus >= $system.cpus
         )
     then
-        insert(new PossibleMatch($system.id, $productId, $subscription.id, 1.0));
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, 100));
 end
 
 rule "instance subscription can match a system"
@@ -35,7 +35,7 @@ rule "instance subscription can match a system"
             (cpus == null || cpus >= $system.cpus)
         )
     then
-        insert(new PossibleMatch($system.id, $productId, $subscription.id, 1.0));
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, 100));
 end
 
 rule "unlimited virtualization subscription can match a system"
@@ -56,7 +56,7 @@ rule "unlimited virtualization subscription can match a system"
         )
     then
         Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
-        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedQuantity.doubleValue()));
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedQuantity * 100));
 end
 
 rule "virtual machines included in hosts's subscriptions can match"
@@ -65,7 +65,7 @@ rule "virtual machines included in hosts's subscriptions can match"
         Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION)
         HostGuest(hostId == $hostId, $guestId : guestId)
     then
-        insert(new PossibleMatch($guestId, $productId, $subscriptionId, 0.0));
+        insert(new PossibleMatch($guestId, $productId, $subscriptionId, 0));
 end
 
 rule "1-2 stackable subscription can match a system"
@@ -79,6 +79,6 @@ rule "1-2 stackable subscription can match a system"
         )
         not (HostGuest(hostId == $systemId))
     then
-        double consumedQuantity = $system.physical ? ($system.cpus + $subscription.cpus - 1) / $subscription.cpus : 0.5;
-        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedQuantity));
+        Integer consumedCents = $system.physical ? ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100 : 50;
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedCents));
 end

@@ -6129,7 +6129,7 @@ rule "Add subscription data for part number 874-006563"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006563")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6140,7 +6140,7 @@ rule "Add subscription data for part number 874-006015"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006015")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6164,7 +6164,7 @@ rule "Add subscription data for part number 874-006036"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006036")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6253,7 +6253,7 @@ rule "Add subscription data for part number 874-006000"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006000")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6583,7 +6583,7 @@ rule "Add subscription data for part number 874-006623"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006623")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6607,7 +6607,7 @@ rule "Add subscription data for part number 874-006569"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006569")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6718,7 +6718,7 @@ rule "Add subscription data for part number 874-006626"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006626")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6981,7 +6981,7 @@ rule "Add subscription data for part number 874-006566"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006566")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7015,7 +7015,7 @@ rule "Add subscription data for part number 874-006033"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006033")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7185,7 +7185,7 @@ rule "Add subscription data for part number 874-006009"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006009")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7357,7 +7357,7 @@ rule "Add subscription data for part number 874-006006"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006006")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7380,7 +7380,7 @@ rule "Add subscription data for part number 874-005997"
         $subscription : Subscription($quantity : quantity, partNumber == "874-005997")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7404,7 +7404,7 @@ rule "Add subscription data for part number 874-006003"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006003")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7590,7 +7590,7 @@ rule "Add subscription data for part number 874-006030"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006030")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7750,7 +7750,7 @@ rule "Add subscription data for part number 051-004343"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004343")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8008,7 +8008,7 @@ rule "Add subscription data for part number 874-006749"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006749")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8044,7 +8044,7 @@ rule "Add subscription data for part number 874-006231"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006231")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8275,7 +8275,7 @@ rule "Add subscription data for part number 874-006027"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006027")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8286,7 +8286,7 @@ rule "Add subscription data for part number 874-006629"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006629")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8322,7 +8322,7 @@ rule "Add subscription data for part number 051-004061"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004061")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8346,7 +8346,7 @@ rule "Add subscription data for part number 874-006064"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006064")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8460,7 +8460,7 @@ rule "Add subscription data for part number 874-006752"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006752")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8606,7 +8606,7 @@ rule "Add subscription data for part number 874-006240"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006240")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9293,7 +9293,7 @@ rule "Add subscription data for part number 874-006018"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006018")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9686,7 +9686,7 @@ rule "Add subscription data for part number 874-006012"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006012")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9894,7 +9894,7 @@ rule "Add subscription data for part number 874-006243"
         $subscription : Subscription($quantity : quantity, partNumber == "874-006243")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -10694,7 +10694,7 @@ rule "Add subscription data for part number 051-004383"
         $subscription : Subscription($quantity : quantity, partNumber == "051-004383")
     then
         modify($subscription) {
-            quantity = Double.POSITIVE_INFINITY,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
