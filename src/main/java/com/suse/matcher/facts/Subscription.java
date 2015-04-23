@@ -186,6 +186,12 @@ public class Subscription implements Comparable<Subscription> {
 
     /** {@inheritDoc} */
     @Override
+    public int compareTo(Subscription oIn) {
+        return new CompareToBuilder().append(id, oIn.id).toComparison();
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
