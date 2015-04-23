@@ -1,9 +1,8 @@
 package com.suse.matcher.facts;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 import java.util.Date;
@@ -13,7 +12,7 @@ import java.util.Date;
  * {@link System}s.
  */
 @PropertyReactive
-public class Subscription {
+public class Subscription implements Comparable<Subscription> {
     /**
      * Encodes virtual machine assignment policies for a {@link Subscription}
      */

@@ -10,3 +10,10 @@ rule "subscription is still valid"
     then
         retract($subscription);
 end
+
+rule "subscriptionSystemLimitHasValue"
+    when
+        $subscription: Subscription(quantity == null)
+    then
+        retract($subscription);
+end

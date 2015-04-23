@@ -81,13 +81,11 @@ public class FactConverter {
      *
      * @param assignment the assignment object, output of the CSP solver
      * @param systems the systems
-     * @param subscriptions the subscriptions
      * @param pinnedMatches the pinned matches
      * @return the output
      */
     @SuppressWarnings("unchecked")
-    public static JsonOutput convertToOutpt(Assignment assignment, List<JsonSystem> systems, List<JsonSubscription> subscriptions,
-            List<JsonMatch> pinnedMatches) {
+    public static JsonOutput convertToOutpt(Assignment assignment, List<JsonSystem> systems, List<JsonMatch> pinnedMatches) {
 
         // prepare list of system ids
         Collection<Long> systemIds = new TreeSet<>();
@@ -159,14 +157,20 @@ public class FactConverter {
         }
 
         // fill output object's remaining subscriptions field
+        Collection<Subscription> subscriptions = new TreeSet<>();
+        for (Object fact : assignment.getProblemFacts()) {
+           if (fact instanceof Subscription) {
+            subscriptions.add((Subscription)fact);
+           }
+        }
         Map<Long, Integer> remainings = new TreeMap<>();
-        for (JsonSubscription subscription : subscriptions) {
-            remainings.put(subscription.id, subscription.systemLimit * 100);
+        for (Subscription subscription : subscriptions) {
+            remainings.put(subscription.id, subscription.quantity * 100);
         }
         for (Match match : confirmedMatches) {
             remainings.put(match.subscriptionId, remainings.get(match.subscriptionId) - match.cents);
         }
-        for (JsonSubscription subscription : subscriptions) {
+        for (Subscription subscription : subscriptions) {
             Integer remaining = remainings.get(subscription.id);
             if (remaining > 0) {
                 output.remainingSubscriptions.add(new JsonOutputSubscription(subscription.id, remaining));
