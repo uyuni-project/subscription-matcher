@@ -1,6 +1,5 @@
 package com.suse.matcher.facts;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,7 +11,7 @@ import org.kie.api.definition.type.PropertyReactive;
  * products and that can be assigned {@link Subscription}s.
  */
 @PropertyReactive
-public class System implements Comparable<System> {
+public class System {
     // constructor-populated fields
     /** The id. */
     public Long id;
@@ -23,9 +22,6 @@ public class System implements Comparable<System> {
     // rule-computed fields
     /**  <code>true</code> if this is a machine made of metal. */
     public boolean physical = true;
-
-    /**   Do product ids contain any RedHat product?. */
-    public boolean red = false;
 
     /**
      * Instantiates a new system.
@@ -63,21 +59,6 @@ public class System implements Comparable<System> {
      */
     public boolean isPhysical() {
         return physical;
-    }
-
-    /**
-     * Checks if this system is red.
-     *
-     * @return true, if it is red
-     */
-    public boolean isRed() {
-        return red;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int compareTo(System oIn) {
-        return new CompareToBuilder().append(id, oIn.id).toComparison();
     }
 
     /** {@inheritDoc} */

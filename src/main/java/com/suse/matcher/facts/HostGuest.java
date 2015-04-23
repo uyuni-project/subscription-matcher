@@ -1,6 +1,5 @@
 package com.suse.matcher.facts;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,7 +10,7 @@ import org.kie.api.definition.type.PropertyReactive;
  * Represents a virtual host-to-guest relationship.
  */
 @PropertyReactive
-public class HostGuest implements Comparable<HostGuest> {
+public class HostGuest {
 
     /** The host system id. */
     public Long hostId;
@@ -64,14 +63,5 @@ public class HostGuest implements Comparable<HostGuest> {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int compareTo(HostGuest oIn) {
-        return new CompareToBuilder()
-            .append(hostId, oIn.hostId)
-            .append(guestId, oIn.guestId)
-            .toComparison();
     }
 }

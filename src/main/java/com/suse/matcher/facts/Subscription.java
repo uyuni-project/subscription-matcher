@@ -1,6 +1,5 @@
 package com.suse.matcher.facts;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,7 +13,7 @@ import java.util.Date;
  * {@link System}s.
  */
 @PropertyReactive
-public class Subscription implements Comparable<Subscription> {
+public class Subscription {
     /**
      * Encodes virtual machine assignment policies for a {@link Subscription}
      */
@@ -184,23 +183,6 @@ public class Subscription implements Comparable<Subscription> {
      */
     public Boolean getStackable() {
         return stackable;
-    }
-
-    //methods
-    /**
-     * Checks if is instance subscription.
-     *
-     * @return the boolean
-     */
-    public Boolean isInstanceSubscription() {
-        return cpus == null;
-    }
-
-    // utility methods
-    /** {@inheritDoc} */
-    @Override
-    public int compareTo(Subscription oIn) {
-        return new CompareToBuilder().append(id, oIn.id).toComparison();
     }
 
     /** {@inheritDoc} */
