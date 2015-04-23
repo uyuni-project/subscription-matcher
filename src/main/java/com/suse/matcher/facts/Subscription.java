@@ -3,6 +3,8 @@ package com.suse.matcher.facts;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 import java.util.Date;
@@ -193,18 +195,28 @@ public class Subscription implements Comparable<Subscription> {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder()
+            .append(id)
+            .toHashCode();
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        return EqualsBuilder.reflectionEquals(this, objIn);
+        if (!(objIn instanceof Subscription)) {
+            return false;
+        }
+        Subscription other = (Subscription) objIn;
+        return new EqualsBuilder()
+            .append(id, other.id)
+            .isEquals();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("id", id)
+            .toString();
     }
 }

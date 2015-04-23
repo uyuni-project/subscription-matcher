@@ -70,18 +70,34 @@ public class PinnedMatch {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder()
+            .append(systemId)
+            .append(productId)
+            .append(subscriptionId)
+            .toHashCode();
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        return EqualsBuilder.reflectionEquals(this, objIn);
+        if (!(objIn instanceof PinnedMatch)) {
+            return false;
+        }
+        PinnedMatch other = (PinnedMatch) objIn;
+        return new EqualsBuilder()
+            .append(systemId, other.systemId)
+            .append(productId, other.productId)
+            .append(subscriptionId, other.subscriptionId)
+            .isEquals();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("systemId", systemId)
+            .append("productId", productId)
+            .append("subscriptionId", subscriptionId)
+            .toString();
     }
 }

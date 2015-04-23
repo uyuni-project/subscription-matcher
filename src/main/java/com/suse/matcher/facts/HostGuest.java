@@ -50,18 +50,31 @@ public class HostGuest {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder()
+            .append(hostId)
+            .append(guestId)
+            .toHashCode();
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        return EqualsBuilder.reflectionEquals(this, objIn);
+        if (!(objIn instanceof HostGuest)) {
+            return false;
+        }
+        HostGuest other = (HostGuest) objIn;
+        return new EqualsBuilder()
+            .append(hostId, other.hostId)
+            .append(guestId, other.guestId)
+            .isEquals();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("hostId", hostId)
+            .append("guestId", guestId)
+            .toString();
     }
 }

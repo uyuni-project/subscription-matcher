@@ -50,18 +50,31 @@ public class SubscriptionProduct {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder()
+            .append(subscriptionId)
+            .append(productId)
+            .toHashCode();
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        return EqualsBuilder.reflectionEquals(this, objIn);
+        if (!(objIn instanceof SubscriptionProduct)) {
+            return false;
+        }
+        SubscriptionProduct other = (SubscriptionProduct) objIn;
+        return new EqualsBuilder()
+            .append(subscriptionId, other.subscriptionId)
+            .append(productId, other.productId)
+            .isEquals();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("subscriptionId", subscriptionId)
+            .append("productId", productId)
+            .toString();
     }
 }

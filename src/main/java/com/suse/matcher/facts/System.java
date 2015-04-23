@@ -64,18 +64,28 @@ public class System {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder()
+            .append(id)
+            .toHashCode();
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        return EqualsBuilder.reflectionEquals(this, objIn);
+        if (!(objIn instanceof System)) {
+            return false;
+        }
+        System other = (System) objIn;
+        return new EqualsBuilder()
+            .append(id, other.id)
+            .isEquals();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("id", id)
+            .toString();
     }
 }

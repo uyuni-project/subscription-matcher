@@ -50,18 +50,31 @@ public class SystemProduct {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder()
+            .append(systemId)
+            .append(productId)
+            .toHashCode();
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        return EqualsBuilder.reflectionEquals(this, objIn);
+        if (!(objIn instanceof SystemProduct)) {
+            return false;
+        }
+        SystemProduct other = (SystemProduct) objIn;
+        return new EqualsBuilder()
+            .append(systemId, other.systemId)
+            .append(productId, other.productId)
+            .isEquals();
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .append("systemId", systemId)
+        .append("productId", productId)
+        .toString();
     }
 }
