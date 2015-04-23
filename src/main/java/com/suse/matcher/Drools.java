@@ -33,10 +33,6 @@ public class Drools {
         KieSession session = container.newKieSession("ksession-rules");
         KieRuntimeLogger logger = factory.getLoggers().newFileLogger(session, LOG_FILENAME);
 
-        // set up logging
-        session.addEventListener(new DebugAgendaEventListener());
-        session.addEventListener(new DebugRuleRuntimeEventListener());
-
         // insert base facts
         for (Object fact : baseFacts) {
             session.insert(fact);
