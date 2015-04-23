@@ -1,0 +1,12 @@
+package com.suse.matcher.rules;
+
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.Today;
+
+rule "subscription is still valid"
+    when
+        $today : Today($timestamp : timestamp)
+        $subscription: Subscription(expiresAt < $timestamp || startsAt > $timestamp)
+    then
+        retract($subscription);
+end

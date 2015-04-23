@@ -1,0 +1,69 @@
+package com.suse.matcher.rules;
+
+import org.optaplanner.core.api.score.buildin.hardsoftlong.HardSoftLongScoreHolder;
+
+import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.PinnedMatch;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
+import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.SystemProduct;
+import com.suse.matcher.solver.Match;
+
+global HardSoftLongScoreHolder scoreHolder;
+
+
+// Hard constraints: no solution can ever be produced if any of those is broken
+// (that is, score is less than 0). If that happens, we found a bug!
+
+// Note that the construction heuristic must be able to construct a solution
+// with score 0, and all subsequent iterations cannot make it worse.
+
+rule "dontExceedSubscriptionCount"
+    when
+        Subscription($subscriptionId:id, $quantity : quantity)
+        $requiredCents : Number(intValue > $quantity * 100) from accumulate (
+            Match($cents : cents, subscriptionId == $subscriptionId, confirmed == true),
+            sum($cents)
+        )
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, $quantity * 100 - $requiredCents.intValue());
+end
+
+rule "disallowFreeVmRides"
+    when
+        Subscription($subscriptionId: id, policy == Policy.UNLIMITED_VIRTUALIZATION)
+        HostGuest($hostId : hostId, $guestId : guestId)
+        Match(systemId == $guestId, subscriptionId == $subscriptionId, confirmed == true)
+        Match(systemId == $hostId, subscriptionId == $subscriptionId, confirmed == false)
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "disallowOverlicensing"
+    when
+        Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, confirmed == true)
+        Match(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId, confirmed == true)
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+// Soft constraints: we try to find the solution that minimizes the score, but there are no guarantees.
+
+rule "minimizeUncoveredInstallations"
+    when
+        Match(confirmed != null)
+        SystemProduct($systemId : systemId, $productId : productId)
+        not Match(systemId == $systemId, productId == $productId, confirmed == true)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, (-$systemId-$productId) * 10);
+end
+
+rule "tryToUsePinnedMatches"
+    when
+        Match(confirmed != null)
+        PinnedMatch($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId)
+        not Match(systemId == $systemId, productId == $productId, subscriptionId == $subscriptionId, confirmed == true)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -1);
+end

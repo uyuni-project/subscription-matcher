@@ -1,0 +1,22 @@
+[
+  {
+    "id": 500,
+    "cpus": 4,
+    "product_ids": [1138]
+  },
+  {
+    "id": 1000,
+    "cpus": 4,
+    "product_ids": [814]
+  },
+  {
+    "id": 2000,
+    "cpus": 4,
+    "product_ids": [814]
+  },
+  {
+    "id": 600,
+    "cpus": 4,
+    "product_ids": [1138]
+  }
+]

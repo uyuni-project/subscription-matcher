@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100,
+    "cpus": 2,
+    "virtual_system_ids": [101, 102, 103],
+    "product_ids": [814]
+  },
+  {
+    "id": 101,
+    "product_ids": [814]
+  },
+  {
+    "id": 102,
+    "product_ids": [814]
+  },
+  {
+    "id": 103,
+    "product_ids": [814]
+  }
+]

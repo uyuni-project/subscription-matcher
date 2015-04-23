@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+    <!-- Use FULL_ASSERT to turn on all debug warnings -->
+    <environmentMode>REPRODUCIBLE</environmentMode>
+
+    <!-- Domain model configuration -->
+    <solutionClass>com.suse.matcher.solver.Assignment</solutionClass>
+    <entityClass>com.suse.matcher.solver.Match</entityClass>
+
+    <!-- Score configuration -->
+    <scoreDirectorFactory>
+        <scoreDefinitionType>HARD_SOFT_LONG</scoreDefinitionType>
+        <scoreDrl>rules/Scores.drl</scoreDrl>
+        <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+    </scoreDirectorFactory>
+
+    <!-- Optimization algorithms configuration -->
+    <termination>
+        <bestScoreLimit>0hard/0soft</bestScoreLimit>
+    </termination>
+    <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+    </constructionHeuristic>
+    <localSearch>
+        <changeMoveSelector />
+        <acceptor>
+            <entityTabuSize>7</entityTabuSize>
+        </acceptor>
+        <forager>
+            <acceptedCountLimit>10</acceptedCountLimit>
+        </forager>
+        <termination>
+            <unimprovedStepCountLimit>3</unimprovedStepCountLimit>
+        </termination>
+    </localSearch>
+</solver>

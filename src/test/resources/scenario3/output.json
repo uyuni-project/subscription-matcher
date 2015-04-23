@@ -1,0 +1,48 @@
+{
+  "compliant_systems": [
+    {
+      "id": 500,
+      "products": [
+        {
+          "id": 1138,
+          "subscription_id": 3,
+          "subscription_cents": 100
+        }
+      ]
+    },
+    {
+      "id": 600,
+      "products": [
+        {
+          "id": 1138,
+          "subscription_id": 3,
+          "subscription_cents": 100
+        }
+      ]
+    },
+    {
+      "id": 1000,
+      "products": [
+        {
+          "id": 814,
+          "subscription_id": 2,
+          "subscription_cents": 100
+        }
+      ]
+    },
+    {
+      "id": 2000,
+      "products": [
+        {
+          "id": 814,
+          "subscription_id": 2,
+          "subscription_cents": 100
+        }
+      ]
+    }
+  ],
+  "partially_compliant_systems": [],
+  "non_compliant_systems": [],
+  "remaining_subscriptions": [],
+  "errors": []
+}

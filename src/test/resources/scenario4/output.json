@@ -1,0 +1,28 @@
+{
+  "compliant_systems": [
+    {
+      "id": 100,
+      "products": [
+        {
+          "id": 1298,
+          "subscription_id": 4,
+          "subscription_cents": 100
+        }
+      ]
+    },
+    {
+      "id": 200,
+      "products": [
+        {
+          "id": 1298,
+          "subscription_id": 5,
+          "subscription_cents": 400
+        }
+      ]
+    }
+  ],
+  "partially_compliant_systems": [],
+  "non_compliant_systems": [],
+  "remaining_subscriptions": [],
+  "errors": []
+}

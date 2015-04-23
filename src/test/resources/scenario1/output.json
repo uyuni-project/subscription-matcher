@@ -1,0 +1,84 @@
+{
+  "compliant_systems": [
+    {
+      "id": 100,
+      "products": [
+        {
+          "id": 814,
+          "subscription_id": 1,
+          "subscription_cents": 100
+        }
+      ]
+    },
+    {
+      "id": 101,
+      "products": [
+        {
+          "id": 814,
+          "subscription_id": 1,
+          "subscription_cents": 0
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "products": [
+        {
+          "id": 814,
+          "subscription_id": 1,
+          "subscription_cents": 0
+        }
+      ]
+    },
+    {
+      "id": 200,
+      "products": [
+        {
+          "id": 814,
+          "subscription_id": 1,
+          "subscription_cents": 100
+        }
+      ]
+    },
+    {
+      "id": 201,
+      "products": [
+        {
+          "id": 814,
+          "subscription_id": 1,
+          "subscription_cents": 0
+        }
+      ]
+    },
+    {
+      "id": 202,
+      "products": [
+        {
+          "id": 814,
+          "subscription_id": 1,
+          "subscription_cents": 0
+        }
+      ]
+    }
+  ],
+  "partially_compliant_systems": [],
+  "non_compliant_systems": [
+    {
+      "id": 300,
+      "products": [
+        {
+          "id": 1122,
+          "subscription_id": null,
+          "subscription_quantity": null
+        }
+      ]
+    }
+  ],
+  "remaining_subscriptions": [
+    {
+      "id": 1,
+      "cents": 100
+    }
+  ],
+  "errors": []
+}

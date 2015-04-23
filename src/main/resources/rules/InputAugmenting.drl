@@ -1,0 +1,15 @@
+package com.suse.matcher.rules;
+
+import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.SystemProduct;
+
+rule "ensure virtual systems are indeed virtual"
+when
+    HostGuest($hostId : hostId, $guestId : guestId)
+    $guest : System(id == $guestId, physical)
+then
+    modify($guest) {
+        physical = false;
+    }
+end

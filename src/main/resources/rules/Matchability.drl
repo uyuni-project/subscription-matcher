@@ -1,0 +1,84 @@
+package com.suse.matcher.rules;
+
+import java.util.List;
+
+import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.PossibleMatch;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.Subscription.Policy;
+import com.suse.matcher.facts.SubscriptionProduct;
+import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.SystemProduct;
+
+rule "physical only subscription can match a system"
+    when
+        $system : System($systemId : id, physical)
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        $subscription : Subscription(
+            id == $subscriptionId,
+            policy == Policy.PHYSICAL_ONLY,
+            cpus >= $system.cpus
+        )
+    then
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, 100));
+end
+
+rule "instance subscription can match a system"
+    when
+        $system : System($systemId : id)
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        $subscription : Subscription(
+            id == $subscriptionId,
+            policy == Policy.INSTANCE,
+            (cpus == null || cpus >= $system.cpus)
+        )
+    then
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, 100));
+end
+
+rule "unlimited virtualization subscription can match a system"
+    when
+        $system : System($systemId : id, physical)
+        (
+            SystemProduct($productId : productId, systemId == $systemId) or
+            (
+                HostGuest(hostId == $systemId, $guestId : guestId) and
+                SystemProduct($productId : productId, systemId == $guestId)
+            )
+        )
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        $subscription : Subscription(
+            id == $subscriptionId,
+            policy == Policy.UNLIMITED_VIRTUALIZATION,
+            (cpus >= $system.cpus || stackable)
+        )
+    then
+        Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedQuantity * 100));
+end
+
+rule "virtual machines included in hosts's subscriptions can match"
+    when
+        $match : PossibleMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
+        Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION)
+        HostGuest(hostId == $hostId, $guestId : guestId)
+    then
+        insert(new PossibleMatch($guestId, $productId, $subscriptionId, 0));
+end
+
+rule "1-2 stackable subscription can match a system"
+    when
+        $system : System($systemId : id)
+        SystemProduct($productId : productId, systemId == $systemId)
+        SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
+        $subscription : Subscription(
+            id == $subscriptionId,
+            policy == Policy.TWO_TWO
+        )
+        not (HostGuest(hostId == $systemId))
+    then
+        Integer consumedCents = $system.physical ? ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100 : 50;
+        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedCents));
+end
