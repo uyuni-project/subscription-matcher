@@ -22,12 +22,7 @@
         <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
     </constructionHeuristic>
     <localSearch>
-        <unionMoveSelector>
-            <changeMoveSelector />
-            <swapMoveSelector />
-            <pillarChangeMoveSelector />
-            <pillarSwapMoveSelector />
-        </unionMoveSelector>
+        <changeMoveSelector />
         <acceptor>
             <entityTabuSize>7</entityTabuSize>
         </acceptor>
