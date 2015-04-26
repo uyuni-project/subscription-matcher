@@ -5491,6 +5491,19 @@ rule "Add subscription data for part number 874-006271"
         };
 end
 
+//suse linux enterprise server for ibm zseries (per engine) 1-year priority subscription
+rule "Add subscription data for part number 874-005051"
+    when
+        $subscription : Subscription(partNumber == "874-005051")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //suse linux enterprise server for sap applications 11 for amd64 & intel64 (4 cpu socketsbasic maintenance1 physical3 year)
 rule "Add subscription data for part number 874-006122"
     when
@@ -5776,6 +5789,19 @@ rule "Add subscription data for part number 874-006291"
         };
 end
 
+//suse linux enterprise server for ibm zseries (per engine) 3-year priority subscription
+rule "Add subscription data for part number 874-005054"
+    when
+        $subscription : Subscription(partNumber == "874-005054")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //suse linux enterprise server for x86 amd64 & intel64 (8 cpu socketspriority supportunlimited virtual instances3 year)
 rule "Add subscription data for part number 874-006311"
     when
@@ -5851,6 +5877,19 @@ rule "Add subscription data for part number 874-006273"
             supportLevel = "priority",
             cpus = 2,
             stackable = false
+        };
+end
+
+//suse linux enterprise server for ibm zseries (per engine) 1-year standard subscription
+rule "Add subscription data for part number 874-005050"
+    when
+        $subscription : Subscription(partNumber == "874-005050")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -7234,6 +7273,19 @@ rule "Add subscription data for part number 874-006259"
         };
 end
 
+//suse linux enterprise server 11 for itanium (per socket) standard 1-year subscription
+rule "Add subscription data for part number 874-005544"
+    when
+        $subscription : Subscription(partNumber == "874-005544")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //suse linux enterprise server for sap applications 11 for amd64 & intel64 (1-2 cpu socketspriority support1 physical5 year)
 rule "Add subscription data for part number 874-006318"
     when
@@ -7281,6 +7333,19 @@ rule "Add subscription data for part number 874-005948"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "basic",
             stackable = false
+        };
+end
+
+//suse linux enterprise server 11 for itanium (per socket) standard subscription 3-year
+rule "Add subscription data for part number 874-005545"
+    when
+        $subscription : Subscription(partNumber == "874-005545")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -7332,6 +7397,19 @@ rule "Add subscription data for part number 874-005954"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
             stackable = false
+        };
+end
+
+//suse linux enterprise server for ibm zseries (per engine) 3-year standard subscription
+rule "Add subscription data for part number 874-005053"
+    when
+        $subscription : Subscription(partNumber == "874-005053")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -7467,6 +7545,19 @@ rule "Add subscription data for part number 874-006338"
             supportLevel = "priority",
             cpus = 4,
             stackable = false
+        };
+end
+
+//suse linux enterprise server for ibm power per socket 1-year standard subscription
+rule "Add subscription data for part number 874-005550"
+    when
+        $subscription : Subscription(partNumber == "874-005550")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -7642,6 +7733,19 @@ rule "Add subscription data for part number 874-006025"
         modify($subscription) {
             quantity = $quantity * 100,
             stackable = false
+        };
+end
+
+//suse linux enterprise server for ibm power per socket 1-year priority add-on subscription
+rule "Add subscription data for part number 874-005641"
+    when
+        $subscription : Subscription(partNumber == "874-005641")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -7934,6 +8038,19 @@ rule "Add subscription data for part number 874-006412"
         };
 end
 
+//suse linux enterprise server for ibm power per socket 1-year priority subscription
+rule "Add subscription data for part number 874-005576"
+    when
+        $subscription : Subscription(partNumber == "874-005576")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //suse linux enterprise server for sap applications 11 for amd64 & intel64 (4 cpu socketspriority supportunlimited virtual instances3 year)
 rule "Add subscription data for part number 874-006153"
     when
@@ -8106,6 +8223,19 @@ rule "Add subscription data for part number 874-005007"
             supportLevel = "basic",
             cpus = 32,
             stackable = false
+        };
+end
+
+//suse linux enterprise server for ibm power per socket 1-year basic subscription
+rule "Add subscription data for part number 874-005548"
+    when
+        $subscription : Subscription(partNumber == "874-005548")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -8579,6 +8709,19 @@ rule "Add subscription data for part number 051-004067"
         };
 end
 
+//suse linux enterprise server for ibm power per socket 3-year standard subscription
+rule "Add subscription data for part number 874-005551"
+    when
+        $subscription : Subscription(partNumber == "874-005551")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //ms cert suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketsbasic maintenance1 physical1 year)
 rule "Add subscription data for part number 874-006403"
     when
@@ -8626,6 +8769,19 @@ rule "Add subscription data for part number 874-006082"
             supportLevel = "priority",
             cpus = 2,
             stackable = false
+        };
+end
+
+//suse linux enterprise server 11 for itanium per socket 1-year basic subscription
+rule "Add subscription data for part number 874-005584"
+    when
+        $subscription : Subscription(partNumber == "874-005584")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -8932,6 +9088,19 @@ rule "Add subscription data for part number 874-006425"
         };
 end
 
+//suse linux enterprise server for ibm zseries (per engine) 1-year maintenance
+rule "Add subscription data for part number 877-001305"
+    when
+        $subscription : Subscription(partNumber == "877-001305")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //suse linux enterprise server for sap applications 11 for amd64 & intel64 (1-2 cpu socketsbasic maintenance1 physical1 year)
 rule "Add subscription data for part number 874-006102"
     when
@@ -9022,6 +9191,19 @@ rule "Add subscription data for part number 874-006148"
         };
 end
 
+//suse linux enterprise server for x86 amd64 & intel64 (per cpu socket pairbasic maintenance1 physical per year)
+rule "Add subscription data for part number 874-006632"
+    when
+        $subscription : Subscription(partNumber == "874-006632")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = false
+        };
+end
+
 //suse linux enterprise high availability extension for x86 amd64 & intel64 (4 cpu socketsinherited subscription level inherited virtualization5 yea
 rule "Add subscription data for part number 874-006358"
     when
@@ -9106,6 +9288,19 @@ rule "Add subscription data for part number 874-006264"
             supportLevel = "basic",
             cpus = 8,
             stackable = false
+        };
+end
+
+//suse linux enterprise server 11 for itanium (per socket) 1-year subscription
+rule "Add subscription data for part number 874-005542"
+    when
+        $subscription : Subscription(partNumber == "874-005542")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -9233,6 +9428,19 @@ rule "Add subscription data for part number 874-006748"
         };
 end
 
+//suse linux enterprise server for ibm power per socket 3-year priority subscription
+rule "Add subscription data for part number 874-005577"
+    when
+        $subscription : Subscription(partNumber == "874-005577")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //suse linux enterprise server for x86 amd64 & intel64 (8 cpu socketsbasic maintenanceunlimited virtual instances1 year)
 rule "Add subscription data for part number 874-006139"
     when
@@ -9256,6 +9464,19 @@ rule "Add subscription data for part number 662644475868"
             supportLevel = "priority",
             cpus = 8,
             stackable = false
+        };
+end
+
+//suse linux enterprise server for ibm system z 10 business class promotion (per ifl) 1-year basic subscription
+rule "Add subscription data for part number 874-005537"
+    when
+        $subscription : Subscription(partNumber == "874-005537")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -9462,6 +9683,19 @@ rule "Add subscription data for part number 874-005048"
         };
 end
 
+//suse linux enterprise server for ibm system z 10 business class promotion (per ifl) 1-year standard subscription
+rule "Add subscription data for part number 874-005538"
+    when
+        $subscription : Subscription(partNumber == "874-005538")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //libreoffice for windows 1-device 1-year standard subscription
 rule "Add subscription data for part number 874-005524"
     when
@@ -9611,6 +9845,19 @@ rule "Add subscription data for part number 874-006182"
         };
 end
 
+//suse linux enterprise server 11 for itanium (per socket) priority 1-year subscription
+rule "Add subscription data for part number 874-005546"
+    when
+        $subscription : Subscription(partNumber == "874-005546")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //activation card suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketspriority support1 physical1 year)
 rule "Add subscription data for part number 662644475271"
     when
@@ -9712,6 +9959,19 @@ rule "Add subscription data for part number 874-006281"
         };
 end
 
+//suse linux enterprise server for ibm power (per socket) priority support for sap 3-year
+rule "Add subscription data for part number 874-005637"
+    when
+        $subscription : Subscription(partNumber == "874-005637")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //geo clustering for suse linux enterprise high availability extension for x86 amd64 & intel64 (8 cpu socketsinherited subscription level inherited v
 rule "Add subscription data for part number 874-006349"
     when
@@ -9720,6 +9980,19 @@ rule "Add subscription data for part number 874-006349"
         modify($subscription) {
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             cpus = 8,
+            stackable = false
+        };
+end
+
+//suse linux enterprise server for x86 amd64 & intel64 (per cpu socket pairbasic maintenance1 physical per month)
+rule "Add subscription data for part number 874-006631"
+    when
+        $subscription : Subscription(partNumber == "874-006631")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "basic",
+            cpus = 2,
             stackable = false
         };
 end
@@ -9783,6 +10056,19 @@ rule "Add subscription data for part number 662644476230"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             cpus = 2,
             stackable = false
+        };
+end
+
+//suse linux enterprise server for ibm system z 10 business class promotion (per ifl) 1-year priority subscription
+rule "Add subscription data for part number 874-005536"
+    when
+        $subscription : Subscription(partNumber == "874-005536")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -10347,6 +10633,19 @@ rule "Add subscription data for part number 874-005769"
         };
 end
 
+//suse linux enterprise server 11 for itanium (per socket) priority subscription 3-year
+rule "Add subscription data for part number 874-005547"
+    when
+        $subscription : Subscription(partNumber == "874-005547")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //sles for sap applications 11 sp2-english-english document-3 years subscriptions for x86_64 physical 8 sockets(priority 7*24)
 rule "Add subscription data for part number 5200224"
     when
@@ -10436,6 +10735,19 @@ rule "Add subscription data for part number 874-006568"
         };
 end
 
+//suse linux enterprise server for ibm power per socket 3-year basic subscription
+rule "Add subscription data for part number 874-005549"
+    when
+        $subscription : Subscription(partNumber == "874-005549")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //ms cert suse linux enterprise server 10 sp4 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
 rule "Add subscription data for part number 874-006609"
     no-loop
@@ -10511,6 +10823,19 @@ rule "Add subscription data for part number 5991-6408"
         };
 end
 
+//suse linux enterprise server for x86 amd64 & intel64 (per cpu socket pairpriority support1 physicalper month)
+rule "Add subscription data for part number 874-006634"
+    when
+        $subscription : Subscription(partNumber == "874-006634")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "priority",
+            cpus = 2,
+            stackable = false
+        };
+end
+
 //ms cert suse manager proxy server instance 3-year subscription
 rule "Add subscription data for part number 874-006096"
     when
@@ -10545,6 +10870,32 @@ rule "Add subscription data for part number 874-006279"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "basic",
             cpus = 8,
+            stackable = false
+        };
+end
+
+//suse linux enterprise server for ibm system z 10 business class promotion (per ifl) 1-year priority subscription
+rule "Add subscription data for part number 874-005539"
+    when
+        $subscription : Subscription(partNumber == "874-005539")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
+//suse linux enterprise server with ha for x86 amd64 & intel64 (per cpu socket pairbasic maintenance1 physical per year)
+rule "Add subscription data for part number 874-006644"
+    when
+        $subscription : Subscription(partNumber == "874-006644")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "basic",
+            cpus = 2,
             stackable = false
         };
 end
@@ -10648,6 +10999,19 @@ rule "Add subscription data for part number 874-005982"
             supportLevel = "standard",
             cpus = 32,
             stackable = false
+        };
+end
+
+//suse linux enterprise mono extension for ibm zseries (per engine) 1-year subscription
+rule "Add subscription data for part number 874-005614"
+    when
+        $subscription : Subscription(partNumber == "874-005614")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -10805,6 +11169,19 @@ rule "Add subscription data for part number 874-005632"
         };
 end
 
+//suse linux enterprise server with ha for x86 amd64 & intel64 (per cpu socket pairbasic maintenance1 physical per month)
+rule "Add subscription data for part number 874-006643"
+    when
+        $subscription : Subscription(partNumber == "874-006643")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = false
+        };
+end
+
 //ms cert suse linux enterprise server for x86 amd64 & intel64 (4 cpu socketsstandard support1 physical1 year)
 rule "Add subscription data for part number 874-006407"
     when
@@ -10882,6 +11259,19 @@ rule "Add subscription data for part number 662644476018"
         };
 end
 
+//suse linux enterprise server for itanium (per socket) priority support for sap 1-year
+rule "Add subscription data for part number 874-005634"
+    when
+        $subscription : Subscription(partNumber == "874-005634")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //suse linux enterprise server for x86&x86-64 per hosted instance basic subscription per annum
 rule "Add subscription data for part number 051-004069"
     when
@@ -10913,6 +11303,19 @@ rule "Add subscription data for part number 874-006478"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
+            stackable = false
+        };
+end
+
+//suse linux enterprise server for x86 amd64 & intel64 (per cpu socket pairbasic maintenanceunlimited virtual instances per year)
+rule "Add subscription data for part number 874-006638"
+    when
+        $subscription : Subscription(partNumber == "874-006638")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
             stackable = false
         };
 end
@@ -11082,6 +11485,19 @@ rule "Add subscription data for part number 874-006184"
         };
 end
 
+//suse linux enterprise server for ibm system z 10 business class promotion (per ifl) 1-year standard subscription
+rule "Add subscription data for part number 874-005535"
+    when
+        $subscription : Subscription(partNumber == "874-005535")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //activation card suse linux enterprise server for x86 amd64 & intel64 (8 cpu socketspriority supportunlimited virtual instances3 year)
 rule "Add subscription data for part number 662644475608"
     when
@@ -11180,6 +11596,19 @@ rule "Add subscription data for part number 874-006354"
         modify($subscription) {
             cpus = 8,
             stackable = false
+        };
+end
+
+//suse linux enterprise server 11 for itanium (per socket) 3-year subscription
+rule "Add subscription data for part number 874-005543"
+    when
+        $subscription : Subscription(partNumber == "874-005543")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -11451,6 +11880,19 @@ rule "Add subscription data for part number 662644475547"
         };
 end
 
+//suse linux enterprise server for ibm power per socket 1-year standard add-on subscription
+rule "Add subscription data for part number 874-005640"
+    when
+        $subscription : Subscription(partNumber == "874-005640")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "standard",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //suse linux enterprise desktop for china 1-instance 1-year subscription
 rule "Add subscription data for part number 874-006854"
     when
@@ -11650,6 +12092,19 @@ rule "Add subscription data for part number 874-006095"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
+            stackable = false
+        };
+end
+
+//suse linux enterprise server with ha for x86 amd64 & intel64 (per cpu socket pairpriority support1 physicalper month)
+rule "Add subscription data for part number 874-006646"
+    when
+        $subscription : Subscription(partNumber == "874-006646")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "priority",
+            cpus = 2,
             stackable = false
         };
 end
@@ -12045,6 +12500,19 @@ rule "Add subscription data for part number 662644476292"
         };
 end
 
+//suse linux enterprise server for x86 amd64 & intel64 (per cpu socket pairbasic maintenanceunlimited virtual instances per month)
+rule "Add subscription data for part number 874-006637"
+    when
+        $subscription : Subscription(partNumber == "874-006637")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = false
+        };
+end
+
 //suse linux enterprise desktop 10 1-device 1-year subscription
 rule "Add subscription data for part number 662644474472"
     when
@@ -12079,6 +12547,19 @@ rule "Add subscription data for part number 874-006141"
             supportLevel = "priority",
             cpus = 8,
             stackable = false
+        };
+end
+
+//suse linux enterprise server 11 for itanium per socket 3-year basic subscription
+rule "Add subscription data for part number 874-005585"
+    when
+        $subscription : Subscription(partNumber == "874-005585")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 1,
+            stackable = true
         };
 end
 
@@ -12245,6 +12726,19 @@ rule "Add subscription data for part number 874-006086"
             supportLevel = "basic",
             cpus = 1,
             stackable = true
+        };
+end
+
+//suse linux enterprise server with ha for x86 amd64 & intel64 (per cpu socket pairbasic maintenanceunlimited virtual instances per month)
+rule "Add subscription data for part number 874-006649"
+    when
+        $subscription : Subscription(partNumber == "874-006649")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = false
         };
 end
 
