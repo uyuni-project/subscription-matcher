@@ -52,7 +52,7 @@ rule "unlimited virtualization subscription can match a system"
         $subscription : Subscription(
             id == $subscriptionId,
             policy == Policy.UNLIMITED_VIRTUALIZATION,
-            (cpus >= $system.cpus || stackable)
+            (cpus >= $system.cpus || stackable == true)
         )
     then
         Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
