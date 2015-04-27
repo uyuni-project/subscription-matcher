@@ -22,7 +22,7 @@ global HardSoftScoreHolder scoreHolder;
 
 rule "dontExceedSubscriptionCount"
     when
-        Subscription($subscriptionId:id, $quantity : quantity)
+        Subscription($subscriptionId: id, $quantity : quantity)
         $requiredCents : Number(intValue > $quantity * 100) from accumulate (
             Match($cents : cents, subscriptionId == $subscriptionId, confirmed == true),
             sum($cents)
