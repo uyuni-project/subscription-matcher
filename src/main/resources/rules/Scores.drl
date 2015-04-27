@@ -53,11 +53,9 @@ end
 
 rule "maximizeCoveredInstallations"
     when
-        Match(confirmed != null)
-        SystemProduct($systemId : systemId, $productId : productId)
-        Match(systemId == $systemId, productId == $productId, confirmed == true)
+        $match : Match(confirmed == true)
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, (int)(($systemId + $productId) % 1000) * 100);
+        scoreHolder.addSoftConstraintMatch(kcontext, (int)(($match.systemId + $match.productId) % 1000) * 100);
 end
 
 rule "maximizePinnedMatchesUse"
