@@ -9531,6 +9531,19 @@ rule "Add subscription data for part number 662644475264"
         };
 end
 
+//suse linux enterprise server for system z 2-5 ifls priority support
+rule "Add subscription data for part number 113-003097-001"
+    when
+        $subscription : Subscription(partNumber == "113-003097-001")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
 //activation card suse linux enterprise server for sap applications 11 for amd64 & intel64 (1-2 cpu socketsbasic maintenanceunlimited virtual instance
 rule "Add subscription data for part number 662644475998"
     when
@@ -10641,6 +10654,19 @@ rule "Add subscription data for part number 874-005547"
         modify($subscription) {
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
+            cpus = 1,
+            stackable = true
+        };
+end
+
+//suse linux enterprise server for system z 2-5 ifls basic support
+rule "Add subscription data for part number 113-003087-001"
+    when
+        $subscription : Subscription(partNumber == "113-003087-001")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
             cpus = 1,
             stackable = true
         };
