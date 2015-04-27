@@ -24,7 +24,7 @@ rule "dontExceedSubscriptionCount"
     when
         Subscription($subscriptionId: id, $quantity : quantity)
         $requiredCents : Number(intValue > $quantity * 100) from accumulate (
-            Match($cents : cents, subscriptionId == $subscriptionId, confirmed == true),
+            Match(subscriptionId == $subscriptionId, confirmed == true, $cents : cents),
             sum($cents)
         )
     then
