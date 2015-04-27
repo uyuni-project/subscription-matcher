@@ -1,8 +1,6 @@
 package com.suse.matcher;
 
 import org.kie.api.KieServices;
-import org.kie.api.event.rule.DebugAgendaEventListener;
-import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -16,9 +14,6 @@ import java.util.Collection;
  */
 public class Drools {
 
-    /** Filename for internal Drools audit log. */
-    public static final String LOG_FILENAME = "drools";
-
     /** Deduction resulting fact objects. */
     private Collection<? extends Object> result;
 
@@ -31,7 +26,10 @@ public class Drools {
         KieServices factory = KieServices.Factory.get();
         KieContainer container = factory.getKieClasspathContainer();
         KieSession session = container.newKieSession("ksession-rules");
-        KieRuntimeLogger logger = factory.getLoggers().newFileLogger(session, LOG_FILENAME);
+
+        // setup logging. This will not really log to the console but to slf4j which
+        // in turn delegates to log4j, see log4j.xml for configuration
+        KieRuntimeLogger logger = factory.getLoggers().newConsoleLogger(session);
 
         // insert base facts
         for (Object fact : baseFacts) {
