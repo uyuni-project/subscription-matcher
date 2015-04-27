@@ -1,6 +1,6 @@
 package com.suse.matcher.rules;
 
-import org.optaplanner.core.api.score.buildin.hardsoftlong.HardSoftLongScoreHolder;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PinnedMatch;
@@ -11,7 +11,7 @@ import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.solver.Match;
 
-global HardSoftLongScoreHolder scoreHolder;
+global HardSoftScoreHolder scoreHolder;
 
 
 // Hard constraints: no solution can ever be produced if any of those is broken
@@ -57,7 +57,7 @@ rule "maximizeCoveredInstallations"
         SystemProduct($systemId : systemId, $productId : productId)
         Match(systemId == $systemId, productId == $productId, confirmed == true)
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, ($systemId + $productId) * 10);
+        scoreHolder.addSoftConstraintMatch(kcontext, (int)(($systemId + $productId) % 1000) * 100);
 end
 
 rule "maximizePinnedMatchesUse"

@@ -4,7 +4,7 @@ import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
-import org.optaplanner.core.api.score.buildin.hardsoftlong.HardSoftLongScore;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,10 +15,10 @@ import java.util.List;
  * {@link com.suse.matcher.facts.PossibleMatch}es, as produced by OptaPlanner.
  */
 @PlanningSolution
-public class Assignment implements Solution<HardSoftLongScore> {
+public class Assignment implements Solution<HardSoftScore> {
 
     /** Score of this assignment. */
-    private HardSoftLongScore score;
+    private HardSoftScore score;
 
     /** Match objects that the OptaPlanner will try to assign Kinds to. */
     private Collection<Match> matches;
@@ -57,7 +57,7 @@ public class Assignment implements Solution<HardSoftLongScore> {
      * {@inheritDoc}
      */
     @Override
-    public HardSoftLongScore getScore() {
+    public HardSoftScore getScore() {
         return score;
     }
 
@@ -65,7 +65,7 @@ public class Assignment implements Solution<HardSoftLongScore> {
      * {@inheritDoc}
      */
     @Override
-    public void setScore(HardSoftLongScore scoreIn) {
+    public void setScore(HardSoftScore scoreIn) {
         score = scoreIn;
     }
 
