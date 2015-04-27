@@ -28,7 +28,6 @@
         </forager>
         <termination>
             <unimprovedStepCountLimit>3</unimprovedStepCountLimit>
-            <millisecondsSpentLimit>500</millisecondsSpentLimit>
         </termination>
     </localSearch>
 </solver>
