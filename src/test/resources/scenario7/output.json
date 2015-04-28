@@ -85,8 +85,8 @@
       "type": "unsatisfied_pinned_match",
       "data": 
         {
-          "subscription_id": 1,
           "product_id": 814,
+          "subscription_id": 1,
           "system_id": 300
         }
     }

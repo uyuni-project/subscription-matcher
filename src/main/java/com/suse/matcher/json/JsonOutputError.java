@@ -4,8 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * JSON representation of the an error detected during the match.
@@ -16,7 +16,7 @@ public class JsonOutputError {
     public String type;
 
     /** Arbitrary data connected to this error. */
-    public Map<String, Long> data = new HashMap<>();
+    public Map<String, Long> data = new TreeMap<>();
 
     /**
      * Instantiates a new json output error.
