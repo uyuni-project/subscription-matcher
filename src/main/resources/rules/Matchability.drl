@@ -70,7 +70,7 @@ end
 
 rule "1-2 stackable subscription can match a system"
     when
-        $system : System($systemId : id)
+        $system : System($systemId : id, physical != null)
         SystemProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
@@ -79,6 +79,10 @@ rule "1-2 stackable subscription can match a system"
         )
         not (HostGuest(hostId == $systemId))
     then
-        Integer consumedCents = $system.physical == true ? ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100 : 50;
-        insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedCents));
+        if ($system.physical) {
+            insert(new PossibleMatch($system.id, $productId, $subscription.id, ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100));
+        }
+        else {
+            insert(new PossibleMatch($system.id, $productId, $subscription.id, 50));
+        }
 end
