@@ -12,7 +12,7 @@ import com.suse.matcher.facts.SystemProduct;
 
 rule "physical only subscription can match a system"
     when
-        $system : System($systemId : id, physical)
+        $system : System($systemId : id, physical == true)
         SystemProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
@@ -40,7 +40,7 @@ end
 
 rule "unlimited virtualization subscription can match a system"
     when
-        $system : System($systemId : id, physical)
+        $system : System($systemId : id, physical == true)
         (
             SystemProduct($productId : productId, systemId == $systemId) or
             (
@@ -79,6 +79,6 @@ rule "1-2 stackable subscription can match a system"
         )
         not (HostGuest(hostId == $systemId))
     then
-        Integer consumedCents = $system.physical ? ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100 : 50;
+        Integer consumedCents = $system.physical == true ? ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100 : 50;
         insert(new PossibleMatch($system.id, $productId, $subscription.id, consumedCents));
 end

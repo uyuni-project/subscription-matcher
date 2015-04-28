@@ -21,7 +21,7 @@ public class System {
 
     // rule-computed fields
     /**  <code>true</code> if this is a machine made of metal. */
-    public boolean physical = true;
+    public Boolean physical;
 
     /**
      * Instantiates a new system.
@@ -57,7 +57,7 @@ public class System {
      *
      * @return true, if it is physical
      */
-    public boolean isPhysical() {
+    public Boolean isPhysical() {
         return physical;
     }
 

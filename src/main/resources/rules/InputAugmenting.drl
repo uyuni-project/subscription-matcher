@@ -4,12 +4,22 @@ import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 
-rule "ensure virtual systems are indeed virtual"
+rule "markVirtualSystems"
 when
-    HostGuest($hostId : hostId, $guestId : guestId)
-    $guest : System(id == $guestId, physical)
+    HostGuest($guestId : guestId)
+    $guest : System(id == $guestId, physical == null)
 then
     modify($guest) {
         physical = false;
+    }
+end
+
+rule "markPhysicalSystems"
+when
+    $system : System(physical == null)
+    not HostGuest(guestId == $system.id)
+then
+    modify($system) {
+        physical = true;
     }
 end
