@@ -9,6 +9,12 @@
         </layout>
     </appender>
 
+    <!-- Uncomment for full matcher logging
+    <category name="com.suse.matcher">
+        <priority value="debug" />
+    </category>
+    -->
+
     <!-- Uncomment for full Drools logging
     <category name="org.drools">
       <priority value="debug" />

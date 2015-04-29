@@ -8,6 +8,11 @@ import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
+import org.optaplanner.core.api.score.Score;
+import org.optaplanner.core.api.score.constraint.ConstraintMatch;
+import org.optaplanner.core.api.score.constraint.ConstraintMatchTotal;
+import org.optaplanner.core.impl.score.director.ScoreDirector;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
