@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -178,6 +179,7 @@ public class FactConverter {
         }
 
         // fill output object's errors field
+        // unsatisfied pinned matches
         for (JsonMatch match : pinnedMatches) {
             Match actualMatch = matchMap.get(new ImmutablePair<Long, Long>(match.systemId, match.productId));
             if (actualMatch == null || !match.subscriptionId.equals(actualMatch.subscriptionId)) {
@@ -187,6 +189,19 @@ public class FactConverter {
                 error.data.put("product_id", match.productId.toString());
                 output.errors.add(error);
             }
+        }
+
+        // unknown part numbers
+        Set<String> unknownPartNumbers = new TreeSet<>();
+        for (Subscription subscription : subscriptions) {
+            if (subscription.policy == null && subscription.partNumber != null) {
+                unknownPartNumbers.add(subscription.partNumber);
+            }
+        }
+        for (String partNumber : unknownPartNumbers) {
+            JsonOutputError error = new JsonOutputError("unknown_part_number");
+            error.data.put("part_number", partNumber);
+            output.errors.add(error);
         }
 
         return output;
