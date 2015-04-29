@@ -36,7 +36,7 @@ rule "disallowFreeVmRides"
         Subscription($subscriptionId: id, policy == Policy.UNLIMITED_VIRTUALIZATION)
         HostGuest($hostId : hostId, $guestId : guestId)
         Match(systemId == $guestId, subscriptionId == $subscriptionId, confirmed == true)
-        Match(systemId == $hostId, subscriptionId == $subscriptionId, confirmed == false)
+        Match(systemId == $hostId, subscriptionId == $subscriptionId, confirmed != true)
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
