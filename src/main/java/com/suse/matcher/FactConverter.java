@@ -160,7 +160,7 @@ public class FactConverter {
         Collection<Subscription> subscriptions = new TreeSet<>();
         for (Object fact : assignment.getProblemFacts()) {
            if (fact instanceof Subscription) {
-            subscriptions.add((Subscription)fact);
+               subscriptions.add((Subscription)fact);
            }
         }
         Map<Long, Integer> remainings = new TreeMap<>();
