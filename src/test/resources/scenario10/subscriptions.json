@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "part_number": "UNKNOWN-PART-NUMBER",
+    "system_limit": 3,
+    "starts_at": "2013-08-01T00:00:00Z",
+    "expires_at": "2015-07-31T00:00:00Z",
+    "scc_org_id": "UC7",
+    "product_ids": [666]
+  }
+]

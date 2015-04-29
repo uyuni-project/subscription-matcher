@@ -1,0 +1,20 @@
+{
+  "compliant_systems": [],
+  "partially_compliant_systems": [],
+  "non_compliant_systems": [],
+  "remaining_subscriptions": [
+    {
+      "id": 1,
+      "cents": 300
+    }
+  ],
+  "errors": [
+    {
+      "type": "unknown_part_number",
+      "data": 
+        {
+          "part_number": "UNKNOWN-PART-NUMBER"
+        }
+    }
+  ]
+}
