@@ -6173,30 +6173,6 @@ rule "Add subscription data for part number 874-005227"
         };
 end
 
-//suse linux enterprise server 10 sp4 for x86long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006563"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006563")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp1 for x86 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006015"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006015")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketsbasic maintenanceunlimited virtual instances3 year)
 rule "Add subscription data for part number 874-006299"
     when
@@ -6206,18 +6182,6 @@ rule "Add subscription data for part number 874-006299"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp1 for amd64 & intel 64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006036"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006036")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6296,18 +6260,6 @@ rule "Add subscription data for part number 874-006316"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for system z long term service pack support 1-year (unlimited ifls)
-rule "Add subscription data for part number 874-006000"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006000")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6411,18 +6363,6 @@ rule "Add subscription data for part number 874-006276"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 4,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp4 for x86 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006561"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006561")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
             stackable = false
         };
 end
@@ -6632,18 +6572,6 @@ rule "Add subscription data for part number 874-005949"
         };
 end
 
-//suse linux enterprise server 11 sp2 for x86 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006623"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006623")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 and for amd64 & intel64 (maximum 32cpu sockets) 3-year subscription
 rule "Add subscription data for part number 662644470054"
     when
@@ -6653,18 +6581,6 @@ rule "Add subscription data for part number 662644470054"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
             cpus = 32,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp4 for system z long term service pack support 1-year (unlimited ifls)
-rule "Add subscription data for part number 874-006569"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006569")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6691,18 +6607,6 @@ rule "Add subscription data for part number 874-006113"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 8,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp4 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006564"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006564")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
             stackable = false
         };
 end
@@ -6746,18 +6650,6 @@ rule "Add subscription data for part number 874-006149"
         };
 end
 
-//suse linux enterprise server 11 sp1 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006034"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006034")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
 //ms cert suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketspriority support1 physical1 year)
 rule "Add subscription data for part number 874-006405"
     when
@@ -6767,18 +6659,6 @@ rule "Add subscription data for part number 874-006405"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp2 for amd64 & intel 64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006626"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006626")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6835,18 +6715,6 @@ rule "Add subscription data for part number 874-006421"
         };
 end
 
-//suse linux enterprise server 10 sp4 for amd64 & intel 64 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006565"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006565")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
 //suse manager management unlimited virtual machines 3-year subscription
 rule "Add subscription data for part number 874-005953"
     when
@@ -6855,18 +6723,6 @@ rule "Add subscription data for part number 874-005953"
         modify($subscription) {
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp4 for x86 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006562"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006562")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -6949,18 +6805,6 @@ rule "Add subscription data for part number 874-006100"
         };
 end
 
-//suse linux enterprise server 11 sp1 for amd64 & intel 64 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006035"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006035")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for sap applications 11 for x86_64 (maximum 32cpu sockets) basic 3-year subscription
 rule "Add subscription data for part number 874-005971"
     when
@@ -7038,18 +6882,6 @@ rule "Add subscription data for part number 5200219"
         };
 end
 
-//suse linux enterprise server 10 sp4 for amd64 & intel 64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006566"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006566")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse manager provisioning unlimited virtual machines 3-year subscription
 rule "Add subscription data for part number 874-005955"
     when
@@ -7058,30 +6890,6 @@ rule "Add subscription data for part number 874-005955"
         modify($subscription) {
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp1 for x86 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006013"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006013")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for amd64 & intel 64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006033"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006033")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7107,18 +6915,6 @@ rule "Add subscription data for part number 874-005313"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "standard",
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for x86 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-005995"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-005995")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
             stackable = false
         };
 end
@@ -7173,18 +6969,6 @@ rule "Add subscription data for part number 874-005686"
         };
 end
 
-//suse linux enterprise server 9 sp4 for x86 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006001"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006001")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketsstandard supportunlimited virtual instances3 year)
 rule "Add subscription data for part number 874-006145"
     when
@@ -7194,18 +6978,6 @@ rule "Add subscription data for part number 874-006145"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "standard",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp2 for x86 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006622"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006622")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -7244,18 +7016,6 @@ rule "Add subscription data for part number 662644475882"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp2 for x86 long term service pack support (unlimited servers)
-rule "Add subscription data for part number 874-006009"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006009")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7424,18 +7184,6 @@ rule "Add subscription data for part number 874-006356"
         };
 end
 
-//suse linux enterprise server 11 sp2 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006624"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006624")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
 //suse linux enterprise desktop 1-instance 3-year priority subscription
 rule "Add subscription data for part number 874-005312"
     when
@@ -7461,18 +7209,6 @@ rule "Add subscription data for part number 435993-B25"
         };
 end
 
-//suse linux enterprise server 9 sp4 for system z long term service pack support 1-year (unlimited ifls)
-rule "Add subscription data for part number 874-006006"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006006")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //ms cert suse manager provisioning unlimited virtual machines 3-year subscription
 rule "Add subscription data for part number 874-006081"
     when
@@ -7481,18 +7217,6 @@ rule "Add subscription data for part number 874-006081"
         modify($subscription) {
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for x86long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-005997"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-005997")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7506,18 +7230,6 @@ rule "Add subscription data for part number 5200107"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 16,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 9 sp4 for x86 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006003"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006003")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -7625,18 +7337,6 @@ rule "Add subscription data for part number 874-006845"
         };
 end
 
-//suse linux enterprise server 11 sp2 for x86 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006621"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006621")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketspriority supportunlimited virtual instances3 year)
 rule "Add subscription data for part number 874-006146"
     when
@@ -7687,18 +7387,6 @@ rule "Add subscription data for part number 874-006071"
         };
 end
 
-//suse linux enterprise server 9 sp4 for x86 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006002"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006002")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server 11 for itanium high performance computing (maximum 8 cpu sockets) 1-year subscription
 rule "Add subscription data for part number 874-005684"
     when
@@ -7709,30 +7397,6 @@ rule "Add subscription data for part number 874-005684"
             supportLevel = "basic",
             cpus = 8,
             stackable = true
-        };
-end
-
-//suse linux enterprise server 10 sp2 for amd64 & intel 64 long term service pack support (unlimited servers)
-rule "Add subscription data for part number 874-006030"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006030")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 9 sp4 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006025"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006025")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
         };
 end
 
@@ -7758,30 +7422,6 @@ rule "Add subscription data for part number 435994-B24"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
             cpus = 32,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for system z long term service pack support 1-year (up to 5 ifls)
-rule "Add subscription data for part number 874-005998"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-005998")
-    then
-        modify($subscription) {
-            quantity = $quantity * 5,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp1 for x86 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006014"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006014")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -7889,18 +7529,6 @@ rule "Add subscription data for part number 874-006135"
         };
 end
 
-//suse linux enterprise server 9 sp4 for x86 & x86_64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 051-004343"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "051-004343")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse linux enterprise high availability extension for x86 amd64 & intel64 (1-2 cpu socketsinherited subscription level inherited virtualization3 y
 rule "Add subscription data for part number 874-006195"
     when
@@ -7988,18 +7616,6 @@ rule "Add subscription data for part number 874-006346"
         };
 end
 
-//suse linux enterprise server 10 sp2 for x86 & x86_64 long term service pack support (up to 100 servers)
-rule "Add subscription data for part number 051-004059"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "051-004059")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketsbasic maintenanceunlimited virtual instances5 year)
 rule "Add subscription data for part number 874-006174"
     when
@@ -8009,18 +7625,6 @@ rule "Add subscription data for part number 874-006174"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp2 for amd64 & intel 64 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006625"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006625")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -8073,18 +7677,6 @@ rule "Add subscription data for part number 874-006323"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 4,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for x86 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-005996"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-005996")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -8164,18 +7756,6 @@ rule "Add subscription data for part number 874-006157"
         };
 end
 
-//customer certifcate suse linux enterprise server 11 sp2 for x86 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006749"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006749")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server 11 for itanium high performance computing (maximum 8 cpu sockets) 3-year subscription
 rule "Add subscription data for part number 874-005685"
     when
@@ -8197,18 +7777,6 @@ rule "Add subscription data for part number 874-006075"
         modify($subscription) {
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "basic",
-            stackable = false
-        };
-end
-
-//ms cert suse linux enterprise server 10 sp3 for x86long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006231"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006231")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8446,30 +8014,6 @@ rule "Add subscription data for part number 874-006134"
         };
 end
 
-//suse linux enterprise server 9 sp4 for amd64 & intel 64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006027"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006027")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp2 for system z long term service pack support 1-year (unlimited ifls)
-rule "Add subscription data for part number 874-006629"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006629")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86&x86-64 - no-support per hosted instance basic subscription per hour
 rule "Add subscription data for part number 051-004063"
     when
@@ -8495,18 +8039,6 @@ rule "Add subscription data for part number 874-006464"
         };
 end
 
-//suse linux enterprise server 10 sp2 for x86 & x86_64 long term service pack support (unlimited servers)
-rule "Add subscription data for part number 051-004061"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "051-004061")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (4 cpu socketsstandard support1 physical1 year)
 rule "Add subscription data for part number 874-006105"
     when
@@ -8516,18 +8048,6 @@ rule "Add subscription data for part number 874-006105"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "standard",
             cpus = 4,
-            stackable = false
-        };
-end
-
-//ms cert suse linux enterprise server 9 sp4 for x86 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006064"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006064")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -8635,18 +8155,6 @@ rule "Add subscription data for part number 874-005985"
         };
 end
 
-//customer certifcate suse linux enterprise server 11 sp2 for amd64 & intel 64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006752"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006752")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for sap applications 11 for amd64 & intel64 (1-2 cpu socketspriority support1 physical3 year)
 rule "Add subscription data for part number 874-006118"
     when
@@ -8669,30 +8177,6 @@ rule "Add subscription data for part number 662644475844"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 4,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp2 for x86 & x86_64 long term service pack support (up to 500 servers)
-rule "Add subscription data for part number 051-004060"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "051-004060")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006031"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006031")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
             stackable = false
         };
 end
@@ -8743,18 +8227,6 @@ rule "Add subscription data for part number 874-006072"
         modify($subscription) {
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "basic",
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp2 for x86 long term service pack support (up to 500 servers)
-rule "Add subscription data for part number 874-006008"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006008")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -8811,30 +8283,6 @@ rule "Add subscription data for part number 874-006177"
         };
 end
 
-//ms cert suse linux enterprise server 11 sp1 for x86 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006240"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006240")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 9 sp4 for x86 & x86_64 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 051-004342"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "051-004342")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (per server up to 32 cpu sockets) priority add-on support  3-year
 rule "Add subscription data for part number 874-005119"
     when
@@ -8870,18 +8318,6 @@ rule "Add subscription data for part number 874-006465"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for amd64 & intel 64 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006032"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006032")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -8997,30 +8433,6 @@ rule "Add subscription data for part number 874-006176"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp2 for x86 long term service pack support (up to 100 servers)
-rule "Add subscription data for part number 874-006007"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006007")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp2 for system z long term service pack support 1-year (up to 10 ifls)
-rule "Add subscription data for part number 874-006628"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006628")
-    then
-        modify($subscription) {
-            quantity = $quantity * 10,
             stackable = false
         };
 end
@@ -9416,18 +8828,6 @@ rule "Add subscription data for part number 874-006191"
         };
 end
 
-//customer certifcate suse linux enterprise server 11 sp2 for x86 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006748"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006748")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for ibm power per socket 3-year priority subscription
 rule "Add subscription data for part number 874-005577"
     when
@@ -9477,18 +8877,6 @@ rule "Add subscription data for part number 874-005537"
             supportLevel = "basic",
             cpus = 1,
             stackable = true
-        };
-end
-
-//suse linux enterprise server 10 sp3 for system z long term service pack support 1-year (up to 10 ifls)
-rule "Add subscription data for part number 874-005999"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-005999")
-    then
-        modify($subscription) {
-            quantity = $quantity * 10,
-            stackable = false
         };
 end
 
@@ -9583,18 +8971,6 @@ rule "Add subscription data for part number 113-003106-001"
         };
 end
 
-//suse linux enterprise server 11 sp1 for system z long term service pack support 1-year (unlimited ifls)
-rule "Add subscription data for part number 874-006018"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006018")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for sap x86_64 (maximum 32cpu sockets) priority 1-year subscription
 rule "Add subscription data for part number 874-005923"
     when
@@ -9630,42 +9006,6 @@ rule "Add subscription data for part number 874-006039"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
             cpus = 32,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp2 for amd64 & intel 64 long term service pack support (up to 500 servers)
-rule "Add subscription data for part number 874-006029"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006029")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp4 for system z long term service pack support 1-year (up to 5 ifls)
-rule "Add subscription data for part number 874-006567"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006567")
-    then
-        modify($subscription) {
-            quantity = $quantity * 5,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp2 for amd64 & intel 64 long term service pack support (up to 100 servers)
-rule "Add subscription data for part number 874-006028"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006028")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
             stackable = false
         };
 end
@@ -9741,18 +9081,6 @@ rule "Add subscription data for part number 874-006197"
     then
         modify($subscription) {
             cpus = 4,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 9 sp4 for x86 & x86_64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 051-004341"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "051-004341")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
             stackable = false
         };
 end
@@ -9833,18 +9161,6 @@ rule "Add subscription data for part number 874-006092"
         };
 end
 
-//ms cert suse linux enterprise server 9 sp4 for x86 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006212"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006212")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for sap applications 11 for amd64 & intel64 (4 cpu socketsbasic maintenanceunlimited virtual instances5 year)
 rule "Add subscription data for part number 874-006182"
     when
@@ -9880,18 +9196,6 @@ rule "Add subscription data for part number 662644475271"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//ms cert suse linux enterprise server 10 sp4 for x86 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006607"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006607")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -10035,18 +9339,6 @@ rule "Add subscription data for part number 874-005957"
         };
 end
 
-//suse linux enterprise server 10 sp2 for system z long term service pack support 1-year (unlimited ifls)
-rule "Add subscription data for part number 874-006012"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006012")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
-            stackable = false
-        };
-end
-
 //ms cert suse linux enterprise server for x86 amd64 & intel64 (4 cpu socketspriority support1 physical1 year)
 rule "Add subscription data for part number 874-006408"
     when
@@ -10098,18 +9390,6 @@ rule "Add subscription data for part number 874-006187"
         };
 end
 
-//ms cert suse linux enterprise server 11 sp1 for amd64 & intel 64 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006242"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006242")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (8 cpu socketsbasic maintenance1 physical3 year)
 rule "Add subscription data for part number 874-006124"
     when
@@ -10119,42 +9399,6 @@ rule "Add subscription data for part number 874-006124"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "basic",
             cpus = 8,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 11 sp2 for system z long term service pack support 1-year (up to 5 ifls)
-rule "Add subscription data for part number 874-006627"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006627")
-    then
-        modify($subscription) {
-            quantity = $quantity * 5,
-            stackable = false
-        };
-end
-
-//ms cert suse linux enterprise server 10 sp4 for x86 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006606"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006606")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 9 sp4 for amd64 & intel 64 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006026"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006026")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
@@ -10257,18 +9501,6 @@ rule "Add subscription data for part number 662644475639"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 2,
-            stackable = false
-        };
-end
-
-//ms cert suse linux enterprise server 11 sp1 for amd64 & intel 64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 874-006243"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006243")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -10749,18 +9981,6 @@ rule "Add subscription data for part number 874-005647"
         };
 end
 
-//suse linux enterprise server 10 sp4 for system z long term service pack support 1-year (up to 10 ifls)
-rule "Add subscription data for part number 874-006568"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006568")
-    then
-        modify($subscription) {
-            quantity = $quantity * 10,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for ibm power per socket 3-year basic subscription
 rule "Add subscription data for part number 874-005549"
     when
@@ -10771,18 +9991,6 @@ rule "Add subscription data for part number 874-005549"
             supportLevel = "basic",
             cpus = 1,
             stackable = true
-        };
-end
-
-//ms cert suse linux enterprise server 10 sp4 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006609"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006609")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
         };
 end
 
@@ -10978,18 +10186,6 @@ rule "Add subscription data for part number 662644475837"
         };
 end
 
-//ms cert suse linux enterprise server 10 sp3 for x86 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006230"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006230")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (8 cpu socketsbasic maintenanceunlimited virtual instances3 year)
 rule "Add subscription data for part number 874-006309"
     when
@@ -10999,18 +10195,6 @@ rule "Add subscription data for part number 874-006309"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "basic",
             cpus = 8,
-            stackable = false
-        };
-end
-
-//ms cert suse linux enterprise server 10 sp3 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006232"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006232")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
             stackable = false
         };
 end
@@ -11153,18 +10337,6 @@ rule "Add subscription data for part number 662644475394"
             policy = Policy.PHYSICAL_ONLY,
             supportLevel = "priority",
             cpus = 4,
-            stackable = false
-        };
-end
-
-//suse linux enterprise server 10 sp3 for x86 & x86_64 long term service pack support 1-year (unlimited servers)
-rule "Add subscription data for part number 051-004383"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "051-004383")
-    then
-        modify($subscription) {
-            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -11728,18 +10900,6 @@ rule "Add subscription data for part number 662644475462"
         };
 end
 
-//ms cert suse linux enterprise server 11 sp1 for amd64 & intel 64 long term service pack support 1-year (up to 100 servers)
-rule "Add subscription data for part number 874-006241"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006241")
-    then
-        modify($subscription) {
-            quantity = $quantity * 100,
-            stackable = false
-        };
-end
-
 //suse linux enterprise high availability extension for x86 amd64 & intel64 (1-2 cpu socketsinherited subscription and rhel inherited virtualization
 rule "Add subscription data for part number 874-006732"
     when
@@ -12200,18 +11360,6 @@ rule "Add subscription data for part number 874-006137"
         };
 end
 
-//ms cert suse linux enterprise server 9 sp4 for amd64 & intel 64 long term service pack support 1-year (up to 500 servers)
-rule "Add subscription data for part number 874-006215"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006215")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
-            stackable = false
-        };
-end
-
 //activation card suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketspriority supportunlimited virtual instances1 year)
 rule "Add subscription data for part number 662644475455"
     when
@@ -12311,18 +11459,6 @@ rule "Add subscription data for part number 874-005526"
         };
 end
 
-//suse linux enterprise server 9 sp4 for system z long term service pack support 1-year (up to 5 ifls)
-rule "Add subscription data for part number 874-006004"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006004")
-    then
-        modify($subscription) {
-            quantity = $quantity * 5,
-            stackable = false
-        };
-end
-
 //ms cert suse linux enterprise server for x86 amd64 & intel64 (1-2 cpu socketsbasic maintenance - no rhelunlimited virtual instances3 year)
 rule "Add subscription data for part number 874-006811"
     when
@@ -12395,18 +11531,6 @@ rule "Add subscription data for part number 662644476216"
         modify($subscription) {
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             cpus = 8,
-            stackable = false
-        };
-end
-
-//ms cert suse linux enterprise server 10 sp2 for x86 long term service pack support (up to 500 servers)
-rule "Add subscription data for part number 874-006221"
-    no-loop
-    when
-        $subscription : Subscription($quantity : quantity, partNumber == "874-006221")
-    then
-        modify($subscription) {
-            quantity = $quantity * 500,
             stackable = false
         };
 end
