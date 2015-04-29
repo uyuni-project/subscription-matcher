@@ -8,10 +8,8 @@ import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
-import org.optaplanner.core.api.score.Score;
-import org.optaplanner.core.api.score.constraint.ConstraintMatch;
-import org.optaplanner.core.api.score.constraint.ConstraintMatchTotal;
-import org.optaplanner.core.impl.score.director.ScoreDirector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -21,6 +19,9 @@ import java.util.List;
  * Matches a list of systems to a list of subscriptions.
  */
 public class Matcher {
+
+    /** Logger instance. */
+    private final Logger logger = LoggerFactory.getLogger(Matcher.class);
 
     /**
      * Matches a list of systems to a list of subscriptions.
@@ -45,8 +46,11 @@ public class Matcher {
         Collection<Object> otherFacts = new LinkedList<>();
         for (Object fact : deducedFacts) {
             if (fact instanceof PossibleMatch) {
-                PossibleMatch match = (PossibleMatch) fact;
-                matches.add(new Match(match.systemId, match.productId, match.subscriptionId, match.cents));
+                PossibleMatch possibleMatch = (PossibleMatch) fact;
+                logger.debug("Deduced: {}", possibleMatch);
+
+                Match match = new Match(possibleMatch.systemId, possibleMatch.productId, possibleMatch.subscriptionId, possibleMatch.cents);
+                matches.add(match);
             }
             else {
                 otherFacts.add(fact);
