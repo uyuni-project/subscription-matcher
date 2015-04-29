@@ -23,7 +23,6 @@ import java.util.List;
 /**
  * Tests {@link Matcher}.
  */
-@SuppressWarnings("restriction") // we use our own JUnit distribution, don't care about Drools complaining
 @RunWith(Parameterized.class)
 public class MatcherTest {
 
