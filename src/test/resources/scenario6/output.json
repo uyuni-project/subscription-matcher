@@ -26,12 +26,12 @@
   ],
   "remaining_subscriptions": [
     {
-      "id": 4,
-      "cents": 100
+      "id": "4",
+      "cents": "100"
     },
     {
-      "id": 5,
-      "cents": 300
+      "id": "5",
+      "cents": "300"
     }
   ],
   "errors": []

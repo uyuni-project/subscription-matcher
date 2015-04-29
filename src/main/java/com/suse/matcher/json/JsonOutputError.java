@@ -16,7 +16,7 @@ public class JsonOutputError {
     public String type;
 
     /** Arbitrary data connected to this error. */
-    public Map<String, Long> data = new TreeMap<>();
+    public Map<String, String> data = new TreeMap<>();
 
     /**
      * Instantiates a new json output error.

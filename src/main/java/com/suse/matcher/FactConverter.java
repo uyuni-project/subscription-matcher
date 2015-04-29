@@ -182,9 +182,9 @@ public class FactConverter {
             Match actualMatch = matchMap.get(new ImmutablePair<Long, Long>(match.systemId, match.productId));
             if (actualMatch == null || !match.subscriptionId.equals(actualMatch.subscriptionId)) {
                 JsonOutputError error = new JsonOutputError("unsatisfied_pinned_match");
-                error.data.put("system_id", match.systemId);
-                error.data.put("subscription_id", match.subscriptionId);
-                error.data.put("product_id", match.productId);
+                error.data.put("system_id", match.systemId.toString());
+                error.data.put("subscription_id", match.subscriptionId.toString());
+                error.data.put("product_id", match.productId.toString());
                 output.errors.add(error);
             }
         }
