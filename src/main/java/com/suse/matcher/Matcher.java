@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,11 +30,12 @@ public class Matcher {
      * @param systems the systems
      * @param subscriptions the subscriptions
      * @param pinnedMatches a list of user-preferred system-subscription matches
+     * @param timestamp the timestamp for this matching
      * @return an object summarizing the match
      */
-    public JsonOutput match(List<JsonSystem> systems, List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches) {
+    public JsonOutput match(List<JsonSystem> systems, List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches, Date timestamp) {
         // convert inputs into facts the rule engine can reason about
-        Collection<Object> baseFacts = FactConverter.convertToFacts(systems, subscriptions, pinnedMatches);
+        Collection<Object> baseFacts = FactConverter.convertToFacts(systems, subscriptions, pinnedMatches, timestamp);
 
         // activate the rule engine to deduce more facts
         Drools drools = new Drools(baseFacts);

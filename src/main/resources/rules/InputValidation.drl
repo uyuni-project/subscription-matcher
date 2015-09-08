@@ -1,11 +1,11 @@
 package com.suse.matcher.rules;
 
 import com.suse.matcher.facts.Subscription;
-import com.suse.matcher.facts.Today;
+import com.suse.matcher.facts.CurrentTime;
 
 rule "subscriptionNotExpired"
     when
-        $today : Today($timestamp : timestamp)
+        CurrentTime($timestamp : timestamp)
         $subscription: Subscription(expiresAt < $timestamp || startsAt > $timestamp)
     then
         retract($subscription);

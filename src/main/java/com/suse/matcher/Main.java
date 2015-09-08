@@ -6,6 +6,7 @@ import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 
 import java.io.FileReader;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class Main {
         List<JsonMatch> pinnedMatches = io.loadMatches(new FileReader(pinnedMatchPath));
 
         // do the matching
-        JsonOutput result = new Matcher().match(systems, subscriptions, pinnedMatches);
+        JsonOutput result = new Matcher().match(systems, subscriptions, pinnedMatches, new Date());
 
         // print output
         System.out.println(io.toJson(result));

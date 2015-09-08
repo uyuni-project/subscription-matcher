@@ -9,13 +9,23 @@ import org.kie.api.definition.type.PropertyReactive;
 import java.util.Date;
 
 /**
- * Encapsulates the current date in a fact, so that it does not change during evaluation.
+ * Encapsulates the date when the matching is performed. This wrapper class is needed
+ * because the fact object must not change during Drools execution.
  */
 @PropertyReactive
-public class Today {
+public class CurrentTime {
 
     /** Current timestamp. */
-    public Date timestamp = new Date();
+    public Date timestamp;
+
+    /**
+     * Instantiates a new current time.
+     *
+     * @param timestampIn the timestamp
+     */
+    public CurrentTime(Date timestampIn) {
+        timestamp = timestampIn;
+    }
 
     /**
      * Gets the timestamp.
@@ -37,10 +47,10 @@ public class Today {
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        if (!(objIn instanceof Today)) {
+        if (!(objIn instanceof CurrentTime)) {
             return false;
         }
-        Today other = (Today) objIn;
+        CurrentTime other = (CurrentTime) objIn;
         return new EqualsBuilder()
             .append(timestamp, other.timestamp)
             .isEquals();

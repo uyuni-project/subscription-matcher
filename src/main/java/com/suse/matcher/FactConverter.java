@@ -1,12 +1,12 @@
 package com.suse.matcher;
 
+import com.suse.matcher.facts.CurrentTime;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
-import com.suse.matcher.facts.Today;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonOutputError;
@@ -26,6 +26,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -45,12 +46,14 @@ public class FactConverter {
      * @param systems a list of systems in JSON format
      * @param subscriptions a list of subscriptions in JSON format
      * @param pinnedMatches a list of pinned matches in JSON format
+     * @param timestamp the timestamp for this set of facts
      * @return a collection of facts
      */
-    public static Collection<Object> convertToFacts(List<JsonSystem> systems, List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches) {
+    public static Collection<Object> convertToFacts(List<JsonSystem> systems, List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches,
+            Date timestamp) {
         Collection<Object> result = new LinkedList<Object>();
 
-        result.add(new Today());
+        result.add(new CurrentTime(timestamp));
 
         for (JsonSystem system : systems) {
             result.add(new System(system.id, system.cpus));
