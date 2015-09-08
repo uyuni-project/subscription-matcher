@@ -18,10 +18,6 @@ import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.MultiMap;
-import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.map.MultiValueMap;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -33,6 +29,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Converts JSON objects to facts (objects the rule engine and CSP solver can
@@ -84,53 +82,57 @@ public class FactConverter {
      * Converts the outputs from CSP solver in output JSON format.
      *
      * @param assignment the assignment object, output of the CSP solver
-     * @param systems the systems
-     * @param pinnedMatches the pinned matches
      * @return the output
      */
-    @SuppressWarnings("unchecked")
-    public static JsonOutput convertToOutpt(Assignment assignment, List<JsonSystem> systems, List<JsonMatch> pinnedMatches) {
+    public static JsonOutput convertToOutput(Assignment assignment) {
+        // extract facts from assignment by type
+        Collection<Match> confirmedMatchFacts = assignment.getMatches().stream()
+                .filter(match -> match.confirmed)
+                .collect(Collectors.toList());
 
-        // prepare list of system ids
-        Collection<Long> systemIds = new TreeSet<>();
-        for (JsonSystem system : systems) {
-            systemIds.add(system.id);
-        }
+        Stream<PinnedMatch> pinnedMatchFacts = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof PinnedMatch)
+                .map(object -> (PinnedMatch) object);
 
-        // prepare list of confirmed Matches
-        Collection<Match> confirmedMatches = CollectionUtils.select(assignment.getMatches(), new Predicate<Match>() {
-            @Override
-            public boolean evaluate(Match match) {
-                return match.confirmed;
-            }
-        });
+        Stream<System> systemFacts = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof System)
+                .map(object -> (System) object);
+
+        List<SystemProduct> systemProductFacts = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof SystemProduct)
+                .map(object -> (SystemProduct) object)
+                .collect(Collectors.toList());
 
         // prepare map from (system id, product id) to Match object
         Map<Pair<Long, Long>, Match> matchMap = new TreeMap<>();
-        for (Match match : confirmedMatches) {
+        for (Match match : confirmedMatchFacts) {
             matchMap.put(new ImmutablePair<>(match.systemId, match.productId), match);
         }
 
-        // prepare multimap from system id to set of product ids
-        @SuppressWarnings("rawtypes")
-        MultiMap<Long, Long> installationMap = MultiValueMap.multiValueMap(new TreeMap<Long, Collection>(), TreeSet.class);
-        for (JsonSystem system : systems) {
-            for (Long productId : system.productIds) {
-                installationMap.put(system.id, productId);
-            }
-        }
-        for (Match match : confirmedMatches) {
-            installationMap.put(match.systemId, match.productId);
-        }
+        // prepare map from system id to set of product ids
+        Map<Long, List<Long>> systemMap = systemFacts
+                .collect(Collectors.toMap(
+                        system -> system.id,
+                        system -> Stream.concat(
+                                confirmedMatchFacts.stream()
+                                    .filter(match -> match.systemId.equals(system.id))
+                                    .map(match -> match.productId),
+                                systemProductFacts.stream()
+                                    .filter(systemProduct -> systemProduct.systemId.equals(system.id))
+                                    .map(systemProduct -> systemProduct.productId)
+                            ).distinct().sorted().collect(Collectors.toList()),
+                        (id1, id2) -> id1,
+                        TreeMap::new
+                ));
 
         // fill output object's system fields
         JsonOutput output = new JsonOutput();
-        for (Long systemId : systemIds) {
+        for (Long systemId : systemMap.keySet()) {
             JsonOutputSystem system = new JsonOutputSystem(systemId);
 
             boolean compliantProductExists = false;
             boolean allProductsCompliant = true;
-            Collection<Long> productIds = (Collection<Long>) installationMap.get(systemId);
+            Collection<Long> productIds = systemMap.get(systemId);
             if (productIds != null) {
                 for (Long productId : productIds) {
                     JsonOutputProduct product = new JsonOutputProduct(productId);
@@ -171,7 +173,7 @@ public class FactConverter {
         for (Subscription subscription : subscriptions) {
             remainings.put(subscription.id, subscription.quantity * 100);
         }
-        for (Match match : confirmedMatches) {
+        for (Match match : confirmedMatchFacts) {
             remainings.put(match.subscriptionId, remainings.get(match.subscriptionId) - match.cents);
         }
         for (Subscription subscription : subscriptions) {
@@ -183,7 +185,7 @@ public class FactConverter {
 
         // fill output object's errors field
         // unsatisfied pinned matches
-        for (JsonMatch match : pinnedMatches) {
+        pinnedMatchFacts.forEach(match -> {
             Match actualMatch = matchMap.get(new ImmutablePair<Long, Long>(match.systemId, match.productId));
             if (actualMatch == null || !match.subscriptionId.equals(actualMatch.subscriptionId)) {
                 JsonOutputError error = new JsonOutputError("unsatisfied_pinned_match");
@@ -192,7 +194,7 @@ public class FactConverter {
                 error.data.put("product_id", match.productId.toString());
                 output.errors.add(error);
             }
-        }
+        });
 
         // unknown part numbers
         Set<String> unknownPartNumbers = new TreeSet<>();

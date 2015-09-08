@@ -64,6 +64,6 @@ public class Matcher {
         Assignment result = optaPlanner.getResult();
 
         // convert output back to output format and return it
-        return FactConverter.convertToOutpt(result, systems, pinnedMatches);
+        return FactConverter.convertToOutput(result);
     }
 }
