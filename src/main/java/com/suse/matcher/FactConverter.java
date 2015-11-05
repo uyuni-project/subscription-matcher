@@ -18,11 +18,11 @@ import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.math3.util.Pair;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -104,9 +104,9 @@ public class FactConverter {
                 .collect(Collectors.toList());
 
         // prepare map from (system id, product id) to Match object
-        Map<Pair<Long, Long>, Match> matchMap = new TreeMap<>();
+        Map<Pair<Long, Long>, Match> matchMap = new HashMap<>();
         for (Match match : confirmedMatchFacts) {
-            matchMap.put(new ImmutablePair<>(match.systemId, match.productId), match);
+            matchMap.put(new Pair<>(match.systemId, match.productId), match);
         }
 
         // prepare map from system id to set of product ids
@@ -137,7 +137,7 @@ public class FactConverter {
                 for (Long productId : productIds) {
                     JsonOutputProduct product = new JsonOutputProduct(productId);
 
-                    Match match = matchMap.get(new ImmutablePair<>(system.id, product.id));
+                    Match match = matchMap.get(new Pair<>(system.id, product.id));
                     if (match != null) {
                         product.subscriptionId = match.subscriptionId;
                         product.subscriptionCents = match.cents;
@@ -186,7 +186,7 @@ public class FactConverter {
         // fill output object's errors field
         // unsatisfied pinned matches
         pinnedMatchFacts.forEach(match -> {
-            Match actualMatch = matchMap.get(new ImmutablePair<Long, Long>(match.systemId, match.productId));
+            Match actualMatch = matchMap.get(new Pair<Long, Long>(match.systemId, match.productId));
             if (actualMatch == null || !match.subscriptionId.equals(actualMatch.subscriptionId)) {
                 JsonOutputError error = new JsonOutputError("unsatisfied_pinned_match");
                 error.data.put("system_id", match.systemId.toString());
