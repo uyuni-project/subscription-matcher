@@ -3,6 +3,12 @@
     <!-- Use FULL_ASSERT to turn on all debug warnings -->
     <environmentMode>REPRODUCIBLE</environmentMode>
 
+    <!-- Use a RNG from commons-math to make results repeatable across JVMs -->
+    <randomType>MERSENNE_TWISTER</randomType>
+
+    <!-- Force the same initial random seed -->
+    <randomSeed>0</randomSeed>
+
     <!-- Domain model configuration -->
     <solutionClass>com.suse.matcher.solver.Assignment</solutionClass>
     <entityClass>com.suse.matcher.solver.Match</entityClass>
@@ -22,9 +28,9 @@
         <!-- Generate next possible solutions by changing their values -->
         <changeMoveSelector />
 
-        <!-- Generate 10 solutions before selecting one for the next step -->
+        <!-- Generate 1000 solutions before selecting one for the next step -->
         <forager>
-            <acceptedCountLimit>10</acceptedCountLimit>
+            <acceptedCountLimit>1000</acceptedCountLimit>
         </forager>
 
         <!-- Selection by highest score but also avoid recently-touched entities
@@ -35,8 +41,8 @@
         </acceptor>
 
         <termination>
-            <!-- Terminate after 3 steps with no score improvement -->
-            <unimprovedStepCountLimit>3</unimprovedStepCountLimit>
+            <!-- Terminate after 5 steps with no score improvement -->
+            <unimprovedStepCountLimit>5</unimprovedStepCountLimit>
         </termination>
     </localSearch>
 </solver>
