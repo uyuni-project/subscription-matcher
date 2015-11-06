@@ -60,7 +60,7 @@ public class Matcher {
         }
 
         // activate the CSP solver with all deduced facts as inputs
-        OptaPlanner<Assignment> optaPlanner = new OptaPlanner<Assignment>(new Assignment(matches, otherFacts));
+        OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, otherFacts));
         Assignment result = optaPlanner.getResult();
 
         // convert output back to output format and return it

@@ -1,6 +1,7 @@
 package com.suse.matcher;
 
-import org.optaplanner.core.api.domain.solution.Solution;
+import com.suse.matcher.solver.Assignment;
+
 import org.optaplanner.core.api.score.constraint.ConstraintMatch;
 import org.optaplanner.core.api.score.constraint.ConstraintMatchTotal;
 import org.optaplanner.core.api.solver.Solver;
@@ -13,31 +14,28 @@ import org.slf4j.LoggerFactory;
  * Facade on the OptaPlanner solver.
  *
  * Fills a Solution object based on configuration specified in solverConfig.xml.
- *
- * @param <T> type of the Solution object
  */
-public class OptaPlanner<T extends Solution<?>> {
+public class OptaPlanner {
 
     /** Logger instance. */
     private final Logger logger = LoggerFactory.getLogger(OptaPlanner.class);
 
     /** The result. */
-    T result;
+    Assignment result;
 
     /**
      * Instantiates an OptaPlanner instance with the specified unsolved problem.
      *
      * @param unsolved the unsolved problem
      */
-    @SuppressWarnings("unchecked")
-    public OptaPlanner(T unsolved) {
+    public OptaPlanner(Assignment unsolved) {
         // init solver
         SolverFactory solverFactory = SolverFactory.createFromXmlResource("solverConfig.xml");
         Solver solver = solverFactory.buildSolver();
 
         // solve problem
         solver.solve(unsolved);
-        result = (T) solver.getBestSolution();
+        result = (Assignment) solver.getBestSolution();
 
         if (logger.isDebugEnabled()) {
             ScoreDirector director = solver.getScoreDirectorFactory().buildScoreDirector();
@@ -57,7 +55,7 @@ public class OptaPlanner<T extends Solution<?>> {
      *
      * @return the result
      */
-    public T getResult() {
+    public Assignment getResult() {
         return result;
     }
 }
