@@ -21,7 +21,7 @@
     <localSearch>
         <changeMoveSelector />
         <acceptor>
-            <entityTabuSize>7</entityTabuSize>
+            <entityTabuRatio>0.02</entityTabuRatio>
         </acceptor>
         <forager>
             <acceptedCountLimit>10</acceptedCountLimit>
