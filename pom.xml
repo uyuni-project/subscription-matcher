@@ -48,7 +48,7 @@
             <plugin>
                 <groupId>org.kie</groupId>
                 <artifactId>kie-maven-plugin</artifactId>
-                <version>6.2.0.Final</version>
+                <version>6.3.0.Final</version>
                 <extensions>true</extensions>
             </plugin>
         </plugins>
@@ -95,7 +95,7 @@
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-compiler</artifactId>
-            <version>6.2.0.Final</version>
+            <version>6.3.0.Final</version>
         </dependency>
         <!-- Override dependency to match SLES shipped version -->
         <dependency>
@@ -107,7 +107,7 @@
         <dependency>
             <groupId>org.optaplanner</groupId>
             <artifactId>optaplanner-core</artifactId>
-            <version>6.2.0.Final</version>
+            <version>6.3.0.Final</version>
         </dependency>
         <!-- Override dependency to match SLES shipped version -->
         <dependency>
