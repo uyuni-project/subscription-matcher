@@ -29,6 +29,12 @@ public class OptaPlanner {
      * @param unsolved the unsolved problem
      */
     public OptaPlanner(Assignment unsolved) {
+        // short circuit the planning in case there's nothing to optimize
+        if (unsolved.getMatches().isEmpty()) {
+            result = unsolved;
+            return;
+        }
+
         // init solver
         SolverFactory solverFactory = SolverFactory.createFromXmlResource("solverConfig.xml");
         Solver solver = solverFactory.buildSolver();
