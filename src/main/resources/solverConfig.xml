@@ -19,14 +19,23 @@
         <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
     </constructionHeuristic>
     <localSearch>
+        <!-- Generate next possible solutions by changing their values -->
         <changeMoveSelector />
-        <acceptor>
-            <entityTabuRatio>0.02</entityTabuRatio>
-        </acceptor>
+
+        <!-- Generate 10 solutions before selecting one for the next step -->
         <forager>
             <acceptedCountLimit>10</acceptedCountLimit>
         </forager>
+
+        <!-- Selection by highest score but also avoid recently-touched entities
+             (this helps avoiding local optima). The list of those "taboo"
+             entities should count at most 2% of the total entities -->
+        <acceptor>
+            <entityTabuRatio>0.02</entityTabuRatio>
+        </acceptor>
+
         <termination>
+            <!-- Terminate after 3 steps with no score improvement -->
             <unimprovedStepCountLimit>3</unimprovedStepCountLimit>
         </termination>
     </localSearch>
