@@ -8,4 +8,5 @@ legacy_skus.csv
 utils/PartNumbers.drl
 utils/ihv_isv.csv
 utils/test.csv
+utils/partnumbers_all.pyc
 
