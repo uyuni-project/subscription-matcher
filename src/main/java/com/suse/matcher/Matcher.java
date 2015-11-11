@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Matches a list of systems to a list of subscriptions.
@@ -44,7 +45,7 @@ public class Matcher {
         // among deductions, the rule engine determines system to subscription "matchability":
         // whether a subscription can be assigned to a system without taking other assignments into account.
         // this is represented by Match objects, divide them from other facts
-        Collection<Match> matches = new LinkedList<>();
+        Collection<Match> matches = new TreeSet<>();
         Collection<Object> otherFacts = new LinkedList<>();
         for (Object fact : deducedFacts) {
             if (fact instanceof PossibleMatch) {

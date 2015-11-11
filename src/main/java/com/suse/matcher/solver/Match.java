@@ -1,5 +1,6 @@
 package com.suse.matcher.solver;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,7 +13,7 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
  * product, that is, to a (system, product) couple.
  */
 @PlanningEntity
-public class Match  {
+public class Match implements Comparable<Match> {
 
     /** The system id. */
     public Long systemId;
@@ -141,5 +142,16 @@ public class Match  {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int compareTo(Match other) {
+        return new CompareToBuilder()
+            .append(systemId, other.systemId)
+            .append(productId, other.productId)
+            .append(subscriptionId, other.subscriptionId)
+            .append(cents, other.cents)
+            .toComparison();
     }
 }
