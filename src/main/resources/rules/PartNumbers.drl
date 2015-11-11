@@ -5930,7 +5930,7 @@ rule "Add subscription data for part number 874-006015"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -5967,7 +5967,7 @@ rule "Add subscription data for part number 874-006018"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -6006,7 +6006,7 @@ rule "Add subscription data for part number 874-006036"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9532,7 +9532,7 @@ rule "Add subscription data for part number 874-006563"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9571,7 +9571,7 @@ rule "Add subscription data for part number 874-006566"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9608,7 +9608,7 @@ rule "Add subscription data for part number 874-006569"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9683,7 +9683,7 @@ rule "Add subscription data for part number 874-006623"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9722,7 +9722,7 @@ rule "Add subscription data for part number 874-006626"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
@@ -9759,7 +9759,7 @@ rule "Add subscription data for part number 874-006629"
     then
         modify($subscription) {
             policy = Policy.INSTANCE,
-            quantity = $quantity * INFINITE,
+            quantity = Integer.MAX_VALUE,
             stackable = false
         };
 end
