@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.suse</groupId>
-    <artifactId>matcher</artifactId>
+    <artifactId>subscription-matcher</artifactId>
     <version>0.1</version>
 
-    <name>matcher</name>
-    <description>Expert system to check your SUSE subscription status</description>
+    <name>subscription-matcher</name>
+    <description>Expert system to match SUSE subscriptions to a set of systems</description>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:openSUSE/matcher.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:openSUSE/subscription-matcher.git</developerConnection>
     </scm>
 
     <packaging>jar</packaging>
