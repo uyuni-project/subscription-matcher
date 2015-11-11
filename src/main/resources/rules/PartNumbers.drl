@@ -489,7 +489,7 @@ rule "Add subscription data for part number 662644470078"
         };
 end
 
-//activation card suse linux enterprise server, system z enterprise class, 1 ifl, basic subscription, 1 year
+//AC SLES Z ENT IFL BS S 1Y
 rule "Add subscription data for part number 662644470085"
     when
         $subscription : Subscription(partNumber == "662644470085")
@@ -502,7 +502,7 @@ rule "Add subscription data for part number 662644470085"
         };
 end
 
-//activation card suse linux enterprise server, system z enterprise class, 1 ifl, basic subscription, 3 year
+//AC SLES Z ENT IFL BS S 3Y
 rule "Add subscription data for part number 662644470108"
     when
         $subscription : Subscription(partNumber == "662644470108")
@@ -567,7 +567,7 @@ rule "Add subscription data for part number 662644470306"
         };
 end
 
-//activation card suse linux enterprise desktop, x86 & x86-64, 1 instance, basic subscription, 1 year
+//AC SLED X86/X86-64 INST BS S 1Y
 rule "Add subscription data for part number 662644470498"
     when
         $subscription : Subscription(partNumber == "662644470498")
@@ -579,7 +579,7 @@ rule "Add subscription data for part number 662644470498"
         };
 end
 
-//activation card suse linux enterprise desktop, x86 & x86-64, 1 instance, basic subscription, 3 year
+//AC SLED X86/X86-64 INST BS S 3Y
 rule "Add subscription data for part number 662644470511"
     when
         $subscription : Subscription(partNumber == "662644470511")
@@ -1567,7 +1567,7 @@ rule "Add subscription data for part number 662644476292"
         };
 end
 
-//activation card geo clustering for suse linux enterprise high availability extension, system z, 1 ifl, inherited subscription, 1 year
+//AC GEO SLE Z IFL INH S 1Y
 rule "Add subscription data for part number 662644476544"
     when
         $subscription : Subscription(partNumber == "662644476544")
@@ -1579,7 +1579,7 @@ rule "Add subscription data for part number 662644476544"
         };
 end
 
-//activation card geo clustering for suse linux enterprise high availability extension, system z, 1 ifl, inherited subscription, 3 year
+//AC GEO SLE Z IFL INH S 3Y
 rule "Add subscription data for part number 662644476551"
     when
         $subscription : Subscription(partNumber == "662644476551")
@@ -1591,7 +1591,7 @@ rule "Add subscription data for part number 662644476551"
         };
 end
 
-//activation card geo clustering for suse linux enterprise high availability extension, system z, 1 ifl, inherited subscription, 5 year
+//AC GEO SLE Z IFL INH S 5Y
 rule "Add subscription data for part number 662644476568"
     when
         $subscription : Subscription(partNumber == "662644476568")
@@ -1603,7 +1603,7 @@ rule "Add subscription data for part number 662644476568"
         };
 end
 
-//activation card suse openstack cloud control node plus admin server, x86-64, 1 instance, priority subscription, 1 year
+//AC CLOUD CTRL/ADM X86-64 INST PR S 1Y
 rule "Add subscription data for part number 662644476643"
     when
         $subscription : Subscription(partNumber == "662644476643")
@@ -1615,7 +1615,7 @@ rule "Add subscription data for part number 662644476643"
         };
 end
 
-//activation card suse openstack cloud control node plus admin server, x86-64, 1 instance, priority subscription, 3 year
+//AC CLOUD CTRL/ADM X86-64 INST PR S 3Y
 rule "Add subscription data for part number 662644476650"
     when
         $subscription : Subscription(partNumber == "662644476650")
@@ -1627,7 +1627,7 @@ rule "Add subscription data for part number 662644476650"
         };
 end
 
-//activation card suse openstack cloud control node, x86-64, 1 instance, priority subscription, 1 year
+//AC CLOUD CTRL X86-64 INST PR S 1Y
 rule "Add subscription data for part number 662644476667"
     when
         $subscription : Subscription(partNumber == "662644476667")
@@ -1639,7 +1639,7 @@ rule "Add subscription data for part number 662644476667"
         };
 end
 
-//activation card suse openstack cloud control node, x86-64, 1 instance, priority subscription, 3 year
+//AC CLOUD CTRL X86-64 INST PR S 3Y
 rule "Add subscription data for part number 662644476674"
     when
         $subscription : Subscription(partNumber == "662644476674")
@@ -1651,7 +1651,7 @@ rule "Add subscription data for part number 662644476674"
         };
 end
 
-//activation card suse openstack cloud compute node, x86-64, 1-2 sockets, priority subscription, 1 year
+//AC CLOUD COMPUTE X86-64 1-2S PR S 1Y
 rule "Add subscription data for part number 662644476681"
     when
         $subscription : Subscription(partNumber == "662644476681")
@@ -1664,7 +1664,7 @@ rule "Add subscription data for part number 662644476681"
         };
 end
 
-//activation card suse openstack cloud compute node, x86-64, 1-2 sockets, priority subscription, 3 year
+//AC CLOUD COMPUTE X86-64 1-2S PR S 3Y
 rule "Add subscription data for part number 662644476698"
     when
         $subscription : Subscription(partNumber == "662644476698")
@@ -1677,7 +1677,7 @@ rule "Add subscription data for part number 662644476698"
         };
 end
 
-//activation card suse openstack cloud compute node, customer hyper-v x86-64, 1-2 sockets, priority subscription, 1 year
+//AC CLOUD COMPUTE HyperV 1-2S PR S 1Y
 rule "Add subscription data for part number 662644476704"
     when
         $subscription : Subscription(partNumber == "662644476704")
@@ -1690,7 +1690,7 @@ rule "Add subscription data for part number 662644476704"
         };
 end
 
-//activation card suse openstack cloud compute node, customer hyper-v x86-64, 1-2 sockets, priority subscription, 3 year
+//AC CLOUD COMPUTE HyperV 1-2S PR S 3Y
 rule "Add subscription data for part number 662644476711"
     when
         $subscription : Subscription(partNumber == "662644476711")
@@ -1703,7 +1703,7 @@ rule "Add subscription data for part number 662644476711"
         };
 end
 
-//activation card suse manager lifecycle management, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 1 year
+//AC MGR LC X86/X86-64 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 662644476728"
     when
         $subscription : Subscription(partNumber == "662644476728")
@@ -1716,7 +1716,7 @@ rule "Add subscription data for part number 662644476728"
         };
 end
 
-//activation card suse manager lifecycle management, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 3 year
+//AC MGR LC X86/X86-64 1-2S/VM PR S 3Y
 rule "Add subscription data for part number 662644476735"
     when
         $subscription : Subscription(partNumber == "662644476735")
@@ -1729,7 +1729,7 @@ rule "Add subscription data for part number 662644476735"
         };
 end
 
-//activation card suse manager monitoring, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 1 year
+//AC MGR MN X86/X86-64 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 662644476742"
     when
         $subscription : Subscription(partNumber == "662644476742")
@@ -1742,7 +1742,7 @@ rule "Add subscription data for part number 662644476742"
         };
 end
 
-//activation card suse manager monitoring, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 3 year
+//AC MGR MN X86/X86-64 1-2S/VM PR S 3Y
 rule "Add subscription data for part number 662644476759"
     when
         $subscription : Subscription(partNumber == "662644476759")
@@ -1755,7 +1755,7 @@ rule "Add subscription data for part number 662644476759"
         };
 end
 
-//activation card suse manager lifecycle management, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 1 year
+//AC MGR LC X86/X86-64 1-2S ULVM PR S 1Y
 rule "Add subscription data for part number 662644476766"
     when
         $subscription : Subscription(partNumber == "662644476766")
@@ -1768,7 +1768,7 @@ rule "Add subscription data for part number 662644476766"
         };
 end
 
-//activation card suse manager lifecycle management, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//AC MGR LC X86/X86-64 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 662644476773"
     when
         $subscription : Subscription(partNumber == "662644476773")
@@ -1781,7 +1781,7 @@ rule "Add subscription data for part number 662644476773"
         };
 end
 
-//activation card suse manager monitoring, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 1 year
+//AC MGR MN X86/X86-64 1-2S ULVM PR S 1Y
 rule "Add subscription data for part number 662644476780"
     when
         $subscription : Subscription(partNumber == "662644476780")
@@ -1794,7 +1794,7 @@ rule "Add subscription data for part number 662644476780"
         };
 end
 
-//activation card suse manager monitoring, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//AC MGR MN X86/X86-64 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 662644476797"
     when
         $subscription : Subscription(partNumber == "662644476797")
@@ -1807,7 +1807,7 @@ rule "Add subscription data for part number 662644476797"
         };
 end
 
-//activation card suse manager lifecycle management, system z, 1 ifl with unlimited virtual machines, priority subscription, 1 year
+//AC MGR LC Z IFL ULVM PR S 1Y
 rule "Add subscription data for part number 662644476803"
     when
         $subscription : Subscription(partNumber == "662644476803")
@@ -1820,7 +1820,7 @@ rule "Add subscription data for part number 662644476803"
         };
 end
 
-//activation card suse manager lifecycle management, system z, 1 ifl with unlimited virtual machines, priority subscription, 3 year
+//AC MGR LC Z IFL ULVM PR S 3Y
 rule "Add subscription data for part number 662644476810"
     when
         $subscription : Subscription(partNumber == "662644476810")
@@ -1833,7 +1833,7 @@ rule "Add subscription data for part number 662644476810"
         };
 end
 
-//activation card suse manager server, x86-64, 1 instance for 1-50 managed linux instances, priority subscription, 1 year
+//AC MGR SRV X86-64 INST 1-50 PR S 1Y
 rule "Add subscription data for part number 662644476827"
     when
         $subscription : Subscription(partNumber == "662644476827")
@@ -1845,7 +1845,7 @@ rule "Add subscription data for part number 662644476827"
         };
 end
 
-//activation card suse manager server, x86-64, 1 instance, priority subscription, 1 year
+//AC MGR SRV X86-64 INST PR S 1Y
 rule "Add subscription data for part number 662644476834"
     when
         $subscription : Subscription(partNumber == "662644476834")
@@ -1857,7 +1857,7 @@ rule "Add subscription data for part number 662644476834"
         };
 end
 
-//activation card suse manager server, x86-64, 1 instance, priority subscription, 3 year
+//AC MGR SRV X86-64 INST PR S 3Y
 rule "Add subscription data for part number 662644476841"
     when
         $subscription : Subscription(partNumber == "662644476841")
@@ -1869,7 +1869,7 @@ rule "Add subscription data for part number 662644476841"
         };
 end
 
-//activation card suse manager proxy, x86-64, 1 instance, priority subscription, 1 year
+//AC MGR PROXY X86-64 INST PR S 1Y
 rule "Add subscription data for part number 662644476858"
     when
         $subscription : Subscription(partNumber == "662644476858")
@@ -1881,7 +1881,7 @@ rule "Add subscription data for part number 662644476858"
         };
 end
 
-//activation card suse manager proxy, x86-64, 1 instance, priority subscription, 3 year
+//AC MGR PROXY X86-64 INST PR S 3Y
 rule "Add subscription data for part number 662644476865"
     when
         $subscription : Subscription(partNumber == "662644476865")
@@ -1893,7 +1893,7 @@ rule "Add subscription data for part number 662644476865"
         };
 end
 
-//activation card suse manager management pack for customer system center, x86-64, 1 scom instance, standard subscription, 1 year
+//AC MGR MPCK X86-64 SCOM INST ST S 1Y
 rule "Add subscription data for part number 662644476872"
     when
         $subscription : Subscription(partNumber == "662644476872")
@@ -1905,7 +1905,7 @@ rule "Add subscription data for part number 662644476872"
         };
 end
 
-//activation card suse manager monitoring, system z, 1 ifl with unlimited virtual machines, priority subscription, 1 year
+//AC MGR MN Z IFL ULVM PR S 1Y
 rule "Add subscription data for part number 662644476889"
     when
         $subscription : Subscription(partNumber == "662644476889")
@@ -1918,7 +1918,7 @@ rule "Add subscription data for part number 662644476889"
         };
 end
 
-//activation card suse manager monitoring, system z, 1 ifl with unlimited virtual machines, priority subscription, 3 year
+//AC MGR MN Z IFL ULVM PR S 3Y
 rule "Add subscription data for part number 662644476896"
     when
         $subscription : Subscription(partNumber == "662644476896")
@@ -1931,7 +1931,7 @@ rule "Add subscription data for part number 662644476896"
         };
 end
 
-//activation card suse manager server, x86-64, 1 instance for 1-50 managed linux instances, priority subscription, 3 year
+//AC MGR SRV X86-64 INST 1-50 PR S 3Y
 rule "Add subscription data for part number 662644476902"
     when
         $subscription : Subscription(partNumber == "662644476902")
@@ -1943,7 +1943,7 @@ rule "Add subscription data for part number 662644476902"
         };
 end
 
-//activation card suse linux enterprise desktop, x86 & x86-64, 1 instance, standard subscription, 1 year
+//AC SLED X86/X86-64 INST ST S 1Y
 rule "Add subscription data for part number 662644477114"
     when
         $subscription : Subscription(partNumber == "662644477114")
@@ -1955,7 +1955,7 @@ rule "Add subscription data for part number 662644477114"
         };
 end
 
-//activation card suse linux enterprise desktop, x86 & x86-64, 1 instance, standard subscription, 3 year
+//AC SLED X86/X86-64 INST ST S 3Y
 rule "Add subscription data for part number 662644477121"
     when
         $subscription : Subscription(partNumber == "662644477121")
@@ -1967,7 +1967,7 @@ rule "Add subscription data for part number 662644477121"
         };
 end
 
-//activation card suse linux enterprise desktop, x86 & x86-64, 1 instance, priority subscription, 1 year
+//AC SLED X86/X86-64 INST PR S 1Y
 rule "Add subscription data for part number 662644477138"
     when
         $subscription : Subscription(partNumber == "662644477138")
@@ -1979,7 +1979,7 @@ rule "Add subscription data for part number 662644477138"
         };
 end
 
-//activation card suse linux enterprise desktop, x86 & x86-64, 1 instance, priority subscription, 3 year
+//AC SLED X86/X86-64 INST PR S 3Y
 rule "Add subscription data for part number 662644477145"
     when
         $subscription : Subscription(partNumber == "662644477145")
@@ -1991,7 +1991,7 @@ rule "Add subscription data for part number 662644477145"
         };
 end
 
-//activation card suse linux enterprise workstation extension, x86-64, 1 instance, inherited subscription, 1 year
+//AC SLE WE X86-64 INST INH S 1Y
 rule "Add subscription data for part number 662644477220"
     when
         $subscription : Subscription(partNumber == "662644477220")
@@ -2002,7 +2002,7 @@ rule "Add subscription data for part number 662644477220"
         };
 end
 
-//activation card suse linux enterprise workstation extension, x86-64, 1 instance, inherited subscription, 3 year
+//AC SLE WE X86-64 INST INH S 3Y
 rule "Add subscription data for part number 662644477223"
     when
         $subscription : Subscription(partNumber == "662644477223")
@@ -2013,7 +2013,7 @@ rule "Add subscription data for part number 662644477223"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, basic subscription, 1 year
+//AC SLE HPC X86-64 1-2S BS S 1Y
 rule "Add subscription data for part number 662644477268"
     when
         $subscription : Subscription(partNumber == "662644477268")
@@ -2026,7 +2026,7 @@ rule "Add subscription data for part number 662644477268"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, basic subscription, 3 year
+//AC SLE HPC X86-64 1-2S BS S 3Y
 rule "Add subscription data for part number 662644477275"
     when
         $subscription : Subscription(partNumber == "662644477275")
@@ -2039,7 +2039,7 @@ rule "Add subscription data for part number 662644477275"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, basic subscription, 5 year
+//AC SLE HPC X86-64 1-2S BS S 5Y
 rule "Add subscription data for part number 662644477282"
     when
         $subscription : Subscription(partNumber == "662644477282")
@@ -2052,7 +2052,7 @@ rule "Add subscription data for part number 662644477282"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, basic subscription, 1 year
+//AC SLE HPC PWR 1-2S BS S 1Y
 rule "Add subscription data for part number 662644477299"
     when
         $subscription : Subscription(partNumber == "662644477299")
@@ -2065,7 +2065,7 @@ rule "Add subscription data for part number 662644477299"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, basic subscription, 3 year
+//AC SLE HPC PWR 1-2S BS S 3Y
 rule "Add subscription data for part number 662644477305"
     when
         $subscription : Subscription(partNumber == "662644477305")
@@ -2078,7 +2078,7 @@ rule "Add subscription data for part number 662644477305"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, basic subscription, 5 year
+//AC SLE HPC PWR 1-2S BS S 5Y
 rule "Add subscription data for part number 662644477312"
     when
         $subscription : Subscription(partNumber == "662644477312")
@@ -2091,7 +2091,7 @@ rule "Add subscription data for part number 662644477312"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, standard subscription, 1 year
+//AC SLE HPC X86-64 1-2S ST S 1Y
 rule "Add subscription data for part number 662644477329"
     when
         $subscription : Subscription(partNumber == "662644477329")
@@ -2104,7 +2104,7 @@ rule "Add subscription data for part number 662644477329"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, standard subscription, 3 year
+//AC SLE HPC X86-64 1-2S ST S 3Y
 rule "Add subscription data for part number 662644477336"
     when
         $subscription : Subscription(partNumber == "662644477336")
@@ -2117,7 +2117,7 @@ rule "Add subscription data for part number 662644477336"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, standard subscription, 5 year
+//AC SLE HPC X86-64 1-2S ST S 5Y
 rule "Add subscription data for part number 662644477343"
     when
         $subscription : Subscription(partNumber == "662644477343")
@@ -2130,7 +2130,7 @@ rule "Add subscription data for part number 662644477343"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, standard subscription, 1 year
+//AC SLE HPC PWR 1-2S ST S 1Y
 rule "Add subscription data for part number 662644477350"
     when
         $subscription : Subscription(partNumber == "662644477350")
@@ -2143,7 +2143,7 @@ rule "Add subscription data for part number 662644477350"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, standard subscription, 3 year
+//AC SLE HPC PWR 1-2S ST S 3Y
 rule "Add subscription data for part number 662644477367"
     when
         $subscription : Subscription(partNumber == "662644477367")
@@ -2156,7 +2156,7 @@ rule "Add subscription data for part number 662644477367"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, standard subscription, 5 year
+//AC SLE HPC PWR 1-2S ST S 5Y
 rule "Add subscription data for part number 662644477374"
     when
         $subscription : Subscription(partNumber == "662644477374")
@@ -2169,7 +2169,7 @@ rule "Add subscription data for part number 662644477374"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, priority subscription, 1 year
+//AC SLE HPC X86-64 1-2S PR S 1Y
 rule "Add subscription data for part number 662644477381"
     when
         $subscription : Subscription(partNumber == "662644477381")
@@ -2182,7 +2182,7 @@ rule "Add subscription data for part number 662644477381"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, priority subscription, 3 year
+//AC SLE HPC X86-64 1-2S PR S 3Y
 rule "Add subscription data for part number 662644477398"
     when
         $subscription : Subscription(partNumber == "662644477398")
@@ -2195,7 +2195,7 @@ rule "Add subscription data for part number 662644477398"
         };
 end
 
-//activation card suse linux enterprise high performance computing, x86-64, 1-2 sockets, priority subscription, 5 year
+//AC SLE HPC X86-64 1-2S PR S 5Y
 rule "Add subscription data for part number 662644477404"
     when
         $subscription : Subscription(partNumber == "662644477404")
@@ -2208,7 +2208,7 @@ rule "Add subscription data for part number 662644477404"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, priority subscription, 1 year
+//AC SLE HPC PWR 1-2S PR S 1Y
 rule "Add subscription data for part number 662644477411"
     when
         $subscription : Subscription(partNumber == "662644477411")
@@ -2221,7 +2221,7 @@ rule "Add subscription data for part number 662644477411"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, priority subscription, 3 year
+//AC SLE HPC PWR 1-2S PR S 3Y
 rule "Add subscription data for part number 662644477428"
     when
         $subscription : Subscription(partNumber == "662644477428")
@@ -2234,7 +2234,7 @@ rule "Add subscription data for part number 662644477428"
         };
 end
 
-//activation card suse linux enterprise high performance computing, ibm power, 1-2 sockets, priority subscription, 5 year
+//AC SLE HPC PWR 1-2S PR S 5Y
 rule "Add subscription data for part number 662644477435"
     when
         $subscription : Subscription(partNumber == "662644477435")
@@ -2247,7 +2247,7 @@ rule "Add subscription data for part number 662644477435"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 1 year
+//AC SLES X86/X86-64 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 662644477443"
     when
         $subscription : Subscription(partNumber == "662644477443")
@@ -2260,7 +2260,7 @@ rule "Add subscription data for part number 662644477443"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 1 year
+//AC SLES X86/X86-64 1-2S ULVM PR S 1Y
 rule "Add subscription data for part number 662644477444"
     when
         $subscription : Subscription(partNumber == "662644477444")
@@ -2273,7 +2273,7 @@ rule "Add subscription data for part number 662644477444"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 1 year
+//AC SLES X86/X86-64 1-2S/VM L3PR S 1Y
 rule "Add subscription data for part number 662644477445"
     when
         $subscription : Subscription(partNumber == "662644477445")
@@ -2286,7 +2286,7 @@ rule "Add subscription data for part number 662644477445"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 1 year
+//AC SLES X86/X86-64 1-2S ULVM L3PR S 1Y
 rule "Add subscription data for part number 662644477446"
     when
         $subscription : Subscription(partNumber == "662644477446")
@@ -2299,7 +2299,7 @@ rule "Add subscription data for part number 662644477446"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, standard subscription, 1 year
+//AC SLES X86/X86-64 1-2S/VM ST S 1Y
 rule "Add subscription data for part number 662644477447"
     when
         $subscription : Subscription(partNumber == "662644477447")
@@ -2312,7 +2312,7 @@ rule "Add subscription data for part number 662644477447"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, standard subscription, 1 year
+//AC SLES X86/X86-64 1-2S ULVM ST S 1Y
 rule "Add subscription data for part number 662644477448"
     when
         $subscription : Subscription(partNumber == "662644477448")
@@ -2325,7 +2325,7 @@ rule "Add subscription data for part number 662644477448"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-standard subscription, 1 year
+//AC SLES X86/X86-64 1-2S/VM L3ST S 1Y
 rule "Add subscription data for part number 662644477449"
     when
         $subscription : Subscription(partNumber == "662644477449")
@@ -2338,7 +2338,7 @@ rule "Add subscription data for part number 662644477449"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-standard subscription, 1 year
+//AC SLES X86/X86-64 1-2S ULVM L3ST S 1Y
 rule "Add subscription data for part number 662644477450"
     when
         $subscription : Subscription(partNumber == "662644477450")
@@ -2351,7 +2351,7 @@ rule "Add subscription data for part number 662644477450"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 3 year
+//AC SLES X86/X86-64 1-2S/VM PR S 3Y
 rule "Add subscription data for part number 662644477451"
     when
         $subscription : Subscription(partNumber == "662644477451")
@@ -2364,7 +2364,7 @@ rule "Add subscription data for part number 662644477451"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//AC SLES X86/X86-64 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 662644477452"
     when
         $subscription : Subscription(partNumber == "662644477452")
@@ -2377,7 +2377,7 @@ rule "Add subscription data for part number 662644477452"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 3 year
+//AC SLES X86/X86-64 1-2S/VM L3PR S 3Y
 rule "Add subscription data for part number 662644477453"
     when
         $subscription : Subscription(partNumber == "662644477453")
@@ -2390,7 +2390,7 @@ rule "Add subscription data for part number 662644477453"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//AC SLES X86/X86-64 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 662644477454"
     when
         $subscription : Subscription(partNumber == "662644477454")
@@ -2403,7 +2403,7 @@ rule "Add subscription data for part number 662644477454"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, standard subscription, 3 year
+//AC SLES X86/X86-64 1-2S/VM ST S 3Y
 rule "Add subscription data for part number 662644477455"
     when
         $subscription : Subscription(partNumber == "662644477455")
@@ -2416,7 +2416,7 @@ rule "Add subscription data for part number 662644477455"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, standard subscription, 3 year
+//AC SLES X86/X86-64 1-2S ULVM ST S 3Y
 rule "Add subscription data for part number 662644477456"
     when
         $subscription : Subscription(partNumber == "662644477456")
@@ -2429,7 +2429,7 @@ rule "Add subscription data for part number 662644477456"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-standard subscription, 3 year
+//AC SLES X86/X86-64 1-2S/VM L3ST S 3Y
 rule "Add subscription data for part number 662644477457"
     when
         $subscription : Subscription(partNumber == "662644477457")
@@ -2442,7 +2442,7 @@ rule "Add subscription data for part number 662644477457"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-standard subscription, 3 year
+//AC SLES X86/X86-64 1-2S ULVM L3ST S 3Y
 rule "Add subscription data for part number 662644477458"
     when
         $subscription : Subscription(partNumber == "662644477458")
@@ -2455,7 +2455,7 @@ rule "Add subscription data for part number 662644477458"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 5 year
+//AC SLES X86/X86-64 1-2S/VM PR S 5Y
 rule "Add subscription data for part number 662644477459"
     when
         $subscription : Subscription(partNumber == "662644477459")
@@ -2468,7 +2468,7 @@ rule "Add subscription data for part number 662644477459"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 5 year
+//AC SLES X86/X86-64 1-2S ULVM PR S 5Y
 rule "Add subscription data for part number 662644477460"
     when
         $subscription : Subscription(partNumber == "662644477460")
@@ -2481,7 +2481,7 @@ rule "Add subscription data for part number 662644477460"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 5 year
+//AC SLES X86/X86-64 1-2S/VM L3PR S 5Y
 rule "Add subscription data for part number 662644477461"
     when
         $subscription : Subscription(partNumber == "662644477461")
@@ -2494,7 +2494,7 @@ rule "Add subscription data for part number 662644477461"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 5 year
+//AC SLES X86/X86-64 1-2S ULVM L3PR S 5Y
 rule "Add subscription data for part number 662644477462"
     when
         $subscription : Subscription(partNumber == "662644477462")
@@ -2507,7 +2507,7 @@ rule "Add subscription data for part number 662644477462"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, standard subscription, 5 year
+//AC SLES X86/X86-64 1-2S/VM ST S 5Y
 rule "Add subscription data for part number 662644477463"
     when
         $subscription : Subscription(partNumber == "662644477463")
@@ -2520,7 +2520,7 @@ rule "Add subscription data for part number 662644477463"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, standard subscription, 5 year
+//AC SLES X86/X86-64 1-2S ULVM ST S 5Y
 rule "Add subscription data for part number 662644477464"
     when
         $subscription : Subscription(partNumber == "662644477464")
@@ -2533,7 +2533,7 @@ rule "Add subscription data for part number 662644477464"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-standard subscription, 5 year
+//AC SLES X86/X86-64 1-2S/VM L3ST S 5Y
 rule "Add subscription data for part number 662644477465"
     when
         $subscription : Subscription(partNumber == "662644477465")
@@ -2546,7 +2546,7 @@ rule "Add subscription data for part number 662644477465"
         };
 end
 
-//activation card suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-standard subscription, 5 year
+//AC SLES X86/X86-64 1-2S ULVM L3ST S 5Y
 rule "Add subscription data for part number 662644477466"
     when
         $subscription : Subscription(partNumber == "662644477466")
@@ -2559,7 +2559,7 @@ rule "Add subscription data for part number 662644477466"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 1 year
+//AC SLE SAP X86-64 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 662644477467"
     when
         $subscription : Subscription(partNumber == "662644477467")
@@ -2572,7 +2572,7 @@ rule "Add subscription data for part number 662644477467"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 1 year
+//AC SLE SAP X86-64 1-2S ULVM PR S 1Y
 rule "Add subscription data for part number 662644477468"
     when
         $subscription : Subscription(partNumber == "662644477468")
@@ -2585,7 +2585,7 @@ rule "Add subscription data for part number 662644477468"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 3 year
+//AC SLE SAP X86-64 1-2S/VM PR S 3Y
 rule "Add subscription data for part number 662644477469"
     when
         $subscription : Subscription(partNumber == "662644477469")
@@ -2598,7 +2598,7 @@ rule "Add subscription data for part number 662644477469"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//AC SLE SAP X86-64 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 662644477470"
     when
         $subscription : Subscription(partNumber == "662644477470")
@@ -2611,7 +2611,7 @@ rule "Add subscription data for part number 662644477470"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 5 year
+//AC SLE SAP X86-64 1-2S/VM PR S 5Y
 rule "Add subscription data for part number 662644477471"
     when
         $subscription : Subscription(partNumber == "662644477471")
@@ -2624,7 +2624,7 @@ rule "Add subscription data for part number 662644477471"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 5 year
+//AC SLE SAP X86-64 1-2S ULVM PR S 5Y
 rule "Add subscription data for part number 662644477472"
     when
         $subscription : Subscription(partNumber == "662644477472")
@@ -2637,7 +2637,7 @@ rule "Add subscription data for part number 662644477472"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 1 year
+//AC SLE SAP X86-64 1-2S/VM L3PR S 1Y
 rule "Add subscription data for part number 662644477473"
     when
         $subscription : Subscription(partNumber == "662644477473")
@@ -2650,7 +2650,7 @@ rule "Add subscription data for part number 662644477473"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 1 year
+//AC SLE SAP X86-64 1-2S ULVM L3PR S 1Y
 rule "Add subscription data for part number 662644477474"
     when
         $subscription : Subscription(partNumber == "662644477474")
@@ -2663,7 +2663,7 @@ rule "Add subscription data for part number 662644477474"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 3 year
+//AC SLE SAP X86-64 1-2S/VM L3PR S 3Y
 rule "Add subscription data for part number 662644477475"
     when
         $subscription : Subscription(partNumber == "662644477475")
@@ -2676,7 +2676,7 @@ rule "Add subscription data for part number 662644477475"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//AC SLE SAP X86-64 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 662644477476"
     when
         $subscription : Subscription(partNumber == "662644477476")
@@ -2689,7 +2689,7 @@ rule "Add subscription data for part number 662644477476"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 5 year
+//AC SLE SAP X86-64 1-2S/VM L3PR S 5Y
 rule "Add subscription data for part number 662644477477"
     when
         $subscription : Subscription(partNumber == "662644477477")
@@ -2702,7 +2702,7 @@ rule "Add subscription data for part number 662644477477"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 5 year
+//AC SLE SAP X86-64 1-2S ULVM L3PR S 5Y
 rule "Add subscription data for part number 662644477478"
     when
         $subscription : Subscription(partNumber == "662644477478")
@@ -2715,7 +2715,7 @@ rule "Add subscription data for part number 662644477478"
         };
 end
 
-//activation card suse linux enterprise high availability extension, x86 & x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 1 year
+//AC SLE HA X86/X86-64 INH VRT INH S 1Y
 rule "Add subscription data for part number 662644477479"
     when
         $subscription : Subscription(partNumber == "662644477479")
@@ -2726,7 +2726,7 @@ rule "Add subscription data for part number 662644477479"
         };
 end
 
-//activation card suse linux enterprise high availability extension, x86 & x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 3 year
+//AC SLE HA X86/X86-64 INH VRT INH S 3Y
 rule "Add subscription data for part number 662644477480"
     when
         $subscription : Subscription(partNumber == "662644477480")
@@ -2737,7 +2737,7 @@ rule "Add subscription data for part number 662644477480"
         };
 end
 
-//activation card suse linux enterprise high availability extension, x86 & x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 5 year
+//AC SLE HA X86/X86-64 INH VRT INH S 5Y
 rule "Add subscription data for part number 662644477481"
     when
         $subscription : Subscription(partNumber == "662644477481")
@@ -2748,7 +2748,7 @@ rule "Add subscription data for part number 662644477481"
         };
 end
 
-//activation card geo clustering for suse linux enterprise high availability extension, x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 1 year
+//AC GEO SLE X86-64 INH VRT INH S 1Y
 rule "Add subscription data for part number 662644477482"
     when
         $subscription : Subscription(partNumber == "662644477482")
@@ -2759,7 +2759,7 @@ rule "Add subscription data for part number 662644477482"
         };
 end
 
-//activation card geo clustering for suse linux enterprise high availability extension, x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 3 year
+//AC GEO SLE X86-64 INH VRT INH S 3Y
 rule "Add subscription data for part number 662644477483"
     when
         $subscription : Subscription(partNumber == "662644477483")
@@ -2770,7 +2770,7 @@ rule "Add subscription data for part number 662644477483"
         };
 end
 
-//activation card geo clustering for suse linux enterprise high availability extension, x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 5 year
+//AC GEO SLE X86-64 INH VRT INH S 5Y
 rule "Add subscription data for part number 662644477484"
     when
         $subscription : Subscription(partNumber == "662644477484")
@@ -2781,7 +2781,7 @@ rule "Add subscription data for part number 662644477484"
         };
 end
 
-//activation card suse manager server, x86-64, 1 instance, l3-priority subscription, 1 year
+//AC MGR SRV X86-64 INST L3PR S 1Y
 rule "Add subscription data for part number 662644477485"
     when
         $subscription : Subscription(partNumber == "662644477485")
@@ -2793,7 +2793,7 @@ rule "Add subscription data for part number 662644477485"
         };
 end
 
-//activation card suse manager server, system z, 1 instance, priority subscription, 1 year
+//AC MGR SRV Z INST PR S 1Y
 rule "Add subscription data for part number 662644477486"
     when
         $subscription : Subscription(partNumber == "662644477486")
@@ -2805,7 +2805,7 @@ rule "Add subscription data for part number 662644477486"
         };
 end
 
-//activation card suse manager server, system z, 1 instance, l3-priority subscription, 1 year
+//AC MGR SRV Z INST L3PR S 1Y
 rule "Add subscription data for part number 662644477487"
     when
         $subscription : Subscription(partNumber == "662644477487")
@@ -2817,7 +2817,7 @@ rule "Add subscription data for part number 662644477487"
         };
 end
 
-//activation card suse manager server, x86-64, 1 instance, l3-priority subscription, 3 year
+//AC MGR SRV X86-64 INST L3PR S 3Y
 rule "Add subscription data for part number 662644477488"
     when
         $subscription : Subscription(partNumber == "662644477488")
@@ -2829,7 +2829,7 @@ rule "Add subscription data for part number 662644477488"
         };
 end
 
-//activation card suse manager server, system z, 1 instance, priority subscription, 3 year
+//AC MGR SRV Z INST PR S 3Y
 rule "Add subscription data for part number 662644477489"
     when
         $subscription : Subscription(partNumber == "662644477489")
@@ -2841,7 +2841,7 @@ rule "Add subscription data for part number 662644477489"
         };
 end
 
-//activation card suse manager server, system z, 1 instance, l3-priority subscription, 3 year
+//AC MGR SRV Z INST L3PR S 3Y
 rule "Add subscription data for part number 662644477490"
     when
         $subscription : Subscription(partNumber == "662644477490")
@@ -2853,7 +2853,7 @@ rule "Add subscription data for part number 662644477490"
         };
 end
 
-//activation card suse manager server, x86-64, 1 instance for 1-50 managed linux instances, l3-priority subscription, 1 year
+//AC MGR SRV X86-64 INST 1-50 L3PR S 1Y
 rule "Add subscription data for part number 662644477491"
     when
         $subscription : Subscription(partNumber == "662644477491")
@@ -2865,7 +2865,7 @@ rule "Add subscription data for part number 662644477491"
         };
 end
 
-//activation card suse manager server, x86-64, 1 instance for 1-50 managed linux instances, l3-priority subscription, 3 year
+//AC MGR SRV X86-64 INST 1-50 L3PR S 3Y
 rule "Add subscription data for part number 662644477492"
     when
         $subscription : Subscription(partNumber == "662644477492")
@@ -2877,7 +2877,7 @@ rule "Add subscription data for part number 662644477492"
         };
 end
 
-//activation card suse manager proxy, x86-64, 1 instance, l3-priority subscription, 1 year
+//AC MGR PROXY X86-64 INST L3PR S 1Y
 rule "Add subscription data for part number 662644477493"
     when
         $subscription : Subscription(partNumber == "662644477493")
@@ -2889,7 +2889,7 @@ rule "Add subscription data for part number 662644477493"
         };
 end
 
-//activation card suse manager proxy, x86-64, 1 instance, l3-priority subscription, 3 year
+//AC MGR PROXY X86-64 INST L3PR S 3Y
 rule "Add subscription data for part number 662644477494"
     when
         $subscription : Subscription(partNumber == "662644477494")
@@ -2901,7 +2901,7 @@ rule "Add subscription data for part number 662644477494"
         };
 end
 
-//activation card suse manager lifecycle management, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 1 year
+//AC MGR LC X86/X86-64 1-2S/VM L3PR S 1Y
 rule "Add subscription data for part number 662644477495"
     when
         $subscription : Subscription(partNumber == "662644477495")
@@ -2914,7 +2914,7 @@ rule "Add subscription data for part number 662644477495"
         };
 end
 
-//activation card suse manager lifecycle management, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 3 year
+//AC MGR LC X86/X86-64 1-2S/VM L3PR S 3Y
 rule "Add subscription data for part number 662644477496"
     when
         $subscription : Subscription(partNumber == "662644477496")
@@ -2927,7 +2927,7 @@ rule "Add subscription data for part number 662644477496"
         };
 end
 
-//activation card suse manager lifecycle management, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 1 year
+//AC MGR LC X86/X86-64 1-2S ULVM L3PR S 1Y
 rule "Add subscription data for part number 662644477497"
     when
         $subscription : Subscription(partNumber == "662644477497")
@@ -2940,7 +2940,7 @@ rule "Add subscription data for part number 662644477497"
         };
 end
 
-//activation card suse manager lifecycle management, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//AC MGR LC X86/X86-64 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 662644477498"
     when
         $subscription : Subscription(partNumber == "662644477498")
@@ -2953,7 +2953,7 @@ rule "Add subscription data for part number 662644477498"
         };
 end
 
-//activation card suse manager lifecycle management, system z, 1 ifl with unlimited virtual machines, l3-priority subscription, 1 year
+//AC MGR LC Z IFL ULVM L3PR S 1Y
 rule "Add subscription data for part number 662644477499"
     when
         $subscription : Subscription(partNumber == "662644477499")
@@ -2966,7 +2966,7 @@ rule "Add subscription data for part number 662644477499"
         };
 end
 
-//activation card suse manager lifecycle management, system z, 1 ifl with unlimited virtual machines, l3-priority subscription, 3 year
+//AC MGR LC Z IFL ULVM L3PR S 3Y
 rule "Add subscription data for part number 662644477500"
     when
         $subscription : Subscription(partNumber == "662644477500")
@@ -2979,7 +2979,7 @@ rule "Add subscription data for part number 662644477500"
         };
 end
 
-//activation card suse manager monitoring, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 1 year
+//AC MGR MN X86/X86-64 1-2S/VM L3PR S 1Y
 rule "Add subscription data for part number 662644477501"
     when
         $subscription : Subscription(partNumber == "662644477501")
@@ -2992,7 +2992,7 @@ rule "Add subscription data for part number 662644477501"
         };
 end
 
-//activation card suse manager monitoring, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 3 year
+//AC MGR MN X86/X86-64 1-2S/VM L3PR S 3Y
 rule "Add subscription data for part number 662644477502"
     when
         $subscription : Subscription(partNumber == "662644477502")
@@ -3005,7 +3005,7 @@ rule "Add subscription data for part number 662644477502"
         };
 end
 
-//activation card suse manager monitoring, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 1 year
+//AC MGR MN X86/X86-64 1-2S ULVM L3PR S 1Y
 rule "Add subscription data for part number 662644477503"
     when
         $subscription : Subscription(partNumber == "662644477503")
@@ -3018,7 +3018,7 @@ rule "Add subscription data for part number 662644477503"
         };
 end
 
-//activation card suse manager monitoring, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//AC MGR MN X86/X86-64 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 662644477504"
     when
         $subscription : Subscription(partNumber == "662644477504")
@@ -3031,7 +3031,7 @@ rule "Add subscription data for part number 662644477504"
         };
 end
 
-//activation card suse manager monitoring, system z, 1 ifl with unlimited virtual machines, l3-priority subscription, 1 year
+//AC MGR MN Z IFL ULVM L3PR S 1Y
 rule "Add subscription data for part number 662644477505"
     when
         $subscription : Subscription(partNumber == "662644477505")
@@ -3044,7 +3044,7 @@ rule "Add subscription data for part number 662644477505"
         };
 end
 
-//activation card suse manager monitoring, system z, 1 ifl with unlimited virtual machines, l3-priority subscription, 3 year
+//AC MGR MN Z IFL ULVM L3PR S 3Y
 rule "Add subscription data for part number 662644477506"
     when
         $subscription : Subscription(partNumber == "662644477506")
@@ -3057,7 +3057,7 @@ rule "Add subscription data for part number 662644477506"
         };
 end
 
-//activation card suse openstack cloud control node plus admin server, x86-64, 1 instance, l3-priority subscription, 1 year
+//AC CLOUD CTRL/ADM X86-64 INST L3PR S 1Y
 rule "Add subscription data for part number 662644477507"
     when
         $subscription : Subscription(partNumber == "662644477507")
@@ -3069,7 +3069,7 @@ rule "Add subscription data for part number 662644477507"
         };
 end
 
-//activation card suse openstack cloud control node plus admin server, x86-64, 1 instance, l3-priority subscription, 3 year
+//AC CLOUD CTRL/ADM X86-64 INST L3PR S 3Y
 rule "Add subscription data for part number 662644477508"
     when
         $subscription : Subscription(partNumber == "662644477508")
@@ -3081,7 +3081,7 @@ rule "Add subscription data for part number 662644477508"
         };
 end
 
-//activation card suse openstack cloud control node, x86-64, 1 instance, l3-priority subscription, 1 year
+//AC CLOUD CTRL X86-64 INST L3PR S 1Y
 rule "Add subscription data for part number 662644477509"
     when
         $subscription : Subscription(partNumber == "662644477509")
@@ -3093,7 +3093,7 @@ rule "Add subscription data for part number 662644477509"
         };
 end
 
-//activation card suse openstack cloud control node, x86-64, 1 instance, l3-priority subscription, 3 year
+//AC CLOUD CTRL X86-64 INST L3PR S 3Y
 rule "Add subscription data for part number 662644477510"
     when
         $subscription : Subscription(partNumber == "662644477510")
@@ -3105,7 +3105,7 @@ rule "Add subscription data for part number 662644477510"
         };
 end
 
-//activation card suse openstack cloud compute node, x86-64, 1-2 sockets, l3-priority subscription, 1 year
+//AC CLOUD COMPUTE X86-64 1-2S L3PR S 1Y
 rule "Add subscription data for part number 662644477511"
     when
         $subscription : Subscription(partNumber == "662644477511")
@@ -3118,7 +3118,7 @@ rule "Add subscription data for part number 662644477511"
         };
 end
 
-//activation card suse openstack cloud compute node, x86-64, 1-2 sockets, l3-priority subscription, 3 year
+//AC CLOUD COMPUTE X86-64 1-2S L3PR S 3Y
 rule "Add subscription data for part number 662644477512"
     when
         $subscription : Subscription(partNumber == "662644477512")
@@ -3131,7 +3131,7 @@ rule "Add subscription data for part number 662644477512"
         };
 end
 
-//activation card suse openstack cloud compute node, customer hyper-v x86-64, 1-2 sockets, l3-priority subscription, 1 year
+//AC CLOUD COMPUTE HyperV 1-2S L3PR S 1Y
 rule "Add subscription data for part number 662644477513"
     when
         $subscription : Subscription(partNumber == "662644477513")
@@ -3144,7 +3144,7 @@ rule "Add subscription data for part number 662644477513"
         };
 end
 
-//activation card suse openstack cloud compute node, customer hyper-v x86-64, 1-2 sockets, l3-priority subscription, 3 year
+//AC CLOUD COMPUTE HyperV 1-2S L3PR S 3Y
 rule "Add subscription data for part number 662644477514"
     when
         $subscription : Subscription(partNumber == "662644477514")
@@ -3157,7 +3157,7 @@ rule "Add subscription data for part number 662644477514"
         };
 end
 
-//activation card suse enterprise storage base configuration, x86-64, 4 osd nodes with 1-2 sockets, priority subscription, 1 year
+//AC STORAGE BASE X86-64 4N1-2S PR S 1Y
 rule "Add subscription data for part number 662644477515"
     no-loop
     when
@@ -3172,7 +3172,7 @@ rule "Add subscription data for part number 662644477515"
         };
 end
 
-//activation card suse enterprise storage base configuration, x86-64, 4 osd nodes with 1-2 sockets, priority subscription, 3 year
+//AC STORAGE BASE X86-64 4N1-2S PR S 3Y
 rule "Add subscription data for part number 662644477516"
     no-loop
     when
@@ -3187,7 +3187,7 @@ rule "Add subscription data for part number 662644477516"
         };
 end
 
-//activation card suse enterprise storage expansion node, x86-64, 1 osd node with 1-2 sockets, priority subscription, 1 year
+//AC STORAGE EXP X86-64 1N1-2S PR S 1Y
 rule "Add subscription data for part number 662644477517"
     when
         $subscription : Subscription(partNumber == "662644477517")
@@ -3200,7 +3200,7 @@ rule "Add subscription data for part number 662644477517"
         };
 end
 
-//activation card suse enterprise storage expansion node, x86-64, 1 osd node with 1-2 sockets, priority subscription, 3 year
+//AC STORAGE EXP X86-64 1N1-2S PR S 3Y
 rule "Add subscription data for part number 662644477518"
     when
         $subscription : Subscription(partNumber == "662644477518")
@@ -3213,7 +3213,7 @@ rule "Add subscription data for part number 662644477518"
         };
 end
 
-//activation card suse enterprise storage base configuration, x86-64, 4 osd nodes with 1-2 sockets, l3-priority subscription, 1 year
+//AC STORAGE BASE X86-64 4N1-2S L3PR S 1Y
 rule "Add subscription data for part number 662644477519"
     no-loop
     when
@@ -3228,7 +3228,7 @@ rule "Add subscription data for part number 662644477519"
         };
 end
 
-//activation card suse enterprise storage base configuration, x86-64, 4 osd nodes with 1-2 sockets, l3-priority subscription, 3 year
+//AC STORAGE BASE X86-64 4N1-2S L3PR S 3Y
 rule "Add subscription data for part number 662644477520"
     no-loop
     when
@@ -3243,7 +3243,7 @@ rule "Add subscription data for part number 662644477520"
         };
 end
 
-//activation card suse enterprise storage expansion node, x86-64, 1 osd node with 1-2 sockets, l3-priority subscription, 1 year
+//AC STORAGE EXP X86-64 1N1-2S L3PR S 1Y
 rule "Add subscription data for part number 662644477521"
     when
         $subscription : Subscription(partNumber == "662644477521")
@@ -3256,7 +3256,7 @@ rule "Add subscription data for part number 662644477521"
         };
 end
 
-//activation card suse enterprise storage expansion node, x86-64, 1 osd node with 1-2 sockets, l3-priority subscription, 3 year
+//AC STORAGE EXP X86-64 1N1-2S L3PR S 3Y
 rule "Add subscription data for part number 662644477522"
     when
         $subscription : Subscription(partNumber == "662644477522")
@@ -3269,7 +3269,7 @@ rule "Add subscription data for part number 662644477522"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, ibm power, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//AC SLE SAP PWR 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 662644477627"
     when
         $subscription : Subscription(partNumber == "662644477627")
@@ -3282,7 +3282,7 @@ rule "Add subscription data for part number 662644477627"
         };
 end
 
-//activation card suse linux enterprise server for sap applications, ibm power, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//AC SLE SAP PWR 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 662644477628"
     when
         $subscription : Subscription(partNumber == "662644477628")
@@ -3359,7 +3359,7 @@ rule "Add subscription data for part number 874-005008"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, basic subscription, 1 year
+//SLES Z ENT IFL BS S 1Y
 rule "Add subscription data for part number 874-005009"
     when
         $subscription : Subscription(partNumber == "874-005009")
@@ -3372,7 +3372,7 @@ rule "Add subscription data for part number 874-005009"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, basic subscription, 3 year
+//SLES Z ENT IFL BS S 3Y
 rule "Add subscription data for part number 874-005011"
     when
         $subscription : Subscription(partNumber == "874-005011")
@@ -3565,7 +3565,7 @@ rule "Add subscription data for part number 874-005057"
         };
 end
 
-//suse linux enterprise desktop, x86 & x86-64, 1 instance, basic subscription, 1 year
+//SLED X86/X86-64 INST BS S 1Y
 rule "Add subscription data for part number 874-005058"
     when
         $subscription : Subscription(partNumber == "874-005058")
@@ -3577,7 +3577,7 @@ rule "Add subscription data for part number 874-005058"
         };
 end
 
-//suse linux enterprise desktop, x86 & x86-64, 1 instance, basic subscription, 3 year
+//SLED X86/X86-64 INST BS S 3Y
 rule "Add subscription data for part number 874-005060"
     when
         $subscription : Subscription(partNumber == "874-005060")
@@ -3808,7 +3808,7 @@ rule "Add subscription data for part number 874-005227"
         };
 end
 
-//suse linux enterprise real time extension, x86-64, 1 physical server, inherited subscription, 1 year
+//SLE RT X86-64 PHYS SRV INH S 1Y
 rule "Add subscription data for part number 874-005279"
     when
         $subscription : Subscription(partNumber == "874-005279")
@@ -3819,7 +3819,7 @@ rule "Add subscription data for part number 874-005279"
         };
 end
 
-//suse linux enterprise real time extension, x86-64, 1 physical server, inherited subscription, 3 year
+//SLE RT X86-64 PHYS SRV INH S 3Y
 rule "Add subscription data for part number 874-005280"
     when
         $subscription : Subscription(partNumber == "874-005280")
@@ -3976,7 +3976,7 @@ rule "Add subscription data for part number 874-005318"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, basic subscription, 1 year
+//SLEPOS CLNT X86 INST BS S 1Y
 rule "Add subscription data for part number 874-005331"
     when
         $subscription : Subscription(partNumber == "874-005331")
@@ -3988,7 +3988,7 @@ rule "Add subscription data for part number 874-005331"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, basic subscription, 3 year
+//SLEPOS CLNT X86 INST BS S 3Y
 rule "Add subscription data for part number 874-005332"
     when
         $subscription : Subscription(partNumber == "874-005332")
@@ -4000,7 +4000,7 @@ rule "Add subscription data for part number 874-005332"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, basic subscription, 1 year
+//SLEPOS BRNCH X86/X86-64 INST BS S 1Y
 rule "Add subscription data for part number 874-005333"
     when
         $subscription : Subscription(partNumber == "874-005333")
@@ -4012,7 +4012,7 @@ rule "Add subscription data for part number 874-005333"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, basic subscription, 3 year
+//SLEPOS BRNCH X86/X86-64 INST BS S 3Y
 rule "Add subscription data for part number 874-005334"
     when
         $subscription : Subscription(partNumber == "874-005334")
@@ -4024,7 +4024,7 @@ rule "Add subscription data for part number 874-005334"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, basic subscription, 1 year
+//SLEPOS ADMIN X86/X86-64 INST BS S 1Y
 rule "Add subscription data for part number 874-005335"
     when
         $subscription : Subscription(partNumber == "874-005335")
@@ -4036,7 +4036,7 @@ rule "Add subscription data for part number 874-005335"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, basic subscription, 3 year
+//SLEPOS ADMIN X86/X86-64 INST BS S 3Y
 rule "Add subscription data for part number 874-005336"
     when
         $subscription : Subscription(partNumber == "874-005336")
@@ -4355,7 +4355,7 @@ rule "Add subscription data for part number 874-005585"
         };
 end
 
-//suse linux enterprise server, itanium, 1 socket, standard subscription, 1 year
+//SLES ITANIUM 1S ST S 1Y
 rule "Add subscription data for part number 874-005586"
     when
         $subscription : Subscription(partNumber == "874-005586")
@@ -4368,7 +4368,7 @@ rule "Add subscription data for part number 874-005586"
         };
 end
 
-//suse linux enterprise server, itanium, 1 socket, standard subscription, 3 year
+//SLES ITANIUM 1S ST S 3Y
 rule "Add subscription data for part number 874-005587"
     when
         $subscription : Subscription(partNumber == "874-005587")
@@ -4381,7 +4381,7 @@ rule "Add subscription data for part number 874-005587"
         };
 end
 
-//suse linux enterprise server, itanium, 1 socket, priority subscription, 1 year
+//SLES ITANIUM 1S PR S 1Y
 rule "Add subscription data for part number 874-005588"
     when
         $subscription : Subscription(partNumber == "874-005588")
@@ -4394,7 +4394,7 @@ rule "Add subscription data for part number 874-005588"
         };
 end
 
-//suse linux enterprise server, itanium, 1 socket, priority subscription, 3 year
+//SLES ITANIUM 1S PR S 3Y
 rule "Add subscription data for part number 874-005589"
     when
         $subscription : Subscription(partNumber == "874-005589")
@@ -4407,7 +4407,7 @@ rule "Add subscription data for part number 874-005589"
         };
 end
 
-//suse linux enterprise server, ibm power, 1 socket, basic subscription, 1 year
+//SLES PWR 1S BS S 1Y
 rule "Add subscription data for part number 874-005590"
     when
         $subscription : Subscription(partNumber == "874-005590")
@@ -4420,7 +4420,7 @@ rule "Add subscription data for part number 874-005590"
         };
 end
 
-//suse linux enterprise server, ibm power, 1 socket, basic subscription, 3 year
+//SLES PWR 1S BS S 3Y
 rule "Add subscription data for part number 874-005591"
     when
         $subscription : Subscription(partNumber == "874-005591")
@@ -4433,7 +4433,7 @@ rule "Add subscription data for part number 874-005591"
         };
 end
 
-//suse linux enterprise server, ibm power, 1 socket, standard subscription, 1 year
+//SLES PWR 1S ST S 1Y
 rule "Add subscription data for part number 874-005592"
     when
         $subscription : Subscription(partNumber == "874-005592")
@@ -4446,7 +4446,7 @@ rule "Add subscription data for part number 874-005592"
         };
 end
 
-//suse linux enterprise server, ibm power, 1 socket, standard subscription, 3 year
+//SLES PWR 1S ST S 3Y
 rule "Add subscription data for part number 874-005593"
     when
         $subscription : Subscription(partNumber == "874-005593")
@@ -4459,7 +4459,7 @@ rule "Add subscription data for part number 874-005593"
         };
 end
 
-//suse linux enterprise server, ibm power, 1 socket, priority subscription, 1 year
+//SLES PWR 1S PR S 1Y
 rule "Add subscription data for part number 874-005594"
     when
         $subscription : Subscription(partNumber == "874-005594")
@@ -4472,7 +4472,7 @@ rule "Add subscription data for part number 874-005594"
         };
 end
 
-//suse linux enterprise server, ibm power, 1 socket, priority subscription, 3 year
+//SLES PWR 1S PR S 3Y
 rule "Add subscription data for part number 874-005595"
     when
         $subscription : Subscription(partNumber == "874-005595")
@@ -4781,7 +4781,7 @@ rule "Add subscription data for part number 874-005692"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, basic subscription, 1 year
+//SLES Z ENT 2-5 IFL BS S 1Y
 rule "Add subscription data for part number 874-005715"
     when
         $subscription : Subscription(partNumber == "874-005715")
@@ -4794,7 +4794,7 @@ rule "Add subscription data for part number 874-005715"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, basic subscription, 3 year
+//SLES Z ENT 2-5 IFL BS S 3Y
 rule "Add subscription data for part number 874-005716"
     when
         $subscription : Subscription(partNumber == "874-005716")
@@ -4807,7 +4807,7 @@ rule "Add subscription data for part number 874-005716"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, basic subscription, 5 year
+//SLES Z ENT 2-5 IFL BS S 5Y
 rule "Add subscription data for part number 874-005717"
     when
         $subscription : Subscription(partNumber == "874-005717")
@@ -4820,7 +4820,7 @@ rule "Add subscription data for part number 874-005717"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, basic subscription, 1 year
+//SLES Z ENT 6-11 IFL BS S 1Y
 rule "Add subscription data for part number 874-005718"
     when
         $subscription : Subscription(partNumber == "874-005718")
@@ -4833,7 +4833,7 @@ rule "Add subscription data for part number 874-005718"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, basic subscription, 3 year
+//SLES Z ENT 6-11 IFL BS S 3Y
 rule "Add subscription data for part number 874-005719"
     when
         $subscription : Subscription(partNumber == "874-005719")
@@ -4846,7 +4846,7 @@ rule "Add subscription data for part number 874-005719"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, basic subscription, 5 year
+//SLES Z ENT 6-11 IFL BS S 5Y
 rule "Add subscription data for part number 874-005720"
     when
         $subscription : Subscription(partNumber == "874-005720")
@@ -4859,7 +4859,7 @@ rule "Add subscription data for part number 874-005720"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, basic subscription, 1 year
+//SLES Z ENT 12-25 IFL BS S 1Y
 rule "Add subscription data for part number 874-005721"
     when
         $subscription : Subscription(partNumber == "874-005721")
@@ -4872,7 +4872,7 @@ rule "Add subscription data for part number 874-005721"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, basic subscription, 3 year
+//SLES Z ENT 12-25 IFL BS S 3Y
 rule "Add subscription data for part number 874-005722"
     when
         $subscription : Subscription(partNumber == "874-005722")
@@ -4885,7 +4885,7 @@ rule "Add subscription data for part number 874-005722"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, basic subscription, 5 year
+//SLES Z ENT 12-25 IFL BS S 5Y
 rule "Add subscription data for part number 874-005723"
     when
         $subscription : Subscription(partNumber == "874-005723")
@@ -4898,7 +4898,7 @@ rule "Add subscription data for part number 874-005723"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, basic subscription, 1 year
+//SLES Z ENT 26-53 IFL BS S 1Y
 rule "Add subscription data for part number 874-005724"
     when
         $subscription : Subscription(partNumber == "874-005724")
@@ -4911,7 +4911,7 @@ rule "Add subscription data for part number 874-005724"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, basic subscription, 3 year
+//SLES Z ENT 26-53 IFL BS S 3Y
 rule "Add subscription data for part number 874-005725"
     when
         $subscription : Subscription(partNumber == "874-005725")
@@ -4924,7 +4924,7 @@ rule "Add subscription data for part number 874-005725"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, basic subscription, 5 year
+//SLES Z ENT 26-53 IFL BS S 5Y
 rule "Add subscription data for part number 874-005726"
     when
         $subscription : Subscription(partNumber == "874-005726")
@@ -4937,7 +4937,7 @@ rule "Add subscription data for part number 874-005726"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, basic subscription, 1 year
+//SLES Z ENT 54+ IFL BS S 1Y
 rule "Add subscription data for part number 874-005727"
     when
         $subscription : Subscription(partNumber == "874-005727")
@@ -4950,7 +4950,7 @@ rule "Add subscription data for part number 874-005727"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, basic subscription, 3 year
+//SLES Z ENT 54+ IFL BS S 3Y
 rule "Add subscription data for part number 874-005728"
     when
         $subscription : Subscription(partNumber == "874-005728")
@@ -4963,7 +4963,7 @@ rule "Add subscription data for part number 874-005728"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, basic subscription, 5 year
+//SLES Z ENT 54+ IFL BS S 5Y
 rule "Add subscription data for part number 874-005729"
     when
         $subscription : Subscription(partNumber == "874-005729")
@@ -4976,7 +4976,7 @@ rule "Add subscription data for part number 874-005729"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, standard subscription, 1 year
+//SLES Z ENT 2-5 IFL ST S 1Y
 rule "Add subscription data for part number 874-005730"
     when
         $subscription : Subscription(partNumber == "874-005730")
@@ -4989,7 +4989,7 @@ rule "Add subscription data for part number 874-005730"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, standard subscription, 3 year
+//SLES Z ENT 2-5 IFL ST S 3Y
 rule "Add subscription data for part number 874-005731"
     when
         $subscription : Subscription(partNumber == "874-005731")
@@ -5002,7 +5002,7 @@ rule "Add subscription data for part number 874-005731"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, standard subscription, 5 year
+//SLES Z ENT 2-5 IFL ST S 5Y
 rule "Add subscription data for part number 874-005732"
     when
         $subscription : Subscription(partNumber == "874-005732")
@@ -5015,7 +5015,7 @@ rule "Add subscription data for part number 874-005732"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, standard subscription, 1 year
+//SLES Z ENT 6-11 IFL ST S 1Y
 rule "Add subscription data for part number 874-005733"
     when
         $subscription : Subscription(partNumber == "874-005733")
@@ -5028,7 +5028,7 @@ rule "Add subscription data for part number 874-005733"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, standard subscription, 3 year
+//SLES Z ENT 6-11 IFL ST S 3Y
 rule "Add subscription data for part number 874-005734"
     when
         $subscription : Subscription(partNumber == "874-005734")
@@ -5041,7 +5041,7 @@ rule "Add subscription data for part number 874-005734"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, standard subscription, 5 year
+//SLES Z ENT 6-11 IFL ST S 5Y
 rule "Add subscription data for part number 874-005735"
     when
         $subscription : Subscription(partNumber == "874-005735")
@@ -5054,7 +5054,7 @@ rule "Add subscription data for part number 874-005735"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, standard subscription, 1 year
+//SLES Z ENT 12-25 IFL ST S 1Y
 rule "Add subscription data for part number 874-005736"
     when
         $subscription : Subscription(partNumber == "874-005736")
@@ -5067,7 +5067,7 @@ rule "Add subscription data for part number 874-005736"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, standard subscription, 3 year
+//SLES Z ENT 12-25 IFL ST S 3Y
 rule "Add subscription data for part number 874-005737"
     when
         $subscription : Subscription(partNumber == "874-005737")
@@ -5080,7 +5080,7 @@ rule "Add subscription data for part number 874-005737"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, standard subscription, 5 year
+//SLES Z ENT 12-25 IFL ST S 5Y
 rule "Add subscription data for part number 874-005738"
     when
         $subscription : Subscription(partNumber == "874-005738")
@@ -5093,7 +5093,7 @@ rule "Add subscription data for part number 874-005738"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, standard subscription, 1 year
+//SLES Z ENT 26-53 IFL ST S 1Y
 rule "Add subscription data for part number 874-005739"
     when
         $subscription : Subscription(partNumber == "874-005739")
@@ -5106,7 +5106,7 @@ rule "Add subscription data for part number 874-005739"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, standard subscription, 3 year
+//SLES Z ENT 26-53 IFL ST S 3Y
 rule "Add subscription data for part number 874-005740"
     when
         $subscription : Subscription(partNumber == "874-005740")
@@ -5119,7 +5119,7 @@ rule "Add subscription data for part number 874-005740"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, standard subscription, 5 year
+//SLES Z ENT 26-53 IFL ST S 5Y
 rule "Add subscription data for part number 874-005741"
     when
         $subscription : Subscription(partNumber == "874-005741")
@@ -5132,7 +5132,7 @@ rule "Add subscription data for part number 874-005741"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, standard subscription, 1 year
+//SLES Z ENT 54+ IFL ST S 1Y
 rule "Add subscription data for part number 874-005742"
     when
         $subscription : Subscription(partNumber == "874-005742")
@@ -5145,7 +5145,7 @@ rule "Add subscription data for part number 874-005742"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, standard subscription, 3 year
+//SLES Z ENT 54+ IFL ST S 3Y
 rule "Add subscription data for part number 874-005743"
     when
         $subscription : Subscription(partNumber == "874-005743")
@@ -5158,7 +5158,7 @@ rule "Add subscription data for part number 874-005743"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, standard subscription, 5 year
+//SLES Z ENT 54+ IFL ST S 5Y
 rule "Add subscription data for part number 874-005744"
     when
         $subscription : Subscription(partNumber == "874-005744")
@@ -5171,7 +5171,7 @@ rule "Add subscription data for part number 874-005744"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, priority subscription, 1 year
+//SLES Z ENT 2-5 IFL PR S 1Y
 rule "Add subscription data for part number 874-005745"
     when
         $subscription : Subscription(partNumber == "874-005745")
@@ -5184,7 +5184,7 @@ rule "Add subscription data for part number 874-005745"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, priority subscription, 3 year
+//SLES Z ENT 2-5 IFL PR S 3Y
 rule "Add subscription data for part number 874-005746"
     when
         $subscription : Subscription(partNumber == "874-005746")
@@ -5197,7 +5197,7 @@ rule "Add subscription data for part number 874-005746"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 2-5 ifls, priority subscription, 5 year
+//SLES Z ENT 2-5 IFL PR S 5Y
 rule "Add subscription data for part number 874-005747"
     when
         $subscription : Subscription(partNumber == "874-005747")
@@ -5210,7 +5210,7 @@ rule "Add subscription data for part number 874-005747"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, priority subscription, 1 year
+//SLES Z ENT 6-11 IFL PR S 1Y
 rule "Add subscription data for part number 874-005748"
     when
         $subscription : Subscription(partNumber == "874-005748")
@@ -5223,7 +5223,7 @@ rule "Add subscription data for part number 874-005748"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, priority subscription, 3 year
+//SLES Z ENT 6-11 IFL PR S 3Y
 rule "Add subscription data for part number 874-005749"
     when
         $subscription : Subscription(partNumber == "874-005749")
@@ -5236,7 +5236,7 @@ rule "Add subscription data for part number 874-005749"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 6-11 ifls, priority subscription, 5 year
+//SLES Z ENT 6-11 IFL PR S 5Y
 rule "Add subscription data for part number 874-005750"
     when
         $subscription : Subscription(partNumber == "874-005750")
@@ -5249,7 +5249,7 @@ rule "Add subscription data for part number 874-005750"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, priority subscription, 1 year
+//SLES Z ENT 12-25 IFL PR S 1Y
 rule "Add subscription data for part number 874-005751"
     when
         $subscription : Subscription(partNumber == "874-005751")
@@ -5262,7 +5262,7 @@ rule "Add subscription data for part number 874-005751"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, priority subscription, 3 year
+//SLES Z ENT 12-25 IFL PR S 3Y
 rule "Add subscription data for part number 874-005752"
     when
         $subscription : Subscription(partNumber == "874-005752")
@@ -5275,7 +5275,7 @@ rule "Add subscription data for part number 874-005752"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 12-25 ifls, priority subscription, 5 year
+//SLES Z ENT 12-25 IFL PR S 5Y
 rule "Add subscription data for part number 874-005753"
     when
         $subscription : Subscription(partNumber == "874-005753")
@@ -5288,7 +5288,7 @@ rule "Add subscription data for part number 874-005753"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, priority subscription, 1 year
+//SLES Z ENT 26-53 IFL PR S 1Y
 rule "Add subscription data for part number 874-005754"
     when
         $subscription : Subscription(partNumber == "874-005754")
@@ -5301,7 +5301,7 @@ rule "Add subscription data for part number 874-005754"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, priority subscription, 3 year
+//SLES Z ENT 26-53 IFL PR S 3Y
 rule "Add subscription data for part number 874-005755"
     when
         $subscription : Subscription(partNumber == "874-005755")
@@ -5314,7 +5314,7 @@ rule "Add subscription data for part number 874-005755"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 26-53 ifls, priority subscription, 5 year
+//SLES Z ENT 26-53 IFL PR S 5Y
 rule "Add subscription data for part number 874-005756"
     when
         $subscription : Subscription(partNumber == "874-005756")
@@ -5327,7 +5327,7 @@ rule "Add subscription data for part number 874-005756"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, priority subscription, 1 year
+//SLES Z ENT 54+ IFL PR S 1Y
 rule "Add subscription data for part number 874-005757"
     when
         $subscription : Subscription(partNumber == "874-005757")
@@ -5340,7 +5340,7 @@ rule "Add subscription data for part number 874-005757"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, priority subscription, 3 year
+//SLES Z ENT 54+ IFL PR S 3Y
 rule "Add subscription data for part number 874-005758"
     when
         $subscription : Subscription(partNumber == "874-005758")
@@ -5353,7 +5353,7 @@ rule "Add subscription data for part number 874-005758"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl @ volume 54+ ifls, priority subscription, 5 year
+//SLES Z ENT 54+ IFL PR S 5Y
 rule "Add subscription data for part number 874-005759"
     when
         $subscription : Subscription(partNumber == "874-005759")
@@ -5496,7 +5496,7 @@ rule "Add subscription data for part number 874-005937"
         };
 end
 
-//suse manager server, x86-64, 1 instance, priority subscription, 1 year
+//MGR SRV X86-64 INST PR S 1Y
 rule "Add subscription data for part number 874-005942"
     when
         $subscription : Subscription(partNumber == "874-005942")
@@ -5508,7 +5508,7 @@ rule "Add subscription data for part number 874-005942"
         };
 end
 
-//suse manager server, x86-64, 1 instance, priority subscription, 3 year
+//MGR SRV X86-64 INST PR S 3Y
 rule "Add subscription data for part number 874-005943"
     when
         $subscription : Subscription(partNumber == "874-005943")
@@ -5520,7 +5520,7 @@ rule "Add subscription data for part number 874-005943"
         };
 end
 
-//suse manager proxy, x86-64, 1 instance, priority subscription, 1 year
+//MGR PROXY X86-64 INST PR S 1Y
 rule "Add subscription data for part number 874-005944"
     when
         $subscription : Subscription(partNumber == "874-005944")
@@ -5532,7 +5532,7 @@ rule "Add subscription data for part number 874-005944"
         };
 end
 
-//suse manager proxy, x86-64, 1 instance, priority subscription, 3 year
+//MGR PROXY X86-64 INST PR S 3Y
 rule "Add subscription data for part number 874-005945"
     when
         $subscription : Subscription(partNumber == "874-005945")
@@ -5740,7 +5740,7 @@ rule "Add subscription data for part number 874-005961"
         };
 end
 
-//suse manager monitoring, system z, 1 ifl with unlimited virtual machines, priority subscription, 1 year
+//MGR MN Z IFL ULVM PR S 1Y
 rule "Add subscription data for part number 874-005962"
     when
         $subscription : Subscription(partNumber == "874-005962")
@@ -5753,7 +5753,7 @@ rule "Add subscription data for part number 874-005962"
         };
 end
 
-//suse manager monitoring, system z, 1 ifl with unlimited virtual machines, priority subscription, 3 year
+//MGR MN Z IFL ULVM PR S 3Y
 rule "Add subscription data for part number 874-005963"
     when
         $subscription : Subscription(partNumber == "874-005963")
@@ -5892,6 +5892,121 @@ rule "Add subscription data for part number 874-005985"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 32,
+            stackable = false
+        };
+end
+
+//SLES 11 SP1 LTSS X86 1-100 INH S 1Y
+rule "Add subscription data for part number 874-006013"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006013")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = false
+        };
+end
+
+//SLES 11 SP1 LTSS X86 1-500 INH S 1Y
+rule "Add subscription data for part number 874-006014"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006014")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = false
+        };
+end
+
+//SLES 11 SP1 LTSS X86 UL INH S 1Y
+rule "Add subscription data for part number 874-006015"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006015")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
+            stackable = false
+        };
+end
+
+//SLES 11 SP1 LTSS Z 1-5 IFL INH S 1Y
+rule "Add subscription data for part number 874-006016"
+    when
+        $subscription : Subscription(partNumber == "874-006016")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            cpus = 1,
+            stackable = true
+        };
+end
+
+//SLES 11 SP1 LTSS Z 1-10 IFL INH S 1Y
+rule "Add subscription data for part number 874-006017"
+    when
+        $subscription : Subscription(partNumber == "874-006017")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            cpus = 1,
+            stackable = true
+        };
+end
+
+//SLES 11 SP1 LTSS Z UL IFL INH S 1Y
+rule "Add subscription data for part number 874-006018"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006018")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
+            stackable = false
+        };
+end
+
+//SLES 11 SP1 LTSS X86-64 1-100 INH S 1Y
+rule "Add subscription data for part number 874-006034"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006034")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = false
+        };
+end
+
+//SLES 11 SP1 LTSS X86-64 1-500 INH S 1Y
+rule "Add subscription data for part number 874-006035"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006035")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = false
+        };
+end
+
+//SLES 11 SP1 LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-006036"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006036")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
             stackable = false
         };
 end
@@ -8399,7 +8514,7 @@ rule "Add subscription data for part number 874-006383"
         };
 end
 
-//suse openstack cloud control node plus admin server, x86-64, 1 instance, priority subscription, 1 year
+//CLOUD CTRL/ADM X86-64 INST PR S 1Y
 rule "Add subscription data for part number 874-006385"
     when
         $subscription : Subscription(partNumber == "874-006385")
@@ -8411,7 +8526,7 @@ rule "Add subscription data for part number 874-006385"
         };
 end
 
-//suse openstack cloud control node plus admin server, x86-64, 1 instance, priority subscription, 3 year
+//CLOUD CTRL/ADM X86-64 INST PR S 3Y
 rule "Add subscription data for part number 874-006386"
     when
         $subscription : Subscription(partNumber == "874-006386")
@@ -8423,7 +8538,7 @@ rule "Add subscription data for part number 874-006386"
         };
 end
 
-//suse openstack cloud control node, x86-64, 1 instance, priority subscription, 1 year
+//CLOUD CTRL X86-64 INST PR S 1Y
 rule "Add subscription data for part number 874-006387"
     when
         $subscription : Subscription(partNumber == "874-006387")
@@ -8435,7 +8550,7 @@ rule "Add subscription data for part number 874-006387"
         };
 end
 
-//suse openstack cloud control node, x86-64, 1 instance, priority subscription, 3 year
+//CLOUD CTRL X86-64 INST PR S 3Y
 rule "Add subscription data for part number 874-006388"
     when
         $subscription : Subscription(partNumber == "874-006388")
@@ -8447,7 +8562,7 @@ rule "Add subscription data for part number 874-006388"
         };
 end
 
-//suse openstack cloud compute node, x86-64, 1-2 sockets, priority subscription, 1 year
+//CLOUD COMPUTE X86-64 1-2S PR S 1Y
 rule "Add subscription data for part number 874-006389"
     when
         $subscription : Subscription(partNumber == "874-006389")
@@ -8460,7 +8575,7 @@ rule "Add subscription data for part number 874-006389"
         };
 end
 
-//suse openstack cloud compute node, x86-64, 1-2 sockets, priority subscription, 3 year
+//CLOUD COMPUTE X86-64 1-2S PR S 3Y
 rule "Add subscription data for part number 874-006390"
     when
         $subscription : Subscription(partNumber == "874-006390")
@@ -8473,7 +8588,7 @@ rule "Add subscription data for part number 874-006390"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, basic subscription, 5 year
+//SLEPOS CLNT X86 INST BS S 5Y
 rule "Add subscription data for part number 874-006391"
     when
         $subscription : Subscription(partNumber == "874-006391")
@@ -8485,7 +8600,7 @@ rule "Add subscription data for part number 874-006391"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, basic subscription, 5 year
+//SLEPOS BRNCH X86/X86-64 INST BS S 5Y
 rule "Add subscription data for part number 874-006392"
     when
         $subscription : Subscription(partNumber == "874-006392")
@@ -8497,7 +8612,7 @@ rule "Add subscription data for part number 874-006392"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, basic subscription, 5 year
+//SLEPOS ADMIN X86/X86-64 INST BS S 5Y
 rule "Add subscription data for part number 874-006393"
     when
         $subscription : Subscription(partNumber == "874-006393")
@@ -8509,7 +8624,7 @@ rule "Add subscription data for part number 874-006393"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, standard subscription, 5 year
+//SLEPOS CLNT X86 INST ST S 5Y
 rule "Add subscription data for part number 874-006394"
     when
         $subscription : Subscription(partNumber == "874-006394")
@@ -8521,7 +8636,7 @@ rule "Add subscription data for part number 874-006394"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, standard subscription, 5 year
+//SLEPOS BRNCH X86/X86-64 INST ST S 5Y
 rule "Add subscription data for part number 874-006395"
     when
         $subscription : Subscription(partNumber == "874-006395")
@@ -8533,7 +8648,7 @@ rule "Add subscription data for part number 874-006395"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, standard subscription, 5 year
+//SLEPOS ADMIN X86/X86-64 INST ST S 5Y
 rule "Add subscription data for part number 874-006396"
     when
         $subscription : Subscription(partNumber == "874-006396")
@@ -8545,7 +8660,7 @@ rule "Add subscription data for part number 874-006396"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, priority subscription, 5 year
+//SLEPOS CLNT X86 INST PR S 5Y
 rule "Add subscription data for part number 874-006397"
     when
         $subscription : Subscription(partNumber == "874-006397")
@@ -8557,7 +8672,7 @@ rule "Add subscription data for part number 874-006397"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, priority subscription, 5 year
+//SLEPOS BRNCH X86/X86-64 INST PR S 5Y
 rule "Add subscription data for part number 874-006398"
     when
         $subscription : Subscription(partNumber == "874-006398")
@@ -8569,7 +8684,7 @@ rule "Add subscription data for part number 874-006398"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, priority subscription, 5 year
+//SLEPOS ADMIN X86/X86-64 INST PR S 5Y
 rule "Add subscription data for part number 874-006399"
     when
         $subscription : Subscription(partNumber == "874-006399")
@@ -9383,7 +9498,122 @@ rule "Add subscription data for part number 874-006516"
         };
 end
 
-//geo clustering for suse linux enterprise high availability extension, system z, 1 ifl, inherited subscription, 1 year
+//SLES 10 SP4 LTSS X86 1-100 INH S 1Y
+rule "Add subscription data for part number 874-006561"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006561")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = false
+        };
+end
+
+//SLES 10 SP4 LTSS X86 1-500 INH S 1Y
+rule "Add subscription data for part number 874-006562"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006562")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = false
+        };
+end
+
+//SLES 10 SP4 LTSS X86 UL INH S 1Y
+rule "Add subscription data for part number 874-006563"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006563")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
+            stackable = false
+        };
+end
+
+//SLES 10 SP4 LTSS X86-64 1-100 INH S 1Y
+rule "Add subscription data for part number 874-006564"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006564")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = false
+        };
+end
+
+//SLES 10 SP4 LTSS X86-64 1-500 INH S 1Y
+rule "Add subscription data for part number 874-006565"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006565")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = false
+        };
+end
+
+//SLES 10 SP4 LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-006566"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006566")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
+            stackable = false
+        };
+end
+
+//SLES 10 SP4 LTSS Z 1-5 IFL INH S 1Y
+rule "Add subscription data for part number 874-006567"
+    when
+        $subscription : Subscription(partNumber == "874-006567")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            cpus = 1,
+            stackable = true
+        };
+end
+
+//SLES 10 SP4 LTSS Z 1-10 IFL INH S 1Y
+rule "Add subscription data for part number 874-006568"
+    when
+        $subscription : Subscription(partNumber == "874-006568")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            cpus = 1,
+            stackable = true
+        };
+end
+
+//SLES 10 SP4 LTSS Z UL IFL INH S 1Y
+rule "Add subscription data for part number 874-006569"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006569")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
+            stackable = false
+        };
+end
+
+//GEO SLE Z IFL INH S 1Y
 rule "Add subscription data for part number 874-006618"
     when
         $subscription : Subscription(partNumber == "874-006618")
@@ -9395,7 +9625,7 @@ rule "Add subscription data for part number 874-006618"
         };
 end
 
-//geo clustering for suse linux enterprise high availability extension, system z, 1 ifl, inherited subscription, 3 year
+//GEO SLE Z IFL INH S 3Y
 rule "Add subscription data for part number 874-006619"
     when
         $subscription : Subscription(partNumber == "874-006619")
@@ -9407,7 +9637,7 @@ rule "Add subscription data for part number 874-006619"
         };
 end
 
-//geo clustering for suse linux enterprise high availability extension, system z, 1 ifl, inherited subscription, 5 year
+//GEO SLE Z IFL INH S 5Y
 rule "Add subscription data for part number 874-006620"
     when
         $subscription : Subscription(partNumber == "874-006620")
@@ -9416,6 +9646,121 @@ rule "Add subscription data for part number 874-006620"
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             cpus = 1,
             stackable = true
+        };
+end
+
+//SLES 11 SP2 LTSS X86 1-100 INH S 1Y
+rule "Add subscription data for part number 874-006621"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006621")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = false
+        };
+end
+
+//SLES 11 SP2 LTSS X86 1-500 INH S 1Y
+rule "Add subscription data for part number 874-006622"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006622")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = false
+        };
+end
+
+//SLES 11 SP2 LTSS X86 UL INH S 1Y
+rule "Add subscription data for part number 874-006623"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006623")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
+            stackable = false
+        };
+end
+
+//SLES 11 SP2 LTSS X86-64 1-100 INH S 1Y
+rule "Add subscription data for part number 874-006624"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006624")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = false
+        };
+end
+
+//SLES 11 SP2 LTSS X86-64 1-500 INH S 1Y
+rule "Add subscription data for part number 874-006625"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006625")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = false
+        };
+end
+
+//SLES 11 SP2 LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-006626"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006626")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
+            stackable = false
+        };
+end
+
+//SLES 11 SP2 LTSS Z 1-5 IFL INH S 1Y
+rule "Add subscription data for part number 874-006627"
+    when
+        $subscription : Subscription(partNumber == "874-006627")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            cpus = 1,
+            stackable = true
+        };
+end
+
+//SLES 11 SP2 LTSS Z 1-10 IFL INH S 1Y
+rule "Add subscription data for part number 874-006628"
+    when
+        $subscription : Subscription(partNumber == "874-006628")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            cpus = 1,
+            stackable = true
+        };
+end
+
+//SLES 11 SP2 LTSS Z UL IFL INH S 1Y
+rule "Add subscription data for part number 874-006629"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-006629")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * INFINITE,
+            stackable = false
         };
 end
 
@@ -9536,7 +9881,7 @@ rule "Add subscription data for part number 874-006649"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, basic subscription, 1 year
+//SLES Z BUS IFL BS S 1Y
 rule "Add subscription data for part number 874-006661"
     when
         $subscription : Subscription(partNumber == "874-006661")
@@ -9549,7 +9894,7 @@ rule "Add subscription data for part number 874-006661"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, basic subscription, 3 year
+//SLES Z BUS IFL BS S 3Y
 rule "Add subscription data for part number 874-006662"
     when
         $subscription : Subscription(partNumber == "874-006662")
@@ -9562,7 +9907,7 @@ rule "Add subscription data for part number 874-006662"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, basic subscription, 5 year
+//SLES Z BUS IFL BS S 5Y
 rule "Add subscription data for part number 874-006663"
     when
         $subscription : Subscription(partNumber == "874-006663")
@@ -9575,7 +9920,7 @@ rule "Add subscription data for part number 874-006663"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, basic subscription, 1 year
+//SLES Z BUS 2-5 IFL BS S 1Y
 rule "Add subscription data for part number 874-006664"
     when
         $subscription : Subscription(partNumber == "874-006664")
@@ -9588,7 +9933,7 @@ rule "Add subscription data for part number 874-006664"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, basic subscription, 3 year
+//SLES Z BUS 2-5 IFL BS S 3Y
 rule "Add subscription data for part number 874-006665"
     when
         $subscription : Subscription(partNumber == "874-006665")
@@ -9601,7 +9946,7 @@ rule "Add subscription data for part number 874-006665"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, basic subscription, 5 year
+//SLES Z BUS 2-5 IFL BS S 5Y
 rule "Add subscription data for part number 874-006666"
     when
         $subscription : Subscription(partNumber == "874-006666")
@@ -9614,7 +9959,7 @@ rule "Add subscription data for part number 874-006666"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, basic subscription, 1 year
+//SLES Z BUS 6-11 IFL BS S 1Y
 rule "Add subscription data for part number 874-006667"
     when
         $subscription : Subscription(partNumber == "874-006667")
@@ -9627,7 +9972,7 @@ rule "Add subscription data for part number 874-006667"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, basic subscription, 3 year
+//SLES Z BUS 6-11 IFL BS S 3Y
 rule "Add subscription data for part number 874-006668"
     when
         $subscription : Subscription(partNumber == "874-006668")
@@ -9640,7 +9985,7 @@ rule "Add subscription data for part number 874-006668"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, basic subscription, 5 year
+//SLES Z BUS 6-11 IFL BS S 5Y
 rule "Add subscription data for part number 874-006669"
     when
         $subscription : Subscription(partNumber == "874-006669")
@@ -9653,7 +9998,7 @@ rule "Add subscription data for part number 874-006669"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, basic subscription, 1 year
+//SLES Z BUS 12+ IFL BS S 1Y
 rule "Add subscription data for part number 874-006670"
     when
         $subscription : Subscription(partNumber == "874-006670")
@@ -9666,7 +10011,7 @@ rule "Add subscription data for part number 874-006670"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, basic subscription, 3 year
+//SLES Z BUS 12+ IFL BS S 3Y
 rule "Add subscription data for part number 874-006671"
     when
         $subscription : Subscription(partNumber == "874-006671")
@@ -9679,7 +10024,7 @@ rule "Add subscription data for part number 874-006671"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, basic subscription, 5 year
+//SLES Z BUS 12+ IFL BS S 5Y
 rule "Add subscription data for part number 874-006672"
     when
         $subscription : Subscription(partNumber == "874-006672")
@@ -9692,7 +10037,7 @@ rule "Add subscription data for part number 874-006672"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, standard subscription, 1 year
+//SLES Z BUS IFL ST S 1Y
 rule "Add subscription data for part number 874-006673"
     when
         $subscription : Subscription(partNumber == "874-006673")
@@ -9705,7 +10050,7 @@ rule "Add subscription data for part number 874-006673"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, standard subscription, 3 year
+//SLES Z BUS IFL ST S 3Y
 rule "Add subscription data for part number 874-006674"
     when
         $subscription : Subscription(partNumber == "874-006674")
@@ -9718,7 +10063,7 @@ rule "Add subscription data for part number 874-006674"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, standard subscription, 5 year
+//SLES Z BUS IFL ST S 5Y
 rule "Add subscription data for part number 874-006675"
     when
         $subscription : Subscription(partNumber == "874-006675")
@@ -9731,7 +10076,7 @@ rule "Add subscription data for part number 874-006675"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, standard subscription, 1 year
+//SLES Z BUS 2-5 IFL ST S 1Y
 rule "Add subscription data for part number 874-006676"
     when
         $subscription : Subscription(partNumber == "874-006676")
@@ -9744,7 +10089,7 @@ rule "Add subscription data for part number 874-006676"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, standard subscription, 3 year
+//SLES Z BUS 2-5 IFL ST S 3Y
 rule "Add subscription data for part number 874-006677"
     when
         $subscription : Subscription(partNumber == "874-006677")
@@ -9757,7 +10102,7 @@ rule "Add subscription data for part number 874-006677"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, standard subscription, 5 year
+//SLES Z BUS 2-5 IFL ST S 5Y
 rule "Add subscription data for part number 874-006678"
     when
         $subscription : Subscription(partNumber == "874-006678")
@@ -9770,7 +10115,7 @@ rule "Add subscription data for part number 874-006678"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, standard subscription, 1 year
+//SLES Z BUS 6-11 IFL ST S 1Y
 rule "Add subscription data for part number 874-006679"
     when
         $subscription : Subscription(partNumber == "874-006679")
@@ -9783,7 +10128,7 @@ rule "Add subscription data for part number 874-006679"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, standard subscription, 3 year
+//SLES Z BUS 6-11 IFL ST S 3Y
 rule "Add subscription data for part number 874-006680"
     when
         $subscription : Subscription(partNumber == "874-006680")
@@ -9796,7 +10141,7 @@ rule "Add subscription data for part number 874-006680"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, standard subscription, 5 year
+//SLES Z BUS 6-11 IFL ST S 5Y
 rule "Add subscription data for part number 874-006681"
     when
         $subscription : Subscription(partNumber == "874-006681")
@@ -9809,7 +10154,7 @@ rule "Add subscription data for part number 874-006681"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, standard subscription, 1 year
+//SLES Z BUS 12+ IFL ST S 1Y
 rule "Add subscription data for part number 874-006682"
     when
         $subscription : Subscription(partNumber == "874-006682")
@@ -9822,7 +10167,7 @@ rule "Add subscription data for part number 874-006682"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, standard subscription, 3 year
+//SLES Z BUS 12+ IFL ST S 3Y
 rule "Add subscription data for part number 874-006683"
     when
         $subscription : Subscription(partNumber == "874-006683")
@@ -9835,7 +10180,7 @@ rule "Add subscription data for part number 874-006683"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, standard subscription, 5 year
+//SLES Z BUS 12+ IFL ST S 5Y
 rule "Add subscription data for part number 874-006684"
     when
         $subscription : Subscription(partNumber == "874-006684")
@@ -9848,7 +10193,7 @@ rule "Add subscription data for part number 874-006684"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, priority subscription, 1 year
+//SLES Z BUS IFL PR S 1Y
 rule "Add subscription data for part number 874-006685"
     when
         $subscription : Subscription(partNumber == "874-006685")
@@ -9861,7 +10206,7 @@ rule "Add subscription data for part number 874-006685"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, priority subscription, 3 year
+//SLES Z BUS IFL PR S 3Y
 rule "Add subscription data for part number 874-006686"
     when
         $subscription : Subscription(partNumber == "874-006686")
@@ -9874,7 +10219,7 @@ rule "Add subscription data for part number 874-006686"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl, priority subscription, 5 year
+//SLES Z BUS IFL PR S 5Y
 rule "Add subscription data for part number 874-006687"
     when
         $subscription : Subscription(partNumber == "874-006687")
@@ -9887,7 +10232,7 @@ rule "Add subscription data for part number 874-006687"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, priority subscription, 1 year
+//SLES Z BUS 2-5 IFL PR S 1Y
 rule "Add subscription data for part number 874-006688"
     when
         $subscription : Subscription(partNumber == "874-006688")
@@ -9900,7 +10245,7 @@ rule "Add subscription data for part number 874-006688"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, priority subscription, 3 year
+//SLES Z BUS 2-5 IFL PR S 3Y
 rule "Add subscription data for part number 874-006689"
     when
         $subscription : Subscription(partNumber == "874-006689")
@@ -9913,7 +10258,7 @@ rule "Add subscription data for part number 874-006689"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 2-5 ifls, priority subscription, 5 year
+//SLES Z BUS 2-5 IFL PR S 5Y
 rule "Add subscription data for part number 874-006690"
     when
         $subscription : Subscription(partNumber == "874-006690")
@@ -9926,7 +10271,7 @@ rule "Add subscription data for part number 874-006690"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, priority subscription, 1 year
+//SLES Z BUS 6-11 IFL PR S 1Y
 rule "Add subscription data for part number 874-006691"
     when
         $subscription : Subscription(partNumber == "874-006691")
@@ -9939,7 +10284,7 @@ rule "Add subscription data for part number 874-006691"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, priority subscription, 3 year
+//SLES Z BUS 6-11 IFL PR S 3Y
 rule "Add subscription data for part number 874-006692"
     when
         $subscription : Subscription(partNumber == "874-006692")
@@ -9952,7 +10297,7 @@ rule "Add subscription data for part number 874-006692"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 6-11 ifls, priority subscription, 5 year
+//SLES Z BUS 6-11 IFL PR S 5Y
 rule "Add subscription data for part number 874-006693"
     when
         $subscription : Subscription(partNumber == "874-006693")
@@ -9965,7 +10310,7 @@ rule "Add subscription data for part number 874-006693"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, priority subscription, 1 year
+//SLES Z BUS 12+ IFL PR S 1Y
 rule "Add subscription data for part number 874-006694"
     when
         $subscription : Subscription(partNumber == "874-006694")
@@ -9978,7 +10323,7 @@ rule "Add subscription data for part number 874-006694"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, priority subscription, 3 year
+//SLES Z BUS 12+ IFL PR S 3Y
 rule "Add subscription data for part number 874-006695"
     when
         $subscription : Subscription(partNumber == "874-006695")
@@ -9991,7 +10336,7 @@ rule "Add subscription data for part number 874-006695"
         };
 end
 
-//suse linux enterprise server, system z business class, 1 ifl @ volume 12+ ifls, priority subscription, 5 year
+//SLES Z BUS 12+ IFL PR S 5Y
 rule "Add subscription data for part number 874-006696"
     when
         $subscription : Subscription(partNumber == "874-006696")
@@ -10004,7 +10349,7 @@ rule "Add subscription data for part number 874-006696"
         };
 end
 
-//suse manager management pack for customer system center, x86-64, 1 scom instance, standard subscription, 1 year
+//MGR MPCK X86-64 SCOM INST ST S 1Y
 rule "Add subscription data for part number 874-006697"
     when
         $subscription : Subscription(partNumber == "874-006697")
@@ -10016,7 +10361,7 @@ rule "Add subscription data for part number 874-006697"
         };
 end
 
-//suse openstack cloud compute node, customer hyper-v x86-64, 1-2 sockets, priority subscription, 1 year
+//CLOUD COMPUTE HyperV 1-2S PR S 1Y
 rule "Add subscription data for part number 874-006698"
     when
         $subscription : Subscription(partNumber == "874-006698")
@@ -10029,7 +10374,7 @@ rule "Add subscription data for part number 874-006698"
         };
 end
 
-//suse openstack cloud compute node, customer hyper-v x86-64, 1-2 sockets, priority subscription, 3 year
+//CLOUD COMPUTE HyperV 1-2S PR S 3Y
 rule "Add subscription data for part number 874-006699"
     when
         $subscription : Subscription(partNumber == "874-006699")
@@ -10118,7 +10463,7 @@ rule "Add subscription data for part number 874-006812"
         };
 end
 
-//suse manager lifecycle management, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 1 year
+//MGR LC X86/X86-64 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 874-006832"
     when
         $subscription : Subscription(partNumber == "874-006832")
@@ -10131,7 +10476,7 @@ rule "Add subscription data for part number 874-006832"
         };
 end
 
-//suse manager lifecycle management, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 3 year
+//MGR LC X86/X86-64 1-2S/VM PR S 3Y
 rule "Add subscription data for part number 874-006833"
     when
         $subscription : Subscription(partNumber == "874-006833")
@@ -10144,7 +10489,7 @@ rule "Add subscription data for part number 874-006833"
         };
 end
 
-//suse manager monitoring, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 1 year
+//MGR MN X86/X86-64 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 874-006834"
     when
         $subscription : Subscription(partNumber == "874-006834")
@@ -10157,7 +10502,7 @@ rule "Add subscription data for part number 874-006834"
         };
 end
 
-//suse manager monitoring, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 3 year
+//MGR MN X86/X86-64 1-2S/VM PR S 3Y
 rule "Add subscription data for part number 874-006835"
     when
         $subscription : Subscription(partNumber == "874-006835")
@@ -10170,7 +10515,7 @@ rule "Add subscription data for part number 874-006835"
         };
 end
 
-//suse manager lifecycle management, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 1 year
+//MGR LC X86/X86-64 1-2S ULVM PR S 1Y
 rule "Add subscription data for part number 874-006836"
     when
         $subscription : Subscription(partNumber == "874-006836")
@@ -10183,7 +10528,7 @@ rule "Add subscription data for part number 874-006836"
         };
 end
 
-//suse manager lifecycle management, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//MGR LC X86/X86-64 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 874-006837"
     when
         $subscription : Subscription(partNumber == "874-006837")
@@ -10196,7 +10541,7 @@ rule "Add subscription data for part number 874-006837"
         };
 end
 
-//suse manager monitoring, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 1 year
+//MGR MN X86/X86-64 1-2S ULVM PR S 1Y
 rule "Add subscription data for part number 874-006838"
     when
         $subscription : Subscription(partNumber == "874-006838")
@@ -10209,7 +10554,7 @@ rule "Add subscription data for part number 874-006838"
         };
 end
 
-//suse manager monitoring, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//MGR MN X86/X86-64 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 874-006839"
     when
         $subscription : Subscription(partNumber == "874-006839")
@@ -10222,7 +10567,7 @@ rule "Add subscription data for part number 874-006839"
         };
 end
 
-//suse manager lifecycle management, system z, 1 ifl with unlimited virtual machines, priority subscription, 1 year
+//MGR LC Z IFL ULVM PR S 1Y
 rule "Add subscription data for part number 874-006840"
     when
         $subscription : Subscription(partNumber == "874-006840")
@@ -10235,7 +10580,7 @@ rule "Add subscription data for part number 874-006840"
         };
 end
 
-//suse manager lifecycle management, system z, 1 ifl with unlimited virtual machines, priority subscription, 3 year
+//MGR LC Z IFL ULVM PR S 3Y
 rule "Add subscription data for part number 874-006841"
     when
         $subscription : Subscription(partNumber == "874-006841")
@@ -10248,7 +10593,7 @@ rule "Add subscription data for part number 874-006841"
         };
 end
 
-//suse manager server, x86-64, 1 instance for 1-50 managed linux instances, priority subscription, 1 year
+//MGR SRV X86-64 INST 1-50 PR S 1Y
 rule "Add subscription data for part number 874-006842"
     when
         $subscription : Subscription(partNumber == "874-006842")
@@ -10260,7 +10605,7 @@ rule "Add subscription data for part number 874-006842"
         };
 end
 
-//suse manager server, x86-64, 1 instance for 1-50 managed linux instances, priority subscription, 3 year
+//MGR SRV X86-64 INST 1-50 PR S 3Y
 rule "Add subscription data for part number 874-006844"
     when
         $subscription : Subscription(partNumber == "874-006844")
@@ -10285,7 +10630,7 @@ rule "Add subscription data for part number 874-006845"
         };
 end
 
-//suse manager server, system z, 1 instance, priority subscription, 1 year
+//MGR SRV Z INST PR S 1Y
 rule "Add subscription data for part number 874-006846"
     when
         $subscription : Subscription(partNumber == "874-006846")
@@ -10297,7 +10642,7 @@ rule "Add subscription data for part number 874-006846"
         };
 end
 
-//suse manager server, system z, 1 instance, priority subscription, 3 year
+//MGR SRV Z INST PR S 3Y
 rule "Add subscription data for part number 874-006847"
     when
         $subscription : Subscription(partNumber == "874-006847")
@@ -10371,7 +10716,7 @@ rule "Add subscription data for part number 874-006854"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, standard subscription, 1 year
+//SLES Z ENT IFL ST S 1Y
 rule "Add subscription data for part number 874-006864"
     when
         $subscription : Subscription(partNumber == "874-006864")
@@ -10384,7 +10729,7 @@ rule "Add subscription data for part number 874-006864"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, standard subscription, 3 year
+//SLES Z ENT IFL ST S 3Y
 rule "Add subscription data for part number 874-006865"
     when
         $subscription : Subscription(partNumber == "874-006865")
@@ -10397,7 +10742,7 @@ rule "Add subscription data for part number 874-006865"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, priority subscription, 1 year
+//SLES Z ENT IFL PR S 1Y
 rule "Add subscription data for part number 874-006866"
     when
         $subscription : Subscription(partNumber == "874-006866")
@@ -10410,7 +10755,7 @@ rule "Add subscription data for part number 874-006866"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, priority subscription, 3 year
+//SLES Z ENT IFL PR S 3Y
 rule "Add subscription data for part number 874-006867"
     when
         $subscription : Subscription(partNumber == "874-006867")
@@ -10423,7 +10768,7 @@ rule "Add subscription data for part number 874-006867"
         };
 end
 
-//suse linux enterprise desktop, x86 & x86-64, 1 instance, standard subscription, 1 year
+//SLED X86/X86-64 INST ST S 1Y
 rule "Add subscription data for part number 874-006868"
     when
         $subscription : Subscription(partNumber == "874-006868")
@@ -10435,7 +10780,7 @@ rule "Add subscription data for part number 874-006868"
         };
 end
 
-//suse linux enterprise desktop, x86 & x86-64, 1 instance, standard subscription, 3 year
+//SLED X86/X86-64 INST ST S 3Y
 rule "Add subscription data for part number 874-006869"
     when
         $subscription : Subscription(partNumber == "874-006869")
@@ -10447,7 +10792,7 @@ rule "Add subscription data for part number 874-006869"
         };
 end
 
-//suse linux enterprise desktop, x86 & x86-64, 1 instance, priority subscription, 1 year
+//SLED X86/X86-64 INST PR S 1Y
 rule "Add subscription data for part number 874-006870"
     when
         $subscription : Subscription(partNumber == "874-006870")
@@ -10459,7 +10804,7 @@ rule "Add subscription data for part number 874-006870"
         };
 end
 
-//suse linux enterprise desktop, x86 & x86-64, 1 instance, priority subscription, 3 year
+//SLED X86/X86-64 INST PR S 3Y
 rule "Add subscription data for part number 874-006871"
     when
         $subscription : Subscription(partNumber == "874-006871")
@@ -10471,7 +10816,7 @@ rule "Add subscription data for part number 874-006871"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, basic subscription, 1 year
+//SLE HPC X86-64 1-2S BS S 1Y
 rule "Add subscription data for part number 874-006872"
     when
         $subscription : Subscription(partNumber == "874-006872")
@@ -10484,7 +10829,7 @@ rule "Add subscription data for part number 874-006872"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, basic subscription, 3 year
+//SLE HPC X86-64 1-2S BS S 3Y
 rule "Add subscription data for part number 874-006873"
     when
         $subscription : Subscription(partNumber == "874-006873")
@@ -10497,7 +10842,7 @@ rule "Add subscription data for part number 874-006873"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, basic subscription, 5 year
+//SLE HPC X86-64 1-2S BS S 5Y
 rule "Add subscription data for part number 874-006874"
     when
         $subscription : Subscription(partNumber == "874-006874")
@@ -10510,7 +10855,7 @@ rule "Add subscription data for part number 874-006874"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 1 year
+//SLES X86/X86-64 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 874-006875"
     when
         $subscription : Subscription(partNumber == "874-006875")
@@ -10523,7 +10868,7 @@ rule "Add subscription data for part number 874-006875"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 1 year
+//SLES X86/X86-64 1-2S ULVM PR S 1Y
 rule "Add subscription data for part number 874-006876"
     when
         $subscription : Subscription(partNumber == "874-006876")
@@ -10536,7 +10881,7 @@ rule "Add subscription data for part number 874-006876"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 1 year
+//SLES X86/X86-64 1-2S/VM L3PR S 1Y
 rule "Add subscription data for part number 874-006877"
     when
         $subscription : Subscription(partNumber == "874-006877")
@@ -10549,7 +10894,7 @@ rule "Add subscription data for part number 874-006877"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 1 year
+//SLES X86/X86-64 1-2S ULVM L3PR S 1Y
 rule "Add subscription data for part number 874-006878"
     when
         $subscription : Subscription(partNumber == "874-006878")
@@ -10562,7 +10907,7 @@ rule "Add subscription data for part number 874-006878"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, standard subscription, 1 year
+//SLES X86/X86-64 1-2S/VM ST S 1Y
 rule "Add subscription data for part number 874-006879"
     when
         $subscription : Subscription(partNumber == "874-006879")
@@ -10575,7 +10920,7 @@ rule "Add subscription data for part number 874-006879"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, standard subscription, 1 year
+//SLES X86/X86-64 1-2S ULVM ST S 1Y
 rule "Add subscription data for part number 874-006880"
     when
         $subscription : Subscription(partNumber == "874-006880")
@@ -10588,7 +10933,7 @@ rule "Add subscription data for part number 874-006880"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-standard subscription, 1 year
+//SLES X86/X86-64 1-2S/VM L3ST S 1Y
 rule "Add subscription data for part number 874-006881"
     when
         $subscription : Subscription(partNumber == "874-006881")
@@ -10601,7 +10946,7 @@ rule "Add subscription data for part number 874-006881"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-standard subscription, 1 year
+//SLES X86/X86-64 1-2S ULVM L3ST S 1Y
 rule "Add subscription data for part number 874-006882"
     when
         $subscription : Subscription(partNumber == "874-006882")
@@ -10614,7 +10959,7 @@ rule "Add subscription data for part number 874-006882"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 3 year
+//SLES X86/X86-64 1-2S/VM PR S 3Y
 rule "Add subscription data for part number 874-006883"
     when
         $subscription : Subscription(partNumber == "874-006883")
@@ -10627,7 +10972,7 @@ rule "Add subscription data for part number 874-006883"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//SLES X86/X86-64 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 874-006884"
     when
         $subscription : Subscription(partNumber == "874-006884")
@@ -10640,7 +10985,7 @@ rule "Add subscription data for part number 874-006884"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 3 year
+//SLES X86/X86-64 1-2S/VM L3PR S 3Y
 rule "Add subscription data for part number 874-006885"
     when
         $subscription : Subscription(partNumber == "874-006885")
@@ -10653,7 +10998,7 @@ rule "Add subscription data for part number 874-006885"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//SLES X86/X86-64 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 874-006886"
     when
         $subscription : Subscription(partNumber == "874-006886")
@@ -10666,7 +11011,7 @@ rule "Add subscription data for part number 874-006886"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, standard subscription, 3 year
+//SLES X86/X86-64 1-2S/VM ST S 3Y
 rule "Add subscription data for part number 874-006887"
     when
         $subscription : Subscription(partNumber == "874-006887")
@@ -10679,7 +11024,7 @@ rule "Add subscription data for part number 874-006887"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, standard subscription, 3 year
+//SLES X86/X86-64 1-2S ULVM ST S 3Y
 rule "Add subscription data for part number 874-006888"
     when
         $subscription : Subscription(partNumber == "874-006888")
@@ -10692,7 +11037,7 @@ rule "Add subscription data for part number 874-006888"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-standard subscription, 3 year
+//SLES X86/X86-64 1-2S/VM L3ST S 3Y
 rule "Add subscription data for part number 874-006889"
     when
         $subscription : Subscription(partNumber == "874-006889")
@@ -10705,7 +11050,7 @@ rule "Add subscription data for part number 874-006889"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, basic subscription, 1 year
+//SLE HPC PWR 1-2S BS S 1Y
 rule "Add subscription data for part number 874-006890"
     when
         $subscription : Subscription(partNumber == "874-006890")
@@ -10718,7 +11063,7 @@ rule "Add subscription data for part number 874-006890"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, basic subscription, 3 year
+//SLE HPC PWR 1-2S BS S 3Y
 rule "Add subscription data for part number 874-006891"
     when
         $subscription : Subscription(partNumber == "874-006891")
@@ -10731,7 +11076,7 @@ rule "Add subscription data for part number 874-006891"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, basic subscription, 5 year
+//SLE HPC PWR 1-2S BS S 5Y
 rule "Add subscription data for part number 874-006892"
     when
         $subscription : Subscription(partNumber == "874-006892")
@@ -10744,7 +11089,7 @@ rule "Add subscription data for part number 874-006892"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-standard subscription, 3 year
+//SLES X86/X86-64 1-2S ULVM L3ST S 3Y
 rule "Add subscription data for part number 874-006893"
     when
         $subscription : Subscription(partNumber == "874-006893")
@@ -10757,7 +11102,7 @@ rule "Add subscription data for part number 874-006893"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 5 year
+//SLES X86/X86-64 1-2S/VM PR S 5Y
 rule "Add subscription data for part number 874-006894"
     when
         $subscription : Subscription(partNumber == "874-006894")
@@ -10770,7 +11115,7 @@ rule "Add subscription data for part number 874-006894"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 5 year
+//SLES X86/X86-64 1-2S ULVM PR S 5Y
 rule "Add subscription data for part number 874-006895"
     when
         $subscription : Subscription(partNumber == "874-006895")
@@ -10783,7 +11128,7 @@ rule "Add subscription data for part number 874-006895"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 5 year
+//SLES X86/X86-64 1-2S/VM L3PR S 5Y
 rule "Add subscription data for part number 874-006896"
     when
         $subscription : Subscription(partNumber == "874-006896")
@@ -10796,7 +11141,7 @@ rule "Add subscription data for part number 874-006896"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 5 year
+//SLES X86/X86-64 1-2S ULVM L3PR S 5Y
 rule "Add subscription data for part number 874-006897"
     when
         $subscription : Subscription(partNumber == "874-006897")
@@ -10809,7 +11154,7 @@ rule "Add subscription data for part number 874-006897"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, standard subscription, 5 year
+//SLES X86/X86-64 1-2S/VM ST S 5Y
 rule "Add subscription data for part number 874-006898"
     when
         $subscription : Subscription(partNumber == "874-006898")
@@ -10822,7 +11167,7 @@ rule "Add subscription data for part number 874-006898"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, standard subscription, 1 year
+//SLE HPC X86-64 1-2S ST S 1Y
 rule "Add subscription data for part number 874-006899"
     when
         $subscription : Subscription(partNumber == "874-006899")
@@ -10835,7 +11180,7 @@ rule "Add subscription data for part number 874-006899"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, standard subscription, 3 year
+//SLE HPC X86-64 1-2S ST S 3Y
 rule "Add subscription data for part number 874-006900"
     when
         $subscription : Subscription(partNumber == "874-006900")
@@ -10848,7 +11193,7 @@ rule "Add subscription data for part number 874-006900"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, standard subscription, 5 year
+//SLE HPC X86-64 1-2S ST S 5Y
 rule "Add subscription data for part number 874-006901"
     when
         $subscription : Subscription(partNumber == "874-006901")
@@ -10861,7 +11206,7 @@ rule "Add subscription data for part number 874-006901"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, standard subscription, 5 year
+//SLES X86/X86-64 1-2S ULVM ST S 5Y
 rule "Add subscription data for part number 874-006902"
     when
         $subscription : Subscription(partNumber == "874-006902")
@@ -10874,7 +11219,7 @@ rule "Add subscription data for part number 874-006902"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-standard subscription, 5 year
+//SLES X86/X86-64 1-2S/VM L3ST S 5Y
 rule "Add subscription data for part number 874-006903"
     when
         $subscription : Subscription(partNumber == "874-006903")
@@ -10887,7 +11232,7 @@ rule "Add subscription data for part number 874-006903"
         };
 end
 
-//suse linux enterprise server, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-standard subscription, 5 year
+//SLES X86/X86-64 1-2S ULVM L3ST S 5Y
 rule "Add subscription data for part number 874-006904"
     when
         $subscription : Subscription(partNumber == "874-006904")
@@ -10900,7 +11245,7 @@ rule "Add subscription data for part number 874-006904"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 1 year
+//SLE SAP X86-64 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 874-006905"
     when
         $subscription : Subscription(partNumber == "874-006905")
@@ -10913,7 +11258,7 @@ rule "Add subscription data for part number 874-006905"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 1 year
+//SLE SAP X86-64 1-2S ULVM PR S 1Y
 rule "Add subscription data for part number 874-006906"
     when
         $subscription : Subscription(partNumber == "874-006906")
@@ -10926,7 +11271,7 @@ rule "Add subscription data for part number 874-006906"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 3 year
+//SLE SAP X86-64 1-2S/VM PR S 3Y
 rule "Add subscription data for part number 874-006907"
     when
         $subscription : Subscription(partNumber == "874-006907")
@@ -10939,7 +11284,7 @@ rule "Add subscription data for part number 874-006907"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//SLE SAP X86-64 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 874-006908"
     when
         $subscription : Subscription(partNumber == "874-006908")
@@ -10952,7 +11297,7 @@ rule "Add subscription data for part number 874-006908"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, priority subscription, 5 year
+//SLE SAP X86-64 1-2S/VM PR S 5Y
 rule "Add subscription data for part number 874-006909"
     when
         $subscription : Subscription(partNumber == "874-006909")
@@ -10965,7 +11310,7 @@ rule "Add subscription data for part number 874-006909"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, priority subscription, 5 year
+//SLE SAP X86-64 1-2S ULVM PR S 5Y
 rule "Add subscription data for part number 874-006910"
     when
         $subscription : Subscription(partNumber == "874-006910")
@@ -10978,7 +11323,7 @@ rule "Add subscription data for part number 874-006910"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 1 year
+//SLE SAP X86-64 1-2S/VM L3PR S 1Y
 rule "Add subscription data for part number 874-006911"
     when
         $subscription : Subscription(partNumber == "874-006911")
@@ -10991,7 +11336,7 @@ rule "Add subscription data for part number 874-006911"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 1 year
+//SLE SAP X86-64 1-2S ULVM L3PR S 1Y
 rule "Add subscription data for part number 874-006912"
     when
         $subscription : Subscription(partNumber == "874-006912")
@@ -11004,7 +11349,7 @@ rule "Add subscription data for part number 874-006912"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 3 year
+//SLE SAP X86-64 1-2S/VM L3PR S 3Y
 rule "Add subscription data for part number 874-006913"
     when
         $subscription : Subscription(partNumber == "874-006913")
@@ -11017,7 +11362,7 @@ rule "Add subscription data for part number 874-006913"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//SLE SAP X86-64 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 874-006914"
     when
         $subscription : Subscription(partNumber == "874-006914")
@@ -11030,7 +11375,7 @@ rule "Add subscription data for part number 874-006914"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 5 year
+//SLE SAP X86-64 1-2S/VM L3PR S 5Y
 rule "Add subscription data for part number 874-006915"
     when
         $subscription : Subscription(partNumber == "874-006915")
@@ -11043,7 +11388,7 @@ rule "Add subscription data for part number 874-006915"
         };
 end
 
-//suse linux enterprise server for sap applications, x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 5 year
+//SLE SAP X86-64 1-2S ULVM L3PR S 5Y
 rule "Add subscription data for part number 874-006916"
     when
         $subscription : Subscription(partNumber == "874-006916")
@@ -11056,7 +11401,7 @@ rule "Add subscription data for part number 874-006916"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, standard subscription, 1 year
+//SLE HPC PWR 1-2S ST S 1Y
 rule "Add subscription data for part number 874-006917"
     when
         $subscription : Subscription(partNumber == "874-006917")
@@ -11069,7 +11414,7 @@ rule "Add subscription data for part number 874-006917"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, standard subscription, 3 year
+//SLE HPC PWR 1-2S ST S 3Y
 rule "Add subscription data for part number 874-006918"
     when
         $subscription : Subscription(partNumber == "874-006918")
@@ -11082,7 +11427,7 @@ rule "Add subscription data for part number 874-006918"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, standard subscription, 5 year
+//SLE HPC PWR 1-2S ST S 5Y
 rule "Add subscription data for part number 874-006919"
     when
         $subscription : Subscription(partNumber == "874-006919")
@@ -11095,7 +11440,7 @@ rule "Add subscription data for part number 874-006919"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, priority subscription, 5 year
+//SLES Z ENT IFL PR S 5Y
 rule "Add subscription data for part number 874-006920"
     when
         $subscription : Subscription(partNumber == "874-006920")
@@ -11108,7 +11453,7 @@ rule "Add subscription data for part number 874-006920"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, standard subscription, 5 year
+//SLES Z ENT IFL ST S 5Y
 rule "Add subscription data for part number 874-006921"
     when
         $subscription : Subscription(partNumber == "874-006921")
@@ -11121,7 +11466,7 @@ rule "Add subscription data for part number 874-006921"
         };
 end
 
-//suse linux enterprise server, system z enterprise class, 1 ifl, basic subscription, 5 year
+//SLES Z ENT IFL BS S 5Y
 rule "Add subscription data for part number 874-006922"
     when
         $subscription : Subscription(partNumber == "874-006922")
@@ -11134,7 +11479,7 @@ rule "Add subscription data for part number 874-006922"
         };
 end
 
-//suse linux enterprise high availability extension, x86 & x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 1 year
+//SLE HA X86/X86-64 INH VRT INH S 1Y
 rule "Add subscription data for part number 874-006923"
     when
         $subscription : Subscription(partNumber == "874-006923")
@@ -11145,7 +11490,7 @@ rule "Add subscription data for part number 874-006923"
         };
 end
 
-//suse linux enterprise high availability extension, x86 & x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 3 year
+//SLE HA X86/X86-64 INH VRT INH S 3Y
 rule "Add subscription data for part number 874-006924"
     when
         $subscription : Subscription(partNumber == "874-006924")
@@ -11156,7 +11501,7 @@ rule "Add subscription data for part number 874-006924"
         };
 end
 
-//suse linux enterprise high availability extension, x86 & x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 5 year
+//SLE HA X86/X86-64 INH VRT INH S 5Y
 rule "Add subscription data for part number 874-006925"
     when
         $subscription : Subscription(partNumber == "874-006925")
@@ -11167,7 +11512,7 @@ rule "Add subscription data for part number 874-006925"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, priority subscription, 1 year
+//SLE HPC X86-64 1-2S PR S 1Y
 rule "Add subscription data for part number 874-006926"
     when
         $subscription : Subscription(partNumber == "874-006926")
@@ -11180,7 +11525,7 @@ rule "Add subscription data for part number 874-006926"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, priority subscription, 3 year
+//SLE HPC X86-64 1-2S PR S 3Y
 rule "Add subscription data for part number 874-006927"
     when
         $subscription : Subscription(partNumber == "874-006927")
@@ -11193,7 +11538,7 @@ rule "Add subscription data for part number 874-006927"
         };
 end
 
-//suse linux enterprise high performance computing, x86-64, 1-2 sockets, priority subscription, 5 year
+//SLE HPC X86-64 1-2S PR S 5Y
 rule "Add subscription data for part number 874-006928"
     when
         $subscription : Subscription(partNumber == "874-006928")
@@ -11206,7 +11551,7 @@ rule "Add subscription data for part number 874-006928"
         };
 end
 
-//geo clustering for suse linux enterprise high availability extension, x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 1 year
+//GEO SLE X86-64 INH VRT INH S 1Y
 rule "Add subscription data for part number 874-006929"
     when
         $subscription : Subscription(partNumber == "874-006929")
@@ -11217,7 +11562,7 @@ rule "Add subscription data for part number 874-006929"
         };
 end
 
-//geo clustering for suse linux enterprise high availability extension, x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 3 year
+//GEO SLE X86-64 INH VRT INH S 3Y
 rule "Add subscription data for part number 874-006930"
     when
         $subscription : Subscription(partNumber == "874-006930")
@@ -11228,7 +11573,7 @@ rule "Add subscription data for part number 874-006930"
         };
 end
 
-//geo clustering for suse linux enterprise high availability extension, x86-64, 1-2 sockets with inherited virtualization, inherited subscription, 5 year
+//GEO SLE X86-64 INH VRT INH S 5Y
 rule "Add subscription data for part number 874-006931"
     when
         $subscription : Subscription(partNumber == "874-006931")
@@ -11239,7 +11584,7 @@ rule "Add subscription data for part number 874-006931"
         };
 end
 
-//suse manager server, x86-64, 1 instance, l3-priority subscription, 1 year
+//MGR SRV X86-64 INST L3PR S 1Y
 rule "Add subscription data for part number 874-006932"
     when
         $subscription : Subscription(partNumber == "874-006932")
@@ -11251,7 +11596,7 @@ rule "Add subscription data for part number 874-006932"
         };
 end
 
-//suse manager server, system z, 1 instance, l3-priority subscription, 1 year
+//MGR SRV Z INST L3PR S 1Y
 rule "Add subscription data for part number 874-006933"
     when
         $subscription : Subscription(partNumber == "874-006933")
@@ -11263,7 +11608,7 @@ rule "Add subscription data for part number 874-006933"
         };
 end
 
-//suse manager server, x86-64, 1 instance, l3-priority subscription, 3 year
+//MGR SRV X86-64 INST L3PR S 3Y
 rule "Add subscription data for part number 874-006934"
     when
         $subscription : Subscription(partNumber == "874-006934")
@@ -11275,7 +11620,7 @@ rule "Add subscription data for part number 874-006934"
         };
 end
 
-//suse manager server, system z, 1 instance, l3-priority subscription, 3 year
+//MGR SRV Z INST L3PR S 3Y
 rule "Add subscription data for part number 874-006935"
     when
         $subscription : Subscription(partNumber == "874-006935")
@@ -11287,7 +11632,7 @@ rule "Add subscription data for part number 874-006935"
         };
 end
 
-//suse manager server, x86-64, 1 instance for 1-50 managed linux instances, l3-priority subscription, 1 year
+//MGR SRV X86-64 INST 1-50 L3PR S 1Y
 rule "Add subscription data for part number 874-006936"
     when
         $subscription : Subscription(partNumber == "874-006936")
@@ -11299,7 +11644,7 @@ rule "Add subscription data for part number 874-006936"
         };
 end
 
-//suse manager server, x86-64, 1 instance for 1-50 managed linux instances, l3-priority subscription, 3 year
+//MGR SRV X86-64 INST 1-50 L3PR S 3Y
 rule "Add subscription data for part number 874-006937"
     when
         $subscription : Subscription(partNumber == "874-006937")
@@ -11311,7 +11656,7 @@ rule "Add subscription data for part number 874-006937"
         };
 end
 
-//suse manager proxy, x86-64, 1 instance, l3-priority subscription, 1 year
+//MGR PROXY X86-64 INST L3PR S 1Y
 rule "Add subscription data for part number 874-006938"
     when
         $subscription : Subscription(partNumber == "874-006938")
@@ -11323,7 +11668,7 @@ rule "Add subscription data for part number 874-006938"
         };
 end
 
-//suse manager proxy, x86-64, 1 instance, l3-priority subscription, 3 year
+//MGR PROXY X86-64 INST L3PR S 3Y
 rule "Add subscription data for part number 874-006939"
     when
         $subscription : Subscription(partNumber == "874-006939")
@@ -11335,7 +11680,7 @@ rule "Add subscription data for part number 874-006939"
         };
 end
 
-//suse manager lifecycle management, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 1 year
+//MGR LC X86/X86-64 1-2S/VM L3PR S 1Y
 rule "Add subscription data for part number 874-006940"
     when
         $subscription : Subscription(partNumber == "874-006940")
@@ -11348,7 +11693,7 @@ rule "Add subscription data for part number 874-006940"
         };
 end
 
-//suse manager lifecycle management, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 3 year
+//MGR LC X86/X86-64 1-2S/VM L3PR S 3Y
 rule "Add subscription data for part number 874-006941"
     when
         $subscription : Subscription(partNumber == "874-006941")
@@ -11361,7 +11706,7 @@ rule "Add subscription data for part number 874-006941"
         };
 end
 
-//suse manager lifecycle management, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 1 year
+//MGR LC X86/X86-64 1-2S ULVM L3PR S 1Y
 rule "Add subscription data for part number 874-006942"
     when
         $subscription : Subscription(partNumber == "874-006942")
@@ -11374,7 +11719,7 @@ rule "Add subscription data for part number 874-006942"
         };
 end
 
-//suse manager lifecycle management, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//MGR LC X86/X86-64 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 874-006943"
     when
         $subscription : Subscription(partNumber == "874-006943")
@@ -11387,7 +11732,7 @@ rule "Add subscription data for part number 874-006943"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, priority subscription, 1 year
+//SLE HPC PWR 1-2S PR S 1Y
 rule "Add subscription data for part number 874-006944"
     when
         $subscription : Subscription(partNumber == "874-006944")
@@ -11400,7 +11745,7 @@ rule "Add subscription data for part number 874-006944"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, priority subscription, 3 year
+//SLE HPC PWR 1-2S PR S 3Y
 rule "Add subscription data for part number 874-006945"
     when
         $subscription : Subscription(partNumber == "874-006945")
@@ -11413,7 +11758,7 @@ rule "Add subscription data for part number 874-006945"
         };
 end
 
-//suse linux enterprise high performance computing, ibm power, 1-2 sockets, priority subscription, 5 year
+//SLE HPC PWR 1-2S PR S 5Y
 rule "Add subscription data for part number 874-006946"
     when
         $subscription : Subscription(partNumber == "874-006946")
@@ -11426,7 +11771,7 @@ rule "Add subscription data for part number 874-006946"
         };
 end
 
-//suse manager lifecycle management, system z, 1 ifl with unlimited virtual machines, l3-priority subscription, 1 year
+//MGR LC Z IFL ULVM L3PR S 1Y
 rule "Add subscription data for part number 874-006947"
     when
         $subscription : Subscription(partNumber == "874-006947")
@@ -11439,7 +11784,7 @@ rule "Add subscription data for part number 874-006947"
         };
 end
 
-//suse manager lifecycle management, system z, 1 ifl with unlimited virtual machines, l3-priority subscription, 3 year
+//MGR LC Z IFL ULVM L3PR S 3Y
 rule "Add subscription data for part number 874-006948"
     when
         $subscription : Subscription(partNumber == "874-006948")
@@ -11452,7 +11797,7 @@ rule "Add subscription data for part number 874-006948"
         };
 end
 
-//suse manager monitoring, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 1 year
+//MGR MN X86/X86-64 1-2S/VM L3PR S 1Y
 rule "Add subscription data for part number 874-006949"
     when
         $subscription : Subscription(partNumber == "874-006949")
@@ -11465,7 +11810,7 @@ rule "Add subscription data for part number 874-006949"
         };
 end
 
-//suse manager monitoring, x86 & x86-64, 1-2 sockets or 1-2 virtual machines, l3-priority subscription, 3 year
+//MGR MN X86/X86-64 1-2S/VM L3PR S 3Y
 rule "Add subscription data for part number 874-006950"
     when
         $subscription : Subscription(partNumber == "874-006950")
@@ -11478,7 +11823,7 @@ rule "Add subscription data for part number 874-006950"
         };
 end
 
-//suse manager monitoring, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 1 year
+//MGR MN X86/X86-64 1-2S ULVM L3PR S 1Y
 rule "Add subscription data for part number 874-006951"
     when
         $subscription : Subscription(partNumber == "874-006951")
@@ -11491,7 +11836,7 @@ rule "Add subscription data for part number 874-006951"
         };
 end
 
-//suse manager monitoring, x86 & x86-64, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//MGR MN X86/X86-64 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 874-006952"
     when
         $subscription : Subscription(partNumber == "874-006952")
@@ -11504,7 +11849,7 @@ rule "Add subscription data for part number 874-006952"
         };
 end
 
-//suse linux enterprise workstation extension, x86-64, 1 instance, inherited subscription, 1 year
+//SLE WE X86-64 INST INH S 1Y
 rule "Add subscription data for part number 874-006953"
     when
         $subscription : Subscription(partNumber == "874-006953")
@@ -11515,7 +11860,7 @@ rule "Add subscription data for part number 874-006953"
         };
 end
 
-//suse linux enterprise workstation extension, x86-64, 1 instance, inherited subscription, 3 year
+//SLE WE X86-64 INST INH S 3Y
 rule "Add subscription data for part number 874-006954"
     when
         $subscription : Subscription(partNumber == "874-006954")
@@ -11539,7 +11884,7 @@ rule "Add subscription data for part number 874-006987"
         };
 end
 
-//suse manager monitoring, system z, 1 ifl with unlimited virtual machines, l3-priority subscription, 1 year
+//MGR MN Z IFL ULVM L3PR S 1Y
 rule "Add subscription data for part number 874-007029"
     when
         $subscription : Subscription(partNumber == "874-007029")
@@ -11552,7 +11897,7 @@ rule "Add subscription data for part number 874-007029"
         };
 end
 
-//suse manager monitoring, system z, 1 ifl with unlimited virtual machines, l3-priority subscription, 3 year
+//MGR MN Z IFL ULVM L3PR S 3Y
 rule "Add subscription data for part number 874-007030"
     when
         $subscription : Subscription(partNumber == "874-007030")
@@ -11565,7 +11910,7 @@ rule "Add subscription data for part number 874-007030"
         };
 end
 
-//suse openstack cloud control node plus admin server, x86-64, 1 instance, l3-priority subscription, 1 year
+//CLOUD CTRL/ADM X86-64 INST L3PR S 1Y
 rule "Add subscription data for part number 874-007031"
     when
         $subscription : Subscription(partNumber == "874-007031")
@@ -11577,7 +11922,7 @@ rule "Add subscription data for part number 874-007031"
         };
 end
 
-//suse openstack cloud control node plus admin server, x86-64, 1 instance, l3-priority subscription, 3 year
+//CLOUD CTRL/ADM X86-64 INST L3PR S 3Y
 rule "Add subscription data for part number 874-007032"
     when
         $subscription : Subscription(partNumber == "874-007032")
@@ -11589,7 +11934,7 @@ rule "Add subscription data for part number 874-007032"
         };
 end
 
-//suse openstack cloud control node, x86-64, 1 instance, l3-priority subscription, 1 year
+//CLOUD CTRL X86-64 INST L3PR S 1Y
 rule "Add subscription data for part number 874-007033"
     when
         $subscription : Subscription(partNumber == "874-007033")
@@ -11601,7 +11946,7 @@ rule "Add subscription data for part number 874-007033"
         };
 end
 
-//suse openstack cloud control node, x86-64, 1 instance, l3-priority subscription, 3 year
+//CLOUD CTRL X86-64 INST L3PR S 3Y
 rule "Add subscription data for part number 874-007034"
     when
         $subscription : Subscription(partNumber == "874-007034")
@@ -11613,7 +11958,7 @@ rule "Add subscription data for part number 874-007034"
         };
 end
 
-//suse openstack cloud compute node, x86-64, 1-2 sockets, l3-priority subscription, 1 year
+//CLOUD COMPUTE X86-64 1-2S L3PR S 1Y
 rule "Add subscription data for part number 874-007035"
     when
         $subscription : Subscription(partNumber == "874-007035")
@@ -11626,7 +11971,7 @@ rule "Add subscription data for part number 874-007035"
         };
 end
 
-//suse openstack cloud compute node, x86-64, 1-2 sockets, l3-priority subscription, 3 year
+//CLOUD COMPUTE X86-64 1-2S L3PR S 3Y
 rule "Add subscription data for part number 874-007036"
     when
         $subscription : Subscription(partNumber == "874-007036")
@@ -11639,7 +11984,7 @@ rule "Add subscription data for part number 874-007036"
         };
 end
 
-//suse openstack cloud compute node, customer hyper-v x86-64, 1-2 sockets, l3-priority subscription, 1 year
+//CLOUD COMPUTE HyperV 1-2S L3PR S 1Y
 rule "Add subscription data for part number 874-007037"
     when
         $subscription : Subscription(partNumber == "874-007037")
@@ -11652,7 +11997,7 @@ rule "Add subscription data for part number 874-007037"
         };
 end
 
-//suse openstack cloud compute node, customer hyper-v x86-64, 1-2 sockets, l3-priority subscription, 3 year
+//CLOUD COMPUTE HyperV 1-2S L3PR S 3Y
 rule "Add subscription data for part number 874-007038"
     when
         $subscription : Subscription(partNumber == "874-007038")
@@ -11665,7 +12010,7 @@ rule "Add subscription data for part number 874-007038"
         };
 end
 
-//suse enterprise storage base configuration, x86-64, 4 osd nodes with 1-2 sockets, priority subscription, 1 year
+//STORAGE BASE X86-64 4N1-2S PR S 1Y
 rule "Add subscription data for part number 874-007039"
     no-loop
     when
@@ -11680,7 +12025,7 @@ rule "Add subscription data for part number 874-007039"
         };
 end
 
-//suse enterprise storage base configuration, x86-64, 4 osd nodes with 1-2 sockets, priority subscription, 3 year
+//STORAGE BASE X86-64 4N1-2S PR S 3Y
 rule "Add subscription data for part number 874-007040"
     no-loop
     when
@@ -11695,7 +12040,7 @@ rule "Add subscription data for part number 874-007040"
         };
 end
 
-//suse enterprise storage expansion node, x86-64, 1 osd node with 1-2 sockets, priority subscription, 1 year
+//STORAGE EXP X86-64 1N1-2S PR S 1Y
 rule "Add subscription data for part number 874-007041"
     when
         $subscription : Subscription(partNumber == "874-007041")
@@ -11708,7 +12053,7 @@ rule "Add subscription data for part number 874-007041"
         };
 end
 
-//suse enterprise storage expansion node, x86-64, 1 osd node with 1-2 sockets, priority subscription, 3 year
+//STORAGE EXP X86-64 1N1-2S PR S 3Y
 rule "Add subscription data for part number 874-007042"
     when
         $subscription : Subscription(partNumber == "874-007042")
@@ -11721,7 +12066,7 @@ rule "Add subscription data for part number 874-007042"
         };
 end
 
-//suse enterprise storage base configuration, x86-64, 4 osd nodes with 1-2 sockets, l3-priority subscription, 1 year
+//STORAGE BASE X86-64 4N1-2S L3PR S 1Y
 rule "Add subscription data for part number 874-007043"
     no-loop
     when
@@ -11736,7 +12081,7 @@ rule "Add subscription data for part number 874-007043"
         };
 end
 
-//suse enterprise storage base configuration, x86-64, 4 osd nodes with 1-2 sockets, l3-priority subscription, 3 year
+//STORAGE BASE X86-64 4N1-2S L3PR S 3Y
 rule "Add subscription data for part number 874-007044"
     no-loop
     when
@@ -11751,7 +12096,7 @@ rule "Add subscription data for part number 874-007044"
         };
 end
 
-//suse enterprise storage expansion node, x86-64, 1 osd node with 1-2 sockets, l3-priority subscription, 1 year
+//STORAGE EXP X86-64 1N1-2S L3PR S 1Y
 rule "Add subscription data for part number 874-007045"
     when
         $subscription : Subscription(partNumber == "874-007045")
@@ -11764,7 +12109,7 @@ rule "Add subscription data for part number 874-007045"
         };
 end
 
-//suse enterprise storage expansion node, x86-64, 1 osd node with 1-2 sockets, l3-priority subscription, 3 year
+//STORAGE EXP X86-64 1N1-2S L3PR S 3Y
 rule "Add subscription data for part number 874-007046"
     when
         $subscription : Subscription(partNumber == "874-007046")
@@ -11777,7 +12122,98 @@ rule "Add subscription data for part number 874-007046"
         };
 end
 
-//suse openstack cloud swift storage node, x86-64, 1-2 sockets, priority subscription, 1 year
+//SLES X86/X86-64 1-2S/VM BS S 1Y
+rule "Add subscription data for part number 874-007073"
+    when
+        $subscription : Subscription(partNumber == "874-007073")
+    then
+        modify($subscription) {
+            policy = Policy.TWO_TWO,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLES X86/X86-64 1-2S ULVM BS S 1Y
+rule "Add subscription data for part number 874-007074"
+    when
+        $subscription : Subscription(partNumber == "874-007074")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLES X86/X86-64 1-2S/VM BS S 3Y
+rule "Add subscription data for part number 874-007075"
+    when
+        $subscription : Subscription(partNumber == "874-007075")
+    then
+        modify($subscription) {
+            policy = Policy.TWO_TWO,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLES X86/X86-64 1-2S ULVM BS S 3Y
+rule "Add subscription data for part number 874-007076"
+    when
+        $subscription : Subscription(partNumber == "874-007076")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLES X86/X86-64 1-2S/VM BS S 5Y
+rule "Add subscription data for part number 874-007077"
+    when
+        $subscription : Subscription(partNumber == "874-007077")
+    then
+        modify($subscription) {
+            policy = Policy.TWO_TWO,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLES X86/X86-64 1-2S ULVM BS S 5Y
+rule "Add subscription data for part number 874-007078"
+    when
+        $subscription : Subscription(partNumber == "874-007078")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLES EDU X86/X86-64 1-2S/VM SLF S 1Y
+rule "Add subscription data for part number 874-007079"
+    when
+        $subscription : Subscription(partNumber == "874-007079")
+    then
+        modify($subscription) {
+            policy = Policy.TWO_TWO,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//CLOUD SWIFT X86-64 1-2S PR S 1Y
 rule "Add subscription data for part number 874-007099"
     when
         $subscription : Subscription(partNumber == "874-007099")
@@ -11790,7 +12226,7 @@ rule "Add subscription data for part number 874-007099"
         };
 end
 
-//suse openstack cloud swift storage node, x86-64, 1-2 sockets, priority subscription, 3 year
+//CLOUD SWIFT X86-64 1-2S PR S 3Y
 rule "Add subscription data for part number 874-007100"
     when
         $subscription : Subscription(partNumber == "874-007100")
@@ -11803,7 +12239,7 @@ rule "Add subscription data for part number 874-007100"
         };
 end
 
-//suse linux enterprise server for sap applications, ibm power, 1-2 sockets with unlimited virtual machines, priority subscription, 3 year
+//SLE SAP PWR 1-2S ULVM PR S 3Y
 rule "Add subscription data for part number 874-007131"
     when
         $subscription : Subscription(partNumber == "874-007131")
@@ -11816,7 +12252,7 @@ rule "Add subscription data for part number 874-007131"
         };
 end
 
-//suse linux enterprise server for sap applications, ibm power, 1-2 sockets with unlimited virtual machines, l3-priority subscription, 3 year
+//SLE SAP PWR 1-2S ULVM L3PR S 3Y
 rule "Add subscription data for part number 874-007132"
     when
         $subscription : Subscription(partNumber == "874-007132")
@@ -11904,7 +12340,7 @@ rule "Add subscription data for part number 877-001341-SAL"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, standard subscription, 1 year
+//SLEPOS CLNT X86 INST ST S 1Y
 rule "Add subscription data for part number 877-003415"
     when
         $subscription : Subscription(partNumber == "877-003415")
@@ -11916,7 +12352,7 @@ rule "Add subscription data for part number 877-003415"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, standard subscription, 3 year
+//SLEPOS CLNT X86 INST ST S 3Y
 rule "Add subscription data for part number 877-003416"
     when
         $subscription : Subscription(partNumber == "877-003416")
@@ -11928,7 +12364,7 @@ rule "Add subscription data for part number 877-003416"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, priority subscription, 1 year
+//SLEPOS CLNT X86 INST PR S 1Y
 rule "Add subscription data for part number 877-003417"
     when
         $subscription : Subscription(partNumber == "877-003417")
@@ -11940,7 +12376,7 @@ rule "Add subscription data for part number 877-003417"
         };
 end
 
-//suse linux enterprise point of service client, x86, 1 instance, priority subscription, 3 year
+//SLEPOS CLNT X86 INST PR S 3Y
 rule "Add subscription data for part number 877-003418"
     when
         $subscription : Subscription(partNumber == "877-003418")
@@ -11952,7 +12388,7 @@ rule "Add subscription data for part number 877-003418"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, standard subscription, 1 year
+//SLEPOS BRNCH X86/X86-64 INST ST S 1Y
 rule "Add subscription data for part number 877-003419"
     when
         $subscription : Subscription(partNumber == "877-003419")
@@ -11964,7 +12400,7 @@ rule "Add subscription data for part number 877-003419"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, standard subscription, 3 year
+//SLEPOS BRNCH X86/X86-64 INST ST S 3Y
 rule "Add subscription data for part number 877-003420"
     when
         $subscription : Subscription(partNumber == "877-003420")
@@ -11976,7 +12412,7 @@ rule "Add subscription data for part number 877-003420"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, priority subscription, 1 year
+//SLEPOS BRNCH X86/X86-64 INST PR S 1Y
 rule "Add subscription data for part number 877-003421"
     when
         $subscription : Subscription(partNumber == "877-003421")
@@ -11988,7 +12424,7 @@ rule "Add subscription data for part number 877-003421"
         };
 end
 
-//suse linux enterprise point of service branch server, x86 & x86-64, 1 instance, priority subscription, 3 year
+//SLEPOS BRNCH X86/X86-64 INST PR S 3Y
 rule "Add subscription data for part number 877-003422"
     when
         $subscription : Subscription(partNumber == "877-003422")
@@ -12000,7 +12436,7 @@ rule "Add subscription data for part number 877-003422"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, standard subscription, 1 year
+//SLEPOS ADMIN X86/X86-64 INST ST S 1Y
 rule "Add subscription data for part number 877-003423"
     when
         $subscription : Subscription(partNumber == "877-003423")
@@ -12012,7 +12448,7 @@ rule "Add subscription data for part number 877-003423"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, standard subscription, 3 year
+//SLEPOS ADMIN X86/X86-64 INST ST S 3Y
 rule "Add subscription data for part number 877-003424"
     when
         $subscription : Subscription(partNumber == "877-003424")
@@ -12024,7 +12460,7 @@ rule "Add subscription data for part number 877-003424"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, priority subscription, 1 year
+//SLEPOS ADMIN X86/X86-64 INST PR S 1Y
 rule "Add subscription data for part number 877-003425"
     when
         $subscription : Subscription(partNumber == "877-003425")
@@ -12036,7 +12472,7 @@ rule "Add subscription data for part number 877-003425"
         };
 end
 
-//suse linux enterprise point of service admin server, x86 & x86-64, 1 instance, priority subscription, 3 year
+//SLEPOS ADMIN X86/X86-64 INST PR S 3Y
 rule "Add subscription data for part number 877-003426"
     when
         $subscription : Subscription(partNumber == "877-003426")
@@ -12061,21 +12497,21 @@ rule "Add subscription data for part number 877-006594"
         };
 end
 
-//suse studio, x86-64, 1-2 instances, priority maintenance, 1 year
+//STUDIO X86-64 1-2INST PR M 1Y
 rule "Add subscription data for part number 877-007567"
     no-loop
     when
         $subscription : Subscription($quantity : quantity, partNumber == "877-007567")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             quantity = $quantity * 2,
             stackable = true
         };
 end
 
-//suse studio, x86-64, additional instance, priority maintenance, 1 year
+//STUDIO X86-64 ADDTL INST PR M 1Y
 rule "Add subscription data for part number 877-007568"
     when
         $subscription : Subscription(partNumber == "877-007568")
@@ -12087,21 +12523,21 @@ rule "Add subscription data for part number 877-007568"
         };
 end
 
-//suse studio, x86-64, 1-2 instances, priority maintenance, 3 year
+//STUDIO X86-64 1-2INST PR M 3Y
 rule "Add subscription data for part number 877-007571"
     no-loop
     when
         $subscription : Subscription($quantity : quantity, partNumber == "877-007571")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             quantity = $quantity * 2,
             stackable = true
         };
 end
 
-//suse studio, x86-64, additional instance, priority maintenance, 3 year
+//STUDIO X86-64 ADDTL INST PR M 3Y
 rule "Add subscription data for part number 877-007572"
     when
         $subscription : Subscription(partNumber == "877-007572")
@@ -12113,21 +12549,21 @@ rule "Add subscription data for part number 877-007572"
         };
 end
 
-//suse studio, x86-64, 1-2 instances, priority maintenance + license, 1 year
+//STUDIO X86-64 1-2INST PR M+L 1Y
 rule "Add subscription data for part number 879-001633"
     no-loop
     when
         $subscription : Subscription($quantity : quantity, partNumber == "879-001633")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.INSTANCE,
             supportLevel = "priority",
             quantity = $quantity * 2,
             stackable = true
         };
 end
 
-//suse studio, x86-64, additional instance, priority maintenance + license, 1 year
+//STUDIO X86-64 ADDTL INST PR M+L 1Y
 rule "Add subscription data for part number 879-001634"
     when
         $subscription : Subscription(partNumber == "879-001634")
