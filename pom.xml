@@ -5,7 +5,7 @@
 
     <groupId>com.suse</groupId>
     <artifactId>matcher</artifactId>
-    <version>0.0.1</version>
+    <version>0.1</version>
 
     <name>matcher</name>
     <description>Expert system to check your SUSE subscription status</description>
