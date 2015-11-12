@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec java -cp $(build-classpath antlr-runtime-3 commons-io commons-lang commons-lang3 commons-math3 drools-compiler drools-core ecj google-gson guava kie-api kie-internal log4j mvel2 optaplanner-core slf4j/api slf4j/log4j12 xstream xmlpull xpp3 protobuf reflections subscription-matcher) com.suse.matcher.Main "$@"
