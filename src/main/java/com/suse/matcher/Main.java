@@ -23,7 +23,7 @@ public class Main {
     public static final void main(String[] args) throws Exception {
         // parse commandline
         if (args.length != 3) {
-            java.lang.System.err.println("Usage: java -jar matcher.jar systems.json subscriptions.json pinned_matches.json");
+            java.lang.System.err.println("Usage: subscription-matcher systems.json subscriptions.json pinned_matches.json");
             java.lang.System.exit(1);
         }
         String systemsPath = args[0];
