@@ -5,7 +5,18 @@ import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
 import java.io.FileReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,25 +32,77 @@ public class Main {
      * @throws Exception if anything unexpected happens
      */
     public static final void main(String[] args) throws Exception {
-        // parse commandline
-        if (args.length != 3) {
-            java.lang.System.err.println("Usage: subscription-matcher systems.json subscriptions.json pinned_matches.json");
-            java.lang.System.exit(1);
+        CommandLine cmd = parseOptions(args);
+        String systemsPath = cmd.getOptionValue('s');
+        String subscriptionsPath = cmd.getOptionValue('u');
+        String pinnedMatchPath = null;
+        if (cmd.hasOption('p')) {
+            pinnedMatchPath = cmd.getOptionValue('c');
         }
-        String systemsPath = args[0];
-        String subscriptionsPath = args[1];
-        String pinnedMatchPath = args[2];
 
         // load files
         JsonIO io = new JsonIO();
         List<JsonSystem> systems = io.loadSystems(new FileReader(systemsPath));
         List<JsonSubscription> subscriptions = io.loadSubscriptions(new FileReader(subscriptionsPath));
-        List<JsonMatch> pinnedMatches = io.loadMatches(new FileReader(pinnedMatchPath));
+
+        List<JsonMatch> pinnedMatches = new ArrayList<JsonMatch>();
+        if (pinnedMatchPath != null) {
+            pinnedMatches = io.loadMatches(new FileReader(pinnedMatchPath));
+        }
 
         // do the matching
         JsonOutput result = new Matcher().match(systems, subscriptions, pinnedMatches, new Date());
 
-        // print output
-        System.out.println(io.toJson(result));
+        if (cmd.hasOption('d')) {
+            PrintWriter writer = new PrintWriter(
+                    new File(cmd.getOptionValue('d'), "matchresult.json"));
+            writer.write(io.toJson(result));
+            writer.close();
+        }
+        else {
+            // print output
+            System.out.println(io.toJson(result));
+        }
+    }
+
+    private static CommandLine parseOptions(String[] args) {
+        CommandLine cmd = null;
+        Options opts = new Options();
+        opts.addOption("h", "help", false, "show this help");
+        opts.addOption("s", "systems", true, "Systems");
+        opts.addOption("u", "subscriptions", true, "Subscriptions");
+        opts.addOption("p", "pinned", true, "Pinned subscriptions to systems");
+        opts.addOption("d", "directory", true, "Output directory");
+
+        CommandLineParser parser = new BasicParser();
+        try {
+            cmd = parser.parse(opts, args);
+            if (cmd.hasOption('h')) {
+                help(opts);
+                java.lang.System.exit(0);
+            }
+            if (!cmd.hasOption("s")) {
+                throw new ParseException("Missing option 'systems'");
+            }
+            if (!cmd.hasOption("u")) {
+                throw new ParseException("Missing option 'subscriptions'");
+            }
+            if (cmd.hasOption('d') && ! new File(cmd.getOptionValue('d')).isDirectory()) {
+                throw new ParseException("Given output directory does not exist " +
+                        "or is not a directory");
+            }
+
+        }
+        catch (ParseException e) {
+            java.lang.System.err.println("Failed to parse comand line properties:" + e);
+            help(opts);
+            java.lang.System.exit(1);
+        }
+        return cmd;
+    }
+
+    private static void help(Options opts) {
+        HelpFormatter formater = new HelpFormatter();
+        formater.printHelp("subscription-matcher OPTIONS", opts);
     }
 }
