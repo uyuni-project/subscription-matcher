@@ -36,8 +36,12 @@ public class Main {
         String systemsPath = cmd.getOptionValue('s');
         String subscriptionsPath = cmd.getOptionValue('u');
         String pinnedMatchPath = null;
+        String outdir = null;
         if (cmd.hasOption('p')) {
             pinnedMatchPath = cmd.getOptionValue('c');
+        }
+        if (cmd.hasOption('d')) {
+            outdir = cmd.getOptionValue('d');
         }
 
         // load files
@@ -51,11 +55,11 @@ public class Main {
         }
 
         // do the matching
-        JsonOutput result = new Matcher().match(systems, subscriptions, pinnedMatches, new Date());
+        JsonOutput result = new Matcher(outdir).match(systems, subscriptions, pinnedMatches, new Date());
 
-        if (cmd.hasOption('d')) {
+        if (outdir != null) {
             PrintWriter writer = new PrintWriter(
-                    new File(cmd.getOptionValue('d'), "matchresult.json"));
+                    new File(outdir, "matchresult.json"));
             writer.write(io.toJson(result));
             writer.close();
         }

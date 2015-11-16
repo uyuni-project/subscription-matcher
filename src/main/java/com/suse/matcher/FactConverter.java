@@ -1,5 +1,6 @@
 package com.suse.matcher;
 
+import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.facts.CurrentTime;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PinnedMatch;
@@ -18,8 +19,13 @@ import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.math3.util.Pair;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -210,5 +216,61 @@ public class FactConverter {
         }
 
         return output;
+    }
+
+    /**
+     * Converts the outputs from CSP solver in CSV format and write it in the directory.
+     *
+     * @param assignment the assignment object, output of the CSP solver
+     * @param outdir the output directory
+     */
+    public static void convertToCSV(Assignment assignment, List<JsonSubscription> subscriptions, String outdir) {
+        Map<Long, CSVOutputSubscription> outsubs = new HashMap<Long, CSVOutputSubscription>();
+        subscriptions.stream().forEach(s -> {
+            CSVOutputSubscription csvs = new CSVOutputSubscription(s);
+            outsubs.put(s.id, csvs);
+        });
+        // extract facts from assignment by type
+        assignment.getMatches().stream()
+        .filter(match -> match.confirmed)
+        .forEach(m -> {
+            if (outsubs.containsKey(m.getSubscriptionId())) {
+                outsubs.get(m.getSubscriptionId()).consume(m.cents / 100);
+            }
+            else {
+                // error
+            }
+        });
+
+        FileWriter fileWriter = null;
+        CSVPrinter csvPrinter = null;
+        CSVFormat  csvFormat = CSVFormat.DEFAULT.withRecordSeparator('\n');
+        try {
+            //initialize FileWriter object
+            fileWriter = new FileWriter(new File(outdir, "subscriptions.csv"));
+            //initialize CSVPrinter object
+            csvPrinter = new CSVPrinter(fileWriter, csvFormat);
+            //Create CSV file header
+            //CSV file header
+            Object [] header = {"id","partNumber","systemLimit","consumed","startDate","endDate"};
+            csvPrinter.printRecord(header);
+
+            for(Map.Entry<Long, CSVOutputSubscription> item : outsubs.entrySet()) {
+                csvPrinter.printRecord(item.getValue().getCSVRow());
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                fileWriter.flush();
+                fileWriter.close();
+                csvPrinter.close();
+            } catch (IOException e) {
+                java.lang.System.out.println("Error while flushing/closing fileWriter/csvPrinter !!!");
+                e.printStackTrace();
+            }
+        }
     }
 }

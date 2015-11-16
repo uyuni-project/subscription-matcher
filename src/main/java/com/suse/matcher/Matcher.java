@@ -25,6 +25,16 @@ public class Matcher {
     /** Logger instance. */
     private final Logger logger = LoggerFactory.getLogger(Matcher.class);
 
+    private String outdir;
+
+    public Matcher() {
+        this.outdir = null;
+    }
+
+    public Matcher(String outdir) {
+        this.outdir = outdir;
+    }
+
     /**
      * Matches a list of systems to a list of subscriptions.
      *
@@ -64,6 +74,9 @@ public class Matcher {
         OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, otherFacts));
         Assignment result = optaPlanner.getResult();
 
+        if (outdir != null) {
+            FactConverter.convertToCSV(result, subscriptions, outdir);
+        }
         // convert output back to output format and return it
         return FactConverter.convertToOutput(result);
     }
