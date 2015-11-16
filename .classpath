@@ -28,5 +28,6 @@
 	<classpathentry kind="lib" path="target/dependency/mvel2-2.2.6.Final.jar"/>
 	<classpathentry kind="lib" path="target/dependency/reflections-0.9.10.jar"/>
 	<classpathentry kind="lib" path="target/dependency/optaplanner-core-6.3.0.Final.jar"/>
+	<classpathentry kind="lib" path="target/dependency/commons-cli-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
