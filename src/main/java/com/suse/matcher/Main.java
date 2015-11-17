@@ -11,11 +11,9 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,13 +53,12 @@ public class Main {
         }
 
         // do the matching
-        JsonOutput result = new Matcher(outdir).match(systems, subscriptions, pinnedMatches, new Date());
+        Matcher m = new Matcher();
+        JsonOutput result = m.match(systems, subscriptions, pinnedMatches, new Date());
 
         if (outdir != null) {
-            PrintWriter writer = new PrintWriter(
-                    new File(outdir, "matchresult.json"));
-            writer.write(io.toJson(result));
-            writer.close();
+            ReportWriter rw = new ReportWriter(systems, subscriptions, pinnedMatches, m.getAssignment(), outdir);
+            rw.writeReports();
         }
         else {
             // print output

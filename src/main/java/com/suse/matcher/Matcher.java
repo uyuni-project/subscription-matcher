@@ -25,15 +25,7 @@ public class Matcher {
     /** Logger instance. */
     private final Logger logger = LoggerFactory.getLogger(Matcher.class);
 
-    private String outdir;
-
-    public Matcher() {
-        this.outdir = null;
-    }
-
-    public Matcher(String outdir) {
-        this.outdir = outdir;
-    }
+    private Assignment assignment;
 
     /**
      * Matches a list of systems to a list of subscriptions.
@@ -72,12 +64,16 @@ public class Matcher {
 
         // activate the CSP solver with all deduced facts as inputs
         OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, otherFacts));
-        Assignment result = optaPlanner.getResult();
+        assignment = optaPlanner.getResult();
 
-        if (outdir != null) {
-            FactConverter.convertToCSV(result, subscriptions, outdir);
-        }
         // convert output back to output format and return it
-        return FactConverter.convertToOutput(result);
+        return FactConverter.convertToOutput(assignment);
+    }
+
+    /**
+     * @return Assignments
+     */
+    public Assignment getAssignment() {
+        return assignment;
     }
 }

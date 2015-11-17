@@ -10,8 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import sun.java2d.loops.ProcessPath.EndSubPathHandler;
-
 
 public class CSVOutputSubscription {
 
