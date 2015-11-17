@@ -62,7 +62,8 @@ public class ReportWriter {
      */
     public void writeReports() throws IOException {
         writeJsonReport();
-        writeCSVReports();
+        writeCSVSubscriptionReport();
+        writeCSVSystemReport();
     }
     /**
      * Write the JSON report
@@ -80,10 +81,8 @@ public class ReportWriter {
      * Converts the outputs from CSP solver in CSV format and write it in the directory.
      * @throws IOException
      */
-    public void writeCSVReports() throws IOException {
-        if (StringUtils.isEmpty(outdir)) {
-            throw new IOException("Output directory not specified");
-        }
+    public void writeCSVSubscriptionReport() throws IOException {
+
         Map<Long, CSVOutputSubscription> outsubs = new HashMap<Long, CSVOutputSubscription>();
         subscriptions.stream().forEach(s -> {
             CSVOutputSubscription csvs = new CSVOutputSubscription(s);
@@ -121,8 +120,9 @@ public class ReportWriter {
             fileWriter.close();
             csvPrinter.close();
         }
+    }
 
-        //########################################################################################
+    public void writeCSVSystemReport() throws IOException {
         Collection<Match> confirmedMatchFacts = assignment.getMatches().stream()
                 .filter(match -> match.confirmed)
                 .collect(Collectors.toList());
@@ -158,38 +158,45 @@ public class ReportWriter {
                         TreeMap::new
                 ));
 
-        //initialize FileWriter object
-        fileWriter = new FileWriter(new File(outdir, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
-        //initialize CSVPrinter object
-        csvPrinter = new CSVPrinter(fileWriter, csvFormat);
-        //print CSV file header
-        csvPrinter.printRecord(CSVOutputSystem.CSV_HEADER);
+        FileWriter fileWriter = null;
+        CSVPrinter csvPrinter = null;
+        CSVFormat  csvFormat = CSVFormat.DEFAULT.withRecordSeparator('\n');
 
-        // fill output object's system fields
-        for (Long systemId : systemMap.keySet()) {
-            Optional<JsonSystem> o = systems.stream().filter(s -> s.id == systemId).findFirst();
-            if (! o.isPresent()) {
-                continue;
-            }
-            CSVOutputSystem csvSystem = new CSVOutputSystem(o.get());
+        try {
+            //initialize FileWriter object
+            fileWriter = new FileWriter(new File(outdir, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
+            //initialize CSVPrinter object
+            csvPrinter = new CSVPrinter(fileWriter, csvFormat);
+            //print CSV file header
+            csvPrinter.printRecord(CSVOutputSystem.CSV_HEADER);
 
-            Collection<Long> productIds = systemMap.get(systemId);
-            if (productIds != null) {
-                for (Long productId : productIds) {
+            // fill output object's system fields
+            for (Long systemId : systemMap.keySet()) {
+                Optional<JsonSystem> o = systems.stream().filter(s -> s.id == systemId).findFirst();
+                if (! o.isPresent()) {
+                    continue;
+                }
+                CSVOutputSystem csvSystem = new CSVOutputSystem(o.get());
 
-                    Match match = matchMap.get(new Pair<>(systemId, productId));
-                    if (match != null) {
-                        csvSystem.productIds.remove(productId);
+                Collection<Long> productIds = systemMap.get(systemId);
+                if (productIds != null) {
+                    for (Long productId : productIds) {
+
+                        Match match = matchMap.get(new Pair<>(systemId, productId));
+                        if (match != null) {
+                            csvSystem.productIds.remove(productId);
+                        }
                     }
                 }
-            }
-            if (!csvSystem.productIds.isEmpty()) {
-                csvPrinter.printRecord(csvSystem.getCSVRow());
+                if (!csvSystem.productIds.isEmpty()) {
+                    csvPrinter.printRecord(csvSystem.getCSVRow());
+                }
             }
         }
-        fileWriter.flush();
-        fileWriter.close();
-        csvPrinter.close();
+        finally {
+            fileWriter.flush();
+            fileWriter.close();
+            csvPrinter.close();
+        }
     }
-
 }
