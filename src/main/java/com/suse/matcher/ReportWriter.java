@@ -109,10 +109,8 @@ public class ReportWriter {
             fileWriter = new FileWriter(new File(outdir, CSV_SUBSCRIPTION_REPORT_FILE));
             //initialize CSVPrinter object
             csvPrinter = new CSVPrinter(fileWriter, csvFormat);
-            //Create CSV file header
-            //CSV file header
-            Object [] header = {"id","partNumber","systemLimit","consumed","startDate","endDate"};
-            csvPrinter.printRecord(header);
+            //print CSV file header
+            csvPrinter.printRecord(CSVOutputSubscription.CSV_HEADER);
 
             for(Map.Entry<Long, CSVOutputSubscription> item : outsubs.entrySet()) {
                 csvPrinter.printRecord(item.getValue().getCSVRow());
@@ -164,10 +162,8 @@ public class ReportWriter {
         fileWriter = new FileWriter(new File(outdir, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
         //initialize CSVPrinter object
         csvPrinter = new CSVPrinter(fileWriter, csvFormat);
-        //Create CSV file header
-        //CSV file header
-        Object [] header = {"id","cpus","unmatched product IDs"};
-        csvPrinter.printRecord(header);
+        //print CSV file header
+        csvPrinter.printRecord(CSVOutputSystem.CSV_HEADER);
 
         // fill output object's system fields
         for (Long systemId : systemMap.keySet()) {

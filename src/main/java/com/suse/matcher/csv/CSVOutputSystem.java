@@ -14,6 +14,9 @@ import java.util.Set;
  * CSV representation of a system
  */
 public class CSVOutputSystem {
+    /** header for CSV output */
+    public static final Object [] CSV_HEADER = {"id","cpus","unmatched product IDs"};
+
     /** The ID */
     public Long id;
 
