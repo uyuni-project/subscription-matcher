@@ -1,10 +1,13 @@
 package com.suse.matcher;
 
+import com.suse.matcher.csv.CSVOutputError;
 import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputSystem;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonOutput;
+import com.suse.matcher.json.JsonOutputError;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
@@ -38,12 +41,14 @@ public class ReportWriter {
     private static final String JSON_REPORT_FILE = "match_report.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
     private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_systems_report.csv";
+    private static final String CSV_ERRORS_REPORT_FILE = "error_report.csv";
 
     private List<JsonSystem> systems;
     private List<JsonSubscription> subscriptions;
     private Assignment assignment;
     private String outdir;
     private CSVFormat csvFormat;
+    private JsonOutput jsonOutput;
 
     public ReportWriter(List<JsonSystem> systems, List<JsonSubscription> subscriptions,
             Assignment assignment, String outdir) {
@@ -53,6 +58,7 @@ public class ReportWriter {
         this.assignment = assignment;
         this.outdir = outdir;
         csvFormat = CSVFormat.EXCEL;
+        jsonOutput = FactConverter.convertToOutput(assignment);
     }
 
     /**
@@ -70,6 +76,7 @@ public class ReportWriter {
         writeJsonReport();
         writeCSVSubscriptionReport();
         writeCSVSystemReport();
+        writeCSVErrorReport();
     }
     /**
      * Write the JSON report
@@ -79,7 +86,7 @@ public class ReportWriter {
         PrintWriter writer = new PrintWriter(
                 new File(outdir, JSON_REPORT_FILE));
         JsonIO io = new JsonIO();
-        writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
+        writer.write(io.toJson(jsonOutput));
         writer.close();
     }
 
@@ -194,6 +201,29 @@ public class ReportWriter {
                 if (!csvSystem.products.isEmpty()) {
                     csvPrinter.printRecords(csvSystem.getCSVRows());
                 }
+            }
+        }
+        finally {
+            fileWriter.flush();
+            fileWriter.close();
+            csvPrinter.close();
+        }
+    }
+
+    public void writeCSVErrorReport() throws IOException {
+        FileWriter fileWriter = null;
+        CSVPrinter csvPrinter = null;
+        try {
+            //initialize FileWriter object
+            fileWriter = new FileWriter(new File(outdir, CSV_ERRORS_REPORT_FILE));
+            //print CSV file header
+            csvFormat = csvFormat.withHeader(CSVOutputError.CSV_HEADER);
+            //initialize CSVPrinter object
+            csvPrinter = new CSVPrinter(fileWriter, csvFormat);
+
+            for (JsonOutputError e : jsonOutput.errors) {
+                CSVOutputError csvError = new CSVOutputError(e);
+                csvPrinter.printRecords(csvError.getCSVRows());
             }
         }
         finally {
