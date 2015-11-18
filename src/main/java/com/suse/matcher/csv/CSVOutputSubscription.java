@@ -14,7 +14,7 @@ import java.util.Set;
 public class CSVOutputSubscription {
 
     /** Header for CSV output */
-    public static final String [] CSV_HEADER = {"id","partNumber","name", "systemLimit","consumed","startDate","endDate"};
+    public static final String [] CSV_HEADER = {"Subscription ID","Part Number","Product Description", "System Limit","Consumed","Start Date","End Date"};
 
     /** The id. */
     public Long id;

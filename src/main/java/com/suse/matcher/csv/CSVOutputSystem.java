@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class CSVOutputSystem {
     /** header for CSV output */
-    public static final String [] CSV_HEADER = {"id","name", "cpus","unmatched product IDs", "unmatched product names"};
+    public static final String [] CSV_HEADER = {"System ID","System Name", "CPUs","Unmatched Product IDs", "Unmatched Product Names"};
 
     /** The ID */
     public Long id;
