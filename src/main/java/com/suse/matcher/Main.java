@@ -57,7 +57,7 @@ public class Main {
         JsonOutput result = m.match(systems, subscriptions, pinnedMatches, new Date());
 
         if (outdir != null) {
-            ReportWriter rw = new ReportWriter(systems, subscriptions, pinnedMatches, m.getAssignment(), outdir);
+            ReportWriter rw = new ReportWriter(systems, subscriptions, m.getAssignment(), outdir);
             if (cmd.hasOption('d')) {
                 rw.setDelimiter(cmd.getOptionValue('d').charAt(0));
             }

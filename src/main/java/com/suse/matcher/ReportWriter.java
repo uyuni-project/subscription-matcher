@@ -12,7 +12,6 @@ import com.suse.matcher.solver.Match;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.util.Pair;
 
 import java.io.File;
@@ -42,16 +41,14 @@ public class ReportWriter {
 
     private List<JsonSystem> systems;
     private List<JsonSubscription> subscriptions;
-    private List<JsonMatch> pinnedMatches;
     private Assignment assignment;
     private String outdir;
     private CSVFormat csvFormat;
 
     public ReportWriter(List<JsonSystem> systems, List<JsonSubscription> subscriptions,
-            List<JsonMatch> pinnedMatches, Assignment assignment, String outdir) {
+            Assignment assignment, String outdir) {
         this.systems = systems;
         this.subscriptions = subscriptions;
-        this.pinnedMatches = pinnedMatches;
         this.outdir = outdir;
         this.assignment = assignment;
         this.outdir = outdir;
