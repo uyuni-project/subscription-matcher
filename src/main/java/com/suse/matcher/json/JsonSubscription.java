@@ -15,6 +15,9 @@ public class JsonSubscription {
     /** The part number. */
     public String partNumber;
 
+    /** The subscription name */
+    public String name;
+
     /** The count. */
     public Integer systemLimit;
 

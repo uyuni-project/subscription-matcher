@@ -14,13 +14,16 @@ import java.util.Set;
 public class CSVOutputSubscription {
 
     /** Header for CSV output */
-    public static final Object [] CSV_HEADER = {"id","partNumber","systemLimit","consumed","startDate","endDate"};
+    public static final Object [] CSV_HEADER = {"id","partNumber","name", "systemLimit","consumed","startDate","endDate"};
 
     /** The id. */
     public Long id;
 
     /** The part number. */
     public String partNumber;
+
+    /** The subscription name */
+    public String name;
 
     /** The count. */
     public Integer systemLimit;
@@ -43,6 +46,7 @@ public class CSVOutputSubscription {
     public CSVOutputSubscription(JsonSubscription s) {
         this.id = s.id;
         this.partNumber = s.partNumber;
+        this.name = s.name;
         this.systemLimit = s.systemLimit;
         this.consumed = 0;
         this.startsAt = s.startsAt;
@@ -64,6 +68,7 @@ public class CSVOutputSubscription {
         List<String> row = new ArrayList<>();
         row.add(String.valueOf(id));
         row.add(partNumber);
+        row.add(name);
         row.add(String.valueOf(systemLimit));
         row.add(String.valueOf(consumed));
         Format df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
