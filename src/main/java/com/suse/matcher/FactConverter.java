@@ -58,8 +58,8 @@ public class FactConverter {
             for (Long guestId : system.virtualSystemIds) {
                 result.add(new HostGuest(system.id, guestId));
             }
-            for (Long productId : system.productIds) {
-                result.add(new SystemProduct(system.id, productId));
+            for (Map.Entry<Long, String> product : system.products.entrySet()) {
+                result.add(new SystemProduct(system.id, product.getKey()));
             }
         }
 

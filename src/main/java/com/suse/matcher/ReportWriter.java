@@ -184,12 +184,12 @@ public class ReportWriter {
 
                         Match match = matchMap.get(new Pair<>(systemId, productId));
                         if (match != null) {
-                            csvSystem.productIds.remove(productId);
+                            csvSystem.products.remove(productId);
                         }
                     }
                 }
-                if (!csvSystem.productIds.isEmpty()) {
-                    csvPrinter.printRecord(csvSystem.getCSVRow());
+                if (!csvSystem.products.isEmpty()) {
+                    csvPrinter.printRecords(csvSystem.getCSVRows());
                 }
             }
         }
