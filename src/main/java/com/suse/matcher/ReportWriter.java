@@ -106,10 +106,10 @@ public class ReportWriter {
         try {
             //initialize FileWriter object
             fileWriter = new FileWriter(new File(outdir, CSV_SUBSCRIPTION_REPORT_FILE));
+            //print CSV file header
+            csvFormat = csvFormat.withHeader(CSVOutputSubscription.CSV_HEADER);
             //initialize CSVPrinter object
             csvPrinter = new CSVPrinter(fileWriter, csvFormat);
-            //print CSV file header
-            csvPrinter.printRecord(CSVOutputSubscription.CSV_HEADER);
 
             for(Map.Entry<Long, CSVOutputSubscription> item : outsubs.entrySet()) {
                 csvPrinter.printRecord(item.getValue().getCSVRow());
@@ -165,10 +165,10 @@ public class ReportWriter {
         try {
             //initialize FileWriter object
             fileWriter = new FileWriter(new File(outdir, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
+            //print CSV file header
+            csvFormat = csvFormat.withHeader(CSVOutputSystem.CSV_HEADER);
             //initialize CSVPrinter object
             csvPrinter = new CSVPrinter(fileWriter, csvFormat);
-            //print CSV file header
-            csvPrinter.printRecord(CSVOutputSystem.CSV_HEADER);
 
             // fill output object's system fields
             for (Long systemId : systemMap.keySet()) {
