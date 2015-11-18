@@ -38,8 +38,8 @@ public class Main {
         if (cmd.hasOption('p')) {
             pinnedMatchPath = cmd.getOptionValue('c');
         }
-        if (cmd.hasOption('d')) {
-            outdir = cmd.getOptionValue('d');
+        if (cmd.hasOption('o')) {
+            outdir = cmd.getOptionValue('o');
         }
 
         // load files
@@ -58,6 +58,9 @@ public class Main {
 
         if (outdir != null) {
             ReportWriter rw = new ReportWriter(systems, subscriptions, pinnedMatches, m.getAssignment(), outdir);
+            if (cmd.hasOption('d')) {
+                rw.setDelimiter(cmd.getOptionValue('d').charAt(0));
+            }
             rw.writeReports();
         }
         else {
@@ -73,7 +76,8 @@ public class Main {
         opts.addOption("s", "systems", true, "Systems");
         opts.addOption("u", "subscriptions", true, "Subscriptions");
         opts.addOption("p", "pinned", true, "Pinned subscriptions to systems");
-        opts.addOption("d", "directory", true, "Output directory");
+        opts.addOption("o", "directory", true, "Output directory");
+        opts.addOption("d", "delimiter", true, "CSV Delimiter (Default: ,)");
 
         CommandLineParser parser = new BasicParser();
         try {
@@ -88,11 +92,10 @@ public class Main {
             if (!cmd.hasOption("u")) {
                 throw new ParseException("Missing option 'subscriptions'");
             }
-            if (cmd.hasOption('d') && ! new File(cmd.getOptionValue('d')).isDirectory()) {
+            if (cmd.hasOption('o') && ! new File(cmd.getOptionValue('o')).isDirectory()) {
                 throw new ParseException("Given output directory does not exist " +
                         "or is not a directory");
             }
-
         }
         catch (ParseException e) {
             java.lang.System.err.println("Failed to parse comand line properties:" + e);

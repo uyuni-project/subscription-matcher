@@ -45,6 +45,7 @@ public class ReportWriter {
     private List<JsonMatch> pinnedMatches;
     private Assignment assignment;
     private String outdir;
+    private CSVFormat csvFormat;
 
     public ReportWriter(List<JsonSystem> systems, List<JsonSubscription> subscriptions,
             List<JsonMatch> pinnedMatches, Assignment assignment, String outdir) {
@@ -54,6 +55,14 @@ public class ReportWriter {
         this.outdir = outdir;
         this.assignment = assignment;
         this.outdir = outdir;
+        csvFormat = CSVFormat.EXCEL;
+    }
+
+    /**
+     * @param delimiter set the used CSV delimiter
+     */
+    public void setDelimiter(char delimiter) {
+        csvFormat = csvFormat.withDelimiter(delimiter);
     }
 
     /**
@@ -102,7 +111,6 @@ public class ReportWriter {
 
         FileWriter fileWriter = null;
         CSVPrinter csvPrinter = null;
-        CSVFormat  csvFormat = CSVFormat.DEFAULT.withRecordSeparator('\n');
         try {
             //initialize FileWriter object
             fileWriter = new FileWriter(new File(outdir, CSV_SUBSCRIPTION_REPORT_FILE));
@@ -160,8 +168,6 @@ public class ReportWriter {
 
         FileWriter fileWriter = null;
         CSVPrinter csvPrinter = null;
-        CSVFormat  csvFormat = CSVFormat.DEFAULT.withRecordSeparator('\n');
-
         try {
             //initialize FileWriter object
             fileWriter = new FileWriter(new File(outdir, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
