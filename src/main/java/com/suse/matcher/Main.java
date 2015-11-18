@@ -36,7 +36,7 @@ public class Main {
         String pinnedMatchPath = null;
         String outdir = null;
         if (cmd.hasOption('p')) {
-            pinnedMatchPath = cmd.getOptionValue('c');
+            pinnedMatchPath = cmd.getOptionValue('p');
         }
         if (cmd.hasOption('o')) {
             outdir = cmd.getOptionValue('o');
