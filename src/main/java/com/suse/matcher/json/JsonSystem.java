@@ -13,6 +13,9 @@ public class JsonSystem {
     /** The ID */
     public Long id;
 
+    /** The profile name */
+    public String name;
+
     /** The populated CPU socket count */
     public Integer cpus;
 

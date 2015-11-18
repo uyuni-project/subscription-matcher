@@ -15,10 +15,13 @@ import java.util.Set;
  */
 public class CSVOutputSystem {
     /** header for CSV output */
-    public static final Object [] CSV_HEADER = {"id","cpus","unmatched product IDs"};
+    public static final Object [] CSV_HEADER = {"id","name", "cpus","unmatched product IDs"};
 
     /** The ID */
     public Long id;
+
+    /** The profile name */
+    public String name;
 
     /** The populated CPU socket count */
     public Integer cpus;
@@ -31,6 +34,7 @@ public class CSVOutputSystem {
 
     public CSVOutputSystem(JsonSystem jsonSystem) {
         this.id = jsonSystem.id;
+        this.name = jsonSystem.name;
         this.cpus = jsonSystem.cpus;
         this.virtualSystemIds = jsonSystem.virtualSystemIds;
         this.productIds = jsonSystem.productIds;
@@ -39,6 +43,7 @@ public class CSVOutputSystem {
     public List<String> getCSVRow() {
         List<String> row = new ArrayList<>();
         row.add(String.valueOf(id));
+        row.add(name);
         row.add(String.valueOf(cpus));
         row.add(String.join(" ", Arrays.toString(productIds.toArray())));
         return row;
