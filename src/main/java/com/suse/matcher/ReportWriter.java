@@ -5,7 +5,6 @@ import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputSystem;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
-import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonOutputError;
 import com.suse.matcher.json.JsonSubscription;
@@ -182,7 +181,9 @@ public class ReportWriter {
 
             // fill output object's system fields
             for (Long systemId : systemMap.keySet()) {
-                Optional<JsonSystem> o = systems.stream().filter(s -> s.id == systemId).findFirst();
+                Optional<JsonSystem> o = systems.stream()
+                        .filter(s -> s.id.equals(systemId))
+                        .findFirst();
                 if (! o.isPresent()) {
                     continue;
                 }
