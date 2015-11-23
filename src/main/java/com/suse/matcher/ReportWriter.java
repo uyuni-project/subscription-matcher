@@ -105,7 +105,7 @@ public class ReportWriter {
         .filter(match -> match.confirmed)
         .forEach(m -> {
             if (outsubs.containsKey(m.getSubscriptionId())) {
-                outsubs.get(m.getSubscriptionId()).consume(m.cents / 100);
+                outsubs.get(m.getSubscriptionId()).increaseMatchCount(m.cents / 100);
             }
             else {
                 // error

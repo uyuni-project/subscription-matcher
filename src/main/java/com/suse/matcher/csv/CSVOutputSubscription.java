@@ -14,7 +14,7 @@ import java.util.Set;
 public class CSVOutputSubscription {
 
     /** Header for CSV output */
-    public static final String [] CSV_HEADER = {"Subscription ID","Part Number","Product Description", "System Limit","Consumed","Start Date","End Date"};
+    public static final String [] CSV_HEADER = {"Subscription ID","Part Number","Product Description", "System Limit","Matched","Start Date","End Date"};
 
     /** The id. */
     public Long id;
@@ -29,7 +29,7 @@ public class CSVOutputSubscription {
     public Integer systemLimit;
 
     /** The consumed. */
-    public Integer consumed;
+    public Integer matched;
 
     /** Start Date. */
     public Date startsAt = new Date(Long.MIN_VALUE);
@@ -48,19 +48,19 @@ public class CSVOutputSubscription {
         this.partNumber = s.partNumber;
         this.name = s.name;
         this.systemLimit = s.systemLimit;
-        this.consumed = 0;
+        this.matched = 0;
         this.startsAt = s.startsAt;
         this.expiresAt = s.expiresAt;
         this.sccOrgId = s.sccOrgId;
         this.productIds = s.productIds;
     }
 
-    public void consume(int count) {
-        if (consumed != null) {
-            consumed = consumed + count;
+    public void increaseMatchCount(int count) {
+        if (matched != null) {
+            matched = matched + count;
         }
         else {
-            consumed = new Integer(count);
+            matched = new Integer(count);
         }
     }
     
@@ -70,7 +70,7 @@ public class CSVOutputSubscription {
         row.add(partNumber);
         row.add(name);
         row.add(String.valueOf(systemLimit));
-        row.add(String.valueOf(consumed));
+        row.add(String.valueOf(matched));
         Format df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         row.add(df.format(startsAt));
         row.add(df.format(expiresAt));
