@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class CSVOutputSystem {
     /** header for CSV output */
-    public static final String [] CSV_HEADER = {"System ID","System Name", "CPUs","Unmatched Product IDs", "Unmatched Product Names"};
+    public static final String [] CSV_HEADER = {"System ID", "System Name", "CPUs", "Unmatched Product Names"};
 
     /** The ID */
     public Long id;
@@ -48,7 +48,6 @@ public class CSVOutputSystem {
         row.add(String.valueOf(cpus));
 
         for(Map.Entry<Long, String> product : products.entrySet()) {
-            row.add(String.valueOf(product.getKey()));
             row.add(product.getValue());
             resultSet.add(row);
             row = new ArrayList<>();
