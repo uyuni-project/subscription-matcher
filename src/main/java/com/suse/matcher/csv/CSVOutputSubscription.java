@@ -9,12 +9,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 
 public class CSVOutputSubscription {
 
     /** Header for CSV output */
-    public static final String [] CSV_HEADER = {"Subscription ID","Part Number","Product Description", "System Limit","Matched","Start Date","End Date"};
+    public static final String [] CSV_HEADER = {"Subscription ID","Part Number","Product Description",
+        "System Limit","Matched","Start Date (UTC)","End Date (UTC)"};
 
     /** The id. */
     public Long id;
@@ -71,7 +73,8 @@ public class CSVOutputSubscription {
         row.add(name);
         row.add(String.valueOf(systemLimit));
         row.add(String.valueOf(matched));
-        Format df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
         row.add(df.format(startsAt));
         row.add(df.format(expiresAt));
         return row;
