@@ -6,12 +6,8 @@ import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
-import org.apache.commons.math3.util.Pair;
-
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -44,25 +40,21 @@ public class MessageCollector {
                 .filter(s -> s.ignored == false)
                 .collect(Collectors.toList());
 
-        // prepare map from (system id, product id) to Match object
-        Map<Pair<Long, Long>, Match> matchMap = new HashMap<>();
-        for (Match match : confirmedMatchFacts) {
-            matchMap.put(new Pair<>(match.systemId, match.productId), match);
-        }
-
         // add messages about unsatisfied pins
         Collection<Message> messages = new LinkedList<Message>();
-        pinnedMatchFacts.forEach(match -> {
-            Match actualMatch = matchMap.get(new Pair<Long, Long>(match.systemId, match.productId));
-            if (actualMatch == null || !match.subscriptionId.equals(actualMatch.subscriptionId)) {
+        pinnedMatchFacts
+            .filter(pin -> !confirmedMatchFacts.stream() // filter unmatched pins
+                    .filter(m -> m.subscriptionId.equals(pin.subscriptionId) && m.systemId.equals(pin.systemId))
+                    .findAny()
+                    .isPresent()
+            )
+            .forEach(unmatchedPin -> {
                 Message message = new Message("unsatisfied_pinned_match", new TreeMap<String, String>(){{
-                    put("system_id", match.systemId.toString());
-                    put("subscription_id", match.subscriptionId.toString());
-                    put("product_id", match.productId.toString());
+                    put("system_id", unmatchedPin.systemId.toString());
+                    put("subscription_id", unmatchedPin.subscriptionId.toString());
                 }});
                 messages.add(message);
-            }
-        });
+            });
 
         // add messages about unknown part numbers
         Set<String> unknownPartNumbers = new TreeSet<>();

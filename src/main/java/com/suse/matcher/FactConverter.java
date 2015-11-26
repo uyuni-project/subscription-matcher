@@ -29,7 +29,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -82,8 +81,7 @@ public class FactConverter {
         }
 
         for (JsonMatch match : pinnedMatches) {
-            result.add(
-                    new PinnedMatch(match.systemId, match.productId, match.subscriptionId));
+            result.add(new PinnedMatch(match.systemId, match.subscriptionId));
         }
 
         return result;

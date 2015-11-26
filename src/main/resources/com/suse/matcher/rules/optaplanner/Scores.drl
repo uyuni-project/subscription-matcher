@@ -60,8 +60,8 @@ end
 
 rule "maximizePinnedMatchesUse"
     when
-        PinnedMatch($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId)
-        Match(systemId == $systemId, productId == $productId, subscriptionId == $subscriptionId, confirmed == true)
+        PinnedMatch($systemId : systemId, $subscriptionId : subscriptionId)
+        Match(systemId == $systemId, subscriptionId == $subscriptionId, confirmed == true)
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end

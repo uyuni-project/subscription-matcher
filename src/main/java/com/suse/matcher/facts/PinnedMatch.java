@@ -15,9 +15,6 @@ public class PinnedMatch {
     /** The system id. */
     public Long systemId;
 
-    /** The product id. */
-    public Long productId;
-
     /** The subscription id. */
     public Long subscriptionId;
 
@@ -25,12 +22,10 @@ public class PinnedMatch {
      * Standard constructor.
      *
      * @param systemIdIn a system id
-     * @param productIdIn an id of a product
      * @param subscriptionIdIn an id of subscription assigned to the system
      */
-    public PinnedMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn) {
+    public PinnedMatch(Long systemIdIn, Long subscriptionIdIn) {
         systemId = systemIdIn;
-        productId = productIdIn;
         subscriptionId = subscriptionIdIn;
     }
 
@@ -50,15 +45,6 @@ public class PinnedMatch {
     }
 
     /**
-     * Gets the product id.
-     *
-     * @return the product id
-     */
-    public Long getProductId() {
-        return productId;
-    }
-
-    /**
      * Gets the subscription id.
      *
      * @return the subscription id
@@ -72,7 +58,6 @@ public class PinnedMatch {
     public int hashCode() {
         return new HashCodeBuilder()
             .append(systemId)
-            .append(productId)
             .append(subscriptionId)
             .toHashCode();
     }
@@ -86,7 +71,6 @@ public class PinnedMatch {
         PinnedMatch other = (PinnedMatch) objIn;
         return new EqualsBuilder()
             .append(systemId, other.systemId)
-            .append(productId, other.productId)
             .append(subscriptionId, other.subscriptionId)
             .isEquals();
     }
@@ -96,7 +80,6 @@ public class PinnedMatch {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
             .append("systemId", systemId)
-            .append("productId", productId)
             .append("subscriptionId", subscriptionId)
             .toString();
     }
