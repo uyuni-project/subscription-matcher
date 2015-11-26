@@ -5,6 +5,7 @@ import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 
+import com.suse.matcher.solver.Assignment;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -53,11 +54,12 @@ public class Main {
         }
 
         // do the matching
-        Matcher m = new Matcher();
-        JsonOutput result = m.match(systems, subscriptions, pinnedMatches, new Date());
+        Assignment assignment = new Matcher()
+                .match(systems, subscriptions, pinnedMatches, new Date());
+        JsonOutput result = FactConverter.convertToOutput(assignment);
 
         if (outdir != null) {
-            ReportWriter rw = new ReportWriter(systems, subscriptions, m.getAssignment(), outdir);
+            ReportWriter rw = new ReportWriter(systems, subscriptions, assignment, outdir);
             if (cmd.hasOption('d')) {
                 rw.setDelimiter(cmd.getOptionValue('d').charAt(0));
             }

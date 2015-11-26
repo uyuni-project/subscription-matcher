@@ -113,7 +113,8 @@ public class MatcherTest {
     @Test
     public void test() throws Exception {
         Date timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse("2015-05-01T00:00:00.000+0200");
-        JsonOutput actualOutput = matcher.match(systems, subscriptions, pinnedMatches, timestamp);
+        JsonOutput actualOutput = FactConverter.convertToOutput(
+                matcher.match(systems, subscriptions, pinnedMatches, timestamp));
 
         JsonIO io = new JsonIO();
 
