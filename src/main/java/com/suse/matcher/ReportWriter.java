@@ -94,23 +94,22 @@ public class ReportWriter {
      * @throws IOException
      */
     public void writeCSVSubscriptionReport() throws IOException {
-
         Map<Long, CSVOutputSubscription> outsubs = new HashMap<Long, CSVOutputSubscription>();
         subscriptions.stream().forEach(s -> {
             CSVOutputSubscription csvs = new CSVOutputSubscription(s);
             outsubs.put(s.id, csvs);
         });
+
         // extract facts from assignment by type
         assignment.getMatches().stream()
-        .filter(match -> match.confirmed)
-        .forEach(m -> {
-            if (outsubs.containsKey(m.getSubscriptionId())) {
-                outsubs.get(m.getSubscriptionId()).increaseMatchCount(m.cents / 100);
-            }
-            else {
-                // error
-            }
-        });
+            .filter(match -> match.confirmed)
+            .forEach(m -> {
+                if (outsubs.containsKey(m.getSubscriptionId())) {
+                    outsubs.get(m.getSubscriptionId()).increaseMatchCount(m.cents / 100);
+                } else {
+                    // error
+                }
+            });
 
         FileWriter fileWriter = null;
         CSVPrinter csvPrinter = null;
@@ -160,7 +159,7 @@ public class ReportWriter {
                         system -> Stream.concat(
                                 confirmedMatchFacts.stream()
                                     .filter(match -> match.systemId.equals(system.id))
-                                    .map(match -> match.productId),
+                                    .map(Match::getProductId),
                                 systemProductFacts.stream()
                                     .filter(systemProduct -> systemProduct.systemId.equals(system.id))
                                     .map(systemProduct -> systemProduct.productId)
@@ -192,7 +191,6 @@ public class ReportWriter {
                 Collection<Long> productIds = systemMap.get(systemId);
                 if (productIds != null) {
                     for (Long productId : productIds) {
-
                         Match match = matchMap.get(new Pair<>(systemId, productId));
                         if (match != null) {
                             csvSystem.products.remove(productId);

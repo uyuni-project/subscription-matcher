@@ -47,8 +47,9 @@ public class FactConverter {
      * @param timestamp the timestamp for this set of facts
      * @return a collection of facts
      */
-    public static Collection<Object> convertToFacts(List<JsonSystem> systems, List<JsonSubscription> subscriptions,
-            List<JsonMatch> pinnedMatches, Date timestamp) {
+    public static Collection<Object> convertToFacts(List<JsonSystem> systems,
+            List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches,
+            Date timestamp) {
         Collection<Object> result = new LinkedList<Object>();
 
         result.add(new CurrentTime(timestamp));
@@ -64,7 +65,8 @@ public class FactConverter {
         }
 
         for (JsonSubscription subscription : subscriptions) {
-            result.add(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit, subscription.startsAt,
+            result.add(new Subscription(subscription.id, subscription.partNumber,
+                    subscription.systemLimit, subscription.startsAt,
                     subscription.expiresAt, subscription.sccOrgId));
             for (Long productId : subscription.productIds) {
                 result.add(new SubscriptionProduct(subscription.id, productId));
@@ -72,7 +74,8 @@ public class FactConverter {
         }
 
         for (JsonMatch match : pinnedMatches) {
-            result.add(new PinnedMatch(match.systemId, match.productId, match.subscriptionId));
+            result.add(
+                    new PinnedMatch(match.systemId, match.productId, match.subscriptionId));
         }
 
         return result;

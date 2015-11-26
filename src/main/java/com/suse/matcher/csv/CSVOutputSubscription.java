@@ -15,8 +15,9 @@ import java.util.TimeZone;
 public class CSVOutputSubscription {
 
     /** Header for CSV output */
-    public static final String [] CSV_HEADER = {"Subscription ID","Part Number","Product Description",
-        "System Limit","Matched","Start Date (UTC)","End Date (UTC)"};
+    public static final String [] CSV_HEADER = {"Subscription ID", "Part Number",
+            "Product Description", "System Limit","Matched", "Start Date (UTC)",
+            "End Date (UTC)"};
 
     /** The id. */
     public Long id;
@@ -65,7 +66,7 @@ public class CSVOutputSubscription {
             matched = new Integer(count);
         }
     }
-    
+
     public List<String> getCSVRow() {
         List<String> row = new ArrayList<>();
         row.add(String.valueOf(id));
