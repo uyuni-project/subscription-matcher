@@ -59,7 +59,7 @@ public class Main {
         JsonOutput result = FactConverter.convertToOutput(assignment);
 
         if (outdir != null) {
-            ReportWriter rw = new ReportWriter(systems, subscriptions, assignment, outdir);
+            ReportWriter rw = new ReportWriter(assignment, outdir);
             if (cmd.hasOption('d')) {
                 rw.setDelimiter(cmd.getOptionValue('d').charAt(0));
             }

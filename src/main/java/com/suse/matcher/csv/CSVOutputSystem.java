@@ -1,9 +1,8 @@
 package com.suse.matcher.csv;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A system as represented in a CSV output file.
@@ -23,7 +22,7 @@ public class CSVOutputSystem {
     private Integer cpus;
 
     /** Installed product IDs with their names. */
-    public Map<Long, String> products = new HashMap<>();
+    private List<String> productNames = new LinkedList<>();
 
     /**
      * Instantiates a new CSV output system.
@@ -31,13 +30,13 @@ public class CSVOutputSystem {
      * @param idIn the id
      * @param nameIn the name
      * @param cpusIn the populated CPU socket count
-     * @param productsIn the products id to name map
+     * @param productNamesIn names of products to be displayed
      */
-    public CSVOutputSystem(Long idIn, String nameIn, Integer cpusIn, Map<Long, String> productsIn) {
+    public CSVOutputSystem(Long idIn, String nameIn, Integer cpusIn, List<String> productNamesIn) {
         id = idIn;
         name = nameIn;
         cpus = cpusIn;
-        products = productsIn;
+        productNames = productNamesIn;
     }
 
     /**
@@ -45,15 +44,15 @@ public class CSVOutputSystem {
      * @return the CSV rows
      */
     public List<List<String>> getCSVRows() {
-        List<List<String>> resultSet = new ArrayList<>();
+        List<List<String>> resultSet = new LinkedList<>();
 
-        List<String> row = new ArrayList<>();
+        List<String> row = new LinkedList<>();
         row.add(String.valueOf(id));
         row.add(name);
         row.add(String.valueOf(cpus));
 
-        for (Map.Entry<Long, String> product : products.entrySet()) {
-            row.add(product.getValue());
+        for (String productName : productNames) {
+            row.add(productName);
             resultSet.add(row);
             row = new ArrayList<>();
             row.add("");

@@ -3,12 +3,12 @@ package com.suse.matcher;
 import com.suse.matcher.csv.CSVOutputError;
 import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputSystem;
+import com.suse.matcher.facts.Product;
+import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonOutputError;
-import com.suse.matcher.json.JsonSubscription;
-import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
@@ -25,8 +25,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -42,17 +40,12 @@ public class ReportWriter {
     private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_systems_report.csv";
     private static final String CSV_ERRORS_REPORT_FILE = "error_report.csv";
 
-    private List<JsonSystem> systems;
-    private List<JsonSubscription> subscriptions;
     private Assignment assignment;
     private String outdir;
     private CSVFormat csvFormat;
     private JsonOutput jsonOutput;
 
-    public ReportWriter(List<JsonSystem> systems, List<JsonSubscription> subscriptions,
-            Assignment assignment, String outdir) {
-        this.systems = systems;
-        this.subscriptions = subscriptions;
+    public ReportWriter(Assignment assignment, String outdir) {
         this.outdir = outdir;
         this.assignment = assignment;
         this.outdir = outdir;
@@ -94,8 +87,12 @@ public class ReportWriter {
      * @throws IOException
      */
     public void writeCSVSubscriptionReport() throws IOException {
+        Stream<Subscription> subscriptions = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof Subscription)
+                .map(object -> (Subscription) object);
+
         Map<Long, CSVOutputSubscription> outsubs = new HashMap<Long, CSVOutputSubscription>();
-        subscriptions.stream().forEach(s -> {
+        subscriptions.forEach(s -> {
             CSVOutputSubscription csvs = new CSVOutputSubscription(
                 s.id,
                 s.partNumber,
@@ -144,13 +141,19 @@ public class ReportWriter {
                 .filter(match -> match.confirmed)
                 .collect(Collectors.toList());
 
-        Stream<System> systemFacts = assignment.getProblemFacts().stream()
+        List<System> systems = assignment.getProblemFacts().stream()
                 .filter(object -> object instanceof System)
-                .map(object -> (System) object);
+                .map(object -> (System) object)
+                .collect(Collectors.toList());
 
         List<SystemProduct> systemProductFacts = assignment.getProblemFacts().stream()
                 .filter(object -> object instanceof SystemProduct)
                 .map(object -> (SystemProduct) object)
+                .collect(Collectors.toList());
+
+        List<Product> products = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof Product)
+                .map(object -> (Product) object)
                 .collect(Collectors.toList());
 
         // prepare map from (system id, product id) to Match object
@@ -158,22 +161,6 @@ public class ReportWriter {
         for (Match match : confirmedMatchFacts) {
             matchMap.put(new Pair<>(match.systemId, match.productId), match);
         }
-
-        // prepare map from system id to set of product ids
-        Map<Long, List<Long>> systemMap = systemFacts
-                .collect(Collectors.toMap(
-                        system -> system.id,
-                        system -> Stream.concat(
-                                confirmedMatchFacts.stream()
-                                    .filter(match -> match.systemId.equals(system.id))
-                                    .map(Match::getProductId),
-                                systemProductFacts.stream()
-                                    .filter(systemProduct -> systemProduct.systemId.equals(system.id))
-                                    .map(systemProduct -> systemProduct.productId)
-                            ).distinct().sorted().collect(Collectors.toList()),
-                        (id1, id2) -> id1,
-                        TreeMap::new
-                ));
 
         FileWriter fileWriter = null;
         CSVPrinter csvPrinter = null;
@@ -186,31 +173,24 @@ public class ReportWriter {
             csvPrinter = new CSVPrinter(fileWriter, csvFormat);
 
             // fill output object's system fields
-            for (Long systemId : systemMap.keySet()) {
-                Optional<JsonSystem> o = systems.stream()
-                        .filter(s -> s.id.equals(systemId))
-                        .findFirst();
-                if (! o.isPresent()) {
-                    continue;
-                }
-                JsonSystem system = o.get();
-                CSVOutputSystem csvSystem = new CSVOutputSystem(
-                    system.id,
-                    system.name,
-                    system.cpus,
-                    system.products
-                );
+            for (System system : systems) {
+                List<String> unmatchedProductNames = systemProductFacts.stream()
+                    .filter(sp -> sp.systemId == system.id)
+                    .filter(sp -> matchMap.get(new Pair<>(sp.systemId, sp.productId)) == null)
+                    .map(sp -> { return products.stream()
+                        .filter(p -> p.id == sp.productId)
+                        .map(p -> p.name)
+                        .findFirst().orElse("Unknown product");
+                    })
+                    .collect(Collectors.toList());
 
-                Collection<Long> productIds = systemMap.get(systemId);
-                if (productIds != null) {
-                    for (Long productId : productIds) {
-                        Match match = matchMap.get(new Pair<>(systemId, productId));
-                        if (match != null) {
-                            csvSystem.products.remove(productId);
-                        }
-                    }
-                }
-                if (!csvSystem.products.isEmpty()) {
+                if (!unmatchedProductNames.isEmpty()) {
+                    CSVOutputSystem csvSystem = new CSVOutputSystem(
+                            system.id,
+                            system.name,
+                            system.cpus,
+                            unmatchedProductNames
+                        );
                     csvPrinter.printRecords(csvSystem.getCSVRows());
                 }
             }
