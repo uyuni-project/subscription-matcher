@@ -17,28 +17,28 @@ public class CSVOutputSubscription {
             "End Date (UTC)"};
 
     /** The id. */
-    public Long id;
+    private Long id;
 
     /** The part number. */
-    public String partNumber;
+    private String partNumber;
 
     /** The subscription name */
-    public String name;
+    private String name;
 
     /** The count. */
-    public Integer systemLimit;
+    private Integer systemLimit;
 
     /** The consumed. */
-    public Integer matched;
+    private Integer matched;
 
     /** Start Date. */
-    public Date startsAt = new Date(Long.MIN_VALUE);
+    private Date startsAt = new Date(Long.MIN_VALUE);
 
     /** End Date. */
-    public Date expiresAt = new Date(Long.MAX_VALUE);
+    private Date expiresAt = new Date(Long.MAX_VALUE);
 
     /** Provided product IDs */
-    public Set<Long> productIds = new HashSet<Long>();
+    private Set<Long> productIds = new HashSet<Long>();
 
     public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer systemLimitIn, Date startsAtIn, Date expiresAtIn,
             Set<Long> productIdsIn) {
