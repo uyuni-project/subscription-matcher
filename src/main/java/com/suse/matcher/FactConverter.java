@@ -3,6 +3,7 @@ package com.suse.matcher;
 import com.suse.matcher.facts.CurrentTime;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PinnedMatch;
+import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
@@ -61,6 +62,7 @@ public class FactConverter {
             }
             for (Map.Entry<Long, String> product : system.products.entrySet()) {
                 result.add(new SystemProduct(system.id, product.getKey()));
+                result.add(new Product(product.getKey(), product.getValue()));
             }
         }
 
