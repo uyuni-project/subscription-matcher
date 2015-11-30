@@ -96,7 +96,16 @@ public class ReportWriter {
     public void writeCSVSubscriptionReport() throws IOException {
         Map<Long, CSVOutputSubscription> outsubs = new HashMap<Long, CSVOutputSubscription>();
         subscriptions.stream().forEach(s -> {
-            CSVOutputSubscription csvs = new CSVOutputSubscription(s);
+            CSVOutputSubscription csvs = new CSVOutputSubscription(
+                s.id,
+                s.partNumber,
+                s.name,
+                s.systemLimit,
+                s.startsAt,
+                s.expiresAt,
+                s.sccOrgId,
+                s.productIds
+            );
             outsubs.put(s.id, csvs);
         });
 

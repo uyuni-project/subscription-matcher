@@ -1,8 +1,5 @@
 package com.suse.matcher.csv;
 
-import com.suse.matcher.json.JsonSubscription;
-
-import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,16 +43,18 @@ public class CSVOutputSubscription {
     /** Provided product IDs */
     public Set<Long> productIds = new HashSet<Long>();
 
-    public CSVOutputSubscription(JsonSubscription s) {
-        this.id = s.id;
-        this.partNumber = s.partNumber;
-        this.name = s.name;
-        this.systemLimit = s.systemLimit;
-        this.matched = 0;
-        this.startsAt = s.startsAt;
-        this.expiresAt = s.expiresAt;
-        this.sccOrgId = s.sccOrgId;
-        this.productIds = s.productIds;
+    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer systemLimitIn, Date startsAtIn, Date expiresAtIn,
+            String sccOrgIdIn, Set<Long> productIdsIn) {
+        id = idIn;
+        partNumber = partNumberIn;
+        name = nameIn;
+        systemLimit = systemLimitIn;
+        startsAt = startsAtIn;
+        expiresAt = expiresAtIn;
+        sccOrgId = sccOrgIdIn;
+        productIds = productIdsIn;
+
+        matched = 0;
     }
 
     public void increaseMatchCount(int count) {
