@@ -8,12 +8,16 @@ rule "subscriptionNotExpired"
         CurrentTime($timestamp : timestamp)
         $subscription: Subscription(expiresAt < $timestamp || startsAt > $timestamp)
     then
-        retract($subscription);
+        modify($subscription) {
+            ignored = true;
+        }
 end
 
 rule "subscriptionSystemLimitHasValue"
     when
         $subscription: Subscription(quantity == null)
     then
-        retract($subscription);
+        modify($subscription) {
+            ignored = true;
+        }
 end

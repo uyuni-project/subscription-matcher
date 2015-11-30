@@ -77,6 +77,9 @@ public class Subscription implements Comparable<Subscription> {
     /**   Can this subscription be used multiple times on the same system?. */
     public Boolean stackable;
 
+    /** Should this subscription be matched at all? Eg. expired subscriptions can be ignored. */
+    public Boolean ignored = false;
+
     /**
      * Instantiates a new subscription.
      *
