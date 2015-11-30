@@ -193,7 +193,13 @@ public class ReportWriter {
                 if (! o.isPresent()) {
                     continue;
                 }
-                CSVOutputSystem csvSystem = new CSVOutputSystem(o.get());
+                JsonSystem system = o.get();
+                CSVOutputSystem csvSystem = new CSVOutputSystem(
+                    system.id,
+                    system.name,
+                    system.cpus,
+                    system.products
+                );
 
                 Collection<Long> productIds = systemMap.get(systemId);
                 if (productIds != null) {
