@@ -12,7 +12,7 @@ import java.util.TimeZone;
 public class CSVOutputSubscription {
 
     /**  Header for the CSV output. */
-    public static final String[] CSV_HEADER = {"Subscription ID", "Part Number", "Product Description", "System Limit", "Matched",
+    public static final String[] CSV_HEADER = {"Subscription ID", "Part Number", "Product Description", "Available Quantity", "Matched Quantity",
             "Start Date (UTC)", "End Date (UTC)"};
 
     /** The subscription id. */
@@ -24,8 +24,8 @@ public class CSVOutputSubscription {
     /** The subscription name. */
     private String name;
 
-    /** The available count. */
-    private Integer systemLimit;
+    /** The quantity. */
+    private Integer quantity;
 
     /** Number of subscriptions matched. */
     private int matched;
@@ -42,15 +42,15 @@ public class CSVOutputSubscription {
      * @param idIn the id
      * @param partNumberIn the part number
      * @param nameIn the name
-     * @param systemLimitIn the available subscription count
+     * @param quantityIn the quantity
      * @param startsAtIn the start date
      * @param expiresAtIn the end date
      */
-    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer systemLimitIn, Date startsAtIn, Date expiresAtIn) {
+    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startsAtIn, Date expiresAtIn) {
         id = idIn;
         partNumber = partNumberIn;
         name = nameIn;
-        systemLimit = systemLimitIn;
+        quantity = quantityIn;
         startsAt = startsAtIn;
         expiresAt = expiresAtIn;
 
@@ -74,7 +74,7 @@ public class CSVOutputSubscription {
         row.add(String.valueOf(id));
         row.add(partNumber);
         row.add(name);
-        row.add(String.valueOf(systemLimit));
+        row.add(String.valueOf(quantity));
         row.add(String.valueOf(matched));
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));

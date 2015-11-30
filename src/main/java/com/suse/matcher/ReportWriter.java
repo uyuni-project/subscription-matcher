@@ -100,7 +100,7 @@ public class ReportWriter {
                 s.id,
                 s.partNumber,
                 s.name,
-                s.systemLimit,
+                s.quantity,
                 s.startsAt,
                 s.expiresAt
             );
