@@ -56,7 +56,7 @@ public class FactConverter {
         result.add(new CurrentTime(timestamp));
 
         for (JsonSystem system : systems) {
-            result.add(new System(system.id, system.cpus));
+            result.add(new System(system.id, system.name, system.cpus));
             for (Long guestId : system.virtualSystemIds) {
                 result.add(new HostGuest(system.id, guestId));
             }

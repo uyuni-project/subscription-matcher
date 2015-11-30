@@ -16,6 +16,9 @@ public class System {
     /** The id. */
     public Long id;
 
+    /** The friendly name. */
+    public String name;
+
     /** The populated CPU socket count. */
     public Integer cpus;
 
@@ -27,10 +30,12 @@ public class System {
      * Instantiates a new system.
      *
      * @param idIn the id
+     * @param nameIn the friendly name
      * @param cpusIn the cpus
      */
-    public System(Long idIn, Integer cpusIn) {
+    public System(Long idIn, String nameIn, Integer cpusIn) {
         id = idIn;
+        name = nameIn;
         cpus = cpusIn;
     }
 
