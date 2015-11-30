@@ -1,35 +1,38 @@
 package com.suse.matcher.csv;
 
-import com.suse.matcher.json.JsonOutputError;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-
 /**
- * CSV representation of an Error detected during the match.
+ * A matching error as represented in a CSV output file.
  */
 public class CSVOutputError {
-    /** header for CSV output */
-    public static final String [] CSV_HEADER = {"Error Type","Error Key", "Error Value"};
+
+    /** Header for the CSV output. */
+    public static final String[] CSV_HEADER = {"Error Type", "Error Key", "Error Value"};
 
     /** A label identifying the error type. */
-    public String type;
+    private String type;
 
     /** Arbitrary data connected to this error. */
-    public Map<String, String> data = new TreeMap<>();
+    private Map<String, String> data = new TreeMap<>();
 
     /**
-     * Constructor
+     * Instantiates a new CSV output error.
+     *
+     * @param typeIn the type
+     * @param dataIn the data
      */
-    public CSVOutputError(JsonOutputError error) {
-        this.type = error.type;
-        this.data = error.data;
+    public CSVOutputError(String typeIn, Map<String, String> dataIn) {
+        type = typeIn;
+        data = dataIn;
     }
 
     /**
+     * Gets the CSV rows.
+     *
      * @return rows for the CSV output
      */
     public List<List<String>> getCSVRows() {
@@ -38,7 +41,7 @@ public class CSVOutputError {
         List<String> row = new ArrayList<>();
         row.add(type);
 
-        for(Map.Entry<String, String> item : data.entrySet()) {
+        for (Map.Entry<String, String> item : data.entrySet()) {
             row.add(item.getKey());
             row.add(item.getValue());
             resultSet.add(row);

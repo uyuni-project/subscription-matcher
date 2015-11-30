@@ -214,7 +214,10 @@ public class ReportWriter {
             csvPrinter = new CSVPrinter(fileWriter, csvFormat);
 
             for (JsonOutputError e : jsonOutput.errors) {
-                CSVOutputError csvError = new CSVOutputError(e);
+                CSVOutputError csvError = new CSVOutputError(
+                    e.type,
+                    e.data
+                );
                 csvPrinter.printRecords(csvError.getCSVRows());
             }
         }
