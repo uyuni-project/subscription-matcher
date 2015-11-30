@@ -3,40 +3,49 @@ package com.suse.matcher.csv;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
 
-
+/**
+ * A subscription as represented in a CSV output file.
+ */
 public class CSVOutputSubscription {
 
-    /** Header for CSV output */
-    public static final String [] CSV_HEADER = {"Subscription ID", "Part Number",
-            "Product Description", "System Limit","Matched", "Start Date (UTC)",
-            "End Date (UTC)"};
+    /**  Header for the CSV output. */
+    public static final String[] CSV_HEADER = {"Subscription ID", "Part Number", "Product Description", "System Limit", "Matched",
+            "Start Date (UTC)", "End Date (UTC)"};
 
-    /** The id. */
+    /** The subscription id. */
     private Long id;
 
     /** The part number. */
     private String partNumber;
 
-    /** The subscription name */
+    /** The subscription name. */
     private String name;
 
-    /** The count. */
+    /** The available count. */
     private Integer systemLimit;
 
-    /** The consumed. */
+    /** Number of subscriptions matched. */
     private int matched;
 
-    /** Start Date. */
+    /** The start date. */
     private Date startsAt = new Date(Long.MIN_VALUE);
 
-    /** End Date. */
+    /** The end date. */
     private Date expiresAt = new Date(Long.MAX_VALUE);
 
+    /**
+     * Instantiates a new CSV output subscription.
+     *
+     * @param idIn the id
+     * @param partNumberIn the part number
+     * @param nameIn the name
+     * @param systemLimitIn the available subscription count
+     * @param startsAtIn the start date
+     * @param expiresAtIn the end date
+     */
     public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer systemLimitIn, Date startsAtIn, Date expiresAtIn) {
         id = idIn;
         partNumber = partNumberIn;
@@ -48,10 +57,18 @@ public class CSVOutputSubscription {
         matched = 0;
     }
 
+    /**
+     * Increase the count of matched subscriptions of this type.
+     * @param count the count
+     */
     public void increaseMatchCount(int count) {
         matched = matched + count;
     }
 
+    /**
+     * Gets the CSV row.
+     * @return the CSV row
+     */
     public List<String> getCSVRow() {
         List<String> row = new ArrayList<>();
         row.add(String.valueOf(id));
