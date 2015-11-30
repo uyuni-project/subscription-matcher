@@ -37,21 +37,17 @@ public class CSVOutputSubscription {
     /** End Date. */
     public Date expiresAt = new Date(Long.MAX_VALUE);
 
-    /** SCC Organization Id. */
-    public String sccOrgId;
-
     /** Provided product IDs */
     public Set<Long> productIds = new HashSet<Long>();
 
     public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer systemLimitIn, Date startsAtIn, Date expiresAtIn,
-            String sccOrgIdIn, Set<Long> productIdsIn) {
+            Set<Long> productIdsIn) {
         id = idIn;
         partNumber = partNumberIn;
         name = nameIn;
         systemLimit = systemLimitIn;
         startsAt = startsAtIn;
         expiresAt = expiresAtIn;
-        sccOrgId = sccOrgIdIn;
         productIds = productIdsIn;
 
         matched = 0;

@@ -103,7 +103,6 @@ public class ReportWriter {
                 s.systemLimit,
                 s.startsAt,
                 s.expiresAt,
-                s.sccOrgId,
                 s.productIds
             );
             outsubs.put(s.id, csvs);
