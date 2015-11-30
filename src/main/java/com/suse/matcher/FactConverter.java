@@ -67,9 +67,15 @@ public class FactConverter {
         }
 
         for (JsonSubscription subscription : subscriptions) {
-            result.add(new Subscription(subscription.id, subscription.partNumber,
-                    subscription.systemLimit, subscription.startsAt,
-                    subscription.expiresAt, subscription.sccOrgId));
+            result.add(new Subscription(
+                subscription.id,
+                subscription.partNumber,
+                subscription.name,
+                subscription.systemLimit,
+                subscription.startsAt,
+                subscription.expiresAt,
+                subscription.sccOrgId
+            ));
             for (Long productId : subscription.productIds) {
                 result.add(new SubscriptionProduct(subscription.id, productId));
             }
