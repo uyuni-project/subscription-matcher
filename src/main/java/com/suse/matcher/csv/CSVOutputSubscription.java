@@ -29,7 +29,7 @@ public class CSVOutputSubscription {
     private Integer systemLimit;
 
     /** The consumed. */
-    private Integer matched;
+    private int matched;
 
     /** Start Date. */
     private Date startsAt = new Date(Long.MIN_VALUE);
@@ -54,12 +54,7 @@ public class CSVOutputSubscription {
     }
 
     public void increaseMatchCount(int count) {
-        if (matched != null) {
-            matched = matched + count;
-        }
-        else {
-            matched = new Integer(count);
-        }
+        matched = matched + count;
     }
 
     public List<String> getCSVRow() {
