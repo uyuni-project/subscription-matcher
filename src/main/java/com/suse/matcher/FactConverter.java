@@ -2,6 +2,7 @@ package com.suse.matcher;
 
 import com.suse.matcher.facts.CurrentTime;
 import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
@@ -27,7 +28,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -100,10 +100,6 @@ public class FactConverter {
         Collection<Match> confirmedMatchFacts = assignment.getMatches().stream()
                 .filter(match -> match.confirmed)
                 .collect(Collectors.toList());
-
-        Stream<PinnedMatch> pinnedMatchFacts = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof PinnedMatch)
-                .map(object -> (PinnedMatch) object);
 
         Stream<System> systemFacts = assignment.getProblemFacts().stream()
                 .filter(object -> object instanceof System)
@@ -195,30 +191,11 @@ public class FactConverter {
         }
 
         // fill output object's errors field
-        // unsatisfied pinned matches
-        pinnedMatchFacts.forEach(match -> {
-            Match actualMatch = matchMap.get(new Pair<Long, Long>(match.systemId, match.productId));
-            if (actualMatch == null || !match.subscriptionId.equals(actualMatch.subscriptionId)) {
-                JsonOutputError error = new JsonOutputError("unsatisfied_pinned_match");
-                error.data.put("system_id", match.systemId.toString());
-                error.data.put("subscription_id", match.subscriptionId.toString());
-                error.data.put("product_id", match.productId.toString());
-                output.errors.add(error);
-            }
-        });
-
-        // unknown part numbers
-        Set<String> unknownPartNumbers = new TreeSet<>();
-        for (Subscription subscription : subscriptions) {
-            if (subscription.policy == null && subscription.partNumber != null) {
-                unknownPartNumbers.add(subscription.partNumber);
-            }
-        }
-        for (String partNumber : unknownPartNumbers) {
-            JsonOutputError error = new JsonOutputError("unknown_part_number");
-            error.data.put("part_number", partNumber);
-            output.errors.add(error);
-        }
+        assignment.getProblemFacts().stream()
+            .filter(o -> o instanceof Message)
+            .map(o -> (Message) o)
+            .sorted()
+            .forEach(m -> output.errors.add(new JsonOutputError(m.type, m.data)));
 
         return output;
     }

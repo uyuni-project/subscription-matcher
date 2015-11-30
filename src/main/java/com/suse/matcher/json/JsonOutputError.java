@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * JSON representation of the an error detected during the match.
@@ -16,15 +15,17 @@ public class JsonOutputError {
     public String type;
 
     /** Arbitrary data connected to this error. */
-    public Map<String, String> data = new TreeMap<>();
+    public Map<String, String> data;
 
     /**
      * Instantiates a new json output error.
      *
      * @param typeIn the type
+     * @param dataIn the data
      */
-    public JsonOutputError(String typeIn) {
+    public JsonOutputError(String typeIn, Map<String, String> dataIn) {
         type = typeIn;
+        data = dataIn;
     }
 
     /** {@inheritDoc} */

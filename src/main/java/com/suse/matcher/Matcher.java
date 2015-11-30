@@ -61,6 +61,11 @@ public class Matcher {
 
         // activate the CSP solver with all deduced facts as inputs
         OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, otherFacts));
-        return optaPlanner.getResult();
+        Assignment result = optaPlanner.getResult();
+
+        // add user messages taking rule engine deductions and CSP solver output into account
+        MessageCollector.addMessages(result);
+
+        return result;
     }
 }
