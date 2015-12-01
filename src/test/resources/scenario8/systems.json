@@ -1,20 +1,32 @@
 [
-  {
-    "id": 100,
-    "cpus": 2,
-    "virtual_system_ids": [101, 102, 103],
-    "product_ids": [814]
-  },
-  {
-    "id": 101,
-    "product_ids": [814]
-  },
-  {
-    "id": 102,
-    "product_ids": [814]
-  },
-  {
-    "id": 103,
-    "product_ids": [814]
-  }
+    {
+        "cpus": 2,
+        "id": 100,
+        "products": {
+            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+        },
+        "virtual_system_ids": [
+            101,
+            102,
+            103
+        ]
+    },
+    {
+        "id": 101,
+        "products": {
+            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+        }
+    },
+    {
+        "id": 102,
+        "products": {
+            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+        }
+    },
+    {
+        "id": 103,
+        "products": {
+            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+        }
+    }
 ]

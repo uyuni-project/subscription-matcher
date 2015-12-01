@@ -1,13 +1,20 @@
 [
-  {
-    "id": 100,
-    "cpus": 4,
-    "product_ids": [1300],
-    "virtual_system_ids": [200]
-  },
-  {
-    "id": 200,
-    "cpus": 4,
-    "product_ids": [1300, 1288]
-  }
+    {
+        "cpus": 4,
+        "id": 100,
+        "products": {
+            "1300": "SUSE Linux Enterprise Server 11 SP4 x86_64"
+        },
+        "virtual_system_ids": [
+            200
+        ]
+    },
+    {
+        "cpus": 4,
+        "id": 200,
+        "products": {
+            "1288": "SUSE Cloud 5 x86_64",
+            "1300": "SUSE Linux Enterprise Server 11 SP4 x86_64"
+        }
+    }
 ]

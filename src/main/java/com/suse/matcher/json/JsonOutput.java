@@ -27,8 +27,8 @@ public class JsonOutput {
     /** The remaining subscriptions after the matching. */
     public List<JsonOutputSubscription> remainingSubscriptions = new LinkedList<>();
 
-    /** The errors. */
-    public List<JsonOutputError> errors = new LinkedList<>();
+    /** The messages. */
+    public List<JsonOutputMessage> messages = new LinkedList<>();
 
     /** {@inheritDoc} */
     @Override

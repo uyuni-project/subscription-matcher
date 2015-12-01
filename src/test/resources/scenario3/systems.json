@@ -1,22 +1,30 @@
 [
-  {
-    "id": 500,
-    "cpus": 4,
-    "product_ids": [1138]
-  },
-  {
-    "id": 1000,
-    "cpus": 4,
-    "product_ids": [814]
-  },
-  {
-    "id": 2000,
-    "cpus": 4,
-    "product_ids": [814]
-  },
-  {
-    "id": 600,
-    "cpus": 4,
-    "product_ids": [1138]
-  }
+    {
+        "cpus": 4,
+        "id": 500,
+        "products": {
+            "1138": "RES 6"
+        }
+    },
+    {
+        "cpus": 4,
+        "id": 1000,
+        "products": {
+            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+        }
+    },
+    {
+        "cpus": 4,
+        "id": 2000,
+        "products": {
+            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+        }
+    },
+    {
+        "cpus": 4,
+        "id": 600,
+        "products": {
+            "1138": "RES 6"
+        }
+    }
 ]

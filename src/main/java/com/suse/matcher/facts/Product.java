@@ -7,63 +7,44 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 /**
- * Represents a hardware or software entity on which you can install
- * products and that can be assigned {@link Subscription}s.
+ * Represents a product that can be matched.
  */
 @PropertyReactive
-public class System {
-    // constructor-populated fields
-    /** The id. */
+public class Product {
+
+    /** The product id. */
     public Long id;
 
     /** The friendly name. */
     public String name;
 
-    /** The populated CPU socket count. */
-    public Integer cpus;
-
-    // rule-computed fields
-    /**  <code>true</code> if this is a machine made of metal. */
-    public Boolean physical;
-
     /**
-     * Instantiates a new system.
+     * Instantiates a new product.
      *
-     * @param idIn the id
+     * @param idIn the product id
      * @param nameIn the friendly name
-     * @param cpusIn the cpus
      */
-    public System(Long idIn, String nameIn, Integer cpusIn) {
+    public Product(Long idIn, String nameIn) {
         id = idIn;
         name = nameIn;
-        cpus = cpusIn;
     }
 
     /**
-     * Gets the id.
+     * Gets the product id.
      *
-     * @return the id
+     * @return the product id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * Gets the cpus.
+     * Gets the friendly name.
      *
-     * @return the cpus
+     * @return the name
      */
-    public Integer getCpus() {
-        return cpus;
-    }
-
-    /**
-     * Checks if this system is physical.
-     *
-     * @return true, if it is physical
-     */
-    public Boolean isPhysical() {
-        return physical;
+    public String getName() {
+        return name;
     }
 
     /** {@inheritDoc} */
@@ -77,10 +58,10 @@ public class System {
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        if (!(objIn instanceof System)) {
+        if (!(objIn instanceof Product)) {
             return false;
         }
-        System other = (System) objIn;
+        Product other = (Product) objIn;
         return new EqualsBuilder()
             .append(id, other.id)
             .isEquals();
@@ -90,7 +71,8 @@ public class System {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("id", id)
-            .toString();
+        .append("id", id)
+        .append("name", name)
+        .toString();
     }
 }

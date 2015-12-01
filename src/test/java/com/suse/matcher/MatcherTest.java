@@ -82,7 +82,8 @@ public class MatcherTest {
      * @throws FileNotFoundException if the JSON file was not found
      */
     private static Reader getReader(int scenarioNumber, String fileName) throws FileNotFoundException {
-        InputStream is = MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber + "/" + fileName);
+        InputStream is = MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber
+                + "/" + fileName);
         if (is == null) {
             throw new FileNotFoundException();
         }
@@ -97,7 +98,8 @@ public class MatcherTest {
      * @param pinnedMatchesIn the pinned matches
      * @param expectedOutputIn the expected output
      */
-    public MatcherTest(List<JsonSystem> systemsIn, List<JsonSubscription> subscriptionsIn, List<JsonMatch> pinnedMatchesIn,
+    public MatcherTest(List<JsonSystem> systemsIn, List<JsonSubscription> subscriptionsIn,
+            List<JsonMatch> pinnedMatchesIn,
             JsonOutput expectedOutputIn) {
         matcher = new Matcher();
         systems = systemsIn;
@@ -113,17 +115,26 @@ public class MatcherTest {
     @Test
     public void test() throws Exception {
         Date timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse("2015-05-01T00:00:00.000+0200");
-        JsonOutput actualOutput = matcher.match(systems, subscriptions, pinnedMatches, timestamp);
+        JsonOutput actualOutput = FactConverter.convertToOutput(
+                matcher.match(systems, subscriptions, pinnedMatches, timestamp));
 
         JsonIO io = new JsonIO();
 
-        assertEquals("compliant systems", io.toJson(expectedOutput.compliantSystems), io.toJson(actualOutput.compliantSystems));
+        assertEquals("compliant systems",
+                io.toJson(expectedOutput.compliantSystems),
+                io.toJson(actualOutput.compliantSystems));
         assertEquals("partially compliant systems",
                 io.toJson(expectedOutput.partiallyCompliantSystems),
                 io.toJson(actualOutput.partiallyCompliantSystems)
         );
-        assertEquals("non compliant systems", io.toJson(expectedOutput.nonCompliantSystems), io.toJson(actualOutput.nonCompliantSystems));
-        assertEquals("remaining subscriptions", io.toJson(expectedOutput.remainingSubscriptions), io.toJson(actualOutput.remainingSubscriptions));
-        assertEquals("errors", io.toJson(expectedOutput.errors), io.toJson(actualOutput.errors));
+        assertEquals("non compliant systems",
+                io.toJson(expectedOutput.nonCompliantSystems),
+                io.toJson(actualOutput.nonCompliantSystems));
+        assertEquals("remaining subscriptions",
+                io.toJson(expectedOutput.remainingSubscriptions),
+                io.toJson(actualOutput.remainingSubscriptions));
+        assertEquals("errors",
+                io.toJson(expectedOutput.messages),
+                io.toJson(actualOutput.messages));
     }
 }

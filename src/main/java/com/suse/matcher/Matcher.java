@@ -2,7 +2,6 @@ package com.suse.matcher;
 
 import com.suse.matcher.facts.PossibleMatch;
 import com.suse.matcher.json.JsonMatch;
-import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
@@ -34,7 +33,7 @@ public class Matcher {
      * @param timestamp the timestamp for this matching
      * @return an object summarizing the match
      */
-    public JsonOutput match(List<JsonSystem> systems, List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches, Date timestamp) {
+    public Assignment match(List<JsonSystem> systems, List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches, Date timestamp) {
         // convert inputs into facts the rule engine can reason about
         Collection<Object> baseFacts = FactConverter.convertToFacts(systems, subscriptions, pinnedMatches, timestamp);
 
@@ -64,7 +63,9 @@ public class Matcher {
         OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, otherFacts));
         Assignment result = optaPlanner.getResult();
 
-        // convert output back to output format and return it
-        return FactConverter.convertToOutput(result);
+        // add user messages taking rule engine deductions and CSP solver output into account
+        MessageCollector.addMessages(result);
+
+        return result;
     }
 }

@@ -5,17 +5,16 @@ import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 
+import com.suse.matcher.solver.Assignment;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,8 +35,12 @@ public class Main {
         String systemsPath = cmd.getOptionValue('s');
         String subscriptionsPath = cmd.getOptionValue('u');
         String pinnedMatchPath = null;
+        String outdir = null;
         if (cmd.hasOption('p')) {
-            pinnedMatchPath = cmd.getOptionValue('c');
+            pinnedMatchPath = cmd.getOptionValue('p');
+        }
+        if (cmd.hasOption('o')) {
+            outdir = cmd.getOptionValue('o');
         }
 
         // load files
@@ -51,13 +54,16 @@ public class Main {
         }
 
         // do the matching
-        JsonOutput result = new Matcher().match(systems, subscriptions, pinnedMatches, new Date());
+        Assignment assignment = new Matcher()
+                .match(systems, subscriptions, pinnedMatches, new Date());
+        JsonOutput result = FactConverter.convertToOutput(assignment);
 
-        if (cmd.hasOption('d')) {
-            PrintWriter writer = new PrintWriter(
-                    new File(cmd.getOptionValue('d'), "matchresult.json"));
-            writer.write(io.toJson(result));
-            writer.close();
+        if (outdir != null) {
+            ReportWriter rw = new ReportWriter(assignment, outdir);
+            if (cmd.hasOption('d')) {
+                rw.setDelimiter(cmd.getOptionValue('d').charAt(0));
+            }
+            rw.writeReports();
         }
         else {
             // print output
@@ -72,7 +78,8 @@ public class Main {
         opts.addOption("s", "systems", true, "Systems");
         opts.addOption("u", "subscriptions", true, "Subscriptions");
         opts.addOption("p", "pinned", true, "Pinned subscriptions to systems");
-        opts.addOption("d", "directory", true, "Output directory");
+        opts.addOption("o", "directory", true, "Output directory");
+        opts.addOption("d", "delimiter", true, "CSV Delimiter (Default: ,)");
 
         CommandLineParser parser = new BasicParser();
         try {
@@ -87,11 +94,10 @@ public class Main {
             if (!cmd.hasOption("u")) {
                 throw new ParseException("Missing option 'subscriptions'");
             }
-            if (cmd.hasOption('d') && ! new File(cmd.getOptionValue('d')).isDirectory()) {
+            if (cmd.hasOption('o') && ! new File(cmd.getOptionValue('o')).isDirectory()) {
                 throw new ParseException("Given output directory does not exist " +
                         "or is not a directory");
             }
-
         }
         catch (ParseException e) {
             java.lang.System.err.println("Failed to parse comand line properties:" + e);

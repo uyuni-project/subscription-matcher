@@ -2,14 +2,16 @@ package com.suse.matcher;
 
 import com.suse.matcher.facts.CurrentTime;
 import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PinnedMatch;
+import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonOutput;
-import com.suse.matcher.json.JsonOutputError;
+import com.suse.matcher.json.JsonOutputMessage;
 import com.suse.matcher.json.JsonOutputProduct;
 import com.suse.matcher.json.JsonOutputSubscription;
 import com.suse.matcher.json.JsonOutputSystem;
@@ -26,7 +28,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -47,32 +48,42 @@ public class FactConverter {
      * @param timestamp the timestamp for this set of facts
      * @return a collection of facts
      */
-    public static Collection<Object> convertToFacts(List<JsonSystem> systems, List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches,
+    public static Collection<Object> convertToFacts(List<JsonSystem> systems,
+            List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches,
             Date timestamp) {
         Collection<Object> result = new LinkedList<Object>();
 
         result.add(new CurrentTime(timestamp));
 
         for (JsonSystem system : systems) {
-            result.add(new System(system.id, system.cpus));
+            result.add(new System(system.id, system.name, system.cpus));
             for (Long guestId : system.virtualSystemIds) {
                 result.add(new HostGuest(system.id, guestId));
             }
-            for (Long productId : system.productIds) {
-                result.add(new SystemProduct(system.id, productId));
+            for (Map.Entry<Long, String> product : system.products.entrySet()) {
+                result.add(new SystemProduct(system.id, product.getKey()));
+                result.add(new Product(product.getKey(), product.getValue()));
             }
         }
 
         for (JsonSubscription subscription : subscriptions) {
-            result.add(new Subscription(subscription.id, subscription.partNumber, subscription.systemLimit, subscription.startsAt,
-                    subscription.expiresAt, subscription.sccOrgId));
+            result.add(new Subscription(
+                subscription.id,
+                subscription.partNumber,
+                subscription.name,
+                subscription.systemLimit,
+                subscription.startsAt,
+                subscription.expiresAt,
+                subscription.sccOrgId
+            ));
             for (Long productId : subscription.productIds) {
                 result.add(new SubscriptionProduct(subscription.id, productId));
             }
         }
 
         for (JsonMatch match : pinnedMatches) {
-            result.add(new PinnedMatch(match.systemId, match.productId, match.subscriptionId));
+            result.add(
+                    new PinnedMatch(match.systemId, match.productId, match.subscriptionId));
         }
 
         return result;
@@ -89,10 +100,6 @@ public class FactConverter {
         Collection<Match> confirmedMatchFacts = assignment.getMatches().stream()
                 .filter(match -> match.confirmed)
                 .collect(Collectors.toList());
-
-        Stream<PinnedMatch> pinnedMatchFacts = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof PinnedMatch)
-                .map(object -> (PinnedMatch) object);
 
         Stream<System> systemFacts = assignment.getProblemFacts().stream()
                 .filter(object -> object instanceof System)
@@ -183,31 +190,12 @@ public class FactConverter {
             }
         }
 
-        // fill output object's errors field
-        // unsatisfied pinned matches
-        pinnedMatchFacts.forEach(match -> {
-            Match actualMatch = matchMap.get(new Pair<Long, Long>(match.systemId, match.productId));
-            if (actualMatch == null || !match.subscriptionId.equals(actualMatch.subscriptionId)) {
-                JsonOutputError error = new JsonOutputError("unsatisfied_pinned_match");
-                error.data.put("system_id", match.systemId.toString());
-                error.data.put("subscription_id", match.subscriptionId.toString());
-                error.data.put("product_id", match.productId.toString());
-                output.errors.add(error);
-            }
-        });
-
-        // unknown part numbers
-        Set<String> unknownPartNumbers = new TreeSet<>();
-        for (Subscription subscription : subscriptions) {
-            if (subscription.policy == null && subscription.partNumber != null) {
-                unknownPartNumbers.add(subscription.partNumber);
-            }
-        }
-        for (String partNumber : unknownPartNumbers) {
-            JsonOutputError error = new JsonOutputError("unknown_part_number");
-            error.data.put("part_number", partNumber);
-            output.errors.add(error);
-        }
+        // fill output object's messages field
+        assignment.getProblemFacts().stream()
+            .filter(o -> o instanceof Message)
+            .map(o -> (Message) o)
+            .sorted()
+            .forEach(m -> output.messages.add(new JsonOutputMessage(m.type, m.data)));
 
         return output;
     }

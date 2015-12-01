@@ -47,7 +47,7 @@ public class Assignment implements Solution<HardSoftScore> {
      * {@inheritDoc}
      */
     @Override
-    public Collection<? extends Object> getProblemFacts() {
+    public Collection<Object> getProblemFacts() {
         // those will be inserted in the private OptaPlanner Drools instance
         // so that they can be used in score rules
         return problemFacts;

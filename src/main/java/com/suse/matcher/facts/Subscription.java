@@ -52,6 +52,9 @@ public class Subscription implements Comparable<Subscription> {
     /** The part number. */
     public String partNumber;
 
+    /** The friendly name. */
+    public String name;
+
     /** The number of subscription units (usually systems) available in this subscription. */
     public Integer quantity;
 
@@ -77,19 +80,24 @@ public class Subscription implements Comparable<Subscription> {
     /**   Can this subscription be used multiple times on the same system?. */
     public Boolean stackable;
 
+    /** Should this subscription be matched at all? Eg. expired subscriptions can be ignored. */
+    public Boolean ignored = false;
+
     /**
      * Instantiates a new subscription.
      *
      * @param idIn the id
      * @param partNumberIn the part number
+     * @param nameIn the friendly name
      * @param quantityIn the quantity
      * @param startsAtIn the starts at
      * @param expiresAtIn the expires at
      * @param sccOrgIdIn the scc org id
      */
-    public Subscription(Long idIn, String partNumberIn, Integer quantityIn, Date startsAtIn, Date expiresAtIn, String sccOrgIdIn) {
+    public Subscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startsAtIn, Date expiresAtIn, String sccOrgIdIn) {
         id = idIn;
         partNumber = partNumberIn;
+        name = nameIn;
         quantity = quantityIn;
         startsAt = startsAtIn;
         expiresAt = expiresAtIn;
