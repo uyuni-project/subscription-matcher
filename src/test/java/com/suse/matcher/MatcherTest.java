@@ -134,7 +134,7 @@ public class MatcherTest {
                 io.toJson(expectedOutput.remainingSubscriptions),
                 io.toJson(actualOutput.remainingSubscriptions));
         assertEquals("errors",
-                io.toJson(expectedOutput.errors),
-                io.toJson(actualOutput.errors));
+                io.toJson(expectedOutput.messages),
+                io.toJson(actualOutput.messages));
     }
 }

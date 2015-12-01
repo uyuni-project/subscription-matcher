@@ -7,23 +7,23 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Map;
 
 /**
- * JSON representation of the an error detected during the match.
+ * JSON representation of a user message generated during the match (error, warning, etc.).
  */
-public class JsonOutputError {
+public class JsonOutputMessage {
 
-    /** A label identifying the error type. */
+    /** A label identifying the message type. */
     public String type;
 
-    /** Arbitrary data connected to this error. */
+    /** Arbitrary data connected to this message. */
     public Map<String, String> data;
 
     /**
-     * Instantiates a new json output error.
+     * Instantiates a new json output message.
      *
      * @param typeIn the type
      * @param dataIn the data
      */
-    public JsonOutputError(String typeIn, Map<String, String> dataIn) {
+    public JsonOutputMessage(String typeIn, Map<String, String> dataIn) {
         type = typeIn;
         data = dataIn;
     }

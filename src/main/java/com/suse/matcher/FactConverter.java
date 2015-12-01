@@ -11,7 +11,7 @@ import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonOutput;
-import com.suse.matcher.json.JsonOutputError;
+import com.suse.matcher.json.JsonOutputMessage;
 import com.suse.matcher.json.JsonOutputProduct;
 import com.suse.matcher.json.JsonOutputSubscription;
 import com.suse.matcher.json.JsonOutputSystem;
@@ -190,12 +190,12 @@ public class FactConverter {
             }
         }
 
-        // fill output object's errors field
+        // fill output object's messages field
         assignment.getProblemFacts().stream()
             .filter(o -> o instanceof Message)
             .map(o -> (Message) o)
             .sorted()
-            .forEach(m -> output.errors.add(new JsonOutputError(m.type, m.data)));
+            .forEach(m -> output.messages.add(new JsonOutputMessage(m.type, m.data)));
 
         return output;
     }
