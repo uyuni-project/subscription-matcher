@@ -1,5 +1,6 @@
 package com.suse.matcher.facts;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * Represents a message to be presented to the user, as a secondary informative output (errors, warnings, etc.)
  */
-public class Message {
+public class Message implements Comparable<Message> {
 
     /** A label identifying the message type. */
     public String type;
@@ -31,10 +32,20 @@ public class Message {
 
     /** {@inheritDoc} */
     @Override
+    public int compareTo(Message oIn) {
+        return new CompareToBuilder()
+            .append(type, oIn.type)
+            // we don't really care about the ordering at this point, provided
+            // it's consistent between runs. Hash code does the trick
+            .append(data.hashCode(), oIn.data.hashCode())
+            .toComparison();
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public int hashCode() {
         return new HashCodeBuilder()
             .append(type)
-            .append(data)
             .toHashCode();
     }
 
