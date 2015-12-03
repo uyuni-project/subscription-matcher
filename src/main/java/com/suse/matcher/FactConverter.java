@@ -172,6 +172,7 @@ public class FactConverter {
                 .filter(o -> o instanceof Subscription)
                 .map(s -> (Subscription) s)
                 .filter(s -> !s.ignored)
+                .sorted()
                 .collect(Collectors.toList());
 
         Map<Long, Integer> remainings = new TreeMap<>();
