@@ -170,12 +170,12 @@ public class FactConverter {
         }
 
         // fill output object's remaining subscriptions field
-        Collection<Subscription> subscriptions = new TreeSet<>();
-        for (Object fact : assignment.getProblemFacts()) {
-           if (fact instanceof Subscription) {
-               subscriptions.add((Subscription)fact);
-           }
-        }
+        Collection<Subscription> subscriptions = assignment.getProblemFacts().stream()
+                .filter(o -> o instanceof Subscription)
+                .map(s -> (Subscription) s)
+                .filter(s -> !s.ignored)
+                .collect(Collectors.toList());
+
         Map<Long, Integer> remainings = new TreeMap<>();
         for (Subscription subscription : subscriptions) {
             remainings.put(subscription.id, subscription.quantity * 100);

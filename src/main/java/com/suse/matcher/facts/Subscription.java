@@ -114,6 +114,16 @@ public class Subscription implements Comparable<Subscription> {
     }
 
     /**
+     * Returns true if this subscription has to be ignored for the matching
+     * (eg. because it is expired)
+     *
+     * @return true if the subscription is to be ignored
+     */
+    public Boolean getIgnored() {
+        return ignored;
+    }
+
+    /**
      * Gets the part number.
      *
      * @return the part number
