@@ -1,4 +1,4 @@
-package com.suse.matcher.rules;
+package com.suse.matcher.rules.drools;
 
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.System;

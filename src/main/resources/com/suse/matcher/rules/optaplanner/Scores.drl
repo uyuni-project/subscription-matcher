@@ -1,4 +1,4 @@
-package com.suse.matcher.rules;
+package com.suse.matcher.rules.optaplanner;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 

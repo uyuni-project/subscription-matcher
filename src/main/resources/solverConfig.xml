@@ -16,7 +16,7 @@
     <!-- Score configuration -->
     <scoreDirectorFactory>
         <scoreDefinitionType>HARD_SOFT</scoreDefinitionType>
-        <scoreDrl>rules/Scores.drl</scoreDrl>
+        <scoreDrl>com/suse/matcher/rules/optaplanner/Scores.drl</scoreDrl>
         <initializingScoreTrend>ONLY_DOWN/ONLY_UP</initializingScoreTrend>
     </scoreDirectorFactory>
 
