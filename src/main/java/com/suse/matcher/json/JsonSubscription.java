@@ -18,19 +18,18 @@ public class JsonSubscription {
     /** The friendly name. */
     public String name;
 
-    /** The count. */
-    public Integer systemLimit;
+    /** The number of available subscriptions. */
+    public Integer quantity;
 
     /** Start Date. */
-    public Date startsAt = new Date(Long.MIN_VALUE);
+    public Date startDate = new Date(Long.MIN_VALUE);
 
     /** End Date. */
-    public Date expiresAt = new Date(Long.MAX_VALUE);
+    public Date endDate = new Date(Long.MAX_VALUE);
 
-    /** SCC Organization Id. */
-    public String sccOrgId;
+    /** SCC Username. */
+    public String sccUsername;
 
     /** Provided product IDs */
     public Set<Long> productIds = new HashSet<Long>();
-
 }

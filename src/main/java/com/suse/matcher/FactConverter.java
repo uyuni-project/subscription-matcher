@@ -71,10 +71,10 @@ public class FactConverter {
                 subscription.id,
                 subscription.partNumber,
                 subscription.name,
-                subscription.systemLimit,
-                subscription.startsAt,
-                subscription.expiresAt,
-                subscription.sccOrgId
+                subscription.quantity,
+                subscription.startDate,
+                subscription.endDate,
+                subscription.sccUsername
             ));
             for (Long productId : subscription.productIds) {
                 result.add(new SubscriptionProduct(subscription.id, productId));
