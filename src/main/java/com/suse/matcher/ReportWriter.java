@@ -198,7 +198,7 @@ public class ReportWriter {
                             .filter(p -> p.id == sp.productId)
                             .map(p -> p.name)
                             .findFirst()
-                            .orElse("Unknown product");})
+                            .orElse("Unknown product (" + sp.productId + ")");})
                     .collect(Collectors.toList());
 
                 if (!unmatchedProductNames.isEmpty()) {
