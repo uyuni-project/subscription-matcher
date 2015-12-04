@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * JSON representation of a system.
  */
-public class JsonSystem {
+public class JsonInputSystem {
 
     /** The ID */
     public Long id;

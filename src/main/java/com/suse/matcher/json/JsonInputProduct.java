@@ -3,7 +3,7 @@ package com.suse.matcher.json;
 /**
  * JSON representation of a product.
  */
-public class JsonProduct {
+public class JsonInputProduct {
 
     /** The id. */
     public Long id;

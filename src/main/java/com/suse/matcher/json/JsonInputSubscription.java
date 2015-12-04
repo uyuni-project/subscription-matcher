@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * JSON representation of a subscription.
  */
-public class JsonSubscription {
+public class JsonInputSubscription {
 
     /** The id. */
     public Long id;

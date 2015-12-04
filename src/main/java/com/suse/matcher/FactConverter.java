@@ -10,15 +10,15 @@ import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.json.JsonInput;
-import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonInputPinnedMatch;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonOutputMessage;
 import com.suse.matcher.json.JsonOutputProduct;
 import com.suse.matcher.json.JsonOutputSubscription;
 import com.suse.matcher.json.JsonOutputSystem;
-import com.suse.matcher.json.JsonProduct;
-import com.suse.matcher.json.JsonSubscription;
-import com.suse.matcher.json.JsonSystem;
+import com.suse.matcher.json.JsonInputProduct;
+import com.suse.matcher.json.JsonInputSubscription;
+import com.suse.matcher.json.JsonInputSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
@@ -52,7 +52,7 @@ public class FactConverter {
 
         result.add(new CurrentTime(timestamp));
 
-        for (JsonSystem system : input.systems) {
+        for (JsonInputSystem system : input.systems) {
             result.add(new System(system.id, system.name, system.cpus));
             for (Long guestId : system.virtualSystemIds) {
                 result.add(new HostGuest(system.id, guestId));
@@ -62,11 +62,11 @@ public class FactConverter {
             }
         }
 
-        for (JsonProduct product : input.products) {
+        for (JsonInputProduct product : input.products) {
             result.add(new Product(product.id, product.name));
         }
 
-        for (JsonSubscription subscription : input.subscriptions) {
+        for (JsonInputSubscription subscription : input.subscriptions) {
             result.add(new Subscription(
                 subscription.id,
                 subscription.partNumber,
@@ -81,7 +81,7 @@ public class FactConverter {
             }
         }
 
-        for (JsonMatch match : input.pinnedMatches) {
+        for (JsonInputPinnedMatch match : input.pinnedMatches) {
             result.add(new PinnedMatch(match.systemId, match.subscriptionId));
         }
 
