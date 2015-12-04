@@ -22,7 +22,7 @@ global HardSoftScoreHolder scoreHolder;
 
 rule "dontExceedSubscriptionCount"
     when
-        Subscription($subscriptionId: id, $quantity : quantity)
+        Subscription($subscriptionId: id, $quantity : quantity, ignored == false)
         $requiredCents : Number(intValue > $quantity * 100) from accumulate (
             Match(subscriptionId == $subscriptionId, confirmed == true, $cents : cents),
             sum($cents)
@@ -33,7 +33,7 @@ end
 
 rule "disallowFreeVmRides"
     when
-        Subscription($subscriptionId: id, policy == Policy.UNLIMITED_VIRTUALIZATION)
+        Subscription($subscriptionId: id, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
         HostGuest($hostId : hostId, $guestId : guestId)
         Match(systemId == $guestId, subscriptionId == $subscriptionId, confirmed == true)
         Match(systemId == $hostId, subscriptionId == $subscriptionId, confirmed != true)
