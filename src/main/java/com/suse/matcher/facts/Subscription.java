@@ -59,13 +59,13 @@ public class Subscription implements Comparable<Subscription> {
     public Integer quantity;
 
     /** Start Date. */
-    public Date startsAt = new Date(Long.MIN_VALUE);
+    public Date startDate = new Date(Long.MIN_VALUE);
 
     /** End Date. */
-    public Date expiresAt = new Date(Long.MAX_VALUE);
+    public Date endDate = new Date(Long.MAX_VALUE);
 
-    /** SCC Organization Id. */
-    public String sccOrgId;
+    /** SCC Username. */
+    public String sccUsername;
 
     // rule-computed fields
     /** Virtualization policy. */
@@ -90,18 +90,18 @@ public class Subscription implements Comparable<Subscription> {
      * @param partNumberIn the part number
      * @param nameIn the friendly name
      * @param quantityIn the quantity
-     * @param startsAtIn the starts at
-     * @param expiresAtIn the expires at
-     * @param sccOrgIdIn the scc org id
+     * @param startDateIn the starts at
+     * @param endDateIn the expires at
+     * @param sccUsernameIn the scc org id
      */
-    public Subscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startsAtIn, Date expiresAtIn, String sccOrgIdIn) {
+    public Subscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn, Date endDateIn, String sccUsernameIn) {
         id = idIn;
         partNumber = partNumberIn;
         name = nameIn;
         quantity = quantityIn;
-        startsAt = startsAtIn;
-        expiresAt = expiresAtIn;
-        sccOrgId = sccOrgIdIn;
+        startDate = startDateIn;
+        endDate = endDateIn;
+        sccUsername = sccUsernameIn;
     }
 
     /**
@@ -147,7 +147,7 @@ public class Subscription implements Comparable<Subscription> {
      * @return the start date
      */
     public Date getStartsAt() {
-        return startsAt;
+        return startDate;
     }
 
     /**
@@ -156,16 +156,16 @@ public class Subscription implements Comparable<Subscription> {
      * @return the end date
      */
     public Date getExpiresAt() {
-        return expiresAt;
+        return endDate;
     }
 
     /**
-     * Gets the SCC org id.
+     * Gets the SCC username.
      *
-     * @return the SCC org id
+     * @return the SCC username
      */
-    public String getSccOrgId() {
-        return sccOrgId;
+    public String getSccUsername() {
+        return sccUsername;
     }
 
     /**

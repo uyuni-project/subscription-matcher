@@ -31,10 +31,10 @@ public class CSVOutputSubscription {
     private int matched;
 
     /** The start date. */
-    private Date startsAt = new Date(Long.MIN_VALUE);
+    private Date startDate = new Date(Long.MIN_VALUE);
 
     /** The end date. */
-    private Date expiresAt = new Date(Long.MAX_VALUE);
+    private Date endDate = new Date(Long.MAX_VALUE);
 
     /**
      * Instantiates a new CSV output subscription.
@@ -43,16 +43,16 @@ public class CSVOutputSubscription {
      * @param partNumberIn the part number
      * @param nameIn the name
      * @param quantityIn the quantity
-     * @param startsAtIn the start date
-     * @param expiresAtIn the end date
+     * @param startDateIn the start date
+     * @param endDateIn the end date
      */
-    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startsAtIn, Date expiresAtIn) {
+    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn, Date endDateIn) {
         id = idIn;
         partNumber = partNumberIn;
         name = nameIn;
         quantity = quantityIn;
-        startsAt = startsAtIn;
-        expiresAt = expiresAtIn;
+        startDate = startDateIn;
+        endDate = endDateIn;
 
         matched = 0;
     }
@@ -78,8 +78,8 @@ public class CSVOutputSubscription {
         row.add(String.valueOf(matched));
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
-        row.add(df.format(startsAt));
-        row.add(df.format(expiresAt));
+        row.add(df.format(startDate));
+        row.add(df.format(endDate));
         return row;
     }
 }

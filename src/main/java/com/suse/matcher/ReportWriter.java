@@ -109,8 +109,8 @@ public class ReportWriter {
                 s.partNumber,
                 s.name,
                 s.quantity,
-                s.startsAt,
-                s.expiresAt
+                s.startDate,
+                s.endDate
             );
             outsubs.put(s.id, csvs);
         });
