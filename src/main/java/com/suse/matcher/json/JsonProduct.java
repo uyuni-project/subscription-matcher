@@ -10,22 +10,4 @@ public class JsonProduct {
 
     /** A friendly name. */
     public String name;
-
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Gets the friendly name.
-     *
-     * @return the friendly name
-     */
-    public String getName() {
-        return name;
-    }
 }
