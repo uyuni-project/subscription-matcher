@@ -37,12 +37,12 @@
              (this helps avoiding local optima). The list of those "taboo"
              entities should count at most 2% of the total entities -->
         <acceptor>
-            <entityTabuRatio>0.02</entityTabuRatio>
+            <entityTabuRatio>0.2</entityTabuRatio>
         </acceptor>
 
         <termination>
-            <!-- Terminate after 5 steps with no score improvement -->
-            <unimprovedStepCountLimit>5</unimprovedStepCountLimit>
+            <!-- Terminate after 20 steps with no score improvement -->
+            <unimprovedStepCountLimit>20</unimprovedStepCountLimit>
         </termination>
     </localSearch>
 </solver>
