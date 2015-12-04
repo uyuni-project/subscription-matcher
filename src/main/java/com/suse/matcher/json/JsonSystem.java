@@ -17,6 +17,9 @@ public class JsonSystem {
     /** The populated CPU socket count */
     public Integer cpus;
 
+    /** True if this system is made of metal */
+    public Boolean physical;
+
     /** Virtual machine IDs */
     public List<Long> virtualSystemIds = new LinkedList<Long>();
 
