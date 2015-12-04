@@ -2,15 +2,21 @@
     {
         "cpus": 4,
         "id": 100,
-        "products": {
-            "1117": "SUSE Linux Enterprise Server 12 x86_64"
-        }
+        "products": [
+            {
+                "id": "1117",
+                "name": "SUSE Linux Enterprise Server 12 x86_64"
+            }
+        ]
     },
     {
         "cpus": 8,
         "id": 200,
-        "products": {
-            "1117": "SUSE Linux Enterprise Server 12 x86_64"
-        }
+        "products": [
+            {
+                "id": "1117",
+                "name": "SUSE Linux Enterprise Server 12 x86_64"
+            }
+        ]
     }
 ]

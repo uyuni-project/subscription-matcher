@@ -1,6 +1,5 @@
 package com.suse.matcher.json;
 
-
 /**
  * JSON representation of a product.
  */
@@ -9,8 +8,8 @@ public class JsonProduct {
     /** The id. */
     public Long id;
 
-    /** A human-friendly name. */
-    public String friendlyName;
+    /** A friendly name. */
+    public String name;
 
     /**
      * Gets the id.
@@ -26,7 +25,7 @@ public class JsonProduct {
      *
      * @return the friendly name
      */
-    public String getFriendlyName() {
-        return friendlyName;
+    public String getName() {
+        return name;
     }
 }

@@ -15,6 +15,7 @@ import com.suse.matcher.json.JsonOutputMessage;
 import com.suse.matcher.json.JsonOutputProduct;
 import com.suse.matcher.json.JsonOutputSubscription;
 import com.suse.matcher.json.JsonOutputSystem;
+import com.suse.matcher.json.JsonProduct;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
@@ -59,9 +60,9 @@ public class FactConverter {
             for (Long guestId : system.virtualSystemIds) {
                 result.add(new HostGuest(system.id, guestId));
             }
-            for (Map.Entry<Long, String> product : system.products.entrySet()) {
-                result.add(new SystemProduct(system.id, product.getKey()));
-                result.add(new Product(product.getKey(), product.getValue()));
+            for (JsonProduct product : system.products) {
+                result.add(new SystemProduct(system.id, product.id));
+                result.add(new Product(product.id, product.name));
             }
         }
 

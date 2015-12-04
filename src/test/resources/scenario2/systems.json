@@ -2,29 +2,41 @@
     {
         "cpus": 16,
         "id": 100,
-        "products": {
-            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
-        }
+        "products": [
+            {
+                "id": "814",
+                "name": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+            }
+        ]
     },
     {
         "cpus": 8,
         "id": 200,
-        "products": {
-            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
-        }
+        "products": [
+            {
+                "id": "814",
+                "name": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+            }
+        ]
     },
     {
         "cpus": 8,
         "id": 300,
-        "products": {
-            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
-        }
+        "products": [
+            {
+                "id": "814",
+                "name": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+            }
+        ]
     },
     {
         "cpus": 16,
         "id": 400,
-        "products": {
-            "814": "SUSE Linux Enterprise Server 11 SP3 x86_64"
-        }
+        "products": [
+            {
+                "id": "814",
+                "name": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+            }
+        ]
     }
 ]

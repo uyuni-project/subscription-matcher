@@ -2,15 +2,21 @@
     {
         "cpus": 4,
         "id": 100,
-        "products": {
-            "1298": "SUSE Linux Enterprise Server 11 SP4 i686"
-        }
+        "products": [
+            {
+                "id": "1298",
+                "name": "SUSE Linux Enterprise Server 11 SP4 i686"
+            }
+        ]
     },
     {
         "cpus": 8,
         "id": 200,
-        "products": {
-            "1298": "SUSE Linux Enterprise Server 11 SP4 i686"
-        }
+        "products": [
+            {
+                "id": "1298",
+                "name": "SUSE Linux Enterprise Server 11 SP4 i686"
+            }
+        ]
     }
 ]
