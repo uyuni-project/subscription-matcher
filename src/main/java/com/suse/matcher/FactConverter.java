@@ -57,9 +57,8 @@ public class FactConverter {
             for (Long guestId : system.virtualSystemIds) {
                 result.add(new HostGuest(system.id, guestId));
             }
-            for (JsonProduct product : system.products) {
-                result.add(new SystemProduct(system.id, product.id));
-                result.add(new Product(product.id, product.name));
+            for (Long productId : system.productIds) {
+                result.add(new SystemProduct(system.id, productId));
             }
         }
 

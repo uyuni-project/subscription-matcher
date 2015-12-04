@@ -23,6 +23,6 @@ public class JsonSystem {
     /** Virtual machine IDs */
     public List<Long> virtualSystemIds = new LinkedList<Long>();
 
-    /** Installed product IDs with its names */
-    public List<JsonProduct> products = new LinkedList<JsonProduct>();
+    /** Installed product IDs */
+    public List<Long> productIds = new LinkedList<Long>();
 }
