@@ -27,7 +27,7 @@ public class JsonIO {
     /** Default constructor. */
     public JsonIO() {
         gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX")
             .setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
             .setPrettyPrinting()
             .create();
