@@ -7,19 +7,9 @@ import com.suse.matcher.facts.SystemProduct;
 rule "markVirtualSystems"
 when
     HostGuest($guestId : guestId)
-    $guest : System(id == $guestId, physical == null)
+    $guest : System(id == $guestId)
 then
     modify($guest) {
         physical = false;
-    }
-end
-
-rule "markPhysicalSystems"
-when
-    $system : System(physical == null)
-    not HostGuest(guestId == $system.id)
-then
-    modify($system) {
-        physical = true;
     }
 end

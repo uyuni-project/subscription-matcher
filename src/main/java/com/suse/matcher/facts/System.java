@@ -24,7 +24,7 @@ public class System {
 
     // rule-computed fields
     /**  <code>true</code> if this is a machine made of metal. */
-    public Boolean physical;
+    public Boolean physical = true;
 
     /**
      * Instantiates a new system.
