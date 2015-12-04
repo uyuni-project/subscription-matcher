@@ -20,26 +20,41 @@
         <initializingScoreTrend>ONLY_DOWN/ONLY_UP</initializingScoreTrend>
     </scoreDirectorFactory>
 
-    <!-- Optimization algorithms configuration -->
+    <!-- Optimization algorithm configuration -->
+
+    <!-- Construct a first solution by iterating through possible matches and switching Match.confirmed from null to true
+         or false, whatever has higher score. By construction the hard score cannot become negative and the soft score
+         comes out typically better than 0
+    -->
     <constructionHeuristic>
         <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
     </constructionHeuristic>
+
+    <!-- Iteratively improve the solution -->
     <localSearch>
-        <!-- Generate next possible solutions by changing their values -->
+        <!-- Propose new solutions by changing the current solutions's Match.confirmed boolean values (in random Match
+        instances). One such change is called a move
+        -->
         <changeMoveSelector />
 
-        <!-- Generate 1000 solutions before selecting one for the next step -->
-        <forager>
-            <acceptedCountLimit>1000</acceptedCountLimit>
-        </forager>
-
-        <!-- Selection by highest score but also avoid recently-touched entities
-             (this helps avoiding local optima). The list of those "taboo"
-             entities should count at most 2% of the total entities -->
+        <!-- Don't accept moves:
+              - that do not actually change the solution (eg. true -> true)
+              - that make the hard score negative
+              - that change a Match among the 20% of most recently changed Matches (colloquially referred to as taboo)
+        -->
         <acceptor>
             <entityTabuRatio>0.2</entityTabuRatio>
         </acceptor>
 
+        <!-- In any case, don't generate more than 1000 acceptable moves -->
+        <forager>
+            <acceptedCountLimit>1000</acceptedCountLimit>
+        </forager>
+
+        <!-- Implicitly pick the accepted move with best score that has been found. It might or might not improve
+             the current overall best score. When the move is picked a "step" is finished and move evaluation restarts
+             from the new solution -->
+ 
         <termination>
             <!-- Terminate after 20 steps with no score improvement -->
             <unimprovedStepCountLimit>20</unimprovedStepCountLimit>
