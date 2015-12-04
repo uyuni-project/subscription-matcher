@@ -2,10 +2,8 @@ package com.suse.matcher;
 
 import static org.junit.Assert.assertEquals;
 
-import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
-import com.suse.matcher.json.JsonSubscription;
-import com.suse.matcher.json.JsonSystem;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Tests {@link Matcher}.
@@ -32,13 +29,7 @@ public class MatcherTest {
     private Matcher matcher;
 
     /** List of systems in the current test run. */
-    private List<JsonSystem> systems;
-
-    /** List of subscriptions in the current test run. */
-    private List<JsonSubscription> subscriptions;
-
-    /** List of pinned matches in the current test run. */
-    private List<JsonMatch> pinnedMatches;
+    private JsonInput input;
 
     /** The expected output. */
     private JsonOutput expectedOutput;
@@ -59,9 +50,7 @@ public class MatcherTest {
         while (moreFiles) {
             try {
                 result.add(new Object[] {
-                    io.loadSystems(getReader(i, "systems.json")),
-                    io.loadSubscriptions(getReader(i, "subscriptions.json")),
-                    io.loadMatches(getReader(i, "pinned_matches.json")),
+                    io.loadInput(getReader(i, "input.json")),
                     io.loadOutput(getReader(i, "output.json"))
                 });
                 i++;
@@ -93,18 +82,12 @@ public class MatcherTest {
     /**
      * Instantiates a new Matcher test.
      *
-     * @param systemsIn the systems
-     * @param subscriptionsIn the subscriptions
-     * @param pinnedMatchesIn the pinned matches
+     * @param inputIn a JSON input data blob
      * @param expectedOutputIn the expected output
      */
-    public MatcherTest(List<JsonSystem> systemsIn, List<JsonSubscription> subscriptionsIn,
-            List<JsonMatch> pinnedMatchesIn,
-            JsonOutput expectedOutputIn) {
+    public MatcherTest(JsonInput inputIn, JsonOutput expectedOutputIn) {
         matcher = new Matcher();
-        systems = systemsIn;
-        subscriptions = subscriptionsIn;
-        pinnedMatches = pinnedMatchesIn;
+        input = inputIn;
         expectedOutput = expectedOutputIn;
     }
 
@@ -115,8 +98,7 @@ public class MatcherTest {
     @Test
     public void test() throws Exception {
         Date timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse("2015-05-01T00:00:00.000+0200");
-        JsonOutput actualOutput = FactConverter.convertToOutput(
-                matcher.match(systems, subscriptions, pinnedMatches, timestamp));
+        JsonOutput actualOutput = FactConverter.convertToOutput(matcher.match(input, timestamp));
 
         JsonIO io = new JsonIO();
 

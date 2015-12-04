@@ -1,11 +1,9 @@
 package com.suse.matcher;
 
-import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
-import com.suse.matcher.json.JsonSubscription;
-import com.suse.matcher.json.JsonSystem;
-
 import com.suse.matcher.solver.Assignment;
+
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -15,9 +13,9 @@ import org.apache.commons.cli.ParseException;
 
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Entry point for the commandline version of this program.
@@ -32,30 +30,24 @@ public class Main {
      */
     public static final void main(String[] args) throws Exception {
         CommandLine cmd = parseOptions(args);
-        String systemsPath = cmd.getOptionValue('s');
-        String subscriptionsPath = cmd.getOptionValue('u');
-        String pinnedMatchPath = null;
         String outdir = null;
-        if (cmd.hasOption('p')) {
-            pinnedMatchPath = cmd.getOptionValue('p');
-        }
         if (cmd.hasOption('o')) {
             outdir = cmd.getOptionValue('o');
         }
 
         // load files
         JsonIO io = new JsonIO();
-        List<JsonSystem> systems = io.loadSystems(new FileReader(systemsPath));
-        List<JsonSubscription> subscriptions = io.loadSubscriptions(new FileReader(subscriptionsPath));
-
-        List<JsonMatch> pinnedMatches = new ArrayList<JsonMatch>();
-        if (pinnedMatchPath != null) {
-            pinnedMatches = io.loadMatches(new FileReader(pinnedMatchPath));
+        Reader reader = null;
+        if (cmd.hasOption('i')) {
+            reader = new FileReader(cmd.getOptionValue('i'));
         }
+        else{
+            reader = new InputStreamReader(System.in);
+        }
+        JsonInput input = io.loadInput(reader);
 
         // do the matching
-        Assignment assignment = new Matcher()
-                .match(systems, subscriptions, pinnedMatches, new Date());
+        Assignment assignment = new Matcher().match(input, new Date());
         JsonOutput result = FactConverter.convertToOutput(assignment);
 
         if (outdir != null) {
@@ -75,9 +67,7 @@ public class Main {
         CommandLine cmd = null;
         Options opts = new Options();
         opts.addOption("h", "help", false, "show this help");
-        opts.addOption("s", "systems", true, "Systems");
-        opts.addOption("u", "subscriptions", true, "Subscriptions");
-        opts.addOption("p", "pinned", true, "Pinned subscriptions to systems");
+        opts.addOption("i", "input", true, "input.json file (Default: standard input)");
         opts.addOption("o", "directory", true, "Output directory");
         opts.addOption("d", "delimiter", true, "CSV Delimiter (Default: ,)");
 
@@ -87,12 +77,6 @@ public class Main {
             if (cmd.hasOption('h')) {
                 help(opts);
                 java.lang.System.exit(0);
-            }
-            if (!cmd.hasOption("s")) {
-                throw new ParseException("Missing option 'systems'");
-            }
-            if (!cmd.hasOption("u")) {
-                throw new ParseException("Missing option 'subscriptions'");
             }
             if (cmd.hasOption('o') && ! new File(cmd.getOptionValue('o')).isDirectory()) {
                 throw new ParseException("Given output directory does not exist " +

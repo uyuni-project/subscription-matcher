@@ -7,14 +7,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
-import com.suse.matcher.json.JsonProduct;
-import com.suse.matcher.json.JsonSubscription;
-import com.suse.matcher.json.JsonSystem;
 
 import java.io.Reader;
-import java.util.List;
 
 /**
  * Serializes and deserializes objects from and to JSON.
@@ -34,47 +30,14 @@ public class JsonIO {
     }
 
     /**
-     * Load a system list from a JSON file.
+     * Load an input JSON file.
      *
      * @param reader the reader object
-     * @return the list
+     * @return the input data
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public List<JsonSystem> loadSystems(Reader reader) throws JsonSyntaxException {
-        return gson.fromJson(reader, new TypeToken<List<JsonSystem>>() { }.getType());
-    }
-
-    /**
-     * Load a subscription list from a JSON file.
-     *
-     * @param reader the reader object
-     * @return the list
-     * @throws JsonSyntaxException in case JSON does not have correct syntax
-     */
-    public List<JsonSubscription> loadSubscriptions(Reader reader) throws JsonSyntaxException {
-        return gson.fromJson(reader, new TypeToken<List<JsonSubscription>>() { }.getType());
-    }
-
-    /**
-     * Load matches from a JSON file.
-     *
-     * @param reader the reader object
-     * @return the list
-     * @throws JsonSyntaxException in case JSON does not have correct syntax
-     */
-    public List<JsonMatch> loadMatches(Reader reader) throws JsonSyntaxException {
-        return gson.fromJson(reader, new TypeToken<List<JsonMatch>>() { }.getType());
-    }
-
-    /**
-     * Load a product list from a JSON file.
-     *
-     * @param reader the reader object
-     * @return the list
-     * @throws JsonSyntaxException in case JSON does not have correct syntax
-     */
-    public List<JsonProduct> loadProducts(Reader reader) throws JsonSyntaxException {
-        return gson.fromJson(reader, new TypeToken<List<JsonProduct>>() { }.getType());
+    public JsonInput loadInput(Reader reader) throws JsonSyntaxException {
+        return gson.fromJson(reader, new TypeToken<JsonInput>() { }.getType());
     }
 
     /**

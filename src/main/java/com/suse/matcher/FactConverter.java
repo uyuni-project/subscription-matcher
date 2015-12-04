@@ -9,6 +9,7 @@ import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
+import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonOutputMessage;
@@ -42,20 +43,16 @@ public class FactConverter {
     /**
      * Converts JSON objects to facts (inputs to the rule engine).
      *
-     * @param systems a list of systems in JSON format
-     * @param subscriptions a list of subscriptions in JSON format
-     * @param pinnedMatches a list of pinned matches in JSON format
+     * @param input a JSON input data blob
      * @param timestamp the timestamp for this set of facts
      * @return a collection of facts
      */
-    public static Collection<Object> convertToFacts(List<JsonSystem> systems,
-            List<JsonSubscription> subscriptions, List<JsonMatch> pinnedMatches,
-            Date timestamp) {
+    public static Collection<Object> convertToFacts(JsonInput input, Date timestamp) {
         Collection<Object> result = new LinkedList<Object>();
 
         result.add(new CurrentTime(timestamp));
 
-        for (JsonSystem system : systems) {
+        for (JsonSystem system : input.systems) {
             result.add(new System(system.id, system.name, system.cpus));
             for (Long guestId : system.virtualSystemIds) {
                 result.add(new HostGuest(system.id, guestId));
@@ -66,7 +63,11 @@ public class FactConverter {
             }
         }
 
-        for (JsonSubscription subscription : subscriptions) {
+        for (JsonProduct product : input.products) {
+            result.add(new Product(product.id, product.name));
+        }
+
+        for (JsonSubscription subscription : input.subscriptions) {
             result.add(new Subscription(
                 subscription.id,
                 subscription.partNumber,
@@ -81,7 +82,7 @@ public class FactConverter {
             }
         }
 
-        for (JsonMatch match : pinnedMatches) {
+        for (JsonMatch match : input.pinnedMatches) {
             result.add(new PinnedMatch(match.systemId, match.subscriptionId));
         }
 
