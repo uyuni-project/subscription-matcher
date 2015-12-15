@@ -9,6 +9,16 @@
         </layout>
     </appender>
 
+    <appender name="file" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${log.path}subscription-matcher.log" />
+        <param name="MaxBackupIndex" value="10" />
+        <param name="MaxFileSize" value="20MB" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %c{1} - %m%n" />
+        </layout>
+    </appender>
+
     <!-- Uncomment for full matcher logging
     <category name="com.suse.matcher">
         <priority value="debug" />
@@ -30,5 +40,6 @@
     <root>
         <priority value="warn" />
         <appender-ref ref="console" />
+        <appender-ref ref="file" />
     </root>
 </log4j:configuration>
