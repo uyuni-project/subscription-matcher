@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 /**
  * Writes output files to disk.
  */
-public class ReportWriter {
+public class OutputWriter {
 
     // filenames
     private static final String JSON_REPORT_FILE = "match_report.json";
@@ -48,12 +48,12 @@ public class ReportWriter {
     private CSVFormat csvFormat;
 
     /**
-     * Instantiates a new report writer.
+     * Instantiates a new writer.
      *
      * @param assignmentIn the assignment
      * @param outputDirectoryIn the output directory
      */
-    public ReportWriter(Assignment assignmentIn, String outputDirectoryIn) {
+    public OutputWriter(Assignment assignmentIn, String outputDirectoryIn) {
         assignment = assignmentIn;
         outputDirectory = outputDirectoryIn;
         csvFormat = CSVFormat.EXCEL;
