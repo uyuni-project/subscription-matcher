@@ -51,7 +51,7 @@ public class Main {
         JsonOutput result = FactConverter.convertToOutput(assignment);
 
         if (outdir != null) {
-            OutputWriter rw = new OutputWriter(assignment, outdir);
+            OutputWriter rw = new OutputWriter(input, assignment, outdir);
             if (cmd.hasOption('d')) {
                 rw.setDelimiter(cmd.getOptionValue('d').charAt(0));
             }

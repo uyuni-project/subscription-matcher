@@ -33,10 +33,14 @@ import java.util.stream.Stream;
 public class OutputWriter {
 
     // filenames
+    private static final String JSON_INPUT_FILE = "input.json";
     private static final String JSON_OUTPUT_FILE = "output.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
     private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_systems_report.csv";
     private static final String CSV_ERRORS_REPORT_FILE = "error_report.csv";
+
+    /** Input to the Matcher. */
+    private Object input;
 
     /** Output from the Matcher. */
     private Assignment assignment;
@@ -50,10 +54,12 @@ public class OutputWriter {
     /**
      * Instantiates a new writer.
      *
+     * @param inputIn the input object
      * @param assignmentIn the assignment
      * @param outputDirectoryIn the output directory
      */
-    public OutputWriter(Assignment assignmentIn, String outputDirectoryIn) {
+    public OutputWriter(Object inputIn, Assignment assignmentIn, String outputDirectoryIn) {
+        input = inputIn;
         assignment = assignmentIn;
         outputDirectory = outputDirectoryIn;
         csvFormat = CSVFormat.EXCEL;
@@ -74,10 +80,23 @@ public class OutputWriter {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void writeOutputFiles() throws IOException {
+        writeJsonInputFile();
         writeJsonOutputFile();
         writeCSVSubscriptionReport();
         writeCSVSystemReport();
         writeCSVErrorReport();
+    }
+
+    /**
+     * Writes the raw input file in JSON format.
+     *
+     * @throws FileNotFoundException if the output directory was not found
+     */
+    public void writeJsonInputFile() throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_INPUT_FILE));
+        JsonIO io = new JsonIO();
+        writer.write(io.toJson(input));
+        writer.close();
     }
 
     /**
