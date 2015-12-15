@@ -78,8 +78,12 @@ public class CSVOutputSubscription {
         row.add(String.valueOf(matched));
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
-        row.add(df.format(startDate));
-        row.add(df.format(endDate));
+        if (startDate != null) {
+            row.add(df.format(startDate));
+        }
+        if (endDate != null) {
+            row.add(df.format(endDate));
+        }
         return row;
     }
 }
