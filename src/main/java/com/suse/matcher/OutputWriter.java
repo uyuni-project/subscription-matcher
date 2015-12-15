@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,12 +40,6 @@ public class OutputWriter {
     private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_systems_report.csv";
     private static final String CSV_ERRORS_REPORT_FILE = "error_report.csv";
 
-    /** Input to the Matcher. */
-    private Object input;
-
-    /** Output from the Matcher. */
-    private Assignment assignment;
-
     /** The output directory. */
     private String outputDirectory;
 
@@ -54,45 +49,39 @@ public class OutputWriter {
     /**
      * Instantiates a new writer.
      *
-     * @param inputIn the input object
-     * @param assignmentIn the assignment
      * @param outputDirectoryIn the output directory
+     * @param delimiter an optional CSV delimiter (default is comma)
      */
-    public OutputWriter(Object inputIn, Assignment assignmentIn, String outputDirectoryIn) {
-        input = inputIn;
-        assignment = assignmentIn;
+    public OutputWriter(String outputDirectoryIn, Optional<Character> delimiter) {
         outputDirectory = outputDirectoryIn;
         csvFormat = CSVFormat.EXCEL;
-    }
-
-    /**
-     * Sets the CSV delimiter.
-     *
-     * @param delimiter set the new CSV delimiter
-     */
-    public void setDelimiter(char delimiter) {
-        csvFormat = csvFormat.withDelimiter(delimiter);
+        if (delimiter.isPresent()) {
+            csvFormat = csvFormat.withDelimiter(delimiter.get());
+        }
     }
 
     /**
      * Write the output files to the specified directory.
      *
+     * @param input the input object
+     * @param assignment output from {@link Matcher}
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public void writeOutputFiles() throws IOException {
-        writeJsonInputFile();
-        writeJsonOutputFile();
-        writeCSVSubscriptionReport();
-        writeCSVSystemReport();
-        writeCSVErrorReport();
+    public void writeOutputFiles(Object input, Assignment assignment) throws IOException {
+        writeJsonInputFile(input);
+        writeJsonOutputFile(assignment);
+        writeCSVSubscriptionReport(assignment);
+        writeCSVSystemReport(assignment);
+        writeCSVErrorReport(assignment);
     }
 
     /**
      * Writes the raw input file in JSON format.
      *
+     * @param input the input object
      * @throws FileNotFoundException if the output directory was not found
      */
-    public void writeJsonInputFile() throws FileNotFoundException {
+    public void writeJsonInputFile(Object input) throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_INPUT_FILE));
         JsonIO io = new JsonIO();
         writer.write(io.toJson(input));
@@ -102,9 +91,10 @@ public class OutputWriter {
     /**
      * Writes the raw output file in JSON format.
      *
+     * @param assignment output from {@link Matcher}
      * @throws FileNotFoundException if the output directory was not found
      */
-    public void writeJsonOutputFile() throws FileNotFoundException {
+    public void writeJsonOutputFile(Assignment assignment) throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_FILE));
         JsonIO io = new JsonIO();
         writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
@@ -114,9 +104,10 @@ public class OutputWriter {
     /**
      * Writes the CSV subscription report.
      *
+     * @param assignment output from {@link Matcher}
      * @throws IOException if an I/O error occurs
      */
-    public void writeCSVSubscriptionReport() throws IOException {
+    public void writeCSVSubscriptionReport(Assignment assignment) throws IOException {
         Stream<Subscription> subscriptions = assignment.getProblemFacts().stream()
             .filter(object -> object instanceof Subscription)
             .map(object -> (Subscription) object);
@@ -170,9 +161,10 @@ public class OutputWriter {
     /**
      * Writes the CSV system report.
      *
+     * @param assignment output from {@link Matcher}
      * @throws IOException if an I/O error occurs
      */
-    public void writeCSVSystemReport() throws IOException {
+    public void writeCSVSystemReport(Assignment assignment) throws IOException {
         Collection<Match> confirmedMatchFacts = assignment.getMatches().stream()
              .filter(match -> match.confirmed)
              .collect(Collectors.toList());
@@ -241,9 +233,10 @@ public class OutputWriter {
     /**
      * Writes the CSV error report.
      *
+     * @param assignment output from {@link Matcher}
      * @throws IOException if an I/O error occurs
      */
-    public void writeCSVErrorReport() throws IOException {
+    public void writeCSVErrorReport(Assignment assignment) throws IOException {
         FileWriter fileWriter = null;
         CSVPrinter csvPrinter = null;
         try {

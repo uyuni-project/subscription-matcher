@@ -1,5 +1,8 @@
 package com.suse.matcher;
 
+import static java.util.Optional.of;
+import static java.util.Optional.empty;
+
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.solver.Assignment;
@@ -16,6 +19,7 @@ import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * Entry point for the commandline version of this program.
@@ -51,11 +55,10 @@ public class Main {
         JsonOutput result = FactConverter.convertToOutput(assignment);
 
         if (outdir != null) {
-            OutputWriter rw = new OutputWriter(input, assignment, outdir);
-            if (cmd.hasOption('d')) {
-                rw.setDelimiter(cmd.getOptionValue('d').charAt(0));
-            }
-            rw.writeOutputFiles();
+            Optional<Character> delimiter = cmd.hasOption('d') ?
+                    of(cmd.getOptionValue('d').charAt(0)) : empty();
+            OutputWriter rw = new OutputWriter(outdir, delimiter);
+            rw.writeOutputFiles(input, assignment);
         }
         else {
             // print output
