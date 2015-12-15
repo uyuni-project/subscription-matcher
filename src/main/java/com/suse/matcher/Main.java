@@ -55,7 +55,7 @@ public class Main {
             if (cmd.hasOption('d')) {
                 rw.setDelimiter(cmd.getOptionValue('d').charAt(0));
             }
-            rw.writeReports();
+            rw.writeOutputFiles();
         }
         else {
             // print output

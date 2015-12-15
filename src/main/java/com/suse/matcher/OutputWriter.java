@@ -33,7 +33,7 @@ import java.util.stream.Stream;
 public class OutputWriter {
 
     // filenames
-    private static final String JSON_REPORT_FILE = "match_report.json";
+    private static final String JSON_OUTPUT_FILE = "output.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
     private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_systems_report.csv";
     private static final String CSV_ERRORS_REPORT_FILE = "error_report.csv";
@@ -69,24 +69,24 @@ public class OutputWriter {
     }
 
     /**
-     * Write the reports to specified output directory.
+     * Write the output files to the specified directory.
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public void writeReports() throws IOException {
-        writeJsonReport();
+    public void writeOutputFiles() throws IOException {
+        writeJsonOutputFile();
         writeCSVSubscriptionReport();
         writeCSVSystemReport();
         writeCSVErrorReport();
     }
 
     /**
-     * Writes the JSON report.
+     * Writes the raw output file in JSON format.
      *
      * @throws FileNotFoundException if the output directory was not found
      */
-    public void writeJsonReport() throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_REPORT_FILE));
+    public void writeJsonOutputFile() throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_FILE));
         JsonIO io = new JsonIO();
         writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
         writer.close();
