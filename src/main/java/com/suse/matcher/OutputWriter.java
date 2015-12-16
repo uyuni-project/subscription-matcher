@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -116,7 +117,7 @@ public class OutputWriter {
             .filter(object -> object instanceof Subscription)
             .map(object -> (Subscription) object);
 
-        Map<Long, CSVOutputSubscription> outsubs = new HashMap<Long, CSVOutputSubscription>();
+        Map<Long, CSVOutputSubscription> outsubs = new TreeMap<Long, CSVOutputSubscription>();
         subscriptions.forEach(s -> {
             CSVOutputSubscription csvs = new CSVOutputSubscription(
                 s.id,
