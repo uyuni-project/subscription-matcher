@@ -1,10 +1,10 @@
 package com.suse.matcher;
 
-import static java.util.Optional.of;
 import static java.util.Optional.empty;
+import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 import com.suse.matcher.json.JsonInput;
-import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.solver.Assignment;
 
 import org.apache.commons.cli.BasicParser;
@@ -13,60 +13,52 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.Date;
 import java.util.Optional;
 
 /**
- * Entry point for the commandline version of this program.
+ * Entry point for the command line version of this program.
  */
 public class Main {
 
     /**
      * The main method.
      *
-     * @param args commandline arguments
+     * @param args command line arguments
      * @throws Exception if anything unexpected happens
      */
     public static final void main(String[] args) throws Exception {
-        CommandLine cmd = parseOptions(args);
-        String outdir = null;
-        if (cmd.hasOption('o')) {
-            outdir = cmd.getOptionValue('o');
-        }
+        // parse command line options
+        CommandLine commandLine = parseCommandLine(args);
 
-        // load files
-        JsonIO io = new JsonIO();
-        Reader reader = null;
-        if (cmd.hasOption('i')) {
-            reader = new FileReader(cmd.getOptionValue('i'));
-        }
-        else{
-            reader = new InputStreamReader(System.in);
-        }
-        JsonInput input = io.loadInput(reader);
+        // create output writer object
+        Optional<Character> delimiter = commandLine.hasOption('d') ?
+                of(commandLine.getOptionValue('d').charAt(0)) :
+                empty();
+        Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
+        OutputWriter writer = new OutputWriter(outdir, delimiter);
+
+        // load input data
+        String inputString = commandLine.hasOption('i') ?
+                FileUtils.readFileToString(new File(commandLine.getOptionValue('i'))) :
+                IOUtils.toString(System.in);
+
+        // save a copy of input data in the output directory
+        writer.writeJsonInput(inputString);
 
         // do the matching
+        JsonInput input = new JsonIO().loadInput(inputString);
         Assignment assignment = new Matcher().match(input, new Date());
-        JsonOutput result = FactConverter.convertToOutput(assignment);
 
-        if (outdir != null) {
-            Optional<Character> delimiter = cmd.hasOption('d') ?
-                    of(cmd.getOptionValue('d').charAt(0)) : empty();
-            OutputWriter rw = new OutputWriter(outdir, delimiter);
-            rw.writeOutputFiles(input, assignment);
-        }
-        else {
-            // print output
-            System.out.println(io.toJson(result));
-        }
+        // write output data
+        writer.writeOutput(assignment);
     }
 
-    private static CommandLine parseOptions(String[] args) {
+    private static CommandLine parseCommandLine(String[] args) {
         CommandLine cmd = null;
         Options opts = new Options();
         opts.addOption("h", "help", false, "show this help");

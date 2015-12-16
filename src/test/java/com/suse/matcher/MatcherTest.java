@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -50,8 +50,8 @@ public class MatcherTest {
         while (moreFiles) {
             try {
                 result.add(new Object[] {
-                    io.loadInput(getReader(i, "input.json")),
-                    io.loadOutput(getReader(i, "output.json"))
+                    io.loadInput(getString(i, "input.json")),
+                    io.loadOutput(getString(i, "output.json"))
                 });
                 i++;
             }
@@ -63,20 +63,20 @@ public class MatcherTest {
     }
 
     /**
-     * Returns a reader for a JSON scenario file
+     * Returns a string for a JSON scenario file
      *
      * @param scenarioNumber the i
      * @param fileName the filename
-     * @return the reader
-     * @throws FileNotFoundException if the JSON file was not found
+     * @return the string
+     * @throws IOException if an unexpected condition happens
      */
-    private static Reader getReader(int scenarioNumber, String fileName) throws FileNotFoundException {
+    private static String getString(int scenarioNumber, String fileName) throws IOException {
         InputStream is = MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber
                 + "/" + fileName);
         if (is == null) {
             throw new FileNotFoundException();
         }
-        return new InputStreamReader(is);
+        return IOUtils.toString(is);
     }
 
     /**

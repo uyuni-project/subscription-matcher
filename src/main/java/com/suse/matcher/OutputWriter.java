@@ -13,6 +13,7 @@ import com.suse.matcher.solver.Match;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.util.Pair;
 
 import java.io.File;
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Writes output files to disk.
+ * Writes output (to disk or standard output).
  */
 public class OutputWriter {
 
@@ -41,7 +42,7 @@ public class OutputWriter {
     private static final String CSV_ERRORS_REPORT_FILE = "error_report.csv";
 
     /** The output directory. */
-    private String outputDirectory;
+    private Optional<String> outputDirectory;
 
     /** The CSV format. */
     private CSVFormat csvFormat;
@@ -49,10 +50,11 @@ public class OutputWriter {
     /**
      * Instantiates a new writer.
      *
-     * @param outputDirectoryIn the output directory
-     * @param delimiter an optional CSV delimiter (default is comma)
+     * @param outputDirectoryIn an optional output directory. If empty, output
+     * will be sent to standard output
+     * @param delimiter an optional CSV delimiter. If empty, comma is used as default
      */
-    public OutputWriter(String outputDirectoryIn, Optional<Character> delimiter) {
+    public OutputWriter(Optional<String> outputDirectoryIn, Optional<Character> delimiter) {
         outputDirectory = outputDirectoryIn;
         csvFormat = CSVFormat.EXCEL;
         if (delimiter.isPresent()) {
@@ -63,29 +65,29 @@ public class OutputWriter {
     /**
      * Write the output files to the specified directory.
      *
-     * @param input the input object
      * @param assignment output from {@link Matcher}
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public void writeOutputFiles(Object input, Assignment assignment) throws IOException {
-        writeJsonInputFile(input);
-        writeJsonOutputFile(assignment);
-        writeCSVSubscriptionReport(assignment);
-        writeCSVSystemReport(assignment);
-        writeCSVErrorReport(assignment);
+    public void writeOutput(Assignment assignment) throws IOException {
+        writeJsonOutput(assignment);
+
+        if (outputDirectory.isPresent()) {
+            writeCSVSubscriptionReport(assignment);
+            writeCSVSystemReport(assignment);
+            writeCSVErrorReport(assignment);
+        }
     }
 
     /**
      * Writes the raw input file in JSON format.
      *
-     * @param input the input object
-     * @throws FileNotFoundException if the output directory was not found
+     * @param input the input
+     * @throws IOException Signals that an I/O exception has occurred.
      */
-    public void writeJsonInputFile(Object input) throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_INPUT_FILE));
-        JsonIO io = new JsonIO();
-        writer.write(io.toJson(input));
-        writer.close();
+    public void writeJsonInput(String input) throws IOException {
+        if (outputDirectory.isPresent()) {
+            FileUtils.write(new File(outputDirectory.get(), JSON_INPUT_FILE), input);
+        }
     }
 
     /**
@@ -94,8 +96,10 @@ public class OutputWriter {
      * @param assignment output from {@link Matcher}
      * @throws FileNotFoundException if the output directory was not found
      */
-    public void writeJsonOutputFile(Assignment assignment) throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_FILE));
+    public void writeJsonOutput(Assignment assignment) throws FileNotFoundException {
+        PrintWriter writer = outputDirectory.isPresent() ?
+                new PrintWriter(new File(outputDirectory.get(), JSON_OUTPUT_FILE)) :
+                new PrintWriter(java.lang.System.out);
         JsonIO io = new JsonIO();
         writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
         writer.close();
@@ -141,7 +145,7 @@ public class OutputWriter {
         CSVPrinter csvPrinter = null;
         try {
             // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory, CSV_SUBSCRIPTION_REPORT_FILE));
+            fileWriter = new FileWriter(new File(outputDirectory.get(), CSV_SUBSCRIPTION_REPORT_FILE));
             // print CSV file header
             csvFormat = csvFormat.withHeader(CSVOutputSubscription.CSV_HEADER);
             // initialize CSVPrinter object
@@ -194,7 +198,7 @@ public class OutputWriter {
         CSVPrinter csvPrinter = null;
         try {
             // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
+            fileWriter = new FileWriter(new File(outputDirectory.get(), CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
             // print CSV file header
             csvFormat = csvFormat.withHeader(CSVOutputSystem.CSV_HEADER);
             // initialize CSVPrinter object
@@ -241,7 +245,7 @@ public class OutputWriter {
         CSVPrinter csvPrinter = null;
         try {
             // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory, CSV_ERRORS_REPORT_FILE));
+            fileWriter = new FileWriter(new File(outputDirectory.get(), CSV_ERRORS_REPORT_FILE));
             // print CSV file header
             csvFormat = csvFormat.withHeader(CSVOutputError.CSV_HEADER);
             // initialize CSVPrinter object

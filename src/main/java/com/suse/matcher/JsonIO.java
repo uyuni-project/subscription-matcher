@@ -10,8 +10,6 @@ import com.google.gson.reflect.TypeToken;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
 
-import java.io.Reader;
-
 /**
  * Serializes and deserializes objects from and to JSON.
  */
@@ -30,26 +28,26 @@ public class JsonIO {
     }
 
     /**
-     * Load an input JSON file.
+     * Load input JSON from a string.
      *
-     * @param reader the reader object
+     * @param string the JSON string
      * @return the input data
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public JsonInput loadInput(Reader reader) throws JsonSyntaxException {
-        return gson.fromJson(reader, new TypeToken<JsonInput>() { }.getType());
+    public JsonInput loadInput(String string) throws JsonSyntaxException {
+        return gson.fromJson(string, new TypeToken<JsonInput>() { }.getType());
     }
 
     /**
-     * Load a matcher's output from a JSON file.
+     * Load output JSON from a string.
      *
-     * @param reader the reader object
+     * @param string the JSON string
      * @return the output
      * @throws JsonIOException in case the file cannot be read correctly
      * @throws JsonSyntaxException in case JSON does not have correct syntax
      */
-    public JsonOutput loadOutput(Reader reader) {
-        return gson.fromJson(reader, new TypeToken<JsonOutput>() { }.getType());
+    public JsonOutput loadOutput(String string) {
+        return gson.fromJson(string, new TypeToken<JsonOutput>() { }.getType());
     }
 
     /**
