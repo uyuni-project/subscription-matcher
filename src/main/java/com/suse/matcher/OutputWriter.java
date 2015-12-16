@@ -208,10 +208,10 @@ public class OutputWriter {
             // fill output object's system fields
             for (System system : systems) {
                 List<String> unmatchedProductNames = systemProductFacts.stream()
-                    .filter(sp -> sp.systemId == system.id)
+                    .filter(sp -> sp.systemId.equals(system.id))
                     .filter(sp -> matchMap.get(new Pair<>(sp.systemId, sp.productId)) == null)
                     .map(sp -> { return products.stream()
-                            .filter(p -> p.id == sp.productId)
+                            .filter(p -> p.id.equals(sp.productId))
                             .map(p -> p.name)
                             .findFirst()
                             .orElse("Unknown product (" + sp.productId + ")");})
