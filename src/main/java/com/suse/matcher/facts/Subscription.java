@@ -59,10 +59,10 @@ public class Subscription implements Comparable<Subscription> {
     public Integer quantity;
 
     /** Start Date. */
-    public Date startDate = new Date(Long.MIN_VALUE);
+    public Date startDate;
 
     /** End Date. */
-    public Date endDate = new Date(Long.MAX_VALUE);
+    public Date endDate;
 
     /** SCC Username. */
     public String sccUsername;

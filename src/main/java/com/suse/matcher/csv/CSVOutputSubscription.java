@@ -31,10 +31,10 @@ public class CSVOutputSubscription {
     private int matched;
 
     /** The start date. */
-    private Date startDate = new Date(Long.MIN_VALUE);
+    private Date startDate;
 
     /** The end date. */
-    private Date endDate = new Date(Long.MAX_VALUE);
+    private Date endDate;
 
     /**
      * Instantiates a new CSV output subscription.

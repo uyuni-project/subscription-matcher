@@ -6,7 +6,7 @@ import com.suse.matcher.facts.CurrentTime;
 rule "subscriptionNotExpired"
     when
         CurrentTime($timestamp : timestamp)
-        $subscription: Subscription(endDate < $timestamp || startDate > $timestamp)
+        $subscription: Subscription((endDate != null && endDate < $timestamp) || (startDate != null && startDate > $timestamp))
     then
         modify($subscription) {
             ignored = true;
