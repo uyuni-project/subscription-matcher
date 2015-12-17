@@ -130,10 +130,19 @@ public class OutputWriter {
             outsubs.put(s.id, csvs);
         });
 
-        // extract facts from assignment by type
-        FactConverter.getConfirmedMatches(assignment).forEach(m -> {
-            if (outsubs.containsKey(m.getSubscriptionId())) {
-                outsubs.get(m.getSubscriptionId()).increaseMatchCount(m.cents / 100);
+        // compute cents by subscription id
+        Map<Long, Integer> matchedCents = new HashMap<>();
+        FactConverter.getConfirmedMatches(assignment)
+            .forEach(m -> matchedCents.merge(m.getSubscriptionId(), m.getCents(), Math::addExact));
+
+        // update output
+        matchedCents.forEach((subscriptionId, cents) -> {
+            if (outsubs.containsKey(subscriptionId)) {
+                // convert from cents to count
+                // we want the partial matches (e.g. only 20 cents of a
+                // subscription is used)
+                // to be counted as an used subscription
+                outsubs.get(subscriptionId).setMatched((int) Math.ceil(cents / 100));
             }
             else {
                 // error

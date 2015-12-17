@@ -58,11 +58,11 @@ public class CSVOutputSubscription {
     }
 
     /**
-     * Increase the count of matched subscriptions of this type.
-     * @param count the count
+     * Sets the count of matched subscriptions of this type.
+     * @param matchedIn the count
      */
-    public void increaseMatchCount(int count) {
-        matched = matched + count;
+    public void setMatched(int matchedIn) {
+        this.matched = matchedIn;
     }
 
     /**
