@@ -2,6 +2,7 @@ package com.suse.matcher.rules.drools;
 
 import java.util.List;
 
+import com.suse.matcher.facts.FreeMatch;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PossibleMatch;
 import com.suse.matcher.facts.Subscription;
@@ -68,7 +69,7 @@ rule "virtual machines included in hosts's subscriptions can match"
         Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
         HostGuest(hostId == $hostId, $guestId : guestId)
     then
-        insertLogical(new PossibleMatch($guestId, $productId, $subscriptionId, 0));
+        insertLogical(new FreeMatch($guestId, $productId, $subscriptionId, $match.id));
 end
 
 rule "1-2 stackable subscription can match a system"

@@ -15,6 +15,9 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 @PlanningEntity
 public class Match implements Comparable<Match> {
 
+    /** A unique identifier for this Match. */
+    public Long id;
+
     /** The system id. */
     public Long systemId;
 
@@ -36,12 +39,14 @@ public class Match implements Comparable<Match> {
     /**
      * Standard constructor.
      *
+     * @param idIn the id
      * @param systemIdIn a system id
      * @param productIdIn an id of a product
      * @param subscriptionIdIn an id of subscription assigned to the system
      * @param centsIn the number of subscription cents used in this match
      */
-    public Match(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn) {
+    public Match(Long idIn, Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn) {
+        id = idIn;
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
@@ -53,6 +58,15 @@ public class Match implements Comparable<Match> {
      * Default constructor.
      */
     public Match() {
+    }
+
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public Long getId() {
+        return id;
     }
 
     /**

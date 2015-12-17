@@ -30,9 +30,7 @@ public class MessageCollector {
                 .filter(object -> object instanceof PinnedMatch)
                 .map(object -> (PinnedMatch) object);
 
-        Collection<Match> confirmedMatchFacts = assignment.getMatches().stream()
-                .filter(match -> match.confirmed)
-                .collect(Collectors.toList());
+        Collection<Match> confirmedMatchFacts = FactConverter.getConfirmedMatches(assignment);
 
         Collection<Subscription> subscriptions = assignment.getProblemFacts().stream()
                 .filter(object -> object instanceof Subscription)

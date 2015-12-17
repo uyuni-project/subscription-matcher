@@ -131,16 +131,14 @@ public class OutputWriter {
         });
 
         // extract facts from assignment by type
-        assignment.getMatches().stream()
-            .filter(match -> match.confirmed)
-            .forEach(m -> {
-                if (outsubs.containsKey(m.getSubscriptionId())) {
-                    outsubs.get(m.getSubscriptionId()).increaseMatchCount(m.cents / 100);
-                }
-                else {
-                    // error
-                }
-            });
+        FactConverter.getConfirmedMatches(assignment).forEach(m -> {
+            if (outsubs.containsKey(m.getSubscriptionId())) {
+                outsubs.get(m.getSubscriptionId()).increaseMatchCount(m.cents / 100);
+            }
+            else {
+                // error
+            }
+        });
 
         FileWriter fileWriter = null;
         CSVPrinter csvPrinter = null;
@@ -170,9 +168,7 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVSystemReport(Assignment assignment) throws IOException {
-        Collection<Match> confirmedMatchFacts = assignment.getMatches().stream()
-             .filter(match -> match.confirmed)
-             .collect(Collectors.toList());
+        Collection<Match> confirmedMatchFacts = FactConverter.getConfirmedMatches(assignment);
 
         List<System> systems = assignment.getProblemFacts().stream()
             .filter(object -> object instanceof System)

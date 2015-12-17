@@ -7,27 +7,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 /**
- *
- * A match associates an installation to a {@link Subscription} (an installation
- * is a ({@link System}, product) couple).
- *
- * A match is possible when the {@link Subscription} is applicable to the
- * {@link System} and the product.
- *
- * Note that the above definition does not take other matches into account - a
- * match is possible when it makes sense on its own.
- *
- * The "correct" mix of PossibleMatches, if it exists, is determined in an
- * {@link com.suse.matcher.solver.Assignment}.
+ * A match that comes free with another {@link PossibleMatch}.
  */
 @PropertyReactive
-public class PossibleMatch {
-
-    /** A sequence number for PossibleMatch ids. */
-    private static Long nextId = 1L;
-
-    /** A unique identifier for this PossibleMatch. */
-    public Long id;
+public class FreeMatch {
 
     /** The system id. */
     public Long systemId;
@@ -38,8 +21,8 @@ public class PossibleMatch {
     /** The subscription id. */
     public Long subscriptionId;
 
-    /** The number of subscription cents used in this match. */
-    public Integer cents;
+    /** id of the Match that must be confirmed to get this one for free. */
+    public Long requiredMatchId;
 
     /**
      * Standard constructor.
@@ -47,25 +30,13 @@ public class PossibleMatch {
      * @param systemIdIn a system id
      * @param productIdIn an id of a product
      * @param subscriptionIdIn an id of subscription assigned to the system
-     * @param centsIn the number of subscription cents used in this match
+     * @param requiredMatchIdIn id of the Match that must be confirmed to get this one for free
      */
-    public PossibleMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn) {
-        id = nextId;
+    public FreeMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Long requiredMatchIdIn) {
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
-        cents = centsIn;
-
-        nextId += 1;
-    }
-
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    public Long getId() {
-        return id;
+        requiredMatchId = requiredMatchIdIn;
     }
 
     /**
@@ -96,13 +67,14 @@ public class PossibleMatch {
     }
 
     /**
-     * Gets the number of subscription cents used in this match.
+     * Gets the id of a Match that must be confirmed before this can be confirmed
      *
-     * @return the cents
+     * @return the id or null
      */
-    public Integer getCents() {
-        return cents;
+    public Long getRequiredMatchId() {
+        return requiredMatchId;
     }
+
 
     /** {@inheritDoc} */
     @Override
@@ -111,22 +83,22 @@ public class PossibleMatch {
             .append(systemId)
             .append(productId)
             .append(subscriptionId)
-            .append(cents)
+            .append(requiredMatchId)
             .toHashCode();
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        if (!(objIn instanceof PossibleMatch)) {
+        if (!(objIn instanceof FreeMatch)) {
             return false;
         }
-        PossibleMatch other = (PossibleMatch) objIn;
+        FreeMatch other = (FreeMatch) objIn;
         return new EqualsBuilder()
             .append(systemId, other.systemId)
             .append(productId, other.productId)
             .append(subscriptionId, other.subscriptionId)
-            .append(cents, other.cents)
+            .append(requiredMatchId, other.requiredMatchId)
             .isEquals();
     }
 
@@ -134,10 +106,8 @@ public class PossibleMatch {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("requiredMatchId", requiredMatchId)
             .append("systemId", systemId)
-            .append("productId", productId)
-            .append("subscriptionId", subscriptionId)
-            .append("cents", cents)
             .toString();
     }
 }
