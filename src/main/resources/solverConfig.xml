@@ -35,7 +35,10 @@
         <!-- Propose new solutions by changing the current solutions's Match.confirmed boolean values (in random Match
         instances). One such change is called a move
         -->
-        <changeMoveSelector />
+        <changeMoveSelector>
+            <!-- Don't generate more than 2000 moves -->
+            <selectedCountLimit>2000</selectedCountLimit>
+        </changeMoveSelector>
 
         <!-- Don't accept moves:
               - that do not actually change the solution (eg. true -> true)
@@ -56,8 +59,8 @@
              from the new solution -->
  
         <termination>
-            <!-- Terminate after 20 steps with no score improvement -->
-            <unimprovedStepCountLimit>20</unimprovedStepCountLimit>
+            <!-- Terminate after 100 steps with no score improvement -->
+            <unimprovedStepCountLimit>100</unimprovedStepCountLimit>
         </termination>
     </localSearch>
 </solver>
