@@ -11,7 +11,7 @@ import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 
-rule "physical only subscription can match a system"
+rule "matchPhysicalOnlySubscription"
     when
         $system : System($systemId : id, physical == true)
         SystemProduct($productId : productId, systemId == $systemId)
@@ -26,7 +26,7 @@ rule "physical only subscription can match a system"
         insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, 100));
 end
 
-rule "instance subscription can match a system"
+rule "matchInstanceSubscription"
     when
         $system : System($systemId : id)
         SystemProduct($productId : productId, systemId == $systemId)
@@ -41,7 +41,7 @@ rule "instance subscription can match a system"
         insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, 100));
 end
 
-rule "unlimited virtualization subscription can match a system"
+rule "matchUnlimitedVirtualizationSubscription"
     when
         $system : System($systemId : id, physical == true)
         (
@@ -63,7 +63,7 @@ rule "unlimited virtualization subscription can match a system"
         insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, consumedQuantity * 100));
 end
 
-rule "virtual machines included in hosts's subscriptions can match"
+rule "matchFreeVirtualizationSubscription"
     when
         $match : PossibleMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
         Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
@@ -72,7 +72,7 @@ rule "virtual machines included in hosts's subscriptions can match"
         insertLogical(new FreeMatch($guestId, $productId, $subscriptionId, $match.id));
 end
 
-rule "1-2 stackable subscription can match a system"
+rule "match22Subscription"
     when
         $system : System($systemId : id, physical != null)
         SystemProduct($productId : productId, systemId == $systemId)
