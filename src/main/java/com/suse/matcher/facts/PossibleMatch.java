@@ -129,6 +129,7 @@ public class PossibleMatch {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("id", id)
             .append("systemId", systemId)
             .append("productId", productId)
             .append("subscriptionId", subscriptionId)

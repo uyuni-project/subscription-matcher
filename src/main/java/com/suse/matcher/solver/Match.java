@@ -155,7 +155,11 @@ public class Match implements Comparable<Match> {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("systemId", systemId)
+            .append("productId", productId)
+            .append("subscriptionId", subscriptionId)
+            .toString();
     }
 
     /** {@inheritDoc} */
