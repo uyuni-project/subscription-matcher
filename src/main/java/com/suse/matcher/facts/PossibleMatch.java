@@ -23,9 +23,6 @@ import org.kie.api.definition.type.PropertyReactive;
 @PropertyReactive
 public class PossibleMatch {
 
-    /** A sequence number for PossibleMatch ids. */
-    private static Long nextId = 1L;
-
     /** A unique identifier for this PossibleMatch. */
     public Long id;
 
@@ -50,13 +47,11 @@ public class PossibleMatch {
      * @param centsIn the number of subscription cents used in this match
      */
     public PossibleMatch(Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn) {
-        id = nextId;
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
         cents = centsIn;
-
-        nextId += 1;
+        id = new Long(this.hashCode());
     }
 
     /**
