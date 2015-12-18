@@ -3,13 +3,9 @@ package com.suse.matcher.rules.optaplanner;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
 import com.suse.matcher.facts.FreeMatch;
-import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
-import com.suse.matcher.facts.Subscription.Policy;
-import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.solver.Match;
 
 global HardSoftScoreHolder scoreHolder;
