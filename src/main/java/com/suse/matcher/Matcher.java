@@ -46,7 +46,7 @@ public class Matcher {
                 PossibleMatch possibleMatch = (PossibleMatch) fact;
                 logger.debug("Deduced: {}", possibleMatch);
 
-                Match match = new Match(possibleMatch.systemId, possibleMatch.productId, possibleMatch.subscriptionId, possibleMatch.cents);
+                Match match = new Match(possibleMatch.id, possibleMatch.systemId, possibleMatch.productId, possibleMatch.subscriptionId, possibleMatch.cents);
                 matches.add(match);
             }
             else {

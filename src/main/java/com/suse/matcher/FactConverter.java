@@ -1,6 +1,11 @@
 package com.suse.matcher;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Stream.concat;
+
 import com.suse.matcher.facts.CurrentTime;
+import com.suse.matcher.facts.FreeMatch;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PinnedMatch;
@@ -11,14 +16,14 @@ import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonInputPinnedMatch;
+import com.suse.matcher.json.JsonInputProduct;
+import com.suse.matcher.json.JsonInputSubscription;
+import com.suse.matcher.json.JsonInputSystem;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonOutputMessage;
 import com.suse.matcher.json.JsonOutputProduct;
 import com.suse.matcher.json.JsonOutputSubscription;
 import com.suse.matcher.json.JsonOutputSystem;
-import com.suse.matcher.json.JsonInputProduct;
-import com.suse.matcher.json.JsonInputSubscription;
-import com.suse.matcher.json.JsonInputSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
@@ -30,6 +35,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -96,9 +102,7 @@ public class FactConverter {
      */
     public static JsonOutput convertToOutput(Assignment assignment) {
         // extract facts from assignment by type
-        Collection<Match> confirmedMatchFacts = assignment.getMatches().stream()
-                .filter(match -> match.confirmed)
-                .collect(Collectors.toList());
+        Collection<Match> confirmedMatchFacts = getConfirmedMatches(assignment);
 
         Stream<System> systemFacts = assignment.getProblemFacts().stream()
                 .filter(object -> object instanceof System)
@@ -198,5 +202,30 @@ public class FactConverter {
             .forEach(m -> output.messages.add(new JsonOutputMessage(m.type, m.data)));
 
         return output;
+    }
+
+    /**
+     * Returns a list of confirmed {@link Match} objects including free ones.
+     * @param assignment the assignment
+     * @return confirmed matches
+     */
+    public static List<Match> getConfirmedMatches(Assignment assignment) {
+        List<Match> nonFreeMatches = assignment.getMatches().stream()
+            .filter(m -> m.confirmed)
+            .collect(toList());
+
+        Set<Long> nonFreeIds = nonFreeMatches.stream()
+            .map(m -> m.id)
+            .collect(toSet());
+
+        Stream<Match> freeMatches = assignment.getProblemFacts().stream()
+                .filter(o -> o instanceof FreeMatch)
+                .map(o -> (FreeMatch) o)
+                .filter(m -> nonFreeIds.contains(m.requiredMatchId))
+                .map(m -> new Match(null, m.systemId, m.productId, m.subscriptionId, 0));
+
+        return concat(nonFreeMatches.stream(), freeMatches)
+            .sorted()
+            .collect(toList());
     }
 }

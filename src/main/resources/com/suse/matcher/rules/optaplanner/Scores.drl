@@ -2,6 +2,7 @@ package com.suse.matcher.rules.optaplanner;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
+import com.suse.matcher.facts.FreeMatch;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
@@ -31,20 +32,14 @@ rule "dontExceedSubscriptionCount"
         scoreHolder.addHardConstraintMatch(kcontext, $quantity * 100 - $requiredCents.intValue());
 end
 
-rule "disallowFreeVmRides"
-    when
-        Subscription($subscriptionId: id, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
-        HostGuest($hostId : hostId, $guestId : guestId)
-        Match(systemId == $guestId, subscriptionId == $subscriptionId, confirmed == true)
-        Match(systemId == $hostId, subscriptionId == $subscriptionId, confirmed != true)
-    then
-        scoreHolder.addHardConstraintMatch(kcontext, -1);
-end
-
 rule "disallowOverlicensing"
     when
         Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, confirmed == true)
-        Match(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId, confirmed == true)
+        Match(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId, confirmed == true) or
+        (
+            FreeMatch(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId, $requiredMatchId : requiredMatchId) and
+            Match(id == $requiredMatchId, confirmed == true)
+        )
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
@@ -53,15 +48,23 @@ end
 
 rule "maximizeCoveredInstallations"
     when
-        $match : Match(confirmed == true)
+        Match($systemId : systemId, $productId : productId, confirmed == true) or
+        (
+            FreeMatch($systemId : systemId, $productId : productId, $requiredMatchId : requiredMatchId) and
+            Match(id == $requiredMatchId, confirmed == true)
+        )
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, (int)(($match.systemId + $match.productId) % 1000) * 100);
+        scoreHolder.addSoftConstraintMatch(kcontext, (int)(($systemId + $productId) % 1000) * 100);
 end
 
 rule "maximizePinnedMatchesUse"
     when
         PinnedMatch($systemId : systemId, $subscriptionId : subscriptionId)
-        Match(systemId == $systemId, subscriptionId == $subscriptionId, confirmed == true)
+        Match(systemId == $systemId, subscriptionId == $subscriptionId, confirmed == true) or
+        (
+            FreeMatch(systemId == $systemId, subscriptionId == $subscriptionId, $requiredMatchId : requiredMatchId) and
+            Match(id == $requiredMatchId, confirmed == true)
+        )
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end
