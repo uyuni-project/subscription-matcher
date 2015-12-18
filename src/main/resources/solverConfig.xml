@@ -43,10 +43,10 @@
         <!-- Don't accept moves:
               - that do not actually change the solution (eg. true -> true)
               - that make the hard score negative
-              - that change a Match among the 20% of most recently changed Matches (colloquially referred to as taboo)
+              - that were already attempted in the last 50 steps (colloquially they are "taboo")
         -->
         <acceptor>
-            <entityTabuRatio>0.2</entityTabuRatio>
+            <moveTabuSize>50</moveTabuSize>
         </acceptor>
 
         <!-- In any case, don't generate more than 1000 acceptable moves -->
