@@ -27,7 +27,7 @@ rule "dontExceedSubscriptionCount"
     then
         scoreHolder.addHardConstraintMatch(kcontext,
             // limit penalty to 10 points
-            -1 -($requiredCents.intValue() - $quantity * 100) * 9 / $requiredCents.intValue()
+            -10 + $quantity * 100 * 9 / $requiredCents.intValue()
         );
 end
 
