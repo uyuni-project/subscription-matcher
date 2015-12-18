@@ -3,13 +3,9 @@ package com.suse.matcher.rules.optaplanner;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
 import com.suse.matcher.facts.FreeMatch;
-import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
-import com.suse.matcher.facts.Subscription.Policy;
-import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.solver.Match;
 
 global HardSoftScoreHolder scoreHolder;
@@ -29,10 +25,13 @@ rule "dontExceedSubscriptionCount"
             sum($cents)
         )
     then
-        scoreHolder.addHardConstraintMatch(kcontext, $quantity * 100 - $requiredCents.intValue());
+        scoreHolder.addHardConstraintMatch(kcontext,
+            // limit penalty to 10 points
+            -10 + $quantity * 100 * 9 / $requiredCents.intValue()
+        );
 end
 
-rule "disallowOverlicensing"
+rule "dontMatchTwice"
     when
         Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, confirmed == true)
         Match(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId, confirmed == true) or
@@ -46,18 +45,18 @@ end
 
 // Soft constraints: we try to find the solution that minimizes the score, but there are no guarantees.
 
-rule "maximizeCoveredInstallations"
+rule "maximizeMatches"
     when
-        Match($systemId : systemId, $productId : productId, confirmed == true) or
+        Match(confirmed == true) or
         (
-            FreeMatch($systemId : systemId, $productId : productId, $requiredMatchId : requiredMatchId) and
+            FreeMatch($requiredMatchId : requiredMatchId) and
             Match(id == $requiredMatchId, confirmed == true)
         )
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, (int)(($systemId + $productId) % 1000) * 100);
+        scoreHolder.addSoftConstraintMatch(kcontext, 10);
 end
 
-rule "maximizePinnedMatchesUse"
+rule "maximizePinnedMatches"
     when
         PinnedMatch($systemId : systemId, $subscriptionId : subscriptionId)
         Match(systemId == $systemId, subscriptionId == $subscriptionId, confirmed == true) or
@@ -68,3 +67,4 @@ rule "maximizePinnedMatchesUse"
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end
+
