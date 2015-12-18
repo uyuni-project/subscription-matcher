@@ -29,7 +29,10 @@ rule "dontExceedSubscriptionCount"
             sum($cents)
         )
     then
-        scoreHolder.addHardConstraintMatch(kcontext, $quantity * 100 - $requiredCents.intValue());
+        scoreHolder.addHardConstraintMatch(kcontext,
+            // limit penalty to 10 points
+            -1 -($requiredCents.intValue() - $quantity * 100) * 9 / $requiredCents.intValue()
+        );
 end
 
 rule "disallowOverlicensing"
@@ -48,13 +51,13 @@ end
 
 rule "maximizeCoveredInstallations"
     when
-        Match($systemId : systemId, $productId : productId, confirmed == true) or
+        Match(confirmed == true) or
         (
-            FreeMatch($systemId : systemId, $productId : productId, $requiredMatchId : requiredMatchId) and
+            FreeMatch($requiredMatchId : requiredMatchId) and
             Match(id == $requiredMatchId, confirmed == true)
         )
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, (int)(($systemId + $productId) % 1000) * 100);
+        scoreHolder.addSoftConstraintMatch(kcontext, 10);
 end
 
 rule "maximizePinnedMatchesUse"
@@ -68,3 +71,4 @@ rule "maximizePinnedMatchesUse"
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end
+
