@@ -32,10 +32,10 @@
 
     <!-- Iteratively improve the solution -->
     <localSearch>
-        <!-- Propose new solutions by changing the current solutions's Match.confirmed boolean values (in random Match
-        instances). One such change is called a change move.
-        Additionally, propose new solutions by swapping the confirmed values of two Match instances. One such change
-        is called a swap move.
+        <!-- Iteratively propose new solutions by changing some of the current solution's Match.confirmed boolean values.
+             A change from a certain solution to a new solution is called a move, and moves are performed repeatedly in
+             iterations called steps.
+             We allow moves to change from 1 to 4 Match.confirmed values per step.
         -->
         <unionMoveSelector>
             <changeMoveSelector/>
@@ -59,22 +59,23 @@
         </unionMoveSelector>
 
         <!-- Don't accept moves:
-              - that do not actually change the solution (eg. true -> true)
-              - that make the hard score negative
-              - that were already attempted in the last 50 steps (colloquially they are "taboo")
+              - that do not actually change the solution (eg. true -> true), implicit
+              - that make the hard score negative, implicit
+              - that were already attempted in the last 50 steps (colloquially they are "taboo").
+                This prevents us to run in circles, repeating the same moves over and over
         -->
         <acceptor>
             <moveTabuSize>50</moveTabuSize>
         </acceptor>
 
-        <!-- In any case, don't generate more than 1000 acceptable moves -->
+        <!-- Generate at most 1000 acceptable moves per step -->
         <forager>
             <acceptedCountLimit>1000</acceptedCountLimit>
         </forager>
 
-        <!-- Implicitly pick the accepted move with best score that has been found. It might or might not improve
-             the current overall best score. When the move is picked a "step" is finished and move evaluation restarts
-             from the new solution -->
+        <!-- At the end of each step, pick the accepted move with best score that has been found.
+             That score might or might not be an improvement to the overall best score.
+             In any case, the new solution is used as the basis for the next step -->
  
         <termination>
             <!-- Terminate after 100 steps with no score improvement -->
