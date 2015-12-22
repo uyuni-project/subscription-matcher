@@ -39,8 +39,22 @@
         -->
         <unionMoveSelector>
             <changeMoveSelector/>
-            <swapMoveSelector/>
-            <!-- Don't generate more than 2000 moves -->
+            <cartesianProductMoveSelector>
+                <changeMoveSelector/>
+                <changeMoveSelector/>
+            </cartesianProductMoveSelector>
+            <cartesianProductMoveSelector>
+                <changeMoveSelector/>
+                <changeMoveSelector/>
+                <changeMoveSelector/>
+            </cartesianProductMoveSelector>
+            <cartesianProductMoveSelector>
+                <changeMoveSelector/>
+                <changeMoveSelector/>
+                <changeMoveSelector/>
+                <changeMoveSelector/>
+            </cartesianProductMoveSelector>
+            <!-- Generate at most 2000 moves per step -->
             <selectedCountLimit>2000</selectedCountLimit>
         </unionMoveSelector>
 
