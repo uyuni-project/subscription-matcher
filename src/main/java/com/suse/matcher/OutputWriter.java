@@ -115,7 +115,8 @@ public class OutputWriter {
     public void writeCSVSubscriptionReport(Assignment assignment) throws IOException {
         Stream<Subscription> subscriptions = assignment.getProblemFacts().stream()
             .filter(object -> object instanceof Subscription)
-            .map(object -> (Subscription) object);
+            .map(object -> (Subscription) object)
+            .filter(s -> s.policy != null);
 
         Map<Long, CSVOutputSubscription> outsubs = new TreeMap<Long, CSVOutputSubscription>();
         subscriptions.forEach(s -> {
