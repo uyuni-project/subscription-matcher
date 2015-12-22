@@ -3,6 +3,7 @@ package com.suse.matcher.rules.drools;
 import java.util.TreeMap;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.facts.CurrentTime;
 
 rule "subscriptionNotExpired"
@@ -31,4 +32,20 @@ rule "unknownPartNumber"
         TreeMap<String, String> data = new TreeMap<>();
         data.put("part_number", $subscription.partNumber);
         insertLogical(new Message(Message.Level.DEBUG, "unknown_part_number", data));
+end
+
+rule "blacklistedProduct"
+    when
+        // novell-open-enterprise-server-i386 9
+        $systemProduct : SystemProduct(productId == 955) or
+        // novell-open-enterprise-server-x86_64 9
+        $systemProduct : SystemProduct(productId == 957) or
+        // open_enterprise_server 11
+        $systemProduct : SystemProduct(productId == 1232) or
+        // open_enterprise_server 11.1
+        $systemProduct : SystemProduct(productId == 1241) or
+        // open_enterprise_server 11.2
+        $systemProduct : SystemProduct(productId == 1242)
+    then
+        retract($systemProduct);
 end
