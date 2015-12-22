@@ -44,7 +44,6 @@ public class Matcher {
         for (Object fact : deducedFacts) {
             if (fact instanceof PossibleMatch) {
                 PossibleMatch possibleMatch = (PossibleMatch) fact;
-                logger.debug("Deduced: {}", possibleMatch);
 
                 Match match = new Match(possibleMatch.id, possibleMatch.systemId, possibleMatch.productId, possibleMatch.subscriptionId, possibleMatch.cents);
                 matches.add(match);
@@ -52,6 +51,10 @@ public class Matcher {
             else {
                 otherFacts.add(fact);
             }
+        }
+
+        for (Match match : matches) {
+            logger.debug("Possible match: {}, {}, {} ({} cents)", match.systemId, match.productId, match.subscriptionId, match.cents);
         }
 
         // activate the CSP solver with all deduced facts as inputs
