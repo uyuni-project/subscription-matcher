@@ -1,5 +1,6 @@
 package com.suse.matcher;
 
+import com.suse.matcher.facts.FreeMatch;
 import com.suse.matcher.facts.PossibleMatch;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.solver.Assignment;
@@ -53,8 +54,12 @@ public class Matcher {
             }
         }
 
-        for (Match match : matches) {
-            logger.debug("Possible match: {}, {}, {} ({} cents)", match.systemId, match.productId, match.subscriptionId, match.cents);
+        if (logger.isDebugEnabled()) {
+            deducedFacts.stream()
+                .filter(o -> (o instanceof PossibleMatch) || (o instanceof FreeMatch))
+                .map(o -> o.toString())
+                .sorted()
+                .forEach(s -> logger.debug(s));
         }
 
         // activate the CSP solver with all deduced facts as inputs
