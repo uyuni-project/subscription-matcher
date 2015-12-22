@@ -13,6 +13,21 @@ import java.util.Map;
  */
 public class Message implements Comparable<Message> {
 
+    /**
+     * Represents the severity level of this message.
+     */
+    public enum Level {
+        /** Relevant for debugging, not to be shown to users in general. */
+        DEBUG,
+        /** Information for users, normal functioning. */
+        INFO,
+        /** Warnings about things that went wrong but still don't block the matcher. */
+        WARNING
+    };
+
+    /** The severity level of this message. */
+    public Level severity;
+
     /** A label identifying the message type. */
     public String type;
 
@@ -22,10 +37,12 @@ public class Message implements Comparable<Message> {
     /**
      * Instantiates a new message.
      *
+     * @param severityIn the severity
      * @param typeIn the type
      * @param dataIn the data
      */
-    public Message(String typeIn, Map<String, String> dataIn) {
+    public Message(Level severityIn, String typeIn, Map<String, String> dataIn) {
+        severity = severityIn;
         type = typeIn;
         data = dataIn;
     }

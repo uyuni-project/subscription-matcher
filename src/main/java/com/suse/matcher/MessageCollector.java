@@ -2,16 +2,12 @@ package com.suse.matcher;
 
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PinnedMatch;
-import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -32,12 +28,6 @@ public class MessageCollector {
 
         Collection<Match> confirmedMatchFacts = FactConverter.getConfirmedMatches(assignment);
 
-        Collection<Subscription> subscriptions = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof Subscription)
-                .map(object -> (Subscription) object)
-                .filter(s -> s.ignored == false)
-                .collect(Collectors.toList());
-
         // add messages about unsatisfied pins
         Collection<Message> messages = new LinkedList<Message>();
         pinnedMatchFacts
@@ -47,26 +37,12 @@ public class MessageCollector {
                     .isPresent()
             )
             .forEach(unmatchedPin -> {
-                Message message = new Message("unsatisfied_pinned_match", new TreeMap<String, String>(){{
+                Message message = new Message(Message.Level.INFO, "unsatisfied_pinned_match", new TreeMap<String, String>(){{
                     put("system_id", unmatchedPin.systemId.toString());
                     put("subscription_id", unmatchedPin.subscriptionId.toString());
                 }});
                 messages.add(message);
             });
-
-        // add messages about unknown part numbers
-        Set<String> unknownPartNumbers = new TreeSet<>();
-        for (Subscription subscription : subscriptions) {
-            if (subscription.policy == null && subscription.partNumber != null) {
-                unknownPartNumbers.add(subscription.partNumber);
-            }
-        }
-        for (String partNumber : unknownPartNumbers) {
-            Message message = new Message("unknown_part_number", new TreeMap<String, String>(){{
-                put("part_number", partNumber);
-            }});
-            messages.add(message);
-        }
 
         assignment.getProblemFacts().addAll(messages);
     }

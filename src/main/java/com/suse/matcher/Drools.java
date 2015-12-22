@@ -1,9 +1,13 @@
 package com.suse.matcher;
 
+import com.suse.matcher.facts.Message;
+
 import org.kie.api.KieServices;
 import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 
@@ -13,6 +17,9 @@ import java.util.Collection;
  * Deduces facts based on some base facts and rules defined ksession-rules.xml.
  */
 public class Drools {
+
+    /** Logger instance. */
+    private final Logger logger = LoggerFactory.getLogger(Drools.class);
 
     /** Deduction resulting fact objects. */
     private Collection<? extends Object> result;
@@ -29,7 +36,7 @@ public class Drools {
 
         // setup logging. This will not really log to the console but to slf4j which
         // in turn delegates to log4j, see log4j.xml for configuration
-        KieRuntimeLogger logger = factory.getLoggers().newConsoleLogger(session);
+        KieRuntimeLogger kieLogger = factory.getLoggers().newConsoleLogger(session);
 
         // insert base facts
         for (Object fact : baseFacts) {
@@ -42,8 +49,17 @@ public class Drools {
         // collect results
         result = session.getObjects();
 
+        // log deducted messages
+        result.stream()
+            .filter(o -> o instanceof Message)
+            .map(m -> (Message) m)
+            .filter(m -> m.severity.equals(Message.Level.DEBUG))
+            .sorted()
+            .forEach(m -> logger.debug("{}: {}", m.type, m.data.toString()));
+        ;
+
         // cleanup
-        logger.close();
+        kieLogger.close();
         session.dispose();
     }
 
