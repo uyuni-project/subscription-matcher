@@ -159,16 +159,16 @@ public class FactConverter {
                 }
             }
 
-            if (compliantProductExists) {
-                if (allProductsCompliant) {
-                    output.compliantSystems.add(system);
-                }
-                else {
-                    output.partiallyCompliantSystems.add(system);
-                }
+            if (allProductsCompliant) {
+                output.compliantSystems.add(system);
             }
             else {
-                output.nonCompliantSystems.add(system);
+                if (compliantProductExists) {
+                    output.partiallyCompliantSystems.add(system);
+                }
+                else {
+                    output.nonCompliantSystems.add(system);
+                }
             }
         }
 
