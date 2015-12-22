@@ -2,13 +2,8 @@ package com.suse.matcher;
 
 import com.suse.matcher.solver.Assignment;
 
-import org.optaplanner.core.api.score.constraint.ConstraintMatch;
-import org.optaplanner.core.api.score.constraint.ConstraintMatchTotal;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
-import org.optaplanner.core.impl.score.director.ScoreDirector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Facade on the OptaPlanner solver.
@@ -16,9 +11,6 @@ import org.slf4j.LoggerFactory;
  * Fills a Solution object based on configuration specified in solverConfig.xml.
  */
 public class OptaPlanner {
-
-    /** Logger instance. */
-    private final Logger logger = LoggerFactory.getLogger(OptaPlanner.class);
 
     /** The result. */
     Assignment result;
@@ -42,18 +34,6 @@ public class OptaPlanner {
         // solve problem
         solver.solve(unsolved);
         result = (Assignment) solver.getBestSolution();
-
-        if (logger.isDebugEnabled()) {
-            ScoreDirector director = solver.getScoreDirectorFactory().buildScoreDirector();
-            director.setWorkingSolution(result);
-            for (ConstraintMatchTotal total : director.getConstraintMatchTotals()) {
-                logger.debug("Constraint: {}, total score: {}", total.getConstraintName(), total.getWeightTotalAsNumber());
-                for (ConstraintMatch match : total.getConstraintMatchSet()) {
-                    logger.debug("  Match partial score: {}", match.getWeightAsNumber());
-                    logger.debug("  Match justification list: {}", match.getJustificationList());
-                }
-            }
-        }
     }
 
     /**
