@@ -31,29 +31,23 @@ CSV Delimiter (Default: ,)
 -o,--directory <arg>::
 Output directory
 
--p,--pinned <arg>::
-Pinned subscriptions to systems in JSON format
-
--s,--systems <arg>::
-Systems in JSON format
-
--u,--subscriptions <arg>::
-Subscriptions in JSON format
+-i,--input <arg>::
+Input file in JSON format (Default: STDIN)
 
 EXAMPLES:
 ---------
 
 Print the JSON format output to STDOUT
 
-  $> subscription-matcher -s systems.json -u subscriptions.json
+  $> subscription-matcher -i input.json
 
 Print the reports to /tmp directory, incl. CSV reports
 
-  $> subscription-matcher -s systems.json -u subscriptions.json -p pinned.json -o /tmp
+  $> subscription-matcher -i input.json -o /tmp
 
 Use semicolon (;) as delimiter
 
-  $> subscription-matcher -s systems.json -u subscriptions.json -o /tmp -d ';'
+  $> subscription-matcher -i input.json -o /tmp -d ';'
 
 AUTHOR
 ------
