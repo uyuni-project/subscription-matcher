@@ -85,7 +85,8 @@ rule "match22Subscription"
         not (HostGuest(hostId == $systemId))
     then
         if ($system.physical) {
-            insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100));
+            insertLogical(new PossibleMatch($system.id, $productId, $subscription.id,
+                ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100));
         }
         else {
             insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, 50));

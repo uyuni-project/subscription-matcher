@@ -94,7 +94,8 @@ public class Subscription implements Comparable<Subscription> {
      * @param endDateIn the expires at
      * @param sccUsernameIn the scc org id
      */
-    public Subscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn, Date endDateIn, String sccUsernameIn) {
+    public Subscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn, Date endDateIn,
+            String sccUsernameIn) {
         id = idIn;
         partNumber = partNumberIn;
         name = nameIn;

@@ -12,8 +12,8 @@ import java.util.TimeZone;
 public class CSVOutputSubscription {
 
     /** Header for the CSV output. */
-    public static final String[] CSV_HEADER = {"Subscription ID", "Part Number", "Product Description", "Available Quantity", "Matched Quantity",
-            "Start Date (UTC)", "End Date (UTC)"};
+    public static final String[] CSV_HEADER = { "Subscription ID", "Part Number", "Product Description", "Available Quantity",
+            "Matched Quantity", "Start Date (UTC)", "End Date (UTC)"};
 
     /** The subscription id. */
     private Long id;
@@ -46,7 +46,8 @@ public class CSVOutputSubscription {
      * @param startDateIn the start date
      * @param endDateIn the end date
      */
-    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn, Date endDateIn) {
+    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn,
+            Date endDateIn) {
         id = idIn;
         partNumber = partNumberIn;
         name = nameIn;
