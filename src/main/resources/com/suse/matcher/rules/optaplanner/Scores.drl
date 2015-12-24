@@ -6,6 +6,7 @@ import com.suse.matcher.facts.FreeMatch;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.solver.Match;
 
 global HardSoftScoreHolder scoreHolder;
@@ -47,12 +48,15 @@ end
 
 // Soft constraints: we try to find the solution that minimizes the score, but there are no guarantees.
 
-rule "maximizeMatches"
+rule "maximizeCoveredInstallations"
     when
-        Match(confirmed == true) or
+        SystemProduct($systemId : systemId, $productId : productId) and
         (
-            FreeMatch($requiredMatchId : requiredMatchId) and
-            Match(id == $requiredMatchId, confirmed == true)
+            Match(systemId == $systemId, productId == $productId, confirmed == true) or
+            (
+                FreeMatch(systemId == $systemId, productId == $productId, $requiredMatchId : requiredMatchId) and
+                Match(id == $requiredMatchId, confirmed == true)
+            )
         )
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 10);
