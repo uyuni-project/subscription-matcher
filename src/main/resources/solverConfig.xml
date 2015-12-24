@@ -78,8 +78,8 @@
              In any case, the new solution is used as the basis for the next step -->
  
         <termination>
-            <!-- Terminate after 100 steps with no score improvement -->
-            <unimprovedStepCountLimit>100</unimprovedStepCountLimit>
+            <!-- Terminate after 1000 steps with no score improvement -->
+            <unimprovedStepCountLimit>1000</unimprovedStepCountLimit>
         </termination>
     </localSearch>
 </solver>
