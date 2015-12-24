@@ -16,7 +16,7 @@ global HardSoftScoreHolder scoreHolder;
 // (that is, score is less than 0). If that happens, we found a bug!
 
 // Note that the construction heuristic must be able to construct a solution
-// with score 0, and all subsequent iterations cannot make it worse.
+// with score 0, so that the final solution can never be unacceptable
 
 rule "dontExceedSubscriptionCount"
     when
@@ -46,7 +46,7 @@ rule "dontMatchTwice"
         scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
 
-// Soft constraints: we try to find the solution that minimizes the score, but there are no guarantees.
+// Soft constraints: we try to find the solution that maximizes the score, but there are no guarantees.
 
 rule "maximizeCoveredInstallations"
     when
