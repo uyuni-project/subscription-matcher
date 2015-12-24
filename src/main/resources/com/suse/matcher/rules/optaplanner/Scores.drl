@@ -33,11 +33,13 @@ end
 
 rule "dontMatchTwice"
     when
-        Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, confirmed == true)
-        Match(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId, confirmed == true) or
+        Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, confirmed == true) and
         (
-            FreeMatch(systemId == $systemId, productId == $productId, $requiredMatchId : requiredMatchId) and
-            Match(id == $requiredMatchId, confirmed == true)
+            Match(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId, confirmed == true) or
+            (
+                FreeMatch(systemId == $systemId, productId == $productId, $requiredMatchId : requiredMatchId) and
+                Match(id == $requiredMatchId, confirmed == true)
+            )
         )
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
