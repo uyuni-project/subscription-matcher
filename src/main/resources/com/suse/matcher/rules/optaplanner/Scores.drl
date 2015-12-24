@@ -36,8 +36,7 @@ rule "dontMatchTwice"
         Match($systemId : systemId, $productId : productId, $subscriptionId : subscriptionId, confirmed == true)
         Match(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId, confirmed == true) or
         (
-            FreeMatch(systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId,
-                $requiredMatchId : requiredMatchId) and
+            FreeMatch(systemId == $systemId, productId == $productId, $requiredMatchId : requiredMatchId) and
             Match(id == $requiredMatchId, confirmed == true)
         )
     then
