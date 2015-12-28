@@ -115,7 +115,7 @@ public class MatcherTest {
         assertEquals("remaining subscriptions",
                 io.toJson(expectedOutput.remainingSubscriptions),
                 io.toJson(actualOutput.remainingSubscriptions));
-        assertEquals("errors",
+        assertEquals("messages",
                 io.toJson(expectedOutput.messages),
                 io.toJson(actualOutput.messages));
     }
