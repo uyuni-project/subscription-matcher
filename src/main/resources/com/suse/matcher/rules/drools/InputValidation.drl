@@ -6,7 +6,7 @@ import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.facts.CurrentTime;
 
-rule "subscriptionNotExpired"
+rule "ignoreExpiredSubscription"
     when
         CurrentTime($timestamp : timestamp)
         $subscription: Subscription((endDate != null && endDate < $timestamp) || (startDate != null && startDate > $timestamp))
@@ -16,7 +16,7 @@ rule "subscriptionNotExpired"
         }
 end
 
-rule "subscriptionSystemLimitHasValue"
+rule "ignoreSubscriptionWithoutQuantity"
     when
         $subscription: Subscription(quantity == null)
     then
@@ -25,16 +25,7 @@ rule "subscriptionSystemLimitHasValue"
         }
 end
 
-rule "unknownPartNumber"
-    when
-        $subscription: Subscription(policy == null, partNumber != null)
-    then
-        TreeMap<String, String> data = new TreeMap<>();
-        data.put("part_number", $subscription.partNumber);
-        insertLogical(new Message(Message.Level.DEBUG, "unknown_part_number", data));
-end
-
-rule "blacklistedProduct"
+rule "retractBlacklistedProduct"
     when
         // novell-open-enterprise-server-i386 9
         $systemProduct : SystemProduct(productId == 955) or
@@ -48,4 +39,13 @@ rule "blacklistedProduct"
         $systemProduct : SystemProduct(productId == 1242)
     then
         retract($systemProduct);
+end
+
+rule "logUnknownPartNumber"
+    when
+        $subscription: Subscription(policy == null, partNumber != null)
+    then
+        TreeMap<String, String> data = new TreeMap<>();
+        data.put("part_number", $subscription.partNumber);
+        insertLogical(new Message(Message.Level.DEBUG, "unknown_part_number", data));
 end
