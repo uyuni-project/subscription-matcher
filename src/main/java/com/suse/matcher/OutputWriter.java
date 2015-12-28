@@ -1,6 +1,6 @@
 package com.suse.matcher;
 
-import com.suse.matcher.csv.CSVOutputError;
+import com.suse.matcher.csv.CSVOutputMessage;
 import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputSystem;
 import com.suse.matcher.facts.Message;
@@ -40,7 +40,7 @@ public class OutputWriter {
     private static final String JSON_OUTPUT_FILE = "output.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
     private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_systems_report.csv";
-    private static final String CSV_ERRORS_REPORT_FILE = "error_report.csv";
+    private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
 
     /** The output directory. */
     private Optional<String> outputDirectory;
@@ -75,7 +75,7 @@ public class OutputWriter {
         if (outputDirectory.isPresent()) {
             writeCSVSubscriptionReport(assignment);
             writeCSVSystemReport(assignment);
-            writeCSVErrorReport(assignment);
+            writeCSVMessageReport(assignment);
         }
     }
 
@@ -242,19 +242,19 @@ public class OutputWriter {
     }
 
     /**
-     * Writes the CSV error report.
+     * Writes the CSV message report.
      *
      * @param assignment output from {@link Matcher}
      * @throws IOException if an I/O error occurs
      */
-    public void writeCSVErrorReport(Assignment assignment) throws IOException {
+    public void writeCSVMessageReport(Assignment assignment) throws IOException {
         FileWriter fileWriter = null;
         CSVPrinter csvPrinter = null;
         try {
             // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory.get(), CSV_ERRORS_REPORT_FILE));
+            fileWriter = new FileWriter(new File(outputDirectory.get(), CSV_MESSAGE_REPORT_FILE));
             // print CSV file header
-            csvFormat = csvFormat.withHeader(CSVOutputError.CSV_HEADER);
+            csvFormat = csvFormat.withHeader(CSVOutputMessage.CSV_HEADER);
             // initialize CSVPrinter object
             csvPrinter = new CSVPrinter(fileWriter, csvFormat);
 
@@ -265,8 +265,8 @@ public class OutputWriter {
                 .collect(Collectors.toList());
 
             for (Message message: messages) {
-                CSVOutputError csvError = new CSVOutputError(message.type, message.data);
-                csvPrinter.printRecords(csvError.getCSVRows());
+                CSVOutputMessage csvMessage = new CSVOutputMessage(message.type, message.data);
+                csvPrinter.printRecords(csvMessage.getCSVRows());
             }
         }
         finally {

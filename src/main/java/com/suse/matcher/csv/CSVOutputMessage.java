@@ -6,26 +6,26 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * A matching error as represented in a CSV output file.
+ * A message from the matcher as represented in a CSV output file.
  */
-public class CSVOutputError {
+public class CSVOutputMessage {
 
     /** Header for the CSV output. */
-    public static final String[] CSV_HEADER = {"Error Type", "Error Key", "Error Value"};
+    public static final String[] CSV_HEADER = {"Message", "Additional data key", "Additional data value"};
 
-    /** A label identifying the error type. */
+    /** A label identifying the message type. */
     private String type;
 
-    /** Arbitrary data connected to this error. */
+    /** Arbitrary data connected to this message. */
     private Map<String, String> data = new TreeMap<>();
 
     /**
-     * Instantiates a new CSV output error.
+     * Instantiates a new CSV output message.
      *
      * @param typeIn the type
      * @param dataIn the data
      */
-    public CSVOutputError(String typeIn, Map<String, String> dataIn) {
+    public CSVOutputMessage(String typeIn, Map<String, String> dataIn) {
         type = typeIn;
         data = dataIn;
     }
