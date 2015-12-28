@@ -12,7 +12,6 @@ import org.kie.api.definition.type.PropertyReactive;
  */
 @PropertyReactive
 public class System {
-    // constructor-populated fields
     /** The id. */
     public Long id;
 
@@ -22,9 +21,8 @@ public class System {
     /** The populated CPU socket count. */
     public Integer cpus;
 
-    // rule-computed fields
-    /**  <code>true</code> if this is a machine made of metal. */
-    public Boolean physical = true;
+    /** <code>true</code> if this is a machine made of metal. */
+    public Boolean physical;
 
     /**
      * Instantiates a new system.
@@ -32,11 +30,13 @@ public class System {
      * @param idIn the id
      * @param nameIn the friendly name
      * @param cpusIn the cpus
+     * @param physicalIn true if this system is made of metal
      */
-    public System(Long idIn, String nameIn, Integer cpusIn) {
+    public System(Long idIn, String nameIn, Integer cpusIn, Boolean physicalIn) {
         id = idIn;
         name = nameIn;
         cpus = cpusIn;
+        physical = physicalIn;
     }
 
     /**

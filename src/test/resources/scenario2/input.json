@@ -252,6 +252,7 @@
         {
             "cpus": 16,
             "id": 100,
+            "physical": true,
             "product_ids": [
                 814
             ]
@@ -259,6 +260,7 @@
         {
             "cpus": 8,
             "id": 200,
+            "physical": true,
             "product_ids": [
                 814
             ]
@@ -266,6 +268,7 @@
         {
             "cpus": 8,
             "id": 300,
+            "physical": true,
             "product_ids": [
                 814
             ]
@@ -273,6 +276,7 @@
         {
             "cpus": 16,
             "id": 400,
+            "physical": true,
             "product_ids": [
                 814
             ]

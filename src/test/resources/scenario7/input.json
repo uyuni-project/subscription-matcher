@@ -145,6 +145,7 @@
         {
             "cpus": 2,
             "id": 100,
+            "physical": true,
             "product_ids": [
                 814
             ],
@@ -172,6 +173,7 @@
         {
             "cpus": 2,
             "id": 200,
+            "physical": true,
             "product_ids": [],
             "virtual_system_ids": [
                 201,
@@ -197,6 +199,7 @@
         {
             "cpus": 127,
             "id": 300,
+            "physical": true,
             "product_ids": [
                 1122
             ]

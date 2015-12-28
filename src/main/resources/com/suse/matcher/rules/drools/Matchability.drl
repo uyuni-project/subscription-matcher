@@ -74,7 +74,7 @@ end
 
 rule "match22Subscription"
     when
-        $system : System($systemId : id, physical != null)
+        $system : System($systemId : id)
         SystemProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(

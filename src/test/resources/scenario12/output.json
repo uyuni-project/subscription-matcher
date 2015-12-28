@@ -1,0 +1,33 @@
+{
+  "compliant_systems": [
+    {
+      "id": 100,
+      "products": []
+    },
+    {
+      "id": 101,
+      "products": []
+    },
+    {
+      "id": 102,
+      "products": []
+    }
+  ],
+  "partially_compliant_systems": [],
+  "non_compliant_systems": [],
+  "remaining_subscriptions": [],
+  "messages": [
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "102"
+      }
+    },
+    {
+      "type": "physical_guest",
+      "data": {
+        "id": "101"
+      }
+    }
+  ]
+}

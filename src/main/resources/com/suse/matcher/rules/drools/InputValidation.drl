@@ -1,8 +1,10 @@
 package com.suse.matcher.rules.drools;
 
 import java.util.TreeMap;
+import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.facts.CurrentTime;
 
@@ -48,4 +50,36 @@ rule "logUnknownPartNumber"
         TreeMap<String, String> data = new TreeMap<>();
         data.put("part_number", $subscription.partNumber);
         insertLogical(new Message(Message.Level.DEBUG, "unknown_part_number", data));
+end
+
+rule "logPhysicalGuest"
+when
+    HostGuest($guestId : guestId)
+    $guest : System(id == $guestId, physical == true)
+then
+    // input data says this guest is physical machine, this is not expected
+    // log and autocorrect
+    TreeMap<String, String> data = new TreeMap<>();
+    data.put("id", $guestId.toString());
+    insert(new Message(Message.Level.DEBUG, "physical_guest", data));
+    modify($guest) {
+        physical = false;
+    }
+end
+
+rule "logMissingHost"
+when
+    $guest : System($guestId : id, physical == false)
+    not HostGuest(guestId == $guestId)
+then
+    // input data says this guest is virtual machine but we do not know
+    // about the system that hosts it
+    // We treat this as a physical machine and warn the user, as the
+    // matching will almost surely be incorrect
+    TreeMap<String, String> data = new TreeMap<>();
+    data.put("id", $guestId.toString());
+    insert(new Message(Message.Level.WARNING, "guest_with_unknown_host", data));
+    modify($guest) {
+        physical = true;
+    }
 end

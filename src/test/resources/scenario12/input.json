@@ -1,0 +1,26 @@
+{
+    "pinned_matches": [],
+    "products": [],
+    "subscriptions": [],
+    "systems": [
+        {
+            "cpus": 4,
+            "id": 100,
+            "physical": true,
+            "product_ids": [],
+            "virtual_system_ids": [
+                101
+            ]
+        },
+        {
+            "id": 101,
+            "physical": true,
+            "product_ids": []
+        },
+        {
+            "id": 102,
+            "physical": false,
+            "product_ids": []
+        }
+    ]
+}
