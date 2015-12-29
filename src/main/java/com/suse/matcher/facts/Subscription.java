@@ -35,7 +35,7 @@ public class Subscription implements Comparable<Subscription> {
          * This subscription can either be assigned to a physical system that does
          * not host virtual machines or to up to two virtual machines.
          */
-        TWO_TWO,
+        ONE_TWO,
         /**
          * This subscription can either be assigned to a physical system as well
          * as to a virtual system. It is meant for an instance but does not allow

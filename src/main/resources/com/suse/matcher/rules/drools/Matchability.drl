@@ -72,14 +72,14 @@ rule "matchFreeVirtualizationSubscription"
         insertLogical(new FreeMatch($guestId, $productId, $subscriptionId, $match.id));
 end
 
-rule "match22Subscription"
+rule "match12Subscription"
     when
         $system : System($systemId : id, cpus != null)
         SystemProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
             id == $subscriptionId,
-            policy == Policy.TWO_TWO,
+            policy == Policy.ONE_TWO,
             ignored == false
         )
         not (HostGuest(hostId == $systemId))

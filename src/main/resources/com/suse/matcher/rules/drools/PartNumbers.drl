@@ -1709,7 +1709,7 @@ rule "Add subscription data for part number 662644476728"
         $subscription : Subscription(partNumber == "662644476728")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -1722,7 +1722,7 @@ rule "Add subscription data for part number 662644476735"
         $subscription : Subscription(partNumber == "662644476735")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -1735,7 +1735,7 @@ rule "Add subscription data for part number 662644476742"
         $subscription : Subscription(partNumber == "662644476742")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -1748,7 +1748,7 @@ rule "Add subscription data for part number 662644476759"
         $subscription : Subscription(partNumber == "662644476759")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -2253,7 +2253,7 @@ rule "Add subscription data for part number 662644477443"
         $subscription : Subscription(partNumber == "662644477443")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -2279,7 +2279,7 @@ rule "Add subscription data for part number 662644477445"
         $subscription : Subscription(partNumber == "662644477445")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2305,7 +2305,7 @@ rule "Add subscription data for part number 662644477447"
         $subscription : Subscription(partNumber == "662644477447")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -2331,7 +2331,7 @@ rule "Add subscription data for part number 662644477449"
         $subscription : Subscription(partNumber == "662644477449")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
             cpus = 2,
             stackable = true
@@ -2357,7 +2357,7 @@ rule "Add subscription data for part number 662644477451"
         $subscription : Subscription(partNumber == "662644477451")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -2383,7 +2383,7 @@ rule "Add subscription data for part number 662644477453"
         $subscription : Subscription(partNumber == "662644477453")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2409,7 +2409,7 @@ rule "Add subscription data for part number 662644477455"
         $subscription : Subscription(partNumber == "662644477455")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -2435,7 +2435,7 @@ rule "Add subscription data for part number 662644477457"
         $subscription : Subscription(partNumber == "662644477457")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
             cpus = 2,
             stackable = true
@@ -2461,7 +2461,7 @@ rule "Add subscription data for part number 662644477459"
         $subscription : Subscription(partNumber == "662644477459")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -2487,7 +2487,7 @@ rule "Add subscription data for part number 662644477461"
         $subscription : Subscription(partNumber == "662644477461")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2513,7 +2513,7 @@ rule "Add subscription data for part number 662644477463"
         $subscription : Subscription(partNumber == "662644477463")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -2539,7 +2539,7 @@ rule "Add subscription data for part number 662644477465"
         $subscription : Subscription(partNumber == "662644477465")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
             cpus = 2,
             stackable = true
@@ -2565,7 +2565,7 @@ rule "Add subscription data for part number 662644477467"
         $subscription : Subscription(partNumber == "662644477467")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -2591,7 +2591,7 @@ rule "Add subscription data for part number 662644477469"
         $subscription : Subscription(partNumber == "662644477469")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -2617,7 +2617,7 @@ rule "Add subscription data for part number 662644477471"
         $subscription : Subscription(partNumber == "662644477471")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -2643,7 +2643,7 @@ rule "Add subscription data for part number 662644477473"
         $subscription : Subscription(partNumber == "662644477473")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2669,7 +2669,7 @@ rule "Add subscription data for part number 662644477475"
         $subscription : Subscription(partNumber == "662644477475")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2695,7 +2695,7 @@ rule "Add subscription data for part number 662644477477"
         $subscription : Subscription(partNumber == "662644477477")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2907,7 +2907,7 @@ rule "Add subscription data for part number 662644477495"
         $subscription : Subscription(partNumber == "662644477495")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2920,7 +2920,7 @@ rule "Add subscription data for part number 662644477496"
         $subscription : Subscription(partNumber == "662644477496")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2985,7 +2985,7 @@ rule "Add subscription data for part number 662644477501"
         $subscription : Subscription(partNumber == "662644477501")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -2998,7 +2998,7 @@ rule "Add subscription data for part number 662644477502"
         $subscription : Subscription(partNumber == "662644477502")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -6026,7 +6026,7 @@ rule "Add subscription data for part number 874-006076"
         $subscription : Subscription(partNumber == "874-006076")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -6039,7 +6039,7 @@ rule "Add subscription data for part number 874-006077"
         $subscription : Subscription(partNumber == "874-006077")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10124,7 +10124,7 @@ rule "Add subscription data for part number 874-006832"
         $subscription : Subscription(partNumber == "874-006832")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10137,7 +10137,7 @@ rule "Add subscription data for part number 874-006833"
         $subscription : Subscription(partNumber == "874-006833")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10150,7 +10150,7 @@ rule "Add subscription data for part number 874-006834"
         $subscription : Subscription(partNumber == "874-006834")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10163,7 +10163,7 @@ rule "Add subscription data for part number 874-006835"
         $subscription : Subscription(partNumber == "874-006835")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10315,7 +10315,7 @@ rule "Add subscription data for part number 874-006850"
         $subscription : Subscription(partNumber == "874-006850")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10328,7 +10328,7 @@ rule "Add subscription data for part number 874-006851"
         $subscription : Subscription(partNumber == "874-006851")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10516,7 +10516,7 @@ rule "Add subscription data for part number 874-006875"
         $subscription : Subscription(partNumber == "874-006875")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10542,7 +10542,7 @@ rule "Add subscription data for part number 874-006877"
         $subscription : Subscription(partNumber == "874-006877")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -10568,7 +10568,7 @@ rule "Add subscription data for part number 874-006879"
         $subscription : Subscription(partNumber == "874-006879")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -10594,7 +10594,7 @@ rule "Add subscription data for part number 874-006881"
         $subscription : Subscription(partNumber == "874-006881")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
             cpus = 2,
             stackable = true
@@ -10620,7 +10620,7 @@ rule "Add subscription data for part number 874-006883"
         $subscription : Subscription(partNumber == "874-006883")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10646,7 +10646,7 @@ rule "Add subscription data for part number 874-006885"
         $subscription : Subscription(partNumber == "874-006885")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -10672,7 +10672,7 @@ rule "Add subscription data for part number 874-006887"
         $subscription : Subscription(partNumber == "874-006887")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -10698,7 +10698,7 @@ rule "Add subscription data for part number 874-006889"
         $subscription : Subscription(partNumber == "874-006889")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
             cpus = 2,
             stackable = true
@@ -10763,7 +10763,7 @@ rule "Add subscription data for part number 874-006894"
         $subscription : Subscription(partNumber == "874-006894")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10789,7 +10789,7 @@ rule "Add subscription data for part number 874-006896"
         $subscription : Subscription(partNumber == "874-006896")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -10815,7 +10815,7 @@ rule "Add subscription data for part number 874-006898"
         $subscription : Subscription(partNumber == "874-006898")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -10880,7 +10880,7 @@ rule "Add subscription data for part number 874-006903"
         $subscription : Subscription(partNumber == "874-006903")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
             cpus = 2,
             stackable = true
@@ -10906,7 +10906,7 @@ rule "Add subscription data for part number 874-006905"
         $subscription : Subscription(partNumber == "874-006905")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10932,7 +10932,7 @@ rule "Add subscription data for part number 874-006907"
         $subscription : Subscription(partNumber == "874-006907")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10958,7 +10958,7 @@ rule "Add subscription data for part number 874-006909"
         $subscription : Subscription(partNumber == "874-006909")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -10984,7 +10984,7 @@ rule "Add subscription data for part number 874-006911"
         $subscription : Subscription(partNumber == "874-006911")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -11010,7 +11010,7 @@ rule "Add subscription data for part number 874-006913"
         $subscription : Subscription(partNumber == "874-006913")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -11036,7 +11036,7 @@ rule "Add subscription data for part number 874-006915"
         $subscription : Subscription(partNumber == "874-006915")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -11341,7 +11341,7 @@ rule "Add subscription data for part number 874-006940"
         $subscription : Subscription(partNumber == "874-006940")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -11354,7 +11354,7 @@ rule "Add subscription data for part number 874-006941"
         $subscription : Subscription(partNumber == "874-006941")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -11458,7 +11458,7 @@ rule "Add subscription data for part number 874-006949"
         $subscription : Subscription(partNumber == "874-006949")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -11471,7 +11471,7 @@ rule "Add subscription data for part number 874-006950"
         $subscription : Subscription(partNumber == "874-006950")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -11783,7 +11783,7 @@ rule "Add subscription data for part number 874-007073"
         $subscription : Subscription(partNumber == "874-007073")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "basic",
             cpus = 2,
             stackable = true
@@ -11809,7 +11809,7 @@ rule "Add subscription data for part number 874-007075"
         $subscription : Subscription(partNumber == "874-007075")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "basic",
             cpus = 2,
             stackable = true
@@ -11835,7 +11835,7 @@ rule "Add subscription data for part number 874-007077"
         $subscription : Subscription(partNumber == "874-007077")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "basic",
             cpus = 2,
             stackable = true
@@ -11861,7 +11861,7 @@ rule "Add subscription data for part number 874-007079"
         $subscription : Subscription(partNumber == "874-007079")
     then
         modify($subscription) {
-            policy = Policy.TWO_TWO,
+            policy = Policy.ONE_TWO,
             supportLevel = "basic",
             cpus = 2,
             stackable = true
