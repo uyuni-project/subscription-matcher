@@ -12,8 +12,8 @@ import java.util.TimeZone;
 public class CSVOutputSubscription {
 
     /** Header for the CSV output. */
-    public static final String[] CSV_HEADER = { "Subscription ID", "Part Number", "Product Description", "Available Quantity",
-            "Matched Quantity", "Start Date (UTC)", "End Date (UTC)"};
+    public static final String[] CSV_HEADER = { "Subscription ID", "Part Number", "Product Description",
+            "Policy", "Available Quantity", "Matched Quantity", "Start Date (UTC)", "End Date (UTC)"};
 
     /** The subscription id. */
     private Long id;
@@ -23,6 +23,9 @@ public class CSVOutputSubscription {
 
     /** The subscription name. */
     private String name;
+
+    /** The subscription policy. */
+    private String policy;
 
     /** The quantity. */
     private Integer quantity;
@@ -42,15 +45,17 @@ public class CSVOutputSubscription {
      * @param idIn the id
      * @param partNumberIn the part number
      * @param nameIn the name
+     * @param policyIn the policy
      * @param quantityIn the quantity
      * @param startDateIn the start date
      * @param endDateIn the end date
      */
-    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn,
-            Date endDateIn) {
+    public CSVOutputSubscription(Long idIn, String partNumberIn, String nameIn, String policyIn,
+            Integer quantityIn, Date startDateIn, Date endDateIn) {
         id = idIn;
         partNumber = partNumberIn;
         name = nameIn;
+        policy = policyIn;
         quantity = quantityIn;
         startDate = startDateIn;
         endDate = endDateIn;
@@ -75,6 +80,7 @@ public class CSVOutputSubscription {
         row.add(String.valueOf(id));
         row.add(partNumber);
         row.add(name);
+        row.add(policy);
         row.add(String.valueOf(quantity));
         row.add(String.valueOf(matched));
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

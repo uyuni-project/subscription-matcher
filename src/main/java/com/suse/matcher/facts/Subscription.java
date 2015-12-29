@@ -24,24 +24,36 @@ public class Subscription implements Comparable<Subscription> {
          * virtual machines running on top of it will not get the same subscription
          * for free.
          */
-        PHYSICAL_ONLY,
+        PHYSICAL_ONLY("Physical deployment only"),
         /**
          * This subscription can exclusively be assigned to a physical system, and
          * virtual machines running on top of it will automatically get the same
          * subscription for free.
          */
-        UNLIMITED_VIRTUALIZATION,
+        UNLIMITED_VIRTUALIZATION("Unlimited Virtual Machines"),
         /**
          * This subscription can either be assigned to a physical system that does
          * not host virtual machines or to up to two virtual machines.
          */
-        ONE_TWO,
+        ONE_TWO("1-2 Sockets or 1-2 Virtual Machines"),
         /**
          * This subscription can either be assigned to a physical system as well
          * as to a virtual system. It is meant for an instance but does not allow
          * any virtualization inheritance
          */
-        INSTANCE
+        INSTANCE("Per-instance");
+
+        private String description;
+
+        private Policy(String descriptionIn){
+            description = descriptionIn;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public String toString() {
+            return description;
+        }
     }
 
     // constructor-populated fields

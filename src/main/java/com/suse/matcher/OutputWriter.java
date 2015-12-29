@@ -124,6 +124,7 @@ public class OutputWriter {
                 s.id,
                 s.partNumber,
                 s.name,
+                s.policy.toString(),
                 s.quantity,
                 s.startDate,
                 s.endDate
