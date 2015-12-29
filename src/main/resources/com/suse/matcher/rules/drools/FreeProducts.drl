@@ -1,0 +1,149 @@
+package com.suse.matcher.rules.drools;
+
+import com.suse.matcher.facts.SystemProduct;
+
+rule "retractFreeProduct"
+    when
+        //SUSE WebYaST
+        $systemProduct : SystemProduct(productId == 835) or
+        //SUSE WebYaST
+        $systemProduct : SystemProduct(productId == 836) or
+        //SUSE WebYaST
+        $systemProduct : SystemProduct(productId == 837) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1145) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1146) or
+        //Legacy Module
+        $systemProduct : SystemProduct(productId == 1148) or
+        //Legacy Module
+        $systemProduct : SystemProduct(productId == 1149) or
+        //Legacy Module
+        $systemProduct : SystemProduct(productId == 1150) or
+        //Web and Scripting Module
+        $systemProduct : SystemProduct(productId == 1151) or
+        //Web and Scripting Module
+        $systemProduct : SystemProduct(productId == 1152) or
+        //Web and Scripting Module
+        $systemProduct : SystemProduct(productId == 1153) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1158) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1159) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1160) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1161) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1162) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1163) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1164) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1165) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1166) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1167) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1168) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1169) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1170) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1171) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1172) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1173) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1174) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1175) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1176) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1177) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1178) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1179) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1180) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1181) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1182) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1183) or
+        //SUSE Linux Enterprise Subscription Management Tool
+        $systemProduct : SystemProduct(productId == 1192) or
+        //SUSE Linux Enterprise Subscription Management Tool
+        $systemProduct : SystemProduct(productId == 1193) or
+        //SUSE Linux Enterprise Subscription Management Tool
+        $systemProduct : SystemProduct(productId == 1194) or
+        //SUSE Linux Enterprise Subscription Management Tool
+        $systemProduct : SystemProduct(productId == 1195) or
+        //SUSE Linux Enterprise Subscription Management Tool
+        $systemProduct : SystemProduct(productId == 1196) or
+        //SUSE Linux Enterprise Subscription Management Tool
+        $systemProduct : SystemProduct(productId == 1197) or
+        //SUSE Linux Enterprise Subscription Management Tool
+        $systemProduct : SystemProduct(productId == 1198) or
+        //SUSE Linux Enterprise Subscription Management Tool
+        $systemProduct : SystemProduct(productId == 1199) or
+        //SUSE WebYaST
+        $systemProduct : SystemProduct(productId == 1206) or
+        //SUSE WebYaST
+        $systemProduct : SystemProduct(productId == 1207) or
+        //Advanced Systems Management Module
+        $systemProduct : SystemProduct(productId == 1212) or
+        //Public Cloud Module
+        $systemProduct : SystemProduct(productId == 1218) or
+        //Public Cloud Module
+        $systemProduct : SystemProduct(productId == 1219) or
+        //Public Cloud Module
+        $systemProduct : SystemProduct(productId == 1220) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1223) or
+        //SUSE Manager Tools
+        $systemProduct : SystemProduct(productId == 1246) or
+        //SUSE Manager Tools
+        $systemProduct : SystemProduct(productId == 1247) or
+        //SUSE Manager Tools
+        $systemProduct : SystemProduct(productId == 1248) or
+        //IBM DLPAR sdk for SLE
+        $systemProduct : SystemProduct(productId == 1249) or
+        //IBM DLPAR Utils for SLE
+        $systemProduct : SystemProduct(productId == 1250) or
+        //Advanced Systems Management Module
+        $systemProduct : SystemProduct(productId == 1294) or
+        //Advanced Systems Management Module
+        $systemProduct : SystemProduct(productId == 1295) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1318) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1320) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1323) or
+        //Containers Module
+        $systemProduct : SystemProduct(productId == 1332) or
+        //Toolchain Module
+        $systemProduct : SystemProduct(productId == 1339) or
+        //Toolchain Module
+        $systemProduct : SystemProduct(productId == 1340) or
+        //Toolchain Module
+        $systemProduct : SystemProduct(productId == 1341) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1343) or
+        //SUSE Linux Enterprise Software Development Kit
+        $systemProduct : SystemProduct(productId == 1344) or
+        //Containers Module
+        $systemProduct : SystemProduct(productId == 1353) or
+        //Containers Module
+        $systemProduct : SystemProduct(productId == 1354) 
+    then
+        retract($systemProduct);
+end
