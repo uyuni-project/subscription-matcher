@@ -143,6 +143,7 @@
             ]
         },
         {
+            "cpus": 1,
             "id": 101,
             "physical": false,
             "product_ids": [
@@ -150,6 +151,7 @@
             ]
         },
         {
+            "cpus": 1,
             "id": 102,
             "physical": false,
             "product_ids": [
@@ -157,6 +159,7 @@
             ]
         },
         {
+            "cpus": 1,
             "id": 103,
             "physical": false,
             "product_ids": [

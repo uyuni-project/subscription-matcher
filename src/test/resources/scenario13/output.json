@@ -1,0 +1,19 @@
+{
+  "compliant_systems": [
+    {
+      "id": 100,
+      "products": []
+    }
+  ],
+  "partially_compliant_systems": [],
+  "non_compliant_systems": [],
+  "remaining_subscriptions": [],
+  "messages": [
+    {
+      "type": "unknown_cpu_count",
+      "data": {
+        "id": "100"
+      }
+    }
+  ]
+}

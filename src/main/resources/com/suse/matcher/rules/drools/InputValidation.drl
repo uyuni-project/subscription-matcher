@@ -83,3 +83,15 @@ then
         physical = true;
     }
 end
+
+rule "logMissingCpuCount"
+when
+    $system : System($id : id, cpus == null)
+then
+    TreeMap<String, String> data = new TreeMap<>();
+    data.put("id", $id.toString());
+    insert(new Message(Message.Level.WARNING, "unknown_cpu_count", data));
+    modify($system) {
+        cpus = 16;
+    }
+end

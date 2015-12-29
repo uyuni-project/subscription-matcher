@@ -43,7 +43,7 @@ end
 
 rule "matchUnlimitedVirtualizationSubscription"
     when
-        $system : System($systemId : id, physical == true)
+        $system : System($systemId : id, physical == true, cpus != null)
         (
             SystemProduct($productId : productId, systemId == $systemId) or
             (
@@ -74,7 +74,7 @@ end
 
 rule "match22Subscription"
     when
-        $system : System($systemId : id)
+        $system : System($systemId : id, cpus != null)
         SystemProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(

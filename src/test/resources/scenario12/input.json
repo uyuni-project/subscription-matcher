@@ -13,11 +13,13 @@
             ]
         },
         {
+            "cpus": 4,
             "id": 101,
             "physical": true,
             "product_ids": []
         },
         {
+            "cpus": 4,
             "id": 102,
             "physical": false,
             "product_ids": []
