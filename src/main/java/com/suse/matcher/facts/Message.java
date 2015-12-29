@@ -1,11 +1,15 @@
 package com.suse.matcher.facts;
 
+import static java.util.stream.Collectors.toList;
+
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,9 +56,19 @@ public class Message implements Comparable<Message> {
     public int compareTo(Message oIn) {
         return new CompareToBuilder()
             .append(type, oIn.type)
-            // we don't really care about the ordering at this point, provided
-            // it's consistent between runs. Hash code does the trick
-            .append(data.hashCode(), oIn.data.hashCode())
+            .append(data, oIn.data, new Comparator<Map<String, String>>() {
+                @Override
+                public int compare(Map<String, String> o1In, Map<String, String> o2In) {
+                    List<String> keys = o1In.keySet().stream().sorted().collect(toList());
+                    for (String key : keys) {
+                        int comparison = o1In.get(key).compareTo(o2In.get(key));
+                        if (comparison != 0) {
+                            return comparison;
+                        }
+                    }
+                    return 0;
+                }
+            })
             .toComparison();
     }
 

@@ -262,6 +262,7 @@ public class OutputWriter {
                 .filter(o -> o instanceof Message)
                 .map(o -> (Message) o)
                 .filter(m -> m.severity != Message.Level.DEBUG)
+                .sorted()
                 .collect(Collectors.toList());
 
             for (Message message: messages) {

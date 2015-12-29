@@ -1,9 +1,9 @@
 package com.suse.matcher.csv;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * A message from the matcher as represented in a CSV output file.
@@ -17,7 +17,7 @@ public class CSVOutputMessage {
     private String type;
 
     /** Arbitrary data connected to this message. */
-    private Map<String, String> data = new TreeMap<>();
+    private Map<String, String> data = new LinkedHashMap<>();
 
     /**
      * Instantiates a new CSV output message.
