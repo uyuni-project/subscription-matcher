@@ -44,7 +44,9 @@ public class Drools {
         }
 
         // start deduction engine
+        long start = System.currentTimeMillis();
         session.fireAllRules();
+        logger.info("Deduction phase took {}ms", System.currentTimeMillis() - start);
 
         // collect results
         result = session.getObjects();

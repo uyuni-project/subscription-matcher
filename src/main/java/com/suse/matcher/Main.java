@@ -15,6 +15,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Date;
@@ -25,6 +27,9 @@ import java.util.Optional;
  */
 public class Main {
 
+    /** Logger instance. */
+    private final static Logger logger = LoggerFactory.getLogger(Main.class);
+
     /**
      * The main method.
      *
@@ -32,7 +37,7 @@ public class Main {
      * @throws Exception if anything unexpected happens
      */
     public static final void main(String[] args) throws Exception {
-        // parse command line options
+        long start = System.currentTimeMillis();
         CommandLine commandLine = parseCommandLine(args);
 
         // create output writer object
@@ -56,6 +61,8 @@ public class Main {
 
         // write output data
         writer.writeOutput(assignment);
+
+        logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
     }
 
     private static CommandLine parseCommandLine(String[] args) {

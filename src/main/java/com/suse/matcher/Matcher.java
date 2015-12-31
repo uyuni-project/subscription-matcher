@@ -55,6 +55,7 @@ public class Matcher {
             }
         }
 
+        logger.info("Found {} possible matches", matches.size());
         if (logger.isDebugEnabled()) {
             deducedFacts.stream()
                 .filter(o -> (o instanceof PossibleMatch) || (o instanceof FreeMatch))
