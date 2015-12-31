@@ -54,8 +54,8 @@
                 <changeMoveSelector/>
                 <changeMoveSelector/>
             </cartesianProductMoveSelector>
-            <!-- Generate at most 2000 moves per step -->
-            <selectedCountLimit>2000</selectedCountLimit>
+            <!-- Generate at most 20000 moves per step -->
+            <selectedCountLimit>20000</selectedCountLimit>
         </unionMoveSelector>
 
         <!-- Don't accept moves:
@@ -68,9 +68,9 @@
             <moveTabuSize>50</moveTabuSize>
         </acceptor>
 
-        <!-- Generate at most 1000 acceptable moves per step -->
+        <!-- Generate at most 10000 acceptable moves per step -->
         <forager>
-            <acceptedCountLimit>1000</acceptedCountLimit>
+            <acceptedCountLimit>10000</acceptedCountLimit>
         </forager>
 
         <!-- At the end of each step, pick the accepted move with best score that has been found.
@@ -78,8 +78,8 @@
              In any case, the new solution is used as the basis for the next step -->
  
         <termination>
-            <!-- Terminate after 1000 steps with no score improvement -->
-            <unimprovedStepCountLimit>1000</unimprovedStepCountLimit>
+            <!-- Terminate after 500 steps with no score improvement -->
+            <unimprovedStepCountLimit>500</unimprovedStepCountLimit>
         </termination>
     </localSearch>
 </solver>
