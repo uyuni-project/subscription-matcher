@@ -80,6 +80,9 @@
         <termination>
             <!-- Terminate after 500 steps with no score improvement -->
             <unimprovedStepCountLimit>500</unimprovedStepCountLimit>
+
+            <!-- Terminate after 10000 steps in any case -->
+            <stepCountLimit>10000</stepCountLimit>
         </termination>
     </localSearch>
 </solver>
