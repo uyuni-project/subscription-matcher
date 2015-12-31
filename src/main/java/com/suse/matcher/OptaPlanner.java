@@ -42,8 +42,9 @@ public class OptaPlanner {
      * Instantiates an OptaPlanner instance with the specified unsolved problem.
      *
      * @param unsolved the unsolved problem
+     * @param testing true if running as a unit test, false otherwise
      */
-    public OptaPlanner(Assignment unsolved) {
+    public OptaPlanner(Assignment unsolved, boolean testing) {
         // short circuit the planning in case there's nothing to optimize
         if (unsolved.getMatches().isEmpty()) {
             result = unsolved;
@@ -51,7 +52,7 @@ public class OptaPlanner {
         }
 
         // init solver
-        Solver solver = initSolver();
+        Solver solver = initSolver(testing);
 
         // solve problem
         long start = System.currentTimeMillis();
@@ -67,8 +68,9 @@ public class OptaPlanner {
      * This method replaces the XML configuration file cited in Optaplanner's documentation.
      *
      * @return the solver
+     * @param testing true if running as a unit test, false otherwise
      */
-    private Solver initSolver() {
+    private Solver initSolver(boolean testing) {
         // init basic objects
         SolverFactory factory = SolverFactory.createEmpty();
         SolverConfig config = factory.getSolverConfig();
@@ -180,6 +182,19 @@ public class OptaPlanner {
         termination.setUnimprovedStepCountLimit(500);
         termination.setStepCountLimit(10_000);
         search.setTerminationConfig(termination);
+
+        /*
+         * Tweak parameters in unit tests, which deal with much less data and need
+         * to run faster. These can only degrade results, so if a unit test passes
+         * in test mode it will pass in production mode too.
+         * Also activate OptaPlanner full assertions to catch more issues.
+         */
+        if (testing) {
+            termination.setUnimprovedStepCountLimit(5);
+            move.setSelectedCountLimit(100L);
+            forager.setAcceptedCountLimit(100);
+            config.setEnvironmentMode(EnvironmentMode.FULL_ASSERT);
+        }
 
         // return solver
         config.getPhaseConfigList().add(search);

@@ -86,7 +86,7 @@ public class MatcherTest {
      * @param expectedOutputIn the expected output
      */
     public MatcherTest(JsonInput inputIn, JsonOutput expectedOutputIn) {
-        matcher = new Matcher();
+        matcher = new Matcher(true);
         input = inputIn;
         expectedOutput = expectedOutputIn;
     }

@@ -57,7 +57,7 @@ public class Main {
 
         // do the matching
         JsonInput input = new JsonIO().loadInput(inputString);
-        Assignment assignment = new Matcher().match(input, new Date());
+        Assignment assignment = new Matcher(false).match(input, new Date());
 
         // write output data
         writer.writeOutput(assignment);

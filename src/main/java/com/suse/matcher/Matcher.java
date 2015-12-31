@@ -22,6 +22,18 @@ public class Matcher {
     /** Logger instance. */
     private final Logger logger = LoggerFactory.getLogger(Matcher.class);
 
+    /** true if the matcher is being tested. */
+    private boolean testing;
+
+    /**
+     * Standard constructor.
+     *
+     * @param testingIn true if running as a unit test, false otherwise
+     */
+    public Matcher(boolean testingIn) {
+        testing = testingIn;
+    }
+
     /**
      * Matches a list of systems to a list of subscriptions.
      *
@@ -65,7 +77,7 @@ public class Matcher {
         }
 
         // activate the CSP solver with all deduced facts as inputs
-        OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, otherFacts));
+        OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, otherFacts), testing);
         Assignment result = optaPlanner.getResult();
 
         // add user messages taking rule engine deductions and CSP solver output into account
