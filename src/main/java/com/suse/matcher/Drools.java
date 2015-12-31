@@ -3,8 +3,9 @@ package com.suse.matcher;
 import com.suse.matcher.facts.Message;
 
 import org.kie.api.KieServices;
+import org.kie.api.builder.KieFileSystem;
+import org.kie.api.conf.EqualityBehaviorOption;
 import org.kie.api.logger.KieRuntimeLogger;
-import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,14 +30,26 @@ public class Drools {
      * @param baseFacts fact objects
      */
     public Drools(Collection<Object> baseFacts) {
-        // read configuration from kmodule.xml and instantiate the engine
-        KieServices factory = KieServices.Factory.get();
-        KieContainer container = factory.getKieClasspathContainer();
-        KieSession session = container.newKieSession("ksession-rules");
+        // setup engine
+        KieServices services = KieServices.Factory.get();
+
+        // two facts are equal if equals() returns true (do not rely on ==)
+        services.newKieModuleModel().newKieBaseModel("model").setEqualsBehavior(EqualityBehaviorOption.EQUALITY);
+
+        // add rule files to engine
+        KieFileSystem kfs = services.newKieFileSystem();
+        kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/FreeProducts.drl"));
+        kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/InputValidation.drl"));
+        kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/Matchability.drl"));
+        kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/PartNumbers.drl"));
+        services.newKieBuilder(kfs).buildAll();
+
+        // start a new session
+        KieSession session = services.newKieContainer(services.getRepository().getDefaultReleaseId()).newKieSession();
 
         // setup logging. This will not really log to the console but to slf4j which
         // in turn delegates to log4j, see log4j.xml for configuration
-        KieRuntimeLogger kieLogger = factory.getLoggers().newConsoleLogger(session);
+        KieRuntimeLogger kieLogger = services.getLoggers().newConsoleLogger(session);
 
         // insert base facts
         for (Object fact : baseFacts) {
