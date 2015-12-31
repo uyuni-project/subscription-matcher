@@ -13,7 +13,7 @@ public class CSVOutputSubscription {
 
     /** Header for the CSV output. */
     public static final String[] CSV_HEADER = { "Subscription ID", "Part Number", "Product Description",
-            "Policy", "Available Quantity", "Matched Quantity", "Start Date (UTC)", "End Date (UTC)"};
+            "Policy", "Total Quantity", "Matched Quantity", "Start Date", "End Date"};
 
     /** The subscription id. */
     private Long id;
@@ -83,7 +83,7 @@ public class CSVOutputSubscription {
         row.add(policy);
         row.add(String.valueOf(quantity));
         row.add(String.valueOf(matched));
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
         if (startDate != null) {
             row.add(df.format(startDate));
