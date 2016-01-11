@@ -43,7 +43,7 @@ public class OutputWriter {
     private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
 
     /** The output directory. */
-    private Optional<String> outputDirectory;
+    private String outputDirectory;
 
     /** The CSV format. */
     private CSVFormat csvFormat;
@@ -51,12 +51,12 @@ public class OutputWriter {
     /**
      * Instantiates a new writer.
      *
-     * @param outputDirectoryIn an optional output directory. If empty, output
-     * will be sent to standard output
+     * @param outputDirectoryIn an output directory path. If empty, current directory is used
+     * as default
      * @param delimiter an optional CSV delimiter. If empty, comma is used as default
      */
     public OutputWriter(Optional<String> outputDirectoryIn, Optional<Character> delimiter) {
-        outputDirectory = outputDirectoryIn;
+        outputDirectory = outputDirectoryIn.orElse(".");
         csvFormat = CSVFormat.EXCEL;
         if (delimiter.isPresent()) {
             csvFormat = csvFormat.withDelimiter(delimiter.get());
@@ -71,12 +71,9 @@ public class OutputWriter {
      */
     public void writeOutput(Assignment assignment) throws IOException {
         writeJsonOutput(assignment);
-
-        if (outputDirectory.isPresent()) {
-            writeCSVSubscriptionReport(assignment);
-            writeCSVSystemReport(assignment);
-            writeCSVMessageReport(assignment);
-        }
+        writeCSVSubscriptionReport(assignment);
+        writeCSVSystemReport(assignment);
+        writeCSVMessageReport(assignment);
     }
 
     /**
@@ -86,9 +83,7 @@ public class OutputWriter {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void writeJsonInput(String input) throws IOException {
-        if (outputDirectory.isPresent()) {
-            FileUtils.write(new File(outputDirectory.get(), JSON_INPUT_FILE), input);
-        }
+        FileUtils.write(new File(outputDirectory, JSON_INPUT_FILE), input);
     }
 
     /**
@@ -98,9 +93,7 @@ public class OutputWriter {
      * @throws FileNotFoundException if the output directory was not found
      */
     public void writeJsonOutput(Assignment assignment) throws FileNotFoundException {
-        PrintWriter writer = outputDirectory.isPresent() ?
-                new PrintWriter(new File(outputDirectory.get(), JSON_OUTPUT_FILE)) :
-                new PrintWriter(java.lang.System.out);
+        PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_FILE));
         JsonIO io = new JsonIO();
         writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
         writer.close();
@@ -155,7 +148,7 @@ public class OutputWriter {
         CSVPrinter csvPrinter = null;
         try {
             // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory.get(), CSV_SUBSCRIPTION_REPORT_FILE));
+            fileWriter = new FileWriter(new File(outputDirectory, CSV_SUBSCRIPTION_REPORT_FILE));
             // print CSV file header
             csvFormat = csvFormat.withHeader(CSVOutputSubscription.CSV_HEADER);
             // initialize CSVPrinter object
@@ -206,7 +199,7 @@ public class OutputWriter {
         CSVPrinter csvPrinter = null;
         try {
             // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory.get(), CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
+            fileWriter = new FileWriter(new File(outputDirectory, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
             // print CSV file header
             csvFormat = csvFormat.withHeader(CSVOutputSystem.CSV_HEADER);
             // initialize CSVPrinter object
@@ -253,7 +246,7 @@ public class OutputWriter {
         CSVPrinter csvPrinter = null;
         try {
             // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory.get(), CSV_MESSAGE_REPORT_FILE));
+            fileWriter = new FileWriter(new File(outputDirectory, CSV_MESSAGE_REPORT_FILE));
             // print CSV file header
             csvFormat = csvFormat.withHeader(CSVOutputMessage.CSV_HEADER);
             // initialize CSVPrinter object

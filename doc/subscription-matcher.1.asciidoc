@@ -16,9 +16,6 @@ subscription-matcher(1) is used to match subscriptions to systems
 and generate reports. subscription-matcher(1) is able to take pre-defined
 pinned matches into account when provided.
 
-When no output directory is provided, the command print only the
-JSON format to STDOUT.
-
 OPTIONS
 -------
 
@@ -29,7 +26,7 @@ show help message and exit
 CSV Delimiter (Default: ,)
 
 -o,--directory <arg>::
-Output directory
+Output directory (Default: current directory)
 
 -i,--input <arg>::
 Input file in JSON format (Default: STDIN)
@@ -37,7 +34,7 @@ Input file in JSON format (Default: STDIN)
 EXAMPLES:
 ---------
 
-Print the JSON format output to STDOUT
+Write output files in the current directory
 
   $> subscription-matcher -i input.json
 

@@ -70,7 +70,7 @@ public class Main {
         Options opts = new Options();
         opts.addOption("h", "help", false, "show this help");
         opts.addOption("i", "input", true, "input.json file (Default: standard input)");
-        opts.addOption("o", "directory", true, "Output directory");
+        opts.addOption("o", "directory", true, "Output directory (Default: current directory)");
         opts.addOption("d", "delimiter", true, "CSV Delimiter (Default: ,)");
 
         CommandLineParser parser = new BasicParser();
