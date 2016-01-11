@@ -93,10 +93,11 @@ public class OutputWriter {
      * @throws FileNotFoundException if the output directory was not found
      */
     public void writeJsonOutput(Assignment assignment) throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_FILE));
-        JsonIO io = new JsonIO();
-        writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
-        writer.close();
+        try (PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_FILE))) {
+            JsonIO io = new JsonIO();
+            writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
+            writer.close();
+        }
     }
 
     /**
@@ -144,24 +145,15 @@ public class OutputWriter {
             }
         });
 
-        FileWriter fileWriter = null;
-        CSVPrinter csvPrinter = null;
-        try {
-            // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory, CSV_SUBSCRIPTION_REPORT_FILE));
-            // print CSV file header
-            csvFormat = csvFormat.withHeader(CSVOutputSubscription.CSV_HEADER);
-            // initialize CSVPrinter object
-            csvPrinter = new CSVPrinter(fileWriter, csvFormat);
+        // prepare header
+        csvFormat = csvFormat.withHeader(CSVOutputSubscription.CSV_HEADER);
 
+        // write CSV file
+        try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_SUBSCRIPTION_REPORT_FILE));
+            CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
             for (Map.Entry<Long, CSVOutputSubscription> item : outsubs.entrySet()) {
-                csvPrinter.printRecord(item.getValue().getCSVRow());
+                printer.printRecord(item.getValue().getCSVRow());
             }
-        }
-        finally {
-            fileWriter.flush();
-            fileWriter.close();
-            csvPrinter.close();
         }
     }
 
@@ -195,17 +187,13 @@ public class OutputWriter {
             matchMap.put(new Pair<>(match.systemId, match.productId), match);
         }
 
-        FileWriter fileWriter = null;
-        CSVPrinter csvPrinter = null;
-        try {
-            // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
-            // print CSV file header
-            csvFormat = csvFormat.withHeader(CSVOutputSystem.CSV_HEADER);
-            // initialize CSVPrinter object
-            csvPrinter = new CSVPrinter(fileWriter, csvFormat);
+        // prepare header
+        csvFormat = csvFormat.withHeader(CSVOutputSystem.CSV_HEADER);
 
-            // fill output object's system fields
+        // write CSV file
+        try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
+                CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
+
             for (System system : systems) {
                 List<String> unmatchedProductNames = systemProductFacts.stream()
                     .filter(sp -> sp.systemId.equals(system.id))
@@ -224,14 +212,9 @@ public class OutputWriter {
                         system.cpus,
                         unmatchedProductNames
                     );
-                    csvPrinter.printRecords(csvSystem.getCSVRows());
+                    printer.printRecords(csvSystem.getCSVRows());
                 }
             }
-        }
-        finally {
-            fileWriter.flush();
-            fileWriter.close();
-            csvPrinter.close();
         }
     }
 
@@ -242,15 +225,12 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVMessageReport(Assignment assignment) throws IOException {
-        FileWriter fileWriter = null;
-        CSVPrinter csvPrinter = null;
-        try {
-            // initialize FileWriter object
-            fileWriter = new FileWriter(new File(outputDirectory, CSV_MESSAGE_REPORT_FILE));
-            // print CSV file header
-            csvFormat = csvFormat.withHeader(CSVOutputMessage.CSV_HEADER);
-            // initialize CSVPrinter object
-            csvPrinter = new CSVPrinter(fileWriter, csvFormat);
+        // prepare header
+        csvFormat = csvFormat.withHeader(CSVOutputMessage.CSV_HEADER);
+
+        // write CSV file
+        try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_MESSAGE_REPORT_FILE));
+                CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
 
             List<Message> messages = assignment.getProblemFacts().stream()
                 .filter(o -> o instanceof Message)
@@ -261,13 +241,8 @@ public class OutputWriter {
 
             for (Message message: messages) {
                 CSVOutputMessage csvMessage = new CSVOutputMessage(message.type, message.data);
-                csvPrinter.printRecords(csvMessage.getCSVRows());
+                printer.printRecords(csvMessage.getCSVRows());
             }
-        }
-        finally {
-            fileWriter.flush();
-            fileWriter.close();
-            csvPrinter.close();
         }
     }
 }
