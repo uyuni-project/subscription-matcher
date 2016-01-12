@@ -1,5 +1,5 @@
-Scenario 7 - Invalid pin data
-=============================
+Scenario 11 - Pinning
+=====================
 
 This scenario defines 2 virtual hosts with either
 two virtual systems on top of it.
