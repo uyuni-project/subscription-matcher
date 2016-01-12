@@ -95,31 +95,14 @@ public class FactConverter {
     public static JsonOutput convertToOutput(Assignment assignment) {
         JsonOutput output = new JsonOutput();
 
-        List<SystemProduct> systemProductFacts = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof SystemProduct)
-                .map(object -> (SystemProduct) object)
-                .collect(Collectors.toList());
+        Collection<SystemProduct> systemProductFacts = assignment.getProblemFacts(SystemProduct.class);
+        Collection<SubscriptionProduct> subscriptionProductFacts = assignment.getProblemFacts(SubscriptionProduct.class);
+        Collection<HostGuest> hostGuestFacts = assignment.getProblemFacts(HostGuest.class);
 
-        List<SubscriptionProduct> subscriptionProductFacts = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof SubscriptionProduct)
-                .map(object -> (SubscriptionProduct) object)
-                .collect(Collectors.toList());
+        output.timestamp = assignment.getProblemFactStream(CurrentTime.class)
+                .findFirst().get().timestamp;
 
-        List<HostGuest> hostGuestFacts = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof HostGuest)
-                .map(object -> (HostGuest) object)
-                .collect(Collectors.toList());
-
-        output.timestamp = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof CurrentTime)
-                .map(object -> (CurrentTime) object)
-                .findFirst()
-                .get()
-                .timestamp;
-
-        output.systems = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof System)
-                .map(object -> (System) object)
+        output.systems = assignment.getProblemFactStream(System.class)
                 .sorted((a, b) -> a.id.compareTo(b.id))
                 .map(s -> new JsonSystem(
                     s.id,
@@ -140,9 +123,7 @@ public class FactConverter {
                 .collect(Collectors.toList())
         ;
 
-        output.products = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof Product)
-                .map(object -> (Product) object)
+        output.products = assignment.getProblemFactStream(Product.class)
                 .sorted((a, b) -> a.id.compareTo(b.id))
                 .map(p -> new JsonProduct(
                         p.id,
@@ -152,9 +133,7 @@ public class FactConverter {
         ;
 
 
-        output.subscriptions = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof Subscription)
-                .map(object -> (Subscription) object)
+        output.subscriptions = assignment.getProblemFactStream(Subscription.class)
                 .sorted((a, b) -> a.id.compareTo(b.id))
                 .map(s -> new JsonSubscription(
                         s.id,
@@ -173,9 +152,7 @@ public class FactConverter {
                 .collect(Collectors.toList())
         ;
 
-        output.pinnedMatches = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof PinnedMatch)
-                .map(object -> (PinnedMatch) object)
+        output.pinnedMatches = assignment.getProblemFactStream(PinnedMatch.class)
                 .sorted((a, b) -> a.subscriptionId.equals(b.subscriptionId) ?
                         a.systemId.compareTo(b.systemId) :
                         a.subscriptionId.compareTo(b.subscriptionId))
@@ -197,9 +174,7 @@ public class FactConverter {
                 .collect(Collectors.toList())
         ;
 
-        output.messages = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof Message)
-                .map(object -> (Message) object)
+        output.messages = assignment.getProblemFactStream(Message.class)
                 .sorted()
                 .map(m -> new JsonMessage(
                         m.type,
@@ -225,9 +200,7 @@ public class FactConverter {
             .map(m -> m.id)
             .collect(toSet());
 
-        Stream<Match> freeMatches = assignment.getProblemFacts().stream()
-                .filter(o -> o instanceof FreeMatch)
-                .map(o -> (FreeMatch) o)
+        Stream<Match> freeMatches = assignment.getProblemFactStream(FreeMatch.class)
                 .filter(m -> nonFreeIds.contains(m.requiredMatchId))
                 .map(m -> new Match(null, m.systemId, m.productId, m.subscriptionId, 0));
 
