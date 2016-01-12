@@ -136,9 +136,9 @@ public class OutputWriter {
             if (outsubs.containsKey(subscriptionId)) {
                 // convert from cents to count
                 // we want the partial matches (e.g. only 20 cents of a
-                // subscription is used)
-                // to be counted as an used subscription
-                outsubs.get(subscriptionId).setMatched((int) Math.ceil(cents / 100));
+                // subscription is used) to be counted as an used subscription
+                // see http://www.cs.nott.ac.uk/~psarb2/G51MPC/slides/NumberLogic.pdf
+                outsubs.get(subscriptionId).setMatched((cents + 100 - 1) / 100);
             }
             else {
                 // error
