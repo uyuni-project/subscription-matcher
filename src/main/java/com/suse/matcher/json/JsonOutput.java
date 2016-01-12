@@ -1,9 +1,6 @@
 package com.suse.matcher.json;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,34 +9,25 @@ import java.util.List;
  */
 public class JsonOutput {
 
-    /** The compliant systems. */
-    public List<JsonOutputSystem> compliantSystems = new LinkedList<>();
+    /** Date and time of the match */
+    public Date timestamp;
 
-    /**
-     * The partially compliant systems (at least one compliant and one
-     * non-compliant product installed).
-     */
-    public List<JsonOutputSystem> partiallyCompliantSystems = new LinkedList<>();
+    /** The systems */
+    public List<JsonSystem> systems = new LinkedList<>();
 
-    /** The non compliant systems. */
-    public List<JsonOutputSystem> nonCompliantSystems = new LinkedList<>();
+    /** The products */
+    public List<JsonProduct> products = new LinkedList<>();
 
-    /** The remaining subscriptions after the matching. */
-    public List<JsonOutputSubscription> remainingSubscriptions = new LinkedList<>();
+    /** The subscriptions */
+    public List<JsonSubscription> subscriptions = new LinkedList<>();
 
-    /** The messages. */
-    public List<JsonOutputMessage> messages = new LinkedList<>();
+    /** The pinned matches */
+    public List<JsonMatch> pinnedMatches = new LinkedList<>();
 
-    /** {@inheritDoc} */
-    @Override
-    public boolean equals(Object objIn) {
-        return EqualsBuilder.reflectionEquals(this, objIn);
-    }
+    /** The confirmed matches */
+    public List<JsonMatch> confirmedMatches = new LinkedList<>();
 
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+    /** The messages */
+    public List<JsonMessage> messages = new LinkedList<>();
+
 }
-

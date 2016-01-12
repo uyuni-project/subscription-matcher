@@ -15,28 +15,20 @@ import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
 import com.suse.matcher.json.JsonInput;
-import com.suse.matcher.json.JsonInputPinnedMatch;
-import com.suse.matcher.json.JsonInputProduct;
-import com.suse.matcher.json.JsonInputSubscription;
-import com.suse.matcher.json.JsonInputSystem;
+import com.suse.matcher.json.JsonMatch;
+import com.suse.matcher.json.JsonMessage;
 import com.suse.matcher.json.JsonOutput;
-import com.suse.matcher.json.JsonOutputMessage;
-import com.suse.matcher.json.JsonOutputProduct;
-import com.suse.matcher.json.JsonOutputSubscription;
-import com.suse.matcher.json.JsonOutputSystem;
+import com.suse.matcher.json.JsonProduct;
+import com.suse.matcher.json.JsonSubscription;
+import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
-import org.apache.commons.math3.util.Pair;
-
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,7 +50,7 @@ public class FactConverter {
 
         result.add(new CurrentTime(timestamp));
 
-        for (JsonInputSystem system : input.systems) {
+        for (JsonSystem system : input.systems) {
             result.add(new System(system.id, system.name, system.cpus, system.physical));
             for (Long guestId : system.virtualSystemIds) {
                 result.add(new HostGuest(system.id, guestId));
@@ -68,11 +60,11 @@ public class FactConverter {
             }
         }
 
-        for (JsonInputProduct product : input.products) {
+        for (JsonProduct product : input.products) {
             result.add(new Product(product.id, product.name));
         }
 
-        for (JsonInputSubscription subscription : input.subscriptions) {
+        for (JsonSubscription subscription : input.subscriptions) {
             result.add(new Subscription(
                 subscription.id,
                 subscription.partNumber,
@@ -87,7 +79,7 @@ public class FactConverter {
             }
         }
 
-        for (JsonInputPinnedMatch match : input.pinnedMatches) {
+        for (JsonMatch match : input.pinnedMatches) {
             result.add(new PinnedMatch(match.systemId, match.subscriptionId));
         }
 
@@ -101,105 +93,120 @@ public class FactConverter {
      * @return the output
      */
     public static JsonOutput convertToOutput(Assignment assignment) {
-        // extract facts from assignment by type
-        Collection<Match> confirmedMatchFacts = getConfirmedMatches(assignment);
-
-        Stream<System> systemFacts = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof System)
-                .map(object -> (System) object);
+        JsonOutput output = new JsonOutput();
 
         List<SystemProduct> systemProductFacts = assignment.getProblemFacts().stream()
                 .filter(object -> object instanceof SystemProduct)
                 .map(object -> (SystemProduct) object)
                 .collect(Collectors.toList());
 
-        // prepare map from (system id, product id) to Match object
-        Map<Pair<Long, Long>, Match> matchMap = new HashMap<>();
-        for (Match match : confirmedMatchFacts) {
-            matchMap.put(new Pair<>(match.systemId, match.productId), match);
-        }
-
-        // prepare map from system id to set of product ids
-        Map<Long, List<Long>> systemMap = systemFacts
-                .collect(Collectors.toMap(
-                        system -> system.id,
-                        system -> Stream.concat(
-                                confirmedMatchFacts.stream()
-                                    .filter(match -> match.systemId.equals(system.id))
-                                    .map(match -> match.productId),
-                                systemProductFacts.stream()
-                                    .filter(systemProduct -> systemProduct.systemId.equals(system.id))
-                                    .map(systemProduct -> systemProduct.productId)
-                            ).distinct().sorted().collect(Collectors.toList()),
-                        (id1, id2) -> id1,
-                        TreeMap::new
-                ));
-
-        // fill output object's system fields
-        JsonOutput output = new JsonOutput();
-        for (Long systemId : systemMap.keySet()) {
-            JsonOutputSystem system = new JsonOutputSystem(systemId);
-
-            boolean compliantProductExists = false;
-            boolean allProductsCompliant = true;
-            Collection<Long> productIds = systemMap.get(systemId);
-            if (productIds != null) {
-                for (Long productId : productIds) {
-                    JsonOutputProduct product = new JsonOutputProduct(productId);
-
-                    Match match = matchMap.get(new Pair<>(system.id, product.id));
-                    if (match != null) {
-                        product.subscriptionId = match.subscriptionId;
-                        product.subscriptionCents = match.cents;
-                    }
-                    compliantProductExists = compliantProductExists || (match != null);
-                    allProductsCompliant = allProductsCompliant && (match != null);
-
-                    system.products.add(product);
-                }
-            }
-
-            if (allProductsCompliant) {
-                output.compliantSystems.add(system);
-            }
-            else {
-                if (compliantProductExists) {
-                    output.partiallyCompliantSystems.add(system);
-                }
-                else {
-                    output.nonCompliantSystems.add(system);
-                }
-            }
-        }
-
-        // fill output object's remaining subscriptions field
-        Collection<Subscription> subscriptions = assignment.getProblemFacts().stream()
-                .filter(o -> o instanceof Subscription)
-                .map(s -> (Subscription) s)
-                .filter(s -> !s.ignored)
-                .sorted()
+        List<SubscriptionProduct> subscriptionProductFacts = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof SubscriptionProduct)
+                .map(object -> (SubscriptionProduct) object)
                 .collect(Collectors.toList());
 
-        Map<Long, Integer> remainings = new TreeMap<>();
-        for (Subscription subscription : subscriptions) {
-            remainings.put(subscription.id, subscription.quantity * 100);
-        }
-        for (Match match : confirmedMatchFacts) {
-            remainings.put(match.subscriptionId, remainings.get(match.subscriptionId) - match.cents);
-        }
-        for (Subscription subscription : subscriptions) {
-            Integer remaining = remainings.get(subscription.id);
-            if (remaining > 0) {
-                output.remainingSubscriptions.add(new JsonOutputSubscription(subscription.id, remaining));
-            }
-        }
+        List<HostGuest> hostGuestFacts = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof HostGuest)
+                .map(object -> (HostGuest) object)
+                .collect(Collectors.toList());
 
-        // fill output object's messages field
-        assignment.getProblemFacts().stream()
-            .filter(o -> o instanceof Message)
-            .map(o -> (Message) o)
-            .sorted()
-            .forEach(m -> output.messages.add(new JsonOutputMessage(m.type, m.data)));
+        output.timestamp = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof CurrentTime)
+                .map(object -> (CurrentTime) object)
+                .findFirst()
+                .get()
+                .timestamp;
+
+        output.systems = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof System)
+                .map(object -> (System) object)
+                .sorted((a, b) -> a.id.compareTo(b.id))
+                .map(s -> new JsonSystem(
+                    s.id,
+                    s.name,
+                    s.cpus,
+                    s.physical,
+                    hostGuestFacts.stream()
+                        .filter(hg -> hg.hostId.equals(s.id))
+                        .map(hg -> hg.guestId)
+                        .sorted()
+                        .collect(Collectors.toList()),
+                    systemProductFacts.stream()
+                        .filter(sp -> sp.systemId.equals(s.id))
+                        .map(sp -> sp.productId)
+                        .sorted()
+                        .collect(Collectors.toList())
+                ))
+                .collect(Collectors.toList())
+        ;
+
+        output.products = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof Product)
+                .map(object -> (Product) object)
+                .sorted((a, b) -> a.id.compareTo(b.id))
+                .map(p -> new JsonProduct(
+                        p.id,
+                        p.name
+                ))
+                .collect(Collectors.toList())
+        ;
+
+
+        output.subscriptions = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof Subscription)
+                .map(object -> (Subscription) object)
+                .sorted((a, b) -> a.id.compareTo(b.id))
+                .map(s -> new JsonSubscription(
+                        s.id,
+                        s.partNumber,
+                        s.name,
+                        s.quantity,
+                        s.startDate,
+                        s.endDate,
+                        s.sccUsername,
+                        subscriptionProductFacts.stream()
+                            .filter(sp -> sp.subscriptionId.equals(s.id))
+                            .map(sp -> sp.productId)
+                            .sorted()
+                            .collect(Collectors.toSet())
+                ))
+                .collect(Collectors.toList())
+        ;
+
+        output.pinnedMatches = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof PinnedMatch)
+                .map(object -> (PinnedMatch) object)
+                .sorted((a, b) -> a.subscriptionId.equals(b.subscriptionId) ?
+                        a.systemId.compareTo(b.systemId) :
+                        a.subscriptionId.compareTo(b.subscriptionId))
+                .map(pm -> new JsonMatch(
+                        pm.systemId,
+                        pm.subscriptionId
+                ))
+                .collect(Collectors.toList())
+        ;
+
+        output.confirmedMatches = getConfirmedMatches(assignment).stream()
+                .sorted()
+                .map(m -> new JsonMatch(
+                        m.systemId,
+                        m.subscriptionId,
+                        m.productId,
+                        m.cents
+                ))
+                .collect(Collectors.toList())
+        ;
+
+        output.messages = assignment.getProblemFacts().stream()
+                .filter(object -> object instanceof Message)
+                .map(object -> (Message) object)
+                .sorted()
+                .map(m -> new JsonMessage(
+                        m.type,
+                        m.data
+                ))
+                .collect(Collectors.toList())
+        ;
 
         return output;
     }

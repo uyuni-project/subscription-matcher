@@ -4,27 +4,28 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.util.Map;
+
 /**
- * JSON representation of a product in the matcher's output.
+ * JSON representation of a user message generated during the match (error, warning, etc.).
  */
-public class JsonOutputProduct {
+public class JsonMessage {
 
-    /** The id. */
-    public Long id;
+    /** A label identifying the message type. */
+    public String type;
 
-    /** A matching subscription ID or null. */
-    public Long subscriptionId;
-
-    /** The amount of used subscription cents or null */
-    public Integer subscriptionCents;
+    /** Arbitrary data connected to this message. */
+    public Map<String, String> data;
 
     /**
-     * Standard constructor.
+     * Instantiates a new json output message.
      *
-     * @param idIn the id
+     * @param typeIn the type
+     * @param dataIn the data
      */
-    public JsonOutputProduct(Long idIn) {
-        id = idIn;
+    public JsonMessage(String typeIn, Map<String, String> dataIn) {
+        type = typeIn;
+        data = dataIn;
     }
 
     /** {@inheritDoc} */
