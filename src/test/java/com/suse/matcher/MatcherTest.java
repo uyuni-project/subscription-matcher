@@ -102,19 +102,24 @@ public class MatcherTest {
 
         JsonIO io = new JsonIO();
 
-        assertEquals("compliant systems",
-                io.toJson(expectedOutput.compliantSystems),
-                io.toJson(actualOutput.compliantSystems));
-        assertEquals("partially compliant systems",
-                io.toJson(expectedOutput.partiallyCompliantSystems),
-                io.toJson(actualOutput.partiallyCompliantSystems)
-        );
-        assertEquals("non compliant systems",
-                io.toJson(expectedOutput.nonCompliantSystems),
-                io.toJson(actualOutput.nonCompliantSystems));
-        assertEquals("remaining subscriptions",
-                io.toJson(expectedOutput.remainingSubscriptions),
-                io.toJson(actualOutput.remainingSubscriptions));
+        assertEquals("timestamp",
+                io.toJson(expectedOutput.timestamp),
+                io.toJson(actualOutput.timestamp));
+        assertEquals("systems",
+                io.toJson(expectedOutput.systems),
+                io.toJson(actualOutput.systems));
+        assertEquals("products",
+                io.toJson(expectedOutput.products),
+                io.toJson(actualOutput.products));
+        assertEquals("subscriptions",
+                io.toJson(expectedOutput.subscriptions),
+                io.toJson(actualOutput.subscriptions));
+        assertEquals("pinnedMatches",
+                io.toJson(expectedOutput.pinnedMatches),
+                io.toJson(actualOutput.pinnedMatches));
+        assertEquals("confirmedMatches",
+                io.toJson(expectedOutput.confirmedMatches),
+                io.toJson(actualOutput.confirmedMatches));
         assertEquals("messages",
                 io.toJson(expectedOutput.messages),
                 io.toJson(actualOutput.messages));

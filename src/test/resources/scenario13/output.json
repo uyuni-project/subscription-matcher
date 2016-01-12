@@ -1,13 +1,18 @@
 {
-  "compliant_systems": [
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "systems": [
     {
       "id": 100,
-      "products": []
+      "cpus": 16,
+      "physical": true,
+      "virtual_system_ids": [],
+      "product_ids": []
     }
   ],
-  "partially_compliant_systems": [],
-  "non_compliant_systems": [],
-  "remaining_subscriptions": [],
+  "products": [],
+  "subscriptions": [],
+  "pinned_matches": [],
+  "confirmed_matches": [],
   "messages": [
     {
       "type": "unknown_cpu_count",

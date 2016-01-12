@@ -1,20 +1,28 @@
 {
-  "compliant_systems": [],
-  "partially_compliant_systems": [],
-  "non_compliant_systems": [],
-  "remaining_subscriptions": [
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "systems": [],
+  "products": [],
+  "subscriptions": [
     {
       "id": 1,
-      "cents": 300
+      "part_number": "UNKNOWN-PART-NUMBER",
+      "quantity": 3,
+      "start_date": "2013-08-01T02:00:00.000+02",
+      "end_date": "2015-07-31T02:00:00.000+02",
+      "scc_username": "UC7",
+      "product_ids": [
+        666
+      ]
     }
   ],
+  "pinned_matches": [],
+  "confirmed_matches": [],
   "messages": [
     {
       "type": "unknown_part_number",
-      "data": 
-        {
-          "part_number": "UNKNOWN-PART-NUMBER"
-        }
+      "data": {
+        "part_number": "UNKNOWN-PART-NUMBER"
+      }
     }
   ]
 }
