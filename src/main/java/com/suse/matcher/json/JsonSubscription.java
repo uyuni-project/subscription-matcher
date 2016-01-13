@@ -32,28 +32,4 @@ public class JsonSubscription {
 
     /** Provided product IDs */
     public Set<Long> productIds = new HashSet<Long>();
-
-    /**
-     * Standard constructor.
-     *
-     * @param idIn the id
-     * @param partNumberIn the part number
-     * @param nameIn the name
-     * @param quantityIn the number of available subscriptions
-     * @param startDateIn the start date
-     * @param endDateIn the end date
-     * @param sccUsernameIn the SCC Username
-     * @param productIdsIn the provided product IDs
-     */
-    public JsonSubscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn,
-            Date endDateIn, String sccUsernameIn, Set<Long> productIdsIn) {
-        id = idIn;
-        partNumber = partNumberIn;
-        name = nameIn;
-        quantity = quantityIn;
-        startDate = startDateIn;
-        endDate = endDateIn;
-        sccUsername = sccUsernameIn;
-        productIds = productIdsIn;
-    }
 }

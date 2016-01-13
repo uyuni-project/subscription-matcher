@@ -1,9 +1,5 @@
 package com.suse.matcher.json;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import java.util.Map;
 
 /**
@@ -26,17 +22,5 @@ public class JsonMessage {
     public JsonMessage(String typeIn, Map<String, String> dataIn) {
         type = typeIn;
         data = dataIn;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean equals(Object objIn) {
-        return EqualsBuilder.reflectionEquals(this, objIn);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

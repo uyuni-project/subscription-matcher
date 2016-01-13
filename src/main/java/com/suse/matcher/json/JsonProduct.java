@@ -10,15 +10,4 @@ public class JsonProduct {
 
     /** A friendly name. */
     public String name;
-
-    /**
-     * Standard constructor.
-     *
-     * @param idIn the id
-     * @param nameIn the name
-     */
-    public JsonProduct(Long idIn, String nameIn) {
-        id = idIn;
-        name = nameIn;
-    }
 }

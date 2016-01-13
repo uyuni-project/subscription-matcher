@@ -17,5 +17,4 @@ public class JsonOutput {
 
     /** The messages */
     public List<JsonMessage> messages = new LinkedList<>();
-
 }
