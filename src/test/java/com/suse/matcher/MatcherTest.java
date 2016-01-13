@@ -105,18 +105,6 @@ public class MatcherTest {
         assertEquals("timestamp",
                 io.toJson(expectedOutput.timestamp),
                 io.toJson(actualOutput.timestamp));
-        assertEquals("systems",
-                io.toJson(expectedOutput.systems),
-                io.toJson(actualOutput.systems));
-        assertEquals("products",
-                io.toJson(expectedOutput.products),
-                io.toJson(actualOutput.products));
-        assertEquals("subscriptions",
-                io.toJson(expectedOutput.subscriptions),
-                io.toJson(actualOutput.subscriptions));
-        assertEquals("pinnedMatches",
-                io.toJson(expectedOutput.pinnedMatches),
-                io.toJson(actualOutput.pinnedMatches));
         assertEquals("confirmedMatches",
                 io.toJson(expectedOutput.confirmedMatches),
                 io.toJson(actualOutput.confirmedMatches));

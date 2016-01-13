@@ -12,18 +12,6 @@ public class JsonOutput {
     /** Date and time of the match */
     public Date timestamp;
 
-    /** The systems */
-    public List<JsonSystem> systems = new LinkedList<>();
-
-    /** The products */
-    public List<JsonProduct> products = new LinkedList<>();
-
-    /** The subscriptions */
-    public List<JsonSubscription> subscriptions = new LinkedList<>();
-
-    /** The pinned matches */
-    public List<JsonMatch> pinnedMatches = new LinkedList<>();
-
     /** The confirmed matches */
     public List<JsonMatch> confirmedMatches = new LinkedList<>();
 
