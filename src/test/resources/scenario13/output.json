@@ -1,17 +1,5 @@
 {
   "timestamp": "2015-05-01T00:00:00.000+02",
-  "systems": [
-    {
-      "id": 100,
-      "cpus": 16,
-      "physical": true,
-      "virtual_system_ids": [],
-      "product_ids": []
-    }
-  ],
-  "products": [],
-  "subscriptions": [],
-  "pinned_matches": [],
   "confirmed_matches": [],
   "messages": [
     {

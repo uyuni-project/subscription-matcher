@@ -1,33 +1,5 @@
 {
   "timestamp": "2015-05-01T00:00:00.000+02",
-  "systems": [
-    {
-      "id": 100,
-      "cpus": 4,
-      "physical": true,
-      "virtual_system_ids": [
-        101
-      ],
-      "product_ids": []
-    },
-    {
-      "id": 101,
-      "cpus": 4,
-      "physical": false,
-      "virtual_system_ids": [],
-      "product_ids": []
-    },
-    {
-      "id": 102,
-      "cpus": 4,
-      "physical": true,
-      "virtual_system_ids": [],
-      "product_ids": []
-    }
-  ],
-  "products": [],
-  "subscriptions": [],
-  "pinned_matches": [],
   "confirmed_matches": [],
   "messages": [
     {
