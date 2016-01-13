@@ -1,7 +1,7 @@
 package com.suse.matcher.json;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * JSON representation of a system.
@@ -21,8 +21,8 @@ public class JsonSystem {
     public Boolean physical;
 
     /** Virtual machine IDs */
-    public List<Long> virtualSystemIds = new LinkedList<Long>();
+    public Set<Long> virtualSystemIds = new LinkedHashSet<>();
 
     /** Installed product IDs */
-    public List<Long> productIds = new LinkedList<Long>();
+    public Set<Long> productIds = new LinkedHashSet<>();
 }

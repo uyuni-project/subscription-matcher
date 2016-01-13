@@ -1,7 +1,7 @@
 package com.suse.matcher.json;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -31,5 +31,5 @@ public class JsonSubscription {
     public String sccUsername;
 
     /** Provided product IDs */
-    public Set<Long> productIds = new HashSet<Long>();
+    public Set<Long> productIds = new LinkedHashSet<>();
 }

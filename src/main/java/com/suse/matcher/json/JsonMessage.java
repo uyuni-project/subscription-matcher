@@ -1,5 +1,6 @@
 package com.suse.matcher.json;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -11,7 +12,7 @@ public class JsonMessage {
     public String type;
 
     /** Arbitrary data connected to this message. */
-    public Map<String, String> data;
+    public Map<String, String> data = new LinkedHashMap<>();
 
     /**
      * Instantiates a new json output message.
