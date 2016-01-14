@@ -255,7 +255,8 @@
             "physical": true,
             "product_ids": [
                 1298
-            ]
+            ],
+            "virtual_system_ids" : []
         },
         {
             "cpus": 8,
@@ -263,7 +264,8 @@
             "physical": true,
             "product_ids": [
                 1298
-            ]
+            ],
+            "virtual_system_ids" : []
         }
     ]
 }

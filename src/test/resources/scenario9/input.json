@@ -167,7 +167,8 @@
             "product_ids": [
                 1300,
                 1288
-            ]
+            ],
+            "virtual_system_ids" : []
         }
     ]
 }

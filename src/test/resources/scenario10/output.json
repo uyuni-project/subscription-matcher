@@ -1,20 +1,12 @@
 {
-  "compliant_systems": [],
-  "partially_compliant_systems": [],
-  "non_compliant_systems": [],
-  "remaining_subscriptions": [
-    {
-      "id": 1,
-      "cents": 300
-    }
-  ],
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "confirmed_matches": [],
   "messages": [
     {
       "type": "unknown_part_number",
-      "data": 
-        {
-          "part_number": "UNKNOWN-PART-NUMBER"
-        }
+      "data": {
+        "part_number": "UNKNOWN-PART-NUMBER"
+      }
     }
   ]
 }

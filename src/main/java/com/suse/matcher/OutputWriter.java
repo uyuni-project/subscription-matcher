@@ -107,9 +107,7 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVSubscriptionReport(Assignment assignment) throws IOException {
-        Stream<Subscription> subscriptions = assignment.getProblemFacts().stream()
-            .filter(object -> object instanceof Subscription)
-            .map(object -> (Subscription) object)
+        Stream<Subscription> subscriptions = assignment.getProblemFactStream(Subscription.class)
             .filter(s -> s.policy != null);
 
         Map<Long, CSVOutputSubscription> outsubs = new TreeMap<Long, CSVOutputSubscription>();
@@ -136,9 +134,9 @@ public class OutputWriter {
             if (outsubs.containsKey(subscriptionId)) {
                 // convert from cents to count
                 // we want the partial matches (e.g. only 20 cents of a
-                // subscription is used)
-                // to be counted as an used subscription
-                outsubs.get(subscriptionId).setMatched((int) Math.ceil(cents / 100));
+                // subscription is used) to be counted as an used subscription
+                // see http://www.cs.nott.ac.uk/~psarb2/G51MPC/slides/NumberLogic.pdf
+                outsubs.get(subscriptionId).setMatched((cents + 100 - 1) / 100);
             }
             else {
                 // error
@@ -166,20 +164,13 @@ public class OutputWriter {
     public void writeCSVSystemReport(Assignment assignment) throws IOException {
         Collection<Match> confirmedMatchFacts = FactConverter.getConfirmedMatches(assignment);
 
-        List<System> systems = assignment.getProblemFacts().stream()
-            .filter(object -> object instanceof System)
-            .map(object -> (System) object)
-            .collect(Collectors.toList());
+        List<System> systems = assignment.getProblemFactStream(System.class)
+                .sorted((a, b) -> a.id.compareTo(b.id))
+                .collect(Collectors.toList());
 
-        List<SystemProduct> systemProductFacts = assignment.getProblemFacts().stream()
-            .filter(object -> object instanceof SystemProduct)
-            .map(object -> (SystemProduct) object)
-            .collect(Collectors.toList());
+        Collection<SystemProduct> systemProducts = assignment.getProblemFacts(SystemProduct.class);
 
-        List<Product> products = assignment.getProblemFacts().stream()
-            .filter(object -> object instanceof Product)
-            .map(object -> (Product) object)
-            .collect(Collectors.toList());
+        Collection<Product> products = assignment.getProblemFacts(Product.class);
 
         // prepare map from (system id, product id) to Match object
         Map<Pair<Long, Long>, Match> matchMap = new HashMap<>();
@@ -194,8 +185,9 @@ public class OutputWriter {
         try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
                 CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
 
+
             for (System system : systems) {
-                List<String> unmatchedProductNames = systemProductFacts.stream()
+                List<String> unmatchedProductNames = systemProducts.stream()
                     .filter(sp -> sp.systemId.equals(system.id))
                     .filter(sp -> matchMap.get(new Pair<>(sp.systemId, sp.productId)) == null)
                     .map(sp -> { return products.stream()
@@ -203,6 +195,7 @@ public class OutputWriter {
                             .map(p -> p.name)
                             .findFirst()
                             .orElse("Unknown product (" + sp.productId + ")");})
+                    .sorted()
                     .collect(Collectors.toList());
 
                 if (!unmatchedProductNames.isEmpty()) {
@@ -232,9 +225,7 @@ public class OutputWriter {
         try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_MESSAGE_REPORT_FILE));
                 CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
 
-            List<Message> messages = assignment.getProblemFacts().stream()
-                .filter(o -> o instanceof Message)
-                .map(o -> (Message) o)
+            List<Message> messages = assignment.getProblemFactStream(Message.class)
                 .filter(m -> m.severity != Message.Level.DEBUG)
                 .sorted()
                 .collect(Collectors.toList());

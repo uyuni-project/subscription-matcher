@@ -22,9 +22,7 @@ public class MessageCollector {
      */
     public static void addMessages(Assignment assignment) {
         // filter out interesting collections from facts
-        Stream<PinnedMatch> pinnedMatchFacts = assignment.getProblemFacts().stream()
-                .filter(object -> object instanceof PinnedMatch)
-                .map(object -> (PinnedMatch) object);
+        Stream<PinnedMatch> pinnedMatchFacts = assignment.getProblemFactStream(PinnedMatch.class);
 
         Collection<Match> confirmedMatchFacts = FactConverter.getConfirmedMatches(assignment);
 

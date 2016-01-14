@@ -1,48 +1,30 @@
 {
-  "compliant_systems": [
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "confirmed_matches": [
     {
-      "id": 100,
-      "products": [
-        {
-          "id": 814,
-          "subscription_id": 1,
-          "subscription_cents": 100
-        }
-      ]
+      "system_id": 100,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 100
     },
     {
-      "id": 200,
-      "products": [
-        {
-          "id": 814,
-          "subscription_id": 2,
-          "subscription_cents": 100
-        }
-      ]
+      "system_id": 200,
+      "subscription_id": 2,
+      "product_id": 814,
+      "cents": 100
     },
     {
-      "id": 300,
-      "products": [
-        {
-          "id": 814,
-          "subscription_id": 2,
-          "subscription_cents": 100
-        }
-      ]
+      "system_id": 300,
+      "subscription_id": 2,
+      "product_id": 814,
+      "cents": 100
     },
     {
-      "id": 400,
-      "products": [
-        {
-          "id": 814,
-          "subscription_id": 1,
-          "subscription_cents": 100
-        }
-      ]
+      "system_id": 400,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 100
     }
   ],
-  "partially_compliant_systems": [],
-  "non_compliant_systems": [],
-  "remaining_subscriptions": [],
   "messages": []
 }

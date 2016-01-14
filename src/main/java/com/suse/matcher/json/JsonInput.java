@@ -8,14 +8,14 @@ import java.util.List;
 public class JsonInput {
 
     /** The systems */
-    public List<JsonInputSystem> systems;
+    public List<JsonSystem> systems;
 
     /** The products */
-    public List<JsonInputProduct> products;
+    public List<JsonProduct> products;
 
     /** The subscriptions */
-    public List<JsonInputSubscription> subscriptions;
+    public List<JsonSubscription> subscriptions;
 
     /** The pinned matches */
-    public List<JsonInputPinnedMatch> pinnedMatches;
+    public List<JsonMatch> pinnedMatches;
 }

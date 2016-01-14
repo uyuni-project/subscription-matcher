@@ -1,21 +1,6 @@
 {
-  "compliant_systems": [
-    {
-      "id": 100,
-      "products": []
-    },
-    {
-      "id": 101,
-      "products": []
-    },
-    {
-      "id": 102,
-      "products": []
-    }
-  ],
-  "partially_compliant_systems": [],
-  "non_compliant_systems": [],
-  "remaining_subscriptions": [],
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "confirmed_matches": [],
   "messages": [
     {
       "type": "guest_with_unknown_host",

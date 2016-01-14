@@ -1,37 +1,11 @@
 {
-  "compliant_systems": [
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "confirmed_matches": [
     {
-      "id": 100,
-      "products": [
-        {
-          "id": 1117,
-          "subscription_id": 4,
-          "subscription_cents": 200
-        }
-      ]
-    }
-  ],
-  "partially_compliant_systems": [],
-  "non_compliant_systems": [
-    {
-      "id": 200,
-      "products": [
-        {
-          "id": 1117,
-          "subscription_id": null,
-          "subscription_quantity": null
-        }
-      ]
-    }
-  ],
-  "remaining_subscriptions": [
-    {
-      "id": 4,
-      "cents": 100
-    },
-    {
-      "id": 5,
-      "cents": 300
+      "system_id": 100,
+      "subscription_id": 4,
+      "product_id": 1117,
+      "cents": 200
     }
   ],
   "messages": []
