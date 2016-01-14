@@ -103,13 +103,13 @@ public class MatcherTest {
         JsonIO io = new JsonIO();
 
         assertEquals("timestamp",
-                io.toJson(expectedOutput.timestamp),
-                io.toJson(actualOutput.timestamp));
+                io.toJson(expectedOutput.getTimestamp()),
+                io.toJson(actualOutput.getTimestamp()));
         assertEquals("confirmedMatches",
-                io.toJson(expectedOutput.confirmedMatches),
-                io.toJson(actualOutput.confirmedMatches));
+                io.toJson(expectedOutput.getConfirmedMatches()),
+                io.toJson(actualOutput.getConfirmedMatches()));
         assertEquals("messages",
-                io.toJson(expectedOutput.messages),
-                io.toJson(actualOutput.messages));
+                io.toJson(expectedOutput.getMessages()),
+                io.toJson(actualOutput.getMessages()));
     }
 }

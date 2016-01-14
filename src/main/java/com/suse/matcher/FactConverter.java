@@ -50,37 +50,37 @@ public class FactConverter {
 
         result.add(new CurrentTime(timestamp));
 
-        for (JsonSystem system : input.systems) {
-            result.add(new System(system.id, system.name, system.cpus, system.physical));
-            for (Long guestId : system.virtualSystemIds) {
-                result.add(new HostGuest(system.id, guestId));
+        for (JsonSystem system : input.getSystems()) {
+            result.add(new System(system.getId(), system.getName(), system.getCpus(), system.getPhysical()));
+            for (Long guestId : system.getVirtualSystemIds()) {
+                result.add(new HostGuest(system.getId(), guestId));
             }
-            for (Long productId : system.productIds) {
-                result.add(new SystemProduct(system.id, productId));
+            for (Long productId : system.getProductIds()) {
+                result.add(new SystemProduct(system.getId(), productId));
             }
         }
 
-        for (JsonProduct product : input.products) {
-            result.add(new Product(product.id, product.name));
+        for (JsonProduct product : input.getProducts()) {
+            result.add(new Product(product.getId(), product.getName()));
         }
 
-        for (JsonSubscription subscription : input.subscriptions) {
+        for (JsonSubscription subscription : input.getSubscriptions()) {
             result.add(new Subscription(
-                subscription.id,
-                subscription.partNumber,
-                subscription.name,
-                subscription.quantity,
-                subscription.startDate,
-                subscription.endDate,
-                subscription.sccUsername
+                    subscription.getId(),
+                    subscription.getPartNumber(),
+                    subscription.getName(),
+                    subscription.getQuantity(),
+                    subscription.getStartDate(),
+                    subscription.getEndDate(),
+                    subscription.getSccUsername()
             ));
-            for (Long productId : subscription.productIds) {
-                result.add(new SubscriptionProduct(subscription.id, productId));
+            for (Long productId : subscription.getProductIds()) {
+                result.add(new SubscriptionProduct(subscription.getId(), productId));
             }
         }
 
-        for (JsonMatch match : input.pinnedMatches) {
-            result.add(new PinnedMatch(match.systemId, match.subscriptionId));
+        for (JsonMatch match : input.getPinnedMatches()) {
+            result.add(new PinnedMatch(match.getSystemId(), match.getSubscriptionId()));
         }
 
         return result;
@@ -93,12 +93,10 @@ public class FactConverter {
      * @return the output
      */
     public static JsonOutput convertToOutput(Assignment assignment) {
-        JsonOutput output = new JsonOutput();
-
-        output.timestamp = assignment.getProblemFactStream(CurrentTime.class)
+        Date timestamp = assignment.getProblemFactStream(CurrentTime.class)
                 .findFirst().get().timestamp;
 
-        output.confirmedMatches = getConfirmedMatches(assignment).stream()
+        List<JsonMatch> confirmedMatches = getConfirmedMatches(assignment).stream()
                 .sorted()
                 .map(m -> new JsonMatch(
                         m.systemId,
@@ -108,7 +106,7 @@ public class FactConverter {
                 ))
                 .collect(Collectors.toList());
 
-        output.messages = assignment.getProblemFactStream(Message.class)
+        List<JsonMessage> messages = assignment.getProblemFactStream(Message.class)
                 .sorted()
                 .map(m -> new JsonMessage(
                         m.type,
@@ -116,7 +114,7 @@ public class FactConverter {
                 ))
                 .collect(Collectors.toList());
 
-        return output;
+        return new JsonOutput(timestamp, confirmedMatches, messages);
     }
 
     /**
