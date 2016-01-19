@@ -39,7 +39,7 @@ public class OutputWriter {
     private static final String JSON_INPUT_FILE = "input.json";
     private static final String JSON_OUTPUT_FILE = "output.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
-    private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_systems_report.csv";
+    private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_system_report.csv";
     private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
 
     /** The output directory. */
