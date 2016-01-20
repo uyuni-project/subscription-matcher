@@ -18,6 +18,16 @@ rule "ignoreExpiredSubscription"
         }
 end
 
+rule "ignoreNotActiveSubscriptions"
+    when
+        $subscription : Subscription(startDate == null) or
+        $subscription : Subscription(endDate == null)
+    then
+        modify($subscription) {
+            ignored = true;
+        }
+end
+
 rule "ignoreSubscriptionWithoutQuantity"
     when
         $subscription: Subscription(quantity == null)
