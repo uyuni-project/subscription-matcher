@@ -113,7 +113,6 @@ public class OutputWriter {
         Map<Long, CSVOutputSubscription> outsubs = new TreeMap<Long, CSVOutputSubscription>();
         subscriptions.forEach(s -> {
             CSVOutputSubscription csvs = new CSVOutputSubscription(
-                s.id,
                 s.partNumber,
                 s.name,
                 s.policy.toString(),
