@@ -12,7 +12,7 @@ import java.util.TimeZone;
 public class CSVOutputSubscription {
 
     /** Header for the CSV output. */
-    public static final String[] CSV_HEADER = { "Subscription ID", "Part Number", "Product Description",
+    public static final String[] CSV_HEADER = { "Subscription ID", "Part Number", "Description",
             "Policy", "Total Quantity", "Matched Quantity", "Start Date", "End Date"};
 
     /** The subscription id. */
