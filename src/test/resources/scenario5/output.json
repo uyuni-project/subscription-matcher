@@ -8,5 +8,9 @@
       "cents": 200
     }
   ],
+  "subscription_policies": {
+    "4": "unlimited_virtualization",
+    "5": "unlimited_virtualization"
+  },
   "messages": []
 }

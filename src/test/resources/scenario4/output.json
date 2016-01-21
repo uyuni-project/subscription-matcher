@@ -14,5 +14,9 @@
       "cents": 400
     }
   ],
+  "subscription_policies": {
+    "4": "physical_only",
+    "5": "unlimited_virtualization"
+  },
   "messages": []
 }

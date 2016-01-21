@@ -108,6 +108,9 @@ public class MatcherTest {
         assertEquals("confirmedMatches",
                 io.toJson(expectedOutput.getConfirmedMatches()),
                 io.toJson(actualOutput.getConfirmedMatches()));
+        assertEquals("subscriptionPolices",
+                io.toJson(expectedOutput.getSubscriptionPolicies()),
+                io.toJson(actualOutput.getSubscriptionPolicies()));
         assertEquals("messages",
                 io.toJson(expectedOutput.getMessages()),
                 io.toJson(actualOutput.getMessages()));

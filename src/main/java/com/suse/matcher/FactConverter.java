@@ -26,10 +26,12 @@ import com.suse.matcher.solver.Match;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -118,9 +120,20 @@ public class FactConverter {
         Map<Long, String> subscriptionPolicies = assignment
                 .getProblemFactStream(Subscription.class)
                 .filter(s -> s.getPolicy() != null)
-                .collect(Collectors.toMap(s -> s.getId(), s -> s.getPolicy().toString()));
+                .sorted()
+                .collect(Collectors.toMap(
+                        s -> s.getId(),
+                        s -> s.getPolicy().name().toLowerCase(),
+                        throwingMerger(),
+                        LinkedHashMap::new));
 
         return new JsonOutput(timestamp, confirmedMatches, messages, subscriptionPolicies);
+    }
+
+    private static BinaryOperator<String> throwingMerger() {
+        return (u,v) -> {
+            throw new IllegalStateException(String.format("Duplicate key %s", u));
+        };
     }
 
     /**

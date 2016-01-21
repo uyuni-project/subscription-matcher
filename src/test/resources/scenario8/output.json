@@ -20,5 +20,8 @@
       "cents": 50
     }
   ],
+  "subscription_policies": {
+    "1": "one_two"
+  },
   "messages": []
 }
