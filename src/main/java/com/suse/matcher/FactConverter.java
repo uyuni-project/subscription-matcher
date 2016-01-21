@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -114,7 +115,12 @@ public class FactConverter {
                 ))
                 .collect(Collectors.toList());
 
-        return new JsonOutput(timestamp, confirmedMatches, messages);
+        Map<Long, String> subscriptionPolicies = assignment
+                .getProblemFactStream(Subscription.class)
+                .filter(s -> s.getPolicy() != null)
+                .collect(Collectors.toMap(s -> s.getId(), s -> s.getPolicy().toString()));
+
+        return new JsonOutput(timestamp, confirmedMatches, messages, subscriptionPolicies);
     }
 
     /**
