@@ -26,5 +26,9 @@
       "cents": 100
     }
   ],
+  "subscription_policies": {
+    "2": "physical_only",
+    "3": "unlimited_virtualization"
+  },
   "messages": []
 }

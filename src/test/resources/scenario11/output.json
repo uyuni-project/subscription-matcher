@@ -38,5 +38,9 @@
       "cents": 0
     }
   ],
+  "subscription_policies": {
+    "1": "unlimited_virtualization",
+    "2": "unlimited_virtualization"
+  },
   "messages": []
 }

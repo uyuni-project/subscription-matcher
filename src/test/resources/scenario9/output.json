@@ -20,5 +20,9 @@
       "cents": 0
     }
   ],
+  "subscription_policies": {
+    "4": "unlimited_virtualization",
+    "5": "instance"
+  },
   "messages": []
 }
