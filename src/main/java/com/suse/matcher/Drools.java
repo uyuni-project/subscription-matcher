@@ -38,7 +38,6 @@ public class Drools {
 
         // add rule files to engine
         KieFileSystem kfs = services.newKieFileSystem();
-        kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/FreeProducts.drl"));
         kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/InputValidation.drl"));
         kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/Matchability.drl"));
         kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/PartNumbers.drl"));

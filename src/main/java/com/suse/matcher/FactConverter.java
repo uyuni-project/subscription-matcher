@@ -64,7 +64,7 @@ public class FactConverter {
         }
 
         for (JsonProduct product : input.getProducts()) {
-            result.add(new Product(product.getId(), product.getName()));
+            result.add(new Product(product.getId(), product.getName(), product.getFree()));
         }
 
         for (JsonSubscription subscription : input.getSubscriptions()) {

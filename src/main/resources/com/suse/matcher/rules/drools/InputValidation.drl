@@ -3,6 +3,7 @@ package com.suse.matcher.rules.drools;
 import java.util.TreeMap;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Message;
+import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
@@ -49,6 +50,14 @@ rule "retractBlacklistedProduct"
         $systemProduct : SystemProduct(productId == 1241) or
         // open_enterprise_server 11.2
         $systemProduct : SystemProduct(productId == 1242)
+    then
+        retract($systemProduct);
+end
+
+rule "retractFreeProduct"
+    when
+        Product($productId : id, free == true)
+        $systemProduct : SystemProduct(productId == $productId)
     then
         retract($systemProduct);
 end

@@ -18,15 +18,20 @@ public class Product {
     /** The friendly name. */
     public String name;
 
+    /** true if this is a free product. */
+    private Boolean free;
+
     /**
      * Instantiates a new product.
      *
      * @param idIn the product id
      * @param nameIn the friendly name
+     * @param freeIn true if this is a free product
      */
-    public Product(Long idIn, String nameIn) {
+    public Product(Long idIn, String nameIn, Boolean freeIn) {
         id = idIn;
         name = nameIn;
+        free = freeIn;
     }
 
     /**
@@ -45,6 +50,15 @@ public class Product {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Checks if the product is free.
+     *
+     * @return true if this is a free product
+     */
+    public Boolean getFree() {
+        return free;
     }
 
     /** {@inheritDoc} */
