@@ -37,32 +37,37 @@ public class Main {
      * @throws Exception if anything unexpected happens
      */
     public static final void main(String[] args) throws Exception {
-        long start = System.currentTimeMillis();
-        CommandLine commandLine = parseCommandLine(args);
+        try {
+            long start = System.currentTimeMillis();
+            CommandLine commandLine = parseCommandLine(args);
 
-        // create output writer object
-        Optional<Character> delimiter = commandLine.hasOption('d') ?
-                of(commandLine.getOptionValue('d').charAt(0)) :
-                empty();
-        Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
-        OutputWriter writer = new OutputWriter(outdir, delimiter);
+            // create output writer object
+            Optional<Character> delimiter = commandLine.hasOption('d') ?
+                    of(commandLine.getOptionValue('d').charAt(0)) :
+                    empty();
+            Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
+            OutputWriter writer = new OutputWriter(outdir, delimiter);
 
-        // load input data
-        String inputString = commandLine.hasOption('i') ?
-                FileUtils.readFileToString(new File(commandLine.getOptionValue('i'))) :
-                IOUtils.toString(System.in);
+            // load input data
+            String inputString = commandLine.hasOption('i') ?
+                    FileUtils.readFileToString(new File(commandLine.getOptionValue('i'))) :
+                    IOUtils.toString(System.in);
 
-        // save a copy of input data in the output directory
-        writer.writeJsonInput(inputString);
+            // save a copy of input data in the output directory
+            writer.writeJsonInput(inputString);
 
-        // do the matching
-        JsonInput input = new JsonIO().loadInput(inputString);
-        Assignment assignment = new Matcher(false).match(input, new Date());
+            // do the matching
+            JsonInput input = new JsonIO().loadInput(inputString);
+            Assignment assignment = new Matcher(false).match(input, new Date());
 
-        // write output data
-        writer.writeOutput(assignment);
+            // write output data
+            writer.writeOutput(assignment);
 
-        logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
+            logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
+        }
+        catch (Exception e) {
+            logger.error("Unexpected exception: ", e);
+        }
     }
 
     private static CommandLine parseCommandLine(String[] args) {
