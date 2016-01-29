@@ -110,7 +110,7 @@ public class OutputWriter {
         Stream<Subscription> subscriptions = assignment.getProblemFactStream(Subscription.class)
             .filter(s -> s.policy != null)
             .filter(s -> s.startDate != null && s.endDate != null)
-            .filter(s -> s.quantity > 0);
+            .filter(s -> s.quantity != null && s.quantity > 0);
 
         Map<Long, CSVOutputSubscription> outsubs = new TreeMap<Long, CSVOutputSubscription>();
         subscriptions.forEach(s -> {
