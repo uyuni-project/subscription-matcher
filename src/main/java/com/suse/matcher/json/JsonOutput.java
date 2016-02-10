@@ -58,6 +58,7 @@ public class JsonOutput {
      * @param timestampIn the timestamp
      * @param confirmedMatchesIn the confirmed matches
      * @param messagesIn the messages
+     * @param subscriptionPoliciesIn mapping from subscription id to its policy
      */
     public JsonOutput(Date timestampIn, List<JsonMatch> confirmedMatchesIn,
             List<JsonMessage> messagesIn, Map<Long, String> subscriptionPoliciesIn) {
@@ -113,10 +114,10 @@ public class JsonOutput {
 
     /**
      * Sets the subscription to policy mapping.
-     * @param subscriptionPolicies subscription to policy map
+     * @param subscriptionPoliciesIn subscription to policy map
      */
-    public void setSubscriptionPolicies(Map<Long, String> subscriptionPolicies) {
-        this.subscriptionPolicies = subscriptionPolicies;
+    public void setSubscriptionPolicies(Map<Long, String> subscriptionPoliciesIn) {
+        this.subscriptionPolicies = subscriptionPoliciesIn;
     }
 
     /**
