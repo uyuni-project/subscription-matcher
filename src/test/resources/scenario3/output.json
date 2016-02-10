@@ -1,29 +1,47 @@
 {
   "timestamp": "2015-05-01T00:00:00.000+02",
-  "confirmed_matches": [
+  "matches": [
     {
       "system_id": 500,
       "subscription_id": 3,
       "product_id": 1138,
-      "cents": 100
+      "cents": 100,
+      "confirmed": true
     },
     {
       "system_id": 600,
       "subscription_id": 3,
       "product_id": 1138,
-      "cents": 100
+      "cents": 100,
+      "confirmed": true
     },
     {
       "system_id": 1000,
       "subscription_id": 2,
       "product_id": 814,
-      "cents": 100
+      "cents": 100,
+      "confirmed": true
+    },
+    {
+      "system_id": 1000,
+      "subscription_id": 3,
+      "product_id": 814,
+      "cents": 100,
+      "confirmed": false
     },
     {
       "system_id": 2000,
       "subscription_id": 2,
       "product_id": 814,
-      "cents": 100
+      "cents": 100,
+      "confirmed": true
+    },
+    {
+      "system_id": 2000,
+      "subscription_id": 3,
+      "product_id": 814,
+      "cents": 100,
+      "confirmed": false
     }
   ],
   "subscription_policies": {

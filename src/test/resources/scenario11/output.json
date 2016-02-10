@@ -1,41 +1,89 @@
 {
   "timestamp": "2015-05-01T00:00:00.000+02",
-  "confirmed_matches": [
+  "matches": [
     {
       "system_id": 100,
       "subscription_id": 1,
       "product_id": 814,
-      "cents": 100
+      "cents": 100,
+      "confirmed": true
+    },
+    {
+      "system_id": 100,
+      "subscription_id": 2,
+      "product_id": 814,
+      "cents": 100,
+      "confirmed": false
     },
     {
       "system_id": 101,
       "subscription_id": 1,
       "product_id": 814,
-      "cents": 0
+      "cents": 0,
+      "confirmed": true
+    },
+    {
+      "system_id": 101,
+      "subscription_id": 2,
+      "product_id": 814,
+      "cents": 0,
+      "confirmed": false
     },
     {
       "system_id": 102,
       "subscription_id": 1,
       "product_id": 814,
-      "cents": 0
+      "cents": 0,
+      "confirmed": true
+    },
+    {
+      "system_id": 102,
+      "subscription_id": 2,
+      "product_id": 814,
+      "cents": 0,
+      "confirmed": false
+    },
+    {
+      "system_id": 200,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 100,
+      "confirmed": false
     },
     {
       "system_id": 200,
       "subscription_id": 2,
       "product_id": 814,
-      "cents": 100
+      "cents": 100,
+      "confirmed": true
+    },
+    {
+      "system_id": 201,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 0,
+      "confirmed": false
     },
     {
       "system_id": 201,
       "subscription_id": 2,
       "product_id": 814,
-      "cents": 0
+      "cents": 0,
+      "confirmed": true
+    },
+    {
+      "system_id": 202,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 0,
+      "confirmed": false
     },
     {
       "system_id": 202,
       "subscription_id": 2,
       "product_id": 814,
-      "cents": 0
+      "cents": 0,
+      "confirmed": true
     }
   ],
   "subscription_policies": {

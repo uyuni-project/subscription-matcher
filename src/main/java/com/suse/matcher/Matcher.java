@@ -59,7 +59,7 @@ public class Matcher {
                 PossibleMatch possibleMatch = (PossibleMatch) fact;
 
                 Match match = new Match(possibleMatch.id, possibleMatch.systemId, possibleMatch.productId,
-                        possibleMatch.subscriptionId, possibleMatch.cents);
+                        possibleMatch.subscriptionId, possibleMatch.cents, null);
                 matches.add(match);
             }
             else {

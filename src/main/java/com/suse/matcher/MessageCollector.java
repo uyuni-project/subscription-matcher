@@ -24,7 +24,7 @@ public class MessageCollector {
         // filter out interesting collections from facts
         Stream<PinnedMatch> pinnedMatchFacts = assignment.getProblemFactStream(PinnedMatch.class);
 
-        Collection<Match> confirmedMatchFacts = FactConverter.getConfirmedMatches(assignment);
+        Collection<Match> confirmedMatchFacts = FactConverter.getMatches(assignment, true);
 
         // add messages about unsatisfied pins
         Collection<Message> messages = new LinkedList<Message>();

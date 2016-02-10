@@ -1,7 +1,7 @@
 package com.suse.matcher;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Stream.concat;
 
 import com.suse.matcher.facts.CurrentTime;
@@ -30,7 +30,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -99,13 +98,14 @@ public class FactConverter {
         Date timestamp = assignment.getProblemFactStream(CurrentTime.class)
                 .findFirst().get().timestamp;
 
-        List<JsonMatch> confirmedMatches = getConfirmedMatches(assignment).stream()
+        List<JsonMatch> confirmedMatches = getMatches(assignment, false).stream()
                 .sorted()
                 .map(m -> new JsonMatch(
                         m.systemId,
                         m.subscriptionId,
                         m.productId,
-                        m.cents
+                        m.cents,
+                        m.confirmed
                 ))
                 .collect(Collectors.toList());
 
@@ -139,22 +139,25 @@ public class FactConverter {
     /**
      * Returns a list of confirmed {@link Match} objects including free ones.
      * @param assignment the assignment
+     * @param confirmedOnly true if only confirmed matches should be returned
      * @return confirmed matches
      */
-    public static List<Match> getConfirmedMatches(Assignment assignment) {
-        List<Match> nonFreeMatches = assignment.getMatches().stream()
-            .filter(m -> m.confirmed)
-            .collect(toList());
-
-        Set<Long> nonFreeIds = nonFreeMatches.stream()
-            .map(m -> m.id)
-            .collect(toSet());
+    public static List<Match> getMatches(Assignment assignment, boolean confirmedOnly) {
+        Map<Long, Match> matchMap = assignment.getMatches().stream()
+            .collect(toMap(m -> m.id, m -> m));
 
         Stream<Match> freeMatches = assignment.getProblemFactStream(FreeMatch.class)
-                .filter(m -> nonFreeIds.contains(m.requiredMatchId))
-                .map(m -> new Match(null, m.systemId, m.productId, m.subscriptionId, 0));
+            .map(m -> new Match(
+                    null,
+                    m.systemId,
+                    m.productId,
+                    m.subscriptionId,
+                    0,
+                    matchMap.get(m.requiredMatchId).confirmed)
+             );
 
-        return concat(nonFreeMatches.stream(), freeMatches)
+        return concat(matchMap.values().stream(), freeMatches)
+            .filter(m -> !confirmedOnly || m.confirmed)
             .sorted()
             .collect(toList());
     }

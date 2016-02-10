@@ -44,14 +44,15 @@ public class Match implements Comparable<Match> {
      * @param productIdIn an id of a product
      * @param subscriptionIdIn an id of subscription assigned to the system
      * @param centsIn the number of subscription cents used in this match
+     * @param confirmedIn confirmation status
      */
-    public Match(Long idIn, Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn) {
+    public Match(Long idIn, Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn, Boolean confirmedIn) {
         id = idIn;
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
         cents = centsIn;
-        confirmed = null;
+        confirmed = confirmedIn;
     }
 
     /**

@@ -1,17 +1,26 @@
 {
   "timestamp": "2015-05-01T00:00:00.000+02",
-  "confirmed_matches": [
+  "matches": [
     {
       "system_id": 100,
       "subscription_id": 4,
       "product_id": 1298,
-      "cents": 100
+      "cents": 100,
+      "confirmed": true
+    },
+    {
+      "system_id": 100,
+      "subscription_id": 5,
+      "product_id": 1298,
+      "cents": 200,
+      "confirmed": false
     },
     {
       "system_id": 200,
       "subscription_id": 5,
       "product_id": 1298,
-      "cents": 400
+      "cents": 400,
+      "confirmed": true
     }
   ],
   "subscription_policies": {
