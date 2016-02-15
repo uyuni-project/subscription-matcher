@@ -127,11 +127,16 @@
             <artifactId>optaplanner-core</artifactId>
             <version>6.3.0.Final</version>
         </dependency>
-        <!-- Override dependency to match SLES shipped version -->
+        <!-- Override dependencies to match SLES shipped version -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>2.6.1</version>
         </dependency>
 
         <dependency>
