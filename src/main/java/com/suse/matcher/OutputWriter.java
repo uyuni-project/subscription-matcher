@@ -2,7 +2,7 @@ package com.suse.matcher;
 
 import com.suse.matcher.csv.CSVOutputMessage;
 import com.suse.matcher.csv.CSVOutputSubscription;
-import com.suse.matcher.csv.CSVOutputSystem;
+import com.suse.matcher.csv.CSVOutputUnmatchedProduct;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
@@ -26,9 +26,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * Writes output (to disk or standard output).
@@ -39,7 +45,7 @@ public class OutputWriter {
     private static final String JSON_INPUT_FILE = "input.json";
     private static final String JSON_OUTPUT_FILE = "output.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
-    private static final String CSV_UNMATCHED_SYSTEMS_REPORT_FILE = "unmatched_system_report.csv";
+    private static final String CSV_UNMATCHED_PRODUCT_REPORT_FILE = "unmatched_product_report.csv";
     private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
 
     /** The output directory. */
@@ -72,7 +78,7 @@ public class OutputWriter {
     public void writeOutput(Assignment assignment) throws IOException {
         writeJsonOutput(assignment);
         writeCSVSubscriptionReport(assignment);
-        writeCSVSystemReport(assignment);
+        writeCSVUnmatchedProductReport(assignment);
         writeCSVMessageReport(assignment);
     }
 
@@ -157,12 +163,12 @@ public class OutputWriter {
     }
 
     /**
-     * Writes the CSV system report.
+     * Writes the CSV report of unmatched products and corresponding systems.
      *
      * @param assignment output from {@link Matcher}
      * @throws IOException if an I/O error occurs
      */
-    public void writeCSVSystemReport(Assignment assignment) throws IOException {
+    public void writeCSVUnmatchedProductReport(Assignment assignment) throws IOException {
         Collection<Match> confirmedMatchFacts = FactConverter.getMatches(assignment, true);
 
         List<System> systems = assignment.getProblemFactStream(System.class)
@@ -170,7 +176,6 @@ public class OutputWriter {
                 .collect(Collectors.toList());
 
         Collection<SystemProduct> systemProducts = assignment.getProblemFacts(SystemProduct.class);
-
         Collection<Product> products = assignment.getProblemFacts(Product.class);
 
         // prepare map from (system id, product id) to Match object
@@ -180,36 +185,44 @@ public class OutputWriter {
         }
 
         // prepare header
-        csvFormat = csvFormat.withHeader(CSVOutputSystem.CSV_HEADER);
+        csvFormat = csvFormat.withHeader(CSVOutputUnmatchedProduct.CSV_HEADER);
 
         // write CSV file
-        try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_UNMATCHED_SYSTEMS_REPORT_FILE));
-                CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
-
-
-            for (System system : systems) {
-                List<String> unmatchedProductNames = systemProducts.stream()
-                    .filter(sp -> sp.systemId.equals(system.id))
+        try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_UNMATCHED_PRODUCT_REPORT_FILE));
+             CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
+            // create map of product id -> set of systems ids with this product and filter out successful matches
+            Map<Long, Set<Long>> unmatchedProductSystems = systemProducts.stream()
                     .filter(sp -> matchMap.get(new Pair<>(sp.systemId, sp.productId)) == null)
-                    .map(sp -> { return products.stream()
-                            .filter(p -> p.id.equals(sp.productId))
-                            .map(p -> p.name)
-                            .findFirst()
-                            .orElse("Unknown product (" + sp.productId + ")");})
-                    .sorted()
-                    .collect(Collectors.toList());
+                    .collect(groupingBy(
+                            SystemProduct::getProductId,
+                            mapping(SystemProduct::getSystemId, toSet())));
 
-                if (!unmatchedProductNames.isEmpty()) {
-                    CSVOutputSystem csvSystem = new CSVOutputSystem(
-                        system.id,
-                        system.name,
-                        system.cpus,
-                        unmatchedProductNames
-                    );
-                    printer.printRecords(csvSystem.getCSVRows());
-                }
+            List<CSVOutputUnmatchedProduct> unmatchedProductsCsvs = unmatchedProductSystems.entrySet().stream()
+                    .map(e -> new CSVOutputUnmatchedProduct(
+                            productNameById(products, e.getKey()),
+                            e.getValue().stream().map(sid -> systemById(systems, sid)).collect(toList())))
+                    .collect(toList());
+
+            for (CSVOutputUnmatchedProduct csv : unmatchedProductsCsvs) {
+                // cant use java 8 forEach as printer throws a checked exception
+                printer.printRecords(csv.getCSVRows());
             }
         }
+    }
+
+    private System systemById(Collection<System> systems, Long systemId) {
+        return systems.stream()
+                .filter(s -> systemId.equals(s.getId()))
+                .findFirst()
+                .get();
+    }
+
+    private String productNameById(Collection<Product> products, Long productId) {
+        return products.stream()
+                .filter(p -> p.id.equals(productId))
+                .map(p -> p.name)
+                .findFirst()
+                .orElse("Unknown product (" + productId + ")");
     }
 
     /**
