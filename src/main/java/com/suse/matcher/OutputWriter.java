@@ -22,6 +22,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,8 +204,9 @@ public class OutputWriter {
                             e.getValue().stream().map(sid -> systemById(systems, sid)).collect(toList())))
                     .collect(toList());
 
+            // cant use java 8 forEach as printer throws a checked exception
             for (CSVOutputUnmatchedProduct csv : unmatchedProductsCsvs) {
-                // cant use java 8 forEach as printer throws a checked exception
+                Collections.sort(csv.getUnmatchedSystems(), ((s1, s2) -> s1.name.compareTo(s2.name)));
                 printer.printRecords(csv.getCSVRows());
             }
         }

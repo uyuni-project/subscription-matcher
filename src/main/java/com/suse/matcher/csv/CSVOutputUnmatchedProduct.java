@@ -32,6 +32,15 @@ public class CSVOutputUnmatchedProduct {
     }
 
     /**
+     * Gets the unmatchedSystems.
+     *
+     * @return unmatchedSystems
+     */
+    public List<System> getUnmatchedSystems() {
+        return unmatchedSystems;
+    }
+
+    /**
      * Gets the CSV rows.
      * @return the CSV rows
      */
