@@ -12,7 +12,7 @@ import java.util.List;
 public class CSVOutputUnmatchedProduct {
 
     /**  Header for the CSV output. */
-    public static final String[] CSV_HEADER = { "Unmatched Product Name", "System Name","System ID", "CPUs"};
+    public static final String[] CSV_HEADER = {"Unmatched Product Name", "System Name","System ID", "CPUs"};
 
     /** The product name. */
     private String productName;
