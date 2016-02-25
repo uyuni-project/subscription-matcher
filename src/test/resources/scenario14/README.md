@@ -1,4 +1,4 @@
-Scenario 15 - post-2015 "1-2" on a physical machine with odd socket count
+Scenario 14 - post-2015 "1-2" on a physical machine with odd socket count
 =========================================================================
 
 This scenario defines a post-2015 "1-2" subscription (id 1) with quantity = 2
