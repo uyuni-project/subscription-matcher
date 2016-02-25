@@ -23,13 +23,14 @@ rule "dontExceedSubscriptionCount"
         Subscription($subscriptionId: id, $quantity : quantity, ignored == false)
         accumulate (
             Match($cents : cents, subscriptionId == $subscriptionId, confirmed == true);
-            $requiredCents : sum($cents);
-            $requiredCents > $quantity * 100
+            $requiredCents : sum($cents)
         )
     then
         scoreHolder.addHardConstraintMatch(kcontext,
-            // limit penalty to 10 points
-            -10 + $quantity * 100 * 9 / $requiredCents.intValue()
+            ($quantity * 100 - $requiredCents.intValue()) >= 0 ?
+                0 :
+                // limit penalty to 10 points
+                -10 + $quantity * 100 * 9 / $requiredCents.intValue()
         );
 end
 
