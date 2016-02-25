@@ -21,9 +21,10 @@ global HardSoftScoreHolder scoreHolder;
 rule "dontExceedSubscriptionCount"
     when
         Subscription($subscriptionId: id, $quantity : quantity, ignored == false)
-        $requiredCents : Number(intValue > $quantity * 100) from accumulate (
-            Match(subscriptionId == $subscriptionId, confirmed == true, $cents : cents),
-            sum($cents)
+        accumulate (
+            Match($cents : cents, subscriptionId == $subscriptionId, confirmed == true);
+            $requiredCents : sum($cents);
+            $requiredCents > $quantity * 100
         )
     then
         scoreHolder.addHardConstraintMatch(kcontext,
