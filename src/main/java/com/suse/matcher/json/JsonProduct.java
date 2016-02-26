@@ -43,17 +43,22 @@ public class JsonProduct {
     /** true if this is a free product. */
     private Boolean free;
 
+    /** true if this is a base product. */
+    private Boolean base;
+
     /**
      * Standard constructor.
      *
      * @param idIn the id
      * @param nameIn the name
      * @param freeIn true if this is a free product
+     * @param baseIn true if this is a base product
      */
-    public JsonProduct(Long idIn, String nameIn, Boolean freeIn) {
+    public JsonProduct(Long idIn, String nameIn, Boolean freeIn, Boolean baseIn) {
         id = idIn;
         name = nameIn;
         free = freeIn;
+        base = baseIn;
     }
 
     /**
@@ -108,5 +113,23 @@ public class JsonProduct {
      */
     public void setFree(Boolean freeIn) {
         free = freeIn;
+    }
+
+    /**
+     * Returns true if this is a base product.
+     *
+     * @return true if this is a base product
+     */
+    public Boolean getBase() {
+        return base;
+    }
+
+    /**
+     * Set to true if this is a base product.
+     *
+     * @param baseIn true if this is a base product
+     */
+    public void setBase(Boolean baseIn) {
+        base = baseIn;
     }
 }

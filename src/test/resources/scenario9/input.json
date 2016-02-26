@@ -3,11 +3,13 @@
     "products": [
         {
             "id": 1288,
-            "name": "SUSE Cloud 5 x86_64"
+            "name": "SUSE Cloud 5 x86_64",
+            "base": false
         },
         {
             "id": 1300,
-            "name": "SUSE Linux Enterprise Server 11 SP4 x86_64"
+            "name": "SUSE Linux Enterprise Server 11 SP4 x86_64",
+            "base": true
         }
     ],
     "subscriptions": [

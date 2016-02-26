@@ -21,17 +21,22 @@ public class Product {
     /** true if this is a free product. */
     private Boolean free;
 
+    /** true if this is a base product. */
+    private Boolean base;
+
     /**
      * Instantiates a new product.
      *
      * @param idIn the product id
      * @param nameIn the friendly name
      * @param freeIn true if this is a free product
+     * @param baseIn true if this is a base product
      */
-    public Product(Long idIn, String nameIn, Boolean freeIn) {
+    public Product(Long idIn, String nameIn, Boolean freeIn, Boolean baseIn) {
         id = idIn;
         name = nameIn;
         free = freeIn;
+        base = baseIn;
     }
 
     /**
@@ -59,6 +64,15 @@ public class Product {
      */
     public Boolean getFree() {
         return free;
+    }
+
+    /**
+     * Returns true if this is a base product.
+     *
+     * @return true if this is a base product
+     */
+    public Boolean getBase() {
+        return base;
     }
 
     /** {@inheritDoc} */

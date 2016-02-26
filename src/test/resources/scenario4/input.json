@@ -3,7 +3,8 @@
     "products": [
         {
             "id": 1298,
-            "name": "SUSE Linux Enterprise Server 11 SP4 i686"
+            "name": "SUSE Linux Enterprise Server 11 SP4 i686",
+            "base": true
         }
     ],
     "subscriptions": [
