@@ -2,9 +2,9 @@ package com.suse.matcher.rules.drools;
 
 import java.util.List;
 
-import com.suse.matcher.facts.FreeMatch;
 import com.suse.matcher.facts.HostGuest;
-import com.suse.matcher.facts.PossibleMatch;
+import com.suse.matcher.facts.IncompatibleGroups;
+import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.SubscriptionProduct;
@@ -23,7 +23,8 @@ rule "matchPhysicalOnlySubscription"
             ignored == false
         )
     then
-        insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, 100));
+        int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
+        insertLogical(new PartialMatch($system.id, $productId, $subscription.id, 100, groupId));
 end
 
 rule "matchInstanceSubscription"
@@ -38,7 +39,8 @@ rule "matchInstanceSubscription"
             ignored == false
         )
     then
-        insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, 100));
+        int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
+        insertLogical(new PartialMatch($system.id, $productId, $subscription.id, 100, groupId));
 end
 
 rule "matchUnlimitedVirtualizationSubscription"
@@ -60,16 +62,17 @@ rule "matchUnlimitedVirtualizationSubscription"
         )
     then
         Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
-        insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, consumedQuantity * 100));
+        int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
+        insertLogical(new PartialMatch($system.id, $productId, $subscription.id, consumedQuantity * 100, groupId));
 end
 
 rule "matchFreeVirtualizationSubscription"
     when
-        $match : PossibleMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
-        Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
-        HostGuest(hostId == $hostId, $guestId : guestId)
+      PartialMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId, $groupId : groupId)
+      Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
+      HostGuest(hostId == $hostId, $guestId : guestId)
     then
-        insertLogical(new FreeMatch($guestId, $productId, $subscriptionId, $match.id));
+      insertLogical(new PartialMatch($guestId, $productId, $subscriptionId, 0, $groupId));
 end
 
 rule "match12Subscription"
@@ -85,11 +88,21 @@ rule "match12Subscription"
         )
         not (HostGuest(hostId == $systemId))
     then
+        int groupId = PartialMatch.generateGroupId($systemId, $productId, $subscriptionId);
         if ($physical) {
-            insertLogical(new PossibleMatch($system.id, $productId, $subscription.id,
-                ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100));
+            insertLogical(new PartialMatch($system.id, $productId, $subscription.id,
+                ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100,
+                groupId));
         }
         else {
-            insertLogical(new PossibleMatch($system.id, $productId, $subscription.id, 50));
+            insertLogical(new PartialMatch($system.id, $productId, $subscription.id, 50, groupId));
         }
+end
+
+rule "findIncompatibleGroups"
+    when
+        PartialMatch($groupId1 : groupId, $systemId : systemId, $productId : productId, $subscriptionId : subscriptionId)
+        PartialMatch($groupId2 : groupId, groupId > $groupId1, systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId)
+    then
+        insertLogical(new IncompatibleGroups($groupId1, $groupId2));
 end

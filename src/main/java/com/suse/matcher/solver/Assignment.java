@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 /**
  * A set of {@link Match}es which is a subset of all
- * {@link com.suse.matcher.facts.PossibleMatch}es, as produced by OptaPlanner.
+ * {@link Match}es, as produced by OptaPlanner.
  */
 @PlanningSolution
 public class Assignment implements Solution<HardSoftScore> {
