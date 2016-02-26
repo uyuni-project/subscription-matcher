@@ -22,6 +22,8 @@ import org.kie.api.definition.type.PropertyReactive;
  */
 @PropertyReactive
 public class PossibleMatch {
+    /** Counter for the id. */
+    private static long maxId = 0;
 
     /** A unique identifier for this PossibleMatch. */
     public Long id;
@@ -51,7 +53,8 @@ public class PossibleMatch {
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
         cents = centsIn;
-        id = new Long(this.hashCode());
+        id = maxId;
+        maxId +=1;
     }
 
     /**
