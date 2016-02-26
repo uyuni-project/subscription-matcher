@@ -68,7 +68,7 @@ rule "maximizePinnedMatches"
         PinnedMatch($systemId : systemId, $subscriptionId : subscriptionId)
         Match(systemId == $systemId, subscriptionId == $subscriptionId, confirmed == true) or
         (
-            FreeMatch(systemId == $systemId, subscriptionId == $subscriptionId, $requiredMatchId : requiredMatchId) and
+            FreeMatch($requiredMatchId : requiredMatchId, systemId == $systemId, subscriptionId == $subscriptionId) and
             Match(id == $requiredMatchId, confirmed == true)
         )
     then
