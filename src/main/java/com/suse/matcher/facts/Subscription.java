@@ -41,7 +41,14 @@ public class Subscription implements Comparable<Subscription> {
          * as to a virtual system. It is meant for an instance but does not allow
          * any virtualization inheritance
          */
-        INSTANCE("Per-instance");
+        INSTANCE("Per-instance"),
+        /**
+         * This subscription refers to an extension product, as such it requires a
+         * compatible base product to be installed on the same system. Assuming the
+         * base product has a matching subscription, its policy it has will
+         * also be applied to the extension product.
+         */
+        INHERITED_VIRTUALIZATION("Inherited");
 
         private String description;
 
