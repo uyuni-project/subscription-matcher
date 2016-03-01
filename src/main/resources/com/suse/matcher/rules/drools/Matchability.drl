@@ -74,7 +74,8 @@ end
 
 rule "match12Subscription"
     when
-        $system : System($systemId : id, cpus != null)
+        // we want to explicitly bind 'physical' here as we want the rule to be reactivated on change of this attribute:
+        $system : System($systemId : id, $physical : physical, cpus != null)
         SystemProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
@@ -84,7 +85,7 @@ rule "match12Subscription"
         )
         not (HostGuest(hostId == $systemId))
     then
-        if ($system.physical) {
+        if ($physical) {
             insertLogical(new PossibleMatch($system.id, $productId, $subscription.id,
                 ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100));
         }
