@@ -1,0 +1,36 @@
+{
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "matches": [
+      {
+          "system_id": 100,
+          "subscription_id": 1,
+          "product_id": 814,
+          "cents": 200,
+          "confirmed": false
+      },
+      {
+          "system_id": 201,
+          "subscription_id": 1,
+          "product_id": 814,
+          "cents": 50,
+          "confirmed": false
+      }
+  ],
+  "subscription_policies": {
+      "1": "one_two"
+  },
+  "messages": [
+      {
+          "type": "guest_with_unknown_host",
+          "data": {
+              "id": "100"
+          }
+      },
+      {
+          "type": "physical_guest",
+          "data": {
+              "id": "201"
+          }
+      }
+  ]
+}
