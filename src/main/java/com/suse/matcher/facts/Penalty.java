@@ -31,6 +31,9 @@ public class Penalty {
     /** The subscription id. */
     public Long subscriptionId;
 
+    /** The host id. */
+    public Long hostId;
+
     /** The penalty cents. */
     public int cents;
 
@@ -38,10 +41,12 @@ public class Penalty {
      * Instantiates a new penalty.
      *
      * @param subscriptionIdIn the subscription id
+     * @param hostIdIn the host id
      * @param centsIn the penalty cents
      */
-    public Penalty(Long subscriptionIdIn, int centsIn) {
+    public Penalty(Long subscriptionIdIn, Long hostIdIn, int centsIn) {
         subscriptionId = subscriptionIdIn;
+        hostId = hostIdIn;
         cents = centsIn;
     }
 
@@ -52,6 +57,15 @@ public class Penalty {
      */
     public Long getSubscriptionId() {
         return subscriptionId;
+    }
+
+    /**
+     * Gets the host id.
+     *
+     * @return the host id
+     */
+    public Long getHostId() {
+        return hostId;
     }
 
     /**
@@ -68,6 +82,7 @@ public class Penalty {
     public int hashCode() {
         return new HashCodeBuilder()
             .append(subscriptionId)
+            .append(hostId)
             .append(cents)
             .toHashCode();
     }

@@ -37,7 +37,7 @@ rule "calculate12Penalties"
   then
     // ...add a 50 cent penalty. This ensures a whole number of subscriptions is
     // always used for the same host
-    insertLogical(new Penalty($subscriptionId, 50));
+    insertLogical(new Penalty($subscriptionId, $hostId, 50));
 end
 
 rule "dontExceedSubscriptionCount"
