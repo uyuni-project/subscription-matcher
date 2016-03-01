@@ -83,6 +83,22 @@ public class PartialMatch implements Comparable<PartialMatch> {
     }
 
     /**
+     * Generates a group id from given base id and subscription id
+     * (this subs is typically inherited virtualization).
+     *
+     * Note for myself: base group id already contains information about the base subscription,
+     * product and system. Interesting case: UV - the group id bears the information about
+     * the subscription, product and HOST.
+     */
+    public static int generateGroupIdFromBaseGroupId(int baseGroupId, long subscriptionId) {
+        return new HashCodeBuilder()
+            .append("FROM_BASE_GID") // todo check impl of HCB, probably this line is not needed
+            .append(baseGroupId)
+            .append(subscriptionId)
+            .toHashCode();
+    }
+
+    /**
      * Gets the system id.
      *
      * @return the system id

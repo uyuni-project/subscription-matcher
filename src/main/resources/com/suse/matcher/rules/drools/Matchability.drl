@@ -5,6 +5,7 @@ import java.util.List;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.IncompatibleGroups;
 import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.SubscriptionProduct;
@@ -73,6 +74,31 @@ rule "matchFreeVirtualizationSubscription"
       HostGuest(hostId == $hostId, $guestId : guestId)
     then
       insertLogical(new PartialMatch($guestId, $productId, $subscriptionId, 0, $groupId));
+end
+
+rule "matchInheritedVirtualization"
+    when
+        // for each match that has a base product
+        PartialMatch($productId : productId, $systemId : systemId, $subscriptionId : subscriptionId, $cents : cents, $groupId : groupId)
+        Product(id == $productId, base == true)
+
+        // an IV subscription to this system
+        Subscription($ivSubsId : id, policy == Policy.INHERITED_VIRTUALIZATION, ignored == false)
+        SubscriptionProduct(subscriptionId == $ivSubsId, $ivProdId : productId)
+        (
+            SystemProduct(productId == $ivProdId, systemId == $systemId) or
+            (
+                SystemProduct($guestId : systemId, productId == $ivProdId) and
+                HostGuest(hostId == $systemId, guestId == $guestId)
+            )
+        )
+
+        // if our group already contains a PM with this subscription, stop here, unless we want to activate this rule forever
+        not PartialMatch(groupId == $groupId, subscriptionId == $ivSubsId, systemId == $systemId)
+    then
+        int groupId = PartialMatch.generateGroupIdFromBaseGroupId($groupId, $subscriptionId);
+        insertLogical(new PartialMatch($systemId, $productId, $subscriptionId, $cents, groupId));
+        insertLogical(new PartialMatch($systemId, $ivProdId, $ivSubsId, $cents, groupId));
 end
 
 rule "match12Subscription"

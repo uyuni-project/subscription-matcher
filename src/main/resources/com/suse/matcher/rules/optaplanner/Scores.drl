@@ -14,7 +14,6 @@ import com.suse.matcher.solver.Match;
 
 global HardSoftScoreHolder scoreHolder;
 
-
 // Hard constraints: no solution can ever be produced if any of those is broken
 // (that is, score is less than 0). If that happens, we found a bug!
 
@@ -24,7 +23,7 @@ global HardSoftScoreHolder scoreHolder;
 rule "calculate12Penalties"
   when
     HostGuest($hostId : hostId)
-    Subscription($subscriptionId : id, policy == Policy.ONE_TWO, ignored == false)
+    Subscription($subscriptionId : id, policy != null && policy == Policy.ONE_TWO, ignored == false)
     accumulate (
         // count the number of VMs that use a certain 1:2 subscription on one host
         HostGuest($guestId : guestId, hostId == $hostId) and
