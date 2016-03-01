@@ -1,0 +1,44 @@
+{
+    "pinned_matches": [
+        {
+            "subscription_id": 1,
+            "system_id": 103
+        }
+    ],
+
+    "products": [
+        {
+            "id": 814,
+            "name": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+        }
+    ],
+    "subscriptions": [
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 1,
+            "part_number": "874-006875",
+            "product_ids": [
+                814
+            ],
+            "quantity": 2,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        }
+    ],
+    "systems": [
+        {
+            "cpus": 1,
+            "id": 100,
+            "physical": true,
+            "product_ids": [814],
+            "virtual_system_ids": []
+        },
+        {
+            "cpus": 3,
+            "id": 103,
+            "physical": true,
+            "product_ids": [814],
+            "virtual_system_ids": []
+        }
+    ]
+}

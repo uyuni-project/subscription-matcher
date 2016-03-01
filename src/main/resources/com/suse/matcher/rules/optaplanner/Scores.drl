@@ -2,7 +2,11 @@ package com.suse.matcher.rules.optaplanner;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
+import java.util.LinkedList;
+
 import com.suse.matcher.facts.FreeMatch;
+import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
@@ -18,17 +22,44 @@ global HardSoftScoreHolder scoreHolder;
 // Note that the construction heuristic must be able to construct a solution
 // with score 0, so that the final solution can never be unacceptable
 
+rule "calculate12Penalties"
+  when
+    // a 1-2 subscription is used for VMs on a certain host
+    Subscription($subscriptionId : id, policy == Policy.ONE_TWO) and
+    Match($systemId : systemId, subscriptionId == $subscriptionId, confirmed == true) and
+    HostGuest($hostId : hostId, guestId == $systemId)
+    accumulate (
+        // count the number of VMs that use that subscription on the host
+        Match($guestId : systemId, subscriptionId == $subscriptionId, confirmed == true) and
+        HostGuest(hostId == $hostId, guestId == $guestId);
+        $count : count();
+        // if the number of VMs is odd...
+        ($count % 2) == 1
+    )
+  then
+    // ...add a 50 cent penalty. This ensures a whole number of subscriptions is
+    // always used for the same host
+    insertLogical(new Penalty($subscriptionId, 50));
+end
+
 rule "dontExceedSubscriptionCount"
     when
         Subscription($subscriptionId: id, $quantity : quantity, ignored == false)
-        $requiredCents : Number(intValue > $quantity * 100) from accumulate (
-            Match(subscriptionId == $subscriptionId, confirmed == true, $cents : cents),
-            sum($cents)
+        accumulate (
+            Match($cents : cents, subscriptionId == $subscriptionId, confirmed == true);
+            $usedCents : sum($cents)
+        )
+        accumulate (
+            Penalty(subscriptionId == $subscriptionId, $cents: cents);
+            $penaltyCents : sum($cents)
         )
     then
+        int availableCents = $quantity * 100;
+        int totalUsedCents = $usedCents.intValue() + $penaltyCents.intValue();
         scoreHolder.addHardConstraintMatch(kcontext,
+            (availableCents - totalUsedCents) >= 0 ? 0 :
             // limit penalty to 10 points
-            -10 + $quantity * 100 * 9 / $requiredCents.intValue()
+            -10 + availableCents * 9 / totalUsedCents
         );
 end
 
@@ -67,10 +98,9 @@ rule "maximizePinnedMatches"
         PinnedMatch($systemId : systemId, $subscriptionId : subscriptionId)
         Match(systemId == $systemId, subscriptionId == $subscriptionId, confirmed == true) or
         (
-            FreeMatch(systemId == $systemId, subscriptionId == $subscriptionId, $requiredMatchId : requiredMatchId) and
+            FreeMatch($requiredMatchId : requiredMatchId, systemId == $systemId, subscriptionId == $subscriptionId) and
             Match(id == $requiredMatchId, confirmed == true)
         )
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end
-
