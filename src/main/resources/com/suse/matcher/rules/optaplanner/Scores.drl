@@ -24,16 +24,14 @@ global HardSoftScoreHolder scoreHolder;
 
 rule "calculate12Penalties"
   when
-    // a 1-2 subscription is used for VMs on a certain host
-    Subscription($subscriptionId : id, policy == Policy.ONE_TWO) and
-    Match($systemId : systemId, subscriptionId == $subscriptionId, confirmed == true) and
-    HostGuest($hostId : hostId, guestId == $systemId)
+    HostGuest($hostId : hostId)
+    Subscription($subscriptionId : id, policy != null && policy == Policy.ONE_TWO, ignored == false)
     accumulate (
-        // count the number of VMs that use that subscription on the host
-        Match($guestId : systemId, subscriptionId == $subscriptionId, confirmed == true) and
-        HostGuest(hostId == $hostId, guestId == $guestId);
+        // count the number of VMs that use a certain 1:2 subscription on one host
+        HostGuest(hostId == $hostId, $guestId : guestId) and
+        Match(systemId == $guestId, subscriptionId == $subscriptionId, confirmed == true);
         $count : count();
-        // if the number of VMs is odd...
+        // if it is odd...
         ($count % 2) == 1
     )
   then
