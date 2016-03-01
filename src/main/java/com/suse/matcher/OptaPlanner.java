@@ -110,9 +110,9 @@ public class OptaPlanner {
          * be negative and the soft score is typically positive (worst case is all Match.confirmed being set to
          * false, which yields 0/0).
          */
-        ConstructionHeuristicPhaseConfig contructionHeuristic = new ConstructionHeuristicPhaseConfig();
-        contructionHeuristic.setConstructionHeuristicType(ConstructionHeuristicType.FIRST_FIT);
-        config.getPhaseConfigList().add(contructionHeuristic);
+        ConstructionHeuristicPhaseConfig constructionHeuristic = new ConstructionHeuristicPhaseConfig();
+        constructionHeuristic.setConstructionHeuristicType(ConstructionHeuristicType.FIRST_FIT);
+        config.getPhaseConfigList().add(constructionHeuristic);
         score.setInitializingScoreTrend("ONLY_DOWN/ONLY_UP");
 
         /*
