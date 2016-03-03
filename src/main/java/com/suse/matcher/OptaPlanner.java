@@ -2,6 +2,7 @@ package com.suse.matcher;
 
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
+import com.suse.matcher.solver.MatchMoveIteratorFactory;
 
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
@@ -11,8 +12,7 @@ import org.optaplanner.core.config.heuristic.selector.common.SelectionCacheType;
 import org.optaplanner.core.config.heuristic.selector.common.SelectionOrder;
 import org.optaplanner.core.config.heuristic.selector.entity.EntitySelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
-import org.optaplanner.core.config.heuristic.selector.move.composite.CartesianProductMoveSelectorConfig;
-import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.move.factory.MoveIteratorFactoryConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
 import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
@@ -129,26 +129,13 @@ public class OptaPlanner {
          *
          * Sequences of steps will hopefully get to some new solutions that have a better score.
          *
-         * We allow moves to change from 1 to 4 Match.confirmed values per step.
+         * For more information about how those moves are generated see the MatchMoveIteratorFactory class.
          */
         LocalSearchPhaseConfig search = new LocalSearchPhaseConfig();
-        UnionMoveSelectorConfig move = new UnionMoveSelectorConfig(new ArrayList<>());
-        move.getMoveSelectorConfigList().add(new ChangeMoveSelectorConfig());
-        move.getMoveSelectorConfigList().add(new CartesianProductMoveSelectorConfig(new ArrayList<MoveSelectorConfig>() {{
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-        }}));
-        move.getMoveSelectorConfigList().add(new CartesianProductMoveSelectorConfig(new ArrayList<MoveSelectorConfig>() {{
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-        }}));
-        move.getMoveSelectorConfigList().add(new CartesianProductMoveSelectorConfig(new ArrayList<MoveSelectorConfig>() {{
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-        }}));
+        MoveIteratorFactoryConfig move = new MoveIteratorFactoryConfig();
+        move.setCacheType(SelectionCacheType.JUST_IN_TIME);
+        move.setSelectionOrder(SelectionOrder.RANDOM);
+        move.setMoveIteratorFactoryClass(MatchMoveIteratorFactory.class);
 
         /*
          * Every step, generate several moves and pick the best scoring one as the next step.
@@ -159,10 +146,8 @@ public class OptaPlanner {
         search.setMoveSelectorConfig(move);
 
         /*
-         * Among generated moves, don't accept moves:
-         *   - that do not actually change the solution (eg. true -> true)
-         *   - that make the hard score negative
-         *   - that were already attempted in the last 50 steps (colloquially called "taboo").
+         * Among generated moves, don't accept moves that were already attempted in the last
+         * 50 steps (colloquially called "taboo").
          *
          * This prevents us to run in circles, repeating the same moves over and over (provided
          * the circle is shorter than 50 steps).

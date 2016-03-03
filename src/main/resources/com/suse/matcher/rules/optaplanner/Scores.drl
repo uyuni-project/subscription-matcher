@@ -61,14 +61,6 @@ rule "dontExceedSubscriptionCount"
         );
 end
 
-rule "avoidIncompatibleGroups"
-    when
-        IncompatibleGroups($groupId1 : groupId1, $groupId2 : groupId2)
-        Match(id == $groupId1, confirmed == true)
-        Match(id == $groupId2, confirmed == true)
-    then
-        scoreHolder.addHardConstraintMatch(kcontext, -1);
-end
 
 // Soft constraints: we try to find the solution that maximizes the score, but there are no guarantees.
 
