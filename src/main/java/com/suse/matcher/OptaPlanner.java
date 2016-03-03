@@ -6,7 +6,10 @@ import com.suse.matcher.solver.Match;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
-import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
+import org.optaplanner.core.config.constructionheuristic.placer.QueuedEntityPlacerConfig;
+import org.optaplanner.core.config.heuristic.selector.common.SelectionCacheType;
+import org.optaplanner.core.config.heuristic.selector.common.SelectionOrder;
+import org.optaplanner.core.config.heuristic.selector.entity.EntitySelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.CartesianProductMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
@@ -20,6 +23,7 @@ import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.random.RandomType;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
+import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,6 +74,7 @@ public class OptaPlanner {
      * @return the solver
      * @param testing true if running as a unit test, false otherwise
      */
+    @SuppressWarnings("rawtypes")
     private Solver initSolver(boolean testing) {
         // init basic objects
         SolverFactory factory = SolverFactory.createEmpty();
@@ -98,22 +103,24 @@ public class OptaPlanner {
         config.setScoreDirectorFactoryConfig(score);
 
         /*
-         * Construct an initial solution by visiting all possible Matches one by one, in order,
-         * and changing that Match's confirmed property from the initial null value first to true and
-         * then to false. Take whichever of the two has higher score and move on to the next Match
-         * (jargon for this is "first fit").
+         * Construct an initial solution by setting all possible Matches' confirmed property to false.
          *
-         * Because of how the score is calculated, moving a Match's confirmed property from null to either
-         * true or false can only make hard score go down and/or the soft score go up (see Scores.drl).
-         *
-         * At the end of this process (called a Construction Heuristic or CH step) the hard score cannot
-         * be negative and the soft score is typically positive (worst case is all Match.confirmed being set to
-         * false, which yields 0/0).
+         * At the end of this process (called a Construction Heuristic or CH step) the score will be
+         * exactly 0/0.
          */
         ConstructionHeuristicPhaseConfig constructionHeuristic = new ConstructionHeuristicPhaseConfig();
-        constructionHeuristic.setConstructionHeuristicType(ConstructionHeuristicType.FIRST_FIT);
+        QueuedEntityPlacerConfig entityPlacer = new QueuedEntityPlacerConfig();
+        EntitySelectorConfig entitySelector = new EntitySelectorConfig();
+        entitySelector.setCacheType(SelectionCacheType.PHASE);
+        entitySelector.setSelectionOrder(SelectionOrder.ORIGINAL);
+        entityPlacer.setEntitySelectorConfig(entitySelector);
+        ChangeMoveSelectorConfig constructionHeuristicMove = new ChangeMoveSelectorConfig();
+        constructionHeuristicMove.setFilterClassList(new ArrayList<Class<? extends SelectionFilter>>() {{
+            add(FalseFilter.class);
+        }});
+        entityPlacer.setMoveSelectorConfigList(new ArrayList<MoveSelectorConfig>() {{ add(constructionHeuristicMove); }});
+        constructionHeuristic.setEntityPlacerConfig(entityPlacer);
         config.getPhaseConfigList().add(constructionHeuristic);
-        score.setInitializingScoreTrend("ONLY_DOWN/ONLY_UP");
 
         /*
          * Starting from the initial solution from the CH phase, explore other solutions by flipping some
