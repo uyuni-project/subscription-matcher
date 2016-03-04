@@ -77,24 +77,24 @@ rule "matchFreeVirtualizationSubscription"
 end
 
 rule "matchInheritedVirtualization"
+    no-loop
     when
-        // for each match that has a base product
-        PartialMatch($productId : productId, $systemId : systemId, $subscriptionId : subscriptionId, $cents : cents, $groupId : groupId)
-        Product(id == $productId, base == true)
+        // for each base product
+        Product($productId : id, base == true)
 
-        // an IV subscription to this system
+        // for each installed add-on product with an IV subscription
         Subscription($ivSubsId : id, policy == Policy.INHERITED_VIRTUALIZATION, ignored == false)
         SubscriptionProduct(subscriptionId == $ivSubsId, $ivProdId : productId)
         (
-            SystemProduct(productId == $ivProdId, systemId == $systemId) or
+            SystemProduct(productId == $ivProdId, $systemId : systemId) or
             (
                 SystemProduct($guestId : systemId, productId == $ivProdId) and
-                HostGuest(hostId == $systemId, guestId == $guestId)
+                HostGuest($systemId : hostId, guestId == $guestId)
             )
         )
 
-        // if our group already contains a PM with this subscription, stop here, unless we want to activate this rule forever
-        not PartialMatch(groupId == $groupId, subscriptionId == $ivSubsId, systemId == $systemId)
+        // for each match
+        PartialMatch($subscriptionId : subscriptionId, $cents : cents, $groupId : groupId, productId == $productId, systemId == $systemId)
     then
         int groupId = PartialMatch.generateGroupIdFromBaseGroupId($groupId, $subscriptionId);
         insertLogical(new PartialMatch($systemId, $productId, $subscriptionId, $cents, groupId));
