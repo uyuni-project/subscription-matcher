@@ -69,11 +69,12 @@ end
 
 rule "matchFreeVirtualizationSubscription"
     when
-      PartialMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId, $groupId : groupId)
+      PartialMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
       Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
       HostGuest(hostId == $hostId, $guestId : guestId)
     then
-      insertLogical(new PartialMatch($guestId, $productId, $subscriptionId, 0, $groupId));
+      int groupId = PartialMatch.generateGroupId($hostId, $productId, $subscriptionId);
+      insertLogical(new PartialMatch($guestId, $productId, $subscriptionId, 0, groupId));
 end
 
 rule "matchInheritedVirtualization"
