@@ -96,7 +96,7 @@ rule "matchInheritedVirtualization"
         // for each match
         PartialMatch($subscriptionId : subscriptionId, $cents : cents, $groupId : groupId, productId == $productId, systemId == $systemId)
     then
-        int groupId = PartialMatch.generateGroupId($groupId, $subscriptionId);
+        int groupId = PartialMatch.generateGroupId($groupId, $ivSubsId);
         insertLogical(new PartialMatch($systemId, $productId, $subscriptionId, $cents, groupId));
         insertLogical(new PartialMatch($systemId, $ivProdId, $ivSubsId, $cents, groupId));
 end
