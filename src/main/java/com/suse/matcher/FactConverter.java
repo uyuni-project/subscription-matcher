@@ -22,6 +22,8 @@ import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -138,7 +140,6 @@ public class FactConverter {
                 .collect(toSet());
 
         return assignment.getProblemFactStream(PartialMatch.class)
-            .sorted()
             .map(m -> new JsonMatch(
                 m.systemId,
                 m.subscriptionId,
@@ -146,6 +147,14 @@ public class FactConverter {
                 m.cents,
                 confirmedGroupIds.contains(m.groupId)
             ))
+            .sorted((a, b) -> new CompareToBuilder()
+                .append(a.getSystemId(), b.getSystemId())
+                .append(a.getProductId(), b.getProductId())
+                .append(a.getSubscriptionId(), b.getSubscriptionId())
+                .append(a.getCents(), b.getCents())
+                .append(a.getConfirmed(), b.getConfirmed())
+                .toComparison()
+            )
             .filter(m -> (!confirmedOnly) || m.getConfirmed())
             .collect(toList());
     }

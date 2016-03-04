@@ -6,14 +6,14 @@
           "subscription_id": 1,
           "product_id": 1298,
           "cents": 100,
-          "confirmed": true
+          "confirmed": false
       },
       {
           "system_id": 100,
           "subscription_id": 1,
           "product_id": 1298,
           "cents": 100,
-          "confirmed": false
+          "confirmed": true
       },
       {
           "system_id": 100,
@@ -27,14 +27,14 @@
           "subscription_id": 1,
           "product_id": 1298,
           "cents": 0,
-          "confirmed": true
+          "confirmed": false
       },
       {
           "system_id": 101,
           "subscription_id": 1,
           "product_id": 1298,
           "cents": 0,
-          "confirmed": false
+          "confirmed": true
       },
       {
           "system_id": 101,
@@ -48,14 +48,14 @@
           "subscription_id": 1,
           "product_id": 1298,
           "cents": 0,
-          "confirmed": true
+          "confirmed": false
       },
       {
           "system_id": 102,
           "subscription_id": 1,
           "product_id": 1298,
           "cents": 0,
-          "confirmed": false
+          "confirmed": true
       },
       {
           "system_id": 102,
@@ -69,14 +69,14 @@
           "subscription_id": 2,
           "product_id": 1299,
           "cents": 100,
-          "confirmed": true
+          "confirmed": false
       },
       {
           "system_id": 1000,
           "subscription_id": 2,
           "product_id": 1299,
           "cents": 100,
-          "confirmed": false
+          "confirmed": true
       },
       {
           "system_id": 1000,
@@ -90,14 +90,14 @@
           "subscription_id": 2,
           "product_id": 1299,
           "cents": 100,
-          "confirmed": true
+          "confirmed": false
       },
       {
           "system_id": 1001,
           "subscription_id": 2,
           "product_id": 1299,
           "cents": 100,
-          "confirmed": false
+          "confirmed": true
       },
       {
           "system_id": 1001,
