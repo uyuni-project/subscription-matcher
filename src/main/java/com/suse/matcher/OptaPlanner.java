@@ -14,6 +14,7 @@ import org.optaplanner.core.config.heuristic.selector.entity.EntitySelectorConfi
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.factory.MoveIteratorFactoryConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.value.ValueSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
 import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
@@ -103,22 +104,44 @@ public class OptaPlanner {
         config.setScoreDirectorFactoryConfig(score);
 
         /*
-         * Construct an initial solution by setting all possible Matches' confirmed property to false.
+         * Construct an initial solution by visiting all possible Matches one by one, in order,
+         * and changing that Match's confirmed property from the initial null value first to true and
+         * then to false. Take whichever of the two has higher score and move on to the next Match
+         * (jargon for this is "first fit").
          *
-         * At the end of this process (called a Construction Heuristic or CH step) the score will be
-         * exactly 0/0.
+         * Because of how the score is calculated, moving a Match's confirmed property from null to either
+         * true or false can only make hard score go down and/or the soft score go up (see Scores.drl).
+         *
+         * At the end of this process (called a Construction Heuristic or CH step) the hard score cannot
+         * be negative and the soft score is typically positive (worst case is all Match.confirmed being set to
+         * false, which yields 0/0).
+         *
+         * We use a custom Move Filter (ConflictMatchMoveFilter) to avoid moves that would result in conflicting
+         * Matches to be confirmed.
          */
         ConstructionHeuristicPhaseConfig constructionHeuristic = new ConstructionHeuristicPhaseConfig();
         QueuedEntityPlacerConfig entityPlacer = new QueuedEntityPlacerConfig();
-        EntitySelectorConfig entitySelector = new EntitySelectorConfig();
-        entitySelector.setCacheType(SelectionCacheType.PHASE);
-        entitySelector.setSelectionOrder(SelectionOrder.ORIGINAL);
-        entityPlacer.setEntitySelectorConfig(entitySelector);
-        ChangeMoveSelectorConfig constructionHeuristicMove = new ChangeMoveSelectorConfig();
-        constructionHeuristicMove.setFilterClassList(new ArrayList<Class<? extends SelectionFilter>>() {{
-            add(FalseFilter.class);
+        EntitySelectorConfig placerEntitySelector = new EntitySelectorConfig();
+        placerEntitySelector.setId("entitySelector");
+        placerEntitySelector.setCacheType(SelectionCacheType.PHASE);
+        placerEntitySelector.setSelectionOrder(SelectionOrder.ORIGINAL);
+        entityPlacer.setEntitySelectorConfig(placerEntitySelector);
+
+        ChangeMoveSelectorConfig changeMove = new ChangeMoveSelectorConfig();
+
+        EntitySelectorConfig moveEntitySelector = new EntitySelectorConfig();
+        moveEntitySelector.setMimicSelectorRef("entitySelector");
+        changeMove.setEntitySelectorConfig(moveEntitySelector);
+
+        ValueSelectorConfig valueSelector = new ValueSelectorConfig();
+        valueSelector.setCacheType(SelectionCacheType.PHASE);
+        valueSelector.setSelectionOrder(SelectionOrder.ORIGINAL);
+        changeMove.setValueSelectorConfig(valueSelector);
+
+        changeMove.setFilterClassList(new ArrayList<Class<? extends SelectionFilter>>() {{
+            add(ConflictMatchMoveFilter.class);
         }});
-        entityPlacer.setMoveSelectorConfigList(new ArrayList<MoveSelectorConfig>() {{ add(constructionHeuristicMove); }});
+        entityPlacer.setMoveSelectorConfigList(new ArrayList<MoveSelectorConfig>() {{ add(changeMove); }});
         constructionHeuristic.setEntityPlacerConfig(entityPlacer);
         config.getPhaseConfigList().add(constructionHeuristic);
 

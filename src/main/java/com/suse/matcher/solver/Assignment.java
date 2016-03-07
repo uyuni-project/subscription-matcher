@@ -1,5 +1,7 @@
 package com.suse.matcher.solver;
 
+import com.suse.matcher.facts.IncompatibleGroups;
+
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.Solution;
@@ -9,6 +11,7 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,6 +31,9 @@ public class Assignment implements Solution<HardSoftScore> {
     /** Other problem facts passed by Drools. */
     private Collection<Object> problemFacts;
 
+    /** Map from each Match to its conflicting Matches. */
+    private Map<Match, List<Match>> conflictMap;
+
     /**
      * Default constructor, required by OptaPlanner.
      */
@@ -43,6 +49,22 @@ public class Assignment implements Solution<HardSoftScore> {
     public Assignment(List<Match> matchesIn, Collection<Object> problemFactsIn) {
         matches = matchesIn;
         problemFacts = problemFactsIn;
+
+        Collection<IncompatibleGroups> incompatibleGroups = getProblemFacts(IncompatibleGroups.class);
+        Map<Integer, Match> idMatchMap = matches.stream()
+                .collect(Collectors.toMap(m -> m.getId(), m -> m));
+        conflictMap = matches.stream()
+            .collect(Collectors.toMap(
+                match -> match,
+                match -> incompatibleGroups.stream()
+                    .filter(pair -> match.getId() == pair.getGroupId1() || match.getId() == pair.getGroupId2())
+                    .map(pair -> match.getId() == pair.getGroupId1() ? pair.getGroupId2() : pair.getGroupId1())
+                    .distinct()
+                    .sorted()
+                    .map(id -> idMatchMap.get(id))
+                    .collect(Collectors.toList())
+            )
+        );
     }
 
     /**
@@ -79,6 +101,15 @@ public class Assignment implements Solution<HardSoftScore> {
     public <T> Collection<T> getProblemFacts(Class<T> type) {
         return getProblemFactStream(type)
             .collect(Collectors.toList());
+    }
+
+    /**
+     * Gets the map from each Match to its conflicting Matches.
+     *
+     * @return the map from each Match to its conflicting Matches
+     */
+    public Map<Match, List<Match>> getConflictMap() {
+        return conflictMap;
     }
 
     /**
