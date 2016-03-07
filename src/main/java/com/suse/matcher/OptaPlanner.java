@@ -190,12 +190,12 @@ public class OptaPlanner {
          * Continue stepping and keep track of the overall best solution found so far.
          *
          * At some point we have to stop stepping, and we do so when:
-         *   - we stepped 500 times with no score improvement (typically)
-         *   - we stepped 10_000 times (when all else fails)
+         *   - we stepped 100 times with no score improvement (typically)
+         *   - we stepped 3_000 times (when all else fails)
          */
         TerminationConfig termination = new TerminationConfig();
-        termination.setUnimprovedStepCountLimit(500);
-        termination.setStepCountLimit(10_000);
+        termination.setUnimprovedStepCountLimit(100);
+        termination.setStepCountLimit(3_000);
         search.setTerminationConfig(termination);
 
         /*
@@ -206,8 +206,6 @@ public class OptaPlanner {
          */
         if (testing) {
             termination.setUnimprovedStepCountLimit(5);
-            move.setSelectedCountLimit(100L);
-            forager.setAcceptedCountLimit(100);
             config.setEnvironmentMode(EnvironmentMode.FULL_ASSERT);
         }
 
