@@ -81,25 +81,25 @@ rule "matchInheritedVirtualization"
     no-loop
     when
         // for each base product
-        Product($productId : id, base == true)
+        Product($baseProductId : id, base == true)
 
         // for each installed add-on product with an IV subscription
-        Subscription($ivSubsId : id, policy == Policy.INHERITED_VIRTUALIZATION, ignored == false)
-        SubscriptionProduct(subscriptionId == $ivSubsId, $ivProdId : productId)
+        Subscription($addonSubscriptionId : id, policy == Policy.INHERITED_VIRTUALIZATION, ignored == false)
+        SubscriptionProduct($addonProductId : productId, subscriptionId == $addonSubscriptionId)
         (
-            SystemProduct(productId == $ivProdId, $systemId : systemId) or
+            SystemProduct($systemId : systemId, productId == $addonProductId) or
             (
-                SystemProduct($guestId : systemId, productId == $ivProdId) and
+                SystemProduct($guestId : systemId, productId == $addonProductId) and
                 HostGuest($systemId : hostId, guestId == $guestId)
             )
         )
 
         // for each match
-        PartialMatch($subscriptionId : subscriptionId, $cents : cents, $groupId : groupId, productId == $productId, systemId == $systemId)
+        PartialMatch($baseSubscriptionId : subscriptionId, $cents : cents, $baseGroupId : groupId, productId == $baseProductId, systemId == $systemId)
     then
-        int groupId = PartialMatch.generateGroupId($groupId, $ivSubsId);
-        insertLogical(new PartialMatch($systemId, $productId, $subscriptionId, $cents, groupId));
-        insertLogical(new PartialMatch($systemId, $ivProdId, $ivSubsId, $cents, groupId));
+        int addonGroupId = PartialMatch.generateGroupId($baseGroupId, $addonSubscriptionId);
+        insertLogical(new PartialMatch($systemId, $baseProductId, $baseSubscriptionId, $cents, addonGroupId));
+        insertLogical(new PartialMatch($systemId, $addonProductId, $addonSubscriptionId, $cents, addonGroupId));
 end
 
 rule "match12Subscription"
