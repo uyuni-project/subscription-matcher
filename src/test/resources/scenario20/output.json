@@ -6,14 +6,14 @@
             "subscription_id": 1,
             "product_id": 814,
             "cents": 100,
-            "confirmed": true
+            "confirmed": false
         },
         {
             "system_id": 100,
             "subscription_id": 1,
             "product_id": 814,
             "cents": 100,
-            "confirmed": false
+            "confirmed": true
         },
         {
             "system_id": 100,
