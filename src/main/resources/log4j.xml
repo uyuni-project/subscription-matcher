@@ -4,7 +4,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     <appender name="console" class="org.apache.log4j.ConsoleAppender">
         <!-- Raise to debug to get debug output in the console -->
-        <param name="Threshold" value="warn"/>
+        <param name="Threshold" value="info"/>
         <param name="Target" value="System.err" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%-5p %c{1} - %m%n" />
@@ -27,7 +27,7 @@
 
     <category name="org.drools">
         <!-- Raise to debug to get full Drools debug -->
-      <priority value="trace" />
+      <priority value="warn" />
     </category>
 
     <category name="org.optaplanner">
