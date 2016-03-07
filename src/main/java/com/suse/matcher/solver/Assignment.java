@@ -23,7 +23,7 @@ public class Assignment implements Solution<HardSoftScore> {
     private HardSoftScore score;
 
     /** Match objects that the OptaPlanner will try to assign Kinds to. */
-    private Collection<Match> matches;
+    private List<Match> matches;
 
     /** Other problem facts passed by Drools. */
     private Collection<Object> problemFacts;
@@ -40,7 +40,7 @@ public class Assignment implements Solution<HardSoftScore> {
      * @param matchesIn fact corresponding to possible matches
      * @param problemFactsIn any other problem facts
      */
-    public Assignment(Collection<Match> matchesIn, Collection<Object> problemFactsIn) {
+    public Assignment(List<Match> matchesIn, Collection<Object> problemFactsIn) {
         matches = matchesIn;
         problemFacts = problemFactsIn;
     }
@@ -103,7 +103,7 @@ public class Assignment implements Solution<HardSoftScore> {
      * @return the matches
      */
     @PlanningEntityCollectionProperty
-    public Collection<Match> getMatches() {
+    public List<Match> getMatches() {
         return matches;
     }
 

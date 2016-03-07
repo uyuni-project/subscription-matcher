@@ -13,7 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.TreeSet;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Matches a list of systems to a list of subscriptions.
@@ -55,12 +56,14 @@ public class Matcher {
         // among deductions, the rule engine determines system to subscription "matchability":
         // whether a subscription can be assigned to a system without taking other assignments into account.
         // this is represented by Match objects, divide them from other facts
-        Collection<Match> matches = deducedFacts.stream()
+        List<Match> matches = deducedFacts.stream()
             .filter(f -> f instanceof PartialMatch)
             .map(o -> (PartialMatch)o)
             .map(p -> p.groupId)
+            .sorted()
+            .distinct()
             .map(id -> new Match(id, null))
-            .collect(toCollection(() -> new TreeSet<>()))
+            .collect(toCollection(() -> new LinkedList<>()))
         ;
 
         logger.info("Found {} possible matches", matches.size());
