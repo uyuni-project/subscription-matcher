@@ -67,15 +67,15 @@ public class Matcher {
         // this is represented by Match objects, divide them from other facts
         List<Match> matches = getMatches(deducedFacts);
 
-        logger.info("Found {} possible matches", matches.size());
-        if (logger.isDebugEnabled()) {
+        logger.info("Found {} matches", matches.size());
+        if (logger.isTraceEnabled()) {
             matches.forEach(m -> {
-                logger.debug(m.toString());
+                logger.trace(m.toString());
                 getPartialMatches(deducedFacts)
                     .filter(p -> p.groupId == m.id)
                     .sorted()
                     .map(o -> o.toString())
-                    .forEach(s -> logger.debug(s));
+                    .forEach(s -> logger.trace(s));
                 ;
             });
         }
