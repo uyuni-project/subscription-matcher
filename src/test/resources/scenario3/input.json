@@ -3,11 +3,13 @@
     "products": [
         {
             "id": 814,
-            "name": "SUSE Linux Enterprise Server 11 SP3 x86_64"
+            "name": "SUSE Linux Enterprise Server 11 SP3 x86_64",
+            "base": true
         },
         {
             "id": 1138,
-            "name": "RES 6"
+            "name": "RES 6",
+            "base": true
         }
     ],
     "subscriptions": [

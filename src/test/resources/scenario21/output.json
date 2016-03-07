@@ -1,0 +1,73 @@
+{
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "matches": [
+      {
+          "system_id": 100,
+          "subscription_id": 1,
+          "product_id": 1298,
+          "cents": 100,
+          "confirmed": true
+      },
+      {
+          "system_id": 100,
+          "subscription_id": 1,
+          "product_id": 1298,
+          "cents": 100,
+          "confirmed": false
+      },
+      {
+          "system_id": 100,
+          "subscription_id": 2,
+          "product_id": 1299,
+          "cents": 100,
+          "confirmed": true
+      },
+      {
+          "system_id": 101,
+          "subscription_id": 1,
+          "product_id": 1298,
+          "cents": 0,
+          "confirmed": true
+      },
+      {
+          "system_id": 101,
+          "subscription_id": 1,
+          "product_id": 1298,
+          "cents": 0,
+          "confirmed": false
+      },
+      {
+          "system_id": 101,
+          "subscription_id": 2,
+          "product_id": 1299,
+          "cents": 0,
+          "confirmed": true
+      },
+      {
+          "system_id": 102,
+          "subscription_id": 1,
+          "product_id": 1298,
+          "cents": 0,
+          "confirmed": true
+      },
+      {
+          "system_id": 102,
+          "subscription_id": 1,
+          "product_id": 1298,
+          "cents": 0,
+          "confirmed": false
+      },
+      {
+          "system_id": 102,
+          "subscription_id": 2,
+          "product_id": 1299,
+          "cents": 0,
+          "confirmed": true
+      }
+  ],
+  "subscription_policies": {
+    "1": "unlimited_virtualization",
+    "2": "inherited_virtualization"
+  },
+  "messages": []
+}

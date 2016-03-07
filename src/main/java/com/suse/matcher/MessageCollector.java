@@ -2,8 +2,8 @@ package com.suse.matcher;
 
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PinnedMatch;
+import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.solver.Assignment;
-import com.suse.matcher.solver.Match;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -24,13 +24,13 @@ public class MessageCollector {
         // filter out interesting collections from facts
         Stream<PinnedMatch> pinnedMatchFacts = assignment.getProblemFactStream(PinnedMatch.class);
 
-        Collection<Match> confirmedMatchFacts = FactConverter.getMatches(assignment, true);
+        Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment, true);
 
         // add messages about unsatisfied pins
         Collection<Message> messages = new LinkedList<Message>();
         pinnedMatchFacts
             .filter(pin -> !confirmedMatchFacts.stream() // filter unmatched pins
-                    .filter(m -> m.subscriptionId.equals(pin.subscriptionId) && m.systemId.equals(pin.systemId))
+                    .filter(m -> m.getSubscriptionId().equals(pin.subscriptionId) && m.getSystemId().equals(pin.systemId))
                     .findAny()
                     .isPresent()
             )

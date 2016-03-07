@@ -8,7 +8,8 @@
     "products": [
         {
             "id": 1117,
-            "name": "SUSE Linux Enterprise Server 12 x86_64"
+            "name": "SUSE Linux Enterprise Server 12 x86_64",
+            "base": true
         }
     ],
     "subscriptions": [

@@ -1,7 +1,9 @@
 package com.suse.matcher;
 
-import com.suse.matcher.facts.FreeMatch;
-import com.suse.matcher.facts.PossibleMatch;
+import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Collectors.toList;
+
+import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
@@ -11,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.TreeSet;
 
 /**
@@ -47,37 +48,38 @@ public class Matcher {
 
         // activate the rule engine to deduce more facts
         Drools drools = new Drools(baseFacts);
-        Collection<? extends Object> deducedFacts = drools.getResult();
+        Collection<Object> deducedFacts = drools.getResult().stream()
+            .map(o -> (Object) o)
+            .collect(toList());
 
         // among deductions, the rule engine determines system to subscription "matchability":
         // whether a subscription can be assigned to a system without taking other assignments into account.
         // this is represented by Match objects, divide them from other facts
-        Collection<Match> matches = new TreeSet<>();
-        Collection<Object> otherFacts = new LinkedList<>();
-        for (Object fact : deducedFacts) {
-            if (fact instanceof PossibleMatch) {
-                PossibleMatch possibleMatch = (PossibleMatch) fact;
-
-                Match match = new Match(possibleMatch.id, possibleMatch.systemId, possibleMatch.productId,
-                        possibleMatch.subscriptionId, possibleMatch.cents, null);
-                matches.add(match);
-            }
-            else {
-                otherFacts.add(fact);
-            }
-        }
+        Collection<Match> matches = deducedFacts.stream()
+            .filter(f -> f instanceof PartialMatch)
+            .map(o -> (PartialMatch)o)
+            .map(p -> p.groupId)
+            .map(id -> new Match(id, null))
+            .collect(toCollection(() -> new TreeSet<>()))
+        ;
 
         logger.info("Found {} possible matches", matches.size());
         if (logger.isDebugEnabled()) {
-            deducedFacts.stream()
-                .filter(o -> (o instanceof PossibleMatch) || (o instanceof FreeMatch))
-                .map(o -> o.toString())
-                .sorted()
-                .forEach(s -> logger.debug(s));
+            matches.forEach(m -> {
+                logger.debug(m.toString());
+                deducedFacts.stream()
+                    .filter(o -> o instanceof PartialMatch)
+                    .map(o -> (PartialMatch)o)
+                    .filter(p -> p.groupId == m.id)
+                    .sorted()
+                    .map(o -> o.toString())
+                    .forEach(s -> logger.debug(s));
+                ;
+            });
         }
 
         // activate the CSP solver with all deduced facts as inputs
-        OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, otherFacts), testing);
+        OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, deducedFacts), testing);
         Assignment result = optaPlanner.getResult();
 
         // add user messages taking rule engine deductions and CSP solver output into account

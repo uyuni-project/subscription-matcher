@@ -1,13 +1,12 @@
 package com.suse.matcher;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Stream.concat;
+import static java.util.stream.Collectors.toSet;
 
 import com.suse.matcher.facts.CurrentTime;
-import com.suse.matcher.facts.FreeMatch;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Message;
+import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
@@ -22,7 +21,6 @@ import com.suse.matcher.json.JsonProduct;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.solver.Assignment;
-import com.suse.matcher.solver.Match;
 
 import java.util.Collection;
 import java.util.Date;
@@ -30,9 +28,9 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Converts JSON objects to facts (objects the rule engine and CSP solver can
@@ -63,7 +61,7 @@ public class FactConverter {
         }
 
         for (JsonProduct product : input.getProducts()) {
-            result.add(new Product(product.getId(), product.getName(), product.getFree()));
+            result.add(new Product(product.getId(), product.getName(), product.getFree(), product.getBase()));
         }
 
         for (JsonSubscription subscription : input.getSubscriptions()) {
@@ -98,16 +96,7 @@ public class FactConverter {
         Date timestamp = assignment.getProblemFactStream(CurrentTime.class)
                 .findFirst().get().timestamp;
 
-        List<JsonMatch> confirmedMatches = getMatches(assignment, false).stream()
-                .sorted()
-                .map(m -> new JsonMatch(
-                        m.systemId,
-                        m.subscriptionId,
-                        m.productId,
-                        m.cents,
-                        m.confirmed
-                ))
-                .collect(Collectors.toList());
+        List<JsonMatch> confirmedMatches = getMatches(assignment, false);
 
         List<JsonMessage> messages = assignment.getProblemFactStream(Message.class)
                 .sorted()
@@ -137,28 +126,27 @@ public class FactConverter {
     }
 
     /**
-     * Returns a list of confirmed {@link Match} objects including free ones.
+     * Returns a list of {@link JsonMatch}es from the {@link Assignment}.
      * @param assignment the assignment
      * @param confirmedOnly true if only confirmed matches should be returned
-     * @return confirmed matches
+     * @return matches
      */
-    public static List<Match> getMatches(Assignment assignment, boolean confirmedOnly) {
-        Map<Long, Match> matchMap = assignment.getMatches().stream()
-            .collect(toMap(m -> m.id, m -> m));
+    public static List<JsonMatch> getMatches(Assignment assignment, boolean confirmedOnly) {
+        Set<Integer> confirmedGroupIds = assignment.getMatches().stream()
+                .filter(m -> m.confirmed)
+                .map(m -> m.id)
+                .collect(toSet());
 
-        Stream<Match> freeMatches = assignment.getProblemFactStream(FreeMatch.class)
-            .map(m -> new Match(
-                    null,
-                    m.systemId,
-                    m.productId,
-                    m.subscriptionId,
-                    0,
-                    matchMap.get(m.requiredMatchId).confirmed)
-             );
-
-        return concat(matchMap.values().stream(), freeMatches)
-            .filter(m -> !confirmedOnly || m.confirmed)
+        return assignment.getProblemFactStream(PartialMatch.class)
             .sorted()
+            .map(m -> new JsonMatch(
+                m.systemId,
+                m.subscriptionId,
+                m.productId,
+                m.cents,
+                confirmedGroupIds.contains(m.groupId)
+            ))
+            .filter(m -> (!confirmedOnly) || m.getConfirmed())
             .collect(toList());
     }
 }

@@ -1,5 +1,10 @@
 package com.suse.matcher;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
+
 import com.suse.matcher.csv.CSVOutputMessage;
 import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputUnmatchedProduct;
@@ -8,8 +13,8 @@ import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.SystemProduct;
+import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.solver.Assignment;
-import com.suse.matcher.solver.Match;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -31,11 +36,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 
 /**
  * Writes output (to disk or standard output).
@@ -170,7 +170,7 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVUnmatchedProductReport(Assignment assignment) throws IOException {
-        Collection<Match> confirmedMatchFacts = FactConverter.getMatches(assignment, true);
+        Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment, true);
 
         List<System> systems = assignment.getProblemFactStream(System.class)
                 .sorted((a, b) -> a.id.compareTo(b.id))
@@ -180,9 +180,9 @@ public class OutputWriter {
         Collection<Product> products = assignment.getProblemFacts(Product.class);
 
         // prepare map from (system id, product id) to Match object
-        Map<Pair<Long, Long>, Match> matchMap = new HashMap<>();
-        for (Match match : confirmedMatchFacts) {
-            matchMap.put(new Pair<>(match.systemId, match.productId), match);
+        Map<Pair<Long, Long>, JsonMatch> matchMap = new HashMap<>();
+        for (JsonMatch match : confirmedMatchFacts) {
+            matchMap.put(new Pair<>(match.getSystemId(), match.getProductId()), match);
         }
 
         // prepare header

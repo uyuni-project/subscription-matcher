@@ -2721,6 +2721,7 @@ rule "Add subscription data for part number 662644477479"
         $subscription : Subscription(partNumber == "662644477479")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -2732,6 +2733,7 @@ rule "Add subscription data for part number 662644477480"
         $subscription : Subscription(partNumber == "662644477480")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -2743,6 +2745,7 @@ rule "Add subscription data for part number 662644477481"
         $subscription : Subscription(partNumber == "662644477481")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -2754,6 +2757,7 @@ rule "Add subscription data for part number 662644477482"
         $subscription : Subscription(partNumber == "662644477482")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -2765,6 +2769,7 @@ rule "Add subscription data for part number 662644477483"
         $subscription : Subscription(partNumber == "662644477483")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -2776,6 +2781,7 @@ rule "Add subscription data for part number 662644477484"
         $subscription : Subscription(partNumber == "662644477484")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -7253,6 +7259,7 @@ rule "Add subscription data for part number 874-006189"
         $subscription : Subscription(partNumber == "874-006189")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = false
         };
@@ -7264,6 +7271,7 @@ rule "Add subscription data for part number 874-006191"
         $subscription : Subscription(partNumber == "874-006191")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 4,
             stackable = false
         };
@@ -7275,6 +7283,7 @@ rule "Add subscription data for part number 874-006195"
         $subscription : Subscription(partNumber == "874-006195")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = false
         };
@@ -7286,6 +7295,7 @@ rule "Add subscription data for part number 874-006197"
         $subscription : Subscription(partNumber == "874-006197")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 4,
             stackable = false
         };
@@ -7297,6 +7307,7 @@ rule "Add subscription data for part number 874-006199"
         $subscription : Subscription(partNumber == "874-006199")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 8,
             stackable = false
         };
@@ -7308,6 +7319,7 @@ rule "Add subscription data for part number 874-006201"
         $subscription : Subscription(partNumber == "874-006201")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = false
         };
@@ -8229,6 +8241,7 @@ rule "Add subscription data for part number 874-006344"
         $subscription : Subscription(partNumber == "874-006344")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = false
         };
@@ -8252,6 +8265,7 @@ rule "Add subscription data for part number 874-006346"
         $subscription : Subscription(partNumber == "874-006346")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 4,
             stackable = false
         };
@@ -8263,6 +8277,7 @@ rule "Add subscription data for part number 874-006348"
         $subscription : Subscription(partNumber == "874-006348")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 8,
             stackable = false
         };
@@ -8286,6 +8301,7 @@ rule "Add subscription data for part number 874-006350"
         $subscription : Subscription(partNumber == "874-006350")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = false
         };
@@ -8309,6 +8325,7 @@ rule "Add subscription data for part number 874-006352"
         $subscription : Subscription(partNumber == "874-006352")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 4,
             stackable = false
         };
@@ -8320,6 +8337,7 @@ rule "Add subscription data for part number 874-006354"
         $subscription : Subscription(partNumber == "874-006354")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 8,
             stackable = false
         };
@@ -8331,6 +8349,7 @@ rule "Add subscription data for part number 874-006356"
         $subscription : Subscription(partNumber == "874-006356")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = false
         };
@@ -8342,6 +8361,7 @@ rule "Add subscription data for part number 874-006358"
         $subscription : Subscription(partNumber == "874-006358")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 4,
             stackable = false
         };
@@ -10074,6 +10094,7 @@ rule "Add subscription data for part number 874-006732"
         $subscription : Subscription(partNumber == "874-006732")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = false
         };
@@ -11140,6 +11161,7 @@ rule "Add subscription data for part number 874-006923"
         $subscription : Subscription(partNumber == "874-006923")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -11151,6 +11173,7 @@ rule "Add subscription data for part number 874-006924"
         $subscription : Subscription(partNumber == "874-006924")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -11162,6 +11185,7 @@ rule "Add subscription data for part number 874-006925"
         $subscription : Subscription(partNumber == "874-006925")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -11212,6 +11236,7 @@ rule "Add subscription data for part number 874-006929"
         $subscription : Subscription(partNumber == "874-006929")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -11223,6 +11248,7 @@ rule "Add subscription data for part number 874-006930"
         $subscription : Subscription(partNumber == "874-006930")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };
@@ -11234,6 +11260,7 @@ rule "Add subscription data for part number 874-006931"
         $subscription : Subscription(partNumber == "874-006931")
     then
         modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             cpus = 2,
             stackable = true
         };

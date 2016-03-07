@@ -1,5 +1,11 @@
 package com.suse.matcher.solver;
 
+import com.suse.matcher.OptaPlanner;
+import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.Product;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.System;
+
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -9,26 +15,19 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 /**
- * Represents the association of a subscription to an installation of a
- * product, that is, to a (system, product) couple.
+ * Represents a set of {@link PartialMatch}es: {@link Subscription}-{@link System}-{@link Product}
+ * associations.
+ *
+ * A Match can be confirmed by {@link OptaPlanner} or not depending on subscription
+ * availability.
+ *
+ * Either all or none of the {@link PartialMatch}es must be confirmed.
  */
 @PlanningEntity
 public class Match implements Comparable<Match> {
 
     /** A unique identifier for this Match. */
-    public Long id;
-
-    /** The system id. */
-    public Long systemId;
-
-    /** The product id. */
-    public Long productId;
-
-    /** The subscription id. */
-    public Long subscriptionId;
-
-    /** The number of subscription cents used in this match. */
-    public Integer cents;
+    public int id;
 
     /**
      * True if this match is taken by the planner, false if it is possible but
@@ -40,18 +39,10 @@ public class Match implements Comparable<Match> {
      * Standard constructor.
      *
      * @param idIn the id
-     * @param systemIdIn a system id
-     * @param productIdIn an id of a product
-     * @param subscriptionIdIn an id of subscription assigned to the system
-     * @param centsIn the number of subscription cents used in this match
      * @param confirmedIn confirmation status
      */
-    public Match(Long idIn, Long systemIdIn, Long productIdIn, Long subscriptionIdIn, Integer centsIn, Boolean confirmedIn) {
+    public Match(int idIn, Boolean confirmedIn) {
         id = idIn;
-        systemId = systemIdIn;
-        productId = productIdIn;
-        subscriptionId = subscriptionIdIn;
-        cents = centsIn;
         confirmed = confirmedIn;
     }
 
@@ -66,44 +57,8 @@ public class Match implements Comparable<Match> {
      *
      * @return the id
      */
-    public Long getId() {
+    public int getId() {
         return id;
-    }
-
-    /**
-     * Gets the system id.
-     *
-     * @return the system id
-     */
-    public Long getSystemId() {
-        return systemId;
-    }
-
-    /**
-     * Gets the product id.
-     *
-     * @return the product id
-     */
-    public Long getProductId() {
-        return productId;
-    }
-
-    /**
-     * Gets the subscription id.
-     *
-     * @return the subscription id
-     */
-    public Long getSubscriptionId() {
-        return subscriptionId;
-    }
-
-    /**
-     * Gets the number of subscription cents used in this match.
-     *
-     * @return the cents
-     */
-    public Integer getCents() {
-        return cents;
     }
 
     /**
@@ -129,10 +84,7 @@ public class Match implements Comparable<Match> {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-            .append(systemId)
-            .append(productId)
-            .append(subscriptionId)
-            .append(cents)
+            .append(id)
             // confirmed is a planning variable, so it must not be in hashCode
             .toHashCode();
     }
@@ -145,10 +97,7 @@ public class Match implements Comparable<Match> {
         }
         Match other = (Match) objIn;
         return new EqualsBuilder()
-            .append(systemId, other.systemId)
-            .append(productId, other.productId)
-            .append(subscriptionId, other.subscriptionId)
-            .append(cents, other.cents)
+            .append(id, other.id)
             // confirmed is a planning variable, so it must not be in equals
             .isEquals();
     }
@@ -157,9 +106,7 @@ public class Match implements Comparable<Match> {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("systemId", systemId)
-            .append("productId", productId)
-            .append("subscriptionId", subscriptionId)
+            .append("id", id)
             .toString();
     }
 
@@ -167,10 +114,7 @@ public class Match implements Comparable<Match> {
     @Override
     public int compareTo(Match other) {
         return new CompareToBuilder()
-            .append(systemId, other.systemId)
-            .append(productId, other.productId)
-            .append(subscriptionId, other.subscriptionId)
-            .append(cents, other.cents)
+            .append(id, other.id)
             .toComparison();
     }
 }
