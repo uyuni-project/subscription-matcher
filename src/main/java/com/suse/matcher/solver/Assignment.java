@@ -1,7 +1,5 @@
 package com.suse.matcher.solver;
 
-import com.suse.matcher.facts.IncompatibleGroups;
-
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.Solution;
@@ -31,8 +29,8 @@ public class Assignment implements Solution<HardSoftScore> {
     /** Other problem facts passed by Drools. */
     private Collection<Object> problemFacts;
 
-    /** Map from each Match to its conflicting Matches. */
-    private Map<Match, List<Match>> conflictMap;
+    /** Maps every {@link Match} id to all conflicting sets where it appears. */
+    private Map<Integer, List<List<Integer>>> conflictMap;
 
     /**
      * Default constructor, required by OptaPlanner.
@@ -45,26 +43,13 @@ public class Assignment implements Solution<HardSoftScore> {
      *
      * @param matchesIn fact corresponding to possible matches
      * @param problemFactsIn any other problem facts
+     * @param conflictMapIn maps every {@link Match} id to any conflicting sets where it appears
      */
-    public Assignment(List<Match> matchesIn, Collection<Object> problemFactsIn) {
+    public Assignment(List<Match> matchesIn, Collection<Object> problemFactsIn,
+            Map<Integer, List<List<Integer>>> conflictMapIn) {
         matches = matchesIn;
         problemFacts = problemFactsIn;
-
-        Collection<IncompatibleGroups> incompatibleGroups = getProblemFacts(IncompatibleGroups.class);
-        Map<Integer, Match> idMatchMap = matches.stream()
-                .collect(Collectors.toMap(m -> m.getId(), m -> m));
-        conflictMap = matches.stream()
-            .collect(Collectors.toMap(
-                match -> match,
-                match -> incompatibleGroups.stream()
-                    .filter(pair -> match.getId() == pair.getGroupId1() || match.getId() == pair.getGroupId2())
-                    .map(pair -> match.getId() == pair.getGroupId1() ? pair.getGroupId2() : pair.getGroupId1())
-                    .distinct()
-                    .sorted()
-                    .map(id -> idMatchMap.get(id))
-                    .collect(Collectors.toList())
-            )
-        );
+        conflictMap = conflictMapIn;
     }
 
     /**
@@ -104,15 +89,6 @@ public class Assignment implements Solution<HardSoftScore> {
     }
 
     /**
-     * Gets the map from each Match to its conflicting Matches.
-     *
-     * @return the map from each Match to its conflicting Matches
-     */
-    public Map<Match, List<Match>> getConflictMap() {
-        return conflictMap;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -147,5 +123,17 @@ public class Assignment implements Solution<HardSoftScore> {
     @ValueRangeProvider(id = "booleanRange")
     public List<Boolean> getBooleans() {
         return new ArrayList<Boolean>(){{ add(Boolean.FALSE); add(Boolean.TRUE); }};
+    }
+
+
+    /**
+     * Returns {@link Match} ids conflicting with the specified {@link Match}.
+     * @param matchId a {@link Match} id
+     * @return the conflicting ids
+     */
+    public Stream<Integer> getConflictingMatchIds(Integer matchId) {
+        return conflictMap.get(matchId).stream()
+            .flatMap(s -> s.stream())
+            .filter(id -> id != matchId);
     }
 }

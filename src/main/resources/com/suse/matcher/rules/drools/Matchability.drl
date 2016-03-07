@@ -126,10 +126,3 @@ rule "match12Subscription"
         }
 end
 
-rule "findIncompatibleGroups"
-    when
-        PartialMatch($groupId1 : groupId, $systemId : systemId, $productId : productId, $subscriptionId : subscriptionId)
-        PartialMatch($groupId2 : groupId, groupId > $groupId1, systemId == $systemId, productId == $productId, subscriptionId != $subscriptionId)
-    then
-        insertLogical(new IncompatibleGroups($groupId1, $groupId2));
-end

@@ -7,11 +7,11 @@ import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFi
 import org.optaplanner.core.impl.heuristic.selector.move.generic.ChangeMove;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- * Filters ChangeMoves by only accepting those changing bits to false.
+ * Filters ChangeMoves by only accepting those that do not lead to conflicts.
  */
 public class ConflictMatchMoveFilter implements SelectionFilter<ChangeMove> {
 
@@ -26,15 +26,22 @@ public class ConflictMatchMoveFilter implements SelectionFilter<ChangeMove> {
      */
     @Override
     public boolean accept(ScoreDirector director, ChangeMove move) {
-        boolean state = (Boolean) move.getPlanningValues().iterator().next();
+        boolean confirmed = (Boolean) move.getPlanningValues().iterator().next();
 
-        if (state) {
+        // we are confirming a Match
+        if (confirmed) {
+            Assignment solution = (Assignment)director.getWorkingSolution();
             Match match = (Match) move.getPlanningEntities().iterator().next();
-            Map<Match, List<Match>> conflictMap = ((Assignment) director.getWorkingSolution()).getConflictMap();
+            Set<Integer> conflictingIds = solution.getConflictingMatchIds(match.id)
+                .collect(Collectors.toSet());
 
-            return conflictMap.get(match).stream().allMatch(m -> m.confirmed == null || m.confirmed == false);
+            // accept this Move only if no conflicting Match has been confirmed already
+            return !solution.getMatches().stream()
+                .anyMatch(m -> m.confirmed == Boolean.TRUE && conflictingIds.contains(m.id));
         }
-
-        return true;
+        else {
+            // leaving a Match unconfirmed is always OK
+            return true;
+        }
     }
 }
