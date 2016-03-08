@@ -52,6 +52,7 @@ public class MatchMove extends AbstractMove {
      */
     @Override
     public boolean isMoveDoable(ScoreDirector director) {
+        // MatchMoveIterator constructs doable MatchMoves only
         return true;
     }
 
