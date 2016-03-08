@@ -60,9 +60,9 @@ public class MatchMove extends AbstractMove {
      */
     @Override
     public Move createUndoMove(ScoreDirector director) {
-        List<Boolean> newConfirmedFlags = confirmedFlags.stream()
-            .map(b -> !b)
-            .collect(Collectors.toList());
+        List<Boolean> newConfirmedFlags = matches.stream()
+                .map(m -> m.confirmed)
+                .collect(Collectors.toList());
 
         return new MatchMove(matches, newConfirmedFlags);
     }
