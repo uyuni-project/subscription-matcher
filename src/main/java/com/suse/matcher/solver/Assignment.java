@@ -9,6 +9,7 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,10 +24,13 @@ public class Assignment implements Solution<HardSoftScore> {
     private HardSoftScore score;
 
     /** Match objects that the OptaPlanner will try to assign Kinds to. */
-    private Collection<Match> matches;
+    private List<Match> matches;
 
     /** Other problem facts passed by Drools. */
     private Collection<Object> problemFacts;
+
+    /** Maps every {@link Match} id to all conflicting sets where it appears. */
+    private Map<Integer, List<List<Integer>>> conflictMap;
 
     /**
      * Default constructor, required by OptaPlanner.
@@ -39,10 +43,13 @@ public class Assignment implements Solution<HardSoftScore> {
      *
      * @param matchesIn fact corresponding to possible matches
      * @param problemFactsIn any other problem facts
+     * @param conflictMapIn maps every {@link Match} id to any conflicting sets where it appears
      */
-    public Assignment(Collection<Match> matchesIn, Collection<Object> problemFactsIn) {
+    public Assignment(List<Match> matchesIn, Collection<Object> problemFactsIn,
+            Map<Integer, List<List<Integer>>> conflictMapIn) {
         matches = matchesIn;
         problemFacts = problemFactsIn;
+        conflictMap = conflictMapIn;
     }
 
     /**
@@ -103,7 +110,7 @@ public class Assignment implements Solution<HardSoftScore> {
      * @return the matches
      */
     @PlanningEntityCollectionProperty
-    public Collection<Match> getMatches() {
+    public List<Match> getMatches() {
         return matches;
     }
 
@@ -116,5 +123,17 @@ public class Assignment implements Solution<HardSoftScore> {
     @ValueRangeProvider(id = "booleanRange")
     public List<Boolean> getBooleans() {
         return new ArrayList<Boolean>(){{ add(Boolean.FALSE); add(Boolean.TRUE); }};
+    }
+
+
+    /**
+     * Returns {@link Match} ids conflicting with the specified {@link Match}.
+     * @param matchId a {@link Match} id
+     * @return the conflicting ids
+     */
+    public Stream<Integer> getConflictingMatchIds(Integer matchId) {
+        return conflictMap.get(matchId).stream()
+            .flatMap(s -> s.stream())
+            .filter(id -> id != matchId);
     }
 }

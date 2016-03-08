@@ -107,6 +107,7 @@ public class Match implements Comparable<Match> {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
             .append("id", id)
+            .append("confirmed", confirmed)
             .toString();
     }
 

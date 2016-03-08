@@ -2,15 +2,19 @@ package com.suse.matcher;
 
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
+import com.suse.matcher.solver.MatchMoveIteratorFactory;
 
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
-import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType;
+import org.optaplanner.core.config.constructionheuristic.placer.QueuedEntityPlacerConfig;
+import org.optaplanner.core.config.heuristic.selector.common.SelectionCacheType;
+import org.optaplanner.core.config.heuristic.selector.common.SelectionOrder;
+import org.optaplanner.core.config.heuristic.selector.entity.EntitySelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
-import org.optaplanner.core.config.heuristic.selector.move.composite.CartesianProductMoveSelectorConfig;
-import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.move.factory.MoveIteratorFactoryConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.value.ValueSelectorConfig;
 import org.optaplanner.core.config.localsearch.LocalSearchPhaseConfig;
 import org.optaplanner.core.config.localsearch.decider.acceptor.AcceptorConfig;
 import org.optaplanner.core.config.localsearch.decider.forager.LocalSearchForagerConfig;
@@ -20,6 +24,7 @@ import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.random.RandomType;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
+import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,6 +75,7 @@ public class OptaPlanner {
      * @return the solver
      * @param testing true if running as a unit test, false otherwise
      */
+    @SuppressWarnings("rawtypes")
     private Solver initSolver(boolean testing) {
         // init basic objects
         SolverFactory factory = SolverFactory.createEmpty();
@@ -109,11 +115,35 @@ public class OptaPlanner {
          * At the end of this process (called a Construction Heuristic or CH step) the hard score cannot
          * be negative and the soft score is typically positive (worst case is all Match.confirmed being set to
          * false, which yields 0/0).
+         *
+         * We use a custom Move Filter (ConflictMatchMoveFilter) to avoid moves that would result in conflicting
+         * Matches to be confirmed.
          */
         ConstructionHeuristicPhaseConfig constructionHeuristic = new ConstructionHeuristicPhaseConfig();
-        constructionHeuristic.setConstructionHeuristicType(ConstructionHeuristicType.FIRST_FIT);
+        QueuedEntityPlacerConfig entityPlacer = new QueuedEntityPlacerConfig();
+        EntitySelectorConfig placerEntitySelector = new EntitySelectorConfig();
+        placerEntitySelector.setId("entitySelector");
+        placerEntitySelector.setCacheType(SelectionCacheType.PHASE);
+        placerEntitySelector.setSelectionOrder(SelectionOrder.ORIGINAL);
+        entityPlacer.setEntitySelectorConfig(placerEntitySelector);
+
+        ChangeMoveSelectorConfig changeMove = new ChangeMoveSelectorConfig();
+
+        EntitySelectorConfig moveEntitySelector = new EntitySelectorConfig();
+        moveEntitySelector.setMimicSelectorRef("entitySelector");
+        changeMove.setEntitySelectorConfig(moveEntitySelector);
+
+        ValueSelectorConfig valueSelector = new ValueSelectorConfig();
+        valueSelector.setCacheType(SelectionCacheType.PHASE);
+        valueSelector.setSelectionOrder(SelectionOrder.ORIGINAL);
+        changeMove.setValueSelectorConfig(valueSelector);
+
+        changeMove.setFilterClassList(new ArrayList<Class<? extends SelectionFilter>>() {{
+            add(ConflictMatchMoveFilter.class);
+        }});
+        entityPlacer.setMoveSelectorConfigList(new ArrayList<MoveSelectorConfig>() {{ add(changeMove); }});
+        constructionHeuristic.setEntityPlacerConfig(entityPlacer);
         config.getPhaseConfigList().add(constructionHeuristic);
-        score.setInitializingScoreTrend("ONLY_DOWN/ONLY_UP");
 
         /*
          * Starting from the initial solution from the CH phase, explore other solutions by flipping some
@@ -122,26 +152,13 @@ public class OptaPlanner {
          *
          * Sequences of steps will hopefully get to some new solutions that have a better score.
          *
-         * We allow moves to change from 1 to 4 Match.confirmed values per step.
+         * For more information about how those moves are generated see the MatchMoveIteratorFactory class.
          */
         LocalSearchPhaseConfig search = new LocalSearchPhaseConfig();
-        UnionMoveSelectorConfig move = new UnionMoveSelectorConfig(new ArrayList<>());
-        move.getMoveSelectorConfigList().add(new ChangeMoveSelectorConfig());
-        move.getMoveSelectorConfigList().add(new CartesianProductMoveSelectorConfig(new ArrayList<MoveSelectorConfig>() {{
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-        }}));
-        move.getMoveSelectorConfigList().add(new CartesianProductMoveSelectorConfig(new ArrayList<MoveSelectorConfig>() {{
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-        }}));
-        move.getMoveSelectorConfigList().add(new CartesianProductMoveSelectorConfig(new ArrayList<MoveSelectorConfig>() {{
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-            add(new ChangeMoveSelectorConfig());
-        }}));
+        MoveIteratorFactoryConfig move = new MoveIteratorFactoryConfig();
+        move.setCacheType(SelectionCacheType.JUST_IN_TIME);
+        move.setSelectionOrder(SelectionOrder.RANDOM);
+        move.setMoveIteratorFactoryClass(MatchMoveIteratorFactory.class);
 
         /*
          * Every step, generate several moves and pick the best scoring one as the next step.
@@ -152,10 +169,8 @@ public class OptaPlanner {
         search.setMoveSelectorConfig(move);
 
         /*
-         * Among generated moves, don't accept moves:
-         *   - that do not actually change the solution (eg. true -> true)
-         *   - that make the hard score negative
-         *   - that were already attempted in the last 50 steps (colloquially called "taboo").
+         * Among generated moves, don't accept moves that were already attempted in the last
+         * 50 steps (colloquially called "taboo").
          *
          * This prevents us to run in circles, repeating the same moves over and over (provided
          * the circle is shorter than 50 steps).
@@ -175,12 +190,12 @@ public class OptaPlanner {
          * Continue stepping and keep track of the overall best solution found so far.
          *
          * At some point we have to stop stepping, and we do so when:
-         *   - we stepped 500 times with no score improvement (typically)
-         *   - we stepped 10_000 times (when all else fails)
+         *   - we stepped 100 times with no score improvement (typically)
+         *   - we stepped 3_000 times (when all else fails)
          */
         TerminationConfig termination = new TerminationConfig();
-        termination.setUnimprovedStepCountLimit(500);
-        termination.setStepCountLimit(10_000);
+        termination.setUnimprovedStepCountLimit(100);
+        termination.setStepCountLimit(3_000);
         search.setTerminationConfig(termination);
 
         /*
@@ -191,8 +206,6 @@ public class OptaPlanner {
          */
         if (testing) {
             termination.setUnimprovedStepCountLimit(5);
-            move.setSelectedCountLimit(100L);
-            forager.setAcceptedCountLimit(100);
             config.setEnvironmentMode(EnvironmentMode.FULL_ASSERT);
         }
 
