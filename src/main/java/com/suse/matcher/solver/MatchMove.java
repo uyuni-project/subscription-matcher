@@ -88,6 +88,8 @@ public class MatchMove extends AbstractMove {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
+            // because of how MatchMoveIterator works, we only need to check
+            // Match objects - confirmedFlags is computed from them
             .append(matches)
             .toHashCode();
     }
@@ -100,6 +102,7 @@ public class MatchMove extends AbstractMove {
         }
         MatchMove other = (MatchMove) objIn;
         return new EqualsBuilder()
+            // see hashCode()
             .append(matches, other.matches)
             .isEquals();
     }
