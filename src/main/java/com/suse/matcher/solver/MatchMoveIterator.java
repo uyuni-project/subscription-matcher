@@ -77,8 +77,7 @@ public class MatchMoveIterator implements Iterator<Move> {
                 .forEach(conflict -> {
                     matches.add(conflict);
                     states.add(false);
-                })
-           ;
+                });
         }
 
         return new MatchMove(matches, states);

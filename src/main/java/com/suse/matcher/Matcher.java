@@ -113,8 +113,8 @@ public class Matcher {
         // group ids in conflicting sets
         // "conflicting" means they target the same (system, product) couple
         Map<SystemProduct, Set<Integer>> conflicts = getPartialMatches(deducedFacts).collect(
-            groupingBy(m -> new SystemProduct(m.systemId, m.productId),
-            mapping(p -> p.groupId, toCollection(() -> new TreeSet<>())))
+            groupingBy(pm -> new SystemProduct(pm.systemId, pm.productId),
+            mapping(pm -> pm.groupId, toCollection(TreeSet::new)))
         );
 
         // discard the above map keys, we only care about values (conflict sets)
@@ -122,7 +122,7 @@ public class Matcher {
         // finally turn all sets to arrays, which are quicker to scan
         List<List<Integer>> conflictList = conflicts.values().stream()
             .distinct()
-            .map(s -> new ArrayList<Integer>(s))
+            .map(s -> new ArrayList<>(s))
             .collect(toList());
 
         // now build a map from each Match id
