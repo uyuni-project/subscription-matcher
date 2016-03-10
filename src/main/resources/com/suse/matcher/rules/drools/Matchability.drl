@@ -11,6 +11,7 @@ import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.facts.HostedProduct;
 
 rule "generateHostedProduct"
 when
@@ -58,10 +59,7 @@ rule "matchUnlimitedVirtualizationSubscription"
         $system : System($systemId : id, physical == true, cpus != null)
         (
             InstalledProduct($productId : productId, systemId == $systemId) or
-            (
-                HostGuest(hostId == $systemId, $guestId : guestId) and
-                InstalledProduct($productId : productId, systemId == $guestId)
-            )
+            HostedProduct($productId : productId, systemId == $systemId)
         )
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
@@ -98,10 +96,7 @@ rule "matchInheritedVirtualization"
         SubscriptionProduct($addonProductId : productId, subscriptionId == $addonSubscriptionId)
         (
             InstalledProduct($systemId : systemId, productId == $addonProductId) or
-            (
-                InstalledProduct($guestId : systemId, productId == $addonProductId) and
-                HostGuest($systemId : hostId, guestId == $guestId)
-            )
+            HostedProduct($systemId : systemId, productId == $addonProductId)
         )
 
         // for each match
