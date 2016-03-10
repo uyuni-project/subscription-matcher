@@ -10,7 +10,7 @@ import org.kie.api.definition.type.PropertyReactive;
  * Represents an installation relationship.
  */
 @PropertyReactive
-public class SystemProduct {
+public class InstalledProduct {
 
     /** The system id. */
     public Long systemId;
@@ -24,7 +24,7 @@ public class SystemProduct {
      * @param systemIdIn the system id
      * @param productIdIn the product id
      */
-    public SystemProduct(Long systemIdIn, Long productIdIn) {
+    public InstalledProduct(Long systemIdIn, Long productIdIn) {
         systemId = systemIdIn;
         productId = productIdIn;
     }
@@ -59,10 +59,10 @@ public class SystemProduct {
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        if (!(objIn instanceof SystemProduct)) {
+        if (!(objIn instanceof InstalledProduct)) {
             return false;
         }
-        SystemProduct other = (SystemProduct) objIn;
+        InstalledProduct other = (InstalledProduct) objIn;
         return new EqualsBuilder()
             .append(systemId, other.systemId)
             .append(productId, other.productId)

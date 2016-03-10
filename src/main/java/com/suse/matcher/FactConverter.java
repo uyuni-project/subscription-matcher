@@ -12,7 +12,7 @@ import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.SystemProduct;
+import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonMessage;
@@ -58,7 +58,7 @@ public class FactConverter {
                 result.add(new HostGuest(system.getId(), guestId));
             }
             for (Long productId : system.getProductIds()) {
-                result.add(new SystemProduct(system.getId(), productId));
+                result.add(new InstalledProduct(system.getId(), productId));
             }
         }
 

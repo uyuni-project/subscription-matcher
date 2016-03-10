@@ -12,7 +12,7 @@ import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.SystemProduct;
+import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.solver.Assignment;
 
@@ -176,7 +176,7 @@ public class OutputWriter {
                 .sorted((a, b) -> a.id.compareTo(b.id))
                 .collect(Collectors.toList());
 
-        Collection<SystemProduct> systemProducts = assignment.getProblemFacts(SystemProduct.class);
+        Collection<InstalledProduct> installedProducts = assignment.getProblemFacts(InstalledProduct.class);
         Collection<Product> products = assignment.getProblemFacts(Product.class);
 
         // prepare map from (system id, product id) to Match object
@@ -192,11 +192,11 @@ public class OutputWriter {
         try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_UNMATCHED_PRODUCT_REPORT_FILE));
              CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
             // create map of product id -> set of systems ids with this product and filter out successful matches
-            Map<Long, Set<Long>> unmatchedProductSystems = systemProducts.stream()
+            Map<Long, Set<Long>> unmatchedProductSystems = installedProducts.stream()
                     .filter(sp -> matchMap.get(new Pair<>(sp.systemId, sp.productId)) == null)
                     .collect(groupingBy(
-                            SystemProduct::getProductId,
-                            mapping(SystemProduct::getSystemId, toSet())));
+                            InstalledProduct::getProductId,
+                            mapping(InstalledProduct::getSystemId, toSet())));
 
             List<CSVOutputUnmatchedProduct> unmatchedProductsCsvs = unmatchedProductSystems.entrySet().stream()
                     .map(e -> new CSVOutputUnmatchedProduct(
