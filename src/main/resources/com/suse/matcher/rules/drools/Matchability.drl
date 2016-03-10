@@ -12,6 +12,15 @@ import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.InstalledProduct;
 
+rule "generateHostedProduct"
+when
+	System($systemId : id, physical == false)
+	InstalledProduct(systemId == $systemId, $productId : productId)
+	HostGuest($hostId : hostId, guestId == $systemId)
+then
+	insertLogical(new HostedProduct($hostId, $productId));
+end
+
 rule "matchPhysicalOnlySubscription"
     when
         $system : System($systemId : id, physical == true)
@@ -126,4 +135,3 @@ rule "match12Subscription"
             insertLogical(new PartialMatch($system.id, $productId, $subscription.id, 50, groupId));
         }
 end
-
