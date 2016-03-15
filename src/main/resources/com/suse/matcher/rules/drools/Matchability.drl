@@ -72,6 +72,7 @@ rule "matchFreeVirtualizationSubscription"
       PartialMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
       Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
       HostGuest(hostId == $hostId, $guestId : guestId)
+      SystemProduct(systemId == $guestId, productId == $productId)
     then
       int groupId = PartialMatch.generateGroupId($hostId, $productId, $subscriptionId);
       insertLogical(new PartialMatch($guestId, $productId, $subscriptionId, 0, groupId));
