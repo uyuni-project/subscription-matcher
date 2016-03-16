@@ -4,6 +4,8 @@ import com.suse.matcher.facts.Message;
 
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieFileSystem;
+import org.kie.api.builder.model.KieBaseModel;
+import org.kie.api.builder.model.KieModuleModel;
 import org.kie.api.conf.EqualityBehaviorOption;
 import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieSession;
@@ -32,15 +34,20 @@ public class Drools {
     public Drools(Collection<Object> baseFacts) {
         // setup engine
         KieServices services = KieServices.Factory.get();
+        KieModuleModel module = services.newKieModuleModel();
 
         // two facts are equal if equals() returns true (do not rely on ==)
-        services.newKieModuleModel().newKieBaseModel("model").setEqualsBehavior(EqualityBehaviorOption.EQUALITY);
+        KieBaseModel base = module.newKieBaseModel("rules")
+            .addPackage("com.suse.matcher.rules.drools")
+            .setEqualsBehavior(EqualityBehaviorOption.EQUALITY);
+        base.newKieSessionModel("session").setDefault(true);
 
         // add rule files to engine
         KieFileSystem kfs = services.newKieFileSystem();
         kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/InputValidation.drl"));
         kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/Matchability.drl"));
         kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/PartNumbers.drl"));
+        kfs.writeKModuleXML(module.toXML());
         services.newKieBuilder(kfs).buildAll();
 
         // start a new session
