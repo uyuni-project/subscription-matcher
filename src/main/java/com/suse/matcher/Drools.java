@@ -25,6 +25,7 @@ public class Drools {
     private static final String[] RULE_GROUPS = {
         "PartNumbers",
         "InputValidation",
+        "InputAugmenting",
         "Matchability",
     };
 

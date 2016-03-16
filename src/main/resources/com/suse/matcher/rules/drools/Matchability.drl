@@ -13,16 +13,6 @@ import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.HostedProduct;
 
-rule "generateHostedProduct"
-    agenda-group "Matchability"
-    when
-        System($systemId : id, physical == false)
-        InstalledProduct(systemId == $systemId, $productId : productId)
-        HostGuest($hostId : hostId, guestId == $systemId)
-    then
-        insert(new HostedProduct($hostId, $productId));
-end
-
 rule "matchPhysicalOnlySubscription"
     agenda-group "Matchability"
     when

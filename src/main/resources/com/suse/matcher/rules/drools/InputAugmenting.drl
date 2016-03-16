@@ -1,0 +1,16 @@
+package com.suse.matcher.rules.drools;
+
+import com.suse.matcher.facts.HostedProduct;
+import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.facts.System;
+
+rule "generateHostedProduct"
+    agenda-group "InputAugmenting"
+    when
+        System($systemId : id, physical == false)
+        InstalledProduct(systemId == $systemId, $productId : productId)
+        HostGuest($hostId : hostId, guestId == $systemId)
+    then
+        insert(new HostedProduct($hostId, $productId));
+end
