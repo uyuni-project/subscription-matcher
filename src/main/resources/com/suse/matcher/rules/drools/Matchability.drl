@@ -15,12 +15,12 @@ import com.suse.matcher.facts.HostedProduct;
 
 rule "generateHostedProduct"
     agenda-group "Matchability"
-when
-	System($systemId : id, physical == false)
-	InstalledProduct(systemId == $systemId, $productId : productId)
-	HostGuest($hostId : hostId, guestId == $systemId)
-then
-	insert(new HostedProduct($hostId, $productId));
+    when
+        System($systemId : id, physical == false)
+        InstalledProduct(systemId == $systemId, $productId : productId)
+        HostGuest($hostId : hostId, guestId == $systemId)
+    then
+        insert(new HostedProduct($hostId, $productId));
 end
 
 rule "matchPhysicalOnlySubscription"
