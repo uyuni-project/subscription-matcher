@@ -10,12 +10,22 @@ import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.SystemProduct;
+import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.facts.HostedProduct;
+
+rule "generateHostedProduct"
+when
+	System($systemId : id, physical == false)
+	InstalledProduct(systemId == $systemId, $productId : productId)
+	HostGuest($hostId : hostId, guestId == $systemId)
+then
+	insertLogical(new HostedProduct($hostId, $productId));
+end
 
 rule "matchPhysicalOnlySubscription"
     when
         $system : System($systemId : id, physical == true)
-        SystemProduct($productId : productId, systemId == $systemId)
+        InstalledProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
             id == $subscriptionId,
@@ -31,7 +41,7 @@ end
 rule "matchInstanceSubscription"
     when
         $system : System($systemId : id)
-        SystemProduct($productId : productId, systemId == $systemId)
+        InstalledProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
             id == $subscriptionId,
@@ -48,11 +58,8 @@ rule "matchUnlimitedVirtualizationSubscription"
     when
         $system : System($systemId : id, physical == true, cpus != null)
         (
-            SystemProduct($productId : productId, systemId == $systemId) or
-            (
-                HostGuest(hostId == $systemId, $guestId : guestId) and
-                SystemProduct($productId : productId, systemId == $guestId)
-            )
+            InstalledProduct($productId : productId, systemId == $systemId) or
+            HostedProduct($productId : productId, systemId == $systemId)
         )
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
@@ -88,11 +95,8 @@ rule "matchInheritedVirtualization"
         Subscription($addonSubscriptionId : id, policy == Policy.INHERITED_VIRTUALIZATION, ignored == false)
         SubscriptionProduct($addonProductId : productId, subscriptionId == $addonSubscriptionId)
         (
-            SystemProduct($systemId : systemId, productId == $addonProductId) or
-            (
-                SystemProduct($guestId : systemId, productId == $addonProductId) and
-                HostGuest($systemId : hostId, guestId == $guestId)
-            )
+            InstalledProduct($systemId : systemId, productId == $addonProductId) or
+            HostedProduct($systemId : systemId, productId == $addonProductId)
         )
 
         // for each match
@@ -107,7 +111,7 @@ rule "match12Subscription"
     when
         // we want to explicitly bind 'physical' here as we want the rule to be reactivated on change of this attribute:
         $system : System($systemId : id, $physical : physical, cpus != null)
-        SystemProduct($productId : productId, systemId == $systemId)
+        InstalledProduct($productId : productId, systemId == $systemId)
         SubscriptionProduct($subscriptionId : subscriptionId, productId == $productId)
         $subscription : Subscription(
             id == $subscriptionId,
@@ -126,4 +130,3 @@ rule "match12Subscription"
             insertLogical(new PartialMatch($system.id, $productId, $subscription.id, 50, groupId));
         }
 end
-

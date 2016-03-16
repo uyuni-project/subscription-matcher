@@ -7,7 +7,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import com.suse.matcher.facts.PartialMatch;
-import com.suse.matcher.facts.SystemProduct;
+import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
@@ -112,9 +112,9 @@ public class Matcher {
     private Map<Integer, List<List<Integer>>> getConflictMap(Collection<Object> deducedFacts) {
         // group ids in conflicting sets
         // "conflicting" means they target the same (system, product) couple
-        Map<SystemProduct, Set<Integer>> conflicts = getPartialMatches(deducedFacts).collect(
-            groupingBy(pm -> new SystemProduct(pm.systemId, pm.productId),
-            mapping(pm -> pm.groupId, toCollection(TreeSet::new)))
+        Map<InstalledProduct, Set<Integer>> conflicts = getPartialMatches(deducedFacts).collect(
+            groupingBy(m -> new InstalledProduct(m.systemId, m.productId),
+            mapping(p -> p.groupId, toCollection(TreeSet::new)))
         );
 
         // discard the above map keys, we only care about values (conflict sets)
