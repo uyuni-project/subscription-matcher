@@ -3,15 +3,15 @@ package com.suse.matcher.rules.drools;
 import java.util.List;
 
 import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.HostedProduct;
 import com.suse.matcher.facts.IncompatibleGroups;
+import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.InstalledProduct;
-import com.suse.matcher.facts.HostedProduct;
 
 rule "matchPhysicalOnlySubscription"
     agenda-group "Matchability"
