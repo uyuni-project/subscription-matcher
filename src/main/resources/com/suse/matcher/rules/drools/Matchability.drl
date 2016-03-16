@@ -14,6 +14,7 @@ import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.HostedProduct;
 
 rule "generateHostedProduct"
+    agenda-group "Matchability"
 when
 	System($systemId : id, physical == false)
 	InstalledProduct(systemId == $systemId, $productId : productId)
@@ -23,6 +24,7 @@ then
 end
 
 rule "matchPhysicalOnlySubscription"
+    agenda-group "Matchability"
     when
         $system : System($systemId : id, physical == true)
         InstalledProduct($productId : productId, systemId == $systemId)
@@ -39,6 +41,7 @@ rule "matchPhysicalOnlySubscription"
 end
 
 rule "matchInstanceSubscription"
+    agenda-group "Matchability"
     when
         $system : System($systemId : id)
         InstalledProduct($productId : productId, systemId == $systemId)
@@ -55,6 +58,7 @@ rule "matchInstanceSubscription"
 end
 
 rule "matchUnlimitedVirtualizationSubscription"
+    agenda-group "Matchability"
     when
         $system : System($systemId : id, physical == true, cpus != null)
         (
@@ -75,6 +79,7 @@ rule "matchUnlimitedVirtualizationSubscription"
 end
 
 rule "matchFreeVirtualizationSubscription"
+    agenda-group "Matchability"
     when
       PartialMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
       Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
@@ -86,6 +91,7 @@ rule "matchFreeVirtualizationSubscription"
 end
 
 rule "matchInheritedVirtualization"
+    agenda-group "Matchability"
     no-loop
     when
         // for each base product
@@ -108,6 +114,7 @@ rule "matchInheritedVirtualization"
 end
 
 rule "match12Subscription"
+    agenda-group "Matchability"
     when
         // we want to explicitly bind 'physical' here as we want the rule to be reactivated on change of this attribute:
         $system : System($systemId : id, $physical : physical, cpus != null)

@@ -10,6 +10,7 @@ import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.CurrentTime;
 
 rule "ignoreExpiredSubscription"
+    agenda-group "InputValidation"
     when
         CurrentTime($timestamp : timestamp)
         $subscription: Subscription((endDate != null && endDate < $timestamp) || (startDate != null && startDate > $timestamp))
@@ -20,6 +21,7 @@ rule "ignoreExpiredSubscription"
 end
 
 rule "ignoreNotActiveSubscriptions"
+    agenda-group "InputValidation"
     when
         $subscription : Subscription(startDate == null) or
         $subscription : Subscription(endDate == null)
@@ -30,6 +32,7 @@ rule "ignoreNotActiveSubscriptions"
 end
 
 rule "ignoreSubscriptionWithoutQuantity"
+    agenda-group "InputValidation"
     when
         $subscription: Subscription(quantity == null)
     then
@@ -39,6 +42,7 @@ rule "ignoreSubscriptionWithoutQuantity"
 end
 
 rule "retractBlacklistedProduct"
+    agenda-group "InputValidation"
     when
         // novell-open-enterprise-server-i386 9
         $installedProduct : InstalledProduct(productId == 955) or
@@ -55,6 +59,7 @@ rule "retractBlacklistedProduct"
 end
 
 rule "retractFreeProduct"
+    agenda-group "InputValidation"
     when
         Product($productId : id, free == true)
         $installedProduct : InstalledProduct(productId == $productId)
@@ -63,6 +68,7 @@ rule "retractFreeProduct"
 end
 
 rule "logUnknownPartNumber"
+    agenda-group "InputValidation"
     when
         $subscription: Subscription(policy == null, partNumber != null)
     then
@@ -72,6 +78,7 @@ rule "logUnknownPartNumber"
 end
 
 rule "logPhysicalGuest"
+    agenda-group "InputValidation"
 when
     HostGuest($guestId : guestId)
     $guest : System(id == $guestId, physical == true)
@@ -87,6 +94,7 @@ then
 end
 
 rule "logMissingHost"
+    agenda-group "InputValidation"
 when
     $guest : System($guestId : id, physical == false)
     not HostGuest(guestId == $guestId)
@@ -104,6 +112,7 @@ then
 end
 
 rule "logMissingCpuCount"
+    agenda-group "InputValidation"
 when
     $system : System($id : id, cpus == null)
 then
