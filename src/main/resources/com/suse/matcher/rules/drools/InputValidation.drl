@@ -74,7 +74,7 @@ rule "logUnknownPartNumber"
     then
         TreeMap<String, String> data = new TreeMap<>();
         data.put("part_number", $subscription.partNumber);
-        insertLogical(new Message(Message.Level.DEBUG, "unknown_part_number", data));
+        insert(new Message(Message.Level.DEBUG, "unknown_part_number", data));
 end
 
 rule "logPhysicalGuest"
