@@ -97,7 +97,7 @@ public class Drools {
             .map(m -> (Message) m)
             .filter(m -> m.severity.equals(Message.Level.DEBUG))
             .sorted()
-            .forEach(m -> logger.debug("{}: {}", m.type, m.data.toString()));
+            .forEach(m -> logger.debug("{}: {}", m.type, m.data.toString()))
         ;
 
         // cleanup
