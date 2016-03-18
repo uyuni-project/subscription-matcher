@@ -5,7 +5,6 @@ import java.util.List;
 import com.suse.matcher.Drools;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.HostedProduct;
-import com.suse.matcher.facts.IncompatibleGroups;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Product;

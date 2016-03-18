@@ -3,7 +3,6 @@ package com.suse.matcher.rules.optaplanner;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
 import com.suse.matcher.facts.HostGuest;
-import com.suse.matcher.facts.IncompatibleGroups;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.facts.PinnedMatch;
