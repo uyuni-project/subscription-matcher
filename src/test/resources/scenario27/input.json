@@ -1,0 +1,67 @@
+{
+    "pinned_matches": [],
+    "products": [
+        {
+            "id": 814,
+            "name": "SLES11-Pool"
+        },
+        {
+            "id": 689,
+            "name": "SLES11-Extras"
+        }
+    ],
+    "subscriptions": [
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 1,
+            "part_number": "113-002220-001",
+            "product_ids": [
+                814
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        },
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 2,
+            "part_number": "113-002220-001",
+            "product_ids": [
+                689
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        }
+    ],
+    "systems": [
+        {
+            "cpus": 1,
+            "id": 100,
+            "physical": true,
+            "product_ids": [],
+            "virtual_system_ids": [101, 102, 103]
+        },
+        {
+            "cpus": 1,
+            "id": 101,
+            "physical": false,
+            "product_ids": [689, 814],
+            "virtual_system_ids": []
+        },
+        {
+            "cpus": 1,
+            "id": 102,
+            "physical": false,
+            "product_ids": [689, 814],
+            "virtual_system_ids": []
+        },
+        {
+            "cpus": 1,
+            "id": 103,
+            "physical": false,
+            "product_ids": [689, 814],
+            "virtual_system_ids": []
+        }
+    ]
+}
