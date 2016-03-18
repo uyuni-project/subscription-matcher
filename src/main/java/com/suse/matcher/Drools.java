@@ -13,7 +13,11 @@ import org.kie.api.runtime.rule.Agenda;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Facade on the Drools rule engine.
@@ -28,6 +32,9 @@ public class Drools {
         "InputAugmenting",
         "Matchability",
     };
+
+    /** Map to fact ids, see generateId(). */
+    private static Map<List<Object>, Integer> idMap = new HashMap<>();
 
     /** Logger instance. */
     private final Logger logger = LoggerFactory.getLogger(Drools.class);
@@ -104,5 +111,21 @@ public class Drools {
      */
     public Collection<? extends Object> getResult() {
         return result;
+    }
+
+    /**
+     * Returns a sequential id which is unique to the specified data.
+     *
+     * Equal input data always results in the same id.
+     *
+     * @param objects objects to generate this id from
+     * @return a new id
+     */
+    public static int generateId(Object... objects) {
+        List<Object> listOfData = Arrays.asList(objects);
+        if (!idMap.containsKey(listOfData)) {
+            idMap.put(listOfData, idMap.size());
+        }
+        return idMap.get(listOfData);
     }
 }

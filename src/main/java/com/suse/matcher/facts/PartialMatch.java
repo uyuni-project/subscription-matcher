@@ -67,19 +67,6 @@ public class PartialMatch implements Comparable<PartialMatch> {
     }
 
     /**
-     * Generates an id which is unique to the specified data.
-     * @param ids ids to generate this id from
-     * @return a new id
-     */
-    public static int generateGroupId(long... ids) {
-        HashCodeBuilder builder = new HashCodeBuilder();
-        for (long id : ids) {
-            builder.append(id);
-        }
-        return builder.toHashCode();
-    }
-
-    /**
      * Gets the system id.
      *
      * @return the system id
