@@ -9,6 +9,7 @@ import org.kie.api.builder.model.KieModuleModel;
 import org.kie.api.conf.EqualityBehaviorOption;
 import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.Agenda;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,13 @@ import java.util.Collection;
  * Deduces facts based on some base facts and rules defined ksession-rules.xml.
  */
 public class Drools {
+    /** Rule groups corresponding to filenames and agenda group names. */
+    private static final String[] RULE_GROUPS = {
+        "PartNumbers",
+        "InputValidation",
+        "InputAugmenting",
+        "Matchability",
+    };
 
     /** Logger instance. */
     private final Logger logger = LoggerFactory.getLogger(Drools.class);
@@ -44,14 +52,20 @@ public class Drools {
 
         // add rule files to engine
         KieFileSystem kfs = services.newKieFileSystem();
-        kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/InputValidation.drl"));
-        kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/Matchability.drl"));
-        kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/PartNumbers.drl"));
+        for (String ruleGroup : RULE_GROUPS) {
+            kfs.write(services.getResources().newClassPathResource("com/suse/matcher/rules/drools/" + ruleGroup+ ".drl"));
+        }
         kfs.writeKModuleXML(module.toXML());
         services.newKieBuilder(kfs).buildAll();
 
         // start a new session
         KieSession session = services.newKieContainer(services.getRepository().getDefaultReleaseId()).newKieSession();
+
+        // set rule ordering
+        Agenda agenda = session.getAgenda();
+        for (int i = RULE_GROUPS.length - 1; i >= 0; i--) {
+            agenda.getAgendaGroup(RULE_GROUPS[i]).setFocus();
+        }
 
         // setup logging. This will not really log to the console but to slf4j which
         // in turn delegates to log4j, see log4j.xml for configuration

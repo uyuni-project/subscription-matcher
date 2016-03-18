@@ -3,26 +3,18 @@ package com.suse.matcher.rules.drools;
 import java.util.List;
 
 import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.HostedProduct;
 import com.suse.matcher.facts.IncompatibleGroups;
+import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.InstalledProduct;
-import com.suse.matcher.facts.HostedProduct;
-
-rule "generateHostedProduct"
-when
-	System($systemId : id, physical == false)
-	InstalledProduct(systemId == $systemId, $productId : productId)
-	HostGuest($hostId : hostId, guestId == $systemId)
-then
-	insertLogical(new HostedProduct($hostId, $productId));
-end
 
 rule "matchPhysicalOnlySubscription"
+    agenda-group "Matchability"
     when
         $system : System($systemId : id, physical == true)
         InstalledProduct($productId : productId, systemId == $systemId)
@@ -35,10 +27,11 @@ rule "matchPhysicalOnlySubscription"
         )
     then
         int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
-        insertLogical(new PartialMatch($system.id, $productId, $subscription.id, 100, groupId));
+        insert(new PartialMatch($system.id, $productId, $subscription.id, 100, groupId));
 end
 
 rule "matchInstanceSubscription"
+    agenda-group "Matchability"
     when
         $system : System($systemId : id)
         InstalledProduct($productId : productId, systemId == $systemId)
@@ -51,10 +44,11 @@ rule "matchInstanceSubscription"
         )
     then
         int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
-        insertLogical(new PartialMatch($system.id, $productId, $subscription.id, 100, groupId));
+        insert(new PartialMatch($system.id, $productId, $subscription.id, 100, groupId));
 end
 
 rule "matchUnlimitedVirtualizationSubscription"
+    agenda-group "Matchability"
     when
         $system : System($systemId : id, physical == true, cpus != null)
         (
@@ -71,10 +65,11 @@ rule "matchUnlimitedVirtualizationSubscription"
     then
         Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
         int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
-        insertLogical(new PartialMatch($system.id, $productId, $subscription.id, consumedQuantity * 100, groupId));
+        insert(new PartialMatch($system.id, $productId, $subscription.id, consumedQuantity * 100, groupId));
 end
 
 rule "matchFreeVirtualizationSubscription"
+    agenda-group "Matchability"
     when
       PartialMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
       Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
@@ -82,10 +77,11 @@ rule "matchFreeVirtualizationSubscription"
       InstalledProduct(systemId == $guestId, productId == $productId)
     then
       int groupId = PartialMatch.generateGroupId($hostId, $productId, $subscriptionId);
-      insertLogical(new PartialMatch($guestId, $productId, $subscriptionId, 0, groupId));
+      insert(new PartialMatch($guestId, $productId, $subscriptionId, 0, groupId));
 end
 
 rule "matchInheritedVirtualization"
+    agenda-group "Matchability"
     no-loop
     when
         // for each base product
@@ -103,11 +99,12 @@ rule "matchInheritedVirtualization"
         PartialMatch($baseSubscriptionId : subscriptionId, $cents : cents, $baseGroupId : groupId, productId == $baseProductId, systemId == $systemId)
     then
         int addonGroupId = PartialMatch.generateGroupId($baseGroupId, $addonSubscriptionId);
-        insertLogical(new PartialMatch($systemId, $baseProductId, $baseSubscriptionId, $cents, addonGroupId));
-        insertLogical(new PartialMatch($systemId, $addonProductId, $addonSubscriptionId, $cents, addonGroupId));
+        insert(new PartialMatch($systemId, $baseProductId, $baseSubscriptionId, $cents, addonGroupId));
+        insert(new PartialMatch($systemId, $addonProductId, $addonSubscriptionId, $cents, addonGroupId));
 end
 
 rule "match12Subscription"
+    agenda-group "Matchability"
     when
         // we want to explicitly bind 'physical' here as we want the rule to be reactivated on change of this attribute:
         $system : System($systemId : id, $physical : physical, cpus != null)
@@ -122,11 +119,11 @@ rule "match12Subscription"
     then
         int groupId = PartialMatch.generateGroupId($systemId, $productId, $subscriptionId);
         if ($physical) {
-            insertLogical(new PartialMatch($system.id, $productId, $subscription.id,
+            insert(new PartialMatch($system.id, $productId, $subscription.id,
                 ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100,
                 groupId));
         }
         else {
-            insertLogical(new PartialMatch($system.id, $productId, $subscription.id, 50, groupId));
+            insert(new PartialMatch($system.id, $productId, $subscription.id, 50, groupId));
         }
 end
