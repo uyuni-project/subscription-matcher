@@ -1,0 +1,59 @@
+package com.suse.matcher.rules.drools;
+
+import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
+
+
+rule "mergeHardBundledGroups"
+    agenda-group "HardBundles"
+    when
+        // look for two PMs for the same system for two bundled subscriptions
+        $s1 : Subscription($hardBundleId : hardBundleId, hardBundleId != null)
+        $pm1 : PartialMatch($systemId : systemId, subscriptionId == $s1.id)
+
+        $s2 : Subscription(id != $s1.id, hardBundleId == $hardBundleId)
+        $pm2 : PartialMatch(systemId == $systemId, subscriptionId == $s2.id, groupId < $pm1.groupId)
+
+        // collect all PMs from the first group
+        accumulate(
+            $pmToRetract : PartialMatch(groupId == $pm1.groupId);
+            $partialMatches : collectList($pmToRetract)
+        )
+    then
+        // "move" them to the second group
+        for(Object fact : $partialMatches) {
+            PartialMatch partialMatch = (PartialMatch) fact;
+
+            // we cannot use modify() because groupId is in hashCode, retract and insert intead
+            retract(partialMatch);
+            insert(new PartialMatch(partialMatch.systemId, partialMatch.productId, partialMatch.subscriptionId,
+                partialMatch.cents, $pm2.groupId));
+        }
+end
+
+rule "retractBundleBreakingPartialMatches"
+    agenda-group "HardBundles"
+    when
+        // take one PM of a bundled Subscription and fix a System
+        Subscription($subscriptionId : id, $hardBundleId : hardBundleId, hardBundleId != null)
+        $pm : PartialMatch($systemId : systemId, $groupId : groupId, subscriptionId == $subscriptionId)
+
+        // count bundled subscriptions
+        accumulate (
+            Subscription(hardBundleId == $hardBundleId);
+            $countBundleSubscription : count()
+        )
+        // count PMs for the bundled subscriptions for the System
+        accumulate (
+            Subscription($sId : id, hardBundleId == $hardBundleId) and
+            PartialMatch(systemId == $systemId, subscriptionId == $sId, groupId == $groupId);
+            $countPartialMatches : count();
+
+            // if the counts don't match then the bundle is unsatisfied
+            $countBundleSubscription != $countPartialMatches
+        )
+    then
+        retract($pm);
+end
