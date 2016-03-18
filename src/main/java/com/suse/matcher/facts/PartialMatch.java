@@ -118,8 +118,8 @@ public class PartialMatch implements Comparable<PartialMatch> {
             .append(systemId)
             .append(productId)
             .append(subscriptionId)
-            .append(groupId)
             .append(cents)
+            .append(groupId)
             .toHashCode();
     }
 
@@ -134,8 +134,8 @@ public class PartialMatch implements Comparable<PartialMatch> {
             .append(systemId, other.systemId)
             .append(productId, other.productId)
             .append(subscriptionId, other.subscriptionId)
-            .append(groupId, other.groupId)
             .append(cents, other.cents)
+            .append(groupId, other.groupId)
             .isEquals();
     }
 
