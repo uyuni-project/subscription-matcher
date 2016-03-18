@@ -1,0 +1,32 @@
+{
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "matches": [
+      {
+          "system_id": 102,
+          "subscription_id": 2,
+          "product_id": 1224,
+          "cents": 100,
+          "confirmed": true
+      },
+      {
+          "system_id": 102,
+          "subscription_id": 1,
+          "product_id": 1298,
+          "cents": 100,
+          "confirmed": true
+      }
+  ],
+  "subscription_policies": {
+    "1": "physical_only",
+    "2": "physical_only"
+  },
+  "messages": [
+	  {
+	    "type": "unsatisfied_pinned_match",
+	    "data": {
+	      "subscription_id": "2",
+	      "system_id": "100"
+	    }
+	  }
+  ]
+}

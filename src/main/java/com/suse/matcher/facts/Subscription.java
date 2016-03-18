@@ -101,6 +101,9 @@ public class Subscription implements Comparable<Subscription> {
     /** Should this subscription be matched at all? Eg. expired subscriptions can be ignored. */
     public Boolean ignored = false;
 
+    /** The Hard Bundle Id that this subscription belongs to. If null, this doesn't belong to any Hard Bundle */
+    public Integer hardBundleId;
+
     /**
      * Instantiates a new subscription.
      *
@@ -223,6 +226,20 @@ public class Subscription implements Comparable<Subscription> {
         return stackable;
     }
 
+    /**
+     * @return Returns the hardBundleId.
+     */
+    public Integer getHardBundleId() {
+        return hardBundleId;
+    }
+
+    /**
+     * @param hardBundleId The hardBundleId to set.
+     */
+    public void setHardBundleId(Integer hardBundleId) {
+        this.hardBundleId = hardBundleId;
+    }
+
     /** {@inheritDoc} */
     @Override
     public int compareTo(Subscription oIn) {
@@ -254,6 +271,7 @@ public class Subscription implements Comparable<Subscription> {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
             .append("id", id)
+            .append("hardBundleId", hardBundleId)
             .toString();
     }
 }

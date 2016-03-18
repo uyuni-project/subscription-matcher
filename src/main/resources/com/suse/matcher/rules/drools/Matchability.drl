@@ -2,9 +2,9 @@ package com.suse.matcher.rules.drools;
 
 import java.util.List;
 
+import com.suse.matcher.Drools;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.HostedProduct;
-import com.suse.matcher.facts.IncompatibleGroups;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Product;
@@ -26,7 +26,7 @@ rule "matchPhysicalOnlySubscription"
             ignored == false
         )
     then
-        int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
+        int groupId = Drools.generateId($system.id, $productId, $subscription.id);
         insert(new PartialMatch($system.id, $productId, $subscription.id, 100, groupId));
 end
 
@@ -43,7 +43,7 @@ rule "matchInstanceSubscription"
             ignored == false
         )
     then
-        int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
+        int groupId = Drools.generateId($system.id, $productId, $subscription.id);
         insert(new PartialMatch($system.id, $productId, $subscription.id, 100, groupId));
 end
 
@@ -64,7 +64,7 @@ rule "matchUnlimitedVirtualizationSubscription"
         )
     then
         Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
-        int groupId = PartialMatch.generateGroupId($system.id, $productId, $subscription.id);
+        int groupId = Drools.generateId($system.id, $productId, $subscription.id);
         insert(new PartialMatch($system.id, $productId, $subscription.id, consumedQuantity * 100, groupId));
 end
 
@@ -76,7 +76,7 @@ rule "matchFreeVirtualizationSubscription"
       HostGuest(hostId == $hostId, $guestId : guestId)
       InstalledProduct(systemId == $guestId, productId == $productId)
     then
-      int groupId = PartialMatch.generateGroupId($hostId, $productId, $subscriptionId);
+      int groupId = Drools.generateId($hostId, $productId, $subscriptionId);
       insert(new PartialMatch($guestId, $productId, $subscriptionId, 0, groupId));
 end
 
@@ -98,7 +98,7 @@ rule "matchInheritedVirtualization"
         // for each match
         PartialMatch($baseSubscriptionId : subscriptionId, $cents : cents, $baseGroupId : groupId, productId == $baseProductId, systemId == $systemId)
     then
-        int addonGroupId = PartialMatch.generateGroupId($baseGroupId, $addonSubscriptionId);
+        int addonGroupId = Drools.generateId($baseGroupId, $addonSubscriptionId);
         insert(new PartialMatch($systemId, $baseProductId, $baseSubscriptionId, $cents, addonGroupId));
         insert(new PartialMatch($systemId, $addonProductId, $addonSubscriptionId, $cents, addonGroupId));
 end
@@ -117,7 +117,7 @@ rule "match12Subscription"
         )
         not (HostGuest(hostId == $systemId))
     then
-        int groupId = PartialMatch.generateGroupId($systemId, $productId, $subscriptionId);
+        int groupId = Drools.generateId($systemId, $productId, $subscriptionId);
         if ($physical) {
             insert(new PartialMatch($system.id, $productId, $subscription.id,
                 ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100,
