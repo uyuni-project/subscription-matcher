@@ -115,11 +115,16 @@
             <artifactId>drools-compiler</artifactId>
             <version>6.3.0.Final</version>
         </dependency>
-        <!-- Override dependency to match SLES shipped version -->
+        <!-- Override dependencies to match SLES shipped version -->
         <dependency>
             <groupId>org.eclipse.jdt.core.compiler</groupId>
             <artifactId>ecj</artifactId>
             <version>4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.9</version>
         </dependency>
 
         <dependency>
