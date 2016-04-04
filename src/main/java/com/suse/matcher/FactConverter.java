@@ -3,7 +3,7 @@ package com.suse.matcher;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
-import com.suse.matcher.facts.CurrentTime;
+import com.suse.matcher.facts.Timestamp;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PartialMatch;
@@ -50,7 +50,7 @@ public class FactConverter {
     public static Collection<Object> convertToFacts(JsonInput input, Date timestamp) {
         Collection<Object> result = new LinkedList<Object>();
 
-        result.add(new CurrentTime(timestamp));
+        result.add(new Timestamp(timestamp));
 
         for (JsonSystem system : input.getSystems()) {
             result.add(new System(system.getId(), system.getName(), system.getCpus(), system.getPhysical()));
@@ -95,7 +95,7 @@ public class FactConverter {
      * @return the output
      */
     public static JsonOutput convertToOutput(Assignment assignment) {
-        Date timestamp = assignment.getProblemFactStream(CurrentTime.class)
+        Date timestamp = assignment.getProblemFactStream(Timestamp.class)
                 .findFirst().get().timestamp;
 
         List<JsonMatch> confirmedMatches = getMatches(assignment, false);
