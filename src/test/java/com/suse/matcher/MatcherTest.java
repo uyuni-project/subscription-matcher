@@ -14,9 +14,7 @@ import org.junit.runners.Parameterized.Parameters;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -97,8 +95,7 @@ public class MatcherTest {
      */
     @Test
     public void test() throws Exception {
-        Date timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse("2015-05-01T00:00:00.000+0200");
-        JsonOutput actualOutput = FactConverter.convertToOutput(matcher.match(input, timestamp));
+        JsonOutput actualOutput = FactConverter.convertToOutput(matcher.match(input));
 
         JsonIO io = new JsonIO();
 

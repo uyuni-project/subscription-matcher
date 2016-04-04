@@ -44,13 +44,12 @@ public class FactConverter {
      * Converts JSON objects to facts (inputs to the rule engine).
      *
      * @param input a JSON input data blob
-     * @param timestamp the timestamp for this set of facts
      * @return a collection of facts
      */
-    public static Collection<Object> convertToFacts(JsonInput input, Date timestamp) {
+    public static Collection<Object> convertToFacts(JsonInput input) {
         Collection<Object> result = new LinkedList<Object>();
 
-        result.add(new Timestamp(timestamp));
+        result.add(new Timestamp(input.getTimestamp()));
 
         for (JsonSystem system : input.getSystems()) {
             result.add(new System(system.getId(), system.getName(), system.getCpus(), system.getPhysical()));

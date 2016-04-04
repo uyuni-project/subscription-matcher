@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,12 +48,11 @@ public class Matcher {
      * Matches a list of systems to a list of subscriptions.
      *
      * @param input a JSON input data blob
-     * @param timestamp the timestamp for this matching
      * @return an object summarizing the match
      */
-    public Assignment match(JsonInput input, Date timestamp) {
+    public Assignment match(JsonInput input) {
         // convert inputs into facts the rule engine can reason about
-        Collection<Object> baseFacts = FactConverter.convertToFacts(input, timestamp);
+        Collection<Object> baseFacts = FactConverter.convertToFacts(input);
 
         // activate the rule engine to deduce more facts
         Drools drools = new Drools(baseFacts);

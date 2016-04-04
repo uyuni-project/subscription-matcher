@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -58,7 +57,7 @@ public class Main {
 
             // do the matching
             JsonInput input = new JsonIO().loadInput(inputString);
-            Assignment assignment = new Matcher(false).match(input, new Date());
+            Assignment assignment = new Matcher(false).match(input);
 
             // write output data
             writer.writeOutput(assignment);
