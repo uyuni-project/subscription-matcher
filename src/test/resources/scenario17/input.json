@@ -33,7 +33,6 @@
             "subscription_id": 2,
             "system_id": 202
         }
-
     ],
     "products": [
         {
@@ -84,7 +83,6 @@
             "product_ids": [814, 815],
             "virtual_system_ids": []
         },
-
         {
             "cpus": 1,
             "id": 100,
@@ -127,7 +125,6 @@
             "product_ids": [814, 815],
             "virtual_system_ids": []
         },
-
         {
             "cpus": 2,
             "id": 300,
