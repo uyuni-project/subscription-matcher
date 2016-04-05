@@ -67,7 +67,7 @@ public class Main {
 
             logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
         }
-        catch (Exception e) {
+        catch (Throwable e) {
             logger.error("Unexpected exception: ", e);
         }
     }
