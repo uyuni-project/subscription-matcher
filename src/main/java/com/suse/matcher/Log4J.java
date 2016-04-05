@@ -18,9 +18,6 @@ import java.util.Optional;
  * Configures logging for the application.
  */
 public class Log4J {
-    /** Log line layout. */
-    private static final Layout LAYOUT = new PatternLayout("%-5p %c{1} - %m%n");
-
     /** Logger instance. */
     private final static Logger logger = LoggerFactory.getLogger(Log4J.class);
 
@@ -28,7 +25,7 @@ public class Log4J {
      * Inits the console logging.
      */
     public static void initConsoleLogging() {
-        ConsoleAppender console = new ConsoleAppender(LAYOUT);
+        ConsoleAppender console = new ConsoleAppender(new PatternLayout("%-5p %c{1} - %m%n"));
         console.setThreshold(Level.INFO);
         console.setTarget("System.err");
         console.activateOptions();
@@ -49,7 +46,7 @@ public class Log4J {
         loggingDirectory.ifPresent(directory -> {
             try {
                 File path = new File(directory, "subscription-matcher.log");
-                RollingFileAppender file = new RollingFileAppender(LAYOUT, path.toString());
+                RollingFileAppender file = new RollingFileAppender(new PatternLayout("%d %-5p %c{1} - %m%n"), path.toString());
                 file.setMaxBackupIndex(10);
                 file.setMaxFileSize("20MB");
                 file.setAppend(true);
