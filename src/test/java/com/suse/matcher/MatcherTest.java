@@ -95,6 +95,8 @@ public class MatcherTest {
      */
     @Test
     public void test() throws Exception {
+        Log4J.initConsoleLogging();
+
         JsonOutput actualOutput = FactConverter.convertToOutput(matcher.match(input));
 
         JsonIO io = new JsonIO();

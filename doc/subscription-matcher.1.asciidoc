@@ -25,8 +25,11 @@ show help message and exit
 -d,--delimiter <arg>::
 CSV Delimiter (Default: ,)
 
--o,--directory <arg>::
+-o,--output-directory <arg>::
 Output directory (Default: current directory)
+
+-l,--log-directory <arg>::
+Logging directory (Default: none, only log via STDERR)
 
 -i,--input <arg>::
 Input file in JSON format (Default: STDIN)

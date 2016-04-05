@@ -37,15 +37,18 @@ public class Main {
      */
     public static final void main(String[] args) throws Exception {
         try {
+            Log4J.initConsoleLogging();
+
             long start = System.currentTimeMillis();
             CommandLine commandLine = parseCommandLine(args);
 
-            // create output writer object
+            // create output writing objects
             Optional<Character> delimiter = commandLine.hasOption('d') ?
                     of(commandLine.getOptionValue('d').charAt(0)) :
                     empty();
             Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
             OutputWriter writer = new OutputWriter(outdir, delimiter);
+            Log4J.initFileLogging(ofNullable(commandLine.getOptionValue('l')));
 
             // load input data
             String inputString = commandLine.hasOption('i') ?
@@ -74,7 +77,8 @@ public class Main {
         Options opts = new Options();
         opts.addOption("h", "help", false, "show this help");
         opts.addOption("i", "input", true, "input.json file (Default: standard input)");
-        opts.addOption("o", "directory", true, "Output directory (Default: current directory)");
+        opts.addOption("o", "output-directory", true, "Output directory (Default: current directory)");
+        opts.addOption("l", "log-directory", true, "Logging directory (Default: none, only log via STDERR)");
         opts.addOption("d", "delimiter", true, "CSV Delimiter (Default: ,)");
 
         CommandLineParser parser = new BasicParser();
@@ -86,6 +90,10 @@ public class Main {
             }
             if (cmd.hasOption('o') && ! new File(cmd.getOptionValue('o')).isDirectory()) {
                 throw new ParseException("Given output directory does not exist " +
+                        "or is not a directory");
+            }
+            if (cmd.hasOption('l') && ! new File(cmd.getOptionValue('l')).isDirectory()) {
+                throw new ParseException("Given logging directory does not exist " +
                         "or is not a directory");
             }
         }
