@@ -90,9 +90,9 @@ public class Main {
             }
         }
         catch (ParseException e) {
-            java.lang.System.err.println("Failed to parse comand line properties:" + e);
+            System.err.println("Failed to parse comand line properties:" + e);
             help(opts);
-            java.lang.System.exit(1);
+            System.exit(1);
         }
         return cmd;
     }
