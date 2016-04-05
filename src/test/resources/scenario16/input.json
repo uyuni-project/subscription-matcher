@@ -1,4 +1,5 @@
 {
+    "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
         {
             "subscription_id": 1,
@@ -8,43 +9,35 @@
             "subscription_id": 1,
             "system_id": 1001
         },
-
         {
             "subscription_id": 1,
             "system_id": 1003
         },
-
         {
             "subscription_id": 1,
             "system_id": 101
         },
-
         {
             "subscription_id": 1,
             "system_id": 102
         },
-
         {
             "subscription_id": 1,
             "system_id": 103
         },
 
-
         {
             "subscription_id": 1,
             "system_id": 201
         },
-
         {
             "subscription_id": 1,
             "system_id": 202
         },
-
         {
             "subscription_id": 1,
             "system_id": 203
         },
-
         {
             "subscription_id": 2,
             "system_id": 1000
@@ -125,7 +118,6 @@
             "product_ids": [814, 815],
             "virtual_system_ids": []
         },
-
         {
             "cpus": 1,
             "id": 100,
@@ -154,7 +146,6 @@
             "product_ids": [814],
             "virtual_system_ids": []
         },
-
         {
             "cpus": 1,
             "id": 200,

@@ -1,4 +1,5 @@
 {
+    "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
         {
             "subscription_id": 1,
@@ -32,7 +33,6 @@
             "subscription_id": 2,
             "system_id": 202
         }
-
     ],
     "products": [
         {
@@ -83,7 +83,6 @@
             "product_ids": [814, 815],
             "virtual_system_ids": []
         },
-
         {
             "cpus": 1,
             "id": 100,
@@ -126,7 +125,6 @@
             "product_ids": [814, 815],
             "virtual_system_ids": []
         },
-
         {
             "cpus": 2,
             "id": 300,

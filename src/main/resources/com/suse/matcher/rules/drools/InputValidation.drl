@@ -7,12 +7,12 @@ import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.InstalledProduct;
-import com.suse.matcher.facts.CurrentTime;
+import com.suse.matcher.facts.Timestamp;
 
 rule "ignoreExpiredSubscription"
     agenda-group "InputValidation"
     when
-        CurrentTime($timestamp : timestamp)
+        Timestamp($timestamp : timestamp)
         $subscription: Subscription((endDate != null && endDate < $timestamp) || (startDate != null && startDate > $timestamp))
     then
         modify($subscription) {
