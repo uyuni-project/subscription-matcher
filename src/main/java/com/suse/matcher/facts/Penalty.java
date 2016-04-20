@@ -96,6 +96,7 @@ public class Penalty {
         Penalty other = (Penalty) objIn;
         return new EqualsBuilder()
             .append(subscriptionId, other.subscriptionId)
+            .append(hostId, other.hostId)
             .append(cents, other.cents)
             .isEquals();
     }
