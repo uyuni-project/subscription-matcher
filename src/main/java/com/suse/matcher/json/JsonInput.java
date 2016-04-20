@@ -55,13 +55,16 @@ public class JsonInput {
     /**
      * Standard constructor.
      *
+     * @param timestampIn the date and time of the match
      * @param systemsIn the systems
      * @param productsIn the products
      * @param subscriptionsIn the subscriptions
      * @param pinnedMatchesIn the pinned matches
      */
-    public JsonInput(List<JsonSystem> systemsIn, List<JsonProduct> productsIn,
-            List<JsonSubscription> subscriptionsIn, List<JsonMatch> pinnedMatchesIn) {
+    public JsonInput(Date timestampIn, List<JsonSystem> systemsIn,
+            List<JsonProduct> productsIn, List<JsonSubscription> subscriptionsIn,
+            List<JsonMatch> pinnedMatchesIn) {
+        timestamp = timestampIn;
         systems = systemsIn;
         products = productsIn;
         subscriptions = subscriptionsIn;
