@@ -9,7 +9,7 @@ import org.kie.api.definition.type.PropertyReactive;
 /**
  * When calculating the total amount of subscription cents used, there
  * might be occasions in which a penalty is applied. This fact encapsulates
- * the penalty applied to a certain subscription.
+ * the penalty applied to a certain subscription and penalty group.
  */
 @PropertyReactive
 public class Penalty {
@@ -17,8 +17,8 @@ public class Penalty {
     /** The subscription id. */
     public Long subscriptionId;
 
-    /** The host id. */
-    public Long hostId;
+    /** The penalty group id. */
+    public int penaltyGroupId;
 
     /** The penalty cents. */
     public int cents;
@@ -27,12 +27,12 @@ public class Penalty {
      * Instantiates a new penalty.
      *
      * @param subscriptionIdIn the subscription id
-     * @param hostIdIn the host id
+     * @param penaltyGroupIdIn the penalty group id
      * @param centsIn the penalty cents
      */
-    public Penalty(Long subscriptionIdIn, Long hostIdIn, int centsIn) {
+    public Penalty(Long subscriptionIdIn, int penaltyGroupIdIn, int centsIn) {
         subscriptionId = subscriptionIdIn;
-        hostId = hostIdIn;
+        penaltyGroupId = penaltyGroupIdIn;
         cents = centsIn;
     }
 
@@ -46,12 +46,12 @@ public class Penalty {
     }
 
     /**
-     * Gets the host id.
+     * Gets the penaltyGroupId.
      *
-     * @return the host id
+     * @return penaltyGroupId
      */
-    public Long getHostId() {
-        return hostId;
+    public int getPenaltyGroupId() {
+        return penaltyGroupId;
     }
 
     /**
@@ -68,7 +68,7 @@ public class Penalty {
     public int hashCode() {
         return new HashCodeBuilder()
             .append(subscriptionId)
-            .append(hostId)
+            .append(penaltyGroupId)
             .append(cents)
             .toHashCode();
     }
@@ -82,7 +82,7 @@ public class Penalty {
         Penalty other = (Penalty) objIn;
         return new EqualsBuilder()
             .append(subscriptionId, other.subscriptionId)
-            .append(hostId, other.hostId)
+            .append(penaltyGroupId, other.penaltyGroupId)
             .append(cents, other.cents)
             .isEquals();
     }
@@ -92,6 +92,7 @@ public class Penalty {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
         .append("subscriptionId", subscriptionId)
+        .append("penaltyGroupId", penaltyGroupId)
         .append("penaltyCents", cents)
         .toString();
     }
