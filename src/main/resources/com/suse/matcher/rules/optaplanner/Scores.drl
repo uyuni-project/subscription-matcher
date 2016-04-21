@@ -2,12 +2,12 @@ package com.suse.matcher.rules.optaplanner;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
-import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.PenaltyGroup;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.solver.Match;
 
@@ -21,11 +21,11 @@ global HardSoftScoreHolder scoreHolder;
 
 rule "calculate12Penalties"
   when
-    HostGuest($hostId : hostId)
+    PenaltyGroup($penaltyGroupId: id)
     Subscription($subscriptionId : id, policy != null && policy == Policy.ONE_TWO, ignored == false)
     accumulate (
-        // count the number of VMs that use a certain 1:2 subscription on one host
-        HostGuest($guestId : guestId, hostId == $hostId) and
+        // count the number of VMs that use a certain 1:2 subscription in one penalty group
+        PenaltyGroup($guestId : guestId, id == $penaltyGroupId) and
         PartialMatch($groupId : groupId, systemId == $guestId, subscriptionId == $subscriptionId) and
         Match(id == $groupId, confirmed == true);
         $count : count();
@@ -34,8 +34,8 @@ rule "calculate12Penalties"
     )
   then
     // ...add a 50 cent penalty. This ensures a whole number of subscriptions is
-    // always used for the same host
-    insertLogical(new Penalty($subscriptionId, $hostId, 50));
+    // always used for the same penalty group
+    insertLogical(new Penalty($subscriptionId, $penaltyGroupId, 50));
 end
 
 rule "dontExceedSubscriptionCount"

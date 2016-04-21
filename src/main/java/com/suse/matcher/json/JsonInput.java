@@ -43,6 +43,9 @@ public class JsonInput {
     /** The systems */
     private List<JsonSystem> systems;
 
+    /** Groups of virtual guests. */
+    private List<JsonVirtualizationGroup> virtualizationGroups;
+
     /** The products */
     private List<JsonProduct> products;
 
@@ -55,14 +58,20 @@ public class JsonInput {
     /**
      * Standard constructor.
      *
+     * @param timestampIn the date and time of the match
      * @param systemsIn the systems
+     * @param virtualizationGroupsIn the groups
      * @param productsIn the products
      * @param subscriptionsIn the subscriptions
      * @param pinnedMatchesIn the pinned matches
      */
-    public JsonInput(List<JsonSystem> systemsIn, List<JsonProduct> productsIn,
-            List<JsonSubscription> subscriptionsIn, List<JsonMatch> pinnedMatchesIn) {
+    public JsonInput(Date timestampIn, List<JsonSystem> systemsIn,
+            List<JsonVirtualizationGroup> virtualizationGroupsIn,
+            List<JsonProduct> productsIn, List<JsonSubscription> subscriptionsIn,
+            List<JsonMatch> pinnedMatchesIn) {
+        timestamp = timestampIn;
         systems = systemsIn;
+        virtualizationGroups = virtualizationGroupsIn;
         products = productsIn;
         subscriptions = subscriptionsIn;
         pinnedMatches = pinnedMatchesIn;
@@ -84,6 +93,25 @@ public class JsonInput {
      */
     public void setSystems(List<JsonSystem> systemsIn) {
         systems = systemsIn;
+    }
+
+    /**
+     * Gets the groups of virtual guests.
+     *
+     * @return the groups of virtual guests
+     */
+    public List<JsonVirtualizationGroup> getVirtualizationGroups() {
+        return virtualizationGroups;
+    }
+
+    /**
+     * Sets the groups of virtual guests.
+     *
+     * @param virtualizationGroupsIn the new groups of virtual guests
+     */
+    public void setVirtualizationGroups(
+            List<JsonVirtualizationGroup> virtualizationGroupsIn) {
+        virtualizationGroups = virtualizationGroupsIn;
     }
 
     /**

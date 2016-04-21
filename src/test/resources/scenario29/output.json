@@ -1,0 +1,23 @@
+{
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "matches": [
+    {
+      "system_id": 101,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 50,
+      "confirmed": true
+    },
+    {
+      "system_id": 111,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 50,
+      "confirmed": true
+    }
+  ],
+  "subscription_policies": {
+    "1": "one_two"
+  },
+  "messages": []
+}

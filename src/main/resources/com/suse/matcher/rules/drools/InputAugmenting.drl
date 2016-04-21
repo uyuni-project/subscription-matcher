@@ -4,9 +4,11 @@ import com.suse.matcher.Drools;
 import com.suse.matcher.facts.HostedProduct;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.facts.PenaltyGroup;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.VirtualizationGroupMember;
 
 rule "generateHostedProduct"
     agenda-group "InputAugmenting"
@@ -16,6 +18,24 @@ rule "generateHostedProduct"
         HostGuest($hostId : hostId, guestId == $systemId)
     then
         insert(new HostedProduct($hostId, $productId));
+end
+
+rule "generatePenaltyGroupsFromVirtualizationGroups"
+    agenda-group "InputAugmenting"
+    when
+        VirtualizationGroupMember($virtualizationGroupId : virtualizationGroupId, $guestId : guestId)
+    then
+        insert(new PenaltyGroup($virtualizationGroupId, $guestId));
+end
+
+rule "generatePenaltyGroups"
+    agenda-group "InputAugmenting"
+    when
+        HostGuest($hostId : hostId, $guestId : guestId)
+        not VirtualizationGroupMember(guestId == $guestId)
+    then
+        int penaltyGroupId = Drools.generateId("host_guest", $hostId);
+        insert(new PenaltyGroup(penaltyGroupId, $guestId));
 end
 
 rule "markHardBundledSubscriptions"
