@@ -1,0 +1,105 @@
+{
+  "timestamp": "2015-05-01T00:00:00.000+0200",
+  "pinned_matches": [
+    {
+      "subscription_id": 2,
+      "system_id": 101
+    }
+  ],
+  "products": [
+    {
+      "id": 814,
+      "name": "SUSE Linux Enterprise Server 11 SP3 x86_64",
+      "base": true
+    },
+    {
+      "id": 815,
+      "name": "Some other base product",
+      "base": true
+    }
+  ],
+  "subscriptions": [
+    {
+      "end_date": "2020-07-31T00:00:00Z",
+      "id": 1,
+      "part_number": "874-006875",
+      "product_ids": [
+          814
+      ],
+      "quantity": 1,
+      "scc_username": "UC7",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "end_date": "2020-07-31T00:00:00Z",
+      "id": 2,
+      "part_number": "874-006905",
+      "product_ids": [
+          815
+      ],
+      "quantity": 1,
+      "scc_username": "UC7",
+      "start_date": "2015-01-01T00:00:00Z"
+    }
+  ],
+  "virtualization_groups" : [
+    {
+      "id": 1000,
+      "virtual_guest_ids": [
+        101,
+        102,
+        111
+      ]
+    }
+  ],
+  "systems": [
+    {
+      "cpus": 2,
+      "id": 100,
+      "physical": true,
+      "product_ids": [],
+      "virtual_system_ids": [
+        101,
+        102
+      ]
+    },
+    {
+      "cpus": 2,
+      "id": 101,
+      "physical": false,
+      "product_ids": [
+        814,
+        815
+      ],
+      "virtual_system_ids" : []
+    },
+    {
+      "cpus": 2,
+      "id": 102,
+      "physical": false,
+      "product_ids": [
+        815
+      ],
+      "virtual_system_ids" : []
+    },
+    {
+      "cpus": 2,
+      "id": 110,
+      "physical": true,
+      "product_ids": [],
+      "virtual_system_ids": [
+        111
+      ]
+    },
+    {
+      "cpus": 64,
+      "id": 111,
+      "physical": false,
+      "product_ids": [
+        814,
+        815
+      ],
+      "virtual_system_ids" : []
+    }
+  ]
+}
