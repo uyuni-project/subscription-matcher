@@ -3,8 +3,8 @@ package com.suse.matcher;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
-import com.suse.matcher.facts.Timestamp;
 import com.suse.matcher.facts.HostGuest;
+import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.PinnedMatch;
@@ -12,7 +12,8 @@ import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.facts.Timestamp;
+import com.suse.matcher.facts.VirtualizationGroupMember;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonMessage;
@@ -20,6 +21,7 @@ import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonProduct;
 import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
+import com.suse.matcher.json.JsonVirtualizationGroup;
 import com.suse.matcher.solver.Assignment;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
@@ -58,6 +60,14 @@ public class FactConverter {
             }
             for (Long productId : system.getProductIds()) {
                 result.add(new InstalledProduct(system.getId(), productId));
+            }
+        }
+
+        for (JsonVirtualizationGroup group : input.getVirtualizationGroups()) {
+            for (Long guestId : group.getVirtualGuestIds()) {
+                result.add(new VirtualizationGroupMember(
+                        Drools.generateId(group.getType(), group.getId()),
+                        guestId));
             }
         }
 
