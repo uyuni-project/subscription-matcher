@@ -8,6 +8,7 @@ import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.Timestamp;
+import com.suse.matcher.facts.VirtualizationGroupMember;
 
 rule "ignoreExpiredSubscription"
     agenda-group "InputValidation"
@@ -98,9 +99,10 @@ rule "logMissingHost"
     when
         $guest : System($guestId : id, physical == false)
         not HostGuest(guestId == $guestId)
+        not VirtualizationGroupMember(guestId == $guestId)
     then
         // input data says this guest is virtual machine but we do not know
-        // about the system that hosts it
+        // about the system that hosts it nor the virtualization group that includes it
         // We treat this as a physical machine and warn the user, as the
         // matching will almost surely be incorrect
         TreeMap<String, String> data = new TreeMap<>();
