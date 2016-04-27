@@ -1,5 +1,8 @@
 package com.suse.matcher;
 
+import static java.util.stream.Collectors.toList;
+
+import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 import com.suse.matcher.solver.MatchMoveIteratorFactory;
@@ -25,10 +28,12 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.random.RandomType;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFilter;
+import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Facade on the OptaPlanner solver.
@@ -65,6 +70,21 @@ public class OptaPlanner {
         logger.info("Optimization phase took {}ms", System.currentTimeMillis() - start);
         result = (Assignment) solver.getBestSolution();
         logger.info("{} matches confirmed", result.getMatches().stream().filter(m -> m.confirmed).count());
+
+        // show Penalty facts generated in Scores.drl using DroolsScoreDirector and re-calculating
+        // the score of the best solution because facts generated dynamically are not available outside of this object
+        if (logger.isDebugEnabled()) {
+            DroolsScoreDirector scoreDirector = (DroolsScoreDirector) solver.getScoreDirectorFactory().buildScoreDirector();
+            scoreDirector.setWorkingSolution(scoreDirector.cloneSolution(result));
+            scoreDirector.calculateScore();
+            Collection<Penalty> penalties = scoreDirector.getKieSession().getObjects()
+                    .stream()
+                    .filter(f -> f instanceof Penalty)
+                    .map(f -> (Penalty)f)
+                    .collect(toList());
+            logger.debug("The best solution has " + penalties.size() + " penalties.");
+            penalties.forEach(penalty -> logger.debug(penalty.toString()));
+        }
     }
 
     /**
