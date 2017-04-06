@@ -6429,7 +6429,8 @@ rule "Add subscription data for part number 874-006070"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false
+            stackable = false,
+            specialHardBundle = true
         };
 end
 
@@ -6442,7 +6443,8 @@ rule "Add subscription data for part number 874-006071"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false
+            stackable = false,
+            specialHardBundle = true
         };
 end
 
@@ -6643,7 +6645,8 @@ rule "Add subscription data for part number 874-006092"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false
+            stackable = false,
+            specialHardBundle = true
         };
 end
 
@@ -6656,7 +6659,8 @@ rule "Add subscription data for part number 874-006093"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false
+            stackable = false,
+            specialHardBundle = true
         };
 end
 
@@ -6683,7 +6687,8 @@ rule "Add subscription data for part number 874-006095"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false
+            stackable = false,
+            specialHardBundle = true
         };
 end
 
@@ -6696,7 +6701,8 @@ rule "Add subscription data for part number 874-006096"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false
+            stackable = false,
+            specialHardBundle = true
         };
 end
 
