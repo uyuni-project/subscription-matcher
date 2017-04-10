@@ -104,8 +104,8 @@ public class Subscription implements Comparable<Subscription> {
     /** The Hard Bundle Id that this subscription belongs to. If null, this doesn't belong to any Hard Bundle */
     public Integer hardBundleId;
 
-    /** Is this subscription a hard bundle with only one subscription? */
-    public Boolean specialHardBundle = false;
+    /** Does this subscription on its own represent a hard bundle? */
+    public Boolean singleSubscriptionHardBundle = false;
 
     /**
      * Instantiates a new subscription.
@@ -237,10 +237,10 @@ public class Subscription implements Comparable<Subscription> {
     }
 
     /**
-     * @return the if this is a special Hard bundle
+     * @return true if this subscription on its own represents a hard bundle
      */
-    public Boolean getSpecialHardBundle() {
-        return specialHardBundle;
+    public Boolean getSingleSubscriptionHardBundle() {
+        return singleSubscriptionHardBundle;
     }
 
     /**

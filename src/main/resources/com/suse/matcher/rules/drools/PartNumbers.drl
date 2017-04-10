@@ -6430,7 +6430,7 @@ rule "Add subscription data for part number 874-006070"
             policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false,
-            specialHardBundle = true
+            singleSubscriptionHardBundle = true
         };
 end
 
@@ -6444,7 +6444,7 @@ rule "Add subscription data for part number 874-006071"
             policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false,
-            specialHardBundle = true
+            singleSubscriptionHardBundle = true
         };
 end
 
@@ -6646,7 +6646,7 @@ rule "Add subscription data for part number 874-006092"
             policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false,
-            specialHardBundle = true
+            singleSubscriptionHardBundle = true
         };
 end
 
@@ -6660,7 +6660,7 @@ rule "Add subscription data for part number 874-006093"
             policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false,
-            specialHardBundle = true
+            singleSubscriptionHardBundle = true
         };
 end
 
@@ -6688,7 +6688,7 @@ rule "Add subscription data for part number 874-006095"
             policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false,
-            specialHardBundle = true
+            singleSubscriptionHardBundle = true
         };
 end
 
@@ -6702,7 +6702,7 @@ rule "Add subscription data for part number 874-006096"
             policy = Policy.INSTANCE,
             supportLevel = "basic",
             stackable = false,
-            specialHardBundle = true
+            singleSubscriptionHardBundle = true
         };
 end
 
