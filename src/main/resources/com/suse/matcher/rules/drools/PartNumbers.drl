@@ -1985,6 +1985,7 @@ rule "Add subscription data for part number 662644476827"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -1998,6 +1999,7 @@ rule "Add subscription data for part number 662644476834"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -2011,6 +2013,7 @@ rule "Add subscription data for part number 662644476841"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -2024,6 +2027,7 @@ rule "Add subscription data for part number 662644476858"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -2037,6 +2041,7 @@ rule "Add subscription data for part number 662644476865"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -2091,6 +2096,7 @@ rule "Add subscription data for part number 662644476902"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3014,6 +3020,7 @@ rule "Add subscription data for part number 662644477485"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3027,6 +3034,7 @@ rule "Add subscription data for part number 662644477486"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3040,6 +3048,7 @@ rule "Add subscription data for part number 662644477487"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3053,6 +3062,7 @@ rule "Add subscription data for part number 662644477488"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3066,6 +3076,7 @@ rule "Add subscription data for part number 662644477489"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3079,6 +3090,7 @@ rule "Add subscription data for part number 662644477490"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3092,6 +3104,7 @@ rule "Add subscription data for part number 662644477491"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3105,6 +3118,7 @@ rule "Add subscription data for part number 662644477492"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3118,6 +3132,7 @@ rule "Add subscription data for part number 662644477493"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -3131,6 +3146,7 @@ rule "Add subscription data for part number 662644477494"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -5941,6 +5957,7 @@ rule "Add subscription data for part number 874-005942"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -5954,6 +5971,7 @@ rule "Add subscription data for part number 874-005943"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -5967,6 +5985,7 @@ rule "Add subscription data for part number 874-005944"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -5980,6 +5999,7 @@ rule "Add subscription data for part number 874-005945"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -6429,8 +6449,8 @@ rule "Add subscription data for part number 874-006070"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false,
-            singleSubscriptionHardBundle = true
+            singleSubscriptionHardBundle = true,
+            stackable = false
         };
 end
 
@@ -6443,8 +6463,8 @@ rule "Add subscription data for part number 874-006071"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false,
-            singleSubscriptionHardBundle = true
+            singleSubscriptionHardBundle = true,
+            stackable = false
         };
 end
 
@@ -6645,8 +6665,8 @@ rule "Add subscription data for part number 874-006092"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false,
-            singleSubscriptionHardBundle = true
+            singleSubscriptionHardBundle = true,
+            stackable = false
         };
 end
 
@@ -6659,8 +6679,8 @@ rule "Add subscription data for part number 874-006093"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false,
-            singleSubscriptionHardBundle = true
+            singleSubscriptionHardBundle = true,
+            stackable = false
         };
 end
 
@@ -6687,8 +6707,8 @@ rule "Add subscription data for part number 874-006095"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false,
-            singleSubscriptionHardBundle = true
+            singleSubscriptionHardBundle = true,
+            stackable = false
         };
 end
 
@@ -6701,8 +6721,8 @@ rule "Add subscription data for part number 874-006096"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "basic",
-            stackable = false,
-            singleSubscriptionHardBundle = true
+            singleSubscriptionHardBundle = true,
+            stackable = false
         };
 end
 
@@ -11087,6 +11107,7 @@ rule "Add subscription data for part number 874-006842"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -11100,6 +11121,7 @@ rule "Add subscription data for part number 874-006844"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -11127,6 +11149,7 @@ rule "Add subscription data for part number 874-006846"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -11140,6 +11163,7 @@ rule "Add subscription data for part number 874-006847"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -12162,6 +12186,7 @@ rule "Add subscription data for part number 874-006932"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -12175,6 +12200,7 @@ rule "Add subscription data for part number 874-006933"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -12188,6 +12214,7 @@ rule "Add subscription data for part number 874-006934"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -12201,6 +12228,7 @@ rule "Add subscription data for part number 874-006935"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -12214,6 +12242,7 @@ rule "Add subscription data for part number 874-006936"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -12227,6 +12256,7 @@ rule "Add subscription data for part number 874-006937"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -12240,6 +12270,7 @@ rule "Add subscription data for part number 874-006938"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
@@ -12253,6 +12284,7 @@ rule "Add subscription data for part number 874-006939"
         modify($subscription) {
             policy = Policy.INSTANCE,
             supportLevel = "l3-priority",
+            singleSubscriptionHardBundle = true,
             stackable = false
         };
 end
