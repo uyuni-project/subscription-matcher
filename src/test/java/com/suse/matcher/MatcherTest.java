@@ -87,6 +87,7 @@ public class MatcherTest {
         matcher = new Matcher(true);
         input = inputIn;
         expectedOutput = expectedOutputIn;
+        Drools.resetIdMap();
     }
 
     /**

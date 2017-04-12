@@ -115,6 +115,13 @@ public class Drools {
     }
 
     /**
+     * reset the idMap
+     */
+    public static void resetIdMap() {
+        idMap.clear();
+    }
+
+    /**
      * Returns a sequential id which is unique to the specified data.
      *
      * Equal input data always results in the same id.
