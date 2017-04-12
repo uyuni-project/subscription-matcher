@@ -32,6 +32,9 @@ public class MatcherTest {
     /** The expected output. */
     private JsonOutput expectedOutput;
 
+    /** The scenario number. */
+    private int scenarioNumber;
+
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
      * with files loaded from resources/subscriptions* JSON files.
@@ -49,7 +52,8 @@ public class MatcherTest {
             try {
                 result.add(new Object[] {
                     io.loadInput(getString(i, "input.json")),
-                    io.loadOutput(getString(i, "output.json"))
+                    io.loadOutput(getString(i, "output.json")),
+                    i
                 });
                 i++;
             }
@@ -82,11 +86,13 @@ public class MatcherTest {
      *
      * @param inputIn a JSON input data blob
      * @param expectedOutputIn the expected output
+     * @param scenarioNumberIn the scenario number
      */
-    public MatcherTest(JsonInput inputIn, JsonOutput expectedOutputIn) {
+    public MatcherTest(JsonInput inputIn, JsonOutput expectedOutputIn, int scenarioNumberIn) {
         matcher = new Matcher(true);
         input = inputIn;
         expectedOutput = expectedOutputIn;
+        scenarioNumber = scenarioNumberIn;
         Drools.resetIdMap();
     }
 
@@ -102,16 +108,16 @@ public class MatcherTest {
 
         JsonIO io = new JsonIO();
 
-        assertEquals("timestamp",
+        assertEquals("scenario" + scenarioNumber + " timestamp",
                 io.toJson(expectedOutput.getTimestamp()),
                 io.toJson(actualOutput.getTimestamp()));
-        assertEquals("matches",
+        assertEquals("scenario" + scenarioNumber + " matches",
                 io.toJson(expectedOutput.getMatches()),
                 io.toJson(actualOutput.getMatches()));
-        assertEquals("subscriptionPolices",
+        assertEquals("scenario" + scenarioNumber + " subscriptionPolices",
                 io.toJson(expectedOutput.getSubscriptionPolicies()),
                 io.toJson(actualOutput.getSubscriptionPolicies()));
-        assertEquals("messages",
+        assertEquals("scenario" + scenarioNumber + " messages",
                 io.toJson(expectedOutput.getMessages()),
                 io.toJson(actualOutput.getMessages()));
     }
