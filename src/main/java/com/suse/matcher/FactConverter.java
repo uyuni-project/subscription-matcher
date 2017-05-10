@@ -3,6 +3,7 @@ package com.suse.matcher;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
+import com.suse.matcher.facts.CentGroup;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.Message;
@@ -153,12 +154,28 @@ public class FactConverter {
                 .map(m -> m.id)
                 .collect(toSet());
 
+        // map of cent group id -> cent group cents
+        Map<Number, Integer> centGroupsCents = assignment.getProblemFactStream(CentGroup.class)
+                .collect(Collectors.toMap(
+                        cg -> cg.id,
+                        cg -> cg.cents
+                ));
+
+        // how many confirmed Partial Matches share one Cent Group
+        Map<Integer, Integer> centGroupMatchesCount = assignment.getProblemFactStream(PartialMatch.class)
+                .filter(pm -> confirmedGroupIds.contains(pm.getGroupId()))
+                .collect(Collectors.toMap(
+                        pm -> pm.centGroupId,
+                        pm -> 1,
+                        (v1, v2) -> v1 + v2
+                ));
+
         return assignment.getProblemFactStream(PartialMatch.class)
             .map(m -> new JsonMatch(
                 m.systemId,
                 m.subscriptionId,
                 m.productId,
-                m.cents,
+                centGroupsCents.get(m.getCentGroupId()) / centGroupMatchesCount.getOrDefault(m.getCentGroupId(), 1),
                 confirmedGroupIds.contains(m.groupId)
             ))
             .sorted((a, b) -> new CompareToBuilder()

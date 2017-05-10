@@ -2,6 +2,7 @@ package com.suse.matcher.rules.optaplanner;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
+import com.suse.matcher.facts.CentGroup;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.facts.PinnedMatch;
@@ -42,17 +43,26 @@ rule "dontExceedSubscriptionCount"
     when
         Subscription($subscriptionId: id, $quantity : quantity, ignored == false)
         accumulate (
-            PartialMatch($cents : cents, $groupId : groupId, subscriptionId == $subscriptionId) and
-            Match(id == $groupId, confirmed == true);
-            $usedCents : sum($cents)
+           PartialMatch($centGroupId : centGroupId, $groupId : groupId, subscriptionId == $subscriptionId) and
+           Match(id == $groupId, confirmed == true) and
+           $cg : CentGroup(id == $centGroupId);
+           $confirmedCentGroups : collectSet($cg)
         )
+
         accumulate (
             Penalty(subscriptionId == $subscriptionId, $cents: cents);
             $penaltyCents : sum($cents)
         )
     then
+        int usedCents = 0;
+        for (Object cg : $confirmedCentGroups) {
+            usedCents += ((CentGroup) cg).cents;
+        }
         int availableCents = $quantity * 100;
-        int totalUsedCents = $usedCents.intValue() + $penaltyCents.intValue();
+        int totalUsedCents = usedCents + $penaltyCents.intValue();
+        java.lang.System.out.println("confirmed grps ids: " + $confirmedCentGroups);
+        java.lang.System.out.println("all: " + usedCents);
+        java.lang.System.out.println(totalUsedCents + ", penalty " + $penaltyCents);
         scoreHolder.addHardConstraintMatch(kcontext,
             (availableCents - totalUsedCents) >= 0 ? 0 :
             // limit penalty to 10 points

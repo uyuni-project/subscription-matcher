@@ -29,7 +29,7 @@ rule "mergeHardBundledGroups"
             // we cannot use modify() because groupId is in hashCode, retract and insert intead
             retract(partialMatch);
             insert(new PartialMatch(partialMatch.systemId, partialMatch.productId, partialMatch.subscriptionId,
-                partialMatch.cents, $pm2.groupId));
+                partialMatch.centGroupId, $pm2.groupId));
         }
 end
 
