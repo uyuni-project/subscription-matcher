@@ -42,11 +42,18 @@ end
 rule "dontExceedSubscriptionCount"
     when
         Subscription($subscriptionId: id, $quantity : quantity, ignored == false)
+
+        // accumulate the cents of all confirmed matches
         accumulate (
-           PartialMatch($centGroupId : centGroupId, $groupId : groupId, subscriptionId == $subscriptionId) and
-           Match(id == $groupId, confirmed == true) and
-           $cg : CentGroup(id == $centGroupId);
-           $confirmedCentGroups : collectSet($cg)
+            PartialMatch($centGroupId : centGroupId, $groupId : groupId, subscriptionId == $subscriptionId) and
+            Match(id == $groupId, confirmed == true) and
+            $cg: CentGroup(id == $centGroupId);
+            $confirmedCentGroups : collectSet($cg)
+        )
+
+        accumulate (
+            $confirmedCentGroup : CentGroup() from $confirmedCentGroups;
+            $usedCents: sum($confirmedCentGroup.cents)
         )
 
         accumulate (
@@ -54,15 +61,8 @@ rule "dontExceedSubscriptionCount"
             $penaltyCents : sum($cents)
         )
     then
-        int usedCents = 0;
-        for (Object cg : $confirmedCentGroups) {
-            usedCents += ((CentGroup) cg).cents;
-        }
         int availableCents = $quantity * 100;
-        int totalUsedCents = usedCents + $penaltyCents.intValue();
-        java.lang.System.out.println("confirmed grps ids: " + $confirmedCentGroups);
-        java.lang.System.out.println("all: " + usedCents);
-        java.lang.System.out.println(totalUsedCents + ", penalty " + $penaltyCents);
+        int totalUsedCents = $usedCents.intValue() + $penaltyCents.intValue();
         scoreHolder.addHardConstraintMatch(kcontext,
             (availableCents - totalUsedCents) >= 0 ? 0 :
             // limit penalty to 10 points
