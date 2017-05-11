@@ -31,7 +31,6 @@ public class Drools {
         "InputValidation",
         "InputAugmenting",
         "Matchability",
-        "HardBundles",
     };
 
     /** Map to fact ids, see generateId(). */
