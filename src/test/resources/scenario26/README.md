@@ -1,5 +1,5 @@
 Scenario 26 - It seems to be an HardBundle but it's not --> quantity is different between subscriptions
-========================================================================================================
+=======================================================================================================
 
 SUBSCRIPTIONS:
 - **2** subscription[1] for SLES11-Pool (product id 814)
@@ -23,6 +23,8 @@ HARD-BUNDLE:
 
 Result
 ------
+The HardBundle is a set of subscriptions sharing certain attributes and owning
+products from the same product class.
 
 The HardBundle should contain subscriptions with the same quantity for each subscription
 but it contains 2 for SLES11-Pool and 3 for SLES11-Extras, so it's not an HardBundle.

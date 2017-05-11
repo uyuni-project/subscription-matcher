@@ -228,7 +228,7 @@ public class OptaPlanner {
          * Also activate OptaPlanner full assertions to catch more issues.
          */
         if (testing) {
-            termination.setUnimprovedStepCountLimit(5);
+            termination.setUnimprovedStepCountLimit(6);
             config.setEnvironmentMode(EnvironmentMode.FULL_ASSERT);
         }
 
