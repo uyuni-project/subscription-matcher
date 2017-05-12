@@ -39,22 +39,19 @@ rule "calculate12Penalties"
     insertLogical(new Penalty($subscriptionId, $penaltyGroupId, 50));
 end
 
+rule "penaltyForExceededMatches"
+  when
+    Subscription($subscriptionId : id, ignored == false) and
+    PartialMatch($groupId : groupId, subscriptionId == $subscriptionId, $centGroupId : centGroupId) and
+    Match(confirmed == true, id == $groupId) and
+    $cg : CentGroup(id == $centGroupId);
+  then
+    insertLogical(new Penalty($subscriptionId, -$centGroupId, $cg.cents));
+end
+
 rule "dontExceedSubscriptionCount"
     when
         Subscription($subscriptionId: id, $quantity : quantity, ignored == false)
-
-        // accumulate the cents of all confirmed matches
-        accumulate (
-            PartialMatch($centGroupId : centGroupId, $groupId : groupId, subscriptionId == $subscriptionId) and
-            Match(id == $groupId, confirmed == true) and
-            $cg: CentGroup(id == $centGroupId);
-            $confirmedCentGroups : collectSet($cg)
-        )
-
-        accumulate (
-            $confirmedCentGroup : CentGroup() from $confirmedCentGroups;
-            $usedCents: sum($confirmedCentGroup.cents)
-        )
 
         accumulate (
             Penalty(subscriptionId == $subscriptionId, $cents: cents);
@@ -62,7 +59,7 @@ rule "dontExceedSubscriptionCount"
         )
     then
         int availableCents = $quantity * 100;
-        int totalUsedCents = $usedCents.intValue() + $penaltyCents.intValue();
+        int totalUsedCents = $penaltyCents.intValue();
         scoreHolder.addHardConstraintMatch(kcontext,
             (availableCents - totalUsedCents) >= 0 ? 0 :
             // limit penalty to 10 points
