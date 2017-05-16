@@ -3,6 +3,7 @@ package com.suse.matcher.rules.optaplanner;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
 import com.suse.matcher.facts.CentGroup;
+import com.suse.matcher.facts.OneTwoPenalty;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.facts.PinnedMatch;
@@ -36,7 +37,7 @@ rule "calculate12Penalties"
   then
     // ...add a 50 cent penalty. This ensures a whole number of subscriptions is
     // always used for the same penalty group
-    insertLogical(new Penalty($subscriptionId, $penaltyGroupId, 50));
+    insertLogical(new OneTwoPenalty($subscriptionId, $penaltyGroupId, 50));
 end
 
 rule "penaltyForExceededMatches"
