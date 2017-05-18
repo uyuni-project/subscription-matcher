@@ -19,14 +19,14 @@
             "system_id": 100,
             "subscription_id": 2,
             "product_id": 1299,
-            "cents": 100,
+            "cents": 50,
             "confirmed": true
         },
         {
             "system_id": 100,
-            "subscription_id": 3,
+            "subscription_id": 2,
             "product_id": 1300,
-            "cents": 100,
+            "cents": 50,
             "confirmed": true
         },
         {
@@ -52,7 +52,7 @@
         },
         {
             "system_id": 101,
-            "subscription_id": 3,
+            "subscription_id": 2,
             "product_id": 1300,
             "cents": 0,
             "confirmed": true
@@ -80,7 +80,7 @@
         },
         {
             "system_id": 102,
-            "subscription_id": 3,
+            "subscription_id": 2,
             "product_id": 1300,
             "cents": 0,
             "confirmed": true
@@ -95,8 +95,7 @@
     ],
     "subscription_policies": {
         "1": "unlimited_virtualization",
-        "2": "inherited_virtualization",
-        "3": "inherited_virtualization"
+        "2": "inherited_virtualization"
     },
     "messages": [
     {
