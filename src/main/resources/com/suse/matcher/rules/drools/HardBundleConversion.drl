@@ -1,5 +1,6 @@
 package com.suse.matcher.rules.drools;
 
+import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
@@ -31,6 +32,18 @@ rule "mergeProducts"
         // we cannot use modify() because subscriptionId is in hashCode, retract and insert instead
         insert(new SubscriptionProduct($sub1Id, $subProd.productId));
         retract($subProd);
+end
+
+rule "mergePinnedMatches"
+    agenda-group "HardBundleConversion"
+    when
+        Subscription(ignored == false, hardBundleId != null, $sub1HardBundleId : hardBundleId, $sub1Id : id)
+        $subToRetract : Subscription(id > $sub1Id, hardBundleId == $sub1HardBundleId)
+        $pinnedMatch : PinnedMatch(subscriptionId == $subToRetract.id)
+    then
+        // we cannot use modify() because of attributes in hashCode, retract and insert instead
+        insert(new PinnedMatch($pinnedMatch.systemId, $sub1Id));
+        retract($pinnedMatch);
 end
 
 rule "removeRedundantSubscriptions"
