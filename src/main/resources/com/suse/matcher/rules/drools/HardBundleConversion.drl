@@ -17,8 +17,15 @@ rule "fakeProductClasses"
         SubscriptionProduct(subscriptionId == $subscriptionId, $prodId : productId)
         $prod : Product(productClass == null, id == $prodId)
     then
+        String productClass = "generated-product-class-" + $subscriptionId.toString();
+
+        TreeMap<String, String> data = new TreeMap<>();
+        data.put("product_id", $prodId.toString());
+        data.put("product_class", productClass);
+        insert(new Message(Message.Level.DEBUG, "hb_fake_product_class", data));
+
         modify($prod) {
-            setProductClass("generated-product-class-" + $subscriptionId.toString());
+            setProductClass(productClass);
         }
 end
 
@@ -41,6 +48,12 @@ rule "mergePinnedMatches"
         $subToRetract : Subscription(id > $sub1Id, hardBundleId == $sub1HardBundleId)
         $pinnedMatch : PinnedMatch(subscriptionId == $subToRetract.id)
     then
+        TreeMap<String, String> data = new TreeMap<>();
+        data.put("old_subscription_id", $subToRetract.id.toString());
+        data.put("new_subscription_id", $sub1Id.toString());
+        data.put("system_id", $pinnedMatch.systemId.toString());
+        insert(new Message(Message.Level.DEBUG, "hb_adjust_pinned_match", data));
+
         // we cannot use modify() because of attributes in hashCode, retract and insert instead
         insert(new PinnedMatch($pinnedMatch.systemId, $sub1Id));
         retract($pinnedMatch);
@@ -52,6 +65,11 @@ rule "removeRedundantSubscriptions"
         $subToKeep: Subscription(ignored == false, hardBundleId != null, $sub1HardBundleId : hardBundleId, $id : id)
         $subToRetract : Subscription(id > $id, hardBundleId == $sub1HardBundleId)
     then
+        TreeMap<String, String> data = new TreeMap<>();
+        data.put("old_subscription_id", $subToRetract.id.toString());
+        data.put("new_subscription_id", $id.toString());
+        insert(new Message(Message.Level.INFO, "hb_merge_subscriptions", data));
+
         modify($subToKeep) {
             setName($subToKeep.name + " + " + $subToRetract.name);
         }

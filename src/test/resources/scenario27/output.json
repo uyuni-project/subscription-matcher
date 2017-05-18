@@ -61,5 +61,27 @@
     "subscription_policies": {
         "1": "unlimited_virtualization"
     },
-    "messages": []
+    "messages": [
+        {
+            "type": "hb_fake_product_class",
+            "data": {
+                "product_class": "generated-product-class-1",
+                "product_id": "814"
+            }
+        },
+        {
+            "type": "hb_fake_product_class",
+            "data": {
+                "product_class": "generated-product-class-2",
+                "product_id": "689"
+            }
+        },
+        {
+            "type": "hb_merge_subscriptions",
+            "data": {
+                "new_subscription_id": "1",
+                "old_subscription_id": "2"
+            }
+        }
+    ]
 }

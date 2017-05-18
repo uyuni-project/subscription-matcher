@@ -34,12 +34,41 @@
     "1": "physical_only"
   },
   "messages": [
-	  {
-	    "type": "unsatisfied_pinned_match",
-	    "data": {
-	      "subscription_id": "1",
-	      "system_id": "100"
-	    }
-	  }
+      {
+          "type": "hb_adjust_pinned_match",
+          "data": {
+              "new_subscription_id": "1",
+              "old_subscription_id": "2",
+              "system_id": "100"
+          }
+      },
+      {
+          "type": "hb_fake_product_class",
+          "data": {
+              "product_class": "generated-product-class-1",
+              "product_id": "1298"
+          }
+      },
+      {
+          "type": "hb_fake_product_class",
+          "data": {
+              "product_class": "generated-product-class-2",
+              "product_id": "1224"
+          }
+      },
+      {
+          "type": "hb_merge_subscriptions",
+          "data": {
+              "new_subscription_id": "1",
+              "old_subscription_id": "2"
+          }
+      },
+      {
+          "type": "unsatisfied_pinned_match",
+          "data": {
+              "subscription_id": "1",
+              "system_id": "100"
+          }
+      }
   ]
 }

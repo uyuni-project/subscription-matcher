@@ -20,5 +20,12 @@
     "1": "instance"
   },
   "messages": [
+      {
+        "type": "hb_merge_subscriptions",
+        "data": {
+          "new_subscription_id": "1",
+          "old_subscription_id": "2"
+        }
+      }
   ]
 }
