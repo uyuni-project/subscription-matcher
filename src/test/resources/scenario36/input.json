@@ -1,0 +1,59 @@
+{
+    "timestamp": "2015-05-01T00:00:00.000+0200",
+    "pinned_matches": [
+    ],
+    "products": [
+        {
+            "id": 1357,
+            "name": "SUSE Linux Enterprise Server 12 SP2 x86_64",
+            "product_class": "7261",
+            "base": true,
+            "free": false
+        },
+        {
+            "id": 1518,
+            "name": "SUSE Manager Server 3.1",
+            "product_class": "SMS-X86",
+            "base": false,
+            "free": false
+        }
+    ],
+    "subscriptions": [
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 1,
+            "part_number": "874-005943",
+            "product_ids": [
+                1357,
+                1518
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        },
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 2,
+            "part_number": "874-005943",
+            "product_ids": [
+                1518
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        }
+    ],
+    "virtualization_groups": [],
+    "systems": [
+        {
+            "cpus": 2,
+            "id": 100,
+            "physical": true,
+            "product_ids": [
+                1357,
+                1518
+            ],
+            "virtual_system_ids" : []
+        }
+    ]
+}
