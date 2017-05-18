@@ -30,6 +30,7 @@ public class Drools {
         "PartNumbers",
         "InputValidation",
         "InputAugmenting",
+        "HardBundleConversion",
         "Matchability",
     };
 

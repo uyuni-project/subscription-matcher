@@ -1,0 +1,45 @@
+package com.suse.matcher.rules.drools;
+
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
+import com.suse.matcher.facts.System;
+
+// Agenda group for converting old style hard bundles (consisting of more subscriptions)
+// into a single-subscription hard bundle
+
+rule "fakeProductClasses"
+    agenda-group "HardBundleConversion"
+    when
+        $sub : Subscription(ignored == false, hardBundleId != null, $sid : id)
+        SubscriptionProduct(subscriptionId == $sid, $prodId : productId)
+        $prod : Product(productClass == null, id == $prodId)
+    then
+        modify($prod) {
+            setProductClass("generated-product-class-" + $sid.toString());
+        }
+end
+
+rule "mergeProducts"
+    agenda-group "HardBundleConversion"
+    when
+        Subscription(ignored == false, hardBundleId != null, $sub1HBid : hardBundleId, $id : id)
+        $subToRetract : Subscription(id > $id, hardBundleId == $sub1HBid)
+        $subProd : SubscriptionProduct(subscriptionId == $subToRetract.id);
+    then
+        modify($subProd) {
+            setSubscriptionId($id);
+        }
+end
+
+rule "removeRedundantSubscriptions"
+    agenda-group "HardBundleConversion"
+    when
+        $subToKeep: Subscription(ignored == false, hardBundleId != null, $sub1HBid : hardBundleId, $id : id)
+        $subToRetract : Subscription(id > $id, hardBundleId == $sub1HBid)
+    then
+        modify($subToKeep) {
+            setName($subToKeep.name + " + " + $subToRetract.name);
+        }
+        retract($subToRetract);
+end
+
