@@ -174,9 +174,17 @@ rule "mergeCentGroupsInBundles"
         $cg1 : CentGroup(id == $centGroupId1, $cents1 : cents)
         $cg2 : CentGroup(id == $centGroupId2, cents == $cents1)
     then
-        //retract($cg2);
         modify($pm2) {
             setCentGroupId($cg1.id);
         }
+end
+
+rule "retractOrphanedCentGroups"
+    agenda-group "Matchability"
+    when
+        $cg : CentGroup($centGroupId : id) and
+        not PartialMatch(centGroupId == $centGroupId)
+    then
+        retract($cg);
 end
 
