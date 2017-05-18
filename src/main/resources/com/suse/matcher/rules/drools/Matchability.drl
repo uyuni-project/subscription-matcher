@@ -114,9 +114,9 @@ rule "matchInheritedVirtualization"
         int addonGroupId = Drools.generateId($baseGroupId, $addonSubscriptionId);
 
         // CentGroup for partial match with base subscription
-        int baseMatchCentGroupId = Drools.generateId("IV-Base", addonGroupId, $systemId);
+        int baseMatchCentGroupId = Drools.generateId("IV-Base", addonGroupId, $centGroupId);
         // CentGroup for partial match with addon subscription
-        int addonMatchCentGroupId = Drools.generateId("IV-Addon", addonGroupId, $systemId);
+        int addonMatchCentGroupId = Drools.generateId("IV-Addon", addonGroupId, $centGroupId);
 
         insert(new CentGroup(baseMatchCentGroupId, $cents));
         insert(new CentGroup(addonMatchCentGroupId, $cents));
