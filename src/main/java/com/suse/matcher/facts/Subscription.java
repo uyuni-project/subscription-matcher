@@ -240,6 +240,15 @@ public class Subscription implements Comparable<Subscription> {
         this.hardBundleId = hardBundleId;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param nameIn - the name
+     */
+    public void setName(String nameIn) {
+        name = nameIn;
+    }
+
     /** {@inheritDoc} */
     @Override
     public int compareTo(Subscription oIn) {

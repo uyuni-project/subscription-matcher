@@ -87,6 +87,15 @@ public class Product {
         return base;
     }
 
+    /**
+     * Sets the productClass.
+     *
+     * @param productClassIn - the productClass
+     */
+    public void setProductClass(String productClassIn) {
+        productClass = productClassIn;
+    }
+
     /** {@inheritDoc} */
     @Override
     public int hashCode() {

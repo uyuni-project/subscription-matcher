@@ -70,10 +70,8 @@ rule "fakeProductClassesHB"
         SubscriptionProduct(subscriptionId == $sid, $prodId : productId)
         $prod : Product(productClass == null, id == $prodId)
     then
-        if ($prod.productClass == null) { // todo ! why is this needed? ^^^ should be enough!!!!!!
-            modify($prod) {
-                productClass = "generated-product-class-" + $sid.toString();
-            }
+        modify($prod) {
+            setProductClass("generated-product-class-" + $sid.toString());
         }
 end
 
@@ -87,7 +85,7 @@ rule "mergeHbProducts" // todo works also for more subs than 2?
     then
         java.lang.System.out.println("merging subscription-product " + $subProd);
         modify($subProd) {
-            subscriptionId = $id;
+            setSubscriptionId($id);
         }
         java.lang.System.out.println("merged subscription-product " + $subProd);
 end
@@ -101,7 +99,7 @@ rule "removeRedundantSubs"
     then
         java.lang.System.out.println("retracting " + $subToRetract);
         modify($subToKeep) {
-            name += " + " + $subToRetract.name;
+            setName($subToKeep.name + " + " + $subToRetract.name);
         }
         retract($subToRetract);
 end

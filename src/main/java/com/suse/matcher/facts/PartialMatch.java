@@ -89,6 +89,15 @@ public class PartialMatch implements Comparable<PartialMatch> {
     }
 
     /**
+     * Sets the centGroupId.
+     *
+     * @param centGroupIdIn - the centGroupId
+     */
+    public void setCentGroupId(int centGroupIdIn) {
+        centGroupId = centGroupIdIn;
+    }
+
+    /**
      * Gets the group id.
      *
      * @return the group id

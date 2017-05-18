@@ -174,7 +174,7 @@ rule "mergeCentGroupsInBundles"
     then
         //retract($cg2);
         modify($pm2) {
-            centGroupId = $cg1.id;
+            setCentGroupId($cg1.id);
         }
 end
 
