@@ -7,15 +7,17 @@ import com.suse.matcher.facts.System;
 // Agenda group for converting old style hard bundles (consisting of more subscriptions)
 // into a single-subscription hard bundle
 
+// For 2 sets of products from 2 subscriptions in a hard bundle, we assume that if they don't
+// have the product class, we set a fake product class per subscription.
 rule "fakeProductClasses"
     agenda-group "HardBundleConversion"
     when
-        $sub : Subscription(ignored == false, hardBundleId != null, $sid : id)
-        SubscriptionProduct(subscriptionId == $sid, $prodId : productId)
+        $sub : Subscription(ignored == false, hardBundleId != null, $subscriptionId : id)
+        SubscriptionProduct(subscriptionId == $subscriptionId, $prodId : productId)
         $prod : Product(productClass == null, id == $prodId)
     then
         modify($prod) {
-            setProductClass("generated-product-class-" + $sid.toString());
+            setProductClass("generated-product-class-" + $subscriptionId.toString());
         }
 end
 
