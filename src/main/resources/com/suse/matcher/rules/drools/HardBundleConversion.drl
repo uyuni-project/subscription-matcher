@@ -24,20 +24,20 @@ end
 rule "mergeProducts"
     agenda-group "HardBundleConversion"
     when
-        Subscription(ignored == false, hardBundleId != null, $sub1HBid : hardBundleId, $id : id)
-        $subToRetract : Subscription(id > $id, hardBundleId == $sub1HBid)
+        Subscription(ignored == false, hardBundleId != null, $sub1HardBundleId : hardBundleId, $sub1Id : id)
+        $subToRetract : Subscription(id > $sub1Id, hardBundleId == $sub1HardBundleId)
         $subProd : SubscriptionProduct(subscriptionId == $subToRetract.id);
     then
         // we cannot use modify() because subscriptionId is in hashCode, retract and insert instead
-        insert(new SubscriptionProduct($id, $subProd.productId));
+        insert(new SubscriptionProduct($sub1Id, $subProd.productId));
         retract($subProd);
 end
 
 rule "removeRedundantSubscriptions"
     agenda-group "HardBundleConversion"
     when
-        $subToKeep: Subscription(ignored == false, hardBundleId != null, $sub1HBid : hardBundleId, $id : id)
-        $subToRetract : Subscription(id > $id, hardBundleId == $sub1HBid)
+        $subToKeep: Subscription(ignored == false, hardBundleId != null, $sub1HardBundleId : hardBundleId, $id : id)
+        $subToRetract : Subscription(id > $id, hardBundleId == $sub1HardBundleId)
     then
         modify($subToKeep) {
             setName($subToKeep.name + " + " + $subToRetract.name);
