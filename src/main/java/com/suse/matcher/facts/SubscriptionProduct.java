@@ -39,15 +39,6 @@ public class SubscriptionProduct {
     }
 
     /**
-     * Sets the subscriptionId.
-     *
-     * @param subscriptionIdIn - the subscriptionId
-     */
-    public void setSubscriptionId(Long subscriptionIdIn) {
-        subscriptionId = subscriptionIdIn;
-    }
-
-    /**
      * Gets the product id.
      *
      * @return the product id

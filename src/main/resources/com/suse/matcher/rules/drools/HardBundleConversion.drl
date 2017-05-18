@@ -26,9 +26,9 @@ rule "mergeProducts"
         $subToRetract : Subscription(id > $id, hardBundleId == $sub1HBid)
         $subProd : SubscriptionProduct(subscriptionId == $subToRetract.id);
     then
-        modify($subProd) {
-            setSubscriptionId($id);
-        }
+        // we cannot use modify() because subscriptionId is in hashCode, retract and insert instead
+        insert(new SubscriptionProduct($id, $subProd.productId));
+        retract($subProd);
 end
 
 rule "removeRedundantSubscriptions"
