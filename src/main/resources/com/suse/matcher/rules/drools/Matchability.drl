@@ -154,36 +154,29 @@ end
 rule "mergeCentGroupsInBundles"
     agenda-group "Matchability"
     when
-        $pm : PartialMatch(
-            $subId : subscriptionId,
-            $centGroupId1 : centGroupId,
-            $systemId : systemId,
-            $productId : productId
+        $match1 : PartialMatch()
+        Product(id == $match1.productId, productClass != null, $match1prodClass : productClass)
+        $match2 : PartialMatch(
+            subscriptionId == $match1.subscriptionId,
+            centGroupId > $match1.centGroupId,
+            systemId == $match1.systemId,
+            productId != $match1.productId
         )
-        Product(id == $productId, $prodClass1 : productClass, productClass != null)
-        $pm2 : PartialMatch(
-            subscriptionId == $subId,
-            centGroupId > $centGroupId1,
-            systemId == $systemId,
-            productId != $productId,
-            $centGroupId2 : centGroupId,
-            $productId2 : productId
-        )
-        Product(id == $productId2, productClass != $prodClass1, productClass != null)
+        Product(id == $match2.productId, productClass != $match1prodClass, productClass != null)
 
-        $cg1 : CentGroup(id == $centGroupId1, $cents1 : cents)
-        $cg2 : CentGroup(id == $centGroupId2, cents == $cents1)
+        CentGroup(id == $match1.centGroupId, $cents : cents)
+        CentGroup(id == $match2.centGroupId, cents == $cents)
     then
-        modify($pm2) {
-            setCentGroupId($cg1.id);
+        modify($match2) {
+            setCentGroupId($match1.centGroupId);
         }
 end
 
 rule "retractOrphanedCentGroups"
     agenda-group "Matchability"
     when
-        $cg : CentGroup($centGroupId : id) and
-        not PartialMatch(centGroupId == $centGroupId)
+        $cg : CentGroup() and
+        not PartialMatch(centGroupId == $cg.id)
     then
         retract($cg);
 end

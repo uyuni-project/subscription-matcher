@@ -43,11 +43,11 @@ end
 rule "penaltyForExceededMatches"
   when
     Subscription($subscriptionId : id, ignored == false) and
-    PartialMatch($groupId : groupId, subscriptionId == $subscriptionId, $centGroupId : centGroupId) and
+    PartialMatch(subscriptionId == $subscriptionId, $groupId : groupId, $centGroupId : centGroupId) and
     Match(confirmed == true, id == $groupId) and
-    $cg : CentGroup(id == $centGroupId);
+    CentGroup(id == $centGroupId, $cents : cents);
   then
-    insertLogical(new Penalty($subscriptionId, -$centGroupId, $cg.cents));
+    insertLogical(new Penalty($subscriptionId, -$centGroupId, $cents));
 end
 
 rule "dontExceedSubscriptionCount"
