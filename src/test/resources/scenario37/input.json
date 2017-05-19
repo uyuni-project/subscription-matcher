@@ -10,17 +10,20 @@
         {
             "id": 1298,
             "name": "SUSE Linux Enterprise Server 11 SP4 i686",
-            "base": true
+            "base": true,
+            "product_class": "1"
         },
         {
             "id": 1224,
             "name": "SUSE Manager Server 2.1",
-            "base": true
+            "base": true,
+            "product_class": "2"
         },
         {
             "id": 1225,
             "name": "Emacs - manager edition",
-            "base": true
+            "base": true,
+            "product_class": "3"
         }
     ],
     "subscriptions": [

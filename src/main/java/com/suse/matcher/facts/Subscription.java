@@ -259,6 +259,15 @@ public class Subscription implements Comparable<Subscription> {
         name = nameIn;
     }
 
+    /**
+     * Sets the singleSubscriptionHardBundle.
+     *
+     * @param singleSubscriptionHardBundleIn - the singleSubscriptionHardBundle
+     */
+    public void setSingleSubscriptionHardBundle(Boolean singleSubscriptionHardBundleIn) {
+        singleSubscriptionHardBundle = singleSubscriptionHardBundleIn;
+    }
+
     /** {@inheritDoc} */
     @Override
     public int compareTo(Subscription oIn) {

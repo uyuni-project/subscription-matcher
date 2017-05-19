@@ -156,6 +156,7 @@ rule "mergeCentGroupsInBundles"
     when
         $match1 : PartialMatch()
         Product(id == $match1.productId, productClass != null, $match1prodClass : productClass)
+        Subscription(id == $match1.subscriptionId, singleSubscriptionHardBundle == true)
         $match2 : PartialMatch(
             subscriptionId == $match1.subscriptionId,
             centGroupId > $match1.centGroupId,
@@ -163,6 +164,7 @@ rule "mergeCentGroupsInBundles"
             productId != $match1.productId
         )
         Product(id == $match2.productId, productClass != $match1prodClass, productClass != null)
+        Subscription(id == $match2.subscriptionId, singleSubscriptionHardBundle == true)
 
         CentGroup(id == $match1.centGroupId, $cents : cents)
         CentGroup(id == $match2.centGroupId, cents == $cents)

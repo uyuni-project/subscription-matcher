@@ -50,7 +50,8 @@ rule "removeRedundantSubscriptions"
         insert(new Message(Message.Level.INFO, "hb_merge_subscriptions", data));
 
         modify($subToKeep) {
-            setName($subToKeep.name + " + " + $subToRetract.name);
+            setName($subToKeep.name + " + " + $subToRetract.name),
+            setSingleSubscriptionHardBundle(true)
         }
         retract($subToRetract);
 end

@@ -9,11 +9,13 @@
     "products": [
         {
             "id": 814,
-            "name": "SLES11-Pool"
+            "name": "SLES11-Pool",
+            "product_class": "1"
         },
         {
             "id": 689,
-            "name": "SLES11-Extras"
+            "name": "SLES11-Extras",
+            "product_class": "2"
         }
     ],
     "subscriptions": [
