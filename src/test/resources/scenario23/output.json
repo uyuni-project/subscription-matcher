@@ -43,20 +43,6 @@
           }
       },
       {
-          "type": "hb_fake_product_class",
-          "data": {
-              "product_class": "generated-product-class-1",
-              "product_id": "1298"
-          }
-      },
-      {
-          "type": "hb_fake_product_class",
-          "data": {
-              "product_class": "generated-product-class-2",
-              "product_id": "1224"
-          }
-      },
-      {
           "type": "hb_merge_subscriptions",
           "data": {
               "new_subscription_id": "1",

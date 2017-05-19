@@ -99,20 +99,6 @@
     },
     "messages": [
         {
-            "type": "hb_fake_product_class",
-            "data": {
-                "product_class": "generated-product-class-2",
-                "product_id": "1299"
-            }
-        },
-        {
-            "type": "hb_fake_product_class",
-            "data": {
-                "product_class": "generated-product-class-3",
-                "product_id": "1300"
-            }
-        },
-        {
             "type": "hb_merge_subscriptions",
             "data": {
                 "new_subscription_id": "2",
