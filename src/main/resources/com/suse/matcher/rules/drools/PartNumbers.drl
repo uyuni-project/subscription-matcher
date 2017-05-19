@@ -10982,6 +10982,7 @@ rule "Add subscription data for part number 874-006833"
             policy = Policy.ONE_TWO,
             supportLevel = "priority",
             cpus = 2,
+            singleSubscriptionHardBundle = true,
             stackable = true
         };
 end
