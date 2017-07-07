@@ -104,6 +104,9 @@ public class Subscription implements Comparable<Subscription> {
     /** The Hard Bundle Id that this subscription belongs to. If null, this doesn't belong to any Hard Bundle */
     public Integer hardBundleId;
 
+    /** Does this subscription on its own represent a hard bundle? */
+    public Boolean singleSubscriptionHardBundle = false;
+
     /**
      * Instantiates a new subscription.
      *
@@ -234,10 +237,35 @@ public class Subscription implements Comparable<Subscription> {
     }
 
     /**
+     * @return true if this subscription on its own represents a hard bundle
+     */
+    public Boolean getSingleSubscriptionHardBundle() {
+        return singleSubscriptionHardBundle;
+    }
+
+    /**
      * @param hardBundleId The hardBundleId to set.
      */
     public void setHardBundleId(Integer hardBundleId) {
         this.hardBundleId = hardBundleId;
+    }
+
+    /**
+     * Sets the name.
+     *
+     * @param nameIn - the name
+     */
+    public void setName(String nameIn) {
+        name = nameIn;
+    }
+
+    /**
+     * Sets the singleSubscriptionHardBundle.
+     *
+     * @param singleSubscriptionHardBundleIn - the singleSubscriptionHardBundle
+     */
+    public void setSingleSubscriptionHardBundle(Boolean singleSubscriptionHardBundleIn) {
+        singleSubscriptionHardBundle = singleSubscriptionHardBundleIn;
     }
 
     /** {@inheritDoc} */

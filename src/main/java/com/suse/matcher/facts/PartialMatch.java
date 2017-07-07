@@ -29,8 +29,8 @@ public class PartialMatch implements Comparable<PartialMatch> {
     /** The subscription id. */
     public long subscriptionId;
 
-    /** The number of subscription cents used in this match. */
-    public int cents;
+    /** The id of the cent group used in this match. More matches can share same cent group. */
+    public int centGroupId;
 
     /** The group id. */
     public int groupId;
@@ -41,14 +41,14 @@ public class PartialMatch implements Comparable<PartialMatch> {
      * @param systemIdIn a system id
      * @param productIdIn an id of a product
      * @param subscriptionIdIn an id of subscription assigned to the system
-     * @param centsIn the number of subscription cents used in this match
+     * @param centGroupIdIn the id of cent group
      * @param groupIdIn the group id
      */
-    public PartialMatch(long systemIdIn, long productIdIn, long subscriptionIdIn, int centsIn, int groupIdIn) {
+    public PartialMatch(long systemIdIn, long productIdIn, long subscriptionIdIn, int centGroupIdIn, int groupIdIn) {
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
-        cents = centsIn;
+        centGroupId = centGroupIdIn;
         groupId = groupIdIn;
     }
 
@@ -80,12 +80,21 @@ public class PartialMatch implements Comparable<PartialMatch> {
     }
 
     /**
-     * Gets the number of subscription cents used in this match.
+     * Gets the id of the cent group used by this match.
      *
-     * @return the cents
+     * @return the centGroupId
      */
-    public int getCents() {
-        return cents;
+    public int getCentGroupId() {
+        return centGroupId;
+    }
+
+    /**
+     * Sets the centGroupId.
+     *
+     * @param centGroupIdIn - the centGroupId
+     */
+    public void setCentGroupId(int centGroupIdIn) {
+        centGroupId = centGroupIdIn;
     }
 
     /**
@@ -104,7 +113,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
             .append(systemId)
             .append(productId)
             .append(subscriptionId)
-            .append(cents)
+            .append(centGroupId)
             .append(groupId)
             .toHashCode();
     }
@@ -120,7 +129,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
             .append(systemId, other.systemId)
             .append(productId, other.productId)
             .append(subscriptionId, other.subscriptionId)
-            .append(cents, other.cents)
+            .append(centGroupId, other.centGroupId)
             .append(groupId, other.groupId)
             .isEquals();
     }
@@ -132,7 +141,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
             .append("systemId", systemId)
             .append("productId", productId)
             .append("subscriptionId", subscriptionId)
-            .append("cents", cents)
+            .append("centGroupId", centGroupId)
             .append("groupId", groupId)
             .toString();
     }
@@ -144,7 +153,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
             .append(systemId, other.systemId)
             .append(productId, other.productId)
             .append(subscriptionId, other.subscriptionId)
-            .append(cents, other.cents)
+            .append(centGroupId, other.centGroupId)
             .append(groupId, other.groupId)
             .toComparison();
     }

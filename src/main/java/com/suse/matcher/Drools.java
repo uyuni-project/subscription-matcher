@@ -30,8 +30,8 @@ public class Drools {
         "PartNumbers",
         "InputValidation",
         "InputAugmenting",
+        "HardBundleConversion",
         "Matchability",
-        "HardBundles",
     };
 
     /** Map to fact ids, see generateId(). */
@@ -112,6 +112,13 @@ public class Drools {
      */
     public Collection<? extends Object> getResult() {
         return result;
+    }
+
+    /**
+     * reset the idMap
+     */
+    public static void resetIdMap() {
+        idMap.clear();
     }
 
     /**

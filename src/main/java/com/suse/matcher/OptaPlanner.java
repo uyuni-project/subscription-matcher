@@ -2,6 +2,7 @@ package com.suse.matcher;
 
 import static java.util.stream.Collectors.toList;
 
+import com.suse.matcher.facts.OneTwoPenalty;
 import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
@@ -79,10 +80,10 @@ public class OptaPlanner {
             scoreDirector.calculateScore();
             Collection<Penalty> penalties = scoreDirector.getKieSession().getObjects()
                     .stream()
-                    .filter(f -> f instanceof Penalty)
+                    .filter(f -> f instanceof OneTwoPenalty)
                     .map(f -> (Penalty)f)
                     .collect(toList());
-            logger.debug("The best solution has " + penalties.size() + " penalties.");
+            logger.debug("The best solution has " + penalties.size() + " penalties for 1-2 subscriptions.");
             penalties.forEach(penalty -> logger.debug(penalty.toString()));
         }
     }
@@ -227,7 +228,7 @@ public class OptaPlanner {
          * Also activate OptaPlanner full assertions to catch more issues.
          */
         if (testing) {
-            termination.setUnimprovedStepCountLimit(5);
+            termination.setUnimprovedStepCountLimit(6);
             config.setEnvironmentMode(EnvironmentMode.FULL_ASSERT);
         }
 

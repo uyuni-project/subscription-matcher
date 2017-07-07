@@ -1,32 +1,31 @@
 {
     "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
-    	{
-          "subscription_id": 2,
-          "system_id": 100
-        }
     ],
     "products": [
         {
-            "id": 1298,
-            "name": "SUSE Linux Enterprise Server 11 SP4 i686",
+            "id": 1357,
+            "name": "SUSE Linux Enterprise Server 12 SP2 x86_64",
+            "product_class": "7261",
             "base": true,
-            "product_class": "1"
+            "free": false
         },
         {
-            "id": 1224,
-            "name": "SUSE Manager Server 2.1",
-            "base": true,
-            "product_class": "2"
+            "id": 1518,
+            "name": "SUSE Manager Server 3.1",
+            "product_class": "SMS-X86",
+            "base": false,
+            "free": false
         }
     ],
     "subscriptions": [
         {
             "end_date": "2020-07-31T00:00:00Z",
             "id": 1,
-            "part_number": "051-004063",
+            "part_number": "874-005943",
             "product_ids": [
-                1298
+                1357,
+                1518
             ],
             "quantity": 1,
             "scc_username": "UC7",
@@ -35,9 +34,9 @@
         {
             "end_date": "2020-07-31T00:00:00Z",
             "id": 2,
-            "part_number": "051-004063",
+            "part_number": "874-005943",
             "product_ids": [
-                1224
+                1518
             ],
             "quantity": 1,
             "scc_username": "UC7",
@@ -51,25 +50,8 @@
             "id": 100,
             "physical": true,
             "product_ids": [
-            	1224
-            ],
-            "virtual_system_ids" : []
-        },
-        {
-            "cpus": 2,
-            "id": 101,
-            "physical": true,
-            "product_ids": [
-                1298
-            ],
-            "virtual_system_ids" : []
-        },
-        {
-            "cpus": 2,
-            "id": 102,
-            "physical": true,
-            "product_ids": [
-                1298, 1224
+                1357,
+                1518
             ],
             "virtual_system_ids" : []
         }

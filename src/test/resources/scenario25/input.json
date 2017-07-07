@@ -9,11 +9,13 @@
     "products": [
         {
             "id": 814,
-            "name": "SLES11-Pool"
+            "name": "SLES11-Pool",
+            "product_class": "1"
         },
         {
             "id": 689,
-            "name": "SLES11-Extras"
+            "name": "SLES11-Extras",
+            "product_class": "2"
         }
     ],
     "subscriptions": [
@@ -43,14 +45,14 @@
     "virtualization_groups": [],
     "systems": [
         {
-            "cpus": 1,
+            "cpus": 3,
             "id": 100,
             "physical": true,
             "product_ids": [689],
             "virtual_system_ids": []
         },
         {
-            "cpus": 1,
+            "cpus": 3,
             "id": 101,
             "physical": true,
             "product_ids": [814],

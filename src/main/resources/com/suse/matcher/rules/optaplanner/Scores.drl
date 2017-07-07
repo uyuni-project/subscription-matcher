@@ -2,6 +2,8 @@ package com.suse.matcher.rules.optaplanner;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
+import com.suse.matcher.facts.CentGroup;
+import com.suse.matcher.facts.OneTwoPenalty;
 import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.facts.PinnedMatch;
@@ -35,24 +37,30 @@ rule "calculate12Penalties"
   then
     // ...add a 50 cent penalty. This ensures a whole number of subscriptions is
     // always used for the same penalty group
-    insertLogical(new Penalty($subscriptionId, $penaltyGroupId, 50));
+    insertLogical(new OneTwoPenalty($subscriptionId, $penaltyGroupId, 50));
+end
+
+rule "penaltyForExceededMatches"
+  when
+    Subscription($subscriptionId : id, ignored == false) and
+    PartialMatch(subscriptionId == $subscriptionId, $groupId : groupId, $centGroupId : centGroupId) and
+    Match(confirmed == true, id == $groupId) and
+    CentGroup(id == $centGroupId, $cents : cents);
+  then
+    insertLogical(new Penalty($subscriptionId, -$centGroupId, $cents));
 end
 
 rule "dontExceedSubscriptionCount"
     when
         Subscription($subscriptionId: id, $quantity : quantity, ignored == false)
-        accumulate (
-            PartialMatch($cents : cents, $groupId : groupId, subscriptionId == $subscriptionId) and
-            Match(id == $groupId, confirmed == true);
-            $usedCents : sum($cents)
-        )
+
         accumulate (
             Penalty(subscriptionId == $subscriptionId, $cents: cents);
             $penaltyCents : sum($cents)
         )
     then
         int availableCents = $quantity * 100;
-        int totalUsedCents = $usedCents.intValue() + $penaltyCents.intValue();
+        int totalUsedCents = $penaltyCents.intValue();
         scoreHolder.addHardConstraintMatch(kcontext,
             (availableCents - totalUsedCents) >= 0 ? 0 :
             // limit penalty to 10 points

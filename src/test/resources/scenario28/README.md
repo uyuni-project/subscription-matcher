@@ -26,13 +26,26 @@ HARD-BUNDLE:
 
 Result
 ------
+The HardBundle is a set of subscriptions sharing certain attributes. Each
+subscription owns products from the same product class. Matcher merges such
+subscriptions into a single subscription (Pinned matches are also adjusted so
+that they correspond to the merged subscription.).
 
-The HardBundle can only be full-matched or none.
-The HardBundle contains 2 subscriptions, 1 for SLES11 product
-and 1 for an addon product, so matching the host[100] system with the
-unlimited_virtualization policy for SLES11[1298] will match guest[101] and guest[102] for SLES,
-then the HardBundle can be applied on host[100] to inherit the unlimited virtualization for guest[101]
-and guest[102] for product [1299] and [1300], but they must have installed all products on all guests.
+Two matches on such subscription, on one system and on 2 products of various product class
+share the same CentGroup (with N cents).
+
+If one match is confirmed, N cents of the subscription are consumed.
+If both matches are confirmed, still only N cents of the subscription are consumed.
+
+The HardBundle contains 2 subscriptions, 1 for SLES11 product and 1 for an
+addon product. These subscriptions will be merged into one subscription with
+quantity=1 and with 2 products.
+
+The matcher finds the solution, such that matching the host[100] system with
+the unlimited_virtualization policy for SLES11[1298] will match guest[101] and
+guest[102] for SLES, then the HardBundle can be applied on host[100] to inherit
+the unlimited virtualization for guest[101] and guest[102] for product [1299]
+and [1300].
 
 System[100]
  - Subscription[1] --> SLES11[1298], CONFIRMED
@@ -50,4 +63,5 @@ System[102]
  - Subscription[3] --> addon product[1300], CONFIRMED
 
 
-The pin on the system[103] will not be satisfied because it breaks the HardBundle.
+The pin on the system[103] will not be satisfied because there is not enough
+subscriptions.

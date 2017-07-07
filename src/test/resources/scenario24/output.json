@@ -2,29 +2,57 @@
   "timestamp": "2015-05-01T00:00:00.000+02",
   "matches": [
       {
-          "system_id": 102,
-          "subscription_id": 2,
+          "system_id": 100,
+          "subscription_id": 1,
           "product_id": 1224,
           "cents": 100,
+          "confirmed": false
+      },
+      {
+          "system_id": 101,
+          "subscription_id": 1,
+          "product_id": 1298,
+          "cents": 100,
+          "confirmed": false
+      },
+      {
+          "system_id": 102,
+          "subscription_id": 1,
+          "product_id": 1224,
+          "cents": 50,
           "confirmed": true
       },
       {
           "system_id": 102,
           "subscription_id": 1,
           "product_id": 1298,
-          "cents": 100,
+          "cents": 50,
           "confirmed": true
       }
   ],
   "subscription_policies": {
-    "1": "instance",
-    "2": "instance"
+    "1": "instance"
   },
   "messages": [
+          {
+              "type": "hb_adjust_pinned_match",
+              "data": {
+                  "new_subscription_id": "1",
+                  "old_subscription_id": "2",
+                  "system_id": "100"
+              }
+          },
+          {
+              "type": "hb_merge_subscriptions",
+              "data": {
+                  "new_subscription_id": "1",
+                  "old_subscription_id": "2"
+              }
+          },
 	  {
 	    "type": "unsatisfied_pinned_match",
 	    "data": {
-	      "subscription_id": "2",
+	      "subscription_id": "1",
 	      "system_id": "100"
 	    }
 	  }

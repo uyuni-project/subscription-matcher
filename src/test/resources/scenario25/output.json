@@ -2,26 +2,46 @@
     "timestamp": "2015-05-01T00:00:00.000+02",
     "matches": [
         {
-            "system_id": 102,
-            "subscription_id": 2,
+            "system_id": 100,
+            "subscription_id": 1,
             "product_id": 689,
             "cents": 200,
+            "confirmed": false
+        },
+        {
+            "system_id": 101,
+            "subscription_id": 1,
+            "product_id": 814,
+            "cents": 200,
+            "confirmed": false
+        },
+        {
+            "system_id": 102,
+            "subscription_id": 1,
+            "product_id": 689,
+            "cents": 100,
             "confirmed": true
         },
         {
             "system_id": 102,
             "subscription_id": 1,
             "product_id": 814,
-            "cents": 200,
+            "cents": 100,
             "confirmed": true
         }
     ],
     "subscription_policies": {
-        "1": "one_two",
-        "2": "one_two"
+        "1": "one_two"
     },
     "messages": [
-    {
+        {
+            "type": "hb_merge_subscriptions",
+            "data": {
+                "new_subscription_id": "1",
+                "old_subscription_id": "2"
+            }
+        },
+        {
 	    "type": "unsatisfied_pinned_match",
 	    "data": {
 	      "subscription_id": "1",

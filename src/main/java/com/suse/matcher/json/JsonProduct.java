@@ -40,6 +40,9 @@ public class JsonProduct {
     /** The friendly name. */
     private String name;
 
+    /** The product class */
+    private String productClass;
+
     /** true if this is a free product. */
     private Boolean free;
 
@@ -51,12 +54,14 @@ public class JsonProduct {
      *
      * @param idIn the id
      * @param nameIn the name
+     * @param productClassIn the productClass
      * @param freeIn true if this is a free product
      * @param baseIn true if this is a base product
      */
-    public JsonProduct(Long idIn, String nameIn, Boolean freeIn, Boolean baseIn) {
+    public JsonProduct(Long idIn, String nameIn, String productClassIn, Boolean freeIn, Boolean baseIn) {
         id = idIn;
         name = nameIn;
+        productClass = productClassIn;
         free = freeIn;
         base = baseIn;
     }
@@ -95,6 +100,20 @@ public class JsonProduct {
      */
     public void setName(String nameIn) {
         name = nameIn;
+    }
+
+    /**
+     * @return the productClass
+     */
+    public String getProductClass() {
+        return productClass;
+    }
+
+    /**
+     * @param productClassIn the productClass to set
+     */
+    public void setProductClass(String productClassIn) {
+        this.productClass = productClassIn;
     }
 
     /**

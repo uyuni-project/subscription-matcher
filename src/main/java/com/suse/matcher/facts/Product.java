@@ -18,6 +18,9 @@ public class Product {
     /** The friendly name. */
     public String name;
 
+    /** The product class */
+    public String productClass;
+
     /** true if this is a free product. */
     private Boolean free;
 
@@ -29,12 +32,14 @@ public class Product {
      *
      * @param idIn the product id
      * @param nameIn the friendly name
+     * @param productClassIn the productClass
      * @param freeIn true if this is a free product
      * @param baseIn true if this is a base product
      */
-    public Product(Long idIn, String nameIn, Boolean freeIn, Boolean baseIn) {
+    public Product(Long idIn, String nameIn, String productClassIn, Boolean freeIn, Boolean baseIn) {
         id = idIn;
         name = nameIn;
+        productClass = productClassIn;
         free = freeIn;
         base = baseIn;
     }
@@ -58,6 +63,13 @@ public class Product {
     }
 
     /**
+     * @return the productClass
+     */
+    public String getProductClass() {
+        return productClass;
+    }
+
+    /**
      * Checks if the product is free.
      *
      * @return true if this is a free product
@@ -73,6 +85,15 @@ public class Product {
      */
     public Boolean getBase() {
         return base;
+    }
+
+    /**
+     * Sets the productClass.
+     *
+     * @param productClassIn - the productClass
+     */
+    public void setProductClass(String productClassIn) {
+        productClass = productClassIn;
     }
 
     /** {@inheritDoc} */
@@ -99,8 +120,9 @@ public class Product {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-        .append("id", id)
-        .append("name", name)
-        .toString();
+            .append("id", id)
+            .append("productClass", productClass)
+            .append("name", name)
+            .toString();
     }
 }

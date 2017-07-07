@@ -1,0 +1,58 @@
+package com.suse.matcher.rules.drools;
+
+import com.suse.matcher.facts.PinnedMatch;
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
+import com.suse.matcher.facts.System;
+
+// Agenda group for converting old style hard bundles (consisting of more subscriptions)
+// into a single-subscription hard bundle
+
+rule "mergeProducts"
+    agenda-group "HardBundleConversion"
+    when
+        Subscription(ignored == false, hardBundleId != null, $sub1HardBundleId : hardBundleId, $subToKeepId : id)
+        Subscription(id > $subToKeepId, hardBundleId == $sub1HardBundleId, $subToRetractId : id)
+        $subProd : SubscriptionProduct(subscriptionId == $subToRetractId);
+    then
+        // we cannot use modify() because subscriptionId is in hashCode, retract and insert instead
+        insert(new SubscriptionProduct($subToKeepId, $subProd.productId));
+        retract($subProd);
+end
+
+rule "mergePinnedMatches"
+    agenda-group "HardBundleConversion"
+    when
+        Subscription(ignored == false, hardBundleId != null, $subToKeepHBId : hardBundleId, $subToKeepId : id)
+        Subscription(id > $subToKeepId, hardBundleId == $subToKeepHBId, $subToRetractId : id)
+        $pinnedMatch : PinnedMatch(subscriptionId == $subToRetractId)
+    then
+        TreeMap<String, String> data = new TreeMap<>();
+        data.put("old_subscription_id", $subToRetractId.toString());
+        data.put("new_subscription_id", $subToKeepId.toString());
+        data.put("system_id", $pinnedMatch.systemId.toString());
+        insert(new Message(Message.Level.DEBUG, "hb_adjust_pinned_match", data));
+
+        // we cannot use modify() because of attributes in hashCode, retract and insert instead
+        insert(new PinnedMatch($pinnedMatch.systemId, $subToKeepId));
+        retract($pinnedMatch);
+end
+
+rule "removeRedundantSubscriptions"
+    agenda-group "HardBundleConversion"
+    when
+        $subToKeep: Subscription(ignored == false, hardBundleId != null)
+        $subToRetract : Subscription(id > $subToKeep.id, hardBundleId == $subToKeep.hardBundleId)
+    then
+        TreeMap<String, String> data = new TreeMap<>();
+        data.put("old_subscription_id", $subToRetract.id.toString());
+        data.put("new_subscription_id", $subToKeep.id.toString());
+        insert(new Message(Message.Level.INFO, "hb_merge_subscriptions", data));
+
+        modify($subToKeep) {
+            setName($subToKeep.name + " + " + $subToRetract.name),
+            setSingleSubscriptionHardBundle(true)
+        }
+        retract($subToRetract);
+end
+

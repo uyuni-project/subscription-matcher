@@ -1,5 +1,5 @@
 Scenario 27 - HardBundle applied for UNLIMITED_VIRTUALIZATION POLICY
-=======================================================================
+====================================================================
 
 SUBSCRIPTIONS:
 - 1 subscription[1] for SLES11-Pool (product id 814)
@@ -22,12 +22,24 @@ HARD-BUNDLE:
 
 Result
 ------
+The HardBundle is a set of subscriptions sharing certain attributes. Each
+subscription owns products from the same product class. Matcher merges such
+subscriptions into a single subscription (Pinned matches are also adjusted so
+that they correspond to the merged subscription.).
 
-The HardBundle can only be full-matched or none.
-The HardBundle contains 2 subscriptions, 1 for SLES11-Pool product
-and 1 for SLES11-Extras product, so matching the host[100] system with the
-unlimited_virtualization policy will match guest 101, 102 and 103 for both
-products, but they must have installed both products on all guests.
+Two matches on such subscription, on one system and on 2 products of various product class
+share the same CentGroup (with N cents).
+
+If one match is confirmed, N cents of the subscription are consumed.
+If both matches are confirmed, still only N cents of the subscription are consumed.
+
+The HardBundle contains 2 subscriptions(with quantity=1), 1 for SLES11-Pool
+product and 1 for SLES11-Extras product.
+These subscriptions will be merged into one subscription with quantity=1 and
+with 2 products.
+
+Matching the host[100] system with the unlimited_virtualization policy will
+match guest 101, 102 and 103 for both products.
 
 System[100]
  - Subscription[1] --> SLES11-Pool[814], CONFIRMED

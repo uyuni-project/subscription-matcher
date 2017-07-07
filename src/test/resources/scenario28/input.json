@@ -15,12 +15,14 @@
         {
             "id": 1299,
             "name": "prod with inherit virtualization subs",
-            "base": false
+            "base": false,
+            "product_class": "1"
         },
         {
             "id": 1300,
             "name": "prod with inherit virtualization subs",
-            "base": false
+            "base": false,
+            "product_class": "2"
         }
     ],
     "subscriptions": [

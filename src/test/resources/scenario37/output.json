@@ -19,14 +19,21 @@
           "system_id": 102,
           "subscription_id": 1,
           "product_id": 1224,
-          "cents": 50,
+          "cents": 33,
+          "confirmed": true
+      },
+      {
+          "system_id": 102,
+          "subscription_id": 1,
+          "product_id": 1225,
+          "cents": 33,
           "confirmed": true
       },
       {
           "system_id": 102,
           "subscription_id": 1,
           "product_id": 1298,
-          "cents": 50,
+          "cents": 33,
           "confirmed": true
       }
   ],
@@ -43,10 +50,25 @@
           }
       },
       {
+          "type": "hb_adjust_pinned_match",
+          "data": {
+              "new_subscription_id": "2",
+              "old_subscription_id": "3",
+              "system_id": "100"
+          }
+      },
+      {
           "type": "hb_merge_subscriptions",
           "data": {
               "new_subscription_id": "1",
               "old_subscription_id": "2"
+          }
+      },
+      {
+          "type": "hb_merge_subscriptions",
+          "data": {
+              "new_subscription_id": "1",
+              "old_subscription_id": "3"
           }
       },
       {
