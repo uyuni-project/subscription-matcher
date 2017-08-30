@@ -71,13 +71,16 @@ end
 
 // Soft constraints: we try to find the solution that maximizes the score, but there are no guarantees.
 
+// Note that soft score values reflect relative importance: maximizeCoveredInstallations (100) is more
+// important than maximizePinnedMatches (10) and so on
+
 rule "maximizeCoveredInstallations"
     when
         InstalledProduct($systemId : systemId, $productId : productId)
         PartialMatch($groupId : groupId, systemId == $systemId, productId == $productId)
         Match(id == $groupId, confirmed == true)
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, 10);
+        scoreHolder.addSoftConstraintMatch(kcontext, 100);
 end
 
 rule "maximizePinnedMatches"
@@ -86,5 +89,16 @@ rule "maximizePinnedMatches"
         PartialMatch($groupId : groupId, systemId == $systemId, subscriptionId == $subscriptionId)
         Match(id == $groupId, confirmed == true)
     then
+        scoreHolder.addSoftConstraintMatch(kcontext, 10);
+end
+
+rule "preferBundledMatches"
+    when
+        PartialMatch($groupId : groupId, $systemId : systemId, $centGroupId : centGroupId)
+        PartialMatch($groupId2 : groupId, systemId == $systemId, centGroupId == $centGroupId)
+        Match(id == $groupId, confirmed == true)
+        Match(id == $groupId2, id > $groupId, confirmed == true)
+    then
         scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end
+
