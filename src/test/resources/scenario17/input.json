@@ -2,35 +2,59 @@
     "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
         {
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "system_id": 1000
         },
         {
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "system_id": 1001
         },
         {
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "system_id": 101
         },
         {
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "system_id": 102
         },
         {
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "system_id": 201
         },
         {
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "system_id": 202
         },
         {
-            "subscription_id": 2,
+            "subscription_id": {
+                "scc_subscription_id": 2,
+                "scc_order_item_id": 2
+            },
             "system_id": 201
         },
         {
-            "subscription_id": 2,
+            "subscription_id": {
+                "scc_subscription_id": 2,
+                "scc_order_item_id": 2
+            },
             "system_id": 202
         }
     ],
@@ -46,26 +70,50 @@
     ],
     "subscriptions": [
         {
-            "end_date": "2020-07-31T00:00:00Z",
             "id": 1,
-            "part_number": "874-006875",
+            "name": "Test Subscription 1",
+            "part_numbers": [
+                "874-006875"
+            ],
             "product_ids": [
                 814
             ],
-            "quantity": 5,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
+            "system_limit": 5,
+            "starts_at": "2015-01-01T00:00:00Z",
+            "expires_at": "2020-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 1,
+                    "part_number": "874-006875",
+                    "quantity": 5,
+                    "scc_username": "UC7",
+                    "start_date": "2015-01-01T00:00:00Z",
+                    "end_date": "2020-07-31T00:00:00Z"
+                }
+            ]
         },
         {
-            "end_date": "2020-07-31T00:00:00Z",
             "id": 2,
-            "part_number": "874-006077",
+            "name": "Test Subscription 2",
+            "part_numbers": [
+                "874-006077"
+            ],
             "product_ids": [
                 815
             ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
+            "system_limit": 1,
+            "starts_at": "2015-01-01T00:00:00Z",
+            "expires_at": "2020-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 2,
+                    "part_number": "874-006077",
+                    "quantity": 1,
+                    "scc_username": "UC7",
+                    "start_date": "2015-01-01T00:00:00Z",
+                    "end_date": "2020-07-31T00:00:00Z"
+                }
+            ]
         }
     ],
     "virtualization_groups": [],
@@ -74,14 +122,19 @@
             "cpus": 1,
             "id": 1000,
             "physical": true,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 1001,
             "physical": true,
-            "product_ids": [814, 815],
+            "product_ids": [
+                814,
+                815
+            ],
             "virtual_system_ids": []
         },
         {
@@ -89,20 +142,26 @@
             "id": 100,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [101]
+            "virtual_system_ids": [
+                101
+            ]
         },
         {
             "cpus": 2,
             "id": 101,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 102,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
@@ -110,20 +169,29 @@
             "id": 200,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [201, 202]
+            "virtual_system_ids": [
+                201,
+                202
+            ]
         },
         {
             "cpus": 2,
             "id": 201,
             "physical": false,
-            "product_ids": [814, 815],
+            "product_ids": [
+                814,
+                815
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 202,
             "physical": false,
-            "product_ids": [814, 815],
+            "product_ids": [
+                814,
+                815
+            ],
             "virtual_system_ids": []
         },
         {
@@ -131,13 +199,17 @@
             "id": 300,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [301]
+            "virtual_system_ids": [
+                301
+            ]
         },
         {
             "cpus": 2,
             "id": 301,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         }
     ]

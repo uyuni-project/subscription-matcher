@@ -1,39 +1,62 @@
 {
     "timestamp": "2015-05-01T00:00:00.000+02",
     "matches": [
-        
         {
             "system_id": 100,
-            "subscription_id": 2,
+            "subscription_id": {
+                "scc_subscription_id": 2,
+                "scc_order_item_id": 2
+            },
             "product_id": 689,
             "cents": 100,
             "confirmed": true
         },
         {
             "system_id": 101,
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "product_id": 814,
             "cents": 100,
             "confirmed": true
         },
         {
             "system_id": 102,
-            "subscription_id": 2,
+            "subscription_id": {
+                "scc_subscription_id": 2,
+                "scc_order_item_id": 2
+            },
             "product_id": 689,
             "cents": 200,
             "confirmed": true
         },
         {
             "system_id": 102,
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "product_id": 814,
             "cents": 200,
             "confirmed": false
         }
     ],
-    "subscription_policies": {
-        "1": "one_two",
-        "2": "one_two"
-    },
+    "subscription_policies": [
+        [
+            {
+                "scc_subscription_id": "1",
+                "scc_order_item_id": "1"
+            },
+            "one_two"
+        ],
+        [
+            {
+                "scc_subscription_id": "2",
+                "scc_order_item_id": "2"
+            },
+            "one_two"
+        ]
+    ],
     "messages": []
 }

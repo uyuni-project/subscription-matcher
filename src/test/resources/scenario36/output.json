@@ -1,31 +1,43 @@
 {
-  "timestamp": "2015-05-01T00:00:00.000+02",
-  "matches": [
-      {
-          "system_id": 100,
-          "subscription_id": 1,
-          "product_id": 1357,
-          "cents": 50,
-          "confirmed": true
-      },
-      {
-          "system_id": 100,
-          "subscription_id": 1,
-          "product_id": 1518,
-          "cents": 50,
-          "confirmed": true
-      }
-  ],
-  "subscription_policies": {
-    "1": "instance"
-  },
-  "messages": [
-      {
-        "type": "hb_merge_subscriptions",
-        "data": {
-          "new_subscription_id": "1",
-          "old_subscription_id": "2"
+    "timestamp": "2015-05-01T00:00:00.000+02",
+    "matches": [
+        {
+            "system_id": 100,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
+            "product_id": 1357,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 100,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
+            "product_id": 1518,
+            "cents": 50,
+            "confirmed": true
         }
-      }
-  ]
+    ],
+    "subscription_policies": [
+        [
+            {
+                "scc_subscription_id": "1",
+                "scc_order_item_id": "1"
+            },
+            "instance"
+        ]
+    ],
+    "messages": [
+        {
+            "type": "hb_merge_subscriptions",
+            "data": {
+                "new_subscription_id": "sccSubscriptionId:1,sccOrderItemId:1",
+                "old_subscription_id": "sccSubscriptionId:2,sccOrderItemId:2"
+            }
+        }
+    ]
 }

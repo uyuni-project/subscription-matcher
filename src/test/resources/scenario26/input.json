@@ -2,7 +2,10 @@
     "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
         {
-            "subscription_id": 1,
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
             "system_id": 101
         }
     ],
@@ -18,26 +21,50 @@
     ],
     "subscriptions": [
         {
-            "end_date": "2020-07-31T00:00:00Z",
             "id": 1,
-            "part_number": "874-006875",
+            "name": "Test Subscription 1",
+            "part_numbers": [
+                "874-006875"
+            ],
             "product_ids": [
                 814
             ],
-            "quantity": 2,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
+            "system_limit": 2,
+            "starts_at": "2015-01-01T00:00:00Z",
+            "expires_at": "2020-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 1,
+                    "part_number": "874-006875",
+                    "quantity": 2,
+                    "scc_username": "UC7",
+                    "start_date": "2015-01-01T00:00:00Z",
+                    "end_date": "2020-07-31T00:00:00Z"
+                }
+            ]
         },
         {
-            "end_date": "2020-07-31T00:00:00Z",
             "id": 2,
-            "part_number": "874-006875",
+            "name": "Test Subscription 2",
+            "part_numbers": [
+                "874-006875"
+            ],
             "product_ids": [
                 689
             ],
-            "quantity": 3,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
+            "system_limit": 3,
+            "starts_at": "2015-01-01T00:00:00Z",
+            "expires_at": "2020-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 2,
+                    "part_number": "874-006875",
+                    "quantity": 3,
+                    "scc_username": "UC7",
+                    "start_date": "2015-01-01T00:00:00Z",
+                    "end_date": "2020-07-31T00:00:00Z"
+                }
+            ]
         }
     ],
     "virtualization_groups": [],
@@ -46,21 +73,28 @@
             "cpus": 1,
             "id": 100,
             "physical": true,
-            "product_ids": [689],
+            "product_ids": [
+                689
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 1,
             "id": 101,
             "physical": true,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 3,
             "id": 102,
             "physical": true,
-            "product_ids": [814, 689],
+            "product_ids": [
+                814,
+                689
+            ],
             "virtual_system_ids": []
         }
     ]

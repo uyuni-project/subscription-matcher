@@ -1,9 +1,12 @@
 {
     "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
-    	{
-          "subscription_id": 1,
-          "system_id": 103
+        {
+            "subscription_id": {
+                "scc_subscription_id": 1,
+                "scc_order_item_id": 1
+            },
+            "system_id": 103
         }
     ],
     "products": [
@@ -27,37 +30,73 @@
     ],
     "subscriptions": [
         {
-            "end_date": "2018-01-31T00:00:00Z",
             "id": 1,
-            "part_number": "662644477627",
+            "name": "Test Subscription 1",
+            "part_numbers": [
+                "662644477627"
+            ],
             "product_ids": [
                 1298
             ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
+            "system_limit": 1,
+            "starts_at": "2015-01-01T00:00:00Z",
+            "expires_at": "2018-01-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 1,
+                    "part_number": "662644477627",
+                    "quantity": 1,
+                    "scc_username": "UC7",
+                    "start_date": "2015-01-01T00:00:00Z",
+                    "end_date": "2018-01-31T00:00:00Z"
+                }
+            ]
         },
         {
-            "end_date": "2020-07-31T00:00:00Z",
             "id": 2,
-            "part_number": "662644477479",
+            "name": "Test Subscription 2",
+            "part_numbers": [
+                "662644477479"
+            ],
             "product_ids": [
                 1299
             ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
+            "system_limit": 1,
+            "starts_at": "2015-01-01T00:00:00Z",
+            "expires_at": "2020-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 2,
+                    "part_number": "662644477479",
+                    "quantity": 1,
+                    "scc_username": "UC7",
+                    "start_date": "2015-01-01T00:00:00Z",
+                    "end_date": "2020-07-31T00:00:00Z"
+                }
+            ]
         },
         {
-            "end_date": "2020-07-31T00:00:00Z",
             "id": 3,
-            "part_number": "662644477479",
+            "name": "Test Subscription 3",
+            "part_numbers": [
+                "662644477479"
+            ],
             "product_ids": [
                 1300
             ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
+            "system_limit": 1,
+            "starts_at": "2015-01-01T00:00:00Z",
+            "expires_at": "2020-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 3,
+                    "part_number": "662644477479",
+                    "quantity": 1,
+                    "scc_username": "UC7",
+                    "start_date": "2015-01-01T00:00:00Z",
+                    "end_date": "2020-07-31T00:00:00Z"
+                }
+            ]
         }
     ],
     "virtualization_groups": [],
@@ -67,27 +106,40 @@
             "id": 100,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [101, 102]
+            "virtual_system_ids": [
+                101,
+                102
+            ]
         },
         {
             "cpus": 1,
             "id": 101,
             "physical": false,
-            "product_ids": [1298, 1299, 1300],
+            "product_ids": [
+                1298,
+                1299,
+                1300
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 1,
             "id": 102,
             "physical": false,
-            "product_ids": [1298, 1299, 1300],
+            "product_ids": [
+                1298,
+                1299,
+                1300
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 1,
             "id": 103,
             "physical": true,
-            "product_ids": [1298],
+            "product_ids": [
+                1298
+            ],
             "virtual_system_ids": []
         }
     ]

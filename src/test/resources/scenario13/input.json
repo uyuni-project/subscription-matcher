@@ -9,7 +9,7 @@
             "id": 100,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         }
     ]
 }

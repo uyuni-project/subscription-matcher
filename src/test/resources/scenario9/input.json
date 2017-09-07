@@ -15,9 +15,11 @@
     ],
     "subscriptions": [
         {
-            "end_date": "2015-07-31T00:00:00Z",
             "id": 4,
-            "part_number": "874-006876",
+            "name": "Test Subscription 4",
+            "part_numbers": [
+                "874-006876"
+            ],
             "product_ids": [
                 1117,
                 1220,
@@ -130,14 +132,26 @@
                 1299,
                 1307
             ],
-            "quantity": 2,
-            "scc_username": "UC7",
-            "start_date": "2013-08-01T00:00:00Z"
+            "system_limit": 2,
+            "starts_at": "2013-08-01T00:00:00Z",
+            "expires_at": "2015-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 4,
+                    "part_number": "874-006876",
+                    "quantity": 2,
+                    "scc_username": "UC7",
+                    "start_date": "2013-08-01T00:00:00Z",
+                    "end_date": "2015-07-31T00:00:00Z"
+                }
+            ]
         },
         {
-            "end_date": "2015-07-31T00:00:00Z",
             "id": 5,
-            "part_number": "874-006385",
+            "name": "Test Subscription 5",
+            "part_numbers": [
+                "874-006385"
+            ],
             "product_ids": [
                 1090,
                 1091,
@@ -146,9 +160,19 @@
                 1288,
                 1317
             ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2013-08-01T00:00:00Z"
+            "system_limit": 1,
+            "starts_at": "2013-08-01T00:00:00Z",
+            "expires_at": "2015-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 5,
+                    "part_number": "874-006385",
+                    "quantity": 1,
+                    "scc_username": "UC7",
+                    "start_date": "2013-08-01T00:00:00Z",
+                    "end_date": "2015-07-31T00:00:00Z"
+                }
+            ]
         }
     ],
     "virtualization_groups": [],
@@ -172,7 +196,7 @@
                 1300,
                 1288
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         }
     ]
 }

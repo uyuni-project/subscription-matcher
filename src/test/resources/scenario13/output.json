@@ -1,13 +1,13 @@
 {
-  "timestamp": "2015-05-01T00:00:00.000+02",
-  "matches": [],
-  "subscription_policies": {},
-  "messages": [
-    {
-      "type": "unknown_cpu_count",
-      "data": {
-        "id": "100"
-      }
-    }
-  ]
+    "timestamp": "2015-05-01T00:00:00.000+02",
+    "matches": [],
+    "subscription_policies": [],
+    "messages": [
+        {
+            "type": "unknown_cpu_count",
+            "data": {
+                "id": "100"
+            }
+        }
+    ]
 }

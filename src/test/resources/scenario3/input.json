@@ -15,9 +15,11 @@
     ],
     "subscriptions": [
         {
-            "end_date": "2015-07-31T00:00:00Z",
             "id": 2,
-            "part_number": "874-006260",
+            "name": "Test Subscription 2",
+            "part_numbers": [
+                "874-006260"
+            ],
             "product_ids": [
                 1117,
                 1220,
@@ -130,14 +132,26 @@
                 1299,
                 1307
             ],
-            "quantity": 2,
-            "scc_username": "UC7",
-            "start_date": "2013-08-01T00:00:00Z"
+            "system_limit": 2,
+            "starts_at": "2013-08-01T00:00:00Z",
+            "expires_at": "2015-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 2,
+                    "part_number": "874-006260",
+                    "quantity": 2,
+                    "scc_username": "UC7",
+                    "start_date": "2013-08-01T00:00:00Z",
+                    "end_date": "2015-07-31T00:00:00Z"
+                }
+            ]
         },
         {
-            "end_date": "2015-07-31T00:00:00Z",
             "id": 3,
-            "part_number": "874-005649",
+            "name": "Test Subscription 3",
+            "part_numbers": [
+                "874-005649"
+            ],
             "product_ids": [
                 1117,
                 1220,
@@ -255,9 +269,19 @@
                 1138,
                 1139
             ],
-            "quantity": 2,
-            "scc_username": "UC7",
-            "start_date": "2013-08-01T00:00:00Z"
+            "system_limit": 2,
+            "starts_at": "2013-08-01T00:00:00Z",
+            "expires_at": "2015-07-31T00:00:00Z",
+            "order_items": [
+                {
+                    "id": 3,
+                    "part_number": "874-005649",
+                    "quantity": 2,
+                    "scc_username": "UC7",
+                    "start_date": "2013-08-01T00:00:00Z",
+                    "end_date": "2015-07-31T00:00:00Z"
+                }
+            ]
         }
     ],
     "virtualization_groups": [],
@@ -269,7 +293,7 @@
             "product_ids": [
                 1138
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 4,
@@ -278,7 +302,7 @@
             "product_ids": [
                 814
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 4,
@@ -287,7 +311,7 @@
             "product_ids": [
                 814
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 4,
@@ -296,7 +320,7 @@
             "product_ids": [
                 1138
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         }
     ]
 }
