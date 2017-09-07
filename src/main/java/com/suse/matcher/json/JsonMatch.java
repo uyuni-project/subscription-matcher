@@ -29,6 +29,8 @@
  */
 package com.suse.matcher.json;
 
+import com.suse.matcher.facts.SubscriptionId;
+
 /**
  * JSON representation of a match.
  */
@@ -38,7 +40,7 @@ public class JsonMatch {
     private Long systemId;
 
     /** The subscription id. */
-    private Long subscriptionId;
+    private SubscriptionId subscriptionId;
 
     /** The product id. */
     private Long productId;
@@ -58,7 +60,7 @@ public class JsonMatch {
      * @param centsIn the number of subscription cents used in this match
      * @param confirmedIn whether this match has been confirmed or not
      */
-    public JsonMatch(Long systemIdIn, Long subscriptionIdIn, Long productIdIn,
+    public JsonMatch(Long systemIdIn, SubscriptionId subscriptionIdIn, Long productIdIn,
             Integer centsIn, Boolean confirmedIn) {
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
@@ -90,7 +92,7 @@ public class JsonMatch {
      *
      * @return the subscription id
      */
-    public Long getSubscriptionId() {
+    public SubscriptionId getSubscriptionId() {
         return subscriptionId;
     }
 
@@ -99,7 +101,7 @@ public class JsonMatch {
      *
      * @param subscriptionIdIn the new subscription id
      */
-    public void setSubscriptionId(Long subscriptionIdIn) {
+    public void setSubscriptionId(SubscriptionId subscriptionIdIn) {
         subscriptionId = subscriptionIdIn;
     }
 

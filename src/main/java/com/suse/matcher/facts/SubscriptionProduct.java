@@ -13,7 +13,7 @@ import org.kie.api.definition.type.PropertyReactive;
 public class SubscriptionProduct {
 
     /** The subscription id. */
-    public Long subscriptionId;
+    public SubscriptionId subscriptionId;
 
     /** The product id. */
     public Long productId;
@@ -24,7 +24,7 @@ public class SubscriptionProduct {
      * @param subscriptionIdIn the subscription id
      * @param productIdIn the product id
      */
-    public SubscriptionProduct(Long subscriptionIdIn, Long productIdIn) {
+    public SubscriptionProduct(SubscriptionId subscriptionIdIn, Long productIdIn) {
         subscriptionId = subscriptionIdIn;
         productId = productIdIn;
     }
@@ -34,7 +34,7 @@ public class SubscriptionProduct {
      *
      * @return the subscription id
      */
-    public Long getSubscriptionId() {
+    public SubscriptionId getSubscriptionId() {
         return subscriptionId;
     }
 

@@ -29,6 +29,8 @@
  */
 package com.suse.matcher.json;
 
+import com.suse.matcher.facts.SubscriptionId;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -47,7 +49,7 @@ public class JsonOutput {
     private List<JsonMatch> matches = new LinkedList<>();
 
     /** Mapping from subscription id to its policy */
-    private Map<Long, String> subscriptionPolicies = new HashMap<>();
+    private Map<SubscriptionId, String> subscriptionPolicies = new HashMap<>();
 
     /** The messages. */
     private List<JsonMessage> messages = new LinkedList<>();
@@ -61,7 +63,7 @@ public class JsonOutput {
      * @param subscriptionPoliciesIn mapping from subscription id to its policy
      */
     public JsonOutput(Date timestampIn, List<JsonMatch> matchesIn,
-            List<JsonMessage> messagesIn, Map<Long, String> subscriptionPoliciesIn) {
+            List<JsonMessage> messagesIn, Map<SubscriptionId, String> subscriptionPoliciesIn) {
         timestamp = timestampIn;
         matches = matchesIn;
         messages = messagesIn;
@@ -108,7 +110,7 @@ public class JsonOutput {
      * Gets the subscription to policy mapping.
      * @return the subscription to policy mapping.
      */
-    public Map<Long, String> getSubscriptionPolicies() {
+    public Map<SubscriptionId, String> getSubscriptionPolicies() {
         return subscriptionPolicies;
     }
 
@@ -116,7 +118,7 @@ public class JsonOutput {
      * Sets the subscription to policy mapping.
      * @param subscriptionPoliciesIn subscription to policy map
      */
-    public void setSubscriptionPolicies(Map<Long, String> subscriptionPoliciesIn) {
+    public void setSubscriptionPolicies(Map<SubscriptionId, String> subscriptionPoliciesIn) {
         this.subscriptionPolicies = subscriptionPoliciesIn;
     }
 

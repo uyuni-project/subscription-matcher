@@ -65,7 +65,7 @@ public class Subscription implements Comparable<Subscription> {
 
     // constructor-populated fields
     /** The id. */
-    public Long id;
+    public SubscriptionId id;
 
     /** The part number. */
     public String partNumber;
@@ -118,7 +118,7 @@ public class Subscription implements Comparable<Subscription> {
      * @param endDateIn the expires at
      * @param sccUsernameIn the scc org id
      */
-    public Subscription(Long idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn, Date endDateIn,
+    public Subscription(SubscriptionId idIn, String partNumberIn, String nameIn, Integer quantityIn, Date startDateIn, Date endDateIn,
             String sccUsernameIn) {
         id = idIn;
         partNumber = partNumberIn;
@@ -134,7 +134,7 @@ public class Subscription implements Comparable<Subscription> {
      *
      * @return the id
      */
-    public Long getId() {
+    public SubscriptionId getId() {
         return id;
     }
 

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * Represents a match that the customer would like to see in the solution.
  *
- * @see PossibleMatch
+ * @see PartialMatch
  */
 public class PinnedMatch {
 
@@ -16,7 +16,7 @@ public class PinnedMatch {
     public Long systemId;
 
     /** The subscription id. */
-    public Long subscriptionId;
+    public SubscriptionId subscriptionId;
 
     /**
      * Standard constructor.
@@ -24,7 +24,7 @@ public class PinnedMatch {
      * @param systemIdIn a system id
      * @param subscriptionIdIn an id of subscription assigned to the system
      */
-    public PinnedMatch(Long systemIdIn, Long subscriptionIdIn) {
+    public PinnedMatch(Long systemIdIn, SubscriptionId subscriptionIdIn) {
         systemId = systemIdIn;
         subscriptionId = subscriptionIdIn;
     }
@@ -49,7 +49,7 @@ public class PinnedMatch {
      *
      * @return the subscription id
      */
-    public Long getSubscriptionId() {
+    public SubscriptionId getSubscriptionId() {
         return subscriptionId;
     }
 

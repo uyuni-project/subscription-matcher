@@ -27,7 +27,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
     public long productId;
 
     /** The subscription id. */
-    public long subscriptionId;
+    public SubscriptionId subscriptionId;
 
     /** The id of the cent group used in this match. More matches can share same cent group. */
     public int centGroupId;
@@ -44,7 +44,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
      * @param centGroupIdIn the id of cent group
      * @param groupIdIn the group id
      */
-    public PartialMatch(long systemIdIn, long productIdIn, long subscriptionIdIn, int centGroupIdIn, int groupIdIn) {
+    public PartialMatch(long systemIdIn, long productIdIn, SubscriptionId subscriptionIdIn, int centGroupIdIn, int groupIdIn) {
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
@@ -75,7 +75,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
      *
      * @return the subscription id
      */
-    public long getSubscriptionId() {
+    public SubscriptionId getSubscriptionId() {
         return subscriptionId;
     }
 

@@ -24,6 +24,7 @@ public class JsonIO {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX")
             .setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
             .setPrettyPrinting()
+            .enableComplexMapKeySerialization()
             .create();
     }
 

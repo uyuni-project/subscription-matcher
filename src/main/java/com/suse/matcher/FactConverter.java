@@ -11,6 +11,7 @@ import com.suse.matcher.facts.PartialMatch;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionId;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.Timestamp;
@@ -20,7 +21,6 @@ import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.json.JsonMessage;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.json.JsonProduct;
-import com.suse.matcher.json.JsonSubscription;
 import com.suse.matcher.json.JsonSystem;
 import com.suse.matcher.json.JsonVirtualizationGroup;
 import com.suse.matcher.solver.Assignment;
@@ -81,20 +81,42 @@ public class FactConverter {
                     product.getBase()));
         }
 
-        for (JsonSubscription subscription : input.getSubscriptions()) {
-            result.add(new Subscription(
-                    subscription.getId(),
-                    subscription.getPartNumber(),
-                    subscription.getName(),
-                    subscription.getQuantity(),
-                    subscription.getStartDate(),
-                    subscription.getEndDate(),
-                    subscription.getSccUsername()
-            ));
-            for (Long productId : subscription.getProductIds()) {
-                result.add(new SubscriptionProduct(subscription.getId(), productId));
+        input.getSubscriptions().forEach(subscription -> {
+            // todo refactor the following if-else hell
+            if (subscription.getOrderItems().isEmpty()) {
+                subscription.getPartNumbers().forEach(pn -> result.add(new Subscription(
+                        new SubscriptionId(subscription.getId(), null),
+                        pn,
+                        subscription.getName(),
+                        subscription.getSystemLimit(),
+                        subscription.getStartsAt(),
+                        subscription.getExpiresAt(),
+                        subscription.getSccUsername()))
+                );
+                for (Long productId : subscription.getProductIds()) {
+                        SubscriptionId subscriptionId = new SubscriptionId(
+                                subscription.getId(), null);
+                        result.add(new SubscriptionProduct(subscriptionId, productId));
+                    }
+            } else {
+                subscription.getOrderItems().forEach(orderItem -> {
+                    result.add(new Subscription(
+                            new SubscriptionId(subscription.getId(), orderItem.getId()),
+                            orderItem.getPartNumber(),
+                            subscription.getName(),
+                            orderItem.getQuantity(),
+                            orderItem.getStartDate(),
+                            orderItem.getEndDate(),
+                            orderItem.getSccUsername()
+                    ));
+                    for (Long productId : subscription.getProductIds()) {
+                        SubscriptionId subscriptionId = new SubscriptionId(
+                                subscription.getId(), orderItem.getId());
+                        result.add(new SubscriptionProduct(subscriptionId, productId));
+                    }
+                });
             }
-        }
+        });
 
         for (JsonMatch match : input.getPinnedMatches()) {
             result.add(new PinnedMatch(match.getSystemId(), match.getSubscriptionId()));
@@ -123,7 +145,7 @@ public class FactConverter {
                 ))
                 .collect(Collectors.toList());
 
-        Map<Long, String> subscriptionPolicies = assignment
+        Map<SubscriptionId, String> subscriptionPolicies = assignment
                 .getProblemFactStream(Subscription.class)
                 .filter(s -> s.getPolicy() != null)
                 .sorted()

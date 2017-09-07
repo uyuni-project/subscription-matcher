@@ -30,7 +30,7 @@ public class OneTwoPenalty extends Penalty {
      * @param penaltyGroupIdIn the penalty group id
      * @param centsIn          the penalty cents
      */
-    public OneTwoPenalty(Long subscriptionIdIn, int penaltyGroupIdIn, int centsIn) {
+    public OneTwoPenalty(SubscriptionId subscriptionIdIn, int penaltyGroupIdIn, int centsIn) {
         super(subscriptionIdIn, penaltyGroupIdIn, centsIn);
     }
 }

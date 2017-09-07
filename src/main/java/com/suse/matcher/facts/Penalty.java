@@ -15,7 +15,7 @@ import org.kie.api.definition.type.PropertyReactive;
 public class Penalty {
 
     /** The subscription id. */
-    public Long subscriptionId;
+    public SubscriptionId subscriptionId;
 
     /** The penalty group id. */
     public int penaltyGroupId;
@@ -30,7 +30,7 @@ public class Penalty {
      * @param penaltyGroupIdIn the penalty group id
      * @param centsIn the penalty cents
      */
-    public Penalty(Long subscriptionIdIn, int penaltyGroupIdIn, int centsIn) {
+    public Penalty(SubscriptionId subscriptionIdIn, int penaltyGroupIdIn, int centsIn) {
         subscriptionId = subscriptionIdIn;
         penaltyGroupId = penaltyGroupIdIn;
         cents = centsIn;
@@ -41,7 +41,7 @@ public class Penalty {
      *
      * @return the subscription id
      */
-    public Long getSubscriptionId() {
+    public SubscriptionId getSubscriptionId() {
         return subscriptionId;
     }
 

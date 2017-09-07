@@ -11,6 +11,7 @@ import com.suse.matcher.csv.CSVOutputUnmatchedProduct;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionId;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.json.JsonMatch;
@@ -119,7 +120,7 @@ public class OutputWriter {
             .filter(s -> s.startDate != null && s.endDate != null)
             .filter(s -> s.quantity != null && s.quantity > 0);
 
-        Map<Long, CSVOutputSubscription> outsubs = new TreeMap<Long, CSVOutputSubscription>();
+        Map<SubscriptionId, CSVOutputSubscription> outsubs = new TreeMap<>();
         subscriptions.forEach(s -> {
             CSVOutputSubscription csvs = new CSVOutputSubscription(
                 s.partNumber,
@@ -133,7 +134,7 @@ public class OutputWriter {
         });
 
         // compute cents by subscription id
-        Map<Long, Integer> matchedCents = new HashMap<>();
+        Map<SubscriptionId, Integer> matchedCents = new HashMap<>();
         FactConverter.getMatches(assignment, true)
             .forEach(m -> matchedCents.merge(m.getSubscriptionId(), m.getCents(), Math::addExact));
 
@@ -157,7 +158,7 @@ public class OutputWriter {
         // write CSV file
         try (FileWriter writer = new FileWriter(new File(outputDirectory, CSV_SUBSCRIPTION_REPORT_FILE));
             CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
-            for (Map.Entry<Long, CSVOutputSubscription> item : outsubs.entrySet()) {
+            for (Map.Entry<SubscriptionId, CSVOutputSubscription> item : outsubs.entrySet()) {
                 printer.printRecord(item.getValue().getCSVRow());
             }
         }
@@ -180,9 +181,9 @@ public class OutputWriter {
         Collection<Product> products = assignment.getProblemFacts(Product.class);
 
         // prepare map from (system id, product id) to Match object
-        Map<Pair<Long, Long>, JsonMatch> matchMap = new HashMap<>();
+        Map<SubscriptionId, JsonMatch> matchMap = new HashMap<>();
         for (JsonMatch match : confirmedMatchFacts) {
-            matchMap.put(new Pair<>(match.getSystemId(), match.getProductId()), match);
+            matchMap.put(new SubscriptionId(match.getSystemId(), match.getProductId()), match);
         }
 
         // prepare header
@@ -193,7 +194,7 @@ public class OutputWriter {
              CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
             // create map of product id -> set of systems ids with this product and filter out successful matches
             Map<Long, Set<Long>> unmatchedProductSystems = installedProducts.stream()
-                    .filter(sp -> matchMap.get(new Pair<>(sp.systemId, sp.productId)) == null)
+                    .filter(sp -> matchMap.get(new Pair(sp.systemId, sp.productId)) == null)
                     .collect(groupingBy(
                             InstalledProduct::getProductId,
                             mapping(InstalledProduct::getSystemId, toSet())));

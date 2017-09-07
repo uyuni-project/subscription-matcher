@@ -35,26 +35,28 @@ import java.util.Set;
 
 /**
  * JSON representation of a subscription.
+ * todo remove the unneeded data from the test?
+ * Created by franky on 11.08.17.
  */
 public class JsonSubscription {
 
     /** The id. */
     private Long id;
 
-    /** The part number. */
-    private String partNumber;
+    /** The part numbers. */
+    private Set<String> partNumbers;
 
     /** The friendly name. */
     private String name;
 
     /** The number of available subscriptions. */
-    private Integer quantity;
+    private Integer systemLimit;
 
     /** Start date. */
-    private Date startDate;
+    private Date startsAt;
 
     /** End date. */
-    private Date endDate;
+    private Date expiresAt;
 
     /** SCC username. */
     private String sccUsername;
@@ -62,35 +64,40 @@ public class JsonSubscription {
     /** Provided product ids. */
     private Set<Long> productIds = new LinkedHashSet<>();
 
+    /** Order items **/
+    private Set<JsonOrderItem> orderItems = new LinkedHashSet<>();
+
     /**
      * Standard constructor.
      *
-     * @param idIn the id
-     * @param partNumberIn the part number
-     * @param nameIn the name
-     * @param quantityIn the quantity
-     * @param startDateIn the start date
-     * @param endDateIn the end date
-     * @param sccUsernameIn the SCC username
-     * @param productIdsIn the product ids
+     * @param idIn - the Id
+     * @param partNumbersIn - part numbers
+     * @param nameIn - subscription name
+     * @param systemLimitIn - system limit
+     * @param startsAtIn - start of the subscription validity
+     * @param expiresAtIn - end of the subscription validity
+     * @param sccUsernameIn - scc username
+     * @param productIdsIn - product ids
+     * @param orderItemsIn - order items
      */
-    public JsonSubscription(Long idIn, String partNumberIn, String nameIn,
-            Integer quantityIn, Date startDateIn, Date endDateIn,
-            String sccUsernameIn, Set<Long> productIdsIn) {
+    public JsonSubscription(Long idIn, Set<String> partNumbersIn, String nameIn,
+            Integer systemLimitIn, Date startsAtIn, Date expiresAtIn, String sccUsernameIn,
+            Set<Long> productIdsIn, Set<JsonOrderItem> orderItemsIn) {
         id = idIn;
-        partNumber = partNumberIn;
+        partNumbers = partNumbersIn;
         name = nameIn;
-        quantity = quantityIn;
-        startDate = startDateIn;
-        endDate = endDateIn;
+        systemLimit = systemLimitIn;
+        startsAt = startsAtIn;
+        expiresAt = expiresAtIn;
         sccUsername = sccUsernameIn;
         productIds = productIdsIn;
+        orderItems = orderItemsIn;
     }
 
     /**
      * Gets the id.
      *
-     * @return the id
+     * @return id
      */
     public Long getId() {
         return id;
@@ -99,135 +106,153 @@ public class JsonSubscription {
     /**
      * Sets the id.
      *
-     * @param idIn the new id
+     * @param idIn - the id
      */
     public void setId(Long idIn) {
         id = idIn;
     }
 
     /**
-     * Gets the part number.
+     * Gets the partNumbers.
      *
-     * @return the part number
+     * @return partNumbers
      */
-    public String getPartNumber() {
-        return partNumber;
+    public Set<String> getPartNumbers() {
+        return partNumbers;
     }
 
     /**
-     * Sets the part number.
+     * Sets the partNumbers.
      *
-     * @param partNumberIn the new part number
+     * @param partNumbersIn - the partNumbers
      */
-    public void setPartNumber(String partNumberIn) {
-        partNumber = partNumberIn;
+    public void setPartNumbers(Set<String> partNumbersIn) {
+        partNumbers = partNumbersIn;
     }
 
     /**
-     * Gets the friendly name.
+     * Gets the name.
      *
-     * @return the friendly name
+     * @return name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Sets the friendly name.
+     * Sets the name.
      *
-     * @param nameIn the new friendly name
+     * @param nameIn - the name
      */
     public void setName(String nameIn) {
         name = nameIn;
     }
 
     /**
-     * Gets the number of available subscriptions.
+     * Gets the systemLimit.
      *
-     * @return the number of available subscriptions
+     * @return systemLimit
      */
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getSystemLimit() {
+        return systemLimit;
     }
 
     /**
-     * Sets the number of available subscriptions.
+     * Sets the systemLimit.
      *
-     * @param quantityIn the new number of available subscriptions
+     * @param systemLimitIn - the systemLimit
      */
-    public void setQuantity(Integer quantityIn) {
-        quantity = quantityIn;
+    public void setSystemLimit(Integer systemLimitIn) {
+        systemLimit = systemLimitIn;
     }
 
     /**
-     * Gets the start date.
+     * Gets the startsAt.
      *
-     * @return the start date
+     * @return startsAt
      */
-    public Date getStartDate() {
-        return startDate;
+    public Date getStartsAt() {
+        return startsAt;
     }
 
     /**
-     * Sets the start date.
+     * Sets the startsAt.
      *
-     * @param startDateIn the new start date
+     * @param startsAtIn - the startsAt
      */
-    public void setStartDate(Date startDateIn) {
-        startDate = startDateIn;
+    public void setStartsAt(Date startsAtIn) {
+        startsAt = startsAtIn;
     }
 
     /**
-     * Gets the end date.
+     * Gets the expiresAt.
      *
-     * @return the end date
+     * @return expiresAt
      */
-    public Date getEndDate() {
-        return endDate;
+    public Date getExpiresAt() {
+        return expiresAt;
     }
 
     /**
-     * Sets the end date.
+     * Sets the expiresAt.
      *
-     * @param endDateIn the new end date
+     * @param expiresAtIn - the expiresAt
      */
-    public void setEndDate(Date endDateIn) {
-        endDate = endDateIn;
+    public void setExpiresAt(Date expiresAtIn) {
+        expiresAt = expiresAtIn;
     }
 
     /**
-     * Gets the SCC username.
+     * Gets the sccUsername.
      *
-     * @return the SCC username
+     * @return sccUsername
      */
     public String getSccUsername() {
         return sccUsername;
     }
 
     /**
-     * Sets the SCC username.
+     * Sets the sccUsername.
      *
-     * @param sccUsernameIn the new SCC username
+     * @param sccUsernameIn - the sccUsername
      */
     public void setSccUsername(String sccUsernameIn) {
         sccUsername = sccUsernameIn;
     }
 
     /**
-     * Gets the provided product ids.
+     * Gets the productIds.
      *
-     * @return the provided product ids
+     * @return productIds
      */
     public Set<Long> getProductIds() {
         return productIds;
     }
 
     /**
-     * Sets the provided product ids.
+     * Sets the productIds.
      *
-     * @param productIdsIn the new provided product ids
+     * @param productIdsIn - the productIds
      */
     public void setProductIds(Set<Long> productIdsIn) {
         productIds = productIdsIn;
+    }
+
+    /**
+     * Gets the orderItems.
+     *
+     * @return orderItems
+     */
+    public Set<JsonOrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    /**
+     * Sets the orderItems.
+     *
+     * @param orderItemsIn - the orderItems
+     */
+    public void setOrderItems(Set<JsonOrderItem> orderItemsIn) {
+        orderItems = orderItemsIn;
     }
 }
