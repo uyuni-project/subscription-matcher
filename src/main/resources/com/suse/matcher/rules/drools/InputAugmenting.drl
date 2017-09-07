@@ -62,3 +62,83 @@ rule "markHardBundledSubscriptions"
         }
 end
 
+rule "generateSuperProductForMgmt"
+    agenda-group "InputAugmenting"
+    when
+        $product : Product(id == 1076 || id == 1078)
+    then
+        Product product = new Product(new Long(-666), "SUMA Lifecycle Mgmt", $product.productClass,
+            $product.free, $product.base);
+        java.lang.System.out.println("inserting new superproduct for Mgmt: " + product);
+        insert(product);
+end
+
+rule "generateSuperProductForProv"
+    agenda-group "InputAugmenting"
+    when
+        $product : Product(id == 1097 || id == 1204)
+    then
+        Product product = new Product(new Long(-667), "SUMA Lifecycle Prov", $product.productClass,
+            $product.free, $product.base);
+        java.lang.System.out.println("inserting new superproduct for Prov: " + product);
+        insert(product);
+end
+
+rule "boostSubscriptionsWithMgmtSuperProduct"
+    agenda-group "InputAugmenting"
+    when
+        SubscriptionProduct($sid : subscriptionId, productId == 1076 || productId == 1078)
+    then
+        java.lang.System.out.println("boosting subscription " + $sid + " with new superproduct for Mgmt.");
+        insert(new SubscriptionProduct($sid, new Long(-666)));
+end
+
+rule "boostSubscriptionsWithProvSuperProduct"
+    agenda-group "InputAugmenting"
+    when
+        SubscriptionProduct($sid : subscriptionId, productId == 1097 || productId == 1204)
+    then
+        java.lang.System.out.println("boosting subscription " + $sid + " with new superproduct for Prov.");
+        insert(new SubscriptionProduct($sid, new Long(-667)));
+end
+
+// fake installed products too
+rule "replaceMgmtSuperproductForSystems"
+    agenda-group "InputAugmenting"
+    when
+        $ip : InstalledProduct(productId == 1076 || productId == 1078)
+    then
+        java.lang.System.out.println("Adding faked installed Mgmt prod to system " + $ip.systemId + " and retracting prod " + $ip.productId);
+        insert(new InstalledProduct($ip.systemId, new Long(-666)));
+        retract($ip);
+end
+rule "replaceProvSuperproductForSystems"
+    agenda-group "InputAugmenting"
+    when
+        $ip : InstalledProduct(productId == 1097 || productId == 1204)
+    then
+        java.lang.System.out.println("Adding faked installed Prov prod to system " + $ip.systemId + " and retracting prod " + $ip.productId);
+        insert(new InstalledProduct($ip.systemId, new Long(-667)));
+        retract($ip);
+end
+
+// fake hostedproducts too
+rule "replaceMgmtSuperproductForHosts"
+    agenda-group "InputAugmenting"
+    when
+        $hp : HostedProduct(productId == 1076 || productId == 1078)
+    then
+        java.lang.System.out.println("Adding faked hosted Mgmt prod to system " + $hp.systemId + " and retracting prod " + $hp.productId);
+        insert(new HostedProduct($hp.systemId, new Long(-666)));
+        retract($hp);
+end
+
+rule "replaceProvSuperproductForHosts"
+    agenda-group "InputAugmenting"
+    when
+        $hp : HostedProduct(productId == 1097 || productId == 1204)
+    then
+        java.lang.System.out.println("Adding faked hosted Prov prod to system " + $hp.systemId + " and retracting prod " + $hp.productId);
+        insert(new HostedProduct($hp.systemId, new Long(-667)));
+        retract($hp);
+end

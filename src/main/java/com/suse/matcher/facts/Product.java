@@ -22,10 +22,10 @@ public class Product {
     public String productClass;
 
     /** true if this is a free product. */
-    private Boolean free;
+    public Boolean free;
 
     /** true if this is a base product. */
-    private Boolean base;
+    public Boolean base;
 
     /**
      * Instantiates a new product.
