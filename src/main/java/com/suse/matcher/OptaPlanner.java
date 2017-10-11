@@ -212,12 +212,12 @@ public class OptaPlanner {
          *
          * At some point we have to stop stepping, and we do so when:
          *   - we stepped 100 times with no score improvement (typically)
-         *   - we stepped 3_000 times (when all else fails)
+         *   - we stepped 15_000 times (when all else fails)
          *   - we spent 1 hour finding the solution
          */
         TerminationConfig termination = new TerminationConfig();
         termination.setUnimprovedStepCountLimit(100);
-        termination.setStepCountLimit(3_000);
+        termination.setStepCountLimit(15_000);
         termination.setHoursSpentLimit(1L);
         search.setTerminationConfig(termination);
 
