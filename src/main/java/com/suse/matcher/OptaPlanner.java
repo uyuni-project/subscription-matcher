@@ -184,9 +184,9 @@ public class OptaPlanner {
         /*
          * Every step, generate several moves and pick the best scoring one as the next step.
          *
-         * As possible moves might be a lot, don't generate more than 20_000 in any case.
+         * As possible moves might be a lot, don't generate more than 10_000 in any case.
          */
-        move.setSelectedCountLimit(20_000L);
+        move.setSelectedCountLimit(10_000L);
         search.setMoveSelectorConfig(move);
 
         /*
@@ -201,10 +201,10 @@ public class OptaPlanner {
         search.setAcceptorConfig(acceptor);
 
         /*
-         * As accepted moves might still be a lot, don't evaluate more than 10_000 in any case.
+         * As accepted moves might still be a lot, don't evaluate more than 5_000 in any case.
          */
         LocalSearchForagerConfig forager = new LocalSearchForagerConfig();
-        forager.setAcceptedCountLimit(10_000);
+        forager.setAcceptedCountLimit(5_000);
         search.setForagerConfig(forager);
 
         /*
