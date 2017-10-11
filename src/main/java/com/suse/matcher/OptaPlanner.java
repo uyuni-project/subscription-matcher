@@ -184,9 +184,9 @@ public class OptaPlanner {
         /*
          * Every step, generate several moves and pick the best scoring one as the next step.
          *
-         * As possible moves might be a lot, don't generate more than 20_000 in any case.
+         * As possible moves might be a lot, don't generate more than 10_000 in any case.
          */
-        move.setSelectedCountLimit(20_000L);
+        move.setSelectedCountLimit(10_000L);
         search.setMoveSelectorConfig(move);
 
         /*
@@ -201,10 +201,10 @@ public class OptaPlanner {
         search.setAcceptorConfig(acceptor);
 
         /*
-         * As accepted moves might still be a lot, don't evaluate more than 10_000 in any case.
+         * As accepted moves might still be a lot, don't evaluate more than 5_000 in any case.
          */
         LocalSearchForagerConfig forager = new LocalSearchForagerConfig();
-        forager.setAcceptedCountLimit(10_000);
+        forager.setAcceptedCountLimit(5_000);
         search.setForagerConfig(forager);
 
         /*
@@ -212,12 +212,12 @@ public class OptaPlanner {
          *
          * At some point we have to stop stepping, and we do so when:
          *   - we stepped 100 times with no score improvement (typically)
-         *   - we stepped 3_000 times (when all else fails)
+         *   - we stepped 15_000 times (when all else fails)
          *   - we spent 1 hour finding the solution
          */
         TerminationConfig termination = new TerminationConfig();
         termination.setUnimprovedStepCountLimit(100);
-        termination.setStepCountLimit(3_000);
+        termination.setStepCountLimit(15_000);
         termination.setHoursSpentLimit(1L);
         search.setTerminationConfig(termination);
 
