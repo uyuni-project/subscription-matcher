@@ -12920,6 +12920,34 @@ rule "Add subscription data for part number 874-007132"
         };
 end
 
+//MGR SRV X86-64 INST PR S 5Y
+rule "Add subscription data for part number 874-007228"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007228")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
+            stackable = false
+        };
+end
+
+//MGR LC X86/X86-64 1-2S/VM PR S 5Y
+rule "Add subscription data for part number 874-007231"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007231")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
 //novell linux desktop 9 managed by zenworks 7 linux management 1-device 1-year maintenance
 rule "Add subscription data for part number 877-001213"
     agenda-group "PartNumbers"
