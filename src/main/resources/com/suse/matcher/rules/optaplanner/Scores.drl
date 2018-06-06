@@ -11,6 +11,7 @@ import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
 import com.suse.matcher.facts.PenaltyGroup;
 import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.facts.ConfirmedMatchInPenaltyGroup;
 import com.suse.matcher.solver.Match;
 
 global HardSoftScoreHolder scoreHolder;
@@ -23,20 +24,26 @@ global HardSoftScoreHolder scoreHolder;
 
 rule "calculate12Penalties"
   when
-    PenaltyGroup($penaltyGroupId: id)
-    Subscription($subscriptionId : id, policy != null && policy == Policy.ONE_TWO, ignored == false)
-    accumulate (
-        // count the number of VMs that use a certain 1:2 subscription in one penalty group
-        PenaltyGroup($guestId : guestId, id == $penaltyGroupId) and
-        PartialMatch($groupId : groupId, systemId == $guestId, subscriptionId == $subscriptionId) and
-        Match(id == $groupId, confirmed == true);
-        $count : count();
-        // if it is odd...
-        ($count % 2) == 1
-    )
+    Subscription($subscriptionId : id, policy != null && policy == Policy.ONE_TWO, ignored == false) and
+    PenaltyGroup($penaltyGroupId: id, $guestId : guestId) and
+    PartialMatch($groupId : groupId, systemId == $guestId, subscriptionId == $subscriptionId) and
+    Match(id == $groupId, confirmed == true);
   then
-    // ...add a 50 cent penalty. This ensures a whole number of subscriptions is
-    // always used for the same penalty group
+    // insert a confirmed match for subscription, guest and penalty group
+    insertLogical(new ConfirmedMatchInPenaltyGroup($subscriptionId, $penaltyGroupId, $guestId));
+end
+
+rule "insert12Penalties"
+  when
+    Subscription($subscriptionId : id, policy != null && policy == Policy.ONE_TWO, ignored == false) and
+    PenaltyGroup($penaltyGroupId: id);
+    accumulate(
+      ConfirmedMatchInPenaltyGroup(subscriptionId == $subscriptionId, penaltyGroupId == $penaltyGroupId);
+      $count : count();
+      ($count % 2) == 1
+    );
+  then
+    // insert a 1-2 penalty when the number of confirmed matches in penalty group is odd
     insertLogical(new OneTwoPenalty($subscriptionId, $penaltyGroupId, 50));
 end
 
