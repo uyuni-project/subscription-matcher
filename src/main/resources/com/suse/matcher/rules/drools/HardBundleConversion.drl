@@ -1,9 +1,12 @@
 package com.suse.matcher.rules.drools;
 
+import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 import com.suse.matcher.facts.System;
+
+import java.util.TreeMap;
 
 // Agenda group for converting old style hard bundles (consisting of more subscriptions)
 // into a single-subscription hard bundle
