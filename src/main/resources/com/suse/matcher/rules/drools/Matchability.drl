@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.suse.matcher.Drools;
 import com.suse.matcher.facts.CentGroup;
+import com.suse.matcher.facts.GroupInInheritedVirtualization;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.HostedProduct;
 import com.suse.matcher.facts.InstalledProduct;
@@ -110,6 +111,7 @@ rule "matchInheritedVirtualization"
             systemId == $systemId
         )
         CentGroup(id == $centGroupId, $cents : cents)
+        not GroupInInheritedVirtualization(groupId == $baseGroupId) // prevent infinite re-activation
     then
         int addonGroupId = Drools.generateId($baseGroupId, $addonSubscriptionId);
 
@@ -120,6 +122,7 @@ rule "matchInheritedVirtualization"
 
         insert(new CentGroup(baseMatchCentGroupId, $cents));
         insert(new CentGroup(addonMatchCentGroupId, $cents));
+        insert(new GroupInInheritedVirtualization(addonGroupId));
         insert(new PartialMatch($systemId, $baseProductId, $baseSubscriptionId, baseMatchCentGroupId, addonGroupId));
         insert(new PartialMatch($systemId, $addonProductId, $addonSubscriptionId, addonMatchCentGroupId, addonGroupId));
 end
