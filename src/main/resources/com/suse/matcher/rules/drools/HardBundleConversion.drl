@@ -4,57 +4,110 @@ import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
-import com.suse.matcher.facts.System;
 
 import java.util.TreeMap;
 
 // Agenda group for converting old style hard bundles (consisting of more subscriptions)
 // into a single-subscription hard bundle
 
-rule "mergeProducts"
+rule "markHardBundledCandidates"
     agenda-group "HardBundleConversion"
     when
-        Subscription(ignored == false, hardBundleId != null, $sub1HardBundleId : hardBundleId, $subToKeepId : id)
-        Subscription(id > $subToKeepId, hardBundleId == $sub1HardBundleId, $subToRetractId : id)
-        $subProd : SubscriptionProduct(subscriptionId == $subToRetractId);
+        // for a subscription we look for another subscription with same attributes
+        // if there is such a subscription, the original subscription is a hard bundle candidate
+        $candidate : Subscription(ignored == false, hardBundleId == null, singleSubscriptionHardBundle == false)
+        Subscription( // try to find subscription in the same hard bundle
+            id != $candidate.id,
+            ignored == false,
+            partNumber == $candidate.partNumber,
+            startDate == $candidate.startDate,
+            endDate == $candidate.endDate,
+            quantity == $candidate.quantity,
+            singleSubscriptionHardBundle == false)
     then
-        // we cannot use modify() because subscriptionId is in hashCode, retract and insert instead
-        insert(new SubscriptionProduct($subToKeepId, $subProd.productId));
-        retract($subProd);
+        // each hard bundle candidate will start with hard bundle id equal to its own id, later we'll merge them together
+        modify ($candidate) {
+            hardBundleId = $candidate.id;
+        }
+end
+
+// MERGING HARD BUNDLES
+// For reproducibility,  we merge 2 hard bundles together such that the hard bundle with higher id gets merged
+// into the one with lower id. This way we make sure the hard bundle id is equal to the lowest
+// subscription ("leading subscription") id of all subscriptions in it.
+rule "mergeHardBundles"
+    agenda-group "HardBundleConversion"
+    when
+        // find 2 subscriptions with same attributes
+        $leadingSub : Subscription(hardBundleId == id, ignored == false)
+        $mergingSub : Subscription(ignored == false,
+            hardBundleId > $leadingSub.hardBundleId,
+            partNumber == $leadingSub.partNumber,
+            startDate == $leadingSub.startDate,
+            endDate == $leadingSub.endDate,
+            quantity == $leadingSub.quantity)
+
+        // when the products of subscriptions are disjoint
+        not (
+            SubscriptionProduct(subscriptionId == $leadingSub.id, $productId : productId)  and
+            SubscriptionProduct(subscriptionId == $mergingSub.id, productId == $productId)
+        )
+
+        // .. and the products of the subscription to be merged are not empty
+        accumulate(
+            $mergingSP : SubscriptionProduct(subscriptionId == $mergingSub.id);
+            $mergingSPs : collectSet($mergingSP),
+            $count : count($mergingSP);
+            $count > 0
+        )
+    then
+        // ... we "merge" mergingSub hard bundle to leading subscription
+        modify($mergingSub) {
+            hardBundleId = $leadingSub.hardBundleId;
+        }
+        modify ($leadingSub) {
+            setSingleSubscriptionHardBundle(true)
+        }
+
+        for (Object mergingSP : $mergingSPs) {
+            insert(new SubscriptionProduct($leadingSub.id, ((SubscriptionProduct) mergingSP).getProductId()));
+            retract(mergingSP);
+        }
 end
 
 rule "mergePinnedMatches"
     agenda-group "HardBundleConversion"
     when
-        Subscription(ignored == false, hardBundleId != null, $subToKeepHBId : hardBundleId, $subToKeepId : id)
-        Subscription(id > $subToKeepId, hardBundleId == $subToKeepHBId, $subToRetractId : id)
+        // id of the "main" subscription in the hard bundle is equal to the hard bundle id
+        Subscription(ignored == false, hardBundleId == id, $hardBundleId : hardBundleId)
+        Subscription(ignored == false, id != $hardBundleId, hardBundleId == $hardBundleId, $subToRetractId : id)
         $pinnedMatch : PinnedMatch(subscriptionId == $subToRetractId)
     then
         TreeMap<String, String> data = new TreeMap<>();
         data.put("old_subscription_id", $subToRetractId.toString());
-        data.put("new_subscription_id", $subToKeepId.toString());
+        data.put("new_subscription_id", $hardBundleId.toString());
         data.put("system_id", $pinnedMatch.systemId.toString());
         insert(new Message(Message.Level.DEBUG, "hb_adjust_pinned_match", data));
 
         // we cannot use modify() because of attributes in hashCode, retract and insert instead
-        insert(new PinnedMatch($pinnedMatch.systemId, $subToKeepId));
+        insert(new PinnedMatch($pinnedMatch.systemId, $hardBundleId));
         retract($pinnedMatch);
 end
 
 rule "removeRedundantSubscriptions"
     agenda-group "HardBundleConversion"
     when
-        $subToKeep: Subscription(ignored == false, hardBundleId != null)
-        $subToRetract : Subscription(id > $subToKeep.id, hardBundleId == $subToKeep.hardBundleId)
+        // out all of the subscriptions in a hard bundle, we keep the one with lowest id
+        $leadingSub: Subscription(ignored == false, hardBundleId == id, singleSubscriptionHardBundle == true)
+        $subToRetract : Subscription(ignored == false, id > $leadingSub.id, hardBundleId == $leadingSub.hardBundleId)
     then
         TreeMap<String, String> data = new TreeMap<>();
         data.put("old_subscription_id", $subToRetract.id.toString());
-        data.put("new_subscription_id", $subToKeep.id.toString());
+        data.put("new_subscription_id", $leadingSub.id.toString());
         insert(new Message(Message.Level.INFO, "hb_merge_subscriptions", data));
 
-        modify($subToKeep) {
-            setName($subToKeep.name + " + " + $subToRetract.name),
-            setSingleSubscriptionHardBundle(true)
+        modify($leadingSub) {
+            name = $leadingSub.name + " + " + $subToRetract.name
         }
         retract($subToRetract);
 end
