@@ -102,7 +102,7 @@ public class Subscription implements Comparable<Subscription> {
     public Boolean ignored = false;
 
     /** The Hard Bundle Id that this subscription belongs to. If null, this doesn't belong to any Hard Bundle */
-    public Integer hardBundleId;
+    public Long hardBundleId;
 
     /** Does this subscription on its own represent a hard bundle? */
     public Boolean singleSubscriptionHardBundle = false;
@@ -232,7 +232,7 @@ public class Subscription implements Comparable<Subscription> {
     /**
      * @return Returns the hardBundleId.
      */
-    public Integer getHardBundleId() {
+    public Long getHardBundleId() {
         return hardBundleId;
     }
 
@@ -246,7 +246,7 @@ public class Subscription implements Comparable<Subscription> {
     /**
      * @param hardBundleId The hardBundleId to set.
      */
-    public void setHardBundleId(Integer hardBundleId) {
+    public void setHardBundleId(Long hardBundleId) {
         this.hardBundleId = hardBundleId;
     }
 

@@ -45,14 +45,6 @@
           "type": "hb_adjust_pinned_match",
           "data": {
               "new_subscription_id": "1",
-              "old_subscription_id": "2",
-              "system_id": "100"
-          }
-      },
-      {
-          "type": "hb_adjust_pinned_match",
-          "data": {
-              "new_subscription_id": "2",
               "old_subscription_id": "3",
               "system_id": "100"
           }

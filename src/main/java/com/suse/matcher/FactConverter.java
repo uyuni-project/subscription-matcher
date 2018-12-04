@@ -113,7 +113,7 @@ public class FactConverter {
         Date timestamp = assignment.getProblemFactStream(Timestamp.class)
                 .findFirst().get().timestamp;
 
-        List<JsonMatch> confirmedMatches = getMatches(assignment, false);
+        List<JsonMatch> matches = getMatches(assignment, false);
 
         List<JsonMessage> messages = assignment.getProblemFactStream(Message.class)
                 .sorted()
@@ -133,7 +133,7 @@ public class FactConverter {
                         throwingMerger(),
                         LinkedHashMap::new));
 
-        return new JsonOutput(timestamp, confirmedMatches, messages, subscriptionPolicies);
+        return new JsonOutput(timestamp, matches, messages, subscriptionPolicies);
     }
 
     private static BinaryOperator<String> throwingMerger() {
@@ -186,7 +186,7 @@ public class FactConverter {
                 .append(a.getConfirmed(), b.getConfirmed())
                 .toComparison()
             )
-            .filter(m -> (!confirmedOnly) || m.getConfirmed())
+            .filter(m -> !confirmedOnly || m.getConfirmed())
             .collect(toList());
     }
 }

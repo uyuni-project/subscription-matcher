@@ -14,18 +14,18 @@
           "product_id": 1518,
           "cents": 50,
           "confirmed": true
+      },
+      {
+          "system_id": 100,
+          "subscription_id": 2,
+          "product_id": 1518,
+          "cents": 100,
+          "confirmed": false
       }
   ],
   "subscription_policies": {
-    "1": "instance"
+    "1": "instance",
+    "2": "instance"
   },
-  "messages": [
-      {
-        "type": "hb_merge_subscriptions",
-        "data": {
-          "new_subscription_id": "1",
-          "old_subscription_id": "2"
-        }
-      }
-  ]
+  "messages": []
 }

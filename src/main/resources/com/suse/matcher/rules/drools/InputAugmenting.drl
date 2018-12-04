@@ -38,27 +38,3 @@ rule "generatePenaltyGroups"
         insert(new PenaltyGroup(penaltyGroupId, $guestId));
 end
 
-rule "markHardBundledSubscriptions"
-    agenda-group "InputAugmenting"
-    when
-        // two subscriptions with different product sets, but otherwise identical, are by definition hard bundled
-        $s1 : Subscription(ignored == false)
-        $s2 : Subscription(ignored == false, partNumber == $s1.partNumber, id > $s1.id, startDate == $s1.startDate, endDate == $s1.endDate, quantity == $s1.quantity)
-        (
-            SubscriptionProduct($productId : productId, subscriptionId == $s1.id) and
-            not SubscriptionProduct(productId == $productId, subscriptionId == $s2.id)
-        ) or
-        (
-            SubscriptionProduct($productId : productId, subscriptionId == $s2.id) and
-            not SubscriptionProduct(productId == $productId, subscriptionId == $s1.id)
-        )
-    then
-        int hardBundleId = Drools.generateId($s1.partNumber, $s1.startDate, $s1.endDate, $s1.quantity);
-        modify($s1) {
-            hardBundleId = hardBundleId;
-        }
-        modify($s2) {
-            hardBundleId = hardBundleId;
-        }
-end
-
