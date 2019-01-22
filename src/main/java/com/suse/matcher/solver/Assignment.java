@@ -1,8 +1,9 @@
 package com.suse.matcher.solver;
 
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
+import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
-import org.optaplanner.core.api.domain.solution.Solution;
+import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProperty;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
@@ -18,7 +19,7 @@ import java.util.stream.Stream;
  * {@link Match}es, as produced by OptaPlanner.
  */
 @PlanningSolution
-public class Assignment implements Solution<HardSoftScore> {
+public class Assignment {
 
     /** Score of this assignment. */
     private HardSoftScore score;
@@ -53,9 +54,9 @@ public class Assignment implements Solution<HardSoftScore> {
     }
 
     /**
-     * {@inheritDoc}
+     * @return the problem facts
      */
-    @Override
+    @ProblemFactCollectionProperty
     public Collection<Object> getProblemFacts() {
         // those will be inserted in the private OptaPlanner Drools instance
         // so that they can be used in score rules
@@ -91,15 +92,16 @@ public class Assignment implements Solution<HardSoftScore> {
     /**
      * {@inheritDoc}
      */
-    @Override
+    @PlanningScore
     public HardSoftScore getScore() {
         return score;
     }
 
     /**
-     * {@inheritDoc}
+     * Set score
+     *
+     * @param scoreIn score
      */
-    @Override
     public void setScore(HardSoftScore scoreIn) {
         score = scoreIn;
     }

@@ -120,7 +120,6 @@ public class OptaPlanner {
          * Declare score type and file location
          */
         ScoreDirectorFactoryConfig score = new ScoreDirectorFactoryConfig();
-        score.setScoreDefinitionType(ScoreDefinitionType.HARD_SOFT);
         score.setScoreDrlList(new ArrayList<String>() {{ add("com/suse/matcher/rules/optaplanner/Scores.drl"); }});
         config.setScoreDirectorFactoryConfig(score);
 
