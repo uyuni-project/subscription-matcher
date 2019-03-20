@@ -35,6 +35,7 @@ public class Log4J {
         org.apache.log4j.Logger.getLogger("com.suse.matcher").setLevel(Level.DEBUG);
         org.apache.log4j.Logger.getLogger("org.drools").setLevel(Level.WARN);
         org.apache.log4j.Logger.getLogger("org.optaplanner").setLevel(Level.WARN);
+        org.apache.log4j.Logger.getLogger("org.kie").setLevel(Level.WARN);
     }
 
     /**
