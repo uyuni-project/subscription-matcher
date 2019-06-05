@@ -81,9 +81,22 @@ rule "aggregateEqualStackableSubscriptions"
             aggregationSubscriptionId = $s1.id
         }
 
+        TreeMap<String, String> msgData = new TreeMap<>();
+        msgData.put("old_subscription_id", $s2.id.toString());
+        msgData.put("new_subscription_id", $s1.id.toString());
+        insert(new Message(Message.Level.INFO, "merge_subscriptions", msgData));
+
         for (Object pm : $pinnedMatches) {
-            insert(new PinnedMatch(((PinnedMatch) pm).systemId, $s1.id));
+            Long systemId = ((PinnedMatch) pm).systemId;
+
+            insert(new PinnedMatch(systemId, $s1.id));
             retract(pm);
+
+            TreeMap<String, String> data = new TreeMap<>();
+            data.put("old_subscription_id", $s2.id.toString());
+            data.put("new_subscription_id", $s1.id.toString());
+            data.put("system_id", systemId.toString());
+            insert(new Message(Message.Level.INFO, "adjust_pinned_match", data));
         }
 
         retract($s2);
