@@ -38,3 +38,73 @@ rule "generatePenaltyGroups"
         insert(new PenaltyGroup(penaltyGroupId, $guestId));
 end
 
+// aggregate 2 equal (same properties, same product set) subscriptions into a single one
+rule "aggregateEqualStackableSubscriptions"
+    agenda-group "InputAugmenting"
+    when
+        $s1: Subscription(ignored == false, stackable == true, aggregationSubscriptionId == null || aggregationSubscriptionId == id)
+        $s2: Subscription(
+            ignored == false,
+            stackable == true,
+            id > $s1.id,
+            id != aggregationSubscriptionId, // rule out subs that already have been aggregated into other subscription
+            partNumber == $s1.partNumber,
+            name == $s1.name,
+            policy == $s1.policy,
+            cpus == $s1.cpus,
+            startDate == $s1.startDate,
+            endDate == $s1.endDate,
+            sccUsername == $s1.sccUsername)
+
+        accumulate(
+            $product1: SubscriptionProduct(subscriptionId == $s1.id);
+            $productIds1: collectSet($product1.productId)
+        )
+
+        accumulate(
+            $product2: SubscriptionProduct(subscriptionId == $s2.id);
+            $productIds2: collectSet($product2.productId);
+            $productIds2 == $productIds1
+        )
+
+        // we're gonna remove the subscription -> let's also adjust its pinned matches
+        accumulate(
+            $pinnedMatch: PinnedMatch(subscriptionId == $s2.id);
+            $pinnedMatches: collectSet($pinnedMatch)
+        )
+    then
+        modify($s1) {
+            quantity += $s2.quantity,
+            aggregationSubscriptionId = $s1.id
+        }
+        modify($s2) {
+            aggregationSubscriptionId = $s1.id
+        }
+
+        for (Object pm : $pinnedMatches) {
+            insert(new PinnedMatch(((PinnedMatch) pm).systemId, $s1.id));
+            retract(pm);
+        }
+
+        retract($s2);
+end
+
+rule "removeRedundantSubscriptionProducts"
+    agenda-group "InputAugmenting"
+    when
+        $sp: SubscriptionProduct()
+        not Subscription(id == $sp.subscriptionId)
+    then
+        retract($sp)
+end
+
+rule "adjustAggregatedSubscriptionName"
+    agenda-group "InputAugmenting"
+    no-loop
+    when
+        $s: Subscription(aggregationSubscriptionId == id, !name.startsWith("Aggregated:"))
+    then
+        modify($s) {
+            name = "Aggregated: " + $s.name
+        }
+end
