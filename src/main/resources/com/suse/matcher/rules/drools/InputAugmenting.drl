@@ -38,21 +38,23 @@ rule "generatePenaltyGroups"
         insert(new PenaltyGroup(penaltyGroupId, $guestId));
 end
 
-// aggregate 2 equal (same properties, same product set) subscriptions into a single one
+// aggregate 2 equal (same properties, same product set) OEM subscriptions into a single one
 rule "aggregateEqualStackableSubscriptions"
     agenda-group "InputAugmenting"
     when
-        $s1: Subscription(ignored == false, stackable == true, aggregationSubscriptionId == null || aggregationSubscriptionId == id)
+        $s1: Subscription(ignored == false, stackable == true, id < 0, aggregationSubscriptionId == null || aggregationSubscriptionId == id)
         $s2: Subscription(
             ignored == false,
             stackable == true,
+            id < 0, // OEM subscription
             id > $s1.id,
             id != aggregationSubscriptionId, // rule out subs that already aggregate other subscription
             partNumber == $s1.partNumber,
             name == $s1.name,
             policy == $s1.policy,
             cpus == $s1.cpus,
-            sccUsername == $s1.sccUsername)
+            sccUsername == $s1.sccUsername,
+            quantity == 1)
 
         accumulate(
             $product1: SubscriptionProduct(subscriptionId == $s1.id);
