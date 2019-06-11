@@ -47,13 +47,11 @@ rule "aggregateEqualStackableSubscriptions"
             ignored == false,
             stackable == true,
             id > $s1.id,
-            id != aggregationSubscriptionId, // rule out subs that already have been aggregated into other subscription
+            id != aggregationSubscriptionId, // rule out subs that already aggregate other subscription
             partNumber == $s1.partNumber,
             name == $s1.name,
             policy == $s1.policy,
             cpus == $s1.cpus,
-            startDate == $s1.startDate,
-            endDate == $s1.endDate,
             sccUsername == $s1.sccUsername)
 
         accumulate(
@@ -75,7 +73,9 @@ rule "aggregateEqualStackableSubscriptions"
     then
         modify($s1) {
             quantity += $s2.quantity,
-            aggregationSubscriptionId = $s1.id
+            aggregationSubscriptionId = $s1.id,
+            startDate = $s1.startDate.after($s2.startDate) ? $s1.startDate : $s2.startDate,
+            endDate = $s1.endDate.before($s2.endDate) ? $s1.endDate : $s2.endDate
         }
         modify($s2) {
             aggregationSubscriptionId = $s1.id
