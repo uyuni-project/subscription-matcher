@@ -1,0 +1,45 @@
+{
+  "timestamp": "2015-05-01T00:00:00.000+0200",
+  "matches": [
+    {
+      "system_id": 100,
+      "subscription_id": -4,
+      "product_id": 1298,
+      "cents": 200,
+      "confirmed": true
+    },
+    {
+      "system_id": 101,
+      "subscription_id": -4,
+      "product_id": 1298,
+      "cents": 200,
+      "confirmed": true
+    }
+  ],
+  "subscription_policies": {
+    "-4": "one_two"
+  },
+  "messages": [
+    {
+      "type": "merge_subscriptions",
+      "data": {
+        "new_subscription_id": "-4",
+        "old_subscription_id": "-1"
+      }
+    },
+    {
+      "type": "merge_subscriptions",
+      "data": {
+        "new_subscription_id": "-4",
+        "old_subscription_id": "-2"
+      }
+    },
+    {
+      "type": "merge_subscriptions",
+      "data": {
+        "new_subscription_id": "-4",
+        "old_subscription_id": "-3"
+      }
+    }
+  ]
+}
