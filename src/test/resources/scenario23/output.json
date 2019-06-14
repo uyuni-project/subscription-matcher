@@ -35,7 +35,7 @@
   },
   "messages": [
       {
-          "type": "hb_adjust_pinned_match",
+          "type": "adjust_pinned_match",
           "data": {
               "new_subscription_id": "1",
               "old_subscription_id": "2",

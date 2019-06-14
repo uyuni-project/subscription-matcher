@@ -87,7 +87,7 @@ rule "mergePinnedMatches"
         data.put("old_subscription_id", $subToRetractId.toString());
         data.put("new_subscription_id", $hardBundleId.toString());
         data.put("system_id", $pinnedMatch.systemId.toString());
-        insert(new Message(Message.Level.DEBUG, "hb_adjust_pinned_match", data));
+        insert(new Message(Message.Level.DEBUG, "adjust_pinned_match", data));
 
         // we cannot use modify() because of attributes in hashCode, retract and insert instead
         insert(new PinnedMatch($pinnedMatch.systemId, $hardBundleId));
