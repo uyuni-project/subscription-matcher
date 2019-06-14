@@ -43,6 +43,20 @@ rule "aggregateEqualStackableSubscriptions"
     agenda-group "InputAugmenting"
     when
         $s1: Subscription(ignored == false, stackable == true, id < 0, aggregationSubscriptionId == null || aggregationSubscriptionId == id)
+
+        // make sure that the $s1 is the one that has lowest id
+        not Subscription(
+            ignored == false,
+            stackable == true,
+            id < 0, // OEM subscription
+            id < $s1.id,
+            partNumber == $s1.partNumber,
+            name == $s1.name,
+            policy == $s1.policy,
+            cpus == $s1.cpus,
+            sccUsername == $s1.sccUsername,
+            quantity == 1)
+
         $s2: Subscription(
             ignored == false,
             stackable == true,
