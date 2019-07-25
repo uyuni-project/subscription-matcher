@@ -1,0 +1,48 @@
+{
+    "timestamp": "2015-05-01T00:00:00.000+0200",
+    "pinned_matches": [],
+    "products": [
+        {
+            "id": 1298,
+            "name": "ACME Product",
+            "base": true,
+            "product_class": "1"
+        }
+    ],
+    "subscriptions": [
+	{
+            "id": -4,
+            "part_number": "662644477469",
+            "name": "Aggregated: Stackable OEM subscription",
+            "product_ids": [
+                1298
+            ],
+            "quantity": 4,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z",
+            "end_date": "2020-07-31T00:00:00Z"
+        }
+     ],
+     "virtualization_groups": [],
+     "systems": [
+         {
+             "cpus": 4,
+             "id": 100,
+             "physical": true,
+             "product_ids": [
+                 1298
+             ],
+             "virtual_system_ids" : []
+         },
+         {
+             "cpus": 4,
+             "id": 101,
+             "physical": true,
+             "product_ids": [
+                 1298
+             ],
+             "virtual_system_ids" : []
+         }
+     ]
+ }
+ 
