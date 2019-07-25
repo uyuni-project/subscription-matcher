@@ -74,14 +74,19 @@
             "cpus": 1,
             "id": 1000,
             "physical": true,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 1001,
             "physical": true,
-            "product_ids": [814, 815],
+            "product_ids": [
+                814,
+                815
+            ],
             "virtual_system_ids": []
         },
         {
@@ -89,20 +94,26 @@
             "id": 100,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [101]
+            "virtual_system_ids": [
+                101
+            ]
         },
         {
             "cpus": 2,
             "id": 101,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 102,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
@@ -110,20 +121,29 @@
             "id": 200,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [201, 202]
+            "virtual_system_ids": [
+                201,
+                202
+            ]
         },
         {
             "cpus": 2,
             "id": 201,
             "physical": false,
-            "product_ids": [814, 815],
+            "product_ids": [
+                814,
+                815
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 202,
             "physical": false,
-            "product_ids": [814, 815],
+            "product_ids": [
+                814,
+                815
+            ],
             "virtual_system_ids": []
         },
         {
@@ -131,13 +151,17 @@
             "id": 300,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [301]
+            "virtual_system_ids": [
+                301
+            ]
         },
         {
             "cpus": 2,
             "id": 301,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         }
     ]

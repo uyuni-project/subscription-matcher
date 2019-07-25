@@ -44,7 +44,8 @@
             "id": 100,
             "physical": true,
             "product_ids": [
-                814, 815
+                814,
+                815
             ],
             "virtual_system_ids": []
         },

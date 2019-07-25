@@ -48,21 +48,28 @@
             "cpus": 3,
             "id": 100,
             "physical": true,
-            "product_ids": [689],
+            "product_ids": [
+                689
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 3,
             "id": 101,
             "physical": true,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 3,
             "id": 102,
             "physical": true,
-            "product_ids": [814, 689],
+            "product_ids": [
+                814,
+                689
+            ],
             "virtual_system_ids": []
         }
     ]

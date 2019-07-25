@@ -34,7 +34,7 @@
             "start_date": "2015-01-01T00:00:00Z",
             "end_date": "2020-07-31T00:00:00Z"
         },
-	{
+        {
             "id": 3,
             "part_number": "662644477469",
             "name": "Stackable subscription",
@@ -46,7 +46,7 @@
             "start_date": "2015-01-01T00:00:00Z",
             "end_date": "2020-07-31T00:00:00Z"
         },
-	{
+        {
             "id": 4,
             "part_number": "662644477469",
             "name": "Stackable subscription",
@@ -58,27 +58,26 @@
             "start_date": "2015-01-01T00:00:00Z",
             "end_date": "2020-07-31T00:00:00Z"
         }
-     ],
-     "virtualization_groups": [],
-     "systems": [
-         {
-             "cpus": 4,
-             "id": 100,
-             "physical": true,
-             "product_ids": [
-                 1298
-             ],
-             "virtual_system_ids" : []
-         },
-         {
-             "cpus": 8,
-             "id": 101,
-             "physical": true,
-             "product_ids": [
-                 1298
-             ],
-             "virtual_system_ids" : []
-         }
-     ]
- }
- 
+    ],
+    "virtualization_groups": [],
+    "systems": [
+        {
+            "cpus": 4,
+            "id": 100,
+            "physical": true,
+            "product_ids": [
+                1298
+            ],
+            "virtual_system_ids": []
+        },
+        {
+            "cpus": 8,
+            "id": 101,
+            "physical": true,
+            "product_ids": [
+                1298
+            ],
+            "virtual_system_ids": []
+        }
+    ]
+}

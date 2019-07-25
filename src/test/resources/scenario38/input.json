@@ -1,14 +1,14 @@
 {
     "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
-	{
-	    "subscription_id": 4,
-	    "system_id": 100
-	},
-	{
-	    "subscription_id": 2,
-	    "system_id": 101
-	}
+        {
+            "subscription_id": 4,
+            "system_id": 100
+        },
+        {
+            "subscription_id": 2,
+            "system_id": 101
+        }
     ],
     "products": [
         {
@@ -69,7 +69,6 @@
             "scc_username": "UC7",
             "start_date": "2015-01-01T00:00:00Z"
         }
-
     ],
     "virtualization_groups": [],
     "systems": [
@@ -78,27 +77,30 @@
             "id": 100,
             "physical": true,
             "product_ids": [
-                1224, 1298
+                1224,
+                1298
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 101,
             "physical": true,
             "product_ids": [
-                1224, 1298
+                1224,
+                1298
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
-	{
+        {
             "cpus": 2,
             "id": 102,
             "physical": true,
             "product_ids": [
-                1224, 1298
+                1224,
+                1298
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         }
     ]
 }
