@@ -8,11 +8,12 @@ import static java.util.stream.Collectors.toSet;
 import com.suse.matcher.csv.CSVOutputMessage;
 import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputUnmatchedProduct;
+import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.solver.Assignment;
 
@@ -45,6 +46,7 @@ public class OutputWriter {
     // filenames
     private static final String JSON_INPUT_FILE = "input.json";
     private static final String JSON_OUTPUT_FILE = "output.json";
+    private static final String PROCESSED_JSON_INPUT_FILE = "processed_input.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
     private static final String CSV_UNMATCHED_PRODUCT_REPORT_FILE = "unmatched_product_report.csv";
     private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
@@ -94,6 +96,20 @@ public class OutputWriter {
     }
 
     /**
+     * Write input processed my matcher run
+     *
+     * @param input the actual input
+     * @param assignment output from {@link Matcher}
+     * @throws FileNotFoundException if the output directory was not found
+     */
+    public void writeProcessedInput(JsonInput input, Assignment assignment) throws FileNotFoundException {
+        try (PrintWriter writer = new PrintWriter(new File(outputDirectory, PROCESSED_JSON_INPUT_FILE))) {
+            JsonIO io = new JsonIO();
+            writer.write(io.toJson(FactConverter.processInput(input, assignment)));
+        }
+    }
+
+    /**
      * Writes the raw output file in JSON format.
      *
      * @param assignment output from {@link Matcher}
@@ -103,7 +119,6 @@ public class OutputWriter {
         try (PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_FILE))) {
             JsonIO io = new JsonIO();
             writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
-            writer.close();
         }
     }
 
@@ -244,7 +259,7 @@ public class OutputWriter {
             List<Message> messages = assignment.getProblemFactStream(Message.class)
                 .filter(m -> m.severity != Message.Level.DEBUG)
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(toList());
 
             for (Message message: messages) {
                 CSVOutputMessage csvMessage = new CSVOutputMessage(message.type, message.data);
@@ -252,4 +267,5 @@ public class OutputWriter {
             }
         }
     }
+
 }

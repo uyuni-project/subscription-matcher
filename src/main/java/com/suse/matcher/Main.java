@@ -62,6 +62,8 @@ public class Main {
             JsonInput input = new JsonIO().loadInput(inputString);
             Assignment assignment = new Matcher(false).match(input);
 
+            // write processed input
+            writer.writeProcessedInput(input, assignment);
             // write output data
             writer.writeOutput(assignment);
 

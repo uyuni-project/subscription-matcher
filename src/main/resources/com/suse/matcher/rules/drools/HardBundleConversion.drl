@@ -106,8 +106,10 @@ rule "removeRedundantSubscriptions"
         data.put("new_subscription_id", $leadingSub.id.toString());
         insert(new Message(Message.Level.INFO, "hb_merge_subscriptions", data));
 
-        modify($leadingSub) {
-            name = $leadingSub.name + " + " + $subToRetract.name
+        if ($leadingSub.name != null && $subToRetract.name != null) {
+            modify($leadingSub) {
+                name = $leadingSub.name + " + " + $subToRetract.name
+            }
         }
         retract($subToRetract);
 end
