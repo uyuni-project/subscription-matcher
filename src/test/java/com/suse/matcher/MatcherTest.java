@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.Optional;
 
 /**
  * Tests {@link Matcher}.
@@ -31,10 +30,7 @@ public class MatcherTest {
     /** Input. */
     private JsonInput input;
 
-    /** Expected processed input after matching. */
-    private final Optional<JsonInput> expectedProcessedInput;
-
-    /** The expected output. */
+    /** Expected output **/
     private JsonOutput expectedOutput;
 
     /** The scenario number. */
@@ -58,7 +54,6 @@ public class MatcherTest {
                 String inputStr = getString(i, "input.json");
                 result.add(new Object[] {
                     io.loadInput(inputStr),
-                    maybeGetString(i, "processed_input.json").map(input -> io.loadInput(input)),
                     io.loadOutput(getString(i, "output.json")),
                     i
                 });
@@ -89,38 +84,16 @@ public class MatcherTest {
     }
 
     /**
-     * Returns a string for a JSON scenario file if the file exists
-     *
-     * @param scenarioNumber the i
-     * @param fileName the filename
-     * @return the string, or empty if the file doesn't exist
-     * @throws IOException if an unexpected condition happens
-     */
-    private static Optional<String> maybeGetString(int scenarioNumber, String fileName) throws IOException {
-        InputStream is = MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber
-                + "/" + fileName);
-
-        if (is == null) {
-            return Optional.empty();
-        }
-
-        return Optional.of(IOUtils.toString(is));
-    }
-
-    /**
      * Instantiates a new Matcher test.
      *
      * @param inputIn a JSON input data blob
-     * @param expectedProcessedInputIn the expected processed input
      * @param expectedOutputIn the expected output
      * @param scenarioNumberIn the scenario number
      */
-    public MatcherTest(JsonInput inputIn, Optional<JsonInput> expectedProcessedInputIn, JsonOutput expectedOutputIn,
-            int scenarioNumberIn) {
+    public MatcherTest(JsonInput inputIn, JsonOutput expectedOutputIn, int scenarioNumberIn) {
         matcher = new Matcher(true);
         input = inputIn;
         expectedOutput = expectedOutputIn;
-        expectedProcessedInput = expectedProcessedInputIn;
         scenarioNumber = scenarioNumberIn;
         Drools.resetIdMap();
     }
@@ -134,7 +107,6 @@ public class MatcherTest {
 
         Assignment assignment = matcher.match(input);
         JsonOutput actualOutput = FactConverter.convertToOutput(assignment);
-        JsonInput processedInput = FactConverter.processInput(input, assignment);
 
         JsonIO io = new JsonIO();
 
@@ -150,9 +122,8 @@ public class MatcherTest {
         assertEquals("scenario" + scenarioNumber + " messages",
                 io.toJson(expectedOutput.getMessages()),
                 io.toJson(actualOutput.getMessages()));
-        expectedProcessedInput.ifPresent(input ->
-                assertEquals("scenario" + scenarioNumber + " processed input",
-                        io.toJson(input),
-                        io.toJson(processedInput)));
+        assertEquals("scenario" + scenarioNumber + " subscriptions",
+                io.toJson(expectedOutput.getSubscriptions()),
+                io.toJson(actualOutput.getSubscriptions()));
     }
 }

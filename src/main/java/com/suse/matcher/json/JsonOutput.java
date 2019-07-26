@@ -52,6 +52,9 @@ public class JsonOutput {
     /** The messages. */
     private List<JsonMessage> messages = new LinkedList<>();
 
+    /** The processed subscriptions **/
+    private List<JsonSubscription> subscriptions;
+
     /**
      * Standard constructor.
      *
@@ -59,13 +62,15 @@ public class JsonOutput {
      * @param matchesIn the matches
      * @param messagesIn the messages
      * @param subscriptionPoliciesIn mapping from subscription id to its policy
+     * @param subscriptionsIn subscriptions (processed by matcher)
      */
-    public JsonOutput(Date timestampIn, List<JsonMatch> matchesIn,
-            List<JsonMessage> messagesIn, Map<Long, String> subscriptionPoliciesIn) {
+    public JsonOutput(Date timestampIn, List<JsonMatch> matchesIn, List<JsonMessage> messagesIn,
+            Map<Long, String> subscriptionPoliciesIn, List<JsonSubscription> subscriptionsIn) {
         timestamp = timestampIn;
         matches = matchesIn;
         messages = messagesIn;
         subscriptionPolicies = subscriptionPoliciesIn;
+        subscriptions = subscriptionsIn;
     }
 
     /**
@@ -136,5 +141,23 @@ public class JsonOutput {
      */
     public void setMessages(List<JsonMessage> messagesIn) {
         messages = messagesIn;
+    }
+
+    /**
+     * Gets the subscriptions.
+     *
+     * @return subscriptions
+     */
+    public List<JsonSubscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    /**
+     * Sets the subscriptions.
+     *
+     * @param subscriptions the subscriptions
+     */
+    public void setSubscriptions(List<JsonSubscription> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 }

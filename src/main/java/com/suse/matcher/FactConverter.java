@@ -137,7 +137,7 @@ public class FactConverter {
                         throwingMerger(),
                         LinkedHashMap::new));
 
-        return new JsonOutput(timestamp, matches, messages, subscriptionPolicies);
+        return new JsonOutput(timestamp, matches, messages, subscriptionPolicies, getSubscriptions(assignment));
     }
 
     private static BinaryOperator<String> throwingMerger() {
@@ -194,17 +194,19 @@ public class FactConverter {
             .collect(toList());
     }
 
-    public static JsonInput processInput(JsonInput input, Assignment assignment) {
+    /**
+     * Processes the input subscriptions based on the matching results (e.g. merges subscriptions in hard bundles).
+     *
+     * @param assignment the solved assignment
+     * @return the processed subscriptions
+     */
+    private static List<JsonSubscription> getSubscriptions(Assignment assignment) {
         Map<Long, Set<Long>> subProducts = assignment.getProblemFactStream(SubscriptionProduct.class)
                 .collect(groupingBy(sp -> sp.subscriptionId, mapping(sp -> sp.productId, Collectors.toCollection(() -> new TreeSet<>()))));
-        List<JsonSubscription> outSubscriptions = assignment.getProblemFactStream(Subscription.class)
+        return assignment.getProblemFactStream(Subscription.class)
                 .sorted(Comparator.comparing(Subscription::getId))
                 .map(s -> new JsonSubscription(s.id, s.partNumber, s.name, s.quantity, s.startDate, s.endDate,
                         s.sccUsername, subProducts.get(s.id)))
                 .collect(toList());
-
-        JsonInput newInput = JsonInput.copy(input);
-        newInput.setSubscriptions(outSubscriptions);
-        return newInput;
     }
 }

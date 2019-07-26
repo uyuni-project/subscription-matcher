@@ -78,17 +78,6 @@ public class JsonInput {
     }
 
     /**
-     * Create a new instance based on the data of another instance
-     *
-     * @param input the {@link JsonInput}
-     * @return the new instance of {@link JsonInput}
-     */
-    public static JsonInput copy(JsonInput input) {
-        return new JsonInput(input.getTimestamp(), input.getSystems(), input.getVirtualizationGroups(),
-                input.getProducts(), input.getSubscriptions(), input.getPinnedMatches());
-    }
-
-    /**
      * Gets the systems.
      *
      * @return the systems
