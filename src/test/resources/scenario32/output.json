@@ -1,60 +1,99 @@
 {
-  "timestamp": "2015-05-01T00:00:00.000+02",
-  "matches": [
-    {
-      "system_id": 10,
-      "subscription_id": 1,
-      "product_id": 900,
-      "cents": 50,
-      "confirmed": true
+    "timestamp": "2015-05-01T00:00:00.000+02",
+    "matches": [
+        {
+            "system_id": 10,
+            "subscription_id": 1,
+            "product_id": 900,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 11,
+            "subscription_id": 2,
+            "product_id": 800,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 12,
+            "subscription_id": 2,
+            "product_id": 801,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 12,
+            "subscription_id": 1,
+            "product_id": 901,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 20,
+            "subscription_id": 2,
+            "product_id": 802,
+            "cents": 50,
+            "confirmed": false
+        },
+        {
+            "system_id": 20,
+            "subscription_id": 3,
+            "product_id": 814,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 30,
+            "subscription_id": 3,
+            "product_id": 815,
+            "cents": 50,
+            "confirmed": false
+        }
+    ],
+    "subscription_policies": {
+        "1": "one_two",
+        "2": "one_two",
+        "3": "one_two"
     },
-    {
-      "system_id": 11,
-      "subscription_id": 2,
-      "product_id": 800,
-      "cents": 50,
-      "confirmed": true
-    },
-    {
-      "system_id": 12,
-      "subscription_id": 2,
-      "product_id": 801,
-      "cents": 50,
-      "confirmed": true
-    },
-    {
-      "system_id": 12,
-      "subscription_id": 1,
-      "product_id": 901,
-      "cents": 50,
-      "confirmed": true
-    },
-    {
-      "system_id": 20,
-      "subscription_id": 2,
-      "product_id": 802,
-      "cents": 50,
-      "confirmed": false
-    },
-    {
-      "system_id": 20,
-      "subscription_id": 3,
-      "product_id": 814,
-      "cents": 50,
-      "confirmed": true
-    },
-    {
-      "system_id": 30,
-      "subscription_id": 3,
-      "product_id": 815,
-      "cents": 50,
-      "confirmed": false
-    }
-  ],
-  "subscription_policies": {
-    "1": "one_two",
-    "2": "one_two",
-    "3": "one_two"
-  },
-  "messages": []
+    "messages": [],
+    "subscriptions": [
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 1,
+            "part_number": "874-006907",
+            "product_ids": [
+                900,
+                901
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        },
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 2,
+            "part_number": "874-006905",
+            "product_ids": [
+                800,
+                801,
+                802
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        },
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 3,
+            "part_number": "874-006875",
+            "product_ids": [
+                814,
+                815
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        }
+    ]
 }

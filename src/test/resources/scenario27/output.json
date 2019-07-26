@@ -69,5 +69,19 @@
                 "old_subscription_id": "2"
             }
         }
+    ],
+    "subscriptions": [
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 1,
+            "part_number": "113-002220-001",
+            "product_ids": [
+                689,
+                814
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        }
     ]
 }

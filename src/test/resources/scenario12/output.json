@@ -1,19 +1,20 @@
 {
-  "timestamp": "2015-05-01T00:00:00.000+02",
-  "matches": [],
-  "subscription_policies": {},
-  "messages": [
-    {
-      "type": "guest_with_unknown_host",
-      "data": {
-        "id": "102"
-      }
-    },
-    {
-      "type": "physical_guest",
-      "data": {
-        "id": "101"
-      }
-    }
-  ]
+    "timestamp": "2015-05-01T00:00:00.000+02",
+    "matches": [],
+    "subscription_policies": {},
+    "messages": [
+        {
+            "type": "guest_with_unknown_host",
+            "data": {
+                "id": "102"
+            }
+        },
+        {
+            "type": "physical_guest",
+            "data": {
+                "id": "101"
+            }
+        }
+    ],
+    "subscriptions": []
 }

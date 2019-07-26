@@ -42,11 +42,25 @@
             }
         },
         {
-	    "type": "unsatisfied_pinned_match",
-	    "data": {
-	      "subscription_id": "1",
-	      "system_id": "101"
-	    }
-	  }
-	]
+            "type": "unsatisfied_pinned_match",
+            "data": {
+                "subscription_id": "1",
+                "system_id": "101"
+            }
+        }
+    ],
+    "subscriptions": [
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 1,
+            "part_number": "874-006875",
+            "product_ids": [
+                689,
+                814
+            ],
+            "quantity": 2,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        }
+    ]
 }
