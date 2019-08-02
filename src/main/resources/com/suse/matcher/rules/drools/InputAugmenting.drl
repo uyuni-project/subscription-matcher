@@ -42,7 +42,7 @@ end
 rule "aggregateEqualStackableSubscriptions"
     agenda-group "InputAugmenting"
     when
-        $s1: Subscription(ignored == false, stackable == true, id < 0, aggregationSubscriptionId == null || aggregationSubscriptionId == id)
+        $s1: Subscription(ignored == false, stackable == true, id < 0, aggregatedSubscriptionId == null || aggregatedSubscriptionId == id)
 
         // make sure that the $s1 is the one that has lowest id
         not Subscription(
@@ -62,7 +62,7 @@ rule "aggregateEqualStackableSubscriptions"
             stackable == true,
             id < 0, // OEM subscription
             id > $s1.id,
-            id != aggregationSubscriptionId, // rule out subs that already aggregate other subscription
+            id != aggregatedSubscriptionId, // rule out subs that already aggregate other subscription
             partNumber == $s1.partNumber,
             name == $s1.name,
             policy == $s1.policy,
@@ -89,12 +89,12 @@ rule "aggregateEqualStackableSubscriptions"
     then
         modify($s1) {
             quantity += $s2.quantity,
-            aggregationSubscriptionId = $s1.id,
+            aggregatedSubscriptionId = $s1.id,
             startDate = $s1.startDate.after($s2.startDate) ? $s1.startDate : $s2.startDate,
             endDate = $s1.endDate.before($s2.endDate) ? $s1.endDate : $s2.endDate
         }
         modify($s2) {
-            aggregationSubscriptionId = $s1.id
+            aggregatedSubscriptionId = $s1.id
         }
 
         TreeMap<String, String> msgData = new TreeMap<>();
@@ -130,7 +130,7 @@ rule "adjustAggregatedSubscriptionName"
     agenda-group "InputAugmenting"
     no-loop
     when
-        $s: Subscription(aggregationSubscriptionId == id, !name.startsWith("Aggregated:"))
+        $s: Subscription(aggregatedSubscriptionId == id, !name.startsWith("Aggregated:"))
     then
         modify($s) {
             name = "Aggregated: " + $s.name
