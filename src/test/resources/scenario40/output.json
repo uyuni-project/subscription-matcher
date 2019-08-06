@@ -21,6 +21,22 @@
     },
     "messages": [
         {
+            "type": "adjust_pinned_match",
+            "data": {
+                "new_subscription_id": "-4",
+                "old_subscription_id": "-1",
+                "system_id": "100"
+            }
+        },
+        {
+            "type": "adjust_pinned_match",
+            "data": {
+                "new_subscription_id": "-4",
+                "old_subscription_id": "-2",
+                "system_id": "101"
+            }
+        },
+        {
             "type": "merge_subscriptions",
             "data": {
                 "part_number": "662644477469"
