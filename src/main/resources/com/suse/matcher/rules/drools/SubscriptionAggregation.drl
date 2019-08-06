@@ -3,31 +3,29 @@ package com.suse.matcher.rules.drools;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.SubscriptionProduct;
 
-// aggregate 2 equal (same properties, same product set) OEM subscriptions into a single one
+/**
+ * This Agenda Group aggregates equal (same properties, same product set) OEM subscriptions into a single one
+ *
+ * This consists of these actions (in this order (enforced by 'salience')):
+ * - merging equal Subscriptions together
+ * - merging PinnedMatches and generating Messages
+ * - cleaning up stale PinnedMatches, SubscriptionProducts and Subscriptions
+ */
+
+// this rule has increased salience, so that it fires before the "cleanup" rules below
 rule "aggregateEqualStackableSubscriptions"
+    salience 2
     agenda-group "SubscriptionAggregation"
     when
         $s1: Subscription(ignored == false, stackable == true, id < 0, aggregatedSubscriptionId == null || aggregatedSubscriptionId == id)
-
-        // make sure that the $s1 is the one that has lowest id
-        not Subscription(
-            ignored == false,
-            stackable == true,
-            id < 0, // OEM subscription
-            id < $s1.id,
-            partNumber == $s1.partNumber,
-            name == $s1.name,
-            policy == $s1.policy,
-            cpus == $s1.cpus,
-            sccUsername == $s1.sccUsername,
-            quantity == 1)
 
         $s2: Subscription(
             ignored == false,
             stackable == true,
             id < 0, // OEM subscription
             id > $s1.id,
-            id != aggregatedSubscriptionId, // rule out subs that already aggregate other subscription
+            // we don't want to merge subs that were merged into other subs already:
+            aggregatedSubscriptionId == null || aggregatedSubscriptionId == id,
             partNumber == $s1.partNumber,
             name == $s1.name,
             policy == $s1.policy,
@@ -45,12 +43,6 @@ rule "aggregateEqualStackableSubscriptions"
             $productIds2: collectSet($product2.productId);
             $productIds2 == $productIds1
         )
-
-        // we're gonna remove the subscription -> let's also adjust its pinned matches
-        accumulate(
-            $pinnedMatch: PinnedMatch(subscriptionId == $s2.id);
-            $pinnedMatches: collectSet($pinnedMatch)
-        )
     then
         modify($s1) {
             quantity += $s2.quantity,
@@ -65,21 +57,32 @@ rule "aggregateEqualStackableSubscriptions"
         TreeMap<String, String> msgData = new TreeMap<>();
         msgData.put("part_number", $s1.partNumber.toString());
         insert(new Message(Message.Level.INFO, "merge_subscriptions", msgData));
+end
 
-        for (Object pm : $pinnedMatches) {
-            Long systemId = ((PinnedMatch) pm).systemId;
+// this rule has increased salience, so that it fires before the "cleanup" rules below
+rule "adjustPinnedMatches"
+    salience 1
+    agenda-group "SubscriptionAggregation"
+    when
+        $s: Subscription(aggregatedSubscriptionId != null, id != aggregatedSubscriptionId)
+        $pm: PinnedMatch(subscriptionId == $s.id)
+    then
+        insert(new PinnedMatch($pm.systemId, $s.aggregatedSubscriptionId));
+        retract($pm);
 
-            insert(new PinnedMatch(systemId, $s1.id));
-            retract(pm);
+        TreeMap<String, String> data = new TreeMap<>();
+        data.put("old_subscription_id", $s.id.toString());
+        data.put("new_subscription_id", $s.aggregatedSubscriptionId.toString());
+        data.put("system_id", $pm.systemId.toString());
+        insert(new Message(Message.Level.INFO, "adjust_pinned_match", data));
+end
 
-            TreeMap<String, String> data = new TreeMap<>();
-            data.put("old_subscription_id", $s2.id.toString());
-            data.put("new_subscription_id", $s1.id.toString());
-            data.put("system_id", systemId.toString());
-            insert(new Message(Message.Level.INFO, "adjust_pinned_match", data));
-        }
-
-        retract($s2);
+rule "removeAggregatedSubscriptions"
+    agenda-group "SubscriptionAggregation"
+    when
+        $s: Subscription(aggregatedSubscriptionId != null, id != aggregatedSubscriptionId)
+    then
+        retract($s)
 end
 
 rule "removeRedundantSubscriptionProducts"
