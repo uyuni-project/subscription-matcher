@@ -44,27 +44,40 @@
             "id": 100,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [101, 102, 103]
+            "virtual_system_ids": [
+                101,
+                102,
+                103
+            ]
         },
         {
             "cpus": 1,
             "id": 101,
             "physical": false,
-            "product_ids": [689, 814],
+            "product_ids": [
+                689,
+                814
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 1,
             "id": 102,
             "physical": false,
-            "product_ids": [689, 814],
+            "product_ids": [
+                689,
+                814
+            ],
             "virtual_system_ids": []
         },
         {
             "cpus": 1,
             "id": 103,
             "physical": false,
-            "product_ids": [689, 814],
+            "product_ids": [
+                689,
+                814
+            ],
             "virtual_system_ids": []
         }
     ]

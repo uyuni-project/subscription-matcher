@@ -2,8 +2,8 @@
     "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
         {
-          "subscription_id": 3,
-          "system_id": 100
+            "subscription_id": 3,
+            "system_id": 100
         }
     ],
     "products": [
@@ -70,7 +70,7 @@
             "product_ids": [
                 1224
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 2,
@@ -79,16 +79,18 @@
             "product_ids": [
                 1298
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 102,
             "physical": true,
             "product_ids": [
-                1298, 1224, 1225
+                1298,
+                1224,
+                1225
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         }
     ]
 }

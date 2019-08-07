@@ -1,125 +1,151 @@
 {
-  "timestamp": "2015-05-01T00:00:00.000+02",
-  "matches": [
-      {
-	  "system_id": 100,
-	  "subscription_id": 1,
-	  "product_id": 1224,
-	  "cents": 100,
-	  "confirmed": false
-      },
-      {
-	  "system_id": 100,
-	  "subscription_id": 3,
-	  "product_id": 1224,
-	  "cents": 50,
-	  "confirmed": true
-      },
-      {
-	  "system_id": 100,
-	  "subscription_id": 1,
-	  "product_id": 1298,
-	  "cents": 100,
-	  "confirmed": false
-      },
-      {
-	  "system_id": 100,
-	  "subscription_id": 3,
-	  "product_id": 1298,
-	  "cents": 50,
-	  "confirmed": true
-      },
-      {
-	  "system_id": 101,
-	  "subscription_id": 1,
-	  "product_id": 1224,
-	  "cents": 50,
-	  "confirmed": true
-      },
-      {
-	  "system_id": 101,
-	  "subscription_id": 3,
-	  "product_id": 1224,
-	  "cents": 100,
-	  "confirmed": false
-      },
-      {
-	  "system_id": 101,
-	  "subscription_id": 1,
-	  "product_id": 1298,
-	  "cents": 50,
-	  "confirmed": true
-      },
-      {
-	  "system_id": 101,
-	  "subscription_id": 3,
-	  "product_id": 1298,
-	  "cents": 100,
-	  "confirmed": false
-      },
-      {
-	  "system_id": 102,
-	  "subscription_id": 1,
-	  "product_id": 1224,
-	  "cents": 100,
-	  "confirmed": false
-      },
-      {
-	  "system_id": 102,
-	  "subscription_id": 3,
-	  "product_id": 1224,
-	  "cents": 100,
-	  "confirmed": false
-      },
-      {
-	  "system_id": 102,
-	  "subscription_id": 1,
-	  "product_id": 1298,
-	  "cents": 100,
-	  "confirmed": false
-      },
-      {
-	  "system_id": 102,
-	  "subscription_id": 3,
-	  "product_id": 1298,
-	  "cents": 100,
-	  "confirmed": false
-      }
-  ],
-  "subscription_policies": {
-    "1": "physical_only",
-    "3": "physical_only"
-  },
-  "messages": [
-      {
-	  "type": "hb_adjust_pinned_match",
-	  "data": {
-	      "new_subscription_id": "1",
-	      "old_subscription_id": "2",
-	      "system_id": "101"
-	  }
-      },
-      {
-	  "type": "hb_adjust_pinned_match",
-	  "data": {
-	      "new_subscription_id": "3",
-	      "old_subscription_id": "4",
-	      "system_id": "100"
-	  }
-      },
-      {
-          "type": "hb_merge_subscriptions",
-          "data": {
-              "new_subscription_id": "1",
-              "old_subscription_id": "2"
-          }
-      },
-      {
-          "type": "hb_merge_subscriptions",
-          "data": {
-              "new_subscription_id": "3",
-              "old_subscription_id": "4"
-          }
-      }
-  ]
+    "timestamp": "2015-05-01T00:00:00.000+02",
+    "matches": [
+        {
+            "system_id": 100,
+            "subscription_id": 1,
+            "product_id": 1224,
+            "cents": 100,
+            "confirmed": false
+        },
+        {
+            "system_id": 100,
+            "subscription_id": 3,
+            "product_id": 1224,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 100,
+            "subscription_id": 1,
+            "product_id": 1298,
+            "cents": 100,
+            "confirmed": false
+        },
+        {
+            "system_id": 100,
+            "subscription_id": 3,
+            "product_id": 1298,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 101,
+            "subscription_id": 1,
+            "product_id": 1224,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 101,
+            "subscription_id": 3,
+            "product_id": 1224,
+            "cents": 100,
+            "confirmed": false
+        },
+        {
+            "system_id": 101,
+            "subscription_id": 1,
+            "product_id": 1298,
+            "cents": 50,
+            "confirmed": true
+        },
+        {
+            "system_id": 101,
+            "subscription_id": 3,
+            "product_id": 1298,
+            "cents": 100,
+            "confirmed": false
+        },
+        {
+            "system_id": 102,
+            "subscription_id": 1,
+            "product_id": 1224,
+            "cents": 100,
+            "confirmed": false
+        },
+        {
+            "system_id": 102,
+            "subscription_id": 3,
+            "product_id": 1224,
+            "cents": 100,
+            "confirmed": false
+        },
+        {
+            "system_id": 102,
+            "subscription_id": 1,
+            "product_id": 1298,
+            "cents": 100,
+            "confirmed": false
+        },
+        {
+            "system_id": 102,
+            "subscription_id": 3,
+            "product_id": 1298,
+            "cents": 100,
+            "confirmed": false
+        }
+    ],
+    "subscription_policies": {
+        "1": "physical_only",
+        "3": "physical_only"
+    },
+    "messages": [
+        {
+            "type": "adjust_pinned_match",
+            "data": {
+                "new_subscription_id": "1",
+                "old_subscription_id": "2",
+                "system_id": "101"
+            }
+        },
+        {
+            "type": "adjust_pinned_match",
+            "data": {
+                "new_subscription_id": "3",
+                "old_subscription_id": "4",
+                "system_id": "100"
+            }
+        },
+        {
+            "type": "hb_merge_subscriptions",
+            "data": {
+                "new_subscription_id": "1",
+                "old_subscription_id": "2"
+            }
+        },
+        {
+            "type": "hb_merge_subscriptions",
+            "data": {
+                "new_subscription_id": "3",
+                "old_subscription_id": "4"
+            }
+        }
+    ],
+    "subscriptions": [
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 1,
+            "part_number": "874-006260",
+            "product_ids": [
+                1224,
+                1298
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        },
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 3,
+            "part_number": "874-006260",
+            "product_ids": [
+                1224,
+                1298
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        }
+    ]
 }

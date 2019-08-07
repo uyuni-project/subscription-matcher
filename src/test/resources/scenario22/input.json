@@ -1,6 +1,6 @@
 {
     "timestamp": "2015-05-01T00:00:00.000+0200",
-    "pinned_matches": [ ],
+    "pinned_matches": [],
     "products": [
         {
             "id": 1298,
@@ -60,18 +60,20 @@
             "id": 1000,
             "physical": true,
             "product_ids": [
-                1299, 1300
+                1299,
+                1300
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 1001,
             "physical": true,
             "product_ids": [
-                1299, 1300
+                1299,
+                1300
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 2,
@@ -80,7 +82,7 @@
             "product_ids": [
                 1299
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 2,
@@ -89,33 +91,37 @@
             "product_ids": [
                 1300
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 2,
             "id": 100,
             "physical": true,
-            "product_ids": [
-            ],
-            "virtual_system_ids" : [101, 102]
+            "product_ids": [],
+            "virtual_system_ids": [
+                101,
+                102
+            ]
         },
         {
             "cpus": 4,
             "id": 101,
             "physical": false,
             "product_ids": [
-                1298, 1300
+                1298,
+                1300
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         },
         {
             "cpus": 4,
             "id": 102,
             "physical": false,
             "product_ids": [
-                1298, 1300
+                1298,
+                1300
             ],
-            "virtual_system_ids" : []
+            "virtual_system_ids": []
         }
     ]
 }

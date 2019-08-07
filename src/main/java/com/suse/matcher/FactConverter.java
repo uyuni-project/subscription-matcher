@@ -1,5 +1,7 @@
 package com.suse.matcher;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
@@ -28,12 +30,14 @@ import com.suse.matcher.solver.Assignment;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
@@ -133,7 +137,7 @@ public class FactConverter {
                         throwingMerger(),
                         LinkedHashMap::new));
 
-        return new JsonOutput(timestamp, matches, messages, subscriptionPolicies);
+        return new JsonOutput(timestamp, matches, messages, subscriptionPolicies, getSubscriptions(assignment));
     }
 
     private static BinaryOperator<String> throwingMerger() {
@@ -188,5 +192,21 @@ public class FactConverter {
             )
             .filter(m -> !confirmedOnly || m.getConfirmed())
             .collect(toList());
+    }
+
+    /**
+     * Processes the input subscriptions based on the matching results (e.g. merges subscriptions in hard bundles).
+     *
+     * @param assignment the solved assignment
+     * @return the processed subscriptions
+     */
+    private static List<JsonSubscription> getSubscriptions(Assignment assignment) {
+        Map<Long, Set<Long>> subProducts = assignment.getProblemFactStream(SubscriptionProduct.class)
+                .collect(groupingBy(sp -> sp.subscriptionId, mapping(sp -> sp.productId, Collectors.toCollection(() -> new TreeSet<>()))));
+        return assignment.getProblemFactStream(Subscription.class)
+                .sorted(Comparator.comparing(Subscription::getId))
+                .map(s -> new JsonSubscription(s.id, s.partNumber, s.name, s.quantity, s.startDate, s.endDate,
+                        s.sccUsername, subProducts.get(s.id)))
+                .collect(toList());
     }
 }

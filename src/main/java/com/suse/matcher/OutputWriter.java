@@ -8,11 +8,11 @@ import static java.util.stream.Collectors.toSet;
 import com.suse.matcher.csv.CSVOutputMessage;
 import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputUnmatchedProduct;
+import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
-import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.solver.Assignment;
 
@@ -103,7 +103,6 @@ public class OutputWriter {
         try (PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_FILE))) {
             JsonIO io = new JsonIO();
             writer.write(io.toJson(FactConverter.convertToOutput(assignment)));
-            writer.close();
         }
     }
 
@@ -244,7 +243,7 @@ public class OutputWriter {
             List<Message> messages = assignment.getProblemFactStream(Message.class)
                 .filter(m -> m.severity != Message.Level.DEBUG)
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(toList());
 
             for (Message message: messages) {
                 CSVOutputMessage csvMessage = new CSVOutputMessage(message.type, message.data);
@@ -252,4 +251,5 @@ public class OutputWriter {
             }
         }
     }
+
 }

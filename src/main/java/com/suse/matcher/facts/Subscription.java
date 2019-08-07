@@ -107,6 +107,9 @@ public class Subscription implements Comparable<Subscription> {
     /** Does this subscription on its own represent a hard bundle? */
     public Boolean singleSubscriptionHardBundle = false;
 
+    /** Id of subscription to which this subscription has been aggregated **/
+    public Long aggregatedSubscriptionId;
+
     /**
      * Instantiates a new subscription.
      *
@@ -248,6 +251,15 @@ public class Subscription implements Comparable<Subscription> {
      */
     public void setHardBundleId(Long hardBundleId) {
         this.hardBundleId = hardBundleId;
+    }
+
+    /**
+     * Gets the aggregatedSubscriptionId.
+     *
+     * @return aggregatedSubscriptionId
+     */
+    public Long getAggregatedSubscriptionId() {
+        return aggregatedSubscriptionId;
     }
 
     /**

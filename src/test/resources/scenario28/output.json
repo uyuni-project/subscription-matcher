@@ -106,11 +106,36 @@
             }
         },
         {
-	    "type": "unsatisfied_pinned_match",
-	    "data": {
-	      "subscription_id": "1",
-	      "system_id": "103"
-	    }
-	  }
-	]
+            "type": "unsatisfied_pinned_match",
+            "data": {
+                "subscription_id": "1",
+                "system_id": "103"
+            }
+        }
+    ],
+    "subscriptions": [
+        {
+            "end_date": "2018-01-31T00:00:00Z",
+            "id": 1,
+            "part_number": "662644477627",
+            "product_ids": [
+                1298
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        },
+        {
+            "end_date": "2020-07-31T00:00:00Z",
+            "id": 2,
+            "part_number": "662644477479",
+            "product_ids": [
+                1299,
+                1300
+            ],
+            "quantity": 1,
+            "scc_username": "UC7",
+            "start_date": "2015-01-01T00:00:00Z"
+        }
+    ]
 }

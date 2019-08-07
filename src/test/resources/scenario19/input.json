@@ -2,11 +2,11 @@
     "timestamp": "2015-05-01T00:00:00.000+0200",
     "pinned_matches": [
         {
-          "subscription_id": 1,
+            "subscription_id": 1,
             "system_id": 101
         },
         {
-          "subscription_id": 1,
+            "subscription_id": 1,
             "system_id": 201
         }
     ],
@@ -36,13 +36,17 @@
             "id": 100,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [101]
+            "virtual_system_ids": [
+                101
+            ]
         },
         {
             "cpus": 2,
             "id": 101,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
@@ -50,13 +54,17 @@
             "id": 200,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [201]
+            "virtual_system_ids": [
+                201
+            ]
         },
         {
             "cpus": 2,
             "id": 201,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         },
         {
@@ -64,13 +72,17 @@
             "id": 300,
             "physical": true,
             "product_ids": [],
-            "virtual_system_ids": [301]
+            "virtual_system_ids": [
+                301
+            ]
         },
         {
             "cpus": 2,
             "id": 301,
             "physical": false,
-            "product_ids": [814],
+            "product_ids": [
+                814
+            ],
             "virtual_system_ids": []
         }
     ]

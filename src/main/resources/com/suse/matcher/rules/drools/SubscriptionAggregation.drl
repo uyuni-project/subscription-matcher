@@ -1,0 +1,106 @@
+package com.suse.matcher.rules.drools;
+
+import com.suse.matcher.facts.Subscription;
+import com.suse.matcher.facts.SubscriptionProduct;
+
+/**
+ * This Agenda Group aggregates equal (same properties, same product set) OEM subscriptions into a single one
+ *
+ * This consists of these actions (in this order (enforced by 'salience')):
+ * - merging equal Subscriptions together
+ * - merging PinnedMatches and generating Messages
+ * - cleaning up stale PinnedMatches, SubscriptionProducts and Subscriptions
+ */
+
+// this rule has increased salience, so that it fires before the "cleanup" rules below
+rule "aggregateEqualStackableSubscriptions"
+    salience 2
+    agenda-group "SubscriptionAggregation"
+    when
+        $s1: Subscription(ignored == false, stackable == true, id < 0, aggregatedSubscriptionId == null || aggregatedSubscriptionId == id)
+
+        $s2: Subscription(
+            ignored == false,
+            stackable == true,
+            id < 0, // OEM subscription
+            id > $s1.id,
+            // we don't want to merge subs that were merged into other subs already:
+            aggregatedSubscriptionId == null || aggregatedSubscriptionId == id,
+            partNumber == $s1.partNumber,
+            name == $s1.name,
+            policy == $s1.policy,
+            cpus == $s1.cpus,
+            sccUsername == $s1.sccUsername,
+            quantity == 1)
+
+        accumulate(
+            $product1: SubscriptionProduct(subscriptionId == $s1.id);
+            $productIds1: collectSet($product1.productId)
+        )
+
+        accumulate(
+            $product2: SubscriptionProduct(subscriptionId == $s2.id);
+            $productIds2: collectSet($product2.productId);
+            $productIds2 == $productIds1
+        )
+    then
+        modify($s1) {
+            quantity += $s2.quantity,
+            aggregatedSubscriptionId = $s1.id,
+            startDate = $s1.startDate.after($s2.startDate) ? $s1.startDate : $s2.startDate,
+            endDate = $s1.endDate.before($s2.endDate) ? $s1.endDate : $s2.endDate
+        }
+        modify($s2) {
+            aggregatedSubscriptionId = $s1.id
+        }
+
+        TreeMap<String, String> msgData = new TreeMap<>();
+        msgData.put("part_number", $s1.partNumber.toString());
+        insert(new Message(Message.Level.INFO, "merge_subscriptions", msgData));
+end
+
+// this rule has increased salience, so that it fires before the "cleanup" rules below
+rule "adjustPinnedMatches"
+    salience 1
+    agenda-group "SubscriptionAggregation"
+    when
+        $s: Subscription(aggregatedSubscriptionId != null, id != aggregatedSubscriptionId)
+        $pm: PinnedMatch(subscriptionId == $s.id)
+    then
+        insert(new PinnedMatch($pm.systemId, $s.aggregatedSubscriptionId));
+        retract($pm);
+
+        TreeMap<String, String> data = new TreeMap<>();
+        data.put("old_subscription_id", $s.id.toString());
+        data.put("new_subscription_id", $s.aggregatedSubscriptionId.toString());
+        data.put("system_id", $pm.systemId.toString());
+        insert(new Message(Message.Level.INFO, "adjust_pinned_match", data));
+end
+
+rule "removeAggregatedSubscriptions"
+    agenda-group "SubscriptionAggregation"
+    when
+        $s: Subscription(aggregatedSubscriptionId != null, id != aggregatedSubscriptionId)
+    then
+        retract($s)
+end
+
+rule "removeRedundantSubscriptionProducts"
+    agenda-group "SubscriptionAggregation"
+    when
+        $sp: SubscriptionProduct()
+        not Subscription(id == $sp.subscriptionId)
+    then
+        retract($sp)
+end
+
+rule "adjustAggregatedSubscriptionName"
+    agenda-group "SubscriptionAggregation"
+    no-loop
+    when
+        $s: Subscription(aggregatedSubscriptionId == id, !name.startsWith("Aggregated:"))
+    then
+        modify($s) {
+            name = "Aggregated: " + $s.name
+        }
+end

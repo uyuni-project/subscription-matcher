@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
+import com.suse.matcher.solver.Assignment;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -26,10 +27,10 @@ public class MatcherTest {
     /** The matcher object under test. */
     private Matcher matcher;
 
-    /** List of systems in the current test run. */
+    /** Input. */
     private JsonInput input;
 
-    /** The expected output. */
+    /** Expected output **/
     private JsonOutput expectedOutput;
 
     /** The scenario number. */
@@ -50,8 +51,9 @@ public class MatcherTest {
         boolean moreFiles = true;
         while (moreFiles) {
             try {
+                String inputStr = getString(i, "input.json");
                 result.add(new Object[] {
-                    io.loadInput(getString(i, "input.json")),
+                    io.loadInput(inputStr),
                     io.loadOutput(getString(i, "output.json")),
                     i
                 });
@@ -98,13 +100,13 @@ public class MatcherTest {
 
     /**
      * Tests against scenario data.
-     * @throws Exception in case anything goes wrong
      */
     @Test
-    public void test() throws Exception {
+    public void test() {
         Log4J.initConsoleLogging();
 
-        JsonOutput actualOutput = FactConverter.convertToOutput(matcher.match(input));
+        Assignment assignment = matcher.match(input);
+        JsonOutput actualOutput = FactConverter.convertToOutput(assignment);
 
         JsonIO io = new JsonIO();
 
@@ -120,5 +122,8 @@ public class MatcherTest {
         assertEquals("scenario" + scenarioNumber + " messages",
                 io.toJson(expectedOutput.getMessages()),
                 io.toJson(actualOutput.getMessages()));
+        assertEquals("scenario" + scenarioNumber + " subscriptions",
+                io.toJson(expectedOutput.getSubscriptions()),
+                io.toJson(actualOutput.getSubscriptions()));
     }
 }
