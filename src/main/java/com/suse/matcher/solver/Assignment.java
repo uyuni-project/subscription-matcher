@@ -1,5 +1,7 @@
 package com.suse.matcher.solver;
 
+import com.suse.matcher.facts.PartialMatch;
+
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.Solution;
@@ -32,6 +34,9 @@ public class Assignment implements Solution<HardSoftScore> {
     /** Maps every {@link Match} id to all conflicting sets where it appears. */
     private Map<Integer, List<List<Integer>>> conflictMap;
 
+    /** Cache of sorted partial matches. */
+    private List<PartialMatch> sortedPartialMatchesCache;
+
     /**
      * Default constructor, required by OptaPlanner.
      */
@@ -44,12 +49,14 @@ public class Assignment implements Solution<HardSoftScore> {
      * @param matchesIn fact corresponding to possible matches
      * @param problemFactsIn any other problem facts
      * @param conflictMapIn maps every {@link Match} id to any conflicting sets where it appears
+     * @param sortedPartialMatchesIn sorted partial matches
      */
     public Assignment(List<Match> matchesIn, Collection<Object> problemFactsIn,
-            Map<Integer, List<List<Integer>>> conflictMapIn) {
+            Map<Integer, List<List<Integer>>> conflictMapIn, List<PartialMatch> sortedPartialMatchesIn) {
         matches = matchesIn;
         problemFacts = problemFactsIn;
         conflictMap = conflictMapIn;
+        sortedPartialMatchesCache = sortedPartialMatchesIn;
     }
 
     /**
@@ -60,6 +67,15 @@ public class Assignment implements Solution<HardSoftScore> {
         // those will be inserted in the private OptaPlanner Drools instance
         // so that they can be used in score rules
         return problemFacts;
+    }
+
+    /**
+     * Gets the sortedPartialMatches cache.
+     *
+     * @return sortedPartialMatches
+     */
+    public List<PartialMatch> getSortedPartialMatchesCache() {
+        return sortedPartialMatchesCache;
     }
 
     /**
