@@ -104,7 +104,7 @@ rule "preferBundledMatches"
         PartialMatch($groupId : groupId, $systemId : systemId, $centGroupId : centGroupId)
         PartialMatch($groupId2 : groupId, systemId == $systemId, centGroupId == $centGroupId)
         Match(id == $groupId, confirmed == true)
-        Match(id == $groupId2, id > $groupId, confirmed == true)
+        Match(id == $groupId2, id != $groupId)
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 1);
 end
