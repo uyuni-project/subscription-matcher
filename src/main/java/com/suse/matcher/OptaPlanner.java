@@ -224,12 +224,12 @@ public class OptaPlanner {
          * Continue stepping and keep track of the overall best solution found so far.
          *
          * At some point we have to stop stepping, and we do so when:
-         *   - we stepped 100 times with no score improvement (typically)
+         *   - we stepped 200 times with no score improvement (typically)
          *   - we stepped 15_000 times (when all else fails)
          *   - we spent 1 hour finding the solution
          */
         TerminationConfig termination = new TerminationConfig();
-        termination.setUnimprovedStepCountLimit(100);
+        termination.setUnimprovedStepCountLimit(200);
         termination.setStepCountLimit(15_000);
         termination.setHoursSpentLimit(1L);
         search.setTerminationConfig(termination);
@@ -241,7 +241,7 @@ public class OptaPlanner {
          * Also activate OptaPlanner full assertions to catch more issues.
          */
         if (testing) {
-            termination.setUnimprovedStepCountLimit(6);
+            termination.setUnimprovedStepCountLimit(12);
             config.setEnvironmentMode(EnvironmentMode.FULL_ASSERT);
         }
 
