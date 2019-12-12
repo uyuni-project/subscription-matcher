@@ -82,8 +82,12 @@ public class Matcher {
         // this is used by the CSP solver to avoid bad solutions
         Map<Integer, List<List<Integer>>> conflictMap = getConflictMap(deducedFacts);
 
+        // compute sorted partial matches for caching
+        List<PartialMatch> sortedPartialMatches = getPartialMatches(deducedFacts).sorted().distinct().collect(toList());
+
         // activate the CSP solver with all deduced facts as inputs
-        OptaPlanner optaPlanner = new OptaPlanner(new Assignment(matches, deducedFacts, conflictMap), testing);
+        OptaPlanner optaPlanner = new OptaPlanner(
+                new Assignment(matches, deducedFacts, conflictMap, sortedPartialMatches), testing);
         Assignment result = optaPlanner.getResult();
 
         // add user messages taking rule engine deductions and CSP solver output into account

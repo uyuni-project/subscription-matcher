@@ -16,6 +16,7 @@ import org.optaplanner.core.config.heuristic.selector.common.SelectionCacheType;
 import org.optaplanner.core.config.heuristic.selector.common.SelectionOrder;
 import org.optaplanner.core.config.heuristic.selector.entity.EntitySelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
+import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.factory.MoveIteratorFactoryConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.value.ValueSelectorConfig;
@@ -35,6 +36,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Facade on the OptaPlanner solver.
@@ -175,19 +177,30 @@ public class OptaPlanner {
          *
          * For more information about how those moves are generated see the MatchMoveIteratorFactory class.
          */
-        LocalSearchPhaseConfig search = new LocalSearchPhaseConfig();
         MoveIteratorFactoryConfig move = new MoveIteratorFactoryConfig();
         move.setCacheType(SelectionCacheType.JUST_IN_TIME);
         move.setSelectionOrder(SelectionOrder.RANDOM);
         move.setMoveIteratorFactoryClass(MatchMoveIteratorFactory.class);
+        move.setSelectedCountLimit(10_000L);
+
+        MoveIteratorFactoryConfig swapMove = new MoveIteratorFactoryConfig();
+        swapMove.setCacheType(SelectionCacheType.JUST_IN_TIME);
+        swapMove.setSelectionOrder(SelectionOrder.RANDOM);
+        swapMove.setMoveIteratorFactoryClass(MatchSwapMoveIteratorFactory.class);
+        swapMove.setSelectedCountLimit(10_000L);
 
         /*
-         * Every step, generate several moves and pick the best scoring one as the next step.
-         *
-         * As possible moves might be a lot, don't generate more than 10_000 in any case.
+         * Union move uses both of the above move implementations:
+         * both moves alternate within the step (in random fashion).
          */
-        move.setSelectedCountLimit(10_000L);
-        search.setMoveSelectorConfig(move);
+        UnionMoveSelectorConfig unionMoveConfig = new UnionMoveSelectorConfig();
+        List<MoveSelectorConfig> selectors = new ArrayList<>();
+        selectors.add(move);
+        selectors.add(swapMove);
+        unionMoveConfig.setMoveSelectorConfigList(selectors);
+
+        LocalSearchPhaseConfig search = new LocalSearchPhaseConfig();
+        search.setMoveSelectorConfig(unionMoveConfig);
 
         /*
          * Among generated moves, don't accept moves that were already attempted in the last
@@ -211,12 +224,12 @@ public class OptaPlanner {
          * Continue stepping and keep track of the overall best solution found so far.
          *
          * At some point we have to stop stepping, and we do so when:
-         *   - we stepped 100 times with no score improvement (typically)
+         *   - we stepped 200 times with no score improvement (typically)
          *   - we stepped 15_000 times (when all else fails)
          *   - we spent 1 hour finding the solution
          */
         TerminationConfig termination = new TerminationConfig();
-        termination.setUnimprovedStepCountLimit(100);
+        termination.setUnimprovedStepCountLimit(200);
         termination.setStepCountLimit(15_000);
         termination.setHoursSpentLimit(1L);
         search.setTerminationConfig(termination);
@@ -228,7 +241,7 @@ public class OptaPlanner {
          * Also activate OptaPlanner full assertions to catch more issues.
          */
         if (testing) {
-            termination.setUnimprovedStepCountLimit(6);
+            termination.setUnimprovedStepCountLimit(12);
             config.setEnvironmentMode(EnvironmentMode.FULL_ASSERT);
         }
 
