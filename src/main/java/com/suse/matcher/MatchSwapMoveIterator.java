@@ -103,7 +103,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
                         e -> Streams.zip(
                                 e.getValue().getOrDefault(true, Collections.emptyList()).stream(),
                                 e.getValue().getOrDefault(false, Collections.emptyList()).stream(),
-                                (v1, v2) -> Pair.create(v1, v2)
+                                (v1, v2) -> new Pair<>(v1, v2)
                         ).collect(toList())
                 ));
     }
