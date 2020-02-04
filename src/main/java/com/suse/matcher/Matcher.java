@@ -51,6 +51,13 @@ public class Matcher {
      * @return an object summarizing the match
      */
     public Assignment match(JsonInput input) {
+
+        (def problem {:facts [{:subs [{:id 1, "SLE15SP1"}]}
+                               :systems [{:id 1, :subs [1]}]]})
+        (-> problem
+            matcher/solve
+            prn)
+
         // convert inputs into facts the rule engine can reason about
         Collection<Object> baseFacts = FactConverter.convertToFacts(input);
 
