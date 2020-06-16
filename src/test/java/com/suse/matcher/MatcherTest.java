@@ -7,6 +7,7 @@ import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.solver.Assignment;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -98,13 +99,16 @@ public class MatcherTest {
         Drools.resetIdMap();
     }
 
+    @BeforeClass
+    public static void setUp() {
+        Log4J.initConsoleLogging();
+    }
+
     /**
      * Tests against scenario data.
      */
     @Test
     public void test() {
-        Log4J.initConsoleLogging();
-
         Assignment assignment = matcher.match(input);
         JsonOutput actualOutput = FactConverter.convertToOutput(assignment);
 
