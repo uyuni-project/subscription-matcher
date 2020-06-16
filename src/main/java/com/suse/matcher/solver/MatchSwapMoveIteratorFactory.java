@@ -13,10 +13,7 @@
  * in this software or its documentation.
  */
 
-package com.suse.matcher;
-
-import com.suse.matcher.solver.Assignment;
-import com.suse.matcher.solver.MatchMoveIterator;
+package com.suse.matcher.solver;
 
 import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.heuristic.selector.move.factory.MoveIteratorFactory;

@@ -7,6 +7,7 @@ import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 import com.suse.matcher.solver.MatchMoveIteratorFactory;
+import com.suse.matcher.solver.MatchSwapMoveIteratorFactory;
 
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
