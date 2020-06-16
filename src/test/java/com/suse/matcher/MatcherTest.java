@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,6 +38,9 @@ public class MatcherTest {
 
     /** The scenario number. */
     private int scenarioNumber;
+
+    /** Logger instance. */
+    private final Logger logger = LoggerFactory.getLogger(MatcherTest.class);
 
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
@@ -109,6 +114,8 @@ public class MatcherTest {
      */
     @Test
     public void test() {
+        logger.info("TESTING SCENARIO {}", scenarioNumber);
+
         Assignment assignment = matcher.match(input);
         JsonOutput actualOutput = FactConverter.convertToOutput(assignment);
 
