@@ -49,7 +49,7 @@ public class MatcherTest {
      * @return a collection of parameters to the constructor of this class
      * @throws Exception in case anything goes wrong
      */
-    @Parameters
+    @Parameters(name = "Scenario #{2}") // name is the number of the scenario
     public static Collection<Object[]> loadTestData() throws Exception {
         JsonIO io = new JsonIO();
         Collection<Object[]> result = new LinkedList<>();
