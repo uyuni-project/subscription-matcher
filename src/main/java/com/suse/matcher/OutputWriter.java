@@ -133,7 +133,7 @@ public class OutputWriter {
 
         // compute cents by subscription id
         Map<Long, Integer> matchedCents = new HashMap<>();
-        FactConverter.getMatches(assignment, true)
+        FactConverter.getMatches(assignment)
             .forEach(m -> matchedCents.merge(m.getSubscriptionId(), m.getCents(), Math::addExact));
 
         // update output
@@ -169,7 +169,7 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVUnmatchedProductReport(Assignment assignment) throws IOException {
-        Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment, true);
+        Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment);
 
         List<System> systems = assignment.getProblemFactStream(System.class)
                 .sorted((a, b) -> a.id.compareTo(b.id))
