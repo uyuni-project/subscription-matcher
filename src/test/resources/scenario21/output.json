@@ -1,97 +1,70 @@
 {
-    "timestamp": "2015-05-01T00:00:00.000+02",
-    "matches": [
-        {
-            "system_id": 100,
-            "subscription_id": 1,
-            "product_id": 1298,
-            "cents": 100,
-            "confirmed": false
-        },
-        {
-            "system_id": 100,
-            "subscription_id": 1,
-            "product_id": 1298,
-            "cents": 100,
-            "confirmed": true
-        },
-        {
-            "system_id": 100,
-            "subscription_id": 2,
-            "product_id": 1299,
-            "cents": 100,
-            "confirmed": true
-        },
-        {
-            "system_id": 101,
-            "subscription_id": 1,
-            "product_id": 1298,
-            "cents": 0,
-            "confirmed": false
-        },
-        {
-            "system_id": 101,
-            "subscription_id": 1,
-            "product_id": 1298,
-            "cents": 0,
-            "confirmed": true
-        },
-        {
-            "system_id": 101,
-            "subscription_id": 2,
-            "product_id": 1299,
-            "cents": 0,
-            "confirmed": true
-        },
-        {
-            "system_id": 102,
-            "subscription_id": 1,
-            "product_id": 1298,
-            "cents": 0,
-            "confirmed": false
-        },
-        {
-            "system_id": 102,
-            "subscription_id": 1,
-            "product_id": 1298,
-            "cents": 0,
-            "confirmed": true
-        },
-        {
-            "system_id": 102,
-            "subscription_id": 2,
-            "product_id": 1299,
-            "cents": 0,
-            "confirmed": true
-        }
-    ],
-    "subscription_policies": {
-        "1": "unlimited_virtualization",
-        "2": "inherited_virtualization"
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "matches": [
+    {
+      "system_id": 100,
+      "subscription_id": 1,
+      "product_id": 1298,
+      "cents": 100
     },
-    "messages": [],
-    "subscriptions": [
-        {
-            "end_date": "2020-07-31T00:00:00Z",
-            "id": 1,
-            "part_number": "874-006876",
-            "product_ids": [
-                1298
-            ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
-        },
-        {
-            "end_date": "2055-07-31T00:00:00Z",
-            "id": 2,
-            "part_number": "874-006925",
-            "product_ids": [
-                1299
-            ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2013-08-01T00:00:00Z"
-        }
-    ]
+    {
+      "system_id": 100,
+      "subscription_id": 2,
+      "product_id": 1299,
+      "cents": 100
+    },
+    {
+      "system_id": 101,
+      "subscription_id": 1,
+      "product_id": 1298,
+      "cents": 0
+    },
+    {
+      "system_id": 101,
+      "subscription_id": 2,
+      "product_id": 1299,
+      "cents": 0
+    },
+    {
+      "system_id": 102,
+      "subscription_id": 1,
+      "product_id": 1298,
+      "cents": 0
+    },
+    {
+      "system_id": 102,
+      "subscription_id": 2,
+      "product_id": 1299,
+      "cents": 0
+    }
+  ],
+  "subscription_policies": {
+    "1": "unlimited_virtualization",
+    "2": "inherited_virtualization"
+  },
+  "messages": [],
+  "subscriptions": [
+    {
+      "end_date": "2020-07-31T00:00:00Z",
+      "id": 1,
+      "part_number": "874-006876",
+      "product_ids": [
+        1298
+      ],
+      "quantity": 1,
+      "scc_username": "UC7",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "end_date": "2055-07-31T00:00:00Z",
+      "id": 2,
+      "part_number": "874-006925",
+      "product_ids": [
+        1299
+      ],
+      "quantity": 1,
+      "scc_username": "UC7",
+      "start_date": "2013-08-01T00:00:00Z"
+    }
+  ]
 }

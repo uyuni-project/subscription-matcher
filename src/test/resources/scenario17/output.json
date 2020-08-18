@@ -1,111 +1,89 @@
 {
-    "timestamp": "2015-05-01T00:00:00.000+02",
-    "matches": [
-        {
-            "system_id": 101,
-            "subscription_id": 1,
-            "product_id": 814,
-            "cents": 50,
-            "confirmed": true
-        },
-        {
-            "system_id": 102,
-            "subscription_id": 1,
-            "product_id": 814,
-            "cents": 100,
-            "confirmed": true
-        },
-        {
-            "system_id": 201,
-            "subscription_id": 1,
-            "product_id": 814,
-            "cents": 50,
-            "confirmed": true
-        },
-        {
-            "system_id": 201,
-            "subscription_id": 2,
-            "product_id": 815,
-            "cents": 50,
-            "confirmed": true
-        },
-        {
-            "system_id": 202,
-            "subscription_id": 1,
-            "product_id": 814,
-            "cents": 50,
-            "confirmed": true
-        },
-        {
-            "system_id": 202,
-            "subscription_id": 2,
-            "product_id": 815,
-            "cents": 50,
-            "confirmed": true
-        },
-        {
-            "system_id": 301,
-            "subscription_id": 1,
-            "product_id": 814,
-            "cents": 50,
-            "confirmed": false
-        },
-        {
-            "system_id": 1000,
-            "subscription_id": 1,
-            "product_id": 814,
-            "cents": 100,
-            "confirmed": true
-        },
-        {
-            "system_id": 1001,
-            "subscription_id": 1,
-            "product_id": 814,
-            "cents": 100,
-            "confirmed": true
-        },
-        {
-            "system_id": 1001,
-            "subscription_id": 2,
-            "product_id": 815,
-            "cents": 100,
-            "confirmed": false
-        }
-    ],
-    "subscription_policies": {
-        "1": "one_two",
-        "2": "one_two"
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "matches": [
+    {
+      "system_id": 101,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 50
     },
-    "messages": [
-        {
-            "type": "guest_with_unknown_host",
-            "data": {
-                "id": "102"
-            }
-        }
-    ],
-    "subscriptions": [
-        {
-            "end_date": "2020-07-31T00:00:00Z",
-            "id": 1,
-            "part_number": "874-006875",
-            "product_ids": [
-                814
-            ],
-            "quantity": 5,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
-        },
-        {
-            "end_date": "2020-07-31T00:00:00Z",
-            "id": 2,
-            "part_number": "874-006077",
-            "product_ids": [
-                815
-            ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
-        }
-    ]
+    {
+      "system_id": 102,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 100
+    },
+    {
+      "system_id": 201,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 50
+    },
+    {
+      "system_id": 201,
+      "subscription_id": 2,
+      "product_id": 815,
+      "cents": 50
+    },
+    {
+      "system_id": 202,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 50
+    },
+    {
+      "system_id": 202,
+      "subscription_id": 2,
+      "product_id": 815,
+      "cents": 50
+    },
+    {
+      "system_id": 1000,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 100
+    },
+    {
+      "system_id": 1001,
+      "subscription_id": 1,
+      "product_id": 814,
+      "cents": 100
+    }
+  ],
+  "subscription_policies": {
+    "1": "one_two",
+    "2": "one_two"
+  },
+  "messages": [
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "102"
+      }
+    }
+  ],
+  "subscriptions": [
+    {
+      "end_date": "2020-07-31T00:00:00Z",
+      "id": 1,
+      "part_number": "874-006875",
+      "product_ids": [
+        814
+      ],
+      "quantity": 5,
+      "scc_username": "UC7",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "end_date": "2020-07-31T00:00:00Z",
+      "id": 2,
+      "part_number": "874-006077",
+      "product_ids": [
+        815
+      ],
+      "quantity": 1,
+      "scc_username": "UC7",
+      "start_date": "2015-01-01T00:00:00Z"
+    }
+  ]
 }

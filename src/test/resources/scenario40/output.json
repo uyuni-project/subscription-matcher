@@ -1,60 +1,58 @@
 {
-    "timestamp": "2015-05-01T00:00:00.000+0200",
-    "matches": [
-        {
-            "system_id": 100,
-            "subscription_id": -4,
-            "product_id": 1298,
-            "cents": 200,
-            "confirmed": true
-        },
-        {
-            "system_id": 101,
-            "subscription_id": -4,
-            "product_id": 1298,
-            "cents": 200,
-            "confirmed": true
-        }
-    ],
-    "subscription_policies": {
-        "-4": "one_two"
+  "timestamp": "2015-05-01T00:00:00.000+0200",
+  "matches": [
+    {
+      "system_id": 100,
+      "subscription_id": -4,
+      "product_id": 1298,
+      "cents": 200
     },
-    "messages": [
-        {
-            "type": "adjust_pinned_match",
-            "data": {
-                "new_subscription_id": "-4",
-                "old_subscription_id": "-1",
-                "system_id": "100"
-            }
-        },
-        {
-            "type": "adjust_pinned_match",
-            "data": {
-                "new_subscription_id": "-4",
-                "old_subscription_id": "-2",
-                "system_id": "101"
-            }
-        },
-        {
-            "type": "merge_subscriptions",
-            "data": {
-                "part_number": "662644477469"
-            }
-        }
-    ],
-    "subscriptions": [
-        {
-            "id": -4,
-            "part_number": "662644477469",
-            "name": "Aggregated: Stackable OEM subscription",
-            "product_ids": [
-                1298
-            ],
-            "quantity": 4,
-            "scc_username": "UC7",
-            "start_date": "2015-02-01T00:00:00Z",
-            "end_date": "2019-07-31T00:00:00Z"
-        }
-    ]
+    {
+      "system_id": 101,
+      "subscription_id": -4,
+      "product_id": 1298,
+      "cents": 200
+    }
+  ],
+  "subscription_policies": {
+    "-4": "one_two"
+  },
+  "messages": [
+    {
+      "type": "adjust_pinned_match",
+      "data": {
+        "new_subscription_id": "-4",
+        "old_subscription_id": "-1",
+        "system_id": "100"
+      }
+    },
+    {
+      "type": "adjust_pinned_match",
+      "data": {
+        "new_subscription_id": "-4",
+        "old_subscription_id": "-2",
+        "system_id": "101"
+      }
+    },
+    {
+      "type": "merge_subscriptions",
+      "data": {
+        "part_number": "662644477469"
+      }
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": -4,
+      "part_number": "662644477469",
+      "name": "Aggregated: Stackable OEM subscription",
+      "product_ids": [
+        1298
+      ],
+      "quantity": 4,
+      "scc_username": "UC7",
+      "start_date": "2015-02-01T00:00:00Z",
+      "end_date": "2019-07-31T00:00:00Z"
+    }
+  ]
 }
