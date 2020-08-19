@@ -31,6 +31,9 @@ Output directory (Default: current directory)
 -l,--log-directory <arg>::
 Logging directory (Default: none, only log via STDERR)
 
+-v,--log-level <arg>::
+Logging directory (Default: INFO, Possible values: OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL)
+
 -i,--input <arg>::
 Input file in JSON format (Default: STDIN)
 
