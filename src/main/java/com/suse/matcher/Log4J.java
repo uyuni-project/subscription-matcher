@@ -24,18 +24,18 @@ public class Log4J {
     /**
      * Inits the console logging.
      */
-    public static void initConsoleLogging() {
+    public static void initConsoleLogging(Optional<Level> level) {
         ConsoleAppender console = new ConsoleAppender(new PatternLayout("%-5p %c{1} - %m%n"));
-        console.setThreshold(Level.INFO);
+        console.setThreshold(level.orElse(Level.INFO));
         console.setTarget("System.err");
         console.activateOptions();
 
         org.apache.log4j.Logger.getRootLogger().addAppender(console);
 
-        org.apache.log4j.Logger.getLogger("com.suse.matcher").setLevel(Level.DEBUG);
-        org.apache.log4j.Logger.getLogger("org.drools").setLevel(Level.WARN);
-        org.apache.log4j.Logger.getLogger("org.optaplanner").setLevel(Level.WARN);
-        org.apache.log4j.Logger.getLogger("org.kie").setLevel(Level.WARN);
+        org.apache.log4j.Logger.getLogger("com.suse.matcher").setLevel(level.orElse(Level.DEBUG));
+        org.apache.log4j.Logger.getLogger("org.drools").setLevel(level.orElse(Level.WARN));
+        org.apache.log4j.Logger.getLogger("org.optaplanner").setLevel(level.orElse(Level.WARN));
+        org.apache.log4j.Logger.getLogger("org.kie").setLevel(level.orElse(Level.WARN));
     }
 
     /**
@@ -53,7 +53,7 @@ public class Log4J {
                 file.setAppend(true);
                 file.activateOptions();
 
-                org.apache.log4j.Logger.getRootLogger().addAppender(file);
+                org.apache.log4j.Logger.getRootLogger().addAppender(file); // log level set in initConsoleLogging
             }
             catch (IOException e) {
                 logger.error("Could not set up file logging", e);

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Optional;
 
 /**
  * Tests {@link Matcher}.
@@ -106,7 +107,7 @@ public class MatcherTest {
 
     @BeforeClass
     public static void setUp() {
-        Log4J.initConsoleLogging();
+        Log4J.initConsoleLogging(Optional.empty());
     }
 
     /**

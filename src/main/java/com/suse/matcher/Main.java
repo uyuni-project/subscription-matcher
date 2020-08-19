@@ -15,6 +15,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,10 +38,13 @@ public class Main {
      */
     public static final void main(String[] args) throws Exception {
         try {
-            Log4J.initConsoleLogging();
-
             long start = System.currentTimeMillis();
             CommandLine commandLine = parseCommandLine(args);
+
+            Optional<Level> logLevel = commandLine.hasOption('v') ?
+                    of(Level.toLevel(commandLine.getOptionValue('v'))) :
+                    empty();
+            Log4J.initConsoleLogging(logLevel);
 
             // create output writing objects
             Optional<Character> delimiter = commandLine.hasOption('d') ?
@@ -79,6 +83,8 @@ public class Main {
         opts.addOption("i", "input", true, "input.json file (Default: standard input)");
         opts.addOption("o", "output-directory", true, "Output directory (Default: current directory)");
         opts.addOption("l", "log-directory", true, "Logging directory (Default: none, only log via STDERR)");
+        opts.addOption("v", "log-level", true,
+                "Log level (Default: INFO, Possible values: OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL)");
         opts.addOption("d", "delimiter", true, "CSV Delimiter (Default: ,)");
 
         CommandLineParser parser = new BasicParser();
