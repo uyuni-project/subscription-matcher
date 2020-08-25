@@ -13,6 +13,7 @@ import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.Timestamp;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.solver.Assignment;
 
@@ -29,12 +30,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -129,12 +132,21 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVSubscriptionReport(Assignment assignment) throws IOException {
+        Date timestamp = assignment.getProblemFactStream(Timestamp.class).findFirst().get().timestamp;
+
+        Comparator<Subscription> activeSubsFirst = (s1, s2) -> {
+            int s1Active = timestamp.after(s1.startDate) && timestamp.before(s1.endDate) ? 0 : 1;
+            int s2Active = timestamp.after(s2.startDate) && timestamp.before(s2.endDate) ? 0 : 1;
+            return s1Active - s2Active;
+        };
+
         Stream<Subscription> subscriptions = assignment.getProblemFactStream(Subscription.class)
             .filter(s -> s.policy != null)
             .filter(s -> s.startDate != null && s.endDate != null)
-            .filter(s -> s.quantity != null && s.quantity > 0);
+            .filter(s -> s.quantity != null && s.quantity > 0)
+            .sorted(activeSubsFirst.thenComparing(Comparator.comparing(s -> s.partNumber)));
 
-        Map<Long, CSVOutputSubscription> outsubs = new TreeMap<Long, CSVOutputSubscription>();
+        Map<Long, CSVOutputSubscription> outsubs = new LinkedHashMap<>();
         subscriptions.forEach(s -> {
             CSVOutputSubscription csvs = new CSVOutputSubscription(
                 s.partNumber,
