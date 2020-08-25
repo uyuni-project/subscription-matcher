@@ -36,6 +36,9 @@ public class Log4J {
         org.apache.log4j.Logger.getLogger("org.drools").setLevel(level.orElse(Level.WARN));
         org.apache.log4j.Logger.getLogger("org.optaplanner").setLevel(level.orElse(Level.WARN));
         org.apache.log4j.Logger.getLogger("org.kie").setLevel(level.orElse(Level.WARN));
+
+        // DefaultAgenda is VERY noisy, let's override the user settings
+        org.apache.log4j.Logger.getLogger("org.drools.core.common.DefaultAgenda").setLevel(Level.WARN);
     }
 
     /**
