@@ -20,6 +20,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.util.Pair;
+import org.apache.log4j.Level;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,6 +46,7 @@ public class OutputWriter {
     // filenames
     private static final String JSON_INPUT_FILE = "input.json";
     private static final String JSON_OUTPUT_FILE = "output.json";
+    private static final String JSON_OUTPUT_ALL_FILE = "output-all.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
     private static final String CSV_UNMATCHED_PRODUCT_REPORT_FILE = "unmatched_product_report.csv";
     private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
@@ -74,13 +76,27 @@ public class OutputWriter {
      * Write the output files to the specified directory.
      *
      * @param assignment output from {@link Matcher}
+     * @param logLevel
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public void writeOutput(Assignment assignment) throws IOException {
+    public void writeOutput(Assignment assignment, Optional<Level> logLevel) throws IOException {
         writeJsonOutput(assignment);
         writeCSVSubscriptionReport(assignment);
         writeCSVUnmatchedProductReport(assignment);
         writeCSVMessageReport(assignment);
+
+        FileUtils.deleteQuietly(new File(JSON_OUTPUT_ALL_FILE));
+        logLevel.filter(l -> l.isGreaterOrEqual(Level.DEBUG)).ifPresent((l) -> writeAllFacts(assignment));
+    }
+
+    private void writeAllFacts(Assignment assignment) {
+        try (PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_ALL_FILE))) {
+            JsonIO io = new JsonIO();
+            writer.write(io.toJson(assignment));
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

@@ -67,7 +67,7 @@ public class Main {
             Assignment assignment = new Matcher(false).match(input);
 
             // write output data
-            writer.writeOutput(assignment);
+            writer.writeOutput(assignment, logLevel);
 
             logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
         }
