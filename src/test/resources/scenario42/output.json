@@ -1,0 +1,47 @@
+{
+  "timestamp": "2015-05-01T00:00:00.000+02",
+  "matches": [
+    {
+      "system_id": 100,
+      "subscription_id": 1,
+      "product_id": 1000,
+      "cents": 50
+    },
+    {
+      "system_id": 100,
+      "subscription_id": 1,
+      "product_id": 1001,
+      "cents": 50
+    },
+    {
+      "system_id": 101,
+      "subscription_id": 1,
+      "product_id": 1000,
+      "cents": 0
+    },
+    {
+      "system_id": 102,
+      "subscription_id": 1,
+      "product_id": 1001,
+      "cents": 0
+    }
+  ],
+  "subscription_policies": {
+    "1": "unlimited_virtualization"
+  },
+  "messages": [],
+  "subscriptions": [
+    {
+      "end_date": "2015-07-31T00:00:00Z",
+      "id": 1,
+      "part_number": "874-005030",
+      "product_ids": [
+        1000,
+        1001
+      ],
+      "quantity": 1,
+      "scc_username": "UC7",
+      "start_date": "2013-08-01T00:00:00Z"
+    }
+  ]
+}

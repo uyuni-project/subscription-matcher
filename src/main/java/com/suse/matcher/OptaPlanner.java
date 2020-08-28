@@ -7,6 +7,7 @@ import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 import com.suse.matcher.solver.MatchMoveIteratorFactory;
+import com.suse.matcher.solver.MatchSwapMoveIteratorFactory;
 
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
@@ -224,12 +225,12 @@ public class OptaPlanner {
          * Continue stepping and keep track of the overall best solution found so far.
          *
          * At some point we have to stop stepping, and we do so when:
-         *   - we stepped 200 times with no score improvement (typically)
+         *   - we stepped 1000 times with no score improvement (typically)
          *   - we stepped 15_000 times (when all else fails)
          *   - we spent 1 hour finding the solution
          */
         TerminationConfig termination = new TerminationConfig();
-        termination.setUnimprovedStepCountLimit(200);
+        termination.setUnimprovedStepCountLimit(1000);
         termination.setStepCountLimit(15_000);
         termination.setHoursSpentLimit(1L);
         search.setTerminationConfig(termination);

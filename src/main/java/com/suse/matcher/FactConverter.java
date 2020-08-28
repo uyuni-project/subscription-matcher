@@ -117,7 +117,7 @@ public class FactConverter {
         Date timestamp = assignment.getProblemFactStream(Timestamp.class)
                 .findFirst().get().timestamp;
 
-        List<JsonMatch> matches = getMatches(assignment, false);
+        List<JsonMatch> matches = getMatches(assignment);
 
         List<JsonMessage> messages = assignment.getProblemFactStream(Message.class)
                 .sorted()
@@ -149,10 +149,9 @@ public class FactConverter {
     /**
      * Returns a list of {@link JsonMatch}es from the {@link Assignment}.
      * @param assignment the assignment
-     * @param confirmedOnly true if only confirmed matches should be returned
      * @return matches
      */
-    public static List<JsonMatch> getMatches(Assignment assignment, boolean confirmedOnly) {
+    public static List<JsonMatch> getMatches(Assignment assignment) {
         Set<Integer> confirmedGroupIds = assignment.getMatches().stream()
                 .filter(m -> m.confirmed)
                 .map(m -> m.id)
@@ -175,22 +174,20 @@ public class FactConverter {
                 ));
 
         return assignment.getProblemFactStream(PartialMatch.class)
+            .filter(m -> confirmedGroupIds.contains(m.groupId)) // only confirmed matches
             .map(m -> new JsonMatch(
                 m.systemId,
                 m.subscriptionId,
                 m.productId,
-                centGroupsCents.get(m.getCentGroupId()) / centGroupMatchesCount.getOrDefault(m.getCentGroupId(), 1),
-                confirmedGroupIds.contains(m.groupId)
+                centGroupsCents.get(m.getCentGroupId()) / centGroupMatchesCount.getOrDefault(m.getCentGroupId(), 1)
             ))
             .sorted((a, b) -> new CompareToBuilder()
                 .append(a.getSystemId(), b.getSystemId())
                 .append(a.getProductId(), b.getProductId())
                 .append(a.getSubscriptionId(), b.getSubscriptionId())
                 .append(a.getCents(), b.getCents())
-                .append(a.getConfirmed(), b.getConfirmed())
                 .toComparison()
             )
-            .filter(m -> !confirmedOnly || m.getConfirmed())
             .collect(toList());
     }
 

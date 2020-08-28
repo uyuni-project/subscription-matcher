@@ -7,16 +7,20 @@ import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.solver.Assignment;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Optional;
 
 /**
  * Tests {@link Matcher}.
@@ -36,6 +40,9 @@ public class MatcherTest {
     /** The scenario number. */
     private int scenarioNumber;
 
+    /** Logger instance. */
+    private final Logger logger = LoggerFactory.getLogger(MatcherTest.class);
+
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
      * with files loaded from resources/subscriptions* JSON files.
@@ -43,7 +50,7 @@ public class MatcherTest {
      * @return a collection of parameters to the constructor of this class
      * @throws Exception in case anything goes wrong
      */
-    @Parameters
+    @Parameters(name = "Scenario #{2}") // name is the number of the scenario
     public static Collection<Object[]> loadTestData() throws Exception {
         JsonIO io = new JsonIO();
         Collection<Object[]> result = new LinkedList<>();
@@ -98,12 +105,17 @@ public class MatcherTest {
         Drools.resetIdMap();
     }
 
+    @BeforeClass
+    public static void setUp() {
+        Log4J.initConsoleLogging(Optional.empty());
+    }
+
     /**
      * Tests against scenario data.
      */
     @Test
     public void test() {
-        Log4J.initConsoleLogging();
+        logger.info("TESTING SCENARIO {}", scenarioNumber);
 
         Assignment assignment = matcher.match(input);
         JsonOutput actualOutput = FactConverter.convertToOutput(assignment);

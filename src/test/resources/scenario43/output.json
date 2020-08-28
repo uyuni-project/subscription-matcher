@@ -3,12 +3,6 @@
   "matches": [
     {
       "system_id": 100,
-      "subscription_id": 1,
-      "product_id": 1298,
-      "cents": 100
-    },
-    {
-      "system_id": 100,
       "subscription_id": 2,
       "product_id": 1299,
       "cents": 50
@@ -20,10 +14,16 @@
       "cents": 50
     },
     {
-      "system_id": 101,
+      "system_id": 100,
       "subscription_id": 1,
-      "product_id": 1298,
-      "cents": 0
+      "product_id": 1625,
+      "cents": 50
+    },
+    {
+      "system_id": 100,
+      "subscription_id": 1,
+      "product_id": 1878,
+      "cents": 50
     },
     {
       "system_id": 101,
@@ -38,9 +38,9 @@
       "cents": 0
     },
     {
-      "system_id": 102,
+      "system_id": 101,
       "subscription_id": 1,
-      "product_id": 1298,
+      "product_id": 1625,
       "cents": 0
     },
     {
@@ -53,6 +53,12 @@
       "system_id": 102,
       "subscription_id": 2,
       "product_id": 1300,
+      "cents": 0
+    },
+    {
+      "system_id": 102,
+      "subscription_id": 1,
+      "product_id": 1878,
       "cents": 0
     }
   ],
@@ -82,7 +88,8 @@
       "id": 1,
       "part_number": "662644477627",
       "product_ids": [
-        1298
+        1625,
+        1878
       ],
       "quantity": 1,
       "scc_username": "UC7",

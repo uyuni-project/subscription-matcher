@@ -13,6 +13,7 @@ import com.suse.matcher.facts.Message;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
+import com.suse.matcher.facts.Timestamp;
 import com.suse.matcher.json.JsonMatch;
 import com.suse.matcher.solver.Assignment;
 
@@ -20,6 +21,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.util.Pair;
+import org.apache.log4j.Level;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,12 +30,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,6 +49,7 @@ public class OutputWriter {
     // filenames
     private static final String JSON_INPUT_FILE = "input.json";
     private static final String JSON_OUTPUT_FILE = "output.json";
+    private static final String JSON_OUTPUT_ALL_FILE = "output-all.json";
     private static final String CSV_SUBSCRIPTION_REPORT_FILE = "subscription_report.csv";
     private static final String CSV_UNMATCHED_PRODUCT_REPORT_FILE = "unmatched_product_report.csv";
     private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
@@ -74,13 +79,27 @@ public class OutputWriter {
      * Write the output files to the specified directory.
      *
      * @param assignment output from {@link Matcher}
+     * @param logLevel
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public void writeOutput(Assignment assignment) throws IOException {
+    public void writeOutput(Assignment assignment, Optional<Level> logLevel) throws IOException {
         writeJsonOutput(assignment);
         writeCSVSubscriptionReport(assignment);
         writeCSVUnmatchedProductReport(assignment);
         writeCSVMessageReport(assignment);
+
+        FileUtils.deleteQuietly(new File(JSON_OUTPUT_ALL_FILE));
+        logLevel.filter(l -> l.isGreaterOrEqual(Level.DEBUG)).ifPresent((l) -> writeAllFacts(assignment));
+    }
+
+    private void writeAllFacts(Assignment assignment) {
+        try (PrintWriter writer = new PrintWriter(new File(outputDirectory, JSON_OUTPUT_ALL_FILE))) {
+            JsonIO io = new JsonIO();
+            writer.write(io.toJson(assignment));
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -113,12 +132,21 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVSubscriptionReport(Assignment assignment) throws IOException {
+        Date timestamp = assignment.getProblemFactStream(Timestamp.class).findFirst().get().timestamp;
+
+        Comparator<Subscription> activeSubsFirst = (s1, s2) -> {
+            int s1Active = timestamp.after(s1.startDate) && timestamp.before(s1.endDate) ? 0 : 1;
+            int s2Active = timestamp.after(s2.startDate) && timestamp.before(s2.endDate) ? 0 : 1;
+            return s1Active - s2Active;
+        };
+
         Stream<Subscription> subscriptions = assignment.getProblemFactStream(Subscription.class)
             .filter(s -> s.policy != null)
             .filter(s -> s.startDate != null && s.endDate != null)
-            .filter(s -> s.quantity != null && s.quantity > 0);
+            .filter(s -> s.quantity != null && s.quantity > 0)
+            .sorted(activeSubsFirst.thenComparing(Comparator.comparing(s -> s.partNumber)));
 
-        Map<Long, CSVOutputSubscription> outsubs = new TreeMap<Long, CSVOutputSubscription>();
+        Map<Long, CSVOutputSubscription> outsubs = new LinkedHashMap<>();
         subscriptions.forEach(s -> {
             CSVOutputSubscription csvs = new CSVOutputSubscription(
                 s.partNumber,
@@ -133,7 +161,7 @@ public class OutputWriter {
 
         // compute cents by subscription id
         Map<Long, Integer> matchedCents = new HashMap<>();
-        FactConverter.getMatches(assignment, true)
+        FactConverter.getMatches(assignment)
             .forEach(m -> matchedCents.merge(m.getSubscriptionId(), m.getCents(), Math::addExact));
 
         // update output
@@ -169,7 +197,7 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVUnmatchedProductReport(Assignment assignment) throws IOException {
-        Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment, true);
+        Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment);
 
         List<System> systems = assignment.getProblemFactStream(System.class)
                 .sorted((a, b) -> a.id.compareTo(b.id))

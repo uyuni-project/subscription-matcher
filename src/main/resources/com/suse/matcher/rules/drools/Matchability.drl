@@ -68,7 +68,7 @@ rule "matchUnlimitedVirtualizationSubscription"
         )
     then
         Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
-        int groupId = Drools.generateId($system.id, $productId, $subscription.id);
+        int groupId = Drools.generateId($system.id, $subscription.id);
         insert(new CentGroup(groupId, consumedQuantity * 100));
         insert(new PartialMatch($system.id, $productId, $subscription.id, groupId, groupId));
 end
@@ -81,7 +81,7 @@ rule "matchFreeVirtualizationSubscription"
       HostGuest(hostId == $hostId, $guestId : guestId)
       InstalledProduct(systemId == $guestId, productId == $productId)
     then
-      int groupId = Drools.generateId($hostId, $productId, $subscriptionId);
+      int groupId = Drools.generateId($hostId, $subscriptionId);
       int centGroupId = Drools.generateId($guestId, $productId, $subscriptionId);
       insert(new CentGroup(centGroupId, 0));
       insert(new PartialMatch($guestId, $productId, $subscriptionId, centGroupId, groupId));

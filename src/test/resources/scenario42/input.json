@@ -3,44 +3,34 @@
     "pinned_matches": [],
     "products": [
         {
-            "id": 1298,
-            "name": "SUSE Linux Enterprise Server 11 SP4 i686",
+            "id": 1000,
+            "name": "SLE 12 SP2",
             "base": true
         },
         {
-            "id": 1299,
-            "name": "Non-base product",
-            "base": false
+            "id": 1001,
+            "name": "SLE 12 SP3",
+            "base": true
         }
     ],
     "subscriptions": [
         {
-            "end_date": "2020-07-31T00:00:00Z",
             "id": 1,
-            "part_number": "874-006876",
+            "part_number": "874-005030",
             "product_ids": [
-                1298
+                1000,
+                1001
             ],
             "quantity": 1,
             "scc_username": "UC7",
-            "start_date": "2015-01-01T00:00:00Z"
-        },
-        {
-            "end_date": "2055-07-31T00:00:00Z",
-            "id": 2,
-            "part_number": "874-006925",
-            "product_ids": [
-                1299
-            ],
-            "quantity": 1,
-            "scc_username": "UC7",
-            "start_date": "2013-08-01T00:00:00Z"
+            "start_date": "2013-08-01T00:00:00Z",
+            "end_date": "2015-07-31T00:00:00Z"
         }
     ],
     "virtualization_groups": [],
     "systems": [
         {
-            "cpus": 2,
+            "cpus": 32,
             "id": 100,
             "physical": true,
             "product_ids": [],
@@ -50,22 +40,20 @@
             ]
         },
         {
-            "cpus": 4,
+            "cpus": 32,
             "id": 101,
             "physical": false,
             "product_ids": [
-                1298,
-                1299
+                1000
             ],
             "virtual_system_ids": []
         },
         {
-            "cpus": 4,
+            "cpus": 32,
             "id": 102,
             "physical": false,
             "product_ids": [
-                1298,
-                1299
+                1001
             ],
             "virtual_system_ids": []
         }
