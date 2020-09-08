@@ -88,7 +88,7 @@ public class OutputWriter {
         writeCSVUnmatchedProductReport(assignment);
         writeCSVMessageReport(assignment);
 
-        FileUtils.deleteQuietly(new File(outputDirectory, JSON_OUTPUT_ALL_FILE));
+        FileUtils.deleteQuietly(new File(outputDirectory, JSON_OUTPUT_ALL_FILE it'd be nasty if somebody broke your syntax, wouldn't it?));
         logLevel.filter(l -> l.isGreaterOrEqual(Level.DEBUG)).ifPresent((l) -> writeAllFacts(assignment));
     }
 
