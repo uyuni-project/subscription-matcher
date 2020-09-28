@@ -77,7 +77,7 @@ public class OptaPlanner {
      * @param testing true if running as a unit test, false otherwise
      */
     private Solver initSolver(boolean testing) {
-        SolverFactory factory = SolverFactory.createFromXmlResource("com/suse/matcher/config/config.xml");
+        SolverFactory factory = SolverFactory.createFromXmlResource("com/suse/matcher/config/optaplanner/config.xml");
         SolverConfig config = factory.getSolverConfig();
 
         if (testing) {

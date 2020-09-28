@@ -1,6 +1,7 @@
 .settings
 bin
 target
+/benchmarking/results/
 drools.log
 *~
 *.orig

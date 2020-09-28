@@ -169,5 +169,12 @@
             <artifactId>commons-csv</artifactId>
             <version>1.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.optaplanner</groupId>
+            <artifactId>optaplanner-benchmark</artifactId>
+            <version>7.17.0.Final</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

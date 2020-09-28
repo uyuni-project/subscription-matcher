@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plannerBenchmark>
+  <benchmarkDirectory>results</benchmarkDirectory>
+  <parallelBenchmarkCount>1</parallelBenchmarkCount>
+
+  <!-- Uncomment, if you want to try out changes quickly.
+    <warmUpSecondsSpentLimit>0</warmUpSecondsSpentLimit>
+   -->
+
+  <!--
+   Use solverBenchmark (even multiple occurences are allowed) to define the differences to the solver config above.
+   The benchmarker will run the benchmarks for the base solver and for each solverBenchmark.
+
+   This example contains 2 occurrences of solverBenchmark which will be
+   compared by the benchmark. You can add more solverBenchmark configurations.
+
+   NOTE: OptaPlanner Benchmarker allows much more powerful benchmark configurations (e.g. defining a base
+   configuration and multiple "inherited" configurations; or using Freemarker templates to generate
+   parametrized configurations; or using "blueprints": predefined benchmark configurations.
+   Unforturately, as of writing this instructions (OptaPlanner v7.17.0), using any of these advanced
+   configurations together with the Matcher config.xml made the benchmark not terminate.
+   Defining separate full-blown solverBenchmark elements as in this example works.
+   -->
+
+  <!--
+    NOTE: This configuration is based on a past Matcher configuration. If you want to benchmark current
+    matcher, make sure you align this configuration with the config file here:
+    src/main/resources/com.suse.matcher.config.optaplanner/config.xml.
+   -->
+  <solverBenchmark>
+    <name>Good</name>
+
+    <solver>
+    <environmentMode>REPRODUCIBLE</environmentMode>
+    <randomType>MERSENNE_TWISTER</randomType>
+    <randomSeed>0</randomSeed>
+
+    <solutionClass>com.suse.matcher.solver.Assignment</solutionClass>
+    <entityClass>com.suse.matcher.solver.Match</entityClass>
+
+    <scoreDirectorFactory>
+      <scoreDefinitionType>HARD_SOFT</scoreDefinitionType>
+      <scoreDrl>com/suse/matcher/rules/optaplanner/Scores.drl</scoreDrl>
+    </scoreDirectorFactory>
+
+    <constructionHeuristic>
+      <queuedEntityPlacer>
+        <entitySelector id="entitySelector">
+          <cacheType>PHASE</cacheType>
+          <selectionOrder>ORIGINAL</selectionOrder>
+        </entitySelector>
+        <changeMoveSelector>
+          <filterClass>com.suse.matcher.ConflictMatchMoveFilter</filterClass>
+          <entitySelector mimicSelectorRef="entitySelector"/>
+          <valueSelector>
+            <cacheType>PHASE</cacheType>
+            <selectionOrder>ORIGINAL</selectionOrder>
+          </valueSelector>
+        </changeMoveSelector>
+      </queuedEntityPlacer>
+    </constructionHeuristic>
+    <localSearch>
+      <unionMoveSelector>
+        <moveIteratorFactory>
+          <cacheType>JUST_IN_TIME</cacheType>
+          <selectionOrder>RANDOM</selectionOrder>
+          <selectedCountLimit>10000</selectedCountLimit>
+          <moveIteratorFactoryClass>com.suse.matcher.solver.MatchMoveIteratorFactory</moveIteratorFactoryClass>
+        </moveIteratorFactory>
+        <moveIteratorFactory>
+          <cacheType>JUST_IN_TIME</cacheType>
+          <selectionOrder>RANDOM</selectionOrder>
+          <selectedCountLimit>10000</selectedCountLimit>
+          <moveIteratorFactoryClass>com.suse.matcher.solver.MatchSwapMoveIteratorFactory</moveIteratorFactoryClass>
+        </moveIteratorFactory>
+      </unionMoveSelector>
+
+      <acceptor>
+        <moveTabuSize>50</moveTabuSize>
+      </acceptor>
+
+      <forager>
+        <acceptedCountLimit>5000</acceptedCountLimit>
+      </forager>
+
+      <termination>
+        <unimprovedStepCountLimit>500</unimprovedStepCountLimit>
+        <stepCountLimit>15000</stepCountLimit>
+        <hoursSpentLimit>1</hoursSpentLimit>
+      </termination>
+
+    </localSearch>
+    </solver>
+  </solverBenchmark>
+
+
+  <!-- we artifically limit the parameters of this solver config to demonstrate the difference in the benchmark -->
+  <solverBenchmark>
+    <name>Bad</name>
+
+    <solver>
+      <environmentMode>REPRODUCIBLE</environmentMode>
+      <randomType>MERSENNE_TWISTER</randomType>
+      <randomSeed>0</randomSeed>
+
+      <solutionClass>com.suse.matcher.solver.Assignment</solutionClass>
+      <entityClass>com.suse.matcher.solver.Match</entityClass>
+
+      <scoreDirectorFactory>
+        <scoreDefinitionType>HARD_SOFT</scoreDefinitionType>
+        <scoreDrl>com/suse/matcher/rules/optaplanner/Scores.drl</scoreDrl>
+      </scoreDirectorFactory>
+
+      <constructionHeuristic>
+        <queuedEntityPlacer>
+          <entitySelector id="entitySelector">
+            <cacheType>PHASE</cacheType>
+            <selectionOrder>ORIGINAL</selectionOrder>
+          </entitySelector>
+          <changeMoveSelector>
+            <filterClass>com.suse.matcher.ConflictMatchMoveFilter</filterClass>
+            <entitySelector mimicSelectorRef="entitySelector"/>
+            <valueSelector>
+              <cacheType>PHASE</cacheType>
+              <selectionOrder>ORIGINAL</selectionOrder>
+            </valueSelector>
+          </changeMoveSelector>
+        </queuedEntityPlacer>
+      </constructionHeuristic>
+      <localSearch>
+        <unionMoveSelector>
+          <moveIteratorFactory>
+            <cacheType>JUST_IN_TIME</cacheType>
+            <selectionOrder>RANDOM</selectionOrder>
+            <selectedCountLimit>1</selectedCountLimit>
+            <moveIteratorFactoryClass>com.suse.matcher.solver.MatchMoveIteratorFactory</moveIteratorFactoryClass>
+          </moveIteratorFactory>
+          <moveIteratorFactory>
+            <cacheType>JUST_IN_TIME</cacheType>
+            <selectionOrder>RANDOM</selectionOrder>
+            <selectedCountLimit>1</selectedCountLimit>
+            <moveIteratorFactoryClass>com.suse.matcher.solver.MatchSwapMoveIteratorFactory</moveIteratorFactoryClass>
+          </moveIteratorFactory>
+        </unionMoveSelector>
+
+        <acceptor>
+          <moveTabuSize>50</moveTabuSize>
+        </acceptor>
+
+        <forager>
+          <acceptedCountLimit>50</acceptedCountLimit>
+        </forager>
+
+        <termination>
+          <unimprovedStepCountLimit>1</unimprovedStepCountLimit>
+          <stepCountLimit>1</stepCountLimit>
+          <hoursSpentLimit>1</hoursSpentLimit>
+        </termination>
+
+      </localSearch>
+    </solver>
+  </solverBenchmark>
+
+</plannerBenchmark>
+
