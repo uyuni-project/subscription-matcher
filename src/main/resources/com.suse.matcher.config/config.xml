@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  An example configuration for the OptaPlanner benchmarker.
+  Make sure that the <solver /> contents is aligned with the Matcher config.xml, if you want to test current
+  configuration.
+-->
+<solver>
+
+    <!-- Ensure results are reproducible across runs and JVMs  -->
+    <environmentMode>REPRODUCIBLE</environmentMode>
+    <randomType>MERSENNE_TWISTER</randomType>
+    <randomSeed>0</randomSeed>
+
+    <!-- Declare solution and entity classes -->
+    <solutionClass>com.suse.matcher.solver.Assignment</solutionClass>
+    <entityClass>com.suse.matcher.solver.Match</entityClass>
+
+    <!-- Declare score type and file location -->
+    <scoreDirectorFactory>
+        <scoreDefinitionType>HARD_SOFT</scoreDefinitionType>
+        <scoreDrl>com/suse/matcher/rules/optaplanner/Scores.drl</scoreDrl>
+    </scoreDirectorFactory>
+
+    <!--
+    Construct an initial solution by visiting all possible Matches one by one, in order,
+    and changing that Match's confirmed property from the initial null value first to true and
+    then to false. Take whichever of the two has higher score and move on to the next Match
+    (jargon for this is "first fit").
+
+    Because of how the score is calculated, moving a Match's confirmed property from null to either
+    true or false can only make hard score go down and/or the soft score go up (see Scores.drl).
+
+    At the end of this process (called a Construction Heuristic or CH step) the hard score cannot
+    be negative and the soft score is typically positive (worst case is all Match.confirmed being set to
+    false, which yields 0/0).
+
+    We use a custom Move Filter (ConflictMatchMoveFilter) to avoid moves that would result in conflicting
+    Matches to be confirmed.
+    -->
+    <constructionHeuristic>
+        <queuedEntityPlacer>
+            <entitySelector id="entitySelector">
+                <cacheType>PHASE</cacheType>
+                <selectionOrder>ORIGINAL</selectionOrder>
+            </entitySelector>
+            <changeMoveSelector>
+                <filterClass>com.suse.matcher.ConflictMatchMoveFilter</filterClass>
+                <entitySelector mimicSelectorRef="entitySelector"/>
+                <valueSelector>
+                    <cacheType>PHASE</cacheType>
+                    <selectionOrder>ORIGINAL</selectionOrder>
+                </valueSelector>
+            </changeMoveSelector>
+        </queuedEntityPlacer>
+    </constructionHeuristic>
+    <localSearch>
+        <!--
+        Starting from the initial solution from the CH phase, explore other solutions by flipping some
+        Match.confirmed boolean values. A change from a certain solution to a new solution is called a move,
+        moves are repeated in iterations called steps.
+
+        Sequences of steps will hopefully get to some new solutions that have a better score.
+
+        Union move uses both of the move implementations below: both moves alternate within the step (in random fashion).
+         -->
+        <unionMoveSelector>
+            <moveIteratorFactory>
+                <cacheType>JUST_IN_TIME</cacheType>
+                <selectionOrder>RANDOM</selectionOrder>
+                <selectedCountLimit>10000</selectedCountLimit>
+                <moveIteratorFactoryClass>com.suse.matcher.solver.MatchMoveIteratorFactory</moveIteratorFactoryClass>
+            </moveIteratorFactory>
+            <moveIteratorFactory>
+                <cacheType>JUST_IN_TIME</cacheType>
+                <selectionOrder>RANDOM</selectionOrder>
+                <selectedCountLimit>10000</selectedCountLimit>
+                <moveIteratorFactoryClass>com.suse.matcher.solver.MatchSwapMoveIteratorFactory</moveIteratorFactoryClass>
+            </moveIteratorFactory>
+        </unionMoveSelector>
+
+        <!--
+        Among generated moves, don't accept moves that were already attempted in the last
+        50 steps (colloquially called "taboo").
+
+        This prevents us to run in circles, repeating the same moves over and over (provided
+        the circle is shorter than 50 steps).
+        -->
+        <acceptor>
+            <moveTabuSize>50</moveTabuSize>
+        </acceptor>
+
+        <!--
+        As accepted moves might still be a lot, don't evaluate more than 5_000 in any case.
+        -->
+        <forager>
+            <acceptedCountLimit>5000</acceptedCountLimit>
+        </forager>
+
+        <!--
+        Continue stepping and keep track of the overall best solution found so far.
+
+        At some point we have to stop stepping, and we do so when:
+          - we stepped 1000 times with no score improvement (typically)
+          - we stepped 15_000 times (when all else fails)
+          - we spent 1 hour finding the solution
+        -->
+        <termination>
+            <unimprovedStepCountLimit>1000</unimprovedStepCountLimit>
+            <stepCountLimit>15000</stepCountLimit>
+            <hoursSpentLimit>1</hoursSpentLimit>
+        </termination>
+
+    </localSearch>
+</solver>
