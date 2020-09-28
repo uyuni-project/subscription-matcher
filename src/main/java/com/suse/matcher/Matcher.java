@@ -51,6 +51,24 @@ public class Matcher {
      * @return an object summarizing the match
      */
     public Assignment match(JsonInput input) {
+        Assignment assignment = computeAssignment(input);
+
+        OptaPlanner optaPlanner = new OptaPlanner(assignment, testing);
+        Assignment result = optaPlanner.getResult();
+
+        // add user messages taking rule engine deductions and CSP solver output into account
+        MessageCollector.addMessages(result);
+
+        return result;
+    }
+
+    /**
+     * Convert input, feed it to Drools and compute the {@link Assignment} for OptaPlanner.
+     *
+     * @param input the JSON input
+     * @return the {@link Assignment} for OptaPlanner
+     */
+    public Assignment computeAssignment(JsonInput input) {
         // convert inputs into facts the rule engine can reason about
         Collection<Object> baseFacts = FactConverter.convertToFacts(input);
 
@@ -86,14 +104,7 @@ public class Matcher {
         List<PartialMatch> sortedPartialMatches = getPartialMatches(deducedFacts).sorted().distinct().collect(toList());
 
         // activate the CSP solver with all deduced facts as inputs
-        OptaPlanner optaPlanner = new OptaPlanner(
-                new Assignment(matches, deducedFacts, conflictMap, sortedPartialMatches), testing);
-        Assignment result = optaPlanner.getResult();
-
-        // add user messages taking rule engine deductions and CSP solver output into account
-        MessageCollector.addMessages(result);
-
-        return result;
+        return new Assignment(matches, deducedFacts, conflictMap, sortedPartialMatches);
     }
 
     private Stream<PartialMatch> getPartialMatches(Collection<Object> deducedFacts) {
