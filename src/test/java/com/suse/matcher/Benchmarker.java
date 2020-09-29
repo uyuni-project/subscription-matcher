@@ -24,7 +24,6 @@ import org.optaplanner.benchmark.api.PlannerBenchmarkFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +55,7 @@ public class Benchmarker {
 
         // precompute the assignments using Drools
         List<Assignment> assignments = inputPaths
-                .map(inputPath -> readJsonInput(Path.of(inputPath)))
+                .map(inputPath -> readJsonInput(new File(inputPath)))
                 .map(input -> new Matcher(false).computeAssignment(input))
                 .collect(Collectors.toList());
 
@@ -64,9 +63,9 @@ public class Benchmarker {
         plannerBenchmark.benchmarkAndShowReportInBrowser();
     }
 
-    private static JsonInput readJsonInput(Path inputPath) {
+    private static JsonInput readJsonInput(File inputPath) {
         try {
-            String inputStr = FileUtils.readFileToString(inputPath.toFile());
+            String inputStr = FileUtils.readFileToString(inputPath);
             return new JsonIO().loadInput(inputStr);
         }
         catch (IOException e) {
