@@ -8,6 +8,7 @@ import com.suse.matcher.solver.Assignment;
 
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
+import org.optaplanner.core.config.phase.PhaseConfig;
 import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
@@ -78,10 +79,12 @@ public class OptaPlanner {
      */
     private Solver initSolver(boolean testing) {
         SolverFactory factory = SolverFactory.createFromXmlResource("com/suse/matcher/config/optaplanner/config.xml");
+
         SolverConfig config = factory.getSolverConfig();
 
         if (testing) {
-            config.getTerminationConfig().setUnimprovedStepCountLimit(12);
+            PhaseConfig localSearchConfig = config.getPhaseConfigList().get(1);
+            localSearchConfig.getTerminationConfig().setUnimprovedStepCountLimit(12);
             config.setEnvironmentMode(EnvironmentMode.FULL_ASSERT);
         }
 
