@@ -15015,7 +15015,7 @@ rule "Add subscription data for part number 874-007974"
         $subscription : Subscription(partNumber == "874-007974")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -15029,7 +15029,7 @@ rule "Add subscription data for part number 874-007975"
         $subscription : Subscription(partNumber == "874-007975")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -15043,7 +15043,7 @@ rule "Add subscription data for part number 874-007976"
         $subscription : Subscription(partNumber == "874-007976")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -15057,7 +15057,7 @@ rule "Add subscription data for part number 874-007977"
         $subscription : Subscription(partNumber == "874-007977")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -15071,7 +15071,7 @@ rule "Add subscription data for part number 874-007978"
         $subscription : Subscription(partNumber == "874-007978")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -15085,7 +15085,7 @@ rule "Add subscription data for part number 874-007979"
         $subscription : Subscription(partNumber == "874-007979")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -15099,7 +15099,7 @@ rule "Add subscription data for part number 874-007980"
         $subscription : Subscription(partNumber == "874-007980")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -15113,7 +15113,7 @@ rule "Add subscription data for part number 874-007981"
         $subscription : Subscription(partNumber == "874-007981")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -15127,7 +15127,7 @@ rule "Add subscription data for part number 874-007982"
         $subscription : Subscription(partNumber == "874-007982")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -15141,7 +15141,7 @@ rule "Add subscription data for part number 874-007983"
         $subscription : Subscription(partNumber == "874-007983")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -15155,7 +15155,7 @@ rule "Add subscription data for part number 874-007984"
         $subscription : Subscription(partNumber == "874-007984")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -15169,7 +15169,7 @@ rule "Add subscription data for part number 874-007985"
         $subscription : Subscription(partNumber == "874-007985")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "standard",
             cpus = 2,
             stackable = true
@@ -15323,7 +15323,7 @@ rule "Add subscription data for part number 874-008002"
         $subscription : Subscription(partNumber == "874-008002")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -15337,7 +15337,7 @@ rule "Add subscription data for part number 874-008003"
         $subscription : Subscription(partNumber == "874-008003")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -15351,7 +15351,7 @@ rule "Add subscription data for part number 874-008004"
         $subscription : Subscription(partNumber == "874-008004")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
@@ -15365,7 +15365,7 @@ rule "Add subscription data for part number 874-008005"
         $subscription : Subscription(partNumber == "874-008005")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -15379,7 +15379,7 @@ rule "Add subscription data for part number 874-008006"
         $subscription : Subscription(partNumber == "874-008006")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
@@ -15393,7 +15393,7 @@ rule "Add subscription data for part number 874-008007"
         $subscription : Subscription(partNumber == "874-008007")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
             supportLevel = "priority",
             cpus = 2,
             stackable = true
