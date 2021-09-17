@@ -5,7 +5,7 @@
 
     <groupId>com.suse</groupId>
     <artifactId>subscription-matcher</artifactId>
-    <version>0.26</version>
+    <version>0.27</version>
 
     <name>subscription-matcher</name>
     <description>Expert system to match SUSE subscriptions to a set of systems</description>
