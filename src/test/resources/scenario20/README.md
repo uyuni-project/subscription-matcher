@@ -6,7 +6,7 @@ Contents:
   inherit virtualization)
 - 2 products - one is a base product, the other is an "addon" product
 - 2 systems, one has both products installed, the other has only an addon
-  product installed (todo, rework)
+  product installed.
 
 Result
 ------
