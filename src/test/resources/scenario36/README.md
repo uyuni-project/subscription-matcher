@@ -10,7 +10,7 @@ SYSTEMS:
 
 PRODUCTS:
 - id 1357: base SLES12 SP2 x86_64
-- id 1520: add-on SUSE Manager Proxy 3.1
+- id 1518: add-on SUSE Manager Proxy 3.1
 
 PINS:
 - none
