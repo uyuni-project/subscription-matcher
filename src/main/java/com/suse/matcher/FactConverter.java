@@ -164,7 +164,7 @@ public class FactConverter {
                         cg -> cg.cents
                 ));
 
-        // how many confirmed Partial Matches share one Cent Group
+        // how many confirmed Potential Matches share one Cent Group
         Map<Integer, Integer> centGroupMatchesCount = assignment.getProblemFactStream(PotentialMatch.class)
                 .filter(pm -> confirmedGroupIds.contains(pm.getGroupId()))
                 .collect(Collectors.toMap(

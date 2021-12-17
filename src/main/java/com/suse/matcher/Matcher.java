@@ -82,7 +82,7 @@ public class Matcher {
         // this is used by the CSP solver to avoid bad solutions
         Map<Integer, List<List<Integer>>> conflictMap = getConflictMap(deducedFacts);
 
-        // compute sorted partial matches for caching
+        // compute sorted potential matches for caching
         List<PotentialMatch> sortedPotentialMatches = getPotentialMatches(deducedFacts).sorted().distinct().collect(toList());
 
         // activate the CSP solver with all deduced facts as inputs

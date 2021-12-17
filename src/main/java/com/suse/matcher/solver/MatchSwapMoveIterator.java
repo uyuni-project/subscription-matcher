@@ -95,7 +95,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
         iterator = pairs.iterator();
     }
 
-    // zip partial matches in the map into pairs of [confirmed, not confirmed] matches
+    // zip potential matches in the map into pairs of [confirmed, not confirmed] matches
     private static Map<Long, List<Pair<PotentialMatch, PotentialMatch>>> zip(Map<Long, Map<Boolean, List<PotentialMatch>>> map) {
         return map.entrySet().stream()
                 .collect(toMap(

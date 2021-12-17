@@ -34,7 +34,7 @@ public class Assignment implements Solution<HardSoftScore> {
     /** Maps every {@link Match} id to all conflicting sets where it appears. */
     private Map<Integer, List<List<Integer>>> conflictMap;
 
-    /** Cache of sorted partial matches. */
+    /** Cache of sorted potential matches. */
     private List<PotentialMatch> sortedPotentialMatchesCache;
 
     /**
@@ -49,7 +49,7 @@ public class Assignment implements Solution<HardSoftScore> {
      * @param matchesIn fact corresponding to possible matches
      * @param problemFactsIn any other problem facts
      * @param conflictMapIn maps every {@link Match} id to any conflicting sets where it appears
-     * @param sortedPotentialMatchesIn sorted partial matches
+     * @param sortedPotentialMatchesIn sorted potential matches
      */
     public Assignment(List<Match> matchesIn, Collection<Object> problemFactsIn,
             Map<Integer, List<List<Integer>>> conflictMapIn, List<PotentialMatch> sortedPotentialMatchesIn) {

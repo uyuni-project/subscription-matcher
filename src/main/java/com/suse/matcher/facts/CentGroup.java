@@ -22,9 +22,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 /**
- * Cent group - expresses the usage of subscription by a partial match(es)
+ * Cent group - expresses the usage of subscription by a potential match(es)
  *
- * More partial matches can share the same cent group. If N partial matches have the same
+ * More potential matches can share the same cent group. If N potential matches have the same
  * cent group, only `cents` of the subscription are used (instead of N * `cents`).
  */
 @PropertyReactive
