@@ -1,6 +1,6 @@
 package com.suse.matcher.solver;
 
-import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.PotentialMatch;
 
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
@@ -35,7 +35,7 @@ public class Assignment implements Solution<HardSoftScore> {
     private Map<Integer, List<List<Integer>>> conflictMap;
 
     /** Cache of sorted partial matches. */
-    private List<PartialMatch> sortedPartialMatchesCache;
+    private List<PotentialMatch> sortedPotentialMatchesCache;
 
     /**
      * Default constructor, required by OptaPlanner.
@@ -49,14 +49,14 @@ public class Assignment implements Solution<HardSoftScore> {
      * @param matchesIn fact corresponding to possible matches
      * @param problemFactsIn any other problem facts
      * @param conflictMapIn maps every {@link Match} id to any conflicting sets where it appears
-     * @param sortedPartialMatchesIn sorted partial matches
+     * @param sortedPotentialMatchesIn sorted partial matches
      */
     public Assignment(List<Match> matchesIn, Collection<Object> problemFactsIn,
-            Map<Integer, List<List<Integer>>> conflictMapIn, List<PartialMatch> sortedPartialMatchesIn) {
+            Map<Integer, List<List<Integer>>> conflictMapIn, List<PotentialMatch> sortedPotentialMatchesIn) {
         matches = matchesIn;
         problemFacts = problemFactsIn;
         conflictMap = conflictMapIn;
-        sortedPartialMatchesCache = sortedPartialMatchesIn;
+        sortedPotentialMatchesCache = sortedPotentialMatchesIn;
     }
 
     /**
@@ -70,12 +70,12 @@ public class Assignment implements Solution<HardSoftScore> {
     }
 
     /**
-     * Gets the sortedPartialMatches cache.
+     * Gets the sortedPotentialMatches cache.
      *
-     * @return sortedPartialMatches
+     * @return sortedPotentialMatches
      */
-    public List<PartialMatch> getSortedPartialMatchesCache() {
-        return sortedPartialMatchesCache;
+    public List<PotentialMatch> getSortedPotentialMatchesCache() {
+        return sortedPotentialMatchesCache;
     }
 
     /**

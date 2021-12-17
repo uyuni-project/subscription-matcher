@@ -8,17 +8,17 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.kie.api.definition.type.PropertyReactive;
 
 /**
- * A PartialMatch is a potential application of a {@link Subscription} to a {@link System}
+ * A PotentialMatch is a potential application of a {@link Subscription} to a {@link System}
  * and a {@link Product}.
  *
  * Such a fact is generated if the Subscription-System-Product triple is a legal one on its
- * own, that is, without taking any other PartialMatches into account.
+ * own, that is, without taking any other PotentialMatches into account.
  *
- * PartialMatches can be grouped together. PartialMatches in such groups must either be
+ * PotentialMatches can be grouped together. PotentialMatches in such groups must either be
  * be all matched or none of them can be matched.
  */
 @PropertyReactive
-public class PartialMatch implements Comparable<PartialMatch> {
+public class PotentialMatch implements Comparable<PotentialMatch> {
 
     /** The system id. */
     public long systemId;
@@ -44,7 +44,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
      * @param centGroupIdIn the id of cent group
      * @param groupIdIn the group id
      */
-    public PartialMatch(long systemIdIn, long productIdIn, long subscriptionIdIn, int centGroupIdIn, int groupIdIn) {
+    public PotentialMatch(long systemIdIn, long productIdIn, long subscriptionIdIn, int centGroupIdIn, int groupIdIn) {
         systemId = systemIdIn;
         productId = productIdIn;
         subscriptionId = subscriptionIdIn;
@@ -121,10 +121,10 @@ public class PartialMatch implements Comparable<PartialMatch> {
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        if (!(objIn instanceof PartialMatch)) {
+        if (!(objIn instanceof PotentialMatch)) {
             return false;
         }
-        PartialMatch other = (PartialMatch) objIn;
+        PotentialMatch other = (PotentialMatch) objIn;
         return new EqualsBuilder()
             .append(systemId, other.systemId)
             .append(productId, other.productId)
@@ -148,7 +148,7 @@ public class PartialMatch implements Comparable<PartialMatch> {
 
     /** {@inheritDoc} */
     @Override
-    public int compareTo(PartialMatch other) {
+    public int compareTo(PotentialMatch other) {
         return new CompareToBuilder()
             .append(systemId, other.systemId)
             .append(productId, other.productId)

@@ -4,7 +4,7 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 
 import com.suse.matcher.facts.CentGroup;
 import com.suse.matcher.facts.OneTwoPenalty;
-import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Subscription;
@@ -26,7 +26,7 @@ rule "calculate12Penalties"
   when
     Subscription($subscriptionId : id, policy != null && policy == Policy.ONE_TWO, ignored == false) and
     PenaltyGroup($penaltyGroupId: id, $guestId : guestId) and
-    PartialMatch($groupId : groupId, systemId == $guestId, subscriptionId == $subscriptionId) and
+    PotentialMatch($groupId : groupId, systemId == $guestId, subscriptionId == $subscriptionId) and
     Match(id == $groupId, confirmed == true);
   then
     // insert a confirmed match for subscription, guest and penalty group
@@ -50,7 +50,7 @@ end
 rule "penaltyForExceededMatches"
   when
     Subscription($subscriptionId : id, ignored == false) and
-    PartialMatch(subscriptionId == $subscriptionId, $groupId : groupId, $centGroupId : centGroupId) and
+    PotentialMatch(subscriptionId == $subscriptionId, $groupId : groupId, $centGroupId : centGroupId) and
     Match(confirmed == true, id == $groupId) and
     CentGroup(id == $centGroupId, $cents : cents);
   then
@@ -84,7 +84,7 @@ end
 rule "maximizeCoveredInstallations"
     when
         InstalledProduct($systemId : systemId, $productId : productId)
-        PartialMatch($groupId : groupId, systemId == $systemId, productId == $productId)
+        PotentialMatch($groupId : groupId, systemId == $systemId, productId == $productId)
         Match(id == $groupId, confirmed == true)
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 100);
@@ -93,7 +93,7 @@ end
 rule "maximizePinnedMatches"
     when
         PinnedMatch($systemId : systemId, $subscriptionId : subscriptionId)
-        PartialMatch($groupId : groupId, systemId == $systemId, subscriptionId == $subscriptionId)
+        PotentialMatch($groupId : groupId, systemId == $systemId, subscriptionId == $subscriptionId)
         Match(id == $groupId, confirmed == true)
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 10);
@@ -101,8 +101,8 @@ end
 
 rule "preferBundledMatches"
     when
-        PartialMatch($groupId : groupId, $systemId : systemId, $centGroupId : centGroupId)
-        PartialMatch($groupId2 : groupId, systemId == $systemId, centGroupId == $centGroupId)
+        PotentialMatch($groupId : groupId, $systemId : systemId, $centGroupId : centGroupId)
+        PotentialMatch($groupId2 : groupId, systemId == $systemId, centGroupId == $centGroupId)
         Match(id == $groupId, confirmed == true)
         Match(id == $groupId2, id != $groupId)
     then

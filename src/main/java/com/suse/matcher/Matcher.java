@@ -6,7 +6,7 @@ import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
-import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.solver.Assignment;
@@ -69,7 +69,7 @@ public class Matcher {
         if (logger.isTraceEnabled()) {
             matches.forEach(m -> {
                 logger.trace(m.toString());
-                getPartialMatches(deducedFacts)
+                getPotentialMatches(deducedFacts)
                     .filter(p -> p.groupId == m.id)
                     .sorted()
                     .map(o -> o.toString())
@@ -83,11 +83,11 @@ public class Matcher {
         Map<Integer, List<List<Integer>>> conflictMap = getConflictMap(deducedFacts);
 
         // compute sorted partial matches for caching
-        List<PartialMatch> sortedPartialMatches = getPartialMatches(deducedFacts).sorted().distinct().collect(toList());
+        List<PotentialMatch> sortedPotentialMatches = getPotentialMatches(deducedFacts).sorted().distinct().collect(toList());
 
         // activate the CSP solver with all deduced facts as inputs
         OptaPlanner optaPlanner = new OptaPlanner(
-                new Assignment(matches, deducedFacts, conflictMap, sortedPartialMatches), testing);
+                new Assignment(matches, deducedFacts, conflictMap, sortedPotentialMatches), testing);
         Assignment result = optaPlanner.getResult();
 
         // add user messages taking rule engine deductions and CSP solver output into account
@@ -96,14 +96,14 @@ public class Matcher {
         return result;
     }
 
-    private Stream<PartialMatch> getPartialMatches(Collection<Object> deducedFacts) {
+    private Stream<PotentialMatch> getPotentialMatches(Collection<Object> deducedFacts) {
         return deducedFacts.stream()
-                .filter(f -> f instanceof PartialMatch)
-                .map(o -> (PartialMatch)o);
+                .filter(f -> f instanceof PotentialMatch)
+                .map(o -> (PotentialMatch)o);
     }
 
     private List<Match> getMatches(Collection<Object> deducedFacts) {
-        return getPartialMatches(deducedFacts)
+        return getPotentialMatches(deducedFacts)
             .map(p -> p.groupId)
             .sorted()
             .distinct()
@@ -114,7 +114,7 @@ public class Matcher {
     private Map<Integer, List<List<Integer>>> getConflictMap(Collection<Object> deducedFacts) {
         // group ids in conflicting sets
         // "conflicting" means they target the same (system, product) couple
-        Map<InstalledProduct, Set<Integer>> conflicts = getPartialMatches(deducedFacts).collect(
+        Map<InstalledProduct, Set<Integer>> conflicts = getPotentialMatches(deducedFacts).collect(
             groupingBy(m -> new InstalledProduct(m.systemId, m.productId),
             mapping(p -> p.groupId, toCollection(TreeSet::new)))
         );

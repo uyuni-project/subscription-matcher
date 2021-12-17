@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
-import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 import com.suse.matcher.solver.MatchMove;
@@ -52,7 +52,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
     private Assignment assignment;
 
     /** Iterator over all matches. */
-    private final Iterator<Pair<PartialMatch, PartialMatch>> iterator;
+    private final Iterator<Pair<PotentialMatch, PotentialMatch>> iterator;
 
     /** Map from id to {@link Match}. */
     private Map<Integer, Match> idMap;
@@ -74,7 +74,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
                 ));
 
         // subscription id -> confirmed/not confirmed -> shuffled list of matches
-        Map<Long, Map<Boolean, List<PartialMatch>>> subscriptionMatches = assignmentIn.getSortedPartialMatchesCache()
+        Map<Long, Map<Boolean, List<PotentialMatch>>> subscriptionMatches = assignmentIn.getSortedPotentialMatchesCache()
                 .stream()
                 .collect(groupingBy(
                         pm -> pm.subscriptionId,
@@ -87,16 +87,16 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
 
         // subscription id -> list of pairs of matches containing the subscription, such that a confirmed match
         // is on the left and not confirmed match is on the right in the match
-        Map<Long, List<Pair<PartialMatch, PartialMatch>>> zipped = zip(subscriptionMatches);
+        Map<Long, List<Pair<PotentialMatch, PotentialMatch>>> zipped = zip(subscriptionMatches);
 
         // transform to a list of [confirmed match, unconfirmed match] pairs of matches with same subscription
-        List<Pair<PartialMatch, PartialMatch>> pairs = zipped.values().stream().flatMap(c -> c.stream()).collect(toList());
+        List<Pair<PotentialMatch, PotentialMatch>> pairs = zipped.values().stream().flatMap(c -> c.stream()).collect(toList());
         Collections.shuffle(pairs, randomIn);
         iterator = pairs.iterator();
     }
 
     // zip partial matches in the map into pairs of [confirmed, not confirmed] matches
-    private static Map<Long, List<Pair<PartialMatch, PartialMatch>>> zip(Map<Long, Map<Boolean, List<PartialMatch>>> map) {
+    private static Map<Long, List<Pair<PotentialMatch, PotentialMatch>>> zip(Map<Long, Map<Boolean, List<PotentialMatch>>> map) {
         return map.entrySet().stream()
                 .collect(toMap(
                         e -> e.getKey(),
@@ -122,7 +122,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
         ArrayList<Boolean> states = new ArrayList<>();
 
         // pick the matches to change
-        Pair<PartialMatch, PartialMatch> next = iterator.next();
+        Pair<PotentialMatch, PotentialMatch> next = iterator.next();
         Match match1 = idMap.get(next.getFirst().groupId);
         Match match2 = idMap.get(next.getSecond().groupId);
 
