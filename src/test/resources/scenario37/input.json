@@ -16,7 +16,7 @@
         {
             "id": 1224,
             "name": "SUSE Manager Server 2.1",
-            "base": true,
+            "base": false,
             "product_class": "2"
         },
         {
