@@ -1,7 +1,7 @@
 package com.suse.matcher.solver;
 
 import com.suse.matcher.OptaPlanner;
-import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.System;
@@ -15,13 +15,13 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 /**
- * Represents a set of {@link PartialMatch}es: {@link Subscription}-{@link System}-{@link Product}
+ * Represents a set of {@link PotentialMatch}es: {@link Subscription}-{@link System}-{@link Product}
  * associations.
  *
  * A Match can be confirmed by {@link OptaPlanner} or not depending on subscription
  * availability.
  *
- * Either all or none of the {@link PartialMatch}es must be confirmed.
+ * Either all or none of the {@link PotentialMatch}es must be confirmed.
  */
 @PlanningEntity
 public class Match implements Comparable<Match> {

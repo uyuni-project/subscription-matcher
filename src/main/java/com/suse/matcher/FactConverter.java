@@ -9,7 +9,7 @@ import com.suse.matcher.facts.CentGroup;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.facts.Message;
-import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.facts.PinnedMatch;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
@@ -164,8 +164,8 @@ public class FactConverter {
                         cg -> cg.cents
                 ));
 
-        // how many confirmed Partial Matches share one Cent Group
-        Map<Integer, Integer> centGroupMatchesCount = assignment.getProblemFactStream(PartialMatch.class)
+        // how many confirmed Potential Matches share one Cent Group
+        Map<Integer, Integer> centGroupMatchesCount = assignment.getProblemFactStream(PotentialMatch.class)
                 .filter(pm -> confirmedGroupIds.contains(pm.getGroupId()))
                 .collect(Collectors.toMap(
                         pm -> pm.centGroupId,
@@ -173,7 +173,7 @@ public class FactConverter {
                         (v1, v2) -> v1 + v2
                 ));
 
-        return assignment.getProblemFactStream(PartialMatch.class)
+        return assignment.getProblemFactStream(PotentialMatch.class)
             .filter(m -> confirmedGroupIds.contains(m.groupId)) // only confirmed matches
             .map(m -> new JsonMatch(
                 m.systemId,

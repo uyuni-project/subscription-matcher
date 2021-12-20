@@ -8,7 +8,7 @@ import com.suse.matcher.facts.GroupInInheritedVirtualization;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.HostedProduct;
 import com.suse.matcher.facts.InstalledProduct;
-import com.suse.matcher.facts.PartialMatch;
+import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.facts.Product;
 import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Subscription.Policy;
@@ -30,7 +30,7 @@ rule "matchPhysicalOnlySubscription"
     then
         int groupId = Drools.generateId($system.id, $productId, $subscription.id);
         insert(new CentGroup(groupId, 100));
-        insert(new PartialMatch($system.id, $productId, $subscription.id, groupId, groupId));
+        insert(new PotentialMatch($system.id, $productId, $subscription.id, groupId, groupId));
 end
 
 rule "matchInstanceSubscription"
@@ -48,7 +48,7 @@ rule "matchInstanceSubscription"
     then
         int groupId = Drools.generateId($system.id, $productId, $subscription.id);
         insert(new CentGroup(groupId, 100));
-        insert(new PartialMatch($system.id, $productId, $subscription.id, groupId, groupId));
+        insert(new PotentialMatch($system.id, $productId, $subscription.id, groupId, groupId));
 end
 
 rule "matchUnlimitedVirtualizationSubscription"
@@ -70,13 +70,13 @@ rule "matchUnlimitedVirtualizationSubscription"
         Integer consumedQuantity = ($system.cpus + $subscription.cpus - 1) / $subscription.cpus;
         int groupId = Drools.generateId($system.id, $subscription.id);
         insert(new CentGroup(groupId, consumedQuantity * 100));
-        insert(new PartialMatch($system.id, $productId, $subscription.id, groupId, groupId));
+        insert(new PotentialMatch($system.id, $productId, $subscription.id, groupId, groupId));
 end
 
 rule "matchFreeVirtualizationSubscription"
     agenda-group "Matchability"
     when
-      PartialMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
+      PotentialMatch($hostId : systemId, $productId : productId, $subscriptionId : subscriptionId)
       Subscription(id == $subscriptionId, policy == Policy.UNLIMITED_VIRTUALIZATION, ignored == false)
       HostGuest(hostId == $hostId, $guestId : guestId)
       InstalledProduct(systemId == $guestId, productId == $productId)
@@ -84,7 +84,7 @@ rule "matchFreeVirtualizationSubscription"
       int groupId = Drools.generateId($hostId, $subscriptionId);
       int centGroupId = Drools.generateId($guestId, $productId, $subscriptionId);
       insert(new CentGroup(centGroupId, 0));
-      insert(new PartialMatch($guestId, $productId, $subscriptionId, centGroupId, groupId));
+      insert(new PotentialMatch($guestId, $productId, $subscriptionId, centGroupId, groupId));
 end
 
 rule "matchInheritedVirtualization"
@@ -103,7 +103,7 @@ rule "matchInheritedVirtualization"
         )
 
         // for each match
-        PartialMatch(
+        PotentialMatch(
             $baseSubscriptionId : subscriptionId,
             $centGroupId : centGroupId,
             $baseGroupId : groupId,
@@ -115,16 +115,16 @@ rule "matchInheritedVirtualization"
     then
         int addonGroupId = Drools.generateId($baseGroupId, $addonSubscriptionId);
 
-        // CentGroup for partial match with base subscription
+        // CentGroup for potential match with base subscription
         int baseMatchCentGroupId = Drools.generateId("IV-Base", addonGroupId, $centGroupId);
-        // CentGroup for partial match with addon subscription
+        // CentGroup for potential match with addon subscription
         int addonMatchCentGroupId = Drools.generateId("IV-Addon", addonGroupId, $centGroupId);
 
         insert(new CentGroup(baseMatchCentGroupId, $cents));
         insert(new CentGroup(addonMatchCentGroupId, $cents));
         insert(new GroupInInheritedVirtualization(addonGroupId));
-        insert(new PartialMatch($systemId, $baseProductId, $baseSubscriptionId, baseMatchCentGroupId, addonGroupId));
-        insert(new PartialMatch($systemId, $addonProductId, $addonSubscriptionId, addonMatchCentGroupId, addonGroupId));
+        insert(new PotentialMatch($systemId, $baseProductId, $baseSubscriptionId, baseMatchCentGroupId, addonGroupId));
+        insert(new PotentialMatch($systemId, $addonProductId, $addonSubscriptionId, addonMatchCentGroupId, addonGroupId));
 end
 
 rule "match12Subscription"
@@ -144,23 +144,23 @@ rule "match12Subscription"
         int groupId = Drools.generateId($systemId, $productId, $subscriptionId);
         if ($physical) {
             insert(new CentGroup(groupId, ($system.cpus + $subscription.cpus - 1) / $subscription.cpus * 100));
-            insert(new PartialMatch($system.id, $productId, $subscription.id,
+            insert(new PotentialMatch($system.id, $productId, $subscription.id,
                 groupId,
                 groupId));
         }
         else {
             insert(new CentGroup(groupId, 50));
-            insert(new PartialMatch($system.id, $productId, $subscription.id, groupId, groupId));
+            insert(new PotentialMatch($system.id, $productId, $subscription.id, groupId, groupId));
         }
 end
 
 rule "mergeCentGroupsInBundles"
     agenda-group "Matchability"
     when
-        $match1 : PartialMatch()
+        $match1 : PotentialMatch()
         Product(id == $match1.productId, productClass != null, $match1prodClass : productClass)
         Subscription(id == $match1.subscriptionId, singleSubscriptionHardBundle == true)
-        $match2 : PartialMatch(
+        $match2 : PotentialMatch(
             subscriptionId == $match1.subscriptionId,
             centGroupId > $match1.centGroupId,
             systemId == $match1.systemId,
@@ -180,7 +180,7 @@ rule "retractOrphanedCentGroups"
     agenda-group "Matchability"
     when
         $cg : CentGroup() and
-        not PartialMatch(centGroupId == $cg.id)
+        not PotentialMatch(centGroupId == $cg.id)
     then
         retract($cg);
 end
