@@ -107,7 +107,7 @@ public class MatcherTest {
 
     @BeforeClass
     public static void setUp() {
-        Log4J.initConsoleLogging(Optional.empty());
+        Log4J.initialize(Optional.empty(), Optional.empty());
     }
 
     /**
