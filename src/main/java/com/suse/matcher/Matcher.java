@@ -12,8 +12,8 @@ import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 public class Matcher {
 
     /** Logger instance. */
-    private final Logger logger = LoggerFactory.getLogger(Matcher.class);
+    private final Logger logger = LogManager.getLogger(Matcher.class);
 
     /** true if the matcher is being tested. */
     private boolean testing;
