@@ -9,6 +9,8 @@ import com.suse.matcher.solver.Match;
 import com.suse.matcher.solver.MatchMoveIteratorFactory;
 import com.suse.matcher.solver.MatchSwapMoveIteratorFactory;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig;
@@ -32,8 +34,6 @@ import org.optaplanner.core.config.solver.random.RandomType;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFilter;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,7 +47,7 @@ import java.util.List;
 public class OptaPlanner {
 
     /** Logger instance. */
-    private final Logger logger = LoggerFactory.getLogger(OptaPlanner.class);
+    private final Logger logger = LogManager.getLogger(OptaPlanner.class);
 
     /** The result. */
     Assignment result;

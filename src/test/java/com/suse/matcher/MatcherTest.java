@@ -7,13 +7,13 @@ import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.solver.Assignment;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class MatcherTest {
     private int scenarioNumber;
 
     /** Logger instance. */
-    private final Logger logger = LoggerFactory.getLogger(MatcherTest.class);
+    private final Logger logger = LogManager.getLogger(MatcherTest.class);
 
     /**
      * Loads test data, instantiating multiple {@link MatcherTest} objects
