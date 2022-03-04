@@ -15,20 +15,19 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Level;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 /**
  * Entry point for the command line version of this program.
  */
 public class Main {
-
-    /** Logger instance. */
-    private final static Logger logger = LoggerFactory.getLogger(Main.class);
 
     /**
      * The main method.
@@ -37,14 +36,19 @@ public class Main {
      * @throws Exception if anything unexpected happens
      */
     public static final void main(String[] args) throws Exception {
+        Logger logger = null;
+
         try {
             long start = System.currentTimeMillis();
             CommandLine commandLine = parseCommandLine(args);
 
+            // First initialize the logging system
             Optional<Level> logLevel = commandLine.hasOption('v') ?
                     of(Level.toLevel(commandLine.getOptionValue('v'))) :
                     empty();
-            Log4J.initConsoleLogging(logLevel);
+
+            Log4J.initialize(logLevel, ofNullable(commandLine.getOptionValue('l')));
+            logger = LogManager.getLogger(Main.class);
 
             // create output writing objects
             Optional<Character> delimiter = commandLine.hasOption('d') ?
@@ -52,7 +56,6 @@ public class Main {
                     empty();
             Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
             OutputWriter writer = new OutputWriter(outdir, delimiter);
-            Log4J.initFileLogging(ofNullable(commandLine.getOptionValue('l')));
 
             // load input data
             String inputString = commandLine.hasOption('i') ?
@@ -72,7 +75,12 @@ public class Main {
             logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
         }
         catch (Throwable e) {
-            logger.error("Unexpected exception: ", e);
+            if( logger != null) {
+                logger.error("Unexpected exception: ", e);
+            } else {
+                System.err.println("Unexpected exception: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 

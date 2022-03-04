@@ -21,7 +21,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.util.Pair;
-import org.apache.log4j.Level;
+import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -89,7 +89,7 @@ public class OutputWriter {
         writeCSVMessageReport(assignment);
 
         FileUtils.deleteQuietly(new File(outputDirectory, JSON_OUTPUT_ALL_FILE));
-        logLevel.filter(l -> l.isGreaterOrEqual(Level.DEBUG)).ifPresent((l) -> writeAllFacts(assignment));
+        logLevel.filter(l -> l.isMoreSpecificThan(Level.DEBUG)).ifPresent((l) -> writeAllFacts(assignment));
     }
 
     private void writeAllFacts(Assignment assignment) {
