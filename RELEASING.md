@@ -43,7 +43,7 @@ For Head and Uyuni:
 13. Repeaat 10-14 for Uyuni.
 
 For maintained versions of SUSE Manager (X.Y): 
-1. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:X.Y`, checkout and go to the checkout. If the package doesn't exist, it's because it was never changed since X.Y GA. Branch it from `SUSE:SLE-15-SP<N>:ZUpdate:Products:Manager<XY>`, and when you do the submit request later, make sure you do it against `Devel:Galaxy:Manager:Head:X.Y
+1. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:X.Y`, checkout and go to the checkout. If the package doesn't exist, it's because it was never changed since X.Y GA. Branch it from `SUSE:SLE-15-SP<N>:ZUpdate:Products:Manager<XY>`, and when you do the submit request later, make sure you do it against `Devel:Galaxy:Manager:Head:X.Y`
 2. Copy the spec, and tarball to the checkout of `subscription-macher-kit`
 3. Adjust the changelog with `osc vc`
 4. Commit the changes with `osc ci`
