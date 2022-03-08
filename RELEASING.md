@@ -10,16 +10,16 @@
 
 ## If there are no new Java dependencies
 
-6. Branch `subscription-matcher` from `systemsmanagement:Uyuni:Master` checkout the package, and go to the checkout.
-7. Run `SMVER=X.YY; wget https://github.com/openSUSE/subscription-matcher/archive/v${SMVER}.tar.gz && tar -xzf v${SMVER}.tar.gz && mv subscription-matcher-${SMVER} subscription-matcher && tar -czf subscription-matcher.tar.gz subscription-matcher && rm -rf subscription-matcher v${SMVER}.tar.gz` (replace X.YY with the version you have at pom.xml)
-8. Change the version at subscription-matcher.spec
-9. Run `osc vc` and add changes
-10. Run `osc build` to check that the package is building
-11. Commit the changes with `osc ci`
-12. Verify that the package is still building in your branch
-13. Run `osc sr` to prepare a submit request
-14. Repeat for the 6-13 for the required `Devel:Galaxy:Manager:[Head|X.Y]` codestreams.
-15. Ping the release engineer.
+1. Branch `subscription-matcher` from `systemsmanagement:Uyuni:Master` checkout the package, and go to the checkout.
+2. Run `SMVER=X.YY; wget https://github.com/openSUSE/subscription-matcher/archive/v${SMVER}.tar.gz && tar -xzf v${SMVER}.tar.gz && mv subscription-matcher-${SMVER} subscription-matcher && tar -czf subscription-matcher.tar.gz subscription-matcher && rm -rf subscription-matcher v${SMVER}.tar.gz` (replace X.YY with the version you have at pom.xml)
+3. Change the version at subscription-matcher.spec
+4. Run `osc vc` and add changes
+5. Run `osc build` to check that the package is building
+6. Commit the changes with `osc ci`
+7. Verify that the package is still building in your branch
+8. Run `osc sr` to prepare a submit request
+9. Repeat for the 6-13 for the required `Devel:Galaxy:Manager:[Head|X.Y]` codestreams.
+10. Ping the release engineer.
 
 NOTE: `osc` only works by default for the public OBS instance (build.opensuse.org). Adjust your command to work with the internal one for `Devel:Galaxy:Manager:*` codestreams.
 
@@ -28,19 +28,19 @@ NOTE: `osc` only works by default for the public OBS instance (build.opensuse.or
 1. Use [tetra](https://github.com/moio/tetra) to generate the main package and the kit package. Remember to adjust the SPEC
 
 For Head and Uyuni:
-2. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:Kit`, checkout and go to the checkout.
-3. Copy the spec, and tarball to the checkout of `subscription-macher-kit`
-5. Adjust the changelog with `osc vc`
-6. Commit the changes with `osc ci`
-7. Run `osc sr` to prepare a submit request
-8. Verify that the package is still building in your branch
-9. Run `osc sr` to prepare a submit request, and ping the Release Engineer
-10. Branch `subscription-macher` from `Devel:Galaxy:Manager:Head`, checkout and go to the checkout.
-11. Copy the spec, and tarball to the checkout of `subscription-macher`.
-12. Adjust the changelog with `osc vc`
-13. Commit the changes with `osc ci`
-14. Run `osc sr` to prepare a submit request
-15. Repeaat 10-14 for Uyuni.
+1. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:Kit`, checkout and go to the checkout.
+2. Copy the spec, and tarball to the checkout of `subscription-macher-kit`
+3. Adjust the changelog with `osc vc`
+4. Commit the changes with `osc ci`
+5. Run `osc sr` to prepare a submit request
+6. Verify that the package is still building in your branch
+7. Run `osc sr` to prepare a submit request, and ping the Release Engineer
+8. Branch `subscription-macher` from `Devel:Galaxy:Manager:Head`, checkout and go to the checkout.
+9. Copy the spec, and tarball to the checkout of `subscription-macher`.
+10. Adjust the changelog with `osc vc`
+11. Commit the changes with `osc ci`
+12. Run `osc sr` to prepare a submit request
+13. Repeaat 10-14 for Uyuni.
 
 For maintained versions of SUSE Manager (X.Y): 
 1. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:X.Y`, checkout and go to the checkout. If the package doesn't exist, it's because it was never changed since X.Y GA. Branch it from `SUSE:SLE-15-SP<N>:ZUpdate:Products:Manager<XY>`, and when you do the submit request later, make sure you do it against `Devel:Galaxy:Manager:Head:X.Y
