@@ -10,20 +10,46 @@
 
 ## If there are no new Java dependencies
 
-6. Proceed to your working copy of systemsmanagement:Uyuni:Master and the package subscription matcher
+6. Branch `subscription-matcher` from `systemsmanagement:Uyuni:Master` checkout the package, and go to the checkout.
 7. Run `SMVER=X.YY; wget https://github.com/openSUSE/subscription-matcher/archive/v${SMVER}.tar.gz && tar -xzf v${SMVER}.tar.gz && mv subscription-matcher-${SMVER} subscription-matcher && tar -czf subscription-matcher.tar.gz subscription-matcher && rm -rf subscription-matcher v${SMVER}.tar.gz` (replace X.YY with the version you have at pom.xml)
 8. Change the version at subscription-matcher.spec
 9. Run `osc vc` and add changes
 10. Run `osc build` to check that the package is building
 11. Commit the changes with `osc ci`
-12. Copypac the package to all the Devel:Galaxy:Manager:X.Y projects with maintenance, with `iosc copypac openSUSE.org:systemsmanagement:Uyuni:Master subscription-matcher Devel:Galaxy:Manager:X.Y` or `osc -A https://api.suse.de copypac openSUSE.org:systemsmanagement:Uyuni:Master subscription-matcher Devel:Galaxy:Manager:X.Y`
+12. Verify that the package is still building in your branch
+13. Run `osc sr` to prepare a submit request
+14. Repeat for the 6-13 for the required `Devel:Galaxy:Manager:[Head|X.Y]` codestreams.
+15. Ping the release engineer.
 
 ## If there are new Java dependencies
 
-6. Use [tetra](https://github.com/moio/tetra) to generate the main package and the kit package. Remember to adjust the SPEC file and changelog
-7. Copy the main package to your working copy of Devel:Galaxy:Manager:Head and the kit package to your working copy of Devel:Galaxy:Manager:Head:Kit
-8. Commit both packages with `iosc ci` if you have the alias or `osc -A https://api.suse.de` otherwise
-9. Copypac the main package to systemsmanagement:Uyuni:Master with `iosc copypac -t https://api.opensuse.org/ Devel:Galaxy:Manager:Head subscription-matcher systemsmanagement:Uyuni:Master` or `osc -A https://api.suse.de copypac -t https://api.opensuse.org/ Devel:Galaxy:Manager:Head subscription-matcher systemsmanagement:Uyuni:Master`
-10. Copypac the main package and the kit to all other Devel:Galaxy:Manager:X.Y projects with maintenance
+1. Use [tetra](https://github.com/moio/tetra) to generate the main package and the kit package. Remember to adjust the SPEC
 
-During submission time for SUSE Manager remember you will need to submit both the main and the kit packages.
+For Head and Uyuni:
+2. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:Kit`, checkout and go to the checkout.
+3. Copy the spec, and tarball to the checkout of `subscription-macher-kit`
+5. Adjust the changelog with `osc vc`
+6. Commit the changes with `osc ci`
+7. Run `osc sr` to prepare a submit request
+8. Verify that the package is still building in your branch
+9. Run `osc sr` to prepare a submit request, and ping the Release Engineer
+10. Branch `subscription-macher` from `Devel:Galaxy:Manager:Head`, checkout and go to the checkout.
+11. Copy the spec, and tarball to the checkout of `subscription-macher`.
+12. Adjust the changelog with `osc vc`
+13. Commit the changes with `osc ci`
+14. Run `osc sr` to prepare a submit request
+15. Repeaat 10-14 for Uyuni.
+
+For maintained versions of SUSE Manager (X.Y): 
+1. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:X.Y`, checkout and go to the checkout.
+2. Copy the spec, and tarball to the checkout of `subscription-macher-kit`
+3. Adjust the changelog with `osc vc`
+4. Commit the changes with `osc ci`
+5. Run `osc sr` to prepare a submit request
+6. Branch `subscription-macher` from `Devel:Galaxy:Manager:Head:X.Y`, checkout and go to the checkout.
+7. Copy the spec, and tarball to the checkout of `subscription-macher`
+8. Adjust the changelog with `osc vc`
+9. Commit the changes with `osc ci`
+10. Run `osc sr` to prepare a submit request
+11. Repeat 1-10 for the rest of affected SUSE Manager versions.
+
