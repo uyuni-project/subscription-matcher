@@ -21,6 +21,8 @@
 14. Repeat for the 6-13 for the required `Devel:Galaxy:Manager:[Head|X.Y]` codestreams.
 15. Ping the release engineer.
 
+NOTE: `osc` only works by default for the public OBS instance (build.opensuse.org). Adjust your command to work with the internal one for `Devel:Galaxy:Manager:*` codestreams.
+
 ## If there are new Java dependencies
 
 1. Use [tetra](https://github.com/moio/tetra) to generate the main package and the kit package. Remember to adjust the SPEC
@@ -41,7 +43,7 @@ For Head and Uyuni:
 15. Repeaat 10-14 for Uyuni.
 
 For maintained versions of SUSE Manager (X.Y): 
-1. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:X.Y`, checkout and go to the checkout.
+1. Branch `subscription-macher-kit` from `Devel:Galaxy:Manager:Head:X.Y`, checkout and go to the checkout. If the package doesn't exist, it's because it was never changed since X.Y GA. Branch it from `SUSE:SLE-15-SP<N>:ZUpdate:Products:Manager<XY>`, and when you do the submit request later, make sure you do it against `Devel:Galaxy:Manager:Head:X.Y
 2. Copy the spec, and tarball to the checkout of `subscription-macher-kit`
 3. Adjust the changelog with `osc vc`
 4. Commit the changes with `osc ci`
@@ -53,3 +55,4 @@ For maintained versions of SUSE Manager (X.Y):
 10. Run `osc sr` to prepare a submit request
 11. Repeat 1-10 for the rest of affected SUSE Manager versions.
 
+NOTE: `osc` only works by default for the public OBS instance (build.opensuse.org). Adjust your command to work with the internal one for `Devel:Galaxy:Manager:*` codestreams.
