@@ -10,4 +10,4 @@ else
     ANTLR=antlr-runtime-3
 fi
 
-exec java -cp $(build-classpath $ANTLR commons-io commons-lang commons-lang3 commons-math3 commons-cli commons-csv drools-compiler drools-core ecj google-gson guava kie-api kie-internal kie-soup-commons kie-soup-project-datamodel-commons kie-soup-maven-support log4j/log4j-api log4j/log4j-core log4j/log4j-slf4j-impl mvel2 optaplanner-core slf4j/api xstream xmlpull xpp3 protobuf reflections subscription-matcher) -server -Xmx2G ${EXTRA_ARGS} com.suse.matcher.Main "$@"
+exec java -cp $(build-classpath $ANTLR commons-io commons-lang3 commons-math3 commons-cli commons-csv drools-compiler drools-core ecj google-gson guava kie-api kie-internal kie-soup-commons kie-soup-project-datamodel-commons kie-soup-maven-support log4j/log4j-api log4j/log4j-core log4j/log4j-slf4j-impl mvel2 optaplanner-core slf4j/api xstream xmlpull xpp3 protobuf reflections subscription-matcher) -server -Xmx2G ${EXTRA_ARGS} com.suse.matcher.Main "$@"
