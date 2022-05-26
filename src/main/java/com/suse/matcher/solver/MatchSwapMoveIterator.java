@@ -20,13 +20,10 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import com.suse.matcher.facts.PotentialMatch;
-import com.suse.matcher.solver.Assignment;
-import com.suse.matcher.solver.Match;
-import com.suse.matcher.solver.MatchMove;
 
 import com.google.common.collect.Streams;
 
-import org.apache.commons.math3.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.optaplanner.core.impl.heuristic.move.Move;
 
 import java.util.ArrayList;
@@ -103,7 +100,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
                         e -> Streams.zip(
                                 e.getValue().getOrDefault(true, Collections.emptyList()).stream(),
                                 e.getValue().getOrDefault(false, Collections.emptyList()).stream(),
-                                (v1, v2) -> new Pair<>(v1, v2)
+                                (v1, v2) -> Pair.of(v1, v2)
                         ).collect(toList())
                 ));
     }
@@ -123,8 +120,8 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
 
         // pick the matches to change
         Pair<PotentialMatch, PotentialMatch> next = iterator.next();
-        Match match1 = idMap.get(next.getFirst().groupId);
-        Match match2 = idMap.get(next.getSecond().groupId);
+        Match match1 = idMap.get(next.getLeft().groupId);
+        Match match2 = idMap.get(next.getRight().groupId);
 
         // swap their "confirmed" flag
         matches.add(match1);

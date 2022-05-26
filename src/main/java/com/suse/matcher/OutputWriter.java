@@ -20,7 +20,7 @@ import com.suse.matcher.solver.Assignment;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.math3.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Level;
 
 import java.io.File;
@@ -209,7 +209,7 @@ public class OutputWriter {
         // prepare map from (system id, product id) to Match object
         Map<Pair<Long, Long>, JsonMatch> matchMap = new HashMap<>();
         for (JsonMatch match : confirmedMatchFacts) {
-            matchMap.put(new Pair<>(match.getSystemId(), match.getProductId()), match);
+            matchMap.put(Pair.of(match.getSystemId(), match.getProductId()), match);
         }
 
         // prepare header
@@ -220,7 +220,7 @@ public class OutputWriter {
              CSVPrinter printer = new CSVPrinter(writer, csvFormat)) {
             // create map of product id -> set of systems ids with this product and filter out successful matches
             Map<Long, Set<Long>> unmatchedProductSystems = installedProducts.stream()
-                    .filter(sp -> matchMap.get(new Pair<>(sp.systemId, sp.productId)) == null)
+                    .filter(sp -> matchMap.get(Pair.of(sp.systemId, sp.productId)) == null)
                     .collect(groupingBy(
                             InstalledProduct::getProductId,
                             mapping(InstalledProduct::getSystemId, toSet())));
