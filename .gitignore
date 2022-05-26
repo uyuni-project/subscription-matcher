@@ -1,4 +1,7 @@
-.settings
+.settings/
+.checkstyle
+.classpath
+.project
 bin
 target
 drools.log
@@ -6,3 +9,4 @@ drools.log
 *.orig
 subscription-matcher.iml
 .idea/
+.vscode/
