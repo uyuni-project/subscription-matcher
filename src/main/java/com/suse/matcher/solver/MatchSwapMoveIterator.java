@@ -16,24 +16,21 @@
 package com.suse.matcher.solver;
 
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import com.suse.matcher.facts.PotentialMatch;
-
-import com.google.common.collect.Streams;
+import com.suse.matcher.util.CollectionUtils;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.optaplanner.core.impl.heuristic.move.Move;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
-import java.util.stream.Collector;
 
 /**
  * Generates {@link MatchMove}s.
@@ -79,30 +76,17 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
                         groupingBy(
                                 pm -> idMap.get(pm.groupId).confirmed,
                                 TreeMap::new,
-                                toShuffledList(randomIn)
+                                CollectionUtils.toShuffledList(randomIn)
                         )));
 
-        // subscription id -> list of pairs of matches containing the subscription, such that a confirmed match
-        // is on the left and not confirmed match is on the right in the match
-        Map<Long, List<Pair<PotentialMatch, PotentialMatch>>> zipped = zip(subscriptionMatches);
-
-        // transform to a list of [confirmed match, unconfirmed match] pairs of matches with same subscription
-        List<Pair<PotentialMatch, PotentialMatch>> pairs = zipped.values().stream().flatMap(c -> c.stream()).collect(toList());
-        Collections.shuffle(pairs, randomIn);
-        iterator = pairs.iterator();
-    }
-
-    // zip potential matches in the map into pairs of [confirmed, not confirmed] matches
-    private static Map<Long, List<Pair<PotentialMatch, PotentialMatch>>> zip(Map<Long, Map<Boolean, List<PotentialMatch>>> map) {
-        return map.entrySet().stream()
-                .collect(toMap(
-                        e -> e.getKey(),
-                        e -> Streams.zip(
-                                e.getValue().getOrDefault(true, Collections.emptyList()).stream(),
-                                e.getValue().getOrDefault(false, Collections.emptyList()).stream(),
-                                (v1, v2) -> Pair.of(v1, v2)
-                        ).collect(toList())
-                ));
+        // Starting from the subscription id -> map of matches, build a shuffled list of pairs of matches containing the
+        // subscription, such that a confirmed match is on the left and not confirmed match is on the right in the match
+        iterator = subscriptionMatches.values()
+                                      .stream()
+                                      .map(map -> CollectionUtils.zip(map.get(true), map.get(false), Pair::of))
+                                      .flatMap(Collection::stream)
+                                      .collect(CollectionUtils.toShuffledList(randomIn))
+                                      .iterator();
     }
 
     /** {@inheritDoc} */
@@ -153,19 +137,4 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
         return new MatchMove(matches, states);
     }
 
-    /**
-     * Custom toList collector that shuffles the list after creating it
-     *
-     * @param random the random numbers generator
-     * @param <T> the type of the list
-     * @return the shuffled list
-     */
-    private static <T> Collector<T, ?, List<T>> toShuffledList(Random random) {
-        return Collector.of(
-                ArrayList::new,
-                List::add,
-                (left, right) -> { left.addAll(right); return left; },
-                list -> { Collections.shuffle(list, random); return (List<T>) list; }
-        );
-    }
 }
