@@ -13,15 +13,14 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Optional;
 
 /**
@@ -59,8 +58,8 @@ public class Main {
 
             // load input data
             String inputString = commandLine.hasOption('i') ?
-                    FileUtils.readFileToString(new File(commandLine.getOptionValue('i'))) :
-                    IOUtils.toString(System.in);
+                Files.readString(Path.of(commandLine.getOptionValue('i'))) :
+                new String(System.in.readAllBytes(), Charset.defaultCharset());
 
             // save a copy of input data in the output directory
             writer.writeJsonInput(inputString);

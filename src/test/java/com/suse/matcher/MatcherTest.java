@@ -6,7 +6,6 @@ import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.solver.Assignment;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.BeforeClass;
@@ -18,6 +17,7 @@ import org.junit.runners.Parameterized.Parameters;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -82,12 +82,13 @@ public class MatcherTest {
      * @throws IOException if an unexpected condition happens
      */
     private static String getString(int scenarioNumber, String fileName) throws IOException {
-        InputStream is = MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber
-                + "/" + fileName);
-        if (is == null) {
-            throw new FileNotFoundException();
+        try (InputStream is = MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber + "/" + fileName)) {
+            if (is == null) {
+                throw new FileNotFoundException();
+            }
+
+            return new String(is.readAllBytes(), Charset.defaultCharset());
         }
-        return IOUtils.toString(is);
     }
 
     /**

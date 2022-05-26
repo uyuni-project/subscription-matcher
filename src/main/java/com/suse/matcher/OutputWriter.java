@@ -19,15 +19,19 @@ import com.suse.matcher.solver.Assignment;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -45,6 +49,8 @@ import java.util.stream.Stream;
  * Writes output (to disk or standard output).
  */
 public class OutputWriter {
+
+    private static final Logger LOGGER = LogManager.getLogger(OutputWriter.class);
 
     // filenames
     private static final String JSON_INPUT_FILE = "input.json";
@@ -88,7 +94,13 @@ public class OutputWriter {
         writeCSVUnmatchedProductReport(assignment);
         writeCSVMessageReport(assignment);
 
-        FileUtils.deleteQuietly(new File(outputDirectory, JSON_OUTPUT_ALL_FILE));
+        try {
+            Files.deleteIfExists(Path.of(outputDirectory, JSON_OUTPUT_ALL_FILE));
+        }
+        catch (Exception ex) {
+            LOGGER.error("Unable to delete file {} in directory {}: {}", JSON_OUTPUT_ALL_FILE, outputDirectory, ex.getMessage());
+        }
+
         logLevel.filter(l -> l.isMoreSpecificThan(Level.DEBUG)).ifPresent((l) -> writeAllFacts(assignment));
     }
 
@@ -109,7 +121,7 @@ public class OutputWriter {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void writeJsonInput(String input) throws IOException {
-        FileUtils.write(new File(outputDirectory, JSON_INPUT_FILE), input);
+        Files.writeString(Path.of(outputDirectory, JSON_INPUT_FILE), input, Charset.defaultCharset());
     }
 
     /**
