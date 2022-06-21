@@ -33,13 +33,13 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -245,7 +245,7 @@ public class OutputWriter {
 
             // cant use java 8 forEach as printer throws a checked exception
             for (CSVOutputUnmatchedProduct csv : unmatchedProductsCsvs) {
-                Collections.sort(csv.getUnmatchedSystems(), ((s1, s2) -> s1.name.compareTo(s2.name)));
+                csv.getUnmatchedSystems().sort((Comparator.comparing(s -> Objects.requireNonNullElse(s.name, ""))));
                 printer.printRecords(csv.getCSVRows());
             }
         }
