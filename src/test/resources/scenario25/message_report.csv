@@ -1,0 +1,5 @@
+Message,Additional data key,Additional data value
+hb_merge_subscriptions,new_subscription_id,1
+"",old_subscription_id,2
+unsatisfied_pinned_match,subscription_id,1
+"",system_id,101

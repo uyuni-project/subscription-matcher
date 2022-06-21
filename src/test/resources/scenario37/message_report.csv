@@ -1,0 +1,10 @@
+Message,Additional data key,Additional data value
+adjust_pinned_match,new_subscription_id,1
+"",old_subscription_id,3
+"",system_id,100
+hb_merge_subscriptions,new_subscription_id,1
+"",old_subscription_id,2
+hb_merge_subscriptions,new_subscription_id,1
+"",old_subscription_id,3
+unsatisfied_pinned_match,subscription_id,1
+"",system_id,100

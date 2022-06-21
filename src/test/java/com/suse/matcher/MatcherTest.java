@@ -1,6 +1,9 @@
 package com.suse.matcher;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
@@ -14,13 +17,23 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Tests {@link Matcher}.
@@ -29,16 +42,19 @@ import java.util.Optional;
 public class MatcherTest {
 
     /** The matcher object under test. */
-    private Matcher matcher;
+    private final Matcher matcher;
+
+    //** Writer to create the output CSVs */
+    private final OutputWriter outputWriter;
 
     /** Input. */
-    private JsonInput input;
+    private final JsonInput input;
 
     /** Expected output **/
-    private JsonOutput expectedOutput;
+    private final JsonOutput expectedOutput;
 
     /** The scenario number. */
-    private int scenarioNumber;
+    private final int scenarioNumber;
 
     /** Logger instance. */
     private final Logger logger = LogManager.getLogger(MatcherTest.class);
@@ -104,6 +120,16 @@ public class MatcherTest {
         expectedOutput = expectedOutputIn;
         scenarioNumber = scenarioNumberIn;
         Drools.resetIdMap();
+
+        Path outputPath = Paths.get("target/output/scenario" + scenarioNumberIn);
+        try {
+            Files.createDirectories(outputPath);
+        } catch(IOException ex) {
+            logger.error("Unable to create the required directory structure: {}", outputPath, ex);
+            throw new IllegalStateException("Unable to create directory structure: " + outputPath);
+        }
+
+        outputWriter = new OutputWriter(Optional.of(outputPath.toString()), Optional.of(','));
     }
 
     @BeforeClass
@@ -120,6 +146,14 @@ public class MatcherTest {
 
         Assignment assignment = matcher.match(input);
         JsonOutput actualOutput = FactConverter.convertToOutput(assignment);
+
+        try {
+            outputWriter.writeOutput(assignment, Optional.empty());
+        }
+        catch (IOException ex) {
+            logger.error("Unable to write output csv", ex);
+            fail("Unable to write output csv");
+        }
 
         JsonIO io = new JsonIO();
 
@@ -138,5 +172,33 @@ public class MatcherTest {
         assertEquals("scenario" + scenarioNumber + " subscriptions",
                 io.toJson(expectedOutput.getSubscriptions()),
                 io.toJson(actualOutput.getSubscriptions()));
+
+        // Checking CSV
+        Stream.of("message_report.csv", "subscription_report.csv", "unmatched_product_report.csv").forEach(csvFile -> {
+            URL expectedCsvURL = MatcherTest.class.getResource("/scenario" + scenarioNumber + "/" + csvFile);
+            assertNotNull("scenario" + scenarioNumber + " cannot load resource for csv " + csvFile, expectedCsvURL);
+
+            Path actualFile = Paths.get("target/output/scenario" + scenarioNumber).resolve(csvFile);
+            assertTrue("scenario" + scenarioNumber + " csv " + csvFile + " not generated", Files.exists(actualFile));
+
+            try (InputStream stream = expectedCsvURL.openStream()) {
+                BufferedReader streamReader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+
+                List<String> actualContent = Files.readAllLines(actualFile, StandardCharsets.UTF_8);
+                List<String> expectedContent = streamReader.lines().collect(Collectors.toList());
+
+                // Verify that the header of both files match
+                assertEquals("scenario" + scenarioNumber + " csv header " + csvFile,
+                    expectedContent.get(0), actualContent.get(0));
+
+                // Verify the content is the same, apart from the order
+                assertEquals("scenario" + scenarioNumber + " csv content " + csvFile,
+                    expectedContent.stream().skip(1).sorted().collect(Collectors.joining("\n")),
+                    actualContent.stream().skip(1).sorted().collect(Collectors.joining("\n")));
+            } catch(IOException ex) {
+                logger.error("Unable to verify CSV files", ex);
+                fail("Unable to verify CSV files");
+            }
+        });
     }
 }
