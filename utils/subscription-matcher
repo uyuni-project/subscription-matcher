@@ -1,13 +1,80 @@
 #!/bin/bash
 
-EXTRA_ARGS=""
-java -version 2>&1 | grep IBM > /dev/null && { EXTRA_ARGS="-Xdump:heap:file=/var/crash/heapdump.%Y%m%d.%H%M%S.%pid.%seq.phd -Xdump:java:file=/var/crash/javacore.%Y%m%d.%H%M%S.%pid.%seq.txt -Xdump:snap:file=/var/crash/Snap.%Y%m%d.%H%M%S.%pid.%seq.trc -Xdump:system:file=/var/crash/core.%Y%m%d.%H%M%S.%pid.%seq.dmp"; }
+# Retrieve the jar path using build-classpath with using the first package name that works
+function jarFromName {
+    local ALTERNATIVE_NAMES=$*
+    local JAR
 
-# Verify the correct name of the antlr jar (it depends on the package providing it)
-if build-classpath antlr3-runtime >/dev/null 2>&1; then
-    ANTLR=antlr3-runtime
-else
-    ANTLR=antlr-runtime-3
+    while [[ $# -gt 0 ]]
+    do
+        if JAR=$(build-classpath "$1" 2> /dev/null); then
+            echo "$JAR"
+            return 0
+        else
+            shift
+        fi
+    done
+
+    echo "Unable to locate a dependency for any of the specified package names: $ALTERNATIVE_NAMES" >&2
+    return 1
+}
+
+# Build the classpath string from a list of dependencies with alternative package names
+function buildClassPath {
+    local JARS=()
+
+    while [[ $# -gt 0 ]]
+    do
+        # Set IFS as the alternative package names are comma separated
+        if ! JARS+=($(IFS=", "; jarFromName $1)); then
+            echo ""
+            return 1
+        fi
+
+        shift
+    done
+
+    # Concatenate all the jar paths with a colon
+    (IFS=":"; echo "${JARS[*]}")
+}
+
+
+EXTRA_ARGS=""
+
+DEPENDENCIES=(
+    "antlr3-runtime, anlr-runtime-3"
+    "apache-commons-lang3, commons-lang3"
+    "apache-commons-math, commons-math3"
+    "apache-commons-cli, commons-cli"
+    "apache-commons-csv, commons-csv"
+    "drools-compiler"
+    "drools-core"
+    "ecj"
+    "google-gson"
+    "guava"
+    "kie-api"
+    "kie-internal"
+    "kie-soup-commons"
+    "kie-soup-project-datamodel-commons"
+    "kie-soup-maven-support"
+    "log4j/log4j-api"
+    "log4j/log4j-core"
+    "log4j/log4j-slf4j-impl"
+    "mvel2"
+    "optaplanner-core"
+    "slf4j/api"
+    "xstream"
+    "xmlpull"
+    "xpp3"
+    "protobuf"
+    "reflections"
+    "subscription-matcher"
+)
+
+
+# Build the classpath, fail if some jars are missing
+if ! CLASSPATH=$(buildClassPath "${DEPENDENCIES[@]}"); then
+    exit 1
 fi
 
-exec java -cp $(build-classpath $ANTLR commons-lang3 commons-math3 commons-cli commons-csv drools-compiler drools-core ecj google-gson guava kie-api kie-internal kie-soup-commons kie-soup-project-datamodel-commons kie-soup-maven-support log4j/log4j-api log4j/log4j-core log4j/log4j-slf4j-impl mvel2 optaplanner-core slf4j/api xstream xmlpull xpp3 protobuf reflections subscription-matcher) -server -Xmx2G ${EXTRA_ARGS} com.suse.matcher.Main "$@"
+exec java -cp "$CLASSPATH" -server -Xmx2G $EXTRA_ARGS com.suse.matcher.Main "$@"
