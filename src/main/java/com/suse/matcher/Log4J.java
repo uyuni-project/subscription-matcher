@@ -1,8 +1,10 @@
 package com.suse.matcher;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender;
-import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.builder.api.AppenderComponentBuilder;
 import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
 import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
@@ -11,13 +13,17 @@ import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 
 import java.nio.file.Paths;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Facade on the log4j logging library.
- *
  * Configures logging for the application.
  */
 public class Log4J {
+
+    private Log4J() {
+        // Prevent instantiation
+    }
 
     /**
      * Initialize the Log4j 2 configuration.
@@ -74,7 +80,16 @@ public class Log4J {
         // DefaultAgenda is VERY noisy, let's override the user settings
         builder.add(builder.newLogger("org.drools.core.common.DefaultAgenda", Level.WARN));
 
-        Configurator.initialize(builder.build());
+        Configuration configuration = builder.build();
+
+        // Update the configuration in the context. There are multiple contexts because slf4j binds loggers by
+        // name, so the log4j compatibility layer cannot use the classloader to define the context
+        Stream.of(LogManager.getContext(false), LogManager.getContext(ClassLoader.getSystemClassLoader(), false))
+              .map(LoggerContext.class::cast)
+              .forEach(context -> {
+                  context.reconfigure(configuration);
+                  context.updateLoggers();
+              });
     }
 
 }
