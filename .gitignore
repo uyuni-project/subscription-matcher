@@ -10,3 +10,12 @@ drools.log
 subscription-matcher.iml
 .idea/
 .vscode/
+
+# Ignore input/output files from a local run
+/input.json
+/output.json
+/output-all.json
+/log/subscription-matcher.log*
+/message_report.csv
+/subscription_report.csv
+/unmatched_product_report.csv
