@@ -224,7 +224,7 @@ class MatcherTest {
      * @return the full resources path, as accessible from the {@link MatcherTest} class.
      */
     private static String getResourcePath(int scenarioNumber, String file) {
-        return "/scenario" + scenarioNumber + "/" + file;
+        return "scenarios/" + scenarioNumber + "/" + file;
     }
 
 
@@ -234,7 +234,7 @@ class MatcherTest {
      * @return the output path
      */
     private static Path getOutputPath(int scenarioNumber) {
-        return Paths.get("target", "output", "scenario" + scenarioNumber);
+        return Paths.get("target", "output", "scenarios", String.valueOf(scenarioNumber));
     }
 
     /**
