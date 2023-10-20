@@ -1,24 +1,25 @@
 package com.suse.matcher;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.solver.Assignment;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,9 +29,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,148 +38,67 @@ import java.util.stream.Stream;
 /**
  * Tests {@link Matcher}.
  */
-@RunWith(Parameterized.class)
-public class MatcherTest {
+class MatcherTest {
 
-    /** The matcher object under test. */
-    private final Matcher matcher;
+    private static final Logger LOGGER = LogManager.getLogger(MatcherTest.class);
 
-    //** Writer to create the output CSVs */
-    private final OutputWriter outputWriter;
+    // CSV files to be checked
+    private static final List<String> CSV_FILES = List.of(
+        "message_report.csv",
+        "subscription_report.csv",
+        "unmatched_product_report.csv"
+    );
 
-    /** Input. */
-    private final JsonInput input;
+    // Utility to convert from/to JSON
+    private static final JsonIO JSON_IO = new JsonIO();
 
-    /** Expected output **/
-    private final JsonOutput expectedOutput;
 
-    /** The scenario number. */
-    private final int scenarioNumber;
-
-    /** Logger instance. */
-    private final Logger logger = LogManager.getLogger(MatcherTest.class);
-
-    /**
-     * Loads test data, instantiating multiple {@link MatcherTest} objects
-     * with files loaded from resources/subscriptions* JSON files.
-     *
-     * @return a collection of parameters to the constructor of this class
-     * @throws Exception in case anything goes wrong
-     */
-    @Parameters(name = "Scenario #{2}") // name is the number of the scenario
-    public static Collection<Object[]> loadTestData() throws Exception {
-        JsonIO io = new JsonIO();
-        Collection<Object[]> result = new LinkedList<>();
-        int i = 1;
-        boolean moreFiles = true;
-        while (moreFiles) {
-            try {
-                String inputStr = getString(i, "input.json");
-                result.add(new Object[] {
-                    io.loadInput(inputStr),
-                    io.loadOutput(getString(i, "output.json")),
-                    i
-                });
-                i++;
-            }
-            catch (FileNotFoundException e) {
-                moreFiles = false;
-            }
-        }
-        return result;
+    @BeforeAll
+    static void initAll() {
+        Log4J.initialize(Optional.of(Level.DEBUG), Optional.empty());
     }
 
-    /**
-     * Returns a string for a JSON scenario file
-     *
-     * @param scenarioNumber the i
-     * @param fileName the filename
-     * @return the string
-     * @throws IOException if an unexpected condition happens
-     */
-    private static String getString(int scenarioNumber, String fileName) throws IOException {
-        try (InputStream is = MatcherTest.class.getResourceAsStream("/scenario" + scenarioNumber + "/" + fileName)) {
-            if (is == null) {
-                throw new FileNotFoundException();
-            }
-
-            return new String(is.readAllBytes(), Charset.defaultCharset());
-        }
-    }
-
-    /**
-     * Instantiates a new Matcher test.
-     *
-     * @param inputIn a JSON input data blob
-     * @param expectedOutputIn the expected output
-     * @param scenarioNumberIn the scenario number
-     */
-    public MatcherTest(JsonInput inputIn, JsonOutput expectedOutputIn, int scenarioNumberIn) {
-        matcher = new Matcher(true);
-        input = inputIn;
-        expectedOutput = expectedOutputIn;
-        scenarioNumber = scenarioNumberIn;
+    @BeforeEach
+    void init() {
         Drools.resetIdMap();
-
-        Path outputPath = Paths.get("target/output/scenario" + scenarioNumberIn);
-        try {
-            Files.createDirectories(outputPath);
-        } catch(IOException ex) {
-            logger.error("Unable to create the required directory structure: {}", outputPath, ex);
-            throw new IllegalStateException("Unable to create directory structure: " + outputPath);
-        }
-
-        outputWriter = new OutputWriter(Optional.of(outputPath.toString()), Optional.of(','));
-    }
-
-    @BeforeClass
-    public static void setUp() {
-        Log4J.initialize(Optional.empty(), Optional.empty());
     }
 
     /**
      * Tests against scenario data.
      */
-    @Test
-    public void test() {
-        logger.info("TESTING SCENARIO {}", scenarioNumber);
+    @DisplayName("Run test scenarios")
+    @ParameterizedTest(name = "{1}")
+    @MethodSource("listScenarios")
+    void testScenario(int scenarioNumber, String description) {
+        LOGGER.info("Executing {}", description);
+        Matcher matcher = new Matcher(true);
 
-        Assignment assignment = matcher.match(input);
+        Assignment assignment = matcher.match(getJsonInput(scenarioNumber));
         JsonOutput actualOutput = FactConverter.convertToOutput(assignment);
 
         try {
+            OutputWriter outputWriter = getOutputWriter(scenarioNumber);
             outputWriter.writeOutput(assignment, Optional.empty());
         }
         catch (IOException ex) {
-            logger.error("Unable to write output csv", ex);
             fail("Unable to write output csv");
         }
 
-        JsonIO io = new JsonIO();
+        // Check the JSON output produced by the process
+        JsonOutput expectedOutput = getJsonOutput(scenarioNumber);
+        assertJsonEquals(expectedOutput.getTimestamp(), actualOutput.getTimestamp());
+        assertJsonEquals(expectedOutput.getMatches(), actualOutput.getMatches());
+        assertJsonEquals(expectedOutput.getSubscriptionPolicies(), actualOutput.getSubscriptionPolicies());
+        assertJsonEquals(expectedOutput.getMessages(), actualOutput.getMessages());
+        assertJsonEquals(expectedOutput.getSubscriptions(), actualOutput.getSubscriptions());
 
-        assertEquals("scenario" + scenarioNumber + " timestamp",
-                io.toJson(expectedOutput.getTimestamp()),
-                io.toJson(actualOutput.getTimestamp()));
-        assertEquals("scenario" + scenarioNumber + " matches",
-                io.toJson(expectedOutput.getMatches()),
-                io.toJson(actualOutput.getMatches()));
-        assertEquals("scenario" + scenarioNumber + " subscriptionPolices",
-                io.toJson(expectedOutput.getSubscriptionPolicies()),
-                io.toJson(actualOutput.getSubscriptionPolicies()));
-        assertEquals("scenario" + scenarioNumber + " messages",
-                io.toJson(expectedOutput.getMessages()),
-                io.toJson(actualOutput.getMessages()));
-        assertEquals("scenario" + scenarioNumber + " subscriptions",
-                io.toJson(expectedOutput.getSubscriptions()),
-                io.toJson(actualOutput.getSubscriptions()));
+        // Check all the CSV files
+        CSV_FILES.forEach(csvFile -> {
+            URL expectedCsvURL = MatcherTest.class.getResource(getResourcePath(scenarioNumber, csvFile));
+            assertNotNull(expectedCsvURL, "Cannot load resource for csv " + csvFile);
 
-        // Checking CSV
-        Stream.of("message_report.csv", "subscription_report.csv", "unmatched_product_report.csv").forEach(csvFile -> {
-            URL expectedCsvURL = MatcherTest.class.getResource("/scenario" + scenarioNumber + "/" + csvFile);
-            assertNotNull("scenario" + scenarioNumber + " cannot load resource for csv " + csvFile, expectedCsvURL);
-
-            Path actualFile = Paths.get("target/output/scenario" + scenarioNumber).resolve(csvFile);
-            assertTrue("scenario" + scenarioNumber + " csv " + csvFile + " not generated", Files.exists(actualFile));
+            Path actualFile = getOutputPath(scenarioNumber).resolve(csvFile);
+            assertTrue(Files.exists(actualFile), "Csv " + csvFile + " not generated");
 
             try (InputStream stream = expectedCsvURL.openStream()) {
                 BufferedReader streamReader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
@@ -188,17 +107,142 @@ public class MatcherTest {
                 List<String> expectedContent = streamReader.lines().collect(Collectors.toList());
 
                 // Verify that the header of both files match
-                assertEquals("scenario" + scenarioNumber + " csv header " + csvFile,
-                    expectedContent.get(0), actualContent.get(0));
+                assertEquals(expectedContent.get(0), actualContent.get(0), "Csv header " + csvFile + " do not match");
 
                 // Verify the content is the same, apart from the order
-                assertEquals("scenario" + scenarioNumber + " csv content " + csvFile,
-                    expectedContent.stream().skip(1).sorted().collect(Collectors.joining("\n")),
-                    actualContent.stream().skip(1).sorted().collect(Collectors.joining("\n")));
+                assertEquals(expectedContent.stream().skip(1).sorted().collect(Collectors.joining("\n")),
+                    actualContent.stream().skip(1).sorted().collect(Collectors.joining("\n")),
+                    "Csv content " + csvFile + "do not match");
             } catch(IOException ex) {
-                logger.error("Unable to verify CSV files", ex);
                 fail("Unable to verify CSV files");
             }
         });
+    }
+
+    /**
+     * Loads test data, instantiating multiple {@link MatcherTest} objects
+     * with files loaded from resources/subscriptions* JSON files.
+     *
+     * @return a collection of parameters to the constructor of this class
+     */
+    static Stream<Arguments> listScenarios() {
+        return Stream.iterate(1, MatcherTest::scenarioExists, i -> i + 1)
+            .map(scenarioNumber -> Arguments.of(scenarioNumber, getScenarioTitle(scenarioNumber)));
+    }
+
+    /**
+     * Checks if the given scenario exists
+     *
+     * @param scenarioNumber the scenario number
+     * @return true if the scenario is available.
+     */
+    private static boolean scenarioExists(int scenarioNumber) {
+        // Ensure all the required resources exists
+        return Stream.concat(Stream.of("input.json", "output.json", "README.md"), CSV_FILES.stream())
+            .map(file -> MatcherTest.class.getResource(getResourcePath(scenarioNumber, file)))
+            .noneMatch(Objects::isNull);
+    }
+
+    /**
+     * Returns the JSON input for the given scenario
+     * @param scenarioNumber the scenario number
+     * @return the provided JSON input for this scenario
+     */
+    private static JsonInput getJsonInput(int scenarioNumber) {
+        return JSON_IO.loadInput(getContentAsString(scenarioNumber, "input.json"));
+    }
+
+    /**
+     * Returns the JSON output for the given scenario
+     * @param scenarioNumber the scenario number
+     * @return the expected JSON output for this scenario
+     */
+    private static JsonOutput getJsonOutput(int scenarioNumber) {
+        return JSON_IO.loadOutput(getContentAsString(scenarioNumber, "output.json"));
+    }
+
+    /**
+     * Creates the output writer for the matching process result files
+     * @param scenarioNumber the scenario number
+     * @return the output writer
+     */
+    private static OutputWriter getOutputWriter(int scenarioNumber) {
+        Path outputPath = getOutputPath(scenarioNumber);
+
+        try {
+            Files.createDirectories(outputPath);
+        } catch(IOException ex) {
+            throw new IllegalStateException("Unable to create directory structure: " + outputPath);
+        }
+
+        return new OutputWriter(Optional.of(outputPath.toString()), Optional.of(','));
+    }
+
+    /**
+     * Retrieves the tille of the specified scenario
+     * @param scenarioNumber the scenario number
+     * @return the title as specified in rt
+     */
+    private static String getScenarioTitle(int scenarioNumber) {
+        URL resource = MatcherTest.class.getResource(getResourcePath(scenarioNumber, "README.md"));
+        if (resource == null) {
+            throw new IllegalStateException("Unable to find README.md for scenario " + scenarioNumber);
+        }
+
+        try (InputStream stream = resource.openStream()) {
+            BufferedReader streamReader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+            return streamReader.readLine();
+        } catch (Exception ex) {
+            throw new IllegalStateException("Unable to load README.md for scenario " + scenarioNumber);
+        }
+    }
+
+    /**
+     * Returns a string for a JSON scenario file
+     *
+     * @param scenarioNumber the i
+     * @param fileName the filename
+     * @return the content as string
+     */
+    private static String getContentAsString(int scenarioNumber, String fileName) {
+        URL resource = MatcherTest.class.getResource(getResourcePath(scenarioNumber, fileName));
+        if (resource == null) {
+            throw new IllegalStateException("Unable to find resource " + fileName + " for scenario " + scenarioNumber);
+        }
+
+        try (InputStream is = resource.openStream()) {
+            return new String(is.readAllBytes(), Charset.defaultCharset());
+        } catch (IOException ex) {
+            throw new IllegalStateException("Unable to read file " + fileName + " for scenario " + scenarioNumber);
+        }
+    }
+
+    /**
+     * Get the full resource path for the given scenario number and file
+     * @param scenarioNumber the scenario number
+     * @param file the file to retrieve
+     * @return the full resources path, as accessible from the {@link MatcherTest} class.
+     */
+    private static String getResourcePath(int scenarioNumber, String file) {
+        return "/scenario" + scenarioNumber + "/" + file;
+    }
+
+
+    /**
+     * Retrieves the output path for a given scenario
+     * @param scenarioNumber the scenario number
+     * @return the output path
+     */
+    private static Path getOutputPath(int scenarioNumber) {
+        return Paths.get("target", "output", "scenario" + scenarioNumber);
+    }
+
+    /**
+     * Asserts that the given object are converted to the same JSON
+     * @param expected the expected object
+     * @param actual the object to check
+     */
+    private static void assertJsonEquals(Object expected, Object actual) {
+        assertEquals(JSON_IO.toJson(expected), JSON_IO.toJson(actual));
     }
 }
