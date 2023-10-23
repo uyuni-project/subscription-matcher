@@ -38,9 +38,9 @@ import java.util.stream.Stream;
 /**
  * Tests {@link Matcher}.
  */
-class MatcherTest {
+class MatcherScenariosTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(MatcherTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(MatcherScenariosTest.class);
 
     // CSV files to be checked
     private static final List<String> CSV_FILES = List.of(
@@ -94,7 +94,7 @@ class MatcherTest {
 
         // Check all the CSV files
         CSV_FILES.forEach(csvFile -> {
-            URL expectedCsvURL = MatcherTest.class.getResource(getResourcePath(scenarioNumber, csvFile));
+            URL expectedCsvURL = MatcherScenariosTest.class.getResource(getResourcePath(scenarioNumber, csvFile));
             assertNotNull(expectedCsvURL, "Cannot load resource for csv " + csvFile);
 
             Path actualFile = getOutputPath(scenarioNumber).resolve(csvFile);
@@ -120,13 +120,13 @@ class MatcherTest {
     }
 
     /**
-     * Loads test data, instantiating multiple {@link MatcherTest} objects
+     * Loads test data, instantiating multiple {@link MatcherScenariosTest} objects
      * with files loaded from resources/subscriptions* JSON files.
      *
      * @return a collection of parameters to the constructor of this class
      */
     static Stream<Arguments> listScenarios() {
-        return Stream.iterate(1, MatcherTest::scenarioExists, i -> i + 1)
+        return Stream.iterate(1, MatcherScenariosTest::scenarioExists, i -> i + 1)
             .map(scenarioNumber -> Arguments.of(scenarioNumber, getScenarioTitle(scenarioNumber)));
     }
 
@@ -139,7 +139,7 @@ class MatcherTest {
     private static boolean scenarioExists(int scenarioNumber) {
         // Ensure all the required resources exists
         return Stream.concat(Stream.of("input.json", "output.json", "README.md"), CSV_FILES.stream())
-            .map(file -> MatcherTest.class.getResource(getResourcePath(scenarioNumber, file)))
+            .map(file -> MatcherScenariosTest.class.getResource(getResourcePath(scenarioNumber, file)))
             .noneMatch(Objects::isNull);
     }
 
@@ -184,7 +184,7 @@ class MatcherTest {
      * @return the title as specified in rt
      */
     private static String getScenarioTitle(int scenarioNumber) {
-        URL resource = MatcherTest.class.getResource(getResourcePath(scenarioNumber, "README.md"));
+        URL resource = MatcherScenariosTest.class.getResource(getResourcePath(scenarioNumber, "README.md"));
         if (resource == null) {
             throw new IllegalStateException("Unable to find README.md for scenario " + scenarioNumber);
         }
@@ -205,7 +205,7 @@ class MatcherTest {
      * @return the content as string
      */
     private static String getContentAsString(int scenarioNumber, String fileName) {
-        URL resource = MatcherTest.class.getResource(getResourcePath(scenarioNumber, fileName));
+        URL resource = MatcherScenariosTest.class.getResource(getResourcePath(scenarioNumber, fileName));
         if (resource == null) {
             throw new IllegalStateException("Unable to find resource " + fileName + " for scenario " + scenarioNumber);
         }
@@ -221,7 +221,7 @@ class MatcherTest {
      * Get the full resource path for the given scenario number and file
      * @param scenarioNumber the scenario number
      * @param file the file to retrieve
-     * @return the full resources path, as accessible from the {@link MatcherTest} class.
+     * @return the full resources path, as accessible from the {@link MatcherScenariosTest} class.
      */
     private static String getResourcePath(int scenarioNumber, String file) {
         return "scenarios/" + scenarioNumber + "/" + file;
