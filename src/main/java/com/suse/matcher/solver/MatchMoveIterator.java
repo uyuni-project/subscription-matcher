@@ -58,8 +58,8 @@ public class MatchMoveIterator implements Iterator<Move<Assignment>> {
     @Override
     public MatchMove next() {
         // prepare MatchMove's lists
-        ArrayList<Match> matches = new ArrayList<Match>();
-        ArrayList<Boolean> states = new ArrayList<Boolean>();
+        ArrayList<Match> matches = new ArrayList<>();
+        ArrayList<Boolean> states = new ArrayList<>();
 
         // pick the match to flip
         Match match = iterator.next();

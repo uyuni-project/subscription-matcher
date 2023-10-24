@@ -58,7 +58,7 @@ public class FactConverter {
      * @return a collection of facts
      */
     public static Collection<Object> convertToFacts(JsonInput input) {
-        Collection<Object> result = new LinkedList<Object>();
+        Collection<Object> result = new LinkedList<>();
 
         result.add(new Timestamp(input.getTimestamp()));
 
