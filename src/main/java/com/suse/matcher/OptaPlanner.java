@@ -33,6 +33,7 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.random.RandomType;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFilter;
+import org.optaplanner.core.impl.score.director.ScoreDirectorFactory;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
 
 import java.util.ArrayList;
@@ -66,19 +67,21 @@ public class OptaPlanner {
         }
 
         // init solver
-        Solver solver = initSolver(testing);
+        Solver<Assignment> solver = initSolver(testing);
 
         // solve problem
         long start = System.currentTimeMillis();
         solver.solve(unsolved);
         logger.info("Optimization phase took {}ms", System.currentTimeMillis() - start);
-        result = (Assignment) solver.getBestSolution();
+        result = solver.getBestSolution();
         logger.info("{} matches confirmed", result.getMatches().stream().filter(m -> m.confirmed).count());
 
         // show Penalty facts generated in Scores.drl using DroolsScoreDirector and re-calculating
         // the score of the best solution because facts generated dynamically are not available outside of this object
         if (logger.isDebugEnabled()) {
-            DroolsScoreDirector scoreDirector = (DroolsScoreDirector) solver.getScoreDirectorFactory().buildScoreDirector();
+            ScoreDirectorFactory<Assignment> scoreDirectorFactory = solver.getScoreDirectorFactory();
+
+            DroolsScoreDirector<Assignment> scoreDirector = (DroolsScoreDirector<Assignment>) scoreDirectorFactory.buildScoreDirector();
             scoreDirector.setWorkingSolution(scoreDirector.cloneSolution(result));
             scoreDirector.calculateScore();
             Collection<Penalty> penalties = scoreDirector.getKieSession().getObjects()
@@ -100,7 +103,7 @@ public class OptaPlanner {
      * @param testing true if running as a unit test, false otherwise
      */
     @SuppressWarnings("rawtypes")
-    private Solver initSolver(boolean testing) {
+    private Solver<Assignment> initSolver(boolean testing) {
         // init basic objects
         SolverFactory factory = SolverFactory.createEmpty();
         SolverConfig config = factory.getSolverConfig();

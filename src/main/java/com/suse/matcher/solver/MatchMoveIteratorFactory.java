@@ -10,28 +10,25 @@ import java.util.Random;
 /**
  * A factory for {@link MatchMoveIterator}s.
  */
-public class MatchMoveIteratorFactory implements MoveIteratorFactory {
+public class MatchMoveIteratorFactory implements MoveIteratorFactory<Assignment> {
 
     /** {@inheritDoc} */
     @Override
-    public long getSize(ScoreDirector director) {
+    public long getSize(ScoreDirector<Assignment> director) {
         // we generate exactly one move per Match
-        return getAssignment(director).getMatches().size();
+        return director.getWorkingSolution().getMatches().size();
     }
 
     /** {@inheritDoc} */
     @Override
-    public Iterator<Move> createRandomMoveIterator(ScoreDirector director, Random random) {
-        return new MatchMoveIterator(getAssignment(director), random);
+    public Iterator<Move<Assignment>> createRandomMoveIterator(ScoreDirector<Assignment> director, Random random) {
+        return new MatchMoveIterator(director.getWorkingSolution(), random);
     }
 
     /** {@inheritDoc} */
     @Override
-    public Iterator<Move> createOriginalMoveIterator(ScoreDirector director) {
+    public Iterator<Move<Assignment>> createOriginalMoveIterator(ScoreDirector<Assignment> director) {
         throw new UnsupportedOperationException("ORIGINAL selectionOrder is not supported.");
     }
 
-    private Assignment getAssignment(ScoreDirector director) {
-        return (Assignment)director.getWorkingSolution();
-    }
 }

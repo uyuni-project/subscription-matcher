@@ -17,7 +17,7 @@ import java.util.Random;
  * In particular, every {@link MatchMove} produced by this class will flip the confirmed
  * flag of one {@link Match} and also make sure all incompatible flags are flipped to false
  */
-public class MatchMoveIterator implements Iterator<Move> {
+public class MatchMoveIterator implements Iterator<Move<Assignment>> {
 
     /** Solution instance. */
     private Assignment assignment;

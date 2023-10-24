@@ -40,7 +40,7 @@ import java.util.TreeMap;
  *
  * All "confirmed" flags of incompatible {@link Match}es are flipped to false.
  */
-public class MatchSwapMoveIterator implements Iterator<Move> {
+public class MatchSwapMoveIterator implements Iterator<Move<Assignment>> {
 
     /** Solution instance. */
     private Assignment assignment;
