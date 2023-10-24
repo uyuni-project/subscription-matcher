@@ -86,7 +86,7 @@ public class OptaPlanner {
                     .filter(f -> f instanceof OneTwoPenalty)
                     .map(f -> (Penalty)f)
                     .collect(toList());
-            logger.debug("The best solution has " + penalties.size() + " penalties for 1-2 subscriptions.");
+            logger.debug("The best solution has {} penalties for 1-2 subscriptions.", penalties.size());
             penalties.forEach(penalty -> logger.debug(penalty.toString()));
         }
     }
