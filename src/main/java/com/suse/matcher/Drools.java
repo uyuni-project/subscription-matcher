@@ -13,6 +13,7 @@ import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.Agenda;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class Drools {
     private final Logger logger = LogManager.getLogger(Drools.class);
 
     /** Deduction resulting fact objects. */
-    private Collection<? extends Object> result;
+    private Collection<Object> result;
 
     /**
      * Instantiates a Drools instance with the specified base facts.
@@ -91,7 +92,7 @@ public class Drools {
         logger.info("Deduction phase took {}ms", System.currentTimeMillis() - start);
 
         // collect results
-        result = session.getObjects();
+        result = new ArrayList<>(session.getObjects());
 
         // log deducted messages
         result.stream()
@@ -111,7 +112,7 @@ public class Drools {
      * Returns all facts deduced by Drools.
      * @return the deduced facts
      */
-    public Collection<? extends Object> getResult() {
+    public Collection<Object> getResult() {
         return result;
     }
 
