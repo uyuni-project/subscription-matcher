@@ -16,6 +16,10 @@ import java.util.stream.Stream;
  */
 public class MessageCollector {
 
+    private MessageCollector() {
+        // Prevent instantiation
+    }
+
     /**
      * Takes an Assignment after OptaPlanner is done with it in order to add user message objects.
      *

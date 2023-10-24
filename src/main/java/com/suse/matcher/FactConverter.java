@@ -47,6 +47,10 @@ import java.util.stream.Collectors;
  */
 public class FactConverter {
 
+    private FactConverter() {
+        // Prevent instantiation
+    }
+
     /**
      * Converts JSON objects to facts (inputs to the rule engine).
      *
