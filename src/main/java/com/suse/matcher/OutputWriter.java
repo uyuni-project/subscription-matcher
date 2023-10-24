@@ -110,7 +110,7 @@ public class OutputWriter {
             writer.write(io.toJson(assignment));
         }
         catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException("Unable to write to facts to file", e);
         }
     }
 
