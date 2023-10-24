@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -150,6 +151,6 @@ public class Assignment implements Solution<HardSoftScore> {
     public Stream<Integer> getConflictingMatchIds(Integer matchId) {
         return conflictMap.get(matchId).stream()
             .flatMap(s -> s.stream())
-            .filter(id -> id != matchId);
+            .filter(id -> !Objects.equals(id, matchId));
     }
 }
