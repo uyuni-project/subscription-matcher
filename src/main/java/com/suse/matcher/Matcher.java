@@ -72,7 +72,6 @@ public class Matcher {
                     .sorted()
                     .map(o -> o.toString())
                     .forEach(s -> logger.trace(s));
-                ;
             });
         }
 
