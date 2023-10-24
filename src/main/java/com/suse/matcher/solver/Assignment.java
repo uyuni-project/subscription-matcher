@@ -138,7 +138,7 @@ public class Assignment implements Solution<HardSoftScore> {
      */
     @ValueRangeProvider(id = "booleanRange")
     public List<Boolean> getBooleans() {
-        return new ArrayList<Boolean>(){{ add(Boolean.FALSE); add(Boolean.TRUE); }};
+        return List.of(Boolean.FALSE, Boolean.TRUE);
     }
 
 
