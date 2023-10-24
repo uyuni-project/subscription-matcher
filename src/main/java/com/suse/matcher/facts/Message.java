@@ -56,18 +56,15 @@ public class Message implements Comparable<Message> {
     public int compareTo(Message oIn) {
         return new CompareToBuilder()
             .append(type, oIn.type)
-            .append(data, oIn.data, new Comparator<Map<String, String>>() {
-                @Override
-                public int compare(Map<String, String> o1In, Map<String, String> o2In) {
-                    List<String> keys = o1In.keySet().stream().sorted().collect(toList());
-                    for (String key : keys) {
-                        int comparison = o1In.get(key).compareTo(o2In.get(key));
-                        if (comparison != 0) {
-                            return comparison;
-                        }
+            .append(data, oIn.data, (Comparator<Map<String, String>>) (o1In, o2In) -> {
+                List<String> keys = o1In.keySet().stream().sorted().collect(toList());
+                for (String key : keys) {
+                    int comparison = o1In.get(key).compareTo(o2In.get(key));
+                    if (comparison != 0) {
+                        return comparison;
                     }
-                    return 0;
                 }
+                return 0;
             })
             .toComparison();
     }
