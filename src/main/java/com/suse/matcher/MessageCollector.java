@@ -8,6 +8,7 @@ import com.suse.matcher.solver.Assignment;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
@@ -34,10 +35,9 @@ public class MessageCollector {
         // add messages about unsatisfied pins
         Collection<Message> messages = new LinkedList<Message>();
         pinnedMatchFacts
-            .filter(pin -> !confirmedMatchFacts.stream() // filter unmatched pins
-                    .filter(m -> m.getSubscriptionId().equals(pin.subscriptionId) && m.getSystemId().equals(pin.systemId))
-                    .findAny()
-                    .isPresent()
+            .filter(pin -> confirmedMatchFacts.stream() // filter unmatched pins
+                    .noneMatch(m -> Objects.equals(m.getSubscriptionId(), pin.subscriptionId) &&
+                        Objects.equals(m.getSystemId(), pin.systemId))
             )
             .forEach(unmatchedPin -> {
                 Message message = new Message(Message.Level.INFO, "unsatisfied_pinned_match", new TreeMap<>(Map.of(
