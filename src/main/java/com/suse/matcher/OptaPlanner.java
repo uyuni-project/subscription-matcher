@@ -1,7 +1,5 @@
 package com.suse.matcher;
 
-import static java.util.stream.Collectors.toList;
-
 import com.suse.matcher.facts.OneTwoPenalty;
 import com.suse.matcher.facts.Penalty;
 import com.suse.matcher.solver.Assignment;
@@ -38,6 +36,7 @@ import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Facade on the OptaPlanner solver.
@@ -87,7 +86,7 @@ public class OptaPlanner {
                     .stream()
                     .filter(f -> f instanceof OneTwoPenalty)
                     .map(f -> (Penalty)f)
-                    .collect(toList());
+                    .collect(Collectors.toList());
             logger.debug("The best solution has {} penalties for 1-2 subscriptions.", penalties.size());
             penalties.forEach(penalty -> logger.debug(penalty.toString()));
         }

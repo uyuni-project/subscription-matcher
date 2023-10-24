@@ -1,11 +1,5 @@
 package com.suse.matcher;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toCollection;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
-
 import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.facts.InstalledProduct;
 import com.suse.matcher.json.JsonInput;
@@ -22,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -80,7 +75,7 @@ public class Matcher {
         Map<Integer, List<List<Integer>>> conflictMap = getConflictMap(deducedFacts);
 
         // compute sorted potential matches for caching
-        List<PotentialMatch> sortedPotentialMatches = getPotentialMatches(deducedFacts).sorted().distinct().collect(toList());
+        List<PotentialMatch> sortedPotentialMatches = getPotentialMatches(deducedFacts).sorted().distinct().collect(Collectors.toList());
 
         // activate the CSP solver with all deduced facts as inputs
         OptaPlanner optaPlanner = new OptaPlanner(
@@ -105,15 +100,15 @@ public class Matcher {
             .sorted()
             .distinct()
             .map(id -> new Match(id, null))
-            .collect(toList());
+            .collect(Collectors.toList());
     }
 
     private Map<Integer, List<List<Integer>>> getConflictMap(Collection<Object> deducedFacts) {
         // group ids in conflicting sets
         // "conflicting" means they target the same (system, product) couple
         Map<InstalledProduct, Set<Integer>> conflicts = getPotentialMatches(deducedFacts).collect(
-            groupingBy(m -> new InstalledProduct(m.systemId, m.productId),
-            mapping(p -> p.groupId, toCollection(TreeSet::new)))
+            Collectors.groupingBy(m -> new InstalledProduct(m.systemId, m.productId),
+            Collectors.mapping(p -> p.groupId, Collectors.toCollection(TreeSet::new)))
         );
 
         // discard the above map keys, we only care about values (conflict sets)
@@ -122,16 +117,16 @@ public class Matcher {
         List<List<Integer>> conflictList = conflicts.values().stream()
             .distinct()
             .map(s -> new ArrayList<>(s))
-            .collect(toList());
+            .collect(Collectors.toList());
 
         // now build a map from each Match id
         // to all of the conflict sets in which it is in
         return getMatches(deducedFacts).stream()
-            .collect(toMap(
+            .collect(Collectors.toMap(
                     m -> m.id,
                     m -> conflictList.stream()
                        .filter(s -> Collections.binarySearch(s, m.id) >= 0)
-                       .collect(toList())
+                       .collect(Collectors.toList())
             ));
     }
 }
