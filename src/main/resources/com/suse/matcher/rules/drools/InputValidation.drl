@@ -32,6 +32,27 @@ rule "ignoreNotActiveSubscriptions"
         }
 end
 
+rule "ignoreServiceSubscriptionsWithoutProducts"
+    agenda-group "InputValidation"
+    when
+        $subscription : Subscription(policy == null)
+        accumulate(
+            $product : SubscriptionProduct(subscriptionId == $subscription.id);
+            $count : count();
+            $count == 0
+        )
+    then
+        // Create a message if it's not a known service subscription
+        if (!$subscription.partNumber.startsWith("051-")) {
+            TreeMap<String, String> msgData = new TreeMap<>();
+            msgData.put("part_number", $subscription.partNumber.toString());
+            insert(new Message(Message.Level.INFO, "no_products_associated", msgData));
+        }
+        modify($subscription) {
+            ignored = true;
+        }
+end
+
 rule "ignoreSubscriptionWithoutQuantity"
     agenda-group "InputValidation"
     when
@@ -71,7 +92,7 @@ end
 rule "logUnknownPartNumber"
     agenda-group "InputValidation"
     when
-        $subscription: Subscription(policy == null, partNumber != null)
+        $subscription: Subscription(policy == null, partNumber != null, ignored == false)
     then
         TreeMap<String, String> data = new TreeMap<>();
         data.put("part_number", $subscription.partNumber);
