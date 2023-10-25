@@ -1,5 +1,6 @@
 package com.suse.matcher;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,7 +10,6 @@ import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.json.JsonOutput;
 import com.suse.matcher.solver.Assignment;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
@@ -55,7 +55,7 @@ class MatcherScenariosTest {
 
     @BeforeAll
     static void initAll() {
-        Log4J.initialize(Optional.of(Level.DEBUG), Optional.empty());
+        Log4J.initialize(Optional.empty(), Optional.empty());
     }
 
     @BeforeEach
@@ -86,11 +86,14 @@ class MatcherScenariosTest {
 
         // Check the JSON output produced by the process
         JsonOutput expectedOutput = getJsonOutput(scenarioNumber);
-        assertJsonEquals(expectedOutput.getTimestamp(), actualOutput.getTimestamp());
-        assertJsonEquals(expectedOutput.getMatches(), actualOutput.getMatches());
-        assertJsonEquals(expectedOutput.getSubscriptionPolicies(), actualOutput.getSubscriptionPolicies());
-        assertJsonEquals(expectedOutput.getMessages(), actualOutput.getMessages());
-        assertJsonEquals(expectedOutput.getSubscriptions(), actualOutput.getSubscriptions());
+
+        assertAll("Check JSON output",
+            () -> assertJsonEquals(expectedOutput.getTimestamp(), actualOutput.getTimestamp(), "Timestamp JSON does not match"),
+            () -> assertJsonEquals(expectedOutput.getMatches(), actualOutput.getMatches(), "Matches JSON does not match"),
+            () -> assertJsonEquals(expectedOutput.getSubscriptionPolicies(), actualOutput.getSubscriptionPolicies(), "Subscription Policies JSON does not match"),
+            () -> assertJsonEquals(expectedOutput.getMessages(), actualOutput.getMessages(), "Messages JSON does not match"),
+            () -> assertJsonEquals(expectedOutput.getSubscriptions(), actualOutput.getSubscriptions(), "Subscriptions JSON does not match")
+        );
 
         // Check all the CSV files
         CSV_FILES.forEach(csvFile -> {
@@ -241,8 +244,9 @@ class MatcherScenariosTest {
      * Asserts that the given object are converted to the same JSON
      * @param expected the expected object
      * @param actual the object to check
+     * @param message the message
      */
-    private static void assertJsonEquals(Object expected, Object actual) {
-        assertEquals(JSON_IO.toJson(expected), JSON_IO.toJson(actual));
+    private static void assertJsonEquals(Object expected, Object actual, String message) {
+        assertEquals(JSON_IO.toJson(expected), JSON_IO.toJson(actual), message);
     }
 }
