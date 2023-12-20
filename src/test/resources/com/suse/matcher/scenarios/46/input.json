@@ -1,0 +1,60 @@
+{
+    "timestamp": "2015-05-01T00:00:00.000+0200",
+    "pinned_matches": [],
+    "products": [
+        {
+            "id": 2605,
+            "name": "SUSE Linux Enterprise Micro 5.5 x86_64",
+            "base": true
+        },
+        {
+            "id": 2465,
+            "name": "SUSE Linux Enterprise Server 15 SP5 x86_6",
+            "base": true
+        }
+    ],
+    "subscriptions": [
+        {
+            "end_date": "2030-12-31T00:00:00Z",
+            "id": 1,
+            "part_number": "874-007864",
+            "name": "SLEM X86-64 1-16VC L3ST S 1Y",
+            "product_ids": [
+                2605
+           ],
+            "quantity": 10,
+            "scc_username": "UC7",
+            "start_date": "2013-08-01T00:00:00Z"
+        }
+    ],
+    "virtualization_groups": [],
+    "systems": [
+        {
+            "cpus": 24,
+            "id": 100,
+            "physical": true,
+            "product_ids": [
+                2605
+            ],
+            "virtual_system_ids": []
+        },
+        {
+            "cpus": 16,
+            "id": 101,
+            "physical": false,
+            "product_ids": [
+                2605
+            ],
+            "virtual_system_ids": []
+        },
+	{
+            "cpus": 2,
+            "id": 102,
+            "physical": true,
+            "product_ids": [
+                2605
+            ],
+            "virtual_system_ids": [ 103 ]
+        }
+    ]
+}
