@@ -5,15 +5,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender;
 import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.builder.api.AppenderComponentBuilder;
 import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
 import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
 import org.apache.logging.log4j.core.config.builder.api.RootLoggerComponentBuilder;
 import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
+import org.apache.logging.log4j.core.impl.Log4jContextFactory;
+import org.apache.logging.log4j.spi.LoggerContextFactory;
 
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  * Facade on the log4j logging library.
@@ -30,11 +33,13 @@ public class Log4J {
      *
      * @param level user chosen level
      * @param loggingDirectory directory for file logging
+     *
+     * @return the Log4j 2 {@link LoggerContext}
      */
-    public static void initialize(Optional<Level> level, Optional<String> loggingDirectory) {
+    public static LoggerContext initialize(Optional<Level> level, Optional<String> loggingDirectory) {
         final ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
 
-        builder.setStatusLevel(level.orElse(Level.INFO));
+        builder.setStatusLevel(Level.INFO);
         builder.setConfigurationName("DefaultConfiguration");
 
         // Build  the root logger
@@ -81,15 +86,20 @@ public class Log4J {
         builder.add(builder.newLogger("org.drools.core.common.DefaultAgenda", Level.WARN));
 
         Configuration configuration = builder.build();
+        LoggerContext context = Configurator.initialize(configuration);
 
-        // Update the configuration in the context. There are multiple contexts because slf4j binds loggers by
-        // name, so the log4j compatibility layer cannot use the classloader to define the context
-        Stream.of(LogManager.getContext(false), LogManager.getContext(ClassLoader.getSystemClassLoader(), false))
-              .map(LoggerContext.class::cast)
-              .forEach(context -> {
-                  context.reconfigure(configuration);
-                  context.updateLoggers();
-              });
+        // Update the configuration in the running contexts. There might be multiple contexts because slf4j binds
+        // loggers by name, so the log4j compatibility layer cannot use the classloader to define the context
+        LoggerContextFactory contextFactory = LogManager.getFactory();
+        if (contextFactory instanceof Log4jContextFactory) {
+            List<LoggerContext> contexts = ((Log4jContextFactory) contextFactory).getSelector().getLoggerContexts();
+            contexts.stream()
+                .distinct()
+                .filter(ctx -> ctx != context)
+                .forEach(ctx -> ctx.updateLoggers(configuration));
+        }
+
+        return context;
     }
 
 }

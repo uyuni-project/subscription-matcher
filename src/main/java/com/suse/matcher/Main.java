@@ -14,8 +14,8 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -35,50 +35,45 @@ public class Main {
      * @throws Exception if anything unexpected happens
      */
     public static final void main(String[] args) throws Exception {
-        Logger logger = null;
+        long start = System.currentTimeMillis();
+        CommandLine commandLine = parseCommandLine(args);
 
-        try {
-            long start = System.currentTimeMillis();
-            CommandLine commandLine = parseCommandLine(args);
+        // First initialize the logging system
+        Optional<Level> logLevel = commandLine.hasOption('v') ?
+            of(Level.toLevel(commandLine.getOptionValue('v'))) :
+            empty();
 
-            // First initialize the logging system
-            Optional<Level> logLevel = commandLine.hasOption('v') ?
-                    of(Level.toLevel(commandLine.getOptionValue('v'))) :
-                    empty();
+        try (LoggerContext context = Log4J.initialize(logLevel, ofNullable(commandLine.getOptionValue('l')))) {
+            Logger logger = context.getLogger(Main.class);
+            logger.info("Starting subscription-matcher process");
 
-            Log4J.initialize(logLevel, ofNullable(commandLine.getOptionValue('l')));
-            logger = LogManager.getLogger(Main.class);
-
-            // create output writing objects
-            Optional<Character> delimiter = commandLine.hasOption('d') ?
+            try {
+                // create output writing objects
+                Optional<Character> delimiter = commandLine.hasOption('d') ?
                     of(commandLine.getOptionValue('d').charAt(0)) :
                     empty();
-            Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
-            OutputWriter writer = new OutputWriter(outdir, delimiter);
+                Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
+                OutputWriter writer = new OutputWriter(outdir, delimiter);
 
-            // load input data
-            String inputString = commandLine.hasOption('i') ?
-                Files.readString(Path.of(commandLine.getOptionValue('i'))) :
-                new String(System.in.readAllBytes(), Charset.defaultCharset());
+                // load input data
+                String inputString = commandLine.hasOption('i') ?
+                    Files.readString(Path.of(commandLine.getOptionValue('i'))) :
+                    new String(System.in.readAllBytes(), Charset.defaultCharset());
 
-            // save a copy of input data in the output directory
-            writer.writeJsonInput(inputString);
+                // save a copy of input data in the output directory
+                writer.writeJsonInput(inputString);
 
-            // do the matching
-            JsonInput input = new JsonIO().loadInput(inputString);
-            Assignment assignment = new Matcher(false).match(input);
+                // do the matching
+                JsonInput input = new JsonIO().loadInput(inputString);
+                Assignment assignment = new Matcher(false).match(input);
 
-            // write output data
-            writer.writeOutput(assignment, logLevel);
+                // write output data
+                writer.writeOutput(assignment, logLevel);
 
-            logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
-        }
-        catch (Throwable e) {
-            if( logger != null) {
-                logger.error("Unexpected exception: ", e);
-            } else {
-                System.err.println("Unexpected exception: " + e.getMessage());
-                e.printStackTrace();
+                logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
+            }
+            catch (Exception ex) {
+                logger.error("Unexpected exception: ", ex);
             }
         }
     }
