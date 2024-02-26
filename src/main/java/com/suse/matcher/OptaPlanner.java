@@ -32,7 +32,6 @@ import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.random.RandomType;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
-import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFilter;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
 
 import java.util.ArrayList;
@@ -117,14 +116,14 @@ public class OptaPlanner {
          * Declare solution and entity classes
          */
         config.setSolutionClass(Assignment.class);
-        config.setEntityClassList(new ArrayList<Class<?>>(){{ add(Match.class); }});
+        config.setEntityClassList(List.of(Match.class));
 
         /*
          * Declare score type and file location
          */
         ScoreDirectorFactoryConfig score = new ScoreDirectorFactoryConfig();
         score.setScoreDefinitionType(ScoreDefinitionType.HARD_SOFT);
-        score.setScoreDrlList(new ArrayList<String>() {{ add("com/suse/matcher/rules/optaplanner/Scores.drl"); }});
+        score.setScoreDrlList(List.of("com/suse/matcher/rules/optaplanner/Scores.drl"));
         config.setScoreDirectorFactoryConfig(score);
 
         /*
@@ -162,10 +161,8 @@ public class OptaPlanner {
         valueSelector.setSelectionOrder(SelectionOrder.ORIGINAL);
         changeMove.setValueSelectorConfig(valueSelector);
 
-        changeMove.setFilterClassList(new ArrayList<Class<? extends SelectionFilter>>() {{
-            add(ConflictMatchMoveFilter.class);
-        }});
-        entityPlacer.setMoveSelectorConfigList(new ArrayList<MoveSelectorConfig>() {{ add(changeMove); }});
+        changeMove.setFilterClassList(List.of(ConflictMatchMoveFilter.class));
+        entityPlacer.setMoveSelectorConfigList(List.of(changeMove));
         constructionHeuristic.setEntityPlacerConfig(entityPlacer);
         config.getPhaseConfigList().add(constructionHeuristic);
 
