@@ -50,7 +50,7 @@ public class OptaPlanner {
     private static final Logger LOGGER = LogManager.getLogger(OptaPlanner.class);
 
     /** The result. */
-    Assignment result;
+    private final Assignment result;
 
     /**
      * Instantiates an OptaPlanner instance with the specified unsolved problem.
