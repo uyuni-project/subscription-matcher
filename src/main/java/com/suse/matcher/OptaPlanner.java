@@ -32,6 +32,8 @@ import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.random.RandomType;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
+import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirectorFactory;
+import org.optaplanner.core.impl.solver.DefaultSolver;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,19 +83,31 @@ public class OptaPlanner {
     }
 
     private static void logOneTwoPenalties(Solver<Assignment> solver, Assignment result) {
-        DroolsScoreDirector<Assignment> scoreDirector = (DroolsScoreDirector<Assignment>) solver.getScoreDirectorFactory().buildScoreDirector();
+        // Make sure the runtime instances are of the correct types
+        if (!(solver instanceof DefaultSolver) || !(solver.getScoreDirectorFactory() instanceof DroolsScoreDirectorFactory)) {
+            return;
+        }
 
-        scoreDirector.setWorkingSolution(scoreDirector.cloneSolution(result));
-        scoreDirector.calculateScore();
+        DefaultSolver<Assignment> defaultSolver = (DefaultSolver<Assignment>) solver;
+        DroolsScoreDirectorFactory<Assignment> directorFactory = (DroolsScoreDirectorFactory<Assignment>) defaultSolver.getScoreDirectorFactory();
+        EnvironmentMode environmentMode = defaultSolver.getEnvironmentMode();
 
-        Collection<Penalty> penalties = scoreDirector.getKieSession().getObjects()
+        // Build a new score director and re-evaluate the score
+        try (DroolsScoreDirector<Assignment> director = directorFactory.buildScoreDirector(true, environmentMode.isAsserted())) {
+            director.setWorkingSolution(director.cloneSolution(result));
+            director.calculateScore();
+
+            Collection<Penalty> penalties = director.getKieSession().getObjects(obj -> obj instanceof OneTwoPenalty)
                 .stream()
-                .filter(f -> f instanceof OneTwoPenalty)
-                .map(f -> (Penalty)f)
+                .map(f -> (Penalty) f)
                 .collect(toList());
 
-        LOGGER.debug("The best solution has {} penalties for 1-2 subscriptions.", penalties.size());
-        penalties.forEach(penalty -> LOGGER.debug(penalty.toString()));
+            LOGGER.debug("The best solution has {} penalties for 1-2 subscriptions.", penalties.size());
+            penalties.forEach(penalty -> LOGGER.debug(penalty.toString()));
+        }
+        catch (Exception ex) {
+            LOGGER.debug("Number of penalties for 1-2 subscriptions not available: {}", ex.getMessage());
+        }
     }
 
     /**
