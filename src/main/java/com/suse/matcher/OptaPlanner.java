@@ -47,7 +47,7 @@ import java.util.List;
 public class OptaPlanner {
 
     /** Logger instance. */
-    private final Logger logger = LogManager.getLogger(OptaPlanner.class);
+    private static final Logger LOGGER = LogManager.getLogger(OptaPlanner.class);
 
     /** The result. */
     Assignment result;
@@ -71,13 +71,13 @@ public class OptaPlanner {
         // solve problem
         long start = System.currentTimeMillis();
         solver.solve(unsolved);
-        logger.info("Optimization phase took {}ms", System.currentTimeMillis() - start);
+        LOGGER.info("Optimization phase took {}ms", System.currentTimeMillis() - start);
         result = (Assignment) solver.getBestSolution();
-        logger.info("{} matches confirmed", result.getMatches().stream().filter(m -> m.confirmed).count());
+        LOGGER.info("{} matches confirmed", result.getMatches().stream().filter(m -> m.confirmed).count());
 
         // show Penalty facts generated in Scores.drl using DroolsScoreDirector and re-calculating
         // the score of the best solution because facts generated dynamically are not available outside of this object
-        if (logger.isDebugEnabled()) {
+        if (LOGGER.isDebugEnabled()) {
             DroolsScoreDirector scoreDirector = (DroolsScoreDirector) solver.getScoreDirectorFactory().buildScoreDirector();
             scoreDirector.setWorkingSolution(scoreDirector.cloneSolution(result));
             scoreDirector.calculateScore();
@@ -86,8 +86,8 @@ public class OptaPlanner {
                     .filter(f -> f instanceof OneTwoPenalty)
                     .map(f -> (Penalty)f)
                     .collect(toList());
-            logger.debug("The best solution has " + penalties.size() + " penalties for 1-2 subscriptions.");
-            penalties.forEach(penalty -> logger.debug(penalty.toString()));
+            LOGGER.debug("The best solution has {} penalties for 1-2 subscriptions.", penalties.size());
+            penalties.forEach(penalty -> LOGGER.debug(penalty.toString()));
         }
     }
 
