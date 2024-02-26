@@ -65,19 +65,19 @@ public class OptaPlanner {
         }
 
         // init solver
-        Solver solver = initSolver(testing);
+        Solver<Assignment> solver = initSolver(testing);
 
         // solve problem
         long start = System.currentTimeMillis();
         solver.solve(unsolved);
         LOGGER.info("Optimization phase took {}ms", System.currentTimeMillis() - start);
-        result = (Assignment) solver.getBestSolution();
+        result = solver.getBestSolution();
         LOGGER.info("{} matches confirmed", result.getMatches().stream().filter(m -> m.confirmed).count());
 
         // show Penalty facts generated in Scores.drl using DroolsScoreDirector and re-calculating
         // the score of the best solution because facts generated dynamically are not available outside of this object
         if (LOGGER.isDebugEnabled()) {
-            DroolsScoreDirector scoreDirector = (DroolsScoreDirector) solver.getScoreDirectorFactory().buildScoreDirector();
+            DroolsScoreDirector<Assignment> scoreDirector = (DroolsScoreDirector<Assignment>) solver.getScoreDirectorFactory().buildScoreDirector();
             scoreDirector.setWorkingSolution(scoreDirector.cloneSolution(result));
             scoreDirector.calculateScore();
             Collection<Penalty> penalties = scoreDirector.getKieSession().getObjects()
@@ -93,15 +93,14 @@ public class OptaPlanner {
     /**
      * Configures and returns an OptaPlanner solver.
      *
-     * This method replaces the XML configuration file cited in Optaplanner's documentation.
+     * This method replaces the XML configuration file cited in OptaPlanner's documentation.
      *
      * @return the solver
      * @param testing true if running as a unit test, false otherwise
      */
-    @SuppressWarnings("rawtypes")
-    private Solver initSolver(boolean testing) {
+    private Solver<Assignment> initSolver(boolean testing) {
         // init basic objects
-        SolverFactory factory = SolverFactory.createEmpty();
+        SolverFactory<Assignment> factory = SolverFactory.createEmpty();
         SolverConfig config = factory.getSolverConfig();
         config.setPhaseConfigList(new ArrayList<>());
 
@@ -192,10 +191,7 @@ public class OptaPlanner {
          * both moves alternate within the step (in random fashion).
          */
         UnionMoveSelectorConfig unionMoveConfig = new UnionMoveSelectorConfig();
-        List<MoveSelectorConfig> selectors = new ArrayList<>();
-        selectors.add(move);
-        selectors.add(swapMove);
-        unionMoveConfig.setMoveSelectorConfigList(selectors);
+        unionMoveConfig.setMoveSelectorConfigList(List.of(move, swapMove));
 
         LocalSearchPhaseConfig search = new LocalSearchPhaseConfig();
         search.setMoveSelectorConfig(unionMoveConfig);
