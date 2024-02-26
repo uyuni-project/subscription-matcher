@@ -18,7 +18,6 @@ import org.optaplanner.core.config.constructionheuristic.placer.QueuedEntityPlac
 import org.optaplanner.core.config.heuristic.selector.common.SelectionCacheType;
 import org.optaplanner.core.config.heuristic.selector.common.SelectionOrder;
 import org.optaplanner.core.config.heuristic.selector.entity.EntitySelectorConfig;
-import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.factory.MoveIteratorFactoryConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
@@ -77,17 +76,24 @@ public class OptaPlanner {
         // show Penalty facts generated in Scores.drl using DroolsScoreDirector and re-calculating
         // the score of the best solution because facts generated dynamically are not available outside of this object
         if (LOGGER.isDebugEnabled()) {
-            DroolsScoreDirector<Assignment> scoreDirector = (DroolsScoreDirector<Assignment>) solver.getScoreDirectorFactory().buildScoreDirector();
-            scoreDirector.setWorkingSolution(scoreDirector.cloneSolution(result));
-            scoreDirector.calculateScore();
-            Collection<Penalty> penalties = scoreDirector.getKieSession().getObjects()
-                    .stream()
-                    .filter(f -> f instanceof OneTwoPenalty)
-                    .map(f -> (Penalty)f)
-                    .collect(toList());
-            LOGGER.debug("The best solution has {} penalties for 1-2 subscriptions.", penalties.size());
-            penalties.forEach(penalty -> LOGGER.debug(penalty.toString()));
+            logOneTwoPenalties(solver, result);
         }
+    }
+
+    private static void logOneTwoPenalties(Solver<Assignment> solver, Assignment result) {
+        DroolsScoreDirector<Assignment> scoreDirector = (DroolsScoreDirector<Assignment>) solver.getScoreDirectorFactory().buildScoreDirector();
+
+        scoreDirector.setWorkingSolution(scoreDirector.cloneSolution(result));
+        scoreDirector.calculateScore();
+
+        Collection<Penalty> penalties = scoreDirector.getKieSession().getObjects()
+                .stream()
+                .filter(f -> f instanceof OneTwoPenalty)
+                .map(f -> (Penalty)f)
+                .collect(toList());
+
+        LOGGER.debug("The best solution has {} penalties for 1-2 subscriptions.", penalties.size());
+        penalties.forEach(penalty -> LOGGER.debug(penalty.toString()));
     }
 
     /**
