@@ -18,7 +18,6 @@ import org.optaplanner.core.config.constructionheuristic.placer.QueuedEntityPlac
 import org.optaplanner.core.config.heuristic.selector.common.SelectionCacheType;
 import org.optaplanner.core.config.heuristic.selector.common.SelectionOrder;
 import org.optaplanner.core.config.heuristic.selector.entity.EntitySelectorConfig;
-import org.optaplanner.core.config.heuristic.selector.move.MoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig;
 import org.optaplanner.core.config.heuristic.selector.move.factory.MoveIteratorFactoryConfig;
 import org.optaplanner.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig;
@@ -32,8 +31,9 @@ import org.optaplanner.core.config.solver.EnvironmentMode;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.random.RandomType;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
-import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFilter;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
+import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirectorFactory;
+import org.optaplanner.core.impl.solver.DefaultSolver;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,10 +47,10 @@ import java.util.List;
 public class OptaPlanner {
 
     /** Logger instance. */
-    private final Logger logger = LogManager.getLogger(OptaPlanner.class);
+    private static final Logger LOGGER = LogManager.getLogger(OptaPlanner.class);
 
     /** The result. */
-    Assignment result;
+    private final Assignment result;
 
     /**
      * Instantiates an OptaPlanner instance with the specified unsolved problem.
@@ -66,43 +66,61 @@ public class OptaPlanner {
         }
 
         // init solver
-        Solver solver = initSolver(testing);
+        Solver<Assignment> solver = initSolver(testing);
 
         // solve problem
         long start = System.currentTimeMillis();
         solver.solve(unsolved);
-        logger.info("Optimization phase took {}ms", System.currentTimeMillis() - start);
-        result = (Assignment) solver.getBestSolution();
-        logger.info("{} matches confirmed", result.getMatches().stream().filter(m -> m.confirmed).count());
+        LOGGER.info("Optimization phase took {}ms", System.currentTimeMillis() - start);
+        result = solver.getBestSolution();
+        LOGGER.info("{} matches confirmed", result.getMatches().stream().filter(m -> m.confirmed).count());
 
         // show Penalty facts generated in Scores.drl using DroolsScoreDirector and re-calculating
         // the score of the best solution because facts generated dynamically are not available outside of this object
-        if (logger.isDebugEnabled()) {
-            DroolsScoreDirector scoreDirector = (DroolsScoreDirector) solver.getScoreDirectorFactory().buildScoreDirector();
-            scoreDirector.setWorkingSolution(scoreDirector.cloneSolution(result));
-            scoreDirector.calculateScore();
-            Collection<Penalty> penalties = scoreDirector.getKieSession().getObjects()
-                    .stream()
-                    .filter(f -> f instanceof OneTwoPenalty)
-                    .map(f -> (Penalty)f)
-                    .collect(toList());
-            logger.debug("The best solution has " + penalties.size() + " penalties for 1-2 subscriptions.");
-            penalties.forEach(penalty -> logger.debug(penalty.toString()));
+        if (LOGGER.isDebugEnabled()) {
+            logOneTwoPenalties(solver, result);
+        }
+    }
+
+    private static void logOneTwoPenalties(Solver<Assignment> solver, Assignment result) {
+        // Make sure the runtime instances are of the correct types
+        if (!(solver instanceof DefaultSolver) || !(solver.getScoreDirectorFactory() instanceof DroolsScoreDirectorFactory)) {
+            return;
+        }
+
+        DefaultSolver<Assignment> defaultSolver = (DefaultSolver<Assignment>) solver;
+        DroolsScoreDirectorFactory<Assignment> directorFactory = (DroolsScoreDirectorFactory<Assignment>) defaultSolver.getScoreDirectorFactory();
+        EnvironmentMode environmentMode = defaultSolver.getEnvironmentMode();
+
+        // Build a new score director and re-evaluate the score
+        try (DroolsScoreDirector<Assignment> director = directorFactory.buildScoreDirector(true, environmentMode.isAsserted())) {
+            director.setWorkingSolution(director.cloneSolution(result));
+            director.calculateScore();
+
+            Collection<Penalty> penalties = director.getKieSession().getObjects(obj -> obj instanceof OneTwoPenalty)
+                .stream()
+                .map(f -> (Penalty) f)
+                .collect(toList());
+
+            LOGGER.debug("The best solution has {} penalties for 1-2 subscriptions.", penalties.size());
+            penalties.forEach(penalty -> LOGGER.debug(penalty.toString()));
+        }
+        catch (Exception ex) {
+            LOGGER.debug("Number of penalties for 1-2 subscriptions not available: {}", ex.getMessage());
         }
     }
 
     /**
      * Configures and returns an OptaPlanner solver.
      *
-     * This method replaces the XML configuration file cited in Optaplanner's documentation.
+     * This method replaces the XML configuration file cited in OptaPlanner's documentation.
      *
      * @return the solver
      * @param testing true if running as a unit test, false otherwise
      */
-    @SuppressWarnings("rawtypes")
-    private Solver initSolver(boolean testing) {
+    private Solver<Assignment> initSolver(boolean testing) {
         // init basic objects
-        SolverFactory factory = SolverFactory.createEmpty();
+        SolverFactory<Assignment> factory = SolverFactory.createEmpty();
         SolverConfig config = factory.getSolverConfig();
         config.setPhaseConfigList(new ArrayList<>());
 
@@ -117,14 +135,14 @@ public class OptaPlanner {
          * Declare solution and entity classes
          */
         config.setSolutionClass(Assignment.class);
-        config.setEntityClassList(new ArrayList<Class<?>>(){{ add(Match.class); }});
+        config.setEntityClassList(List.of(Match.class));
 
         /*
          * Declare score type and file location
          */
         ScoreDirectorFactoryConfig score = new ScoreDirectorFactoryConfig();
         score.setScoreDefinitionType(ScoreDefinitionType.HARD_SOFT);
-        score.setScoreDrlList(new ArrayList<String>() {{ add("com/suse/matcher/rules/optaplanner/Scores.drl"); }});
+        score.setScoreDrlList(List.of("com/suse/matcher/rules/optaplanner/Scores.drl"));
         config.setScoreDirectorFactoryConfig(score);
 
         /*
@@ -162,10 +180,8 @@ public class OptaPlanner {
         valueSelector.setSelectionOrder(SelectionOrder.ORIGINAL);
         changeMove.setValueSelectorConfig(valueSelector);
 
-        changeMove.setFilterClassList(new ArrayList<Class<? extends SelectionFilter>>() {{
-            add(ConflictMatchMoveFilter.class);
-        }});
-        entityPlacer.setMoveSelectorConfigList(new ArrayList<MoveSelectorConfig>() {{ add(changeMove); }});
+        changeMove.setFilterClassList(List.of(ConflictMatchMoveFilter.class));
+        entityPlacer.setMoveSelectorConfigList(List.of(changeMove));
         constructionHeuristic.setEntityPlacerConfig(entityPlacer);
         config.getPhaseConfigList().add(constructionHeuristic);
 
@@ -195,10 +211,7 @@ public class OptaPlanner {
          * both moves alternate within the step (in random fashion).
          */
         UnionMoveSelectorConfig unionMoveConfig = new UnionMoveSelectorConfig();
-        List<MoveSelectorConfig> selectors = new ArrayList<>();
-        selectors.add(move);
-        selectors.add(swapMove);
-        unionMoveConfig.setMoveSelectorConfigList(selectors);
+        unionMoveConfig.setMoveSelectorConfigList(List.of(move, swapMove));
 
         LocalSearchPhaseConfig search = new LocalSearchPhaseConfig();
         search.setMoveSelectorConfig(unionMoveConfig);
