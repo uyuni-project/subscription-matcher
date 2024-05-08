@@ -7,8 +7,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Represents a match that the customer would like to see in the solution.
- *
- * @see PossibleMatch
  */
 public class PinnedMatch {
 
