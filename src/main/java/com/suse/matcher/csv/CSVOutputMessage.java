@@ -1,7 +1,6 @@
 package com.suse.matcher.csv;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +13,10 @@ public class CSVOutputMessage {
     public static final String[] CSV_HEADER = {"Message", "Additional data key", "Additional data value"};
 
     /** A label identifying the message type. */
-    private String type;
+    private final String type;
 
     /** Arbitrary data connected to this message. */
-    private Map<String, String> data = new LinkedHashMap<>();
+    private final Map<String, String> data;
 
     /**
      * Instantiates a new CSV output message.

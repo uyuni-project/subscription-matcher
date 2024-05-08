@@ -50,9 +50,9 @@ public class Subscription implements Comparable<Subscription> {
          */
         INHERITED_VIRTUALIZATION("Inherited");
 
-        private String description;
+        private final String description;
 
-        private Policy(String descriptionIn){
+        Policy(String descriptionIn){
             description = descriptionIn;
         }
 

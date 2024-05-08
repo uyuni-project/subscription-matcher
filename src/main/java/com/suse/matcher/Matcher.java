@@ -28,7 +28,7 @@ public class Matcher {
     private static final Logger LOGGER = LogManager.getLogger(Matcher.class);
 
     /** true if the matcher is being tested. */
-    private boolean testing;
+    private final boolean testing;
 
     /**
      * Standard constructor.
