@@ -84,9 +84,9 @@ rule "mergePinnedMatches"
         $pinnedMatch : PinnedMatch(subscriptionId == $subToRetractId)
     then
         TreeMap<String, String> data = new TreeMap<>();
-        data.put("old_subscription_id", $subToRetractId.toString());
-        data.put("new_subscription_id", $hardBundleId.toString());
-        data.put("system_id", $pinnedMatch.systemId.toString());
+        data.put("old_subscription_id", String.valueOf($subToRetractId));
+        data.put("new_subscription_id", String.valueOf($hardBundleId));
+        data.put("system_id", String.valueOf($pinnedMatch.systemId));
         insert(new Message(Message.Level.INFO, "adjust_pinned_match", data));
 
         // we cannot use modify() because of attributes in hashCode, retract and insert instead
@@ -102,8 +102,8 @@ rule "removeRedundantSubscriptions"
         $subToRetract : Subscription(ignored == false, id > $leadingSub.id, hardBundleId == $leadingSub.hardBundleId)
     then
         TreeMap<String, String> data = new TreeMap<>();
-        data.put("old_subscription_id", $subToRetract.id.toString());
-        data.put("new_subscription_id", $leadingSub.id.toString());
+        data.put("old_subscription_id", String.valueOf($subToRetract.id));
+        data.put("new_subscription_id", String.valueOf($leadingSub.id));
         insert(new Message(Message.Level.INFO, "hb_merge_subscriptions", data));
 
         if ($leadingSub.name != null && $subToRetract.name != null) {

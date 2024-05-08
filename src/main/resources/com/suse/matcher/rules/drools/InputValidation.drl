@@ -45,7 +45,7 @@ rule "ignoreServiceSubscriptionsWithoutProducts"
         // Create a message if it's not a known service subscription
         if (!$subscription.partNumber.startsWith("051-")) {
             TreeMap<String, String> msgData = new TreeMap<>();
-            msgData.put("part_number", $subscription.partNumber.toString());
+            msgData.put("part_number", String.valueOf($subscription.partNumber));
             insert(new Message(Message.Level.INFO, "no_products_associated", msgData));
         }
         modify($subscription) {
@@ -108,7 +108,7 @@ rule "logPhysicalGuest"
         // input data says this guest is physical machine, this is not expected
         // log and autocorrect
         TreeMap<String, String> data = new TreeMap<>();
-        data.put("id", $guestId.toString());
+        data.put("id", String.valueOf($guestId));
         insert(new Message(Message.Level.DEBUG, "physical_guest", data));
         modify($guest) {
             physical = false;
@@ -127,7 +127,7 @@ rule "logMissingHost"
         // We treat this as a physical machine and warn the user, as the
         // matching will almost surely be incorrect
         TreeMap<String, String> data = new TreeMap<>();
-        data.put("id", $guestId.toString());
+        data.put("id", String.valueOf($guestId));
         insert(new Message(Message.Level.WARNING, "guest_with_unknown_host", data));
         modify($guest) {
             physical = true;
@@ -140,7 +140,7 @@ rule "logMissingCpuCount"
         $system : System($id : id, cpus == null)
     then
         TreeMap<String, String> data = new TreeMap<>();
-        data.put("id", $id.toString());
+        data.put("id", String.valueOf($id));
         insert(new Message(Message.Level.WARNING, "unknown_cpu_count", data));
         modify($system) {
             cpus = 16;
