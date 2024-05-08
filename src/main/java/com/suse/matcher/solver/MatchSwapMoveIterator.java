@@ -21,6 +21,7 @@ import static java.util.stream.Collectors.toMap;
 import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.util.CollectionUtils;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -113,7 +114,7 @@ public class MatchSwapMoveIterator implements Iterator<MatchMove> {
         states.add(match1.confirmed);
 
         // also make sure any conflicting match is (flipped to) false
-        if (match2.confirmed) {
+        if (BooleanUtils.isTrue(match2.confirmed)) {
             assignment.getConflictingMatchIds(match1.id)
                     .map(id -> idMap.get(id))
                     .filter(conflict -> conflict.confirmed)
@@ -123,7 +124,7 @@ public class MatchSwapMoveIterator implements Iterator<MatchMove> {
                     });
         }
 
-        if (match1.confirmed) {
+        if (BooleanUtils.isTrue(match1.confirmed)) {
             assignment.getConflictingMatchIds(match2.id)
                     .map(id -> idMap.get(id))
                     .filter(conflict -> conflict.confirmed)
