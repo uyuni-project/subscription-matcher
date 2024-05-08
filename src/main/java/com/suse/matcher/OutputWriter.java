@@ -71,9 +71,7 @@ public class OutputWriter {
     public OutputWriter(Optional<String> outputDirectoryIn, Optional<Character> delimiter) {
         outputDirectory = outputDirectoryIn.orElse(".");
         csvFormat = CSVFormat.EXCEL;
-        if (delimiter.isPresent()) {
-            csvFormat = csvFormat.withDelimiter(delimiter.get());
-        }
+        delimiter.ifPresent(character -> csvFormat = csvFormat.withDelimiter(character));
     }
 
     /**
@@ -153,7 +151,7 @@ public class OutputWriter {
             .filter(s -> s.policy != null)
             .filter(s -> s.startDate != null && s.endDate != null)
             .filter(s -> s.quantity != null && s.quantity > 0)
-            .sorted(activeSubsFirst.thenComparing(Comparator.comparing(s -> s.partNumber)));
+            .sorted(activeSubsFirst.thenComparing(s -> s.partNumber));
 
         Map<Long, CSVOutputSubscription> outsubs = new LinkedHashMap<>();
         subscriptions.forEach(s -> {
@@ -182,9 +180,6 @@ public class OutputWriter {
                 // see http://www.cs.nott.ac.uk/~psarb2/G51MPC/slides/NumberLogic.pdf
                 outsubs.get(subscriptionId).setMatched((cents + 100 - 1) / 100);
             }
-            else {
-                // error
-            }
         });
 
         // prepare header
@@ -209,7 +204,7 @@ public class OutputWriter {
         Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment);
 
         List<System> systems = assignment.getProblemFactStream(System.class)
-                .sorted((a, b) -> a.id.compareTo(b.id))
+                .sorted(Comparator.comparing(a -> a.id))
                 .collect(Collectors.toList());
 
         Collection<InstalledProduct> installedProducts = assignment.getProblemFacts(InstalledProduct.class);
