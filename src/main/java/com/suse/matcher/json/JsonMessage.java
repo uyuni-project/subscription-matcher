@@ -29,7 +29,6 @@
  */
 package com.suse.matcher.json;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -41,7 +40,7 @@ public class JsonMessage {
     private String type;
 
     /** Arbitrary data connected to this message. */
-    private Map<String, String> data = new LinkedHashMap<>();
+    private Map<String, String> data;
 
     /**
      * Standard constructor.

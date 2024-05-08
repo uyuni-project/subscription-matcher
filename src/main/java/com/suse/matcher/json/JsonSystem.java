@@ -29,7 +29,6 @@
  */
 package com.suse.matcher.json;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -53,10 +52,10 @@ public class JsonSystem {
     private Boolean virtualHost;
 
     /** Virtual machine ids. */
-    private Set<Long> virtualSystemIds = new LinkedHashSet<>();
+    private Set<Long> virtualSystemIds;
 
     /** Installed product ids. */
-    private Set<Long> productIds = new LinkedHashSet<>();
+    private Set<Long> productIds;
 
     /**
      * Standard constructor.
