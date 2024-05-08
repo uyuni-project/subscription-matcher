@@ -30,8 +30,6 @@
 package com.suse.matcher.json;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,13 +42,13 @@ public class JsonOutput {
     private Date timestamp;
 
     /** All matches, possible and confirmed. */
-    private List<JsonMatch> matches = new LinkedList<>();
+    private List<JsonMatch> matches;
 
     /** Mapping from subscription id to its policy */
-    private Map<Long, String> subscriptionPolicies = new HashMap<>();
+    private Map<Long, String> subscriptionPolicies;
 
     /** The messages. */
-    private List<JsonMessage> messages = new LinkedList<>();
+    private List<JsonMessage> messages;
 
     /** The processed subscriptions **/
     private List<JsonSubscription> subscriptions;
