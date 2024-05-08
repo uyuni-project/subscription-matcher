@@ -1,7 +1,7 @@
 package com.suse.matcher;
 
-import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.facts.InstalledProduct;
+import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.solver.Assignment;
 import com.suse.matcher.solver.Match;
@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 public class Matcher {
 
     /** Logger instance. */
-    private final Logger logger = LogManager.getLogger(Matcher.class);
+    private static final Logger LOGGER = LogManager.getLogger(Matcher.class);
 
     /** true if the matcher is being tested. */
     private boolean testing;
@@ -58,15 +58,15 @@ public class Matcher {
         // this is represented by Match objects, divide them from other facts
         List<Match> matches = getMatches(deducedFacts);
 
-        logger.info("Found {} matches", matches.size());
-        if (logger.isTraceEnabled()) {
+        LOGGER.info("Found {} matches", matches.size());
+        if (LOGGER.isTraceEnabled()) {
             matches.forEach(m -> {
-                logger.trace(m.toString());
+                LOGGER.trace(m.toString());
                 getPotentialMatches(deducedFacts)
                     .filter(p -> p.groupId == m.id)
                     .sorted()
                     .map(o -> o.toString())
-                    .forEach(s -> logger.trace(s));
+                    .forEach(s -> LOGGER.trace(s));
             });
         }
 

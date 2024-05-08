@@ -26,6 +26,9 @@ import java.util.Map;
  * Deduces facts based on some base facts and rules defined ksession-rules.xml.
  */
 public class Drools {
+    /** Logger instance. */
+    private static final Logger LOGGER = LogManager.getLogger(Drools.class);
+
     /** Rule groups corresponding to filenames and agenda group names. */
     private static final String[] RULE_GROUPS = {
         "PartNumbers",
@@ -38,9 +41,6 @@ public class Drools {
 
     /** Map to fact ids, see generateId(). */
     private static Map<List<Object>, Integer> idMap = new HashMap<>();
-
-    /** Logger instance. */
-    private final Logger logger = LogManager.getLogger(Drools.class);
 
     /** Deduction resulting fact objects. */
     private Collection<Object> result;
@@ -89,7 +89,7 @@ public class Drools {
         // start deduction engine
         long start = System.currentTimeMillis();
         session.fireAllRules();
-        logger.info("Deduction phase took {}ms", System.currentTimeMillis() - start);
+        LOGGER.info("Deduction phase took {}ms", System.currentTimeMillis() - start);
 
         // collect results
         result = new ArrayList<>(session.getObjects());
@@ -100,7 +100,7 @@ public class Drools {
             .map(m -> (Message) m)
             .filter(m -> m.severity.equals(Message.Level.DEBUG))
             .sorted()
-            .forEach(m -> logger.debug("{}: {}", m.type, m.data))
+            .forEach(m -> LOGGER.debug("{}: {}", m.type, m.data))
         ;
 
         // cleanup
