@@ -1,9 +1,5 @@
 package com.suse.matcher;
 
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
-import static java.util.Optional.ofNullable;
-
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.solver.Assignment;
 
@@ -40,19 +36,19 @@ public class Main {
 
         // First initialize the logging system
         Optional<Level> logLevel = commandLine.hasOption('v') ?
-            of(Level.toLevel(commandLine.getOptionValue('v'))) :
-            empty();
+            Optional.of(Level.toLevel(commandLine.getOptionValue('v'))) :
+            Optional.empty();
 
-        try (LoggerContext context = Log4J.initialize(logLevel, ofNullable(commandLine.getOptionValue('l')))) {
+        try (LoggerContext context = Log4J.initialize(logLevel, Optional.ofNullable(commandLine.getOptionValue('l')))) {
             Logger logger = context.getLogger(Main.class);
             logger.info("Starting subscription-matcher process");
 
             try {
                 // create output writing objects
                 Optional<Character> delimiter = commandLine.hasOption('d') ?
-                    of(commandLine.getOptionValue('d').charAt(0)) :
-                    empty();
-                Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
+                    Optional.of(commandLine.getOptionValue('d').charAt(0)) :
+                    Optional.empty();
+                Optional<String> outdir = Optional.ofNullable(commandLine.getOptionValue('o'));
                 OutputWriter writer = new OutputWriter(outdir, delimiter);
 
                 // load input data

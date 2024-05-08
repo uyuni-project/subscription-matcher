@@ -1,13 +1,12 @@
 package com.suse.matcher.solver;
 
-import static java.util.stream.Collectors.toMap;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Generates {@link MatchMove}s.
@@ -40,10 +39,7 @@ public class MatchMoveIterator implements Iterator<MatchMove> {
         iterator = orderedMatches.iterator();
 
         idMap = orderedMatches.stream()
-            .collect(toMap(
-                    match -> match.id,
-                    match -> match
-            ));
+            .collect(Collectors.toMap(match -> match.id, match -> match));
     }
 
     /** {@inheritDoc} */

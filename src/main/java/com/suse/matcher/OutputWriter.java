@@ -1,10 +1,5 @@
 package com.suse.matcher;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
-
 import com.suse.matcher.csv.CSVOutputMessage;
 import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputUnmatchedProduct;
@@ -235,15 +230,16 @@ public class OutputWriter {
             // create map of product id -> set of systems ids with this product and filter out successful matches
             Map<Long, Set<Long>> unmatchedProductSystems = installedProducts.stream()
                     .filter(sp -> matchMap.get(Pair.of(sp.systemId, sp.productId)) == null)
-                    .collect(groupingBy(
-                            InstalledProduct::getProductId,
-                            mapping(InstalledProduct::getSystemId, toSet())));
+                    .collect(Collectors.groupingBy(
+                        InstalledProduct::getProductId,
+                        Collectors.mapping(InstalledProduct::getSystemId, Collectors.toSet())
+                    ));
 
             List<CSVOutputUnmatchedProduct> unmatchedProductsCsvs = unmatchedProductSystems.entrySet().stream()
                     .map(e -> new CSVOutputUnmatchedProduct(
                             productNameById(products, e.getKey()),
-                            e.getValue().stream().flatMap(sid -> systemById(systems, sid).stream()).collect(toList())))
-                    .collect(toList());
+                            e.getValue().stream().flatMap(sid -> systemById(systems, sid).stream()).collect(Collectors.toList())))
+                    .collect(Collectors.toList());
 
             // cant use java 8 forEach as printer throws a checked exception
             for (CSVOutputUnmatchedProduct csv : unmatchedProductsCsvs) {
@@ -284,7 +280,7 @@ public class OutputWriter {
             List<Message> messages = assignment.getProblemFactStream(Message.class)
                 .filter(m -> m.severity != Message.Level.DEBUG)
                 .sorted()
-                .collect(toList());
+                .collect(Collectors.toList());
 
             for (Message message: messages) {
                 CSVOutputMessage csvMessage = new CSVOutputMessage(message.type, message.data);
