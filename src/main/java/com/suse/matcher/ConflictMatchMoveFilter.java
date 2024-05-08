@@ -16,12 +16,6 @@ import java.util.stream.Collectors;
 public class ConflictMatchMoveFilter implements SelectionFilter<Assignment, ChangeMove> {
 
     /**
-     * Default constructor.
-     */
-    public ConflictMatchMoveFilter() {
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
