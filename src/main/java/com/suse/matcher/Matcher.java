@@ -56,9 +56,7 @@ public class Matcher {
 
         // activate the rule engine to deduce more facts
         Drools drools = new Drools(baseFacts);
-        Collection<Object> deducedFacts = drools.getResult().stream()
-            .map(o -> (Object) o)
-            .collect(toList());
+        Collection<Object> deducedFacts = drools.getResult();
 
         // among deductions, the rule engine determines system to subscription "matchability":
         // whether a subscription can be assigned to a system without taking other assignments into account.
