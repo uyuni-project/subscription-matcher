@@ -22,7 +22,6 @@ import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.util.CollectionUtils;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.optaplanner.core.impl.heuristic.move.Move;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +39,7 @@ import java.util.TreeMap;
  *
  * All "confirmed" flags of incompatible {@link Match}es are flipped to false.
  */
-public class MatchSwapMoveIterator implements Iterator<Move> {
+public class MatchSwapMoveIterator implements Iterator<MatchMove> {
 
     /** Solution instance. */
     private Assignment assignment;
