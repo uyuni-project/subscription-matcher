@@ -114,8 +114,9 @@ public class FactConverter {
      * @return the output
      */
     public static JsonOutput convertToOutput(Assignment assignment) {
-        Date timestamp = assignment.getProblemFactStream(Timestamp.class)
-                .findFirst().get().timestamp;
+        Date timestamp = assignment.getProblemFactStream(Timestamp.class).findFirst()
+            .map(Timestamp::getTimestamp)
+            .orElse(new Date());
 
         List<JsonMatch> matches = getMatches(assignment);
 
