@@ -80,7 +80,7 @@ public class OutputWriter {
      * Write the output files to the specified directory.
      *
      * @param assignment output from {@link Matcher}
-     * @param logLevel
+     * @param logLevel the logging level
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void writeOutput(Assignment assignment, Optional<Level> logLevel) throws IOException {
@@ -96,7 +96,7 @@ public class OutputWriter {
             LOGGER.error("Unable to delete file {} in directory {}: {}", JSON_OUTPUT_ALL_FILE, outputDirectory, ex.getMessage());
         }
 
-        logLevel.filter(l -> l.isMoreSpecificThan(Level.DEBUG)).ifPresent((l) -> writeAllFacts(assignment));
+        logLevel.filter(l -> l.isMoreSpecificThan(Level.DEBUG)).ifPresent(l -> writeAllFacts(assignment));
     }
 
     private void writeAllFacts(Assignment assignment) {
