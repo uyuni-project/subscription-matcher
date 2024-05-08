@@ -132,10 +132,6 @@ public class Drools {
      * @return a new id
      */
     public static int generateId(Object... objects) {
-        List<Object> listOfData = Arrays.asList(objects);
-        if (!idMap.containsKey(listOfData)) {
-            idMap.put(listOfData, idMap.size());
-        }
-        return idMap.get(listOfData);
+        return idMap.computeIfAbsent(Arrays.asList(objects), k -> idMap.size());
     }
 }
