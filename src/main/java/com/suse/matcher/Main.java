@@ -14,6 +14,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,9 +30,8 @@ public class Main {
      * The main method.
      *
      * @param args command line arguments
-     * @throws Exception if anything unexpected happens
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         long start = System.currentTimeMillis();
         CommandLine commandLine = parseCommandLine(args);
 
@@ -68,8 +69,13 @@ public class Main {
 
                 logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
             }
-            catch (Exception ex) {
-                logger.error("Unexpected exception: ", ex);
+            catch (IOException ex) {
+                logger.error("Unexpected I/O error", ex);
+                throw new UncheckedIOException(ex);
+            }
+            catch (RuntimeException ex) {
+                logger.error("Unexpected error", ex);
+                throw ex;
             }
         }
     }
