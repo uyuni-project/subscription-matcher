@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 /**
  * Filters ChangeMoves by only accepting those that do not lead to conflicts.
  */
-public class ConflictMatchMoveFilter implements SelectionFilter<Assignment, ChangeMove> {
+public class ConflictMatchMoveFilter implements SelectionFilter<Assignment, ChangeMove<Assignment>> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean accept(ScoreDirector<Assignment> director, ChangeMove move) {
+    public boolean accept(ScoreDirector<Assignment> director, ChangeMove<Assignment> move) {
         boolean confirmed = (Boolean) move.getPlanningValues().iterator().next();
 
         // we are confirming a Match

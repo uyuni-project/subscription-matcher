@@ -2,8 +2,6 @@ package com.suse.matcher.solver;
 
 import static java.util.stream.Collectors.toMap;
 
-import org.optaplanner.core.impl.heuristic.move.Move;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -17,7 +15,7 @@ import java.util.Random;
  * In particular, every {@link MatchMove} produced by this class will flip the confirmed
  * flag of one {@link Match} and also make sure all incompatible flags are flipped to false
  */
-public class MatchMoveIterator implements Iterator<Move> {
+public class MatchMoveIterator implements Iterator<MatchMove> {
 
     /** Solution instance. */
     private Assignment assignment;
