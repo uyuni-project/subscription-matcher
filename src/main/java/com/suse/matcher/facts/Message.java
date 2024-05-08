@@ -27,7 +27,7 @@ public class Message implements Comparable<Message> {
         INFO,
         /** Warnings about things that went wrong but still don't block the matcher. */
         WARNING
-    };
+    }
 
     /** The severity level of this message. */
     public Level severity;
