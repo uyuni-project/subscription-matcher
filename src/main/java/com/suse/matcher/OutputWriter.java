@@ -144,7 +144,9 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVSubscriptionReport(Assignment assignment) throws IOException {
-        Date timestamp = assignment.getProblemFactStream(Timestamp.class).findFirst().get().timestamp;
+        Date timestamp = assignment.getProblemFactStream(Timestamp.class).findFirst()
+            .map(Timestamp::getTimestamp)
+            .orElse(new Date());
 
         Comparator<Subscription> activeSubsFirst = (s1, s2) -> {
             int s1Active = timestamp.after(s1.startDate) && timestamp.before(s1.endDate) ? 0 : 1;
@@ -240,7 +242,7 @@ public class OutputWriter {
             List<CSVOutputUnmatchedProduct> unmatchedProductsCsvs = unmatchedProductSystems.entrySet().stream()
                     .map(e -> new CSVOutputUnmatchedProduct(
                             productNameById(products, e.getKey()),
-                            e.getValue().stream().map(sid -> systemById(systems, sid)).collect(toList())))
+                            e.getValue().stream().flatMap(sid -> systemById(systems, sid).stream()).collect(toList())))
                     .collect(toList());
 
             // cant use java 8 forEach as printer throws a checked exception
@@ -251,11 +253,10 @@ public class OutputWriter {
         }
     }
 
-    private System systemById(Collection<System> systems, Long systemId) {
+    private Optional<System> systemById(Collection<System> systems, Long systemId) {
         return systems.stream()
-                .filter(s -> systemId.equals(s.getId()))
-                .findFirst()
-                .get();
+                .filter(s -> Objects.equals(systemId, s.getId()))
+                .findFirst();
     }
 
     private String productNameById(Collection<Product> products, Long productId) {
