@@ -1,7 +1,5 @@
 package com.suse.matcher.facts;
 
-import static java.util.stream.Collectors.toList;
-
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -11,6 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Represents a message to be presented to the user, as a secondary informative output (errors, warnings, etc.)
@@ -57,7 +56,7 @@ public class Message implements Comparable<Message> {
         return new CompareToBuilder()
             .append(type, oIn.type)
             .append(data, oIn.data, (Comparator<Map<String, String>>) (o1In, o2In) -> {
-                List<String> keys = o1In.keySet().stream().sorted().collect(toList());
+                List<String> keys = o1In.keySet().stream().sorted().collect(Collectors.toList());
                 for (String key : keys) {
                     int comparison = o1In.get(key).compareTo(o2In.get(key));
                     if (comparison != 0) {

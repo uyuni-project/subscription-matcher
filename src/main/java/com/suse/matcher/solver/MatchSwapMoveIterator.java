@@ -15,9 +15,6 @@
 
 package com.suse.matcher.solver;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toMap;
-
 import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.util.CollectionUtils;
 
@@ -31,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /**
  * Generates {@link MatchMove}s.
@@ -62,7 +60,7 @@ public class MatchSwapMoveIterator implements Iterator<MatchMove> {
         List<Match> orderedMatches = new ArrayList<>(assignment.getMatches());
 
         idMap = orderedMatches.stream()
-                .collect(toMap(
+                .collect(Collectors.toMap(
                         match -> match.id,
                         match -> match
                 ));
@@ -70,14 +68,15 @@ public class MatchSwapMoveIterator implements Iterator<MatchMove> {
         // subscription id -> confirmed/not confirmed -> shuffled list of matches
         Map<Long, Map<Boolean, List<PotentialMatch>>> subscriptionMatches = assignmentIn.getSortedPotentialMatchesCache()
                 .stream()
-                .collect(groupingBy(
-                        pm -> pm.subscriptionId,
+                .collect(Collectors.groupingBy(
+                    pm -> pm.subscriptionId,
+                    TreeMap::new,
+                    Collectors.groupingBy(
+                        pm -> idMap.get(pm.groupId).confirmed,
                         TreeMap::new,
-                        groupingBy(
-                                pm -> idMap.get(pm.groupId).confirmed,
-                                TreeMap::new,
-                                CollectionUtils.toShuffledList(randomIn)
-                        )));
+                        CollectionUtils.toShuffledList(randomIn)
+                    )
+                ));
 
         // Starting from the subscription id -> map of matches, build a shuffled list of pairs of matches containing the
         // subscription, such that a confirmed match is on the left and not confirmed match is on the right in the match
