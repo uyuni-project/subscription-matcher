@@ -41,13 +41,13 @@ import java.util.stream.Collectors;
 public class MatchSwapMoveIterator implements Iterator<MatchMove> {
 
     /** Solution instance. */
-    private Assignment assignment;
+    private final Assignment assignment;
 
     /** Iterator over all matches. */
     private final Iterator<Pair<PotentialMatch, PotentialMatch>> iterator;
 
     /** Map from id to {@link Match}. */
-    private Map<Integer, Match> idMap;
+    private final Map<Integer, Match> idMap;
 
     /**
      * Standard constructor.

@@ -56,7 +56,7 @@ public class OutputWriter {
     private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
 
     /** The output directory. */
-    private String outputDirectory;
+    private final String outputDirectory;
 
     /** The CSV format. */
     private CSVFormat csvFormat;

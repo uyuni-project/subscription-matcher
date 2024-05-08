@@ -40,10 +40,10 @@ public class Drools {
     };
 
     /** Map to fact ids, see generateId(). */
-    private static Map<List<Object>, Integer> idMap = new HashMap<>();
+    private static final Map<List<Object>, Integer> ID_MAP = new HashMap<>();
 
     /** Deduction resulting fact objects. */
-    private Collection<Object> result;
+    private final Collection<Object> result;
 
     /**
      * Instantiates a Drools instance with the specified base facts.
@@ -120,7 +120,7 @@ public class Drools {
      * reset the idMap
      */
     public static void resetIdMap() {
-        idMap.clear();
+        ID_MAP.clear();
     }
 
     /**
@@ -132,6 +132,6 @@ public class Drools {
      * @return a new id
      */
     public static int generateId(Object... objects) {
-        return idMap.computeIfAbsent(Arrays.asList(objects), k -> idMap.size());
+        return ID_MAP.computeIfAbsent(Arrays.asList(objects), k -> ID_MAP.size());
     }
 }

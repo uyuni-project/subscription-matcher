@@ -30,7 +30,7 @@ public class Main {
      * @param args command line arguments
      * @throws Exception if anything unexpected happens
      */
-    public static final void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
         CommandLine commandLine = parseCommandLine(args);
 

@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 public class MatchMoveIterator implements Iterator<MatchMove> {
 
     /** Solution instance. */
-    private Assignment assignment;
+    private final Assignment assignment;
 
     /** Iterator over all matches. */
-    private Iterator<Match> iterator;
+    private final Iterator<Match> iterator;
 
     /** Map from id to {@link Match}. */
-    private Map<Integer, Match> idMap;
+    private final Map<Integer, Match> idMap;
 
     /**
      * Standard constructor.
