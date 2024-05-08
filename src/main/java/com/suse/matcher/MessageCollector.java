@@ -33,7 +33,7 @@ public class MessageCollector {
         Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment);
 
         // add messages about unsatisfied pins
-        Collection<Message> messages = new LinkedList<Message>();
+        Collection<Message> messages = new LinkedList<>();
         pinnedMatchFacts
             .filter(pin -> confirmedMatchFacts.stream() // filter unmatched pins
                     .noneMatch(m -> Objects.equals(m.getSubscriptionId(), pin.subscriptionId) &&
