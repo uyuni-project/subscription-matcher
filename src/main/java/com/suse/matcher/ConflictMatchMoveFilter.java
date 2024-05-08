@@ -30,8 +30,8 @@ public class ConflictMatchMoveFilter implements SelectionFilter<Assignment, Chan
                 .collect(Collectors.toSet());
 
             // accept this Move only if no conflicting Match has been confirmed already
-            return !solution.getMatches().stream()
-                .anyMatch(m -> m.confirmed == Boolean.TRUE && conflictingIds.contains(m.id));
+            return solution.getMatches().stream()
+                .noneMatch(m -> m.confirmed == Boolean.TRUE && conflictingIds.contains(m.id));
         }
         else {
             // leaving a Match unconfirmed is always OK
