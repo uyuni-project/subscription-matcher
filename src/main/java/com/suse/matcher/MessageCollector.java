@@ -7,6 +7,7 @@ import com.suse.matcher.solver.Assignment;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
@@ -35,10 +36,10 @@ public class MessageCollector {
                     .isPresent()
             )
             .forEach(unmatchedPin -> {
-                Message message = new Message(Message.Level.INFO, "unsatisfied_pinned_match", new TreeMap<String, String>(){{
-                    put("system_id", unmatchedPin.systemId.toString());
-                    put("subscription_id", unmatchedPin.subscriptionId.toString());
-                }});
+                Message message = new Message(Message.Level.INFO, "unsatisfied_pinned_match", new TreeMap<>(Map.of(
+                    "system_id", unmatchedPin.systemId.toString(),
+                    "subscription_id", unmatchedPin.subscriptionId.toString()
+                )));
                 messages.add(message);
             });
 
