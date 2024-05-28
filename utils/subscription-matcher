@@ -39,6 +39,7 @@ function buildClassPath {
 }
 
 
+JAVA_OPTS="-server -Xmx2G --add-opens=java.base/java.lang=ALL-UNNAMED"
 EXTRA_ARGS=""
 
 DEPENDENCIES=(
@@ -77,4 +78,4 @@ if ! CLASSPATH=$(buildClassPath "${DEPENDENCIES[@]}"); then
     exit 1
 fi
 
-exec java -cp "$CLASSPATH" -server -Xmx2G $EXTRA_ARGS com.suse.matcher.Main "$@"
+exec java $JAVA_OPTS -cp "$CLASSPATH" $EXTRA_ARGS com.suse.matcher.Main "$@"
