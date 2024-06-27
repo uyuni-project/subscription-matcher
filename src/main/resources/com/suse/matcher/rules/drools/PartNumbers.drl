@@ -19222,8 +19222,9 @@ rule "Add subscription data for part number 874-008210-C"
         $subscription : Subscription(partNumber == "874-008210-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19236,8 +19237,9 @@ rule "Add subscription data for part number 874-008211-C"
         $subscription : Subscription(partNumber == "874-008211-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19250,8 +19252,9 @@ rule "Add subscription data for part number 874-008212-C"
         $subscription : Subscription(partNumber == "874-008212-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19264,8 +19267,9 @@ rule "Add subscription data for part number 874-008213-C"
         $subscription : Subscription(partNumber == "874-008213-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19278,8 +19282,9 @@ rule "Add subscription data for part number 874-008214-C"
         $subscription : Subscription(partNumber == "874-008214-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19292,8 +19297,9 @@ rule "Add subscription data for part number 874-008215-C"
         $subscription : Subscription(partNumber == "874-008215-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19306,8 +19312,9 @@ rule "Add subscription data for part number 874-008216-C"
         $subscription : Subscription(partNumber == "874-008216-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19320,8 +19327,9 @@ rule "Add subscription data for part number 874-008217-C"
         $subscription : Subscription(partNumber == "874-008217-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19334,8 +19342,9 @@ rule "Add subscription data for part number 874-008218-C"
         $subscription : Subscription(partNumber == "874-008218-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19348,8 +19357,9 @@ rule "Add subscription data for part number 874-008219-C"
         $subscription : Subscription(partNumber == "874-008219-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19362,8 +19372,9 @@ rule "Add subscription data for part number 874-008220-C"
         $subscription : Subscription(partNumber == "874-008220-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19376,8 +19387,9 @@ rule "Add subscription data for part number 874-008221-C"
         $subscription : Subscription(partNumber == "874-008221-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19390,8 +19402,9 @@ rule "Add subscription data for part number 874-008222-C"
         $subscription : Subscription(partNumber == "874-008222-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19404,8 +19417,9 @@ rule "Add subscription data for part number 874-008223-C"
         $subscription : Subscription(partNumber == "874-008223-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19418,8 +19432,9 @@ rule "Add subscription data for part number 874-008224-C"
         $subscription : Subscription(partNumber == "874-008224-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19432,8 +19447,9 @@ rule "Add subscription data for part number 874-008225-C"
         $subscription : Subscription(partNumber == "874-008225-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19446,8 +19462,9 @@ rule "Add subscription data for part number 874-008226-C"
         $subscription : Subscription(partNumber == "874-008226-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19460,8 +19477,9 @@ rule "Add subscription data for part number 874-008227-C"
         $subscription : Subscription(partNumber == "874-008227-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "l3-standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19474,8 +19492,9 @@ rule "Add subscription data for part number 874-008228-C"
         $subscription : Subscription(partNumber == "874-008228-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19488,8 +19507,9 @@ rule "Add subscription data for part number 874-008229-C"
         $subscription : Subscription(partNumber == "874-008229-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19502,8 +19522,9 @@ rule "Add subscription data for part number 874-008230-C"
         $subscription : Subscription(partNumber == "874-008230-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "priority",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19516,8 +19537,9 @@ rule "Add subscription data for part number 874-008231-C"
         $subscription : Subscription(partNumber == "874-008231-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19530,8 +19552,9 @@ rule "Add subscription data for part number 874-008232-C"
         $subscription : Subscription(partNumber == "874-008232-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
@@ -19544,8 +19567,9 @@ rule "Add subscription data for part number 874-008233-C"
         $subscription : Subscription(partNumber == "874-008233-C")
     then
         modify($subscription) {
-            policy = Policy.PHYSICAL_ONLY,
+            policy = Policy.ONE_TWO,
             supportLevel = "standard",
+            cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
         };
