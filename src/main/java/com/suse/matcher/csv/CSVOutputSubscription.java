@@ -16,25 +16,25 @@ public class CSVOutputSubscription {
             "Policy", "Total Quantity", "Matched Quantity", "Start Date", "End Date"};
 
     /** The part number. */
-    private String partNumber;
+    private final String partNumber;
 
     /** The subscription name. */
-    private String name;
+    private final String name;
 
     /** The subscription policy. */
-    private String policy;
+    private final String policy;
 
     /** The quantity. */
-    private Integer quantity;
+    private final Integer quantity;
+
+    /** The start date. */
+    private final Date startDate;
+
+    /** The end date. */
+    private final Date endDate;
 
     /** Number of subscriptions matched. */
     private int matched;
-
-    /** The start date. */
-    private Date startDate;
-
-    /** The end date. */
-    private Date endDate;
 
     /**
      * Instantiates a new CSV output subscription.

@@ -30,7 +30,6 @@
 package com.suse.matcher.json;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -60,7 +59,7 @@ public class JsonSubscription {
     private String sccUsername;
 
     /** Provided product ids. */
-    private Set<Long> productIds = new LinkedHashSet<>();
+    private Set<Long> productIds;
 
     /**
      * Standard constructor.

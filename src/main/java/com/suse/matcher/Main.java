@@ -1,9 +1,5 @@
 package com.suse.matcher;
 
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
-import static java.util.Optional.ofNullable;
-
 import com.suse.matcher.json.JsonInput;
 import com.suse.matcher.solver.Assignment;
 
@@ -18,6 +14,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,27 +30,26 @@ public class Main {
      * The main method.
      *
      * @param args command line arguments
-     * @throws Exception if anything unexpected happens
      */
-    public static final void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         long start = System.currentTimeMillis();
         CommandLine commandLine = parseCommandLine(args);
 
         // First initialize the logging system
         Optional<Level> logLevel = commandLine.hasOption('v') ?
-            of(Level.toLevel(commandLine.getOptionValue('v'))) :
-            empty();
+            Optional.of(Level.toLevel(commandLine.getOptionValue('v'))) :
+            Optional.empty();
 
-        try (LoggerContext context = Log4J.initialize(logLevel, ofNullable(commandLine.getOptionValue('l')))) {
+        try (LoggerContext context = Log4J.initialize(logLevel, Optional.ofNullable(commandLine.getOptionValue('l')))) {
             Logger logger = context.getLogger(Main.class);
             logger.info("Starting subscription-matcher process");
 
             try {
                 // create output writing objects
                 Optional<Character> delimiter = commandLine.hasOption('d') ?
-                    of(commandLine.getOptionValue('d').charAt(0)) :
-                    empty();
-                Optional<String> outdir = ofNullable(commandLine.getOptionValue('o'));
+                    Optional.of(commandLine.getOptionValue('d').charAt(0)) :
+                    Optional.empty();
+                Optional<String> outdir = Optional.ofNullable(commandLine.getOptionValue('o'));
                 OutputWriter writer = new OutputWriter(outdir, delimiter);
 
                 // load input data
@@ -72,8 +69,13 @@ public class Main {
 
                 logger.info("Whole execution took {}ms", System.currentTimeMillis() - start);
             }
-            catch (Exception ex) {
-                logger.error("Unexpected exception: ", ex);
+            catch (IOException ex) {
+                logger.error("Unexpected I/O error", ex);
+                throw new UncheckedIOException(ex);
+            }
+            catch (RuntimeException ex) {
+                logger.error("Unexpected error", ex);
+                throw ex;
             }
         }
     }

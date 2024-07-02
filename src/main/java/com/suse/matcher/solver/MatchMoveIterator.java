@@ -1,15 +1,12 @@
 package com.suse.matcher.solver;
 
-import static java.util.stream.Collectors.toMap;
-
-import org.optaplanner.core.impl.heuristic.move.Move;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Generates {@link MatchMove}s.
@@ -17,16 +14,16 @@ import java.util.Random;
  * In particular, every {@link MatchMove} produced by this class will flip the confirmed
  * flag of one {@link Match} and also make sure all incompatible flags are flipped to false
  */
-public class MatchMoveIterator implements Iterator<Move> {
+public class MatchMoveIterator implements Iterator<MatchMove> {
 
     /** Solution instance. */
-    private Assignment assignment;
+    private final Assignment assignment;
 
     /** Iterator over all matches. */
-    private Iterator<Match> iterator;
+    private final Iterator<Match> iterator;
 
     /** Map from id to {@link Match}. */
-    private Map<Integer, Match> idMap;
+    private final Map<Integer, Match> idMap;
 
     /**
      * Standard constructor.
@@ -42,10 +39,7 @@ public class MatchMoveIterator implements Iterator<Move> {
         iterator = orderedMatches.iterator();
 
         idMap = orderedMatches.stream()
-            .collect(toMap(
-                    match -> match.id,
-                    match -> match
-            ));
+            .collect(Collectors.toMap(match -> match.id, match -> match));
     }
 
     /** {@inheritDoc} */
@@ -58,8 +52,8 @@ public class MatchMoveIterator implements Iterator<Move> {
     @Override
     public MatchMove next() {
         // prepare MatchMove's lists
-        ArrayList<Match> matches = new ArrayList<Match>();
-        ArrayList<Boolean> states = new ArrayList<Boolean>();
+        ArrayList<Match> matches = new ArrayList<>();
+        ArrayList<Boolean> states = new ArrayList<>();
 
         // pick the match to flip
         Match match = iterator.next();

@@ -60,7 +60,7 @@ public class VirtualizationGroupMember {
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object objIn) {
-        if (!(objIn instanceof HostGuest)) {
+        if (!(objIn instanceof VirtualizationGroupMember)) {
             return false;
         }
         VirtualizationGroupMember other = (VirtualizationGroupMember) objIn;

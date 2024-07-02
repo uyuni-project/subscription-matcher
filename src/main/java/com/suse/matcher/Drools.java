@@ -13,6 +13,7 @@ import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.Agenda;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,6 +26,9 @@ import java.util.Map;
  * Deduces facts based on some base facts and rules defined ksession-rules.xml.
  */
 public class Drools {
+    /** Logger instance. */
+    private static final Logger LOGGER = LogManager.getLogger(Drools.class);
+
     /** Rule groups corresponding to filenames and agenda group names. */
     private static final String[] RULE_GROUPS = {
         "PartNumbers",
@@ -36,13 +40,10 @@ public class Drools {
     };
 
     /** Map to fact ids, see generateId(). */
-    private static Map<List<Object>, Integer> idMap = new HashMap<>();
-
-    /** Logger instance. */
-    private final Logger logger = LogManager.getLogger(Drools.class);
+    private static final Map<List<Object>, Integer> ID_MAP = new HashMap<>();
 
     /** Deduction resulting fact objects. */
-    private Collection<? extends Object> result;
+    private final Collection<Object> result;
 
     /**
      * Instantiates a Drools instance with the specified base facts.
@@ -88,10 +89,10 @@ public class Drools {
         // start deduction engine
         long start = System.currentTimeMillis();
         session.fireAllRules();
-        logger.info("Deduction phase took {}ms", System.currentTimeMillis() - start);
+        LOGGER.info("Deduction phase took {}ms", System.currentTimeMillis() - start);
 
         // collect results
-        result = session.getObjects();
+        result = new ArrayList<>(session.getObjects());
 
         // log deducted messages
         result.stream()
@@ -99,7 +100,7 @@ public class Drools {
             .map(m -> (Message) m)
             .filter(m -> m.severity.equals(Message.Level.DEBUG))
             .sorted()
-            .forEach(m -> logger.debug("{}: {}", m.type, m.data.toString()))
+            .forEach(m -> LOGGER.debug("{}: {}", m.type, m.data))
         ;
 
         // cleanup
@@ -111,7 +112,7 @@ public class Drools {
      * Returns all facts deduced by Drools.
      * @return the deduced facts
      */
-    public Collection<? extends Object> getResult() {
+    public Collection<Object> getResult() {
         return result;
     }
 
@@ -119,7 +120,7 @@ public class Drools {
      * reset the idMap
      */
     public static void resetIdMap() {
-        idMap.clear();
+        ID_MAP.clear();
     }
 
     /**
@@ -131,10 +132,6 @@ public class Drools {
      * @return a new id
      */
     public static int generateId(Object... objects) {
-        List<Object> listOfData = Arrays.asList(objects);
-        if (!idMap.containsKey(listOfData)) {
-            idMap.put(listOfData, idMap.size());
-        }
-        return idMap.get(listOfData);
+        return ID_MAP.computeIfAbsent(Arrays.asList(objects), k -> ID_MAP.size());
     }
 }

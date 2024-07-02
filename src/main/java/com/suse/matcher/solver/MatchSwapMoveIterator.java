@@ -15,14 +15,11 @@
 
 package com.suse.matcher.solver;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toMap;
-
 import com.suse.matcher.facts.PotentialMatch;
 import com.suse.matcher.util.CollectionUtils;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.optaplanner.core.impl.heuristic.move.Move;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /**
  * Generates {@link MatchMove}s.
@@ -40,16 +38,16 @@ import java.util.TreeMap;
  *
  * All "confirmed" flags of incompatible {@link Match}es are flipped to false.
  */
-public class MatchSwapMoveIterator implements Iterator<Move> {
+public class MatchSwapMoveIterator implements Iterator<MatchMove> {
 
     /** Solution instance. */
-    private Assignment assignment;
+    private final Assignment assignment;
 
     /** Iterator over all matches. */
     private final Iterator<Pair<PotentialMatch, PotentialMatch>> iterator;
 
     /** Map from id to {@link Match}. */
-    private Map<Integer, Match> idMap;
+    private final Map<Integer, Match> idMap;
 
     /**
      * Standard constructor.
@@ -62,7 +60,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
         List<Match> orderedMatches = new ArrayList<>(assignment.getMatches());
 
         idMap = orderedMatches.stream()
-                .collect(toMap(
+                .collect(Collectors.toMap(
                         match -> match.id,
                         match -> match
                 ));
@@ -70,14 +68,15 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
         // subscription id -> confirmed/not confirmed -> shuffled list of matches
         Map<Long, Map<Boolean, List<PotentialMatch>>> subscriptionMatches = assignmentIn.getSortedPotentialMatchesCache()
                 .stream()
-                .collect(groupingBy(
-                        pm -> pm.subscriptionId,
+                .collect(Collectors.groupingBy(
+                    pm -> pm.subscriptionId,
+                    TreeMap::new,
+                    Collectors.groupingBy(
+                        pm -> idMap.get(pm.groupId).confirmed,
                         TreeMap::new,
-                        groupingBy(
-                                pm -> idMap.get(pm.groupId).confirmed,
-                                TreeMap::new,
-                                CollectionUtils.toShuffledList(randomIn)
-                        )));
+                        CollectionUtils.toShuffledList(randomIn)
+                    )
+                ));
 
         // Starting from the subscription id -> map of matches, build a shuffled list of pairs of matches containing the
         // subscription, such that a confirmed match is on the left and not confirmed match is on the right in the match
@@ -114,7 +113,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
         states.add(match1.confirmed);
 
         // also make sure any conflicting match is (flipped to) false
-        if (match2.confirmed) {
+        if (BooleanUtils.isTrue(match2.confirmed)) {
             assignment.getConflictingMatchIds(match1.id)
                     .map(id -> idMap.get(id))
                     .filter(conflict -> conflict.confirmed)
@@ -124,7 +123,7 @@ public class MatchSwapMoveIterator implements Iterator<Move> {
                     });
         }
 
-        if (match1.confirmed) {
+        if (BooleanUtils.isTrue(match1.confirmed)) {
             assignment.getConflictingMatchIds(match2.id)
                     .map(id -> idMap.get(id))
                     .filter(conflict -> conflict.confirmed)

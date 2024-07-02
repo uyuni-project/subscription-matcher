@@ -1,14 +1,14 @@
 package com.suse.matcher;
 
-import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
+import com.suse.matcher.json.JsonInput;
+import com.suse.matcher.json.JsonOutput;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.suse.matcher.json.JsonInput;
-import com.suse.matcher.json.JsonOutput;
 
 /**
  * Serializes and deserializes objects from and to JSON.
@@ -16,13 +16,13 @@ import com.suse.matcher.json.JsonOutput;
 public class JsonIO {
 
     /** Deserializer instance. */
-    private Gson gson;
+    private final Gson gson;
 
     /** Default constructor. */
     public JsonIO() {
         gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX")
-            .setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setPrettyPrinting()
             .create();
     }

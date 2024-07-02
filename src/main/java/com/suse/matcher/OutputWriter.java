@@ -1,10 +1,5 @@
 package com.suse.matcher;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
-
 import com.suse.matcher.csv.CSVOutputMessage;
 import com.suse.matcher.csv.CSVOutputSubscription;
 import com.suse.matcher.csv.CSVOutputUnmatchedProduct;
@@ -61,7 +56,7 @@ public class OutputWriter {
     private static final String CSV_MESSAGE_REPORT_FILE = "message_report.csv";
 
     /** The output directory. */
-    private String outputDirectory;
+    private final String outputDirectory;
 
     /** The CSV format. */
     private CSVFormat csvFormat;
@@ -76,16 +71,14 @@ public class OutputWriter {
     public OutputWriter(Optional<String> outputDirectoryIn, Optional<Character> delimiter) {
         outputDirectory = outputDirectoryIn.orElse(".");
         csvFormat = CSVFormat.EXCEL;
-        if (delimiter.isPresent()) {
-            csvFormat = csvFormat.withDelimiter(delimiter.get());
-        }
+        delimiter.ifPresent(character -> csvFormat = csvFormat.withDelimiter(character));
     }
 
     /**
      * Write the output files to the specified directory.
      *
      * @param assignment output from {@link Matcher}
-     * @param logLevel
+     * @param logLevel the logging level
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void writeOutput(Assignment assignment, Optional<Level> logLevel) throws IOException {
@@ -101,7 +94,7 @@ public class OutputWriter {
             LOGGER.error("Unable to delete file {} in directory {}: {}", JSON_OUTPUT_ALL_FILE, outputDirectory, ex.getMessage());
         }
 
-        logLevel.filter(l -> l.isMoreSpecificThan(Level.DEBUG)).ifPresent((l) -> writeAllFacts(assignment));
+        logLevel.filter(l -> l.isMoreSpecificThan(Level.DEBUG)).ifPresent(l -> writeAllFacts(assignment));
     }
 
     private void writeAllFacts(Assignment assignment) {
@@ -110,7 +103,7 @@ public class OutputWriter {
             writer.write(io.toJson(assignment));
         }
         catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException("Unable to write to facts to file", e);
         }
     }
 
@@ -144,7 +137,9 @@ public class OutputWriter {
      * @throws IOException if an I/O error occurs
      */
     public void writeCSVSubscriptionReport(Assignment assignment) throws IOException {
-        Date timestamp = assignment.getProblemFactStream(Timestamp.class).findFirst().get().timestamp;
+        Date timestamp = assignment.getProblemFactStream(Timestamp.class).findFirst()
+            .map(Timestamp::getTimestamp)
+            .orElse(new Date());
 
         Comparator<Subscription> activeSubsFirst = (s1, s2) -> {
             int s1Active = timestamp.after(s1.startDate) && timestamp.before(s1.endDate) ? 0 : 1;
@@ -156,7 +151,7 @@ public class OutputWriter {
             .filter(s -> s.policy != null)
             .filter(s -> s.startDate != null && s.endDate != null)
             .filter(s -> s.quantity != null && s.quantity > 0)
-            .sorted(activeSubsFirst.thenComparing(Comparator.comparing(s -> s.partNumber)));
+            .sorted(activeSubsFirst.thenComparing(s -> s.partNumber));
 
         Map<Long, CSVOutputSubscription> outsubs = new LinkedHashMap<>();
         subscriptions.forEach(s -> {
@@ -185,9 +180,6 @@ public class OutputWriter {
                 // see http://www.cs.nott.ac.uk/~psarb2/G51MPC/slides/NumberLogic.pdf
                 outsubs.get(subscriptionId).setMatched((cents + 100 - 1) / 100);
             }
-            else {
-                // error
-            }
         });
 
         // prepare header
@@ -212,7 +204,7 @@ public class OutputWriter {
         Collection<JsonMatch> confirmedMatchFacts = FactConverter.getMatches(assignment);
 
         List<System> systems = assignment.getProblemFactStream(System.class)
-                .sorted((a, b) -> a.id.compareTo(b.id))
+                .sorted(Comparator.comparing(a -> a.id))
                 .collect(Collectors.toList());
 
         Collection<InstalledProduct> installedProducts = assignment.getProblemFacts(InstalledProduct.class);
@@ -233,15 +225,16 @@ public class OutputWriter {
             // create map of product id -> set of systems ids with this product and filter out successful matches
             Map<Long, Set<Long>> unmatchedProductSystems = installedProducts.stream()
                     .filter(sp -> matchMap.get(Pair.of(sp.systemId, sp.productId)) == null)
-                    .collect(groupingBy(
-                            InstalledProduct::getProductId,
-                            mapping(InstalledProduct::getSystemId, toSet())));
+                    .collect(Collectors.groupingBy(
+                        InstalledProduct::getProductId,
+                        Collectors.mapping(InstalledProduct::getSystemId, Collectors.toSet())
+                    ));
 
             List<CSVOutputUnmatchedProduct> unmatchedProductsCsvs = unmatchedProductSystems.entrySet().stream()
                     .map(e -> new CSVOutputUnmatchedProduct(
                             productNameById(products, e.getKey()),
-                            e.getValue().stream().map(sid -> systemById(systems, sid)).collect(toList())))
-                    .collect(toList());
+                            e.getValue().stream().flatMap(sid -> systemById(systems, sid).stream()).collect(Collectors.toList())))
+                    .collect(Collectors.toList());
 
             // cant use java 8 forEach as printer throws a checked exception
             for (CSVOutputUnmatchedProduct csv : unmatchedProductsCsvs) {
@@ -251,11 +244,10 @@ public class OutputWriter {
         }
     }
 
-    private System systemById(Collection<System> systems, Long systemId) {
+    private Optional<System> systemById(Collection<System> systems, Long systemId) {
         return systems.stream()
-                .filter(s -> systemId.equals(s.getId()))
-                .findFirst()
-                .get();
+                .filter(s -> Objects.equals(systemId, s.getId()))
+                .findFirst();
     }
 
     private String productNameById(Collection<Product> products, Long productId) {
@@ -283,7 +275,7 @@ public class OutputWriter {
             List<Message> messages = assignment.getProblemFactStream(Message.class)
                 .filter(m -> m.severity != Message.Level.DEBUG)
                 .sorted()
-                .collect(toList());
+                .collect(Collectors.toList());
 
             for (Message message: messages) {
                 CSVOutputMessage csvMessage = new CSVOutputMessage(message.type, message.data);

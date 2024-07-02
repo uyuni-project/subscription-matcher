@@ -12,6 +12,8 @@ import com.suse.matcher.solver.Assignment;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,6 +44,8 @@ class MatcherScenariosTest {
 
     private static final Logger LOGGER = LogManager.getLogger(MatcherScenariosTest.class);
 
+    private static LoggerContext loggerContext = null;
+
     // CSV files to be checked
     private static final List<String> CSV_FILES = List.of(
         "message_report.csv",
@@ -52,10 +56,16 @@ class MatcherScenariosTest {
     // Utility to convert from/to JSON
     private static final JsonIO JSON_IO = new JsonIO();
 
-
     @BeforeAll
-    static void initAll() {
-        Log4J.initialize(Optional.empty(), Optional.empty());
+    static void initLoggerContext() {
+        loggerContext = Log4J.initialize(Optional.empty(), Optional.empty());
+    }
+
+    @AfterAll
+    static void closeLoggerContext() {
+        if (loggerContext != null) {
+            loggerContext.close();
+        }
     }
 
     @BeforeEach

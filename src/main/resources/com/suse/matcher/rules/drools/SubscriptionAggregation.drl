@@ -55,7 +55,7 @@ rule "aggregateEqualStackableSubscriptions"
         }
 
         TreeMap<String, String> msgData = new TreeMap<>();
-        msgData.put("part_number", $s1.partNumber.toString());
+        msgData.put("part_number", String.valueOf($s1.partNumber));
         insert(new Message(Message.Level.INFO, "merge_subscriptions", msgData));
 end
 
@@ -71,9 +71,9 @@ rule "adjustPinnedMatches"
         retract($pm);
 
         TreeMap<String, String> data = new TreeMap<>();
-        data.put("old_subscription_id", $s.id.toString());
-        data.put("new_subscription_id", $s.aggregatedSubscriptionId.toString());
-        data.put("system_id", $pm.systemId.toString());
+        data.put("old_subscription_id", String.valueOf($s.id));
+        data.put("new_subscription_id", String.valueOf($s.aggregatedSubscriptionId));
+        data.put("system_id", String.valueOf($pm.systemId));
         insert(new Message(Message.Level.INFO, "adjust_pinned_match", data));
 end
 

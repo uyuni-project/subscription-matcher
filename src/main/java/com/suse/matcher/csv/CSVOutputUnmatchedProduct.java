@@ -15,10 +15,10 @@ public class CSVOutputUnmatchedProduct {
     public static final String[] CSV_HEADER = {"Unmatched Product Name", "System Name","System ID", "CPUs"};
 
     /** The product name. */
-    private String productName;
+    private final String productName;
 
     /** Unmatched unmatchedSystems corresponding to product */
-    private List<System> unmatchedSystems;
+    private final List<System> unmatchedSystems;
 
     /**
      * Standard constructor.

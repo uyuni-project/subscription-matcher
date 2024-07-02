@@ -3,7 +3,6 @@ package com.suse.matcher.solver;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.optaplanner.core.impl.heuristic.move.AbstractMove;
-import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
 import java.util.Collection;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
  *
  * This will simply flip multiple "confirmed" bits in an equal number of {@link Match} planning entities.
  */
-public class MatchMove extends AbstractMove {
+public class MatchMove extends AbstractMove<Assignment> {
 
     /** The matches. */
     List<Match> matches;
@@ -38,7 +37,7 @@ public class MatchMove extends AbstractMove {
      * {@inheritDoc}
      */
     @Override
-    protected void doMoveOnGenuineVariables(ScoreDirector director) {
+    protected void doMoveOnGenuineVariables(ScoreDirector<Assignment> director) {
         for (int i = 0; i < matches.size(); i++) {
             Match m = matches.get(i);
             director.beforeVariableChanged(m, "confirmed");
@@ -51,7 +50,7 @@ public class MatchMove extends AbstractMove {
      * {@inheritDoc}
      */
     @Override
-    public boolean isMoveDoable(ScoreDirector director) {
+    public boolean isMoveDoable(ScoreDirector<Assignment> director) {
         // MatchMoveIterator constructs doable MatchMoves only
         return true;
     }
@@ -60,7 +59,7 @@ public class MatchMove extends AbstractMove {
      * {@inheritDoc}
      */
     @Override
-    public AbstractMove createUndoMove(ScoreDirector director) {
+    public AbstractMove<Assignment> createUndoMove(ScoreDirector<Assignment> director) {
         List<Boolean> newConfirmedFlags = matches.stream()
                 .map(m -> m.confirmed)
                 .collect(Collectors.toList());
@@ -72,7 +71,7 @@ public class MatchMove extends AbstractMove {
      * {@inheritDoc}
      */
     @Override
-    public Collection<? extends Object> getPlanningEntities() {
+    public Collection<Match> getPlanningEntities() {
         return matches;
     }
 
@@ -80,7 +79,7 @@ public class MatchMove extends AbstractMove {
      * {@inheritDoc}
      */
     @Override
-    public Collection<? extends Object> getPlanningValues() {
+    public Collection<Boolean> getPlanningValues() {
         return confirmedFlags;
     }
 

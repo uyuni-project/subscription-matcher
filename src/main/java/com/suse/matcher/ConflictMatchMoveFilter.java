@@ -13,19 +13,13 @@ import java.util.stream.Collectors;
 /**
  * Filters ChangeMoves by only accepting those that do not lead to conflicts.
  */
-public class ConflictMatchMoveFilter implements SelectionFilter<Assignment, ChangeMove> {
-
-    /**
-     * Default constructor.
-     */
-    public ConflictMatchMoveFilter() {
-    }
+public class ConflictMatchMoveFilter implements SelectionFilter<Assignment, ChangeMove<Assignment>> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean accept(ScoreDirector<Assignment> director, ChangeMove move) {
+    public boolean accept(ScoreDirector<Assignment> director, ChangeMove<Assignment> move) {
         boolean confirmed = (Boolean) move.getPlanningValues().iterator().next();
 
         // we are confirming a Match
@@ -36,8 +30,8 @@ public class ConflictMatchMoveFilter implements SelectionFilter<Assignment, Chan
                 .collect(Collectors.toSet());
 
             // accept this Move only if no conflicting Match has been confirmed already
-            return !solution.getMatches().stream()
-                .anyMatch(m -> m.confirmed == Boolean.TRUE && conflictingIds.contains(m.id));
+            return solution.getMatches().stream()
+                .noneMatch(m -> m.confirmed == Boolean.TRUE && conflictingIds.contains(m.id));
         }
         else {
             // leaving a Match unconfirmed is always OK

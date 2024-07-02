@@ -1,10 +1,5 @@
 package com.suse.matcher;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
-
 import com.suse.matcher.facts.CentGroup;
 import com.suse.matcher.facts.HostGuest;
 import com.suse.matcher.facts.InstalledProduct;
@@ -47,6 +42,10 @@ import java.util.stream.Collectors;
  */
 public class FactConverter {
 
+    private FactConverter() {
+        // Prevent instantiation
+    }
+
     /**
      * Converts JSON objects to facts (inputs to the rule engine).
      *
@@ -54,7 +53,7 @@ public class FactConverter {
      * @return a collection of facts
      */
     public static Collection<Object> convertToFacts(JsonInput input) {
-        Collection<Object> result = new LinkedList<Object>();
+        Collection<Object> result = new LinkedList<>();
 
         result.add(new Timestamp(input.getTimestamp()));
 
@@ -114,8 +113,9 @@ public class FactConverter {
      * @return the output
      */
     public static JsonOutput convertToOutput(Assignment assignment) {
-        Date timestamp = assignment.getProblemFactStream(Timestamp.class)
-                .findFirst().get().timestamp;
+        Date timestamp = assignment.getProblemFactStream(Timestamp.class).findFirst()
+            .map(Timestamp::getTimestamp)
+            .orElse(new Date());
 
         List<JsonMatch> matches = getMatches(assignment);
 
@@ -155,7 +155,7 @@ public class FactConverter {
         Set<Integer> confirmedGroupIds = assignment.getMatches().stream()
                 .filter(m -> m.confirmed)
                 .map(m -> m.id)
-                .collect(toSet());
+                .collect(Collectors.toSet());
 
         // map of cent group id -> cent group cents
         Map<Number, Integer> centGroupsCents = assignment.getProblemFactStream(CentGroup.class)
@@ -188,7 +188,7 @@ public class FactConverter {
                 .append(a.getCents(), b.getCents())
                 .toComparison()
             )
-            .collect(toList());
+            .collect(Collectors.toList());
     }
 
     /**
@@ -199,11 +199,14 @@ public class FactConverter {
      */
     private static List<JsonSubscription> getSubscriptions(Assignment assignment) {
         Map<Long, Set<Long>> subProducts = assignment.getProblemFactStream(SubscriptionProduct.class)
-                .collect(groupingBy(sp -> sp.subscriptionId, mapping(sp -> sp.productId, Collectors.toCollection(() -> new TreeSet<>()))));
+                .collect(Collectors.groupingBy(
+                    sp -> sp.subscriptionId,
+                    Collectors.mapping(sp -> sp.productId, Collectors.toCollection(() -> new TreeSet<>()))
+                ));
         return assignment.getProblemFactStream(Subscription.class)
                 .sorted(Comparator.comparing(Subscription::getId))
                 .map(s -> new JsonSubscription(s.id, s.partNumber, s.name, s.quantity, s.startDate, s.endDate,
                         s.sccUsername, subProducts.get(s.id)))
-                .collect(toList());
+                .collect(Collectors.toList());
     }
 }

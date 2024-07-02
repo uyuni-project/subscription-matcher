@@ -8,10 +8,10 @@ import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -138,7 +138,7 @@ public class Assignment implements Solution<HardSoftScore> {
      */
     @ValueRangeProvider(id = "booleanRange")
     public List<Boolean> getBooleans() {
-        return new ArrayList<Boolean>(){{ add(Boolean.FALSE); add(Boolean.TRUE); }};
+        return List.of(Boolean.FALSE, Boolean.TRUE);
     }
 
 
@@ -150,6 +150,6 @@ public class Assignment implements Solution<HardSoftScore> {
     public Stream<Integer> getConflictingMatchIds(Integer matchId) {
         return conflictMap.get(matchId).stream()
             .flatMap(s -> s.stream())
-            .filter(id -> id != matchId);
+            .filter(id -> !Objects.equals(id, matchId));
     }
 }
