@@ -1,0 +1,13 @@
+Part Number,Description,Policy,Total Quantity,Matched Quantity,Start Date,End Date
+874-005942,"SUSE Manager Server, x86-64, 1 Instance, Priority Subscription, 1 Year",Per-instance,1,0,2022-02-21,2023-02-21
+874-005942,"SUSE Manager Server, x86-64, 1 Instance, Priority Subscription, 1 Year",Per-instance,1,0,2023-02-07,2024-02-07
+874-005942,"SUSE Manager Server, x86-64, 1 Instance, Priority Subscription, 1 Year",Per-instance,1,0,2024-02-15,2025-02-15
+874-005942,"SUSE Manager Server, x86-64, 1 Instance, Priority Subscription, 1 Year",Per-instance,1,1,2025-03-17,2026-03-17
+874-006932,"SUSE Manager Server, x86-64, 1 Instance, L3-Priority Subscription, 1 Year",Per-instance,1,0,2021-12-09,2022-09-09
+874-007933,"SUSE Multi-Linux Manager Lifecycle Management+, X86-64, 1-2 Sockets or 1-2 Virtual Machines, Priority Subscription, 1 Year",1-2 Sockets or 1-2 Virtual Machines,10,0,2025-07-01,2025-09-30
+874-008055,"SUSE Linux Enterprise Server for SAP Applications with Live Patching, x86-64, 1-2 Sockets or 1-2 Virtual Machines, Priority Subscription, 1 Year",1-2 Sockets or 1-2 Virtual Machines,1,0,2021-12-01,2022-11-30
+874-008061,"SUSE Multi-Linux Support High Availability Extension, x86-64, 1-2 Sockets with Inherited Virtualization, Inherited Subscription, 3 Year",Inherited,16,0,2025-11-01,2028-10-31
+P-874-008272-C,"SUSE Multi-Linux Support Enterprise, x86-64, 1-2 Sockets or 1-2 Virtual Machines, Priority Subscription, 3 Year, Promotion",1-2 Sockets or 1-2 Virtual Machines,21,21,2025-11-01,2028-10-31
+P-874-008273-C,"SUSE Multi-Linux Support Enterprise, x86-64, 1-2 Sockets with Unlimited Virtual Machines, Priority Subscription, 3 Year, Promotion",Unlimited Virtual Machines,16,16,2025-11-01,2028-10-31
+P-874-008273-C,"SUSE Multi-Linux Support Enterprise, x86-64, 1-2 Sockets with Unlimited Virtual Machines, Priority Subscription, 3 Year, Promotion",Unlimited Virtual Machines,24,24,2025-11-01,2028-10-31
+P-874-008285-C,"SUSE Multi-Linux Support Professional, x86-64, 1-99 subscriptions, 1-2 Sockets or 1-2 Virtual Machines, Priority Subscription, 1 Year, Promotion",1-2 Sockets or 1-2 Virtual Machines,40,40,2025-11-01,2028-10-31
