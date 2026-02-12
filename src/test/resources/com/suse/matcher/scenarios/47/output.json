@@ -1,0 +1,5636 @@
+{
+  "timestamp": "2026-01-08T00:00:02.812Z",
+  "matches": [
+      {
+        "system_id": 1000010009,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 50
+      },
+      {
+        "system_id": 1000010009,
+        "subscription_id": 473468,
+        "product_id": 2793,
+        "cents": 50
+      },
+      {
+        "system_id": 1000010012,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010012,
+        "subscription_id": 473468,
+        "product_id": 2609,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010012,
+        "subscription_id": 473468,
+        "product_id": 2720,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010022,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010022,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010022,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010024,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010024,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010024,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010025,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010025,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010025,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010026,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010026,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010026,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010027,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010027,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010027,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010028,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010028,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010028,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010042,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010042,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010042,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010044,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010044,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010044,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010051,
+        "subscription_id": 473469,
+        "product_id": 1076,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010051,
+        "subscription_id": 473469,
+        "product_id": 1251,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010051,
+        "subscription_id": 473469,
+        "product_id": 2702,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010055,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010055,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010055,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010062,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010062,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010062,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010064,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010064,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010064,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010079,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010079,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010079,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010080,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010080,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010080,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010081,
+        "subscription_id": 473469,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010081,
+        "subscription_id": 473469,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010081,
+        "subscription_id": 473469,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010083,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010083,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010083,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010084,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010084,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010084,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010089,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010089,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010089,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010126,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010126,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010126,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010127,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010127,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010127,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010128,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010128,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010128,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010130,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010130,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010130,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010132,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010132,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010132,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010135,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010135,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010135,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010136,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010136,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010136,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010137,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010137,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010137,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010138,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010138,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010138,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010142,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010142,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010142,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010143,
+        "subscription_id": 473469,
+        "product_id": 1076,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010143,
+        "subscription_id": 473469,
+        "product_id": 1251,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010143,
+        "subscription_id": 473469,
+        "product_id": 2702,
+        "cents": 266
+      },
+      {
+        "system_id": 1000010181,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010181,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010181,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010182,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010182,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010182,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010183,
+        "subscription_id": 473469,
+        "product_id": 1076,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010183,
+        "subscription_id": 473469,
+        "product_id": 1251,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010183,
+        "subscription_id": 473469,
+        "product_id": 2702,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010187,
+        "subscription_id": 473469,
+        "product_id": 1076,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010187,
+        "subscription_id": 473469,
+        "product_id": 1251,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010187,
+        "subscription_id": 473469,
+        "product_id": 2702,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010193,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010193,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010193,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010194,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010194,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010194,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010195,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010195,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010195,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 133
+      },
+      {
+        "system_id": 1000010199,
+        "subscription_id": 473472,
+        "product_id": 1076,
+        "cents": 100
+      },
+      {
+        "system_id": 1000010199,
+        "subscription_id": 473472,
+        "product_id": 1251,
+        "cents": 100
+      },
+      {
+        "system_id": 1000010199,
+        "subscription_id": 473472,
+        "product_id": 2702,
+        "cents": 100
+      },
+      {
+        "system_id": 1000010223,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010223,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010223,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010224,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010224,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010224,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010225,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010225,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010225,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010226,
+        "subscription_id": 473468,
+        "product_id": 1076,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010226,
+        "subscription_id": 473468,
+        "product_id": 1251,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010226,
+        "subscription_id": 473468,
+        "product_id": 2702,
+        "cents": 33
+      },
+      {
+        "system_id": 1000010255,
+        "subscription_id": 473470,
+        "product_id": 1076,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010255,
+        "subscription_id": 473470,
+        "product_id": 1251,
+        "cents": 66
+      },
+      {
+        "system_id": 1000010255,
+        "subscription_id": 473470,
+        "product_id": 2702,
+        "cents": 66
+      },
+      {
+        "system_id": 2000010000,
+        "subscription_id": -5057941,
+        "product_id": 2609,
+        "cents": 100
+      }
+  ],
+  "subscription_policies": {
+    "-5057941": "instance",
+    "-4935996": "instance",
+    "-4773515": "instance",
+    "-4773476": "instance",
+    "-4703806": "instance",
+    "389403": "one_two",
+    "464273": "one_two",
+    "473468": "unlimited_virtualization",
+    "473469": "one_two",
+    "473470": "unlimited_virtualization",
+    "473471": "inherited_virtualization",
+    "473472": "one_two"
+  },
+  "messages": [
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010009"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010012"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010014"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010016"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010017"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010019"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010020"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010021"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010022"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010023"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010024"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010025"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010026"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010027"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010028"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010029"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010030"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010031"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010032"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010033"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010034"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010035"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010036"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010037"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010038"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010039"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010040"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010041"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010042"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010043"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010044"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010046"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010047"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010048"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010049"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010050"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010051"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010052"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010053"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010054"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010055"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010056"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010057"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010058"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010059"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010060"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010061"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010062"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010063"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010064"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010065"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010066"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010067"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010068"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010069"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010070"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010071"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010072"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010073"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010074"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010075"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010076"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010077"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010078"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010079"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010080"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010081"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010082"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010083"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010084"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010085"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010086"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010089"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010090"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010091"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010092"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010093"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010094"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010095"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010096"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010097"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010098"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010099"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010100"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010101"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010102"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010103"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010104"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010105"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010106"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010107"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010108"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010109"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010110"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010111"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010112"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010113"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010114"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010115"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010116"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010117"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010118"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010119"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010120"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010121"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010122"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010123"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010124"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010125"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010126"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010127"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010128"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010129"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010130"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010131"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010132"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010133"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010134"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010135"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010136"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010137"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010138"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010139"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010140"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010141"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010142"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010143"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010144"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010145"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010146"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010147"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010148"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010149"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010150"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010151"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010152"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010153"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010154"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010155"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010156"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010157"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010158"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010159"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010160"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010161"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010162"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010163"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010164"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010165"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010166"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010167"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010168"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010169"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010170"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010171"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010172"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010173"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010174"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010175"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010176"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010177"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010178"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010179"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010180"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010181"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010182"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010183"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010184"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010185"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010186"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010187"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010188"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010189"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010190"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010191"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010192"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010193"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010194"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010195"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010196"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010197"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010198"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010199"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010200"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010201"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010202"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010203"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010204"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010205"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010206"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010207"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010208"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010209"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010210"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010211"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010216"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010219"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010220"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010221"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010222"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010223"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010224"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010225"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010226"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010227"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010228"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010229"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010230"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010231"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010232"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010233"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010234"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010235"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010236"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010237"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010238"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010239"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010240"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010241"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010242"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010243"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010244"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010246"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010247"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010248"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010249"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010250"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010251"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010252"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010253"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010255"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010256"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010257"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010258"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010259"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010260"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010261"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010262"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010263"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010264"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010265"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010266"
+      }
+    },
+    {
+      "type": "guest_with_unknown_host",
+      "data": {
+        "id": "1000010267"
+      }
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": -5057941,
+      "part_number": "874-005942",
+      "name": "SUSE Manager Server, x86-64, 1 Instance, Priority Subscription, 1 Year",
+      "quantity": 1,
+      "start_date": "2025-03-17T00:00:00.000Z",
+      "end_date": "2026-03-17T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1001,
+        1117,
+        1119,
+        1140,
+        1246,
+        1247,
+        1248,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1732,
+        1749,
+        1751,
+        1759,
+        1763,
+        1768,
+        1873,
+        1878,
+        1899,
+        1917,
+        1918,
+        1929,
+        1934,
+        1939,
+        2001,
+        2007,
+        2012,
+        2113,
+        2133,
+        2140,
+        2202,
+        2208,
+        2210,
+        2222,
+        2233,
+        2234,
+        2235,
+        2236,
+        2283,
+        2292,
+        2354,
+        2361,
+        2362,
+        2378,
+        2401,
+        2406,
+        2407,
+        2408,
+        2409,
+        2410,
+        2428,
+        2465,
+        2470,
+        2520,
+        2521,
+        2531,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2563,
+        2564,
+        2574,
+        2585,
+        2586,
+        2587,
+        2588,
+        2605,
+        2609,
+        2676,
+        2677,
+        2699,
+        2718,
+        2731,
+        2732,
+        2733,
+        2734,
+        2763,
+        2764,
+        2765,
+        2774,
+        2793,
+        2886,
+        2899,
+        2913,
+        2921,
+        2922,
+        2923,
+        2924,
+        2930,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": -4935996,
+      "part_number": "874-005942",
+      "name": "SUSE Manager Server, x86-64, 1 Instance, Priority Subscription, 1 Year",
+      "quantity": 1,
+      "start_date": "2024-02-15T00:00:00.000Z",
+      "end_date": "2025-02-15T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1001,
+        1117,
+        1119,
+        1140,
+        1246,
+        1247,
+        1248,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1732,
+        1749,
+        1751,
+        1759,
+        1763,
+        1768,
+        1873,
+        1878,
+        1899,
+        1917,
+        1918,
+        1929,
+        1934,
+        1939,
+        2001,
+        2007,
+        2012,
+        2113,
+        2133,
+        2140,
+        2202,
+        2208,
+        2210,
+        2222,
+        2233,
+        2234,
+        2235,
+        2236,
+        2283,
+        2292,
+        2354,
+        2361,
+        2362,
+        2378,
+        2401,
+        2406,
+        2407,
+        2408,
+        2409,
+        2410,
+        2428,
+        2465,
+        2470,
+        2520,
+        2521,
+        2531,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2563,
+        2564,
+        2574,
+        2585,
+        2586,
+        2587,
+        2588,
+        2605,
+        2609,
+        2676,
+        2677,
+        2699,
+        2718,
+        2731,
+        2732,
+        2733,
+        2734,
+        2763,
+        2764,
+        2765,
+        2774,
+        2793,
+        2886,
+        2899,
+        2913,
+        2921,
+        2922,
+        2923,
+        2924,
+        2930,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": -4773515,
+      "part_number": "874-005942",
+      "name": "SUSE Manager Server, x86-64, 1 Instance, Priority Subscription, 1 Year",
+      "quantity": 1,
+      "start_date": "2023-02-07T00:00:00.000Z",
+      "end_date": "2024-02-07T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1001,
+        1117,
+        1119,
+        1140,
+        1246,
+        1247,
+        1248,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1732,
+        1749,
+        1751,
+        1759,
+        1763,
+        1768,
+        1873,
+        1878,
+        1899,
+        1917,
+        1918,
+        1929,
+        1934,
+        1939,
+        2001,
+        2007,
+        2012,
+        2113,
+        2133,
+        2140,
+        2208,
+        2210,
+        2222,
+        2233,
+        2234,
+        2235,
+        2236,
+        2292,
+        2354,
+        2361,
+        2362,
+        2378,
+        2406,
+        2407,
+        2408,
+        2409,
+        2410,
+        2465,
+        2470,
+        2520,
+        2521,
+        2531,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2563,
+        2564,
+        2585,
+        2586,
+        2587,
+        2588,
+        2609,
+        2676,
+        2677,
+        2718,
+        2731,
+        2732,
+        2733,
+        2734,
+        2763,
+        2764,
+        2765,
+        2793,
+        2886,
+        2899,
+        2921,
+        2922,
+        2923,
+        2924,
+        2930,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": -4773476,
+      "part_number": "874-005942",
+      "name": "SUSE Manager Server, x86-64, 1 Instance, Priority Subscription, 1 Year",
+      "quantity": 1,
+      "start_date": "2022-02-21T00:00:00.000Z",
+      "end_date": "2023-02-21T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1001,
+        1117,
+        1119,
+        1140,
+        1246,
+        1247,
+        1248,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1732,
+        1749,
+        1751,
+        1759,
+        1763,
+        1768,
+        1873,
+        1878,
+        1899,
+        1917,
+        1918,
+        1929,
+        1934,
+        1939,
+        2001,
+        2007,
+        2012,
+        2113,
+        2133,
+        2140,
+        2208,
+        2210,
+        2222,
+        2233,
+        2234,
+        2235,
+        2236,
+        2292,
+        2354,
+        2361,
+        2362,
+        2378,
+        2406,
+        2407,
+        2408,
+        2409,
+        2410,
+        2465,
+        2470,
+        2520,
+        2521,
+        2531,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2563,
+        2564,
+        2585,
+        2586,
+        2587,
+        2588,
+        2609,
+        2676,
+        2677,
+        2718,
+        2731,
+        2732,
+        2733,
+        2734,
+        2763,
+        2764,
+        2765,
+        2793,
+        2886,
+        2899,
+        2921,
+        2922,
+        2923,
+        2924,
+        2930,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": -4703806,
+      "part_number": "874-006932",
+      "name": "SUSE Manager Server, x86-64, 1 Instance, L3-Priority Subscription, 1 Year",
+      "quantity": 1,
+      "start_date": "2021-12-09T00:00:00.000Z",
+      "end_date": "2022-09-09T01:00:00.000+01",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1001,
+        1117,
+        1119,
+        1140,
+        1246,
+        1247,
+        1248,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1732,
+        1749,
+        1751,
+        1759,
+        1763,
+        1768,
+        1873,
+        1878,
+        1899,
+        1917,
+        1918,
+        1929,
+        1934,
+        1939,
+        2001,
+        2007,
+        2012,
+        2113,
+        2133,
+        2140,
+        2208,
+        2210,
+        2222,
+        2233,
+        2234,
+        2235,
+        2236,
+        2292,
+        2354,
+        2361,
+        2362,
+        2378,
+        2406,
+        2407,
+        2408,
+        2409,
+        2410,
+        2465,
+        2470,
+        2520,
+        2521,
+        2531,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2563,
+        2564,
+        2585,
+        2586,
+        2587,
+        2588,
+        2609,
+        2676,
+        2677,
+        2718,
+        2731,
+        2732,
+        2733,
+        2734,
+        2763,
+        2764,
+        2765,
+        2793,
+        2886,
+        2899,
+        2921,
+        2922,
+        2923,
+        2924,
+        2930,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": 389403,
+      "part_number": "874-008055",
+      "name": "SUSE Linux Enterprise Server for SAP Applications with Live Patching, x86-64, 1-2 Sockets or 1-2 Virtual Machines, Priority Subscription, 1 Year",
+      "quantity": 1,
+      "start_date": "2021-12-01T00:00:00.000Z",
+      "end_date": "2022-11-30T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        958,
+        959,
+        960,
+        961,
+        962,
+        963,
+        964,
+        965,
+        966,
+        967,
+        968,
+        969,
+        970,
+        971,
+        972,
+        973,
+        974,
+        975,
+        976,
+        977,
+        978,
+        979,
+        980,
+        981,
+        982,
+        983,
+        984,
+        985,
+        986,
+        987,
+        988,
+        1117,
+        1128,
+        1129,
+        1130,
+        1131,
+        1133,
+        1134,
+        1135,
+        1136,
+        1245,
+        1253,
+        1254,
+        1255,
+        1256,
+        1276,
+        1277,
+        1278,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1319,
+        1322,
+        1324,
+        1329,
+        1330,
+        1346,
+        1357,
+        1361,
+        1414,
+        1421,
+        1426,
+        1432,
+        1473,
+        1476,
+        1479,
+        1536,
+        1575,
+        1582,
+        1612,
+        1625,
+        1634,
+        1714,
+        1715,
+        1716,
+        1717,
+        1736,
+        1755,
+        1757,
+        1763,
+        1766,
+        1785,
+        1828,
+        1878,
+        1880,
+        1884,
+        1888,
+        1929,
+        1939,
+        1941,
+        1959,
+        1984,
+        2001,
+        2136,
+        2140,
+        2187,
+        2195,
+        2233,
+        2234,
+        2235,
+        2236,
+        2292,
+        2294,
+        2334,
+        2340,
+        2406,
+        2407,
+        2408,
+        2409,
+        2465,
+        2467,
+        2511,
+        2517,
+        2520,
+        2521,
+        2563,
+        2564,
+        2585,
+        2586,
+        2587,
+        2588,
+        2609,
+        2611,
+        2631,
+        2664,
+        2731,
+        2732,
+        2733,
+        2734,
+        2793,
+        2795,
+        2812,
+        2816,
+        2921,
+        2922,
+        2923,
+        2924,
+        2930,
+        2937,
+        2985
+      ]
+    },
+    {
+      "id": 464273,
+      "part_number": "874-007933",
+      "name": "SUSE Multi-Linux Manager Lifecycle Management+, X86-64, 1-2 Sockets or 1-2 Virtual Machines, Priority Subscription, 1 Year",
+      "quantity": 10,
+      "start_date": "2025-07-01T01:00:00.000+01",
+      "end_date": "2025-09-30T01:00:00.000+01",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        998,
+        999,
+        1000,
+        1001,
+        1002,
+        1076,
+        1097,
+        1119,
+        1140,
+        1141,
+        1246,
+        1247,
+        1248,
+        1349,
+        1352,
+        1419,
+        1518,
+        1520,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1724,
+        1725,
+        1899,
+        1900,
+        1917,
+        1918,
+        1929,
+        2001,
+        2007,
+        2009,
+        2012,
+        2113,
+        2202,
+        2208,
+        2210,
+        2222,
+        2223,
+        2233,
+        2234,
+        2235,
+        2236,
+        2283,
+        2361,
+        2362,
+        2378,
+        2379,
+        2401,
+        2406,
+        2407,
+        2408,
+        2409,
+        2410,
+        2428,
+        2520,
+        2521,
+        2531,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2563,
+        2564,
+        2574,
+        2585,
+        2586,
+        2587,
+        2588,
+        2605,
+        2676,
+        2677,
+        2699,
+        2718,
+        2720,
+        2731,
+        2732,
+        2733,
+        2734,
+        2763,
+        2764,
+        2765,
+        2774,
+        2886,
+        2899,
+        2913,
+        2921,
+        2922,
+        2923,
+        2924,
+        3020,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3095,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": 473468,
+      "part_number": "P-874-008273-C",
+      "name": "SUSE Multi-Linux Support Enterprise, x86-64, 1-2 Sockets with Unlimited Virtual Machines, Priority Subscription, 3 Year, Promotion",
+      "quantity": 24,
+      "start_date": "2025-11-01T00:00:00.000Z",
+      "end_date": "2028-10-31T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1000,
+        1001,
+        1002,
+        1076,
+        1097,
+        1117,
+        1119,
+        1122,
+        1127,
+        1138,
+        1139,
+        1140,
+        1141,
+        1246,
+        1247,
+        1248,
+        1251,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1352,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1520,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1725,
+        1763,
+        1878,
+        1899,
+        1900,
+        1917,
+        1918,
+        1921,
+        1939,
+        2007,
+        2009,
+        2012,
+        2113,
+        2140,
+        2202,
+        2208,
+        2210,
+        2222,
+        2223,
+        2283,
+        2292,
+        2361,
+        2362,
+        2378,
+        2379,
+        2401,
+        2410,
+        2428,
+        2465,
+        2531,
+        2538,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2574,
+        2605,
+        2609,
+        2676,
+        2677,
+        2699,
+        2702,
+        2718,
+        2720,
+        2763,
+        2764,
+        2765,
+        2774,
+        2778,
+        2793,
+        2886,
+        2899,
+        2913,
+        2930,
+        3020,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3095,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": 473469,
+      "part_number": "P-874-008272-C",
+      "name": "SUSE Multi-Linux Support Enterprise, x86-64, 1-2 Sockets or 1-2 Virtual Machines, Priority Subscription, 3 Year, Promotion",
+      "quantity": 21,
+      "start_date": "2025-11-01T00:00:00.000Z",
+      "end_date": "2028-10-31T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1000,
+        1001,
+        1002,
+        1076,
+        1097,
+        1117,
+        1119,
+        1122,
+        1127,
+        1138,
+        1139,
+        1140,
+        1141,
+        1246,
+        1247,
+        1248,
+        1251,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1352,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1520,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1725,
+        1763,
+        1878,
+        1899,
+        1900,
+        1917,
+        1918,
+        1921,
+        1939,
+        2007,
+        2009,
+        2012,
+        2113,
+        2140,
+        2202,
+        2208,
+        2210,
+        2222,
+        2223,
+        2283,
+        2292,
+        2361,
+        2362,
+        2378,
+        2379,
+        2401,
+        2410,
+        2428,
+        2465,
+        2531,
+        2538,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2574,
+        2605,
+        2609,
+        2676,
+        2677,
+        2699,
+        2702,
+        2718,
+        2720,
+        2763,
+        2764,
+        2765,
+        2774,
+        2778,
+        2793,
+        2886,
+        2899,
+        2913,
+        2930,
+        3020,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3095,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": 473470,
+      "part_number": "P-874-008273-C",
+      "name": "SUSE Multi-Linux Support Enterprise, x86-64, 1-2 Sockets with Unlimited Virtual Machines, Priority Subscription, 3 Year, Promotion",
+      "quantity": 16,
+      "start_date": "2025-11-01T00:00:00.000Z",
+      "end_date": "2028-10-31T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1000,
+        1001,
+        1002,
+        1076,
+        1097,
+        1117,
+        1119,
+        1122,
+        1127,
+        1138,
+        1139,
+        1140,
+        1141,
+        1246,
+        1247,
+        1248,
+        1251,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1352,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1520,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1725,
+        1763,
+        1878,
+        1899,
+        1900,
+        1917,
+        1918,
+        1921,
+        1939,
+        2007,
+        2009,
+        2012,
+        2113,
+        2140,
+        2202,
+        2208,
+        2210,
+        2222,
+        2223,
+        2283,
+        2292,
+        2361,
+        2362,
+        2378,
+        2379,
+        2401,
+        2410,
+        2428,
+        2465,
+        2531,
+        2538,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2574,
+        2605,
+        2609,
+        2676,
+        2677,
+        2699,
+        2702,
+        2718,
+        2720,
+        2763,
+        2764,
+        2765,
+        2774,
+        2778,
+        2793,
+        2886,
+        2899,
+        2913,
+        2930,
+        3020,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3095,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    },
+    {
+      "id": 473471,
+      "part_number": "874-008061",
+      "name": "SUSE Multi-Linux Support High Availability Extension, x86-64, 1-2 Sockets with Inherited Virtualization, Inherited Subscription, 3 Year",
+      "quantity": 16,
+      "start_date": "2025-11-01T00:00:00.000Z",
+      "end_date": "2028-10-31T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        958,
+        959,
+        960,
+        961,
+        962,
+        963,
+        964,
+        965,
+        966,
+        967,
+        968,
+        969,
+        970,
+        971,
+        972,
+        973,
+        974,
+        975,
+        976,
+        977,
+        978,
+        979,
+        980,
+        981,
+        982,
+        983,
+        984,
+        985,
+        986,
+        987,
+        988,
+        1132,
+        1245,
+        1252,
+        1254,
+        1255,
+        1256,
+        1276,
+        1277,
+        1278,
+        1324,
+        1361,
+        1432,
+        1582,
+        1634,
+        1785,
+        1884,
+        1922,
+        1959,
+        2195,
+        2340,
+        2517,
+        2539,
+        2631,
+        2812,
+        2937
+      ]
+    },
+    {
+      "id": 473472,
+      "part_number": "P-874-008285-C",
+      "name": "SUSE Multi-Linux Support Professional, x86-64, 1-99 subscriptions, 1-2 Sockets or 1-2 Virtual Machines, Priority Subscription, 1 Year, Promotion",
+      "quantity": 40,
+      "start_date": "2025-11-01T00:00:00.000Z",
+      "end_date": "2028-10-31T00:00:00.000Z",
+      "scc_username": "fddb66519f",
+      "product_ids": [
+        -41,
+        -40,
+        -39,
+        -38,
+        -37,
+        -36,
+        -35,
+        -32,
+        -31,
+        -30,
+        -29,
+        -28,
+        -27,
+        -26,
+        -25,
+        -24,
+        -23,
+        -22,
+        -20,
+        -19,
+        -18,
+        -17,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        669,
+        670,
+        673,
+        674,
+        677,
+        679,
+        681,
+        683,
+        684,
+        686,
+        687,
+        688,
+        690,
+        691,
+        694,
+        695,
+        696,
+        697,
+        698,
+        700,
+        703,
+        704,
+        706,
+        707,
+        708,
+        709,
+        712,
+        713,
+        717,
+        718,
+        719,
+        721,
+        723,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        733,
+        735,
+        737,
+        742,
+        746,
+        748,
+        751,
+        752,
+        753,
+        756,
+        757,
+        759,
+        761,
+        765,
+        766,
+        767,
+        768,
+        769,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        782,
+        783,
+        785,
+        786,
+        790,
+        791,
+        792,
+        793,
+        794,
+        796,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        817,
+        818,
+        819,
+        822,
+        824,
+        827,
+        828,
+        832,
+        954,
+        955,
+        956,
+        957,
+        998,
+        999,
+        1000,
+        1001,
+        1002,
+        1076,
+        1097,
+        1117,
+        1119,
+        1122,
+        1127,
+        1138,
+        1139,
+        1140,
+        1141,
+        1246,
+        1247,
+        1248,
+        1251,
+        1298,
+        1299,
+        1300,
+        1305,
+        1306,
+        1307,
+        1322,
+        1349,
+        1352,
+        1357,
+        1419,
+        1421,
+        1473,
+        1476,
+        1479,
+        1518,
+        1520,
+        1575,
+        1625,
+        1679,
+        1680,
+        1681,
+        1682,
+        1683,
+        1684,
+        1685,
+        1686,
+        1687,
+        1688,
+        1689,
+        1690,
+        1691,
+        1692,
+        1693,
+        1694,
+        1695,
+        1696,
+        1697,
+        1698,
+        1699,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1707,
+        1708,
+        1709,
+        1710,
+        1711,
+        1712,
+        1714,
+        1715,
+        1716,
+        1717,
+        1724,
+        1725,
+        1763,
+        1878,
+        1899,
+        1900,
+        1917,
+        1918,
+        1921,
+        1939,
+        2007,
+        2009,
+        2012,
+        2113,
+        2140,
+        2202,
+        2208,
+        2210,
+        2222,
+        2223,
+        2283,
+        2292,
+        2361,
+        2362,
+        2378,
+        2379,
+        2401,
+        2410,
+        2428,
+        2465,
+        2531,
+        2538,
+        2542,
+        2543,
+        2549,
+        2550,
+        2551,
+        2574,
+        2605,
+        2609,
+        2676,
+        2677,
+        2699,
+        2702,
+        2718,
+        2720,
+        2763,
+        2764,
+        2765,
+        2774,
+        2778,
+        2793,
+        2886,
+        2899,
+        2913,
+        2930,
+        3020,
+        3022,
+        3028,
+        3029,
+        3032,
+        3033,
+        3036,
+        3037,
+        3040,
+        3041,
+        3044,
+        3045,
+        3046,
+        3047,
+        3052,
+        3053,
+        3054,
+        3055,
+        3060,
+        3062,
+        3064,
+        3065,
+        3066,
+        3095,
+        3099,
+        3111,
+        3112,
+        3113,
+        3114,
+        3246,
+        3247,
+        3248,
+        3249
+      ]
+    }
+  ]
+}
