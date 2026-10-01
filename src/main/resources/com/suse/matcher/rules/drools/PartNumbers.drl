@@ -13281,6 +13281,20 @@ rule "Add subscription data for part number 874-007167"
         };
 end
 
+//SLES PWR 1-2S ULVM L3PR S 3Y
+rule "Add subscription data for part number 874-007169"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007169")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
 //SLES PWR 1-2S/VM L3ST S 3Y
 rule "Add subscription data for part number 874-007175"
     agenda-group "PartNumbers"
@@ -13923,6 +13937,48 @@ rule "Add subscription data for part number 874-007370"
         modify($subscription) {
             policy = Policy.ONE_TWO,
             supportLevel = "priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLES PWR 1-2S ULVM L3ST S 5Y
+rule "Add subscription data for part number 874-007372"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007372")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "l3-standard",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE RT X86-64, 1-2S/VM ST S 1Y
+rule "Add subscription data for part number 874-007395"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007395")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "standard",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE RT X86-64, 1-2S/VM ST S 3Y
+rule "Add subscription data for part number 874-007396"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007396")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "standard",
             cpus = 2,
             stackable = true
         };
@@ -15529,6 +15585,20 @@ rule "Add subscription data for part number 874-007913"
         modify($subscription) {
             policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SMLMLM+ POWER 1-2S/VM PR 1Y
+rule "Add subscription data for part number 874-007915"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007915")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "priority",
             cpus = 2,
             stackable = true
         };
