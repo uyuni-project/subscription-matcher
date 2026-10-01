@@ -14411,6 +14411,132 @@ rule "Add subscription data for part number 874-007541"
         };
 end
 
+//SLE HPC X86-64 1-2S L3 ST S 1YR
+rule "Add subscription data for part number 874-007542"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007542")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-standard",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE HPC X86-64 1-2S L3 ST S 3YR
+rule "Add subscription data for part number 874-007543"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007543")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-standard",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE HPC X86-64 1-2S L3 ST S 5YR
+rule "Add subscription data for part number 874-007544"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007544")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-standard",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE HPC X86-64 1-2S L3 PR S 1YR
+rule "Add subscription data for part number 874-007545"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007545")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE HPC X86-64 1-2S L3 PR S 3YR
+rule "Add subscription data for part number 874-007546"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007546")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE HPC X86-64 1-2S L3 PR S 5YR
+rule "Add subscription data for part number 874-007547"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007547")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE HPC X86-64 1-2S ESPOS L3 PR S 1YR
+rule "Add subscription data for part number 874-007557"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007557")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE HPC X86-64 1-2S ESPOS L3 PR S 5YR
+rule "Add subscription data for part number 874-007559"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007559")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SLE HPC ARM 1-2S L3 PR S 5YR
+rule "Add subscription data for part number 874-007572"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007572")
+    then
+        modify($subscription) {
+            policy = Policy.PHYSICAL_ONLY,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
 //MIG CAASP X86-64 1-2S ULCV PR S 1Y
 rule "Add subscription data for part number 874-007630"
     agenda-group "PartNumbers"
