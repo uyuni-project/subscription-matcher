@@ -21042,6 +21042,20 @@ rule "Add subscription data for part number 874-008519-C"
         };
 end
 
+//SMLS X86-64 1-2S/VM PR 1Y
+rule "Add subscription data for part number 874-008578"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-008578")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
 //novell linux desktop 9 managed by zenworks 7 linux management 1-device 1-year maintenance
 rule "Add subscription data for part number 877-001213"
     agenda-group "PartNumbers"
@@ -21377,6 +21391,51 @@ rule "Add subscription data for part number 879-001634"
         };
 end
 
+//SMLS BS X86-64 1-499 P 2S/VM ST S 3Y
+rule "Add subscription data for part number P-874-008257-C"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "P-874-008257-C")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "standard",
+            cpus = 2,
+            singleSubscriptionHardBundle = true,
+            stackable = true
+        };
+end
+
+//SMLS PF X86-64 1-99 P 2S/VM PR 3Y
+rule "Add subscription data for part number P-874-008262-C"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "P-874-008262-C")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "priority",
+            cpus = 2,
+            singleSubscriptionHardBundle = true,
+            stackable = true
+        };
+end
+
+//SMLS PF X86-64 1-99 P UVM PR 3Y
+rule "Add subscription data for part number P-874-008267-C"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "P-874-008267-C")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 2,
+            singleSubscriptionHardBundle = true,
+            stackable = true
+        };
+end
+
 //SMLS EP X86-64 P 1-2S/VM PR 3Y
 rule "Add subscription data for part number P-874-008272-C"
     agenda-group "PartNumbers"
@@ -21403,6 +21462,20 @@ rule "Add subscription data for part number P-874-008273-C"
             supportLevel = "priority",
             cpus = 2,
             singleSubscriptionHardBundle = true,
+            stackable = true
+        };
+end
+
+//SMLS LT X86-64 1-499 P 1-2S/VM SS 3Y
+rule "Add subscription data for part number P-874-008274"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "P-874-008274")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "basic",
+            cpus = 2,
             stackable = true
         };
 end
