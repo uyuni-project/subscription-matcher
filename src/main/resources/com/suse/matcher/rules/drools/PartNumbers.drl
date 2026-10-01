@@ -4,20 +4,6 @@ import com.suse.matcher.facts.Subscription;
 import com.suse.matcher.facts.Subscription.Policy;
 import com.suse.matcher.facts.System;
 
-//SLESSAP 12 X86_64 1-2SCKT 1-2VM 3Y PR
-rule "Add subscription data for part number 05052884"
-    agenda-group "PartNumbers"
-    when
-        $subscription : Subscription(partNumber == "05052884")
-    then
-        modify($subscription) {
-            policy = Policy.ONE_TWO,
-            supportLevel = "priority",
-            cpus = 2,
-            stackable = true
-        };
-end
-
 //suse linux enterprise server for x86 amd64 & intel64 (maximum 4 cpu sockets) for appliance 1-year subscription
 rule "Add subscription data for part number 051-003964"
     agenda-group "PartNumbers"
@@ -3583,20 +3569,6 @@ rule "Add subscription data for part number 662644477628"
     then
         modify($subscription) {
             policy = Policy.UNLIMITED_VIRTUALIZATION,
-            supportLevel = "l3-priority",
-            cpus = 2,
-            stackable = true
-        };
-end
-
-//AC SLE SAP PWR 1-2S/VM L3PR S 3Y
-rule "Add subscription data for part number 662644477749"
-    agenda-group "PartNumbers"
-    when
-        $subscription : Subscription(partNumber == "662644477749")
-    then
-        modify($subscription) {
-            policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 2,
             stackable = true
