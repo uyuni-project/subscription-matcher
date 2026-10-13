@@ -19929,6 +19929,18 @@ rule "Add subscription data for part number 874-008274"
         };
 end
 
+//SLES 15 SP4 LTSS X86-64 1-10 INH S 1Y
+rule "Add subscription data for part number 874-008323"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-008323")
+    then
+        modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
+            stackable = true
+        };
+end
+
 //SLES X86-64 1-2S UVM PR S 3Y
 rule "Add subscription data for part number 874-008395"
     agenda-group "PartNumbers"
