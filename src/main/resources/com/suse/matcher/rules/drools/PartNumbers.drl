@@ -205,6 +205,20 @@ rule "Add subscription data for part number 113-003106-001"
         };
 end
 
+//MGR PROXY X86-64 INST PR S KEY
+rule "Add subscription data for part number 113-003404-001"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "113-003404-001")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            supportLevel = "priority",
+            singleSubscriptionHardBundle = true,
+            stackable = false
+        };
+end
+
 //suse linux enterprise server for x86 amd64 intel64 level server (maximum 1cpu socket) 1-year subscription
 rule "Add subscription data for part number 435992-B21"
     agenda-group "PartNumbers"
@@ -3781,6 +3795,48 @@ rule "Add subscription data for part number 874-005031"
             supportLevel = "priority",
             cpus = 32,
             stackable = false
+        };
+end
+
+//MGR RBS EDEKA X86-64 1-2S ULVM BS S 7Y
+rule "Add subscription data for part number 874-005042"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-005042")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//MGR RBS EDEKA X86-64 1-2S ULVM BS S 1Y
+rule "Add subscription data for part number 874-005045"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-005045")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//MGR RBS EDEKA X86-64 1-2S ULVM BS S 5Y
+rule "Add subscription data for part number 874-005046"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-005046")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "basic",
+            cpus = 2,
+            stackable = true
         };
 end
 
@@ -13528,6 +13584,34 @@ rule "Add subscription data for part number 874-007237"
         };
 end
 
+//SMLM MON X86-64 1-2S/VM L3PR 5Y
+rule "Add subscription data for part number 874-007245"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007245")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SMLM MON X86-64 1-2S W/UVM L3PR 5Y
+rule "Add subscription data for part number 874-007246"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007246")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "l3-priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
 //MGR LC PWR 1-2S/VM PR S 1Y
 rule "Add subscription data for part number 874-007248"
     agenda-group "PartNumbers"
@@ -14891,6 +14975,34 @@ rule "Add subscription data for part number 874-007817"
         modify($subscription) {
             policy = Policy.UNLIMITED_VIRTUALIZATION,
             cpus = 1,
+            stackable = true
+        };
+end
+
+//SMLM RBS AIO X86-64 1-2S W/UVM PR 1Y
+rule "Add subscription data for part number 874-007824"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007824")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 2,
+            stackable = true
+        };
+end
+
+//SMLM RBS AIO X86-64 1-2S W/UVM PR 5Y
+rule "Add subscription data for part number 874-007826"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007826")
+    then
+        modify($subscription) {
+            policy = Policy.UNLIMITED_VIRTUALIZATION,
+            supportLevel = "priority",
+            cpus = 2,
             stackable = true
         };
 end
