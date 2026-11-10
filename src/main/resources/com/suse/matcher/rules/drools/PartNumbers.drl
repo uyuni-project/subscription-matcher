@@ -3617,6 +3617,202 @@ rule "Add subscription data for part number 662644478463"
         };
 end
 
+//SLES11 SP3 EXTRM  SPT X86-64 UNLMT 1Y
+rule "Add subscription data for part number 874-002500"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002500")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 12 SP2 RCTV LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-002515"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002515")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 12 SP3 RCTV LTSS X86-64 500 IH S 1Y
+rule "Add subscription data for part number 874-002520"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002520")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = true
+        };
+end
+
+//SLES 12 SP3 RCTV LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-002521"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002521")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 12 SP4 RCTV LTSS X86-64 100 IH S 1Y
+rule "Add subscription data for part number 874-002525"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002525")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 12 SP4 RCTV LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-002527"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002527")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 15 SP1 RCTV LTSS X86-64 100 IH S 1Y
+rule "Add subscription data for part number 874-002537"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002537")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 15 SP1 RCTV LTSS X86-64 500 IH S 1Y
+rule "Add subscription data for part number 874-002538"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002538")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = true
+        };
+end
+
+//SLES 15 SP1 RCTV LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-002539"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002539")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 15 SP2 RCTV LTSS X86-64 100 IH S 1Y
+rule "Add subscription data for part number 874-002543"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002543")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 15 SP2 RCTV LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-002545"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002545")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 15 SP3 RCTV LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-002549"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002549")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 15 SP3 RCTV LTSS X86-64 100 IH S 1Y
+rule "Add subscription data for part number 874-002550"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002550")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 15 SP3 RCTV LTSS X86-64 500 IH S 1Y
+rule "Add subscription data for part number 874-002552"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-002552")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = true
+        };
+end
+
 //ec vla suse linux ent srvr 9 ibm zseries-s/390 z900/z990 1cpu 1yr
 rule "Add subscription data for part number 874-002993-001"
     agenda-group "PartNumbers"
@@ -14649,6 +14845,20 @@ rule "Add subscription data for part number 874-007572"
         };
 end
 
+//SLES11 SP3 X86-64 RCTV LTSS 1Y (UNLTD)
+rule "Add subscription data for part number 874-007591"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-007591")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
 //MIG CAASP X86-64 1-2S ULCV PR S 1Y
 rule "Add subscription data for part number 874-007630"
     agenda-group "PartNumbers"
@@ -20363,6 +20573,34 @@ rule "Add subscription data for part number 874-008255"
         };
 end
 
+//SLES11-SP3 HyperLong LTSS
+rule "Add subscription data for part number 874-008256"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008256")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 12 SP5 LTSS EXTENDED SECURITY UL
+rule "Add subscription data for part number 874-008259"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008259")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
 //SUSE LBTY X86-64 1-2S L3PR S 1Y
 rule "Add subscription data for part number 874-008274"
     agenda-group "PartNumbers"
@@ -20377,6 +20615,104 @@ rule "Add subscription data for part number 874-008274"
         };
 end
 
+//SLES X86-64 11SP4 LTSS CORE INH 1Y 26-27
+rule "Add subscription data for part number 874-008312"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008312")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 12 SP5 LTSS CORE x86-64 UL INST 1YR
+rule "Add subscription data for part number 874-008314"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008314")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 12 SP5 LTSS X86-64 1-100 INH S 1Y
+rule "Add subscription data for part number 874-008316"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008316")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 15 SP3 LTSS X86-64 11-100 INH S 1Y
+rule "Add subscription data for part number 874-008318"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008318")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 15 SP4 LTSS X86-64 1-100 INH S 1Y
+rule "Add subscription data for part number 874-008319"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008319")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 12 SP5 LTSS X86-64 1-10 INH S 1Y
+rule "Add subscription data for part number 874-008320"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008320")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 10,
+            stackable = true
+        };
+end
+
+//SLES 15 SP3 LTSS X86-64 1-10 INH S 1Y
+rule "Add subscription data for part number 874-008322"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008322")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 10,
+            stackable = true
+        };
+end
+
 //SLES 15 SP4 LTSS X86-64 1-10 INH S 1Y
 rule "Add subscription data for part number 874-008323"
     agenda-group "PartNumbers"
@@ -20387,6 +20723,172 @@ rule "Add subscription data for part number 874-008323"
         modify($subscription) {
             policy = Policy.INSTANCE,
             quantity = $quantity * 10,
+            stackable = true
+        };
+end
+
+//SLES 15 SP5 LTSS X86-64 1-10 INH S 1Y
+rule "Add subscription data for part number 874-008330"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008330")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 10,
+            stackable = true
+        };
+end
+
+//SLES 15 SP5 LTSS X86-64 1-100 INH S 1Y
+rule "Add subscription data for part number 874-008331"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008331")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 15 SP5 LTSS X86-64 1-500 INH S 1Y
+rule "Add subscription data for part number 874-008332"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008332")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = true
+        };
+end
+
+//SLES 15 SP5 LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-008333"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008333")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 15 SP6 LTSS X86-64 1-10 INH S 1Y
+rule "Add subscription data for part number 874-008342"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008342")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 10,
+            stackable = true
+        };
+end
+
+//SLES 15 SP6 LTSS X86-64 1-100 INH S 1Y
+rule "Add subscription data for part number 874-008343"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008343")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 15 SP6 LTSS X86-64 101-500 INH S 1Y
+rule "Add subscription data for part number 874-008344"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008344")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
+            stackable = true
+        };
+end
+
+//SLES 15 SP6 LTSS X86-64 UL INH S 1Y
+rule "Add subscription data for part number 874-008345"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008345")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES 12 SP5 LTSS ES X86-64 1IN INH 1Y
+rule "Add subscription data for part number 874-008358"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-008358")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            stackable = true
+        };
+end
+
+//SLES 12 SP5 LTSS ES X86-64 1-10 INH 1Y
+rule "Add subscription data for part number 874-008359"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008359")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 10,
+            stackable = true
+        };
+end
+
+//SLES 12 SP5 LTSS ES X86-64 1-100 INH 1Y
+rule "Add subscription data for part number 874-008360"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008360")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
+//SLES 12 SP5 LTSS ES X86-64 1-500 INH 1Y
+rule "Add subscription data for part number 874-008361"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008361")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 500,
             stackable = true
         };
 end
