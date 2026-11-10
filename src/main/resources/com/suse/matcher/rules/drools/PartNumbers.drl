@@ -3631,6 +3631,18 @@ rule "Add subscription data for part number 874-002500"
         };
 end
 
+//SLES LTSS x86_64 1-2 SK IVPCS INH S 3YR
+rule "Add subscription data for part number 874-002504"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-002504")
+    then
+        modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
+            stackable = true
+        };
+end
+
 //SLES 12 SP2 RCTV LTSS X86-64 UL INH S 1Y
 rule "Add subscription data for part number 874-002515"
     agenda-group "PartNumbers"
@@ -14831,6 +14843,18 @@ rule "Add subscription data for part number 874-007559"
         };
 end
 
+//SLE HPC X86-64 1-2S LTSS INH SUB 1YR
+rule "Add subscription data for part number 874-007560"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007560")
+    then
+        modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
+            stackable = true
+        };
+end
+
 //SLE HPC ARM 1-2S L3 PR S 5YR
 rule "Add subscription data for part number 874-007572"
     agenda-group "PartNumbers"
@@ -15628,6 +15652,30 @@ rule "Add subscription data for part number 874-007882"
             policy = Policy.ONE_TWO,
             supportLevel = "l3-priority",
             cpus = 16,
+            stackable = true
+        };
+end
+
+//SLES LTSS ARM 16+CR 1-2 SK/IVCB INH S 1Y
+rule "Add subscription data for part number 874-007883"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007883")
+    then
+        modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
+            stackable = true
+        };
+end
+
+//SLES LTSS ARM 1-15C 1-4C IVCB INH S 1Y
+rule "Add subscription data for part number 874-007884"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-007884")
+    then
+        modify($subscription) {
+            policy = Policy.INHERITED_VIRTUALIZATION,
             stackable = true
         };
 end
@@ -20639,6 +20687,19 @@ rule "Add subscription data for part number 874-008314"
         modify($subscription) {
             policy = Policy.INSTANCE,
             quantity = Integer.MAX_VALUE,
+            stackable = true
+        };
+end
+
+//SLES LTSS x86_64 1-2 S/VM PCS INH S 1Y
+rule "Add subscription data for part number 874-008315"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-008315")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            cpus = 2,
             stackable = true
         };
 end
