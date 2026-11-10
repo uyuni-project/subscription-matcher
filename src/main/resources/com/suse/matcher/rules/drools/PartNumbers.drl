@@ -20265,6 +20265,20 @@ rule "Add subscription data for part number 874-008274"
         };
 end
 
+//SLES 12 SP5 LTSS X86-64 11-100 INH S 1Y
+rule "Add subscription data for part number 874-008316"
+    agenda-group "PartNumbers"
+    no-loop
+    when
+        $subscription : Subscription($quantity : quantity, partNumber == "874-008316")
+    then
+        modify($subscription) {
+            policy = Policy.INSTANCE,
+            quantity = $quantity * 100,
+            stackable = true
+        };
+end
+
 //SLES 15 SP4 LTSS X86-64 1-10 INH S 1Y
 rule "Add subscription data for part number 874-008323"
     agenda-group "PartNumbers"
@@ -21092,6 +21106,21 @@ rule "Add subscription data for part number 874-008519-C"
         modify($subscription) {
             policy = Policy.ONE_TWO,
             supportLevel = "standard",
+            cpus = 2,
+            singleSubscriptionHardBundle = true,
+            stackable = true
+        };
+end
+
+//SMLS EP X86-64 1-2S/VM PR 1Y
+rule "Add subscription data for part number 874-008570-C"
+    agenda-group "PartNumbers"
+    when
+        $subscription : Subscription(partNumber == "874-008570-C")
+    then
+        modify($subscription) {
+            policy = Policy.ONE_TWO,
+            supportLevel = "priority",
             cpus = 2,
             singleSubscriptionHardBundle = true,
             stackable = true
